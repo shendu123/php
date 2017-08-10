@@ -1,0 +1,56 @@
+<div class="main_b9_1_left">
+    <ul id="menu">
+        <li><a href="">账号中心</a>
+            <ul>
+                <li <eq name="ACTION_NAME" value="index">class="user_li_pg"</eq> ><a href="{:U('Member/index')}">账号信息</a></li>
+                <li <eq name="ACTION_NAME" value="my_info">class="user_li_pg"</eq> ><a href="{:U('Member/my_info')}">个人信息</a></li>
+                <eq name="ACTION_NAME" value="my_portrait">
+                <li class="user_li_pg"><a href="{:U('Member/my_info')}">编辑头像</a></li>
+                </eq> 
+                <li <eq name="ACTION_NAME" value="deliver_address">class="user_li_pg"</eq>><a href="{:U('Member/deliver_address')}">我的地址薄</a></li>
+                <eq name="ACTION_NAME" value="check">
+                <li class="user_li_pg"><a href="{:U('Member/check',array('type'=>'email'))}">邮箱、手机认证</a></li>
+                </eq>
+                <li <eq name="ACTION_NAME" value="payment">class="user_li_pg"</eq>><a href="{:U('Member/payment')}" target="_blank">在线充值</a></li>
+                <eq name="ACTION_NAME" value="payment_order">
+                <li <eq name="ACTION_NAME" value="payment_order">class="user_li_pg"</eq>><a href="javascript:void(0);">订单支付</a></li>
+                </eq>
+                <li <eq name="ACTION_NAME" value="limsum">class="user_li_pg"</eq> ><a href="{:U('Member/limsum')}">信用额度</a></li>
+                <li <eq name="ACTION_NAME" value="pledge">class="user_li_pg"</eq> ><a href="{:U('Member/pledge')}">账户余额</a></li>
+                <li <eq name="ACTION_NAME" value="pledge_take">class="user_li_pg"</eq> ><a href="{:U('Member/pledge_take')}">余额取款</a></li>
+                <li <eq name="ACTION_NAME" value="mysms">class="user_li_pg"</eq>  style="position: relative;">
+                    <a href="{:U('Member/mysms')}">提醒/站内信</a>
+                    <if condition="$smsc neq 0"><span title="{$smsc}条未读" class="smsc">{$smsc}</span></if>
+                </li>
+                <li <eq name="ACTION_NAME" value="sendmsg">class="user_li_pg"</eq>><a href="{:U('Member/sendmsg')}">发送站内信</a></li>
+                <eq name="ACTION_NAME" value="sendlist"><li class="user_li_pg"><a href="javascript:void(0);">已发送站内信</a></li></eq>
+                <eq name="ACTION_NAME" value="exchange"><li class="user_li_pg"><a href="javascript:void(0);">会话记录</a></li></eq>
+                
+                <li <eq name="ACTION_NAME" value="reset_pwd">class="user_li_pg"</eq> ><a href="{:U('Member/reset_pwd')}">修改密码</a></li>
+            </ul>
+        </li>
+        <li><a href="">我是买家</a>
+            <ul>
+                <li <eq name="ACTION_NAME" value="myatt">class="user_li_pg"</eq> ><a href="{:U('Member/myatt',array('type'=>'pm'))}">我关注的</a></li>
+                <li <eq name="ACTION_NAME" value="mybid">class="user_li_pg"</eq> ><a href="{:U('Member/mybid')}">我参与的拍卖</a></li>
+                <li <eq name="ACTION_NAME" value="mysucc">class="user_li_pg"</eq> ><a href="{:U('Member/mysucc')}">我拍到的</a></li>
+                <if condition="ACTION_NAME eq evaluate"><li class="user_li_pg"><a href="javascript:void(0);">商品评价</a></li></if>
+                <li <in name="ACTION_NAME" value="my_evaluate,buy_myevaluate">class="user_li_pg"</in> ><a href="{:U('Member/buy_myevaluate')}">评价管理</a></li>
+
+            </ul>
+        </li>
+        <li><a href="">我是卖家</a>
+            <ul>
+                <li <eq name="ACTION_NAME" value="addGoods">class="user_li_pg"</eq> ><a href="{:U('Member/addGoods')}">发布拍卖</a></li>
+                <li <eq name="ACTION_NAME" value="goodsList">class="user_li_pg"</eq> ><a href="{:U('Member/goodsList')}">待发布拍卖</a></li>
+                <li <eq name="ACTION_NAME" value="auctionList">class="user_li_pg"</eq> ><a href="{:U('Member/auctionList')}">我的拍卖</a></li>
+                <li <eq name="ACTION_NAME" value="myorder">class="user_li_pg"</eq> ><a href="{:U('Member/myorder')}">拍卖订单</a></li>
+                <li <in name="ACTION_NAME" value="my_evaluatebuy,seller_myevaluate">class="user_li_pg"</in>><a href="{:U('Member/seller_myevaluate')}">评价管理</a></li>
+                <if condition="C('Weixin.appid') and C('Weixin.appsecret')">
+                    <li <eq name="ACTION_NAME" value="weisend">class="user_li_pg"</eq> ><a href="{:U('Member/weisend')}">微信图文推送</a></li>
+                </if>
+                
+            </ul>
+        </li>
+    </ul>
+</div>

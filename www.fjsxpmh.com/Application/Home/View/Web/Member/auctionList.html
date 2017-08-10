@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+        <meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>我的拍卖-我是卖家-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+        <js href="__WEBSOCKET__/js/swfobject.js"/>
+        <js href="__WEBSOCKET__/js/web_socket.js"/>
+    </head>
+    <body onload="connect();">
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;我是卖家&nbsp;&gt;&gt;&nbsp;我的拍卖</div>
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                <ul class="inquiry">
+                    <eq name="ACTION_NAME" value="auctionList">
+                        <li <eq name="saytyp.get" value="biding">class="hover"</eq>><a href="{:U('auctionList',array('typ'=>'biding'))}">正在拍卖</a></li>
+                        <li <eq name="saytyp.get" value="future">class="hover"</eq>><a href="{:U('auctionList',array('typ'=>'future'))}">未开拍拍卖</a></li>
+                        <li <eq name="saytyp.get" value="bidend">class="hover"</eq>><a href="{:U('auctionList',array('typ'=>'bidend'))}">已结束拍卖</a></li>
+                    </eq>
+                    <eq name="ACTION_NAME" value="searchAuction"><li class="hover">搜索结果</li></eq>
+                </ul>
+                <div class="inquiry-con">
+                    <div class="searchbox">
+                        <form action="{:U('Member/searchAuction')}" method='get'>
+                        关键字：
+                        <input type="hidden" value="{$saytyp.get}" name="typ" class="input"/>
+                            <input type="text" value="{$keys.keyword}" name="keyword" class="input" placeholder="搜索标题的关键字" />
+                            &nbsp;&nbsp;模式：
+                            <select name="type">
+                                <option value="" <eq name="keys.type" value="">selected="selected"</eq> >所有</option>
+                                <option value="0" <eq name="keys.type" value="0">selected="selected"</eq>>竞拍</option>
+                                <option value="1" <eq name="keys.type" value="1">selected="selected"</eq>>竞标</option>
+                                </select>
+                            &nbsp;&nbsp;频道：
+                            <select name="pid">
+                                <option value="">所有频道</option>
+                                <volist name="channel" id="vo">
+                                    <if condition="$vo[cid] eq $keys[pid]">
+                                        <option value="{$vo.cid}" selected="selected">{$vo.name}</option>
+                                        <else/>
+                                        <option value="{$vo.cid}">{$vo.name}</option>
+                                    </if>
+                                </volist>
+                            </select>
+                            &nbsp;&nbsp;<button class="sbtn">筛选</button>
+                        </form>
+                    </div>
+                        <eq name="ACTION_NAME" value="searchAuction">
+                            <div class="seamsg">
+                                <empty name="ginfo">
+                                    在<span class="keyword">{$keys.chname}</span>频道的<span class="keyword">{$keys.catname}</span>分类下找到<span class="keyword">{$keys.count}</span>个<if condition="$keys['keyword'] != ''">与<span class="keyword">{$keys.keyword}</span>相关的</if>
+                                    <span class="keyword">{$keys.tname}</span>商品！
+                                <else/>
+                                    找到属于商品：<span class="keyword">{$ginfo.title}</span>的拍品<span class="keyword">{$keys.count}</span>个
+                                </empty>
+                            </div>
+                        </eq>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="trade-table">
+                            <thead>
+                                <tr>
+                                    <th width="30%">拍品名称</th>
+                                    <th width="25%">所在分类</th>
+                                    <th width="5%">模式</th>
+                                    <th width="10%">开始时间</th>
+                                    <th width="10%">结束时间</th>
+                                    <th width="5%">状态</th>
+                                    <th>操作</th>
+                                    
+                                </tr>
+                            </thead>
+                            <volist name="list" id="vo">
+                                <tr align="center" pid="{$vo.pid}">
+                                    <td align="left">
+                                            <img style="margin-right: 5px; display: inline; float:left;" src="{$upWholeUrl}{$vo.pimg|picRep=###,3}" width="50px" />
+                                            <in name="vo.pattern" value="1,2">
+                                                <a target="_blank" style="color: #ff6600;" href="{:U('Home/Special/speul',array('sid'=>$vo['sid']))}">【专场】</a>
+                                            </in>
+                                            <in name="vo.pattern" value="3,4">
+                                                <a target="_blank" style="color: #ff6600;" href="{:U('Home/Meeting/meetul',array('mid'=>$vo['mid']))}">【拍卖会】</a>
+                                            </in>
+                                            <a style="color:#ff6600;" href="{:U('Home/Auction/details',array('pid'=>$vo[pid]))}" target="_blank">{$vo.pname}</a>
+                                    </td>
+                                    <td>{$vo.pidName}->{$vo.cidName}</td>
+                                    <td>
+                                        <eq name="vo.type" value="0">竞拍</eq>
+                                        <eq name="vo.type" value="1">竞标</eq>
+                                    </td>
+                                    <td title="{$vo.starttime|date="Y-m-d H:i",###}">
+                                        {$vo.starttime|date="m-d H:i",###}</td>
+                                    <td title="{$vo.endtime|date="Y-m-d H:i",###}">
+                                        <neq name="saytyp.get" value="bidend"><in name="vo.pattern" value="3,4">最快<br/></in></neq>
+                                        {$vo.endtime|date="m-d H:i",###}
+                                    </td>
+                                    <td>{$vo.st}</td>
+                                    <td>
+                                        <neq name="saytyp.get" value="bidend">
+                                            <eq name="vo.uid" value="0">[ <a href="__URL__/editAuction?pid={$vo.pid}">编辑</a> ] </eq>
+                                        </neq>
+                                        <if condition="($vo['bid'] eq 0) and ($saytyp['get'] eq 'biding')">
+                                            [ <a pid="{$vo.pid}" href="javascript:void(0)" name="{$vo.pname}" class="cancelpai">撤拍 </a> ]
+                                        </if>
+                                        <eq name="saytyp.get" value="future">
+                                            [ <a pid="{$vo.pid}" href="javascript:void(0)" name="{$vo.pname}" class="del">删除 </a> ]
+                                        </eq>
+                                        <if condition="($saytyp['get'] neq 'future') and ($saytyp['get'] neq 'biding')">
+                                            [ <a href="{:U('Member/addAuction',array('gid'=>$vo['gid']))}">再次拍卖 </a> ]
+                                            <eq name="vo.endstatus" value="1"><br/>[ <a href="{:U('Member/order_details',array('order_no'=>$vo['order_no']))}">查看订单 </a> ]</eq>
+                                        </if>
+                                    </td>
+                                </tr>
+                            </volist>
+                            <tr>
+                                <td colspan="11" align="right" class="page">{$page}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+        <script type="text/javascript">
+            var ws_rom_pre = "{:C('BID_PRE')}";
+            // 拍品删除提交地址
+            var delLink = "{:U('Member/del_auction')}";
+            // 拍品撤拍提交地址
+            var cancelLink = "{:U('Member/cancelPai')}";
+
+            var formUrl ="{:U('Member/searchAuction')}";
+            var getCateUrl ="{:U('Member/getcate')}";
+            var catePid = '{$keys.pid}';
+            var selectObj = $('select[name=pid]');
+            // 频道select事件
+            selectObj.on("change",function(){
+                var pid = $(this).children('option:selected').attr('value');
+                getCateHtml(pid,$(this));
+            });
+            // 获取分类select的html
+            function getCateHtml(cheCid,selectObj){
+               $.post(getCateUrl,{'pid':cheCid},function(data){      //ajax后台
+                if (data.status) {
+                        selectObj.next('#cid_select').remove();
+                        selectObj.after(data.htm);
+                    } else {
+                        alert(data.msg);
+                    }
+                },'json');
+            }
+
+            $(function(){
+                getCateHtml(catePid,selectObj);
+                // 撤拍
+                $(".cancelpai").click(function(){
+                    var canceltr = $(this).parents('tr');
+                    var cancelpid = $(this).attr('pid');
+                    popup.confirm('你真的打算将【<b>'+$(this).attr("name")+'</b>】撤拍吗?<br/>撤拍将立即结束拍卖，解冻您和买家的保证金。','温馨提示',function(action){
+                        if(action == 'ok'){
+                            $.post(cancelLink,{'pid':cancelpid},function(data){      //ajax后台
+                            if (data.status) {
+                                    popup.success(data.msg);
+                                    ws.send(JSON.stringify({"type":"drive","pre":ws_rom_pre,"data":data.result}));
+                                    canceltr.remove();
+                                    setTimeout(function(){
+                                        window.top.location.reload();
+                                    },2000);
+                                    
+                                } else {
+                                    alert(data.msg);
+                                }
+                            },'json');
+                        }
+                    });
+                    return false;
+                });
+                // 删除
+                $(".del").click(function(){
+                    var deltr = $(this).parents('tr');
+                    var delpid = $(this).attr('pid');
+                    popup.confirm('你真的打算删除【<b>'+$(this).attr("name")+'</b>】吗?','温馨提示',function(action){
+                        if(action == 'ok'){
+                            $.post(delLink,{'pid':delpid},function(data){      //ajax后台
+                            if (data.status) {
+                                    popup.success(data.msg);
+                                    ws.send(JSON.stringify({"type":"drive","data":data.result}));
+                                    deltr.remove();
+                                    setTimeout(function(){
+                                        window.top.location.reload();
+                                    },2000);
+                                } else {
+                                    alert(data.msg);
+                                }
+                            },'json');
+                        }
+                    });
+                    return false;
+                });
+            });
+// 等待提示框【
+popStatus(3, '正在建立连接.....', 0,'',true);
+// 等待提示框】
+// web_socket【
+var ws_room_id = 'admin';
+var ws_my_name = 'adminer';
+var ws_my_uid = '0';
+var ltnr = '__IMG__/ltnr_pic.png';
+var domain = 'http://'+window.location.host+'/'
+
+if (typeof console == "undefined") {    this.console = { log: function (msg) {  } };}
+    WEB_SOCKET_SWF_LOCATION = "__WEBSOCKET__/swf/WebSocketMain.swf";
+    WEB_SOCKET_DEBUG = true;
+    var ws, client_list={};
+
+    // 连接服务端
+    function connect() {
+        // 创建websocket
+        ws = new WebSocket("ws://"+document.domain+":7272");
+        // 当socket连接打开时，输入用户名
+        ws.onopen = onopen;
+
+        // 当有消息时根据消息类型显示不同信息
+        ws.onmessage = onmessage; 
+        ws.onclose = function() {
+          console.log("连接关闭，定时重连");
+          connect();
+        };
+        ws.onerror = function() {
+            popStatus(4, '出现错误,请联系网站管理员！', 0,'',true);
+            console.log("出现错误");
+        };
+    }
+
+    // 连接建立时发送登录信息
+    function onopen(){
+        // 登录
+        var login_data = '{"type":"login","client_name":"'+ws_my_name+'","room_id":'+ws_room_id+'}';
+        // 移除等待提示【
+        popStatusOff();
+        // 移除等待提示】
+        console.log("websocket握手成功，发送登录数据:"+login_data);
+        ws.send(login_data);
+    }
+    // 服务端发来消息时
+    function onmessage(e){
+        console.log(e.data);
+        var data = eval("("+e.data+")");
+        switch(data['type']){
+            // 服务端ping客户端
+            case 'ping':
+                ws.send('{"type":"pong","domain":'+domain+'}');
+                break;
+            // 登录 更新用户列表
+            case 'login':
+                //{"type":"login","client_id":xxx,"client_name":"xxx","client_list":"[...]","time":"xxx"}
+                say(data['client_id'], data['client_name'],  data['client_name']+' 进入拍场', data['time']);
+                if(data['client_list']){
+                    client_list = data['client_list'];
+                }
+                else{
+                    client_list[data['client_id']] = data['client_name']; 
+                }
+                // 更新用户列表
+                flush_client_list();
+                console.log(data['client_name']+"登录成功");
+                break;
+            // 出价
+            case 'drive':
+                // bidChange(data.thisS);
+                alert('drive');
+                break;
+            // 用户退出 更新用户列表
+            case 'logout':
+                //{"type":"logout","client_id":xxx,"time":"xxx"}
+                say(data['from_client_id'], data['from_client_name'], data['from_client_name']+' 退出了', data['time']);
+                delete client_list[data['from_client_id']];
+                flush_client_list();
+        }
+    }
+    // 撤拍
+// web_socket】
+        </script>
+    </body>
+</html>

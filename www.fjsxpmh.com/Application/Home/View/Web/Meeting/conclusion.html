@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$meet.description}" />
+        <title>{$meet.mname}》拍卖会结论书-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/cuitindex.css"/>
+		<css href="__CSS__/list.css"/>
+		<js href="__JS__/indexjs.js"/>
+		<js href="__JS__/bid_list.js"/>
+<style>
+    .conclusion{ width: 900px; margin: 20px auto 0; position: relative;}
+    .conclusion .logo{ position: absolute; left: 0px; top: 0px;}
+    .conclusion button{ position: absolute; right: 0px; top: 0px; padding: 2px 10px; background-color: #c84040; border: solid 1px #cd2525; color: #fff; font-weight: bold; cursor: pointer;}
+    .conclusion button:hover{ background-color:#cd2525; border: solid 1px #db0505; }
+    .conclusion h1{font-size: 20px; padding-top: 15px; margin: 0 auto 20px;text-align: center;width: 480px;}
+    .conclusion h2{ font-size: 14px;text-align: center; margin: 20px auto 0;}
+    .conclusion table{ margin: 10px auto;}
+    .conclusion table .th1{ font-size: 25px;}
+    .conclusion table .red{ color: #c84040;}
+    .conclusion table tr th,table tr td{border: solid 1px #999; padding: 5px;}
+    .conclusion table th{ background-color: #e4e4e4;}
+</style>
+    </head>
+    <body>
+        <div class="conclusion">
+        <div class="logo">{:showAdvPosition('web_logo','span')}</div>
+        <button type="button" onclick="window.print()">打印</button>
+        <h1>《{$meet.mname}》拍卖会结果统计</h1>
+        <h2>拍卖会结束信息</h2>
+        <table>
+            <tr>
+                <th>开始时间</th>
+                <th>结束时间</th>
+                <th>拍品数量（件）</th>
+                <th>成交（件）</th>
+                <th>流拍（件）</th>
+                <th>成交总价（元）</th>
+            </tr>
+            <tr>
+                <td align="center">{$meet.starttime|date='Y-m-d H:i',###}</td>
+                <td align="center">{$meet.endtime|date='Y-m-d H:i',###}</td>
+                <td align="center">{$meet.acount}</td>
+                <td align="center">{$meet.acccount}</td>
+                <td align="center">{$meet.loscount}</td>
+                <td align="right"><strong class="red">{$meet.accprice}</strong></td>
+            </tr>
+        </table>
+        <h2>拍卖会拍品结束信息</h2>
+        <table>
+            <tr>
+                <th width="5%">序号</th>
+                <th width="10%">编号</th>
+                <th width="17%">拍品名称</th>
+                <th width="5%">开始时间</th>
+                <th width="5%">结束时间</th>
+                <th width="5%">起拍价</th>
+                <th width="6%">保留价</th>
+                <th width="7%">溢价率（%）</th>
+                <th width="7%">保证金</th>
+                <th width="5%">出价次数</th>
+                <th width="10%">最终价（元）</th>
+                <th width="10%">最后出价</th>
+                <th width="8%">结束状态</th>
+            </tr>
+            <volist name="alist" id="vo">
+            <tr>
+                <td align="center">{$vo.msort}</td>
+                <td>{$vo.bidnb}</td>
+                <td>{$vo.pname}</td>
+                <td align="center">{$vo.starttime|date='m-d H:i',###}</td>
+                <td align="center">{$vo.endtime|date='m-d H:i',###}</td>
+                <td align="right">{$vo.onset}</td>
+                <td align="right">{$vo.price}</td>
+                <td align="right">{$vo.premium}</td>
+                <td align="right">{:pledgeShow($vo['pattern'],$vo['pledge_type'],$vo['onset'],$vo['pledge'],$vo['spledge'],$vo['mpledge'])}</td>
+                <td align="center">{$vo.bidcount}</td>
+                <td align="right"><strong class="red">{$vo.nowprice}</strong></td>
+                <td align="center">{$vo.nickname|default="无"}</td>
+                <td align="center">
+                    <eq name="vo.endstatus" value="1">成交</eq>
+                    <eq name="vo.endstatus" value="2">未达到目标价<br/>流拍</eq>
+                    <eq name="vo.endstatus" value="3">无人出价<br/>流拍</eq>
+                    <eq name="vo.endstatus" value="4">撤拍</eq>
+                </td>
+            </tr>
+            </volist>
+        </table>
+        </div>
+    </body>
+    </html>

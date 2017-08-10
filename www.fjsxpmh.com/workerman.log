@@ -1,0 +1,108 @@
+2017-04-10 15:08:25 client_id:7f00000108fc0000015c	client_ip:2130706433
+exception 'Exception' with message '$_SESSION['room_id'] not set. client_ip:127.0.0.1' in D:\www.fjsxpmh.com\Application\Chat\Event.php:115
+Stack trace:
+#0 D:\www.fjsxpmh.com\GatewayWorker\BusinessWorker.php(216): Event::onMessage('7f00000108fc000...', '{"type":"bid","...')
+#1 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#2 D:\www.fjsxpmh.com\Workerman\Connection\TcpConnection.php(471): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #23)
+#4 D:\www.fjsxpmh.com\Workerman\Events\Select.php(253): call_user_func_array(Array, Array)
+#5 D:\www.fjsxpmh.com\Workerman\Worker.php(734): Workerman\Events\Select->loop()
+#6 D:\www.fjsxpmh.com\GatewayWorker\BusinessWorker.php(96): Workerman\Worker->run()
+#7 D:\www.fjsxpmh.com\Workerman\Worker.php(422): GatewayWorker\BusinessWorker->run()
+#8 D:\www.fjsxpmh.com\Workerman\Worker.php(339): Workerman\Worker::runAllWorkers()
+#9 D:\www.fjsxpmh.com\Application\Chat\start_businessworker.php(36): Workerman\Worker::runAll()
+#10 {main}
+2017-04-10 15:09:49 client_id:7f00000108fc00000164	client_ip:2130706433
+exception 'Exception' with message '$_SESSION['room_id'] not set. client_ip:127.0.0.1' in D:\www.fjsxpmh.com\Application\Chat\Event.php:115
+Stack trace:
+#0 D:\www.fjsxpmh.com\GatewayWorker\BusinessWorker.php(216): Event::onMessage('7f00000108fc000...', '{"type":"bid","...')
+#1 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#2 D:\www.fjsxpmh.com\Workerman\Connection\TcpConnection.php(471): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #23)
+#4 D:\www.fjsxpmh.com\Workerman\Events\Select.php(253): call_user_func_array(Array, Array)
+#5 D:\www.fjsxpmh.com\Workerman\Worker.php(734): Workerman\Events\Select->loop()
+#6 D:\www.fjsxpmh.com\GatewayWorker\BusinessWorker.php(96): Workerman\Worker->run()
+#7 D:\www.fjsxpmh.com\Workerman\Worker.php(422): GatewayWorker\BusinessWorker->run()
+#8 D:\www.fjsxpmh.com\Workerman\Worker.php(339): Workerman\Worker::runAllWorkers()
+#9 D:\www.fjsxpmh.com\Application\Chat\start_businessworker.php(36): Workerman\Worker::runAll()
+#10 {main}
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:07 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:08 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:08 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:11 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready
+2017-04-10 17:01:12 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready

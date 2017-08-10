@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>
+            <eq name="ACTION_NAME" value="index">支付订单列表</eq>
+            <eq name="ACTION_NAME" value="search">支付订单搜索结果</eq>
+            -{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            if(ACTION_NAME == 'index'){
+                $pagname = '支付订单列表';
+            }elseif(ACTION_NAME == 'search'){
+                $pagname = '支付订单搜索结果';
+            };
+            $currentNav ='支付管理 > '.$pagname;
+        </php>
+        <include file="Common:intoHead" />
+        <!-- 日期时间插件 -->
+        <css href="--PUBLIC--/Js/datetimepicker/jquery.datetimepicker.css"/>
+        <js href="--PUBLIC--/Js/datetimepicker/jquery.datetimepicker.js"/>
+        <!-- 日期时间插件 -->
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">
+                            <eq name="ACTION_NAME" value="index">支付订单列表</eq>
+                            <eq name="ACTION_NAME" value="search">支付订单搜索结果</eq>
+                        </div>
+                        <div class="search">
+                            <form action="{:U('search')}" method='get'>
+                            时间：
+                                <input type="text" id="start_time"size="17" value="{$keys.start_time}" name="start_time" class="input"/> 至
+                                <input type="text" id="end_time" size="17" value="{$keys.end_time}" name="end_time" class="input"/>
+                                &nbsp;&nbsp;支付状态：
+                                <select name="status">
+                                    <option value="" <eq name="keys[status]" value="">selected="selected"</eq>>所有</option>
+                                    <option value="0" <eq name="keys[status]" value="0">selected="selected"</eq>>未支付</option>
+                                    <option value="1" <eq name="keys[status]" value="1">selected="selected"</eq>>已支付</option>
+                                </select>
+                                &nbsp;&nbsp;<button class="btn">筛选</button>
+                            </form>
+                        </div>
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab payType">
+                        <thead>
+                            <tr>
+                                <td>支付单号</td>
+                                <td>本站单号</td>
+                                <td>用户账号</td>
+                                <td>支付项</td>
+                                <td>在线支付方式</td>
+                                <td>支付金额</td>
+                                <td>其他支付</td>
+                                <td>订单更新时间</td>
+                                <td>支付状态</td>
+                                <td>操作</td>
+                            </tr>
+                        </thead>
+                        <foreach name="order" item="v">
+                            <tr align="center">
+                                <td>{$v.bill_no}</td>
+                                <td>{$v.order_no}</td>
+                                <td>{$v.account}</td>
+                                <td>{$v.purpose}</td>
+                                <td align="left">{$v.paytype}</td>
+                                <td align="right">{$v.money}</td>
+                                <td>
+                                    <if condition="$v['yuemn'] eq 0 and $v['pledge'] eq 0">
+                                        无
+                                    <else/>
+                                        <neq name="v.yuemn" value="0">余额支付：{$v.yuemn}</neq>
+                                        <neq name="v.pledge" value="0">保证金支付：{$v.pledge}</neq>
+                                    </if>
+                                    
+                                </td>
+                                <td>{$v.update_time}</td>
+                                <td>
+                                    <eq name="v[status]" value="1">已支付</eq>
+                                    <eq name="v[status]" value="0">未支付</eq>
+                                </td>
+                                <td>[ <a href="__URL__/del?bill_no={$v.bill_no}">删除</a> ]</td>
+                            </tr>
+                        </foreach>
+                        <tr>
+                            <td colspan="20" align="right" class="page">{$page}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+    </body>
+</html>
+<script type="text/javascript">
+    //为input添加时间插件
+    $('#start_time').datetimepicker({lang:'ch'});
+    $('#end_time').datetimepicker({lang:'ch'});
+    //为input添加插件_end
+</script>

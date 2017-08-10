@@ -1,0 +1,49 @@
+<base href="{$site.WAP_ROOT}"/>
+<css href="__CSS__/amazeui.css"/>
+<css href="__CSS__/app.css"/>
+<css href="--PUBLIC--/Css/pop_status.css"/>
+<css href="--PUBLIC--/Js/asyncbox/skins/oncoo.css"/>
+<js href="--PUBLIC--/Js/jquery-1.7.2.min.js"/>
+<js href="--PUBLIC--/Js/pop_status.js"/>
+<js href="--PUBLIC--/Js/functions.js"/>
+<js href="--PUBLIC--/Js/jquery.form.js"/>
+<js href="--PUBLIC--/Js/asyncbox/asyncbox.js"/>
+<js href="__JS__/jquery.lazyload.min.js"/>
+<js href="__JS__/wap_common.js"/>
+<js href="__JS__/amazeui.min.js"/>
+<script type="text/javascript">
+
+// 关注商家地址
+	var setAttentionSellerUrl ="{:U('Seller/attention')}";
+	var attUrl = "{:U('Member/attention')}";
+	var login = "{$login}";
+	var iswei = "{$iswei}";
+	var ismobile = "{$ismobile}";
+</script>
+<eq name="iswei" value="1">
+	<js href="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"/>
+	<script type="text/javascript">
+		var imgUrl = "{$shareimg}";
+		var sharelink = "{$sharelink}";
+		var descContent = "{:C('SITE_INFO.description')}";
+		var shareTitle = "{:C('SITE_INFO.title')}";
+		var appid = "{:C('Weixin.appid')}";
+		wx.config({
+		    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+		    appId: "{$signPackage['appId']}", // 必填，公众号的唯一标识
+		    timestamp: "{$signPackage['timestamp']}", // 必填，生成签名的时间戳
+		    nonceStr: "{$signPackage['nonceStr']}", // 必填，生成签名的随机串
+		    signature: "{$signPackage['signature']}",// 必填，签名，见附录1
+		    jsApiList: [
+			'onMenuShareTimeline',
+			'onMenuShareAppMessage','onMenuShareQQ',
+			'onMenuShareQZone',
+			'onMenuShareWeibo',
+			'chooseImage',  
+	      	'previewImage',  
+	      	'uploadImage',  
+	      	'downloadImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+		});
+	</script>
+</eq>
+</head>

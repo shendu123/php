@@ -1,0 +1,22 @@
+<foreach name="channel" item="vo">
+    <div class="on-plate">
+        <h1 class="on-channel-title am-cf">{$vo.name}
+          <span class="am-fr">
+              <a class="on-mor" href="{:U('Auction/endbid',array('gt'=>$vo['cid']))}">最新成交</a>
+              <a class="on-mor" href="{:U('Auction/waitbid',array('gt'=>$vo['cid']))}">拍卖预告</a>
+          </span>
+       </h1>
+        <ul  class="on-auction-list am-avg-sm-2 gallery-list">
+            <foreach name="vo.bid" item="bav">
+                <empty name="bav.elistA">
+                    <li class="datanone">很抱歉该条件下暂无拍品，您可以重新查询！</li>
+                <else />
+                    <volist name="bav.elistA" id="avo">
+                        <include file="Auction/bidbox" />
+                    </volist>
+                </empty>
+            </foreach>
+        </ul>
+        <a href="{:U('Auction/index',array('gt'=>$vo['cid']))}"  class="lookmore">更多成交<span></span></a>
+    </div>
+</foreach>

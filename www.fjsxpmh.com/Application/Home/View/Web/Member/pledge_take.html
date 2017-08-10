@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>保证金-账号中心-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;账号中心&nbsp;&gt;&gt;&nbsp;保证金取款</div>
+
+        
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                    <h2>保证金取款</h2>
+                    <div class="earnest">
+                        <a href="{:U('pledge_take',array('take'=>'form'))}" class="mini_btn1 fr">提现申请</a>
+                        当前保证金：<strong><em>{$pledge.wallet_pledge}元</em></strong>&nbsp;&nbsp;
+                        冻结：<strong><em>{$pledge.wallet_pledge_freeze}元</em></strong>&nbsp;&nbsp;
+                        可申请取款<strong class="red1">{$pledge.usable}</strong> 元
+                       
+                    </div>
+                    <div class="earnest"> 
+                    提交申请后，保证金将暂时冻结；直到完成提现才会扣除！<br>
+                    提现后请耐心等待！我们会在两个工作日（节假日顺延）内将您提现的金额转账到您指定账户！<br>
+                    注意：转账产生的手续费将会从您提现金额内扣除！
+                    </div>
+                    <div class="trade">
+                        <table width="100%" bgcolor="dddddd" cellspacing="0" cellpadding="0" class="trade-table">
+                            <caption class="history">
+                            申请记录：</caption>
+                            <empty name="take_list">
+                            没有申请记录
+                            <else />
+                            <thead>
+                                <tr>
+                                    <th width="10%">提现金额</th>
+                                    <th width="30%">收款账户信息</th>
+                                    <th width="20%">备注</th>
+                                    <th width="10%">申请时间</th>
+                                    <th width="20%">状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="take_list" id="tv">
+                                <tr>
+                                    <td>{$tv.money}</td>
+                                    <td>
+                                        <ul class="bankinfo">
+                                            <li class="clearfix"><div class="th">银行：</div><div class="td">{$tv.bank}</div></li>
+                                            <li class="clearfix"><div class="th">开户行：</div><div class="td">{$tv.bankhome}</div></li>
+                                            <li class="clearfix"><div class="th">姓名：</div><div class="td">{$tv.name}</div></li>
+                                            <li class="clearfix"><div class="th">账号：</div><div class="td">{$tv.account}</div></li>
+                                        </ul>
+                                    </td>
+                                    <td>{$tv.remark}</td>
+                                    <td>{$tv.time|date='Y-m-d H:i',###}</td>
+                                    <td>
+                                        <eq name="tv.status" value="0">等待提现</eq>
+                                        <eq name="tv.status" value="1">
+                                        已转账<br>
+                                        <div class="tl">
+                                        时间：{$tv.dtime|date='Y-m-d H:i',###}<br>
+                                        回复：{$tv.cause}
+                                        </div>
+                                        </eq>
+                                        <eq name="tv.status" value="2">
+                                        被驳回<br>
+                                        <div class="tl">
+                                        时间：{$tv.dtime|date='Y-m-d H:i',###}<br>
+                                        原因：{$tv.cause}
+                                        </div>
+                                        </eq>
+                                    </td>
+                                </tr>
+                            </volist>
+                                <tr><td class="page" colspan="5" style="text-align: right;">{$page}</td></tr>
+                            </tbody>
+                            </empty>
+                        </table>
+                    </div>
+            </div>
+            <!---右侧结束-->
+        </div>
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<js href="--PUBLIC--/Js/jquery-validate.js"/>
+<script type="text/javascript">
+    $(function(){
+        //jQuery Validate 表单验证
+        $('input').focus(function(){
+
+            if($(this).parents('dl').children('.error').length > 0 || $(this).parents('dl').children('.success').length > 0){
+            }else{
+                $(this).parents('dl').children('.onFocus').show();
+                $(this).parents('dl').children('.onShow').hide();
+            }
+        });
+        $("form[name='myInfo']").validate({
+            errorElement : 'dd',
+            success : 'success',
+            errorPlacement : function(error, element) {
+                error.appendTo(element.parents('dl'));
+                error.parents('dl').children('.onFocus').hide();
+                error.parents('dl').children('.onShow').hide();
+            },
+            rules : {
+                pwd : {
+                    required : true,
+                },
+                new_pwd : {
+                    required : true,
+                },
+                new_pwded : {
+                    required : true,
+                    equalTo : "#new_pwd"
+                },
+            },
+            messages : {
+                pwd : {
+                    required : '当前密码不能为空哦'
+                },
+                new_pwd : {
+                    required : '新密码不能为空哦'
+                },
+                new_pwded : {
+                    required : '确认一下你刚才输入的密码',
+                    equalTo : '两次密码不一致'
+                },
+            }
+        });
+        $(".submit").click(function(){
+            if($("form[name='myInfo']").valid()){
+                commonAjaxSubmit();
+            }
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

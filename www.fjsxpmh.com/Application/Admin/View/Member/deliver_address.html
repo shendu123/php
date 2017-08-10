@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>用户地址薄-网站注册会员管理-后台管理-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='网站注册会员管理 > 用户地址薄';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">
+                            {$info.account}的地址薄
+                        </div>
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                        <tr>
+                            <td width="10%">收货人</td>
+                            <td width="15%">所在地区</td>
+                            <td width="15%">详细地址</td>
+                            <td width="5%">邮编</td>
+                            <td width="10%">手机</td>
+                            <td width="10%">电话</td>
+                            <td width="5%">默认</td>
+                        </tr>
+                        </thead>
+                        <empty name="list">
+                            <tr>
+                                <td align="center" colspan="10">没有设置地址薄</td>
+                            </tr>
+                        <else/>
+                            <volist name="list" id="vo">
+                                <tr align="center" id="{$vo.id}">
+                                    <td>{$vo.truename}</td>
+                                    <td> {$vo.ctstr} </td>
+                                    <td>{$vo.address}</td>
+                                    <td>{$vo.postalcode}</td>
+                                    <td>{$vo.mobile}</td>
+                                    <td>{$vo.phone}</td>
+                                    <td>
+                                        <eq name="vo.default" value="1">是<else/>否</eq>
+                                    </td>
+                                </tr>
+                            </volist>
+                        </empty>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+    </body>
+</html>

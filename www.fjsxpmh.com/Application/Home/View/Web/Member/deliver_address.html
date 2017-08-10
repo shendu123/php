@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>{$ts}收货地址-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;账号中心&nbsp;&gt;&gt;&nbsp;{$ts}收货地址</div>
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+           	  <div class="sider">
+                    <ul class="inquiry">
+                        <li class="hover"><a href="{:U('Member/my_info')}">{$ts}收货地址</a></li>
+                    </ul>
+                    <div class="inquiry-con">
+                    <form id="address" name="address" class="validateClass" action="" method="post">
+                        <div class="gongsxxbox">
+                            <div class="my_info clearfix">
+                                <dl class="clearfix">
+                                    <dt>所在地区：</dt>
+                                    <dd>
+                                        {:W('Oncoo/region',array($info[province],$info['city'],$info['area'],3))}
+                                    </dd>
+                                    <dd><div id="provinceTip"></div></dd>
+                                    <dd><div id="cityTip"></div></dd>
+                                    <dd><div id="areaTip"></div></dd>
+                                </dl>                    
+                                <dl class="clearfix">
+                                    <dt>详细地址：</dt>
+                                    <dd><textarea id="address" name="address" class="input" style=" padding: 5px; width:350px; height:48px;" placeholder="不需要重复填写省市区，必须大于5个字符，小于120个字符">{$info.address}</textarea></dd>
+                                    <dd><div id="addressTip"></div></dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>邮政编码：</dt>
+                                    <dd><input id="postalcode" name="postalcode" class="input" type="text" value="{$info.postalcode}" /></dd>
+                                    <dd><div id="postalcodeTip"></div></dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>联系人：</dt>
+                                    <dd><input id="truename" type="text" size="30" class="input" name="truename" value="{$info.truename}"/></dd>
+                                    <dd><div id="truenameTip"></div></dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>手机号码：</dt>
+                                    <dd><input id="mobile" type="text" size="30" class="input" name="mobile" value="{$info.mobile}"/></dd>
+                                    <dd><div id="mobileTip"></div></dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>联系电话：</dt>
+                                    <dd><input id="phone" type="text" size="30" class="input" name="phone" value="{$info.phone}"/></dd>
+                                    <dd><div id="phoneTip"></div></dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>设置默认：</dt>
+                                    <dd><label><input style="vertical-align: sub; margin-right: 5px;" type="checkbox" id="default" value="1" name="default">设置为默认收货地址</label></dd>
+                                </dl>
+                                <dl id="btn_box">
+                                <input type="hidden" name="uid" value="{$info.uid}" />
+                                <input type="hidden" name="adid" value="{$info.adid}"/>
+                                    <button id="submit" class="btn_blue submit">保存</button>
+                                </dl>
+                            </div>
+                        </div>
+                    </form>
+                    <!---右侧结束-->
+                    <div class="tbl-deliver-address">
+                        <div class="caption mtb10">已保存了<span id="count">{$count}</span>条地址，还能保存<span id="yu">{$yu}</span>条地址</div>
+                            <table cellspacing="0" cellpadding="0" border="0" class="tbl-main">
+                                <colgroup>
+                                    <col class="col-man">
+                                    <col class="col-area">
+                                    <col class="col-address">
+                                    <col class="col-postcode">
+                                    <col class="col-phone">
+                                    <col class="col-actions">
+                                </colgroup>
+                                <tbody>
+                                    <tr class="thead-tbl-grade">
+                                        <th>收货人</th>
+                                        <th>所在地区</th>
+                                        <th>详细地址</th>
+                                        <th>邮编</th>
+                                        <th>电话/手机</th>
+                                        <th>操作</th>
+                                        <th></th>
+                                    </tr>
+                                    <foreach name="list" item="av">
+                                        <tr class="thead-tbl-address  address-default">
+                                            <td>{$av.truename}</td>
+                                            <td> {$av.ctstr} </td>
+                                            <td>{$av.address}</td>
+                                            <td>{$av.postalcode}</td>
+                                            <td>
+                                                <neq name="av.phone" value="">{$av.phone}<br/></neq>
+                                                <neq name="av.mobile" value="">{$av.mobile}</neq>
+                                            </td>
+                                            <td>
+                                                <a href="{:U('Member/deliver_address',array('adid'=>$av['adid']))}">修改</a> |
+                                                <a class="del" adid="{$av.adid}" href="javascript:void(0)">删除</a>
+                                            </td>
+                                            <td class="thead-tbl-status">
+                                                <eq name="av.default" value="1">
+                                                    <a class="note def" def="on" adid="{$av.adid}" href="javascript:void(0)">默认地址</a>
+                                                    <else/>
+                                                    <a class="note" def="" adid="{$av.adid}" href="javascript:void(0)">设为默认</a>
+                                                </eq>
+                                            </td>
+                                        </tr>
+                                    </foreach>
+                                    
+                                </tbody>
+                            </table>
+                    </div>
+                    </div>
+                </div>
+            
+            
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<script type="text/javascript">
+var delLink = "{:U('Member/del_deliver_address')}";
+var topLink = "{:U('Member/deliver_address')}";
+var count = "{$count}";
+var yu = "{$yu}";
+var setDefaultUrl = "{:U('Member/default_deliver_address')}";
+    $(function(){
+        // 设默认【
+        $('a.note').click(function(){
+            var thisObj = $(this);
+            if(thisObj.attr('def')==''){
+                var tihObj = $(this).parents('tbody').find('.thead-tbl-status a');
+                $.post(setDefaultUrl,{'adid':thisObj.attr('adid')},function(data){      //ajax后台
+                    if (data.status) {
+                        tihObj.attr('def','');
+                        tihObj.removeClass('def');
+                        tihObj.html('设为默认')
+
+                        thisObj.attr('def','on');
+                        thisObj.addClass('def');
+                        thisObj.html('默认地址');
+
+                        popup.success(data.msg);
+                        setTimeout(function(){
+                            popup.close("asyncbox_success");
+                        },2000);
+                    } else {
+                        alert(data.msg);
+                    }
+                },'json'); 
+            }else{
+                return false;
+            }
+            
+        });
+        // 设默认】
+
+
+
+        // 表单验证【
+    $.formValidator.initConfig({formID:"address",submitButtonID:"submit"});
+    $("#submit").click(function(){
+        if($.formValidator.pageIsValid('1')==true){
+            commonAjaxSubmit('','','');
+        }
+        return false;
+    });
+
+    $("#truename").formValidator({onShow:"请输入你的中文姓名",onFocus:"要求2-4个中文字符",onCorrect:"输入正确"}).functionValidator({fun:trueName});
+
+    $("#mobile").formValidator({onShow:"主要用于交易通知",onFocus:"11位数字，如“13812345678”",onCorrect:"输入手机号",onEmpty:"该项为必填项"}).inputValidator({min:11,max:11,onError:"手机号码必须是11位的,请确认"}).regexValidator({regExp:"mobile",dataType:"enum",onError:"你输入的手机号码格式不正确"});
+    $("#phone").formValidator({empty:true,onShow:"请输入你的联系电话，可以为空哦",onFocus:"格式例如：0577-88888888",onCorrect:"谢谢你的合作",onEmpty:"你真的不想留联系电话了吗？"}).regexValidator({regExp:"^(([0\\+]\\d{2,3}-)?(0\\d{2,3})-)?(\\d{7,8})(-(\\d{3,}))?$",onError:"你输入的联系电话格式不正确"});
+
+    $("#province").formValidator({onShow:"请选择省",onFocus:"省份必须选择",onCorrect:"谢谢配合"}).inputValidator({min:1,onError: "请选择省份!"});
+    $("#city").formValidator({onShow:"请选择市",onFocus:"城市必须选择",onCorrect:"谢谢配合"}).inputValidator({min:1,onError: "请选择城市!"});
+    $("#area").formValidator({onShow:"请选择区",onFocus:"区域必须选择",onCorrect:"谢谢配合"}).inputValidator({min:1,onError: "请选择区域!"});
+    
+    $("#postalcode").formValidator({onShow:"请填写邮编",onFocus:"必须大于5个字符，小于120个字符",onCorrect:"输入正确"}).functionValidator({fun:isZipCode});
+
+    $("#address").formValidator({onShow:"请填写详细地址",onFocus:"必须大于5个字符，小于120个字符",onCorrect:"输入正确"}).inputValidator({min:5,max:120,onError:"你输入的昵称不正确,请确认"});
+    // 表单验证】
+        $(".del").click(function(){
+            var adid = $(this).attr("adid");
+            var delobj = $(this).parents('tr');
+            popup.confirm('你真的打算删除该地址吗?','温馨提示',function(action){
+                $.post(delLink,{'adid':adid},function(data){      //ajax后台
+                    if (data.status) {
+                        delobj.remove();
+                        count = Number(count)-1;
+                        yu = Number(yu)+1;
+                        $('#count').html(count);
+                        $('#yu').html(yu);
+                        top.window.location.href=topLink;
+                    } else {
+                        alert(data.msg);
+                    }
+                },'json'); 
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

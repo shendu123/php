@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<script type="text/javascript">
+	        var imgUrl = "http://wx.pyan.com/static/images/shareThumb.jpg";
+	        var link = "{$shareurl}";
+	        var descContent = '微信用户专享，玩幸运大转盘，就有机会赢取手机话费！';
+	        var shareTitle = '玩幸运大转盘，赢手机话费！！！';
+	        var appid = '';
+		</script>
+ 		<js href="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"/>
+		<script type="text/javascript">
+			wx.config({
+			    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+			    appId: "{$signPackage['appId']}", // 必填，公众号的唯一标识
+			    timestamp: "{$signPackage['timestamp']}", // 必填，生成签名的时间戳
+			    nonceStr: "{$signPackage['nonceStr']}", // 必填，生成签名的随机串
+			    signature: "{$signPackage['signature']}",// 必填，签名，见附录1
+			    jsApiList: [
+			                'onMenuShareTimeline',
+			                'onMenuShareAppMessage',
+			                'onMenuShareQQ',
+			                'onMenuShareWeibo'
+			                ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			});
+			wx.ready(function(){
+			    //朋友圈
+			    wx.onMenuShareTimeline({
+			        title: shareTitle,
+			        link: link,
+			        imgUrl: imgUrl,
+			        trigger: function (res) {
+			            alert('用户点击并朋友圈');
+			         },
+			        success: function () { 
+			            // 用户确认分享后执行的回调函数
+			            alert('Timeline分享成功');
+			        },
+			        cancel: function () { 
+			            // 用户取消分享后执行的回调函数
+			            alert('您取消了分享Timeline');
+			        }
+			    });
+			    wx.onMenuShareAppMessage({
+			        title: shareTitle,
+			        link: link,
+			        desc: descContent,
+			        imgUrl: imgUrl,
+			        type: '', // 分享类型,music、video或link，不填默认为link
+			        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+			        success: function () { 
+			            alert('分享给朋友分享成功');
+			        },
+			        cancel: function () { 
+			            alert('您取消了分享给朋友');
+			        }
+			    });
+			    wx.onMenuShareQQ({
+			        title: shareTitle,
+			        desc: descContent,
+			        link: link,
+			        imgUrl: imgUrl,
+			        success: function () { 
+			            alert('qq分享成功');
+			        },
+			        cancel: function () { 
+			            alert('您取消了分享给qq');
+			        }
+			    });
+			    wx.onMenuShareWeibo({
+			        title: shareTitle,
+			        desc: descContent,
+			        link: link,
+			        imgUrl: imgUrl,
+			        success: function () { 
+			               alert('weibo分享成功');
+			        },
+			        cancel: function () { 
+			              alert('weibo取消');
+			        }
+			    });
+			    // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+			});
+			wx.error(function (res) {
+			      alert(res.errMsg);
+			});
+		</script>
+    </head>
+    <body>
+    阿斯顿飞卡拉加水电费考虑骄傲卡拉斯蒂芬骄傲交水电费了
+    </body>
+</html>
+
+ 

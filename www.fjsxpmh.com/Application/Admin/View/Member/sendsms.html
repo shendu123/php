@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>发送站内信-用户管理-{$site.SITE_INFO.name}</title>
+    <php>
+        
+        
+        $currentNav ='用户管理 > 发送站内信';
+    </php>
+    <include file="Common:intoHead" />
+</head>
+<body>
+<div class="wrap"> <include file="Common:head" />
+    <div class="mainBody"> <include file="Common:left" />
+        <div id="Right">
+            <div class="contentArea">
+                <div class="Item hr clearfix">
+                    <div class="current">发送站内信</div>
+                </div>
+                <form action="" method="post">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                        <tr class="clearfix">
+                            <th style="width: 50px;">用户：</th>
+                            <td>
+                                <ul class="userlist">
+                                    <foreach name="list" item="v">
+                                        <li>
+                                            <label class="clearfix">
+                                                <input class="fl" name="data[uid][]" type="checkbox" checked="checked" value="{$v.uid}" />
+                                                <img class="fl" src="{$v.uid|getUserpic=###,2}">
+                                                <div class="fl">
+                                                    账号：{$v.account}<br/>昵称：{$v.nickname}
+                                                </div>
+                                            </label>
+                                        </li>
+                                    </foreach>
+                                    
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr class="clearfix">
+                            <th>内容：</th>
+                            <td><textarea name="data[content]" class="input" style=" padding: 5px; width:400px; height:80px;" placeholder=""></textarea></td>
+                        </tr>
+                    </table>
+                </form>
+                <div class="commonBtnArea" >
+                    <button class="btn submit">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<include file="Common:foot" />
+
+<script type="text/javascript">
+    $(function(){
+        $(".submit").click(function(){
+            commonAjaxSubmit();
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

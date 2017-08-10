@@ -1,0 +1,95 @@
+<div class="indexheader">
+    <div class="top bg_wide">
+        <div class="topcon w_wide"> 
+            <include file="Common:top" />
+        </div>
+    </div>
+    <div class="head" style="position:relative;" >
+        <h1 class="logo">
+            {:showAdvPosition('web_logo','span')}
+        </h1>
+        <div class="logo_r_ad">
+            {:showAdvPosition('web_logo_right','span')}
+        </div>
+        
+        <div class="search">
+            <ul class="search-slec">
+              <li class="searcur"><a val="0" href="javascript:void(0);">全部</a></li>
+              <li ><a val="1" href="javascript:void(0);">拍卖</a></li>
+              <li ><a val="2" href="javascript:void(0);">资讯</a></li>
+            </ul>
+            <div class="search-panel">
+                <form id="form_search" name="form_search" method="post" action="{:U('Index/search')}">
+                    <input id="seakey" class="text"  type="text"  value="请输入关键词"  name="searchkey" autocomplete="off" />
+                    <input type="hidden" id="searchtype" name="searchtype" value = "0" />
+                    <input id="seaForm" type="button" class="button" value="查 询" />
+                </form>
+           </div>
+        </div>    
+        <div class="mybox">
+            <a href="<eq name="login" value="1">{:U('Member/mybid')}<else/>{:U('Login/index')}</eq>" rel="nofollow">我的拍卖</a>                     
+        </div>
+    </div>
+    <div class="nav"> 
+        <div class="navcon clearfix">
+
+            <div <if condition="!((CONTROLLER_NAME eq 'Index') and (ACTION_NAME eq 'index'))">id="navleft"</if> class="navleft">
+                <h2>导航、推荐
+                <if condition="!((CONTROLLER_NAME eq 'Index') and (ACTION_NAME eq 'index'))"><span class="xiala"></span></if>
+                </h2>
+                <div class="leftlist">
+                    <menu menupos="3" maxsize="5"/>
+                </div>
+            </div>
+
+            <div class="navmain cearfix">
+                <div class="defaultNav">
+                    <ul>
+                        <li <eq name="CONTROLLER_NAME" value="Index"><neq name="ACTION_NAME" value="search">class="navcur"</neq></eq>>
+                           <a href="{:U('Index/index')}" title="{$site.SITE_INFO.title}"> 首页</a> 
+                        </li>
+
+                        <foreach name="channelMenu" item="cm">
+                            <li <eq name="gt.0" value="$cm.cid">class="navcur"</eq>>
+                               <a href="{:U('Auction/index',array('gt'=>$cm['cid']))}"> {$cm.name}</a> 
+                            </li>
+                        </foreach>
+                        <li <eq name="CONTROLLER_NAME" value="Special">class="navcur"</eq>><a href="{:U('Special/index')}">专场拍卖</a></li>
+                        <li <eq name="CONTROLLER_NAME" value="Meeting">class="navcur"</eq>><a href="{:U('Meeting/index')}">拍卖会</a></li>
+                        <li><menu menupos="1" maxsize="5"/></li>
+                        <eq name="ACTION_NAME" value="search">
+                            <li class="navcur"><a href=""> 搜索结果</a></li>
+                        </eq>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var seakey =$('#seakey');
+    $(function(){
+        // 搜索框
+        var keyval = seakey.val();  
+        seakey.focus(function() {if ($(this).val() == keyval) {$(this).val("");}});
+        seakey.blur(function() {if ($(this).val()== "") {$(this).val(keyval);}}); 
+        $('.search-slec a').click(function(){
+            $(this).parents('ul').children('li').removeClass("searcur");
+            $(this).parents('li').addClass("searcur");
+            $('#searchtype').attr('value',$(this).attr('val'));
+        });
+        $('#seaForm').click(function(){
+            if (seakey.val()==""||seakey.val()=="请输入关键词"){ 
+              popup.error("请输入关键词");
+              setTimeout(function(){
+                popup.close("asyncbox_error");
+              },2000);
+              seakey.focus();
+              return false;
+            }else{
+              $('#form_search').submit();
+            }
+        });
+    });
+</script>

@@ -1,0 +1,31 @@
+<li class="bbox">
+    <a class="pic" target="_blank" href="{:U('Auction/details',array('pid'=>$avo['pid']))}">
+        <img width="225" height="170" alt="{$avo.pname}" src="{$upWholeUrl}{$avo.pictures|getPicUrl=###,2,0}">
+        <span class="icon-jp">
+            <eq name="avo.type" value="0">竞拍</eq>
+            <eq name="avo.type" value="1">竞标</eq>
+        </span>
+    </a>
+    <div class="biddetail">
+        <p class="pldtit"><a target="_blank" href="{:U('Auction/details',array('pid'=>$avo['pid']))}">{$avo.pname}</a>
+        <div class="cont clearfix">
+            <div class="fl l">
+                <p class="pldprice ">
+                    <span>¥<em>{$avo.onset}</em>元起</span>
+                </p>               
+                <ul class="plddetail">
+                    <li>保证金：
+                        {:pledgeShow($avo['pattern'],$avo['pledge_type'],$avo['onset'],$avo['pledge'],$avo['spledge'],$avo['mpledge'])}
+                    </li> 
+                    <li>结束时间：{$avo.endtime|date='m-d H:i',###}</li> 
+                </ul> 
+            </div>
+            <a href="{:U('Auction/details',array('pid'=>$avo['pid']))}" class="pldcount fr r">
+                <span>{$avo.bidcount}</span>
+                <br>
+                次出价
+            </a>
+        </div>
+        
+    </div>
+</li>

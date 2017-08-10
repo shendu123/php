@@ -1,0 +1,13 @@
+<div class="main_b7_1 fl">
+    <ul id="menu">
+    <foreach name="newlist" key="ck" item="cv">
+        <li><a class="cuit_over" href="">{$cv.cname}</a>
+            <ul <if condition="$cv['cid'] == $list['cid'] ">class="sel"</if> style="display: block;">
+                <foreach name="cv.list" key="nk" item="nv">
+                    <li <if condition="$nk == $list['id'] ">class="user_li_pg"</if>><a class="cuit_over" href="{:U('help',array('id'=>$nk))}">{$nv}</a></li>
+                </foreach>
+            </ul>
+        </li>
+    </foreach>            
+    </ul>
+</div>

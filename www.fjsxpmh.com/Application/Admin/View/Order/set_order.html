@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>订单配置-后台管理-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='拍卖管理 > 订单配置';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">拍卖订单配置</div>
+                    </div>
+                    <form>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th>支付期限：</th>
+                                <td>
+                                    <input  style="text-align: right;" type="text" class="input" size="10" name="order[losetime1]" value="{$order.losetime1}"/>天&nbsp;&nbsp;订单生成后，买家的支付期限。如果过期将扣除买家保证金，扣除佣金后自动转入卖家账户。
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>发货期限：</th>
+                                <td><input  style="text-align: right;" type="text" class="input" size="10" name="order[losetime2]" value="{$order.losetime2}"/>天&nbsp;&nbsp;买家确认支付后，卖家发货时间期限。如果过期未发货，将扣除卖家保证金转入卖家账户。
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>收货期限：</th>
+                                <td><input  style="text-align: right;" type="text" class="input" size="10" name="order[losetime3]" value="{$order.losetime3}"/>天&nbsp;&nbsp;卖家发货后，买家确认收货时间。如过期将自动确认收货。
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>买家评价期限：</th>
+                                <td><input  style="text-align: right;" type="text" class="input" size="10" name="order[losetime4]" value="{$order.losetime4}"/>天&nbsp;&nbsp;买家确认收货或自动确认收货后，买家的评价期限。如过期将自动确认默认好评。
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>卖家评价期限：</th>
+                                <td><input  style="text-align: right;" type="text" class="input" size="10" name="order[losetime10]" value="{$order.losetime10}"/>天&nbsp;&nbsp;买家评价后，卖家评价买家的时间。如过期将自动好评。
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>违约处理：</th>
+                                <td colspan="2">如未按时支付或未按时发货网站抽取保证金的<input  style="text-align: right;" type="text" class="input" size="10" name="order[liquidated]" value="{$order.liquidated}"/>%，剩余部分转入对方账户
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td colspan="2" align="left">
+                                修改后需清理缓存【首页】->【缓存清理】（选择网站配置缓存）进行清理。<br>
+                                    *不填写或者0为永久有效！*<br>*该配置为订单生成后支付时间段，如在该时间段未进行支付，用户将无法进行支付！保证金将被扣除！*
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            $(function(){
+                $(".submit").click(function(){
+                    commonAjaxSubmit();
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

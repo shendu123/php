@@ -1,0 +1,58 @@
+<include file="Common:meta" />
+<title>卖家信息-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+<ul class="tabMenu am-avg-sm-2">
+    <li <eq name="ACTION_NAME" value="my_info">class="on"</eq>><a href="{:U('Member/my_info')}">基本信息</a></li>
+    <li <eq name="ACTION_NAME" value="imseller">class="on"</eq>><a href="{:U('Member/imseller')}">卖家信息</a></li>
+</ul>
+<div class="am-margin-top">
+    <form id="imseller" class="am-form" name="imseller">
+        <dl class="user-frame">
+            <dd><input id="organization" placeholder="卖家名称" type="text" size="30" class="input" name="organization" value="{$my_info.organization}"/></dd>
+            <dd><div id="organizationTip"></div></dd>
+        </dl>
+        <dl class="user-frame">
+            <dd><textarea id="intro" placeholder="卖家简介" name="intro" class="input">{$my_info.intro}</textarea></dd>
+            <dd><div id="introTip"></div></dd>
+        </dl>
+        <dl class="user-frame" >
+            <dd id="btn_box">
+                <input type="hidden" name="uid" value="{$my_info.uid}" />
+                <button class="submitBtn am-btn am-btn-danger on-btn-danger am-radius" id="submit">保存</button>
+            </dd>
+        </dl>
+    </form>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<script type="text/javascript">
+var checkMobile = "{:U('Login/checkMobile')}";
+var checkEmail = "{:U('Login/checkEmail')}";
+    $(function(){
+    // 表单验证【
+	$.formValidator.initConfig({formID:"imseller",submitButtonID:"submit"});
+    $("#submit").click(function(){
+        $.formValidator.pageIsValid('1');
+        setTimeout(function(){
+            if($.formValidator.pageIsValid('1')==true){
+                commonAjaxSubmit('','','');
+            }
+        },200);
+        return false;
+    });
+    $("#organization").formValidator({onShow:"请填写卖家名称",onFocus:"要求最少2个不超过(汉字10个;英文字符20个)字",onCorrect:"输入正确"}).inputValidator({min:3,max:20,onError:"你输入的名称不正确,请确认"});
+
+    $("#intro").formValidator({onShow:"请填写卖家简介",onFocus:"要求最少2个不超过(汉字50个;英文字符100个)字",onCorrect:"输入正确"}).inputValidator({min:3,max:100,onError:"你输入的简介不正确,请确认"});
+    // 表单验证】
+    });
+</script>
+</body>
+</html>

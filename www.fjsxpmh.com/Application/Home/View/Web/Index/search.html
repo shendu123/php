@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>“{$searchkey}”关键词搜索-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+        <css href="__CSS__/cuitindex.css"/>
+        <css href="__CSS__/list.css"/>
+        <js href="__JS__/indexjs.js"/>
+    </head>
+    <body>
+    <include file="Common:head_wide" />
+    <div class="container clearfix">
+            <eq name="searchtype" value="0">
+                <include file="Index:search_auction" />
+                <include file="Index:search_news" />
+            </eq>
+            <eq name="searchtype" value="1">
+                <include file="Index:search_auction" />
+            </eq>
+            <eq name="searchtype" value="2">
+                <include file="Index:search_news" />
+            </eq>
+    </div>
+<!---底部开始-->
+<include file="Common:help_wide" />
+<include file="Common:footer"/>
+</body>
+</html>

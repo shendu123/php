@@ -1,0 +1,38 @@
+<include file="Common:meta" />
+<title>信誉额度-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+    <div class="on-tips">
+        信用额度：<strong>{$limsum.wallet_limsum}</strong>元&nbsp;&nbsp;
+        冻结：<strong>{$limsum.wallet_limsum_freeze}</strong>元&nbsp;&nbsp;
+        可用：<strong>{$limsum.usable}</strong>元
+    </div>
+    <div style="font-size: 12px; margin:5px;" data-am-alert="" class="am-alert am-alert-warning zhyts"><button class="am-close" type="button">×</button><p>信用额度功能类似保证金，可参与拍卖和预定。参拍或预定将冻结相应信用额度，成交后解冻。信用额度不可提现！
+            您可以联系我们申请信用额度！</p></div>
+    <ul class="on-shouzhi am-avg-sm-1 am-avg-md-2">
+        <volist name="bill" id="bv">
+            <li class="on-li">
+                <div class="on-li-con">
+                    单号：{$bv.order_no}<br/>
+                    <neq name="bv.expend" value="0">支出：<strong class="on-expend">{$bv.expend}</strong></neq>
+                    <neq name="bv.income" value="0">收入：<strong class="on-income">{$bv.income}</strong></neq>【{$bv.changetype|changetype=###}】<br/>
+                    {$bv.annotation}<span class="on-time">{$bv.time|date='Y-m-d H:i',###}</span><br/>
+                </div>
+            </li>
+        </volist>
+    </ul>
+    <!--分页【-->
+    <notempty name="page">
+        <div class="pagestyle">
+            {$page}
+        </div>
+    </notempty>
+    <!--分页】-->
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+</body>
+</html>

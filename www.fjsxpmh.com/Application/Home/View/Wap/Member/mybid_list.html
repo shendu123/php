@@ -1,0 +1,37 @@
+<include file="Common:meta" />
+<title>我的出价-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+    <div  class="mbsecbox">
+        <table width="100%" class="on-table am-table am-table-bordered am-table-radius am-table-striped">
+            <tr>
+                <th class="30%">出价方式</th>
+                <th width="15%">加价</th>
+                <th width="15%">价格</th>
+                <th width="40%">时间</th>
+            </tr>
+            <volist name="list" id="vo">
+            <tr>
+                <td align="center">{$vo.type}</td>
+                <td align="right"><span class="red1 fb">{$vo.money}</span></td>
+                <td align="right"><span class="red1 fb">{$vo.bided}</span></td>
+                <td align="center">{$vo.time|date='Y-m-d H:i',###}</td>
+            </tr>
+            </volist>
+        </table>
+    </div>
+    <!--分页【-->
+    <notempty name="page">
+        <div class="pagestyle">
+            {$page}
+        </div>
+    </notempty>
+    <!--分页】-->
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+</body>
+</html>

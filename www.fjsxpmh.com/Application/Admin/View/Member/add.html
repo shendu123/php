@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>添加、编辑用户-用户管理-{$site.SITE_INFO.name}</title>
+    <php>
+        
+        
+        $currentNav ='用户管理 > 添加、编辑用户';
+    </php>
+    <include file="Common:intoHead" />
+</head>
+<body>
+<div class="wrap"> <include file="Common:head" />
+    <div class="mainBody"> <include file="Common:left" />
+        <div id="Right">
+            <div class="contentArea">
+                
+                <form action="" method="post">
+                    <div class="Item hr clearfix">
+                        <div class="current">基本信息</div>
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                        <tr>
+                            <th>登录账号：</th>
+                            <td><input name="info[account]" type="text" class="input" size="30" value="{$info.account}" /></td>
+                        </tr>
+                        <tr>
+                            <th width="120">密码：</th>
+                            <td><input name="info[pwd]" type="password" class="input" size="30" value="" />  不修改留空</td>
+                        </tr>
+                        <tr>
+                            <th width="120">昵称：</th>
+                            <td><input name="info[nickname]" type="text" class="input" size="20" value="{$info.nickname}" /></td>
+                        </tr>
+                        <tr>
+                            <th width="120">真实姓名：</th>
+                            <td><input name="info[truename]" type="text" class="input" size="20" value="{$info.truename}" /></td>
+                        </tr>
+                        <tr>
+                            <th width="120">买家得分：</th>
+                            <td><input name="info[scorebuy]" type="text" class="input" size="10" value="{$info.scorebuy}" /></td>
+                        </tr>
+                        <tr>
+                            <th width="120">个性签名：</th>
+                            <td><input name="info[intr]" type="text" class="input" size="40" value="{$info.intr}" /></td>
+                        </tr>
+                        <tr>
+                            <th width="120">性别：</th>
+                            <td>
+                                <label>
+                                    <input type="radio" name="info[sex]" value="1" <if condition="$info['sex'] eq 1">checked</if> >男
+                                </label>
+                                <label><input type="radio" name="info[sex]" value="0" <if condition="$info['sex'] eq 0">checked</if>>女</label></td>
+                        </tr>
+                        
+                        <tr>
+                            <th>邮箱：</th>
+                            <td>
+                                <input name="info[email]" type="text" class="input" size="30" value="{$info.email}" />
+                                <label>
+                                    <input type="radio" name="info[verify_email]" value="1" <if condition="$info['verify_email'] eq 1">checked</if>>已认证
+                                </label>
+                                <label>
+                                    <input type="radio" name="info[verify_email]" value="0" <if condition="$info['verify_email'] eq 0">checked</if>>未认证
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="120">手机号码：</th>
+                            <td>
+                                <input name="info[mobile]" type="text" class="input" size="30" value="{$info.mobile}" />
+                                <label>
+                                    <input type="radio" name="info[verify_mobile]" value="1" <if condition="$info['verify_mobile'] eq 1">checked</if>>已认证
+                                </label>
+                                <label>
+                                    <input type="radio" name="info[verify_mobile]" value="0" <if condition="$info['verify_mobile'] eq 0">checked</if>>未认证
+                                </label>
+                            </td>
+                        </tr>
+                        
+<!--                         <tr>
+                            <th width="120">QQ：</th>
+                            <td><input name="info[qq]" type="text" class="input" size="30" value="{$info.qq}" /></td>
+                        </tr> -->
+                        <tr>
+                            <th width="120">固定电话：</th>
+                            <td><input name="info[phone]" type="text" class="input" size="30" value="{$info.phone}" /></td>
+                        </tr>
+                        <tr class="clearfix">
+                            <th>邮政编码：</th>
+                            <td><input name="info[postalcode]" class="input" type="text" value="{$info.postalcode}" /></td>
+                        </tr>
+                        <tr class="clearfix">
+                            <th>地址：</th>
+                            <td>
+                                {:W('Home/Oncoo/region',array($info[province],$info[city],$info[area],3))}
+                            </td>
+                        </tr>
+                        <tr class="clearfix">
+                            <th>街道地址：</th>
+                            <td><textarea name="info[address]" class="input" style=" padding: 5px; width:350px; height:48px;" placeholder="不需要重复填写省市区，必须大于5个字符，小于120个字符">{$info.address}</textarea></td>
+                        </tr>
+
+                        <tr>
+                            <th width="120">状态：</th>
+                            <td>
+                                <label>
+                                    <input type="radio" name="info[status]" value="1" <if condition="$info['status'] eq 1">checked</if> >启用
+                                </label>
+                                <label><input type="radio" name="info[status]" value="0" <if condition="$info['status'] eq 0">checked</if>>禁用</label></td>
+                        </tr>
+                    </table>
+
+                    <div class="Item hr clearfix">
+                        <div class="current">卖家信息</div>
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                        <tr>
+                            <th width="120">卖家得分：</th>
+                            <td><input name="info[score]" type="text" class="input" size="10" value="{$info.score}" /></td>
+                        </tr>
+                        <tr>
+                            <th width="120">卖家名称：</th>
+                            <td><input name="info[organization]" type="text" class="input" size="30" value="{$info.organization}" /></td>
+                        </tr>
+                        <tr>
+                            <th width="120">卖家简介：</th>
+                            <td><textarea name="info[intro]" class="input" style=" padding: 5px; width:350px; height:48px;">{$info.intro}</textarea></td>
+                        </tr>
+                    </table>
+                    <input type="hidden" name="uid" value="{$info.uid}"/>
+                </form>
+                <div class="commonBtnArea" >
+                    <button class="btn submit">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<include file="Common:foot" />
+
+<script type="text/javascript">
+    $(function(){
+        $(".submit").click(function(){
+            commonAjaxSubmit();
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

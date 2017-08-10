@@ -1,0 +1,72 @@
+<include file="Common:meta" />
+<title>评价买家-我是卖家</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<js href="--PUBLIC--/Js/jquery_raty/jquery.raty.min.js"/>
+<body>
+<include file="Member:menu" />
+<ul class="sea_list am-avg-sm-1">
+    <li>
+        <div class="on-licon">
+            <div class="pth"><a href="{:U('Auction/details',array('pid'=>$ainfo['pid']))}">【<eq name="ainfo.type" value="0">竞拍</eq><eq name="ainfo.type" value="1">竞标</eq>】{$ainfo.pname}</a><span class="bidnb">[拍品编号：{$ainfo.bidnb}]</span></div>
+            <div class="pcon clearfix">
+                <div class="imbox">
+                    <a href="{:U('Auction/details',array('pid'=>$ainfo['pid']))}">
+                        <img src="{$upWholeUrl}{$ainfo.pictures||getPicUrl=###,2,0}" alt="">
+                    </a>
+                </div>
+                <div class="infobox">
+                    成交价：<span class="qipai">{$ainfo.nowprice|wipezero=###}元</span><br/>
+                    运费：
+                    <span class="blue1">
+                        {$ainfo.freight|wipezero=###}元
+                    </span><br/>
+                    保证金：
+                    <span class="p_col">
+						{:pledgeShow($ainfo['pattern'],$ainfo['pledge_type'],$ainfo['onset'],$ainfo['pledge'],$ainfo['spledge'],$ainfo['mpledge'])}
+					</span>
+                    <br/>
+                    结束时间：{$ainfo.endtime|date='m-d H:i',###}<br/>
+                </div>
+                
+            </div>
+        </div>
+    </li>
+</ul>
+<div class="evalu_tit">对买家做出评价</div>
+<form id="evaluate" name="evaluate" class="am-form" action="" method="post">
+    <dl class="user-frame">
+        <dd>
+            <textarea placeholder="评价买家" name="info[evaluate]"></textarea>
+        </dd>
+    </dl>
+    <dl class="user-frame">
+        <dd>
+            <label class="am-radio-inline"><input type="radio" checked="checked" name="info[score]" value="2" /><img width="20" height="20" src="--PUBLIC--/Img/level/good.gif" alt="好评" />好评</label>
+            <label class="am-radio-inline"><input type="radio" name="info[score]" value="1" /><img width="20" height="20" src="--PUBLIC--/Img/level/middle.gif" alt="中评" />中评</label>
+            <label class="am-radio-inline"><input type="radio" name="info[score]" value="0" /><img width="20" height="20" src="--PUBLIC--/Img/level/bad.gif" alt="差评" />差评</label>
+        </dd>
+    </dl>
+    <input type="hidden" name="info[order_no]" value="{$info.order_no}" />
+    <dl class="user-frame" id="btn_box">
+        <dd>
+            <button class="submitBtn am-btn am-btn-danger on-btn-danger am-radius">提交评价</button>
+        </dd>
+    </dl>
+</form>
+    
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+<script type="text/javascript">
+    $(function(){
+        // 评价星级】
+        $(".submitBtn").click(function(){
+            commonAjaxSubmit();
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

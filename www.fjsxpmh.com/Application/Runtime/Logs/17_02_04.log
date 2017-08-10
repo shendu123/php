@@ -1,0 +1,296 @@
+[ 2017-02-04T09:02:28+08:00 ] 127.0.0.1 /Public/getusercard.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000046s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000679s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000775s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000893s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead E:\www\www.fjsxpmh.com\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `on_auction` [ RunTime:0.001128s ]
+SQL: SHOW COLUMNS FROM `on_goods` [ RunTime:0.000747s ]
+SQL: SHOW COLUMNS FROM `on_member` [ RunTime:0.000842s ]
+SQL: SHOW COLUMNS FROM `on_special_auction` [ RunTime:0.000755s ]
+SQL: SHOW COLUMNS FROM `on_meeting_auction` [ RunTime:0.000776s ]
+SQL: SELECT Auction.pid AS pid,Auction.gid AS gid,Auction.bidnb AS bidnb,Auction.type AS type,Auction.status AS status,Auction.pname AS pname,Auction.onset AS onset,Auction.price AS price,Auction.nowprice AS nowprice,Auction.freight AS freight,Auction.pledge_type AS pledge_type,Auction.pledge AS pledge,Auction.broker_type AS broker_type,Auction.broker AS broker,Auction.stepsize_type AS stepsize_type,Auction.stepsize AS stepsize,Auction.starttime AS starttime,Auction.endtime AS endtime,Auction.uid AS uid,Auction.bidcount AS bidcount,Auction.endstatus AS endstatus,Auction.steptime AS steptime,Auction.deferred AS deferred,Auction.clcount AS clcount,Auction.pattern AS pattern,Auction.sid AS sid,Auction.mid AS mid,Auction.msort AS msort,Auction.succtype AS succtype,Auction.succprice AS succprice,Auction.agency_uid AS agency_uid,Auction.agency_price AS agency_price,Goods.cid AS cid,Goods.aid AS aid,Goods.keywords AS keywords,Goods.filtrate AS filtrate,Goods.pictures AS pictures,Goods.province AS province,Goods.city AS city,Goods.area AS area,Goods.description AS description,Goods.content AS content,Goods.sellerid AS sellerid,Member.organization AS organization,Member.intro AS intro,Member.score AS score,Special_auction.spledge AS spledge,Meeting_auction.mpledge AS mpledge FROM on_auction Auction LEFT JOIN on_goods Goods ON Auction.gid = Goods.id LEFT JOIN on_member Member ON Goods.sellerid = Member.uid LEFT JOIN on_special_auction Special_auction ON Auction.sid = Special_auction.sid LEFT JOIN on_meeting_auction Meeting_auction ON Auction.mid = Meeting_auction.mid WHERE ( Auction.endtime < 1486170148 ) AND ( Auction.endstatus = 0 )  [ RunTime:0.000873s ]
+SQL: SHOW COLUMNS FROM `on_goods_category` [ RunTime:0.000821s ]
+SQL: SELECT * FROM `on_goods_category` WHERE ( `pid` = 0 ) ORDER BY sort desc  [ RunTime:0.000459s ]
+ERR: 页面错误！
+
+[ 2017-02-04T09:16:57+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000347s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000422s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000534s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead E:\www\www.fjsxpmh.com\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `on_auction` [ RunTime:0.001627s ]
+SQL: SHOW COLUMNS FROM `on_goods` [ RunTime:0.001094s ]
+SQL: SHOW COLUMNS FROM `on_member` [ RunTime:0.001142s ]
+SQL: SHOW COLUMNS FROM `on_special_auction` [ RunTime:0.000979s ]
+SQL: SHOW COLUMNS FROM `on_meeting_auction` [ RunTime:0.000856s ]
+SQL: SELECT Auction.pid AS pid,Auction.gid AS gid,Auction.bidnb AS bidnb,Auction.type AS type,Auction.status AS status,Auction.pname AS pname,Auction.onset AS onset,Auction.price AS price,Auction.nowprice AS nowprice,Auction.freight AS freight,Auction.pledge_type AS pledge_type,Auction.pledge AS pledge,Auction.broker_type AS broker_type,Auction.broker AS broker,Auction.stepsize_type AS stepsize_type,Auction.stepsize AS stepsize,Auction.starttime AS starttime,Auction.endtime AS endtime,Auction.uid AS uid,Auction.bidcount AS bidcount,Auction.endstatus AS endstatus,Auction.steptime AS steptime,Auction.deferred AS deferred,Auction.clcount AS clcount,Auction.pattern AS pattern,Auction.sid AS sid,Auction.mid AS mid,Auction.msort AS msort,Auction.succtype AS succtype,Auction.succprice AS succprice,Auction.agency_uid AS agency_uid,Auction.agency_price AS agency_price,Goods.cid AS cid,Goods.aid AS aid,Goods.keywords AS keywords,Goods.filtrate AS filtrate,Goods.pictures AS pictures,Goods.province AS province,Goods.city AS city,Goods.area AS area,Goods.description AS description,Goods.content AS content,Goods.sellerid AS sellerid,Member.organization AS organization,Member.intro AS intro,Member.score AS score,Special_auction.spledge AS spledge,Meeting_auction.mpledge AS mpledge FROM on_auction Auction LEFT JOIN on_goods Goods ON Auction.gid = Goods.id LEFT JOIN on_member Member ON Goods.sellerid = Member.uid LEFT JOIN on_special_auction Special_auction ON Auction.sid = Special_auction.sid LEFT JOIN on_meeting_auction Meeting_auction ON Auction.mid = Meeting_auction.mid WHERE ( Auction.endtime < 1486171017 ) AND ( Auction.endstatus = 0 )  [ RunTime:0.000836s ]
+SQL: SHOW COLUMNS FROM `on_goods_category` [ RunTime:0.000755s ]
+SQL: SELECT * FROM `on_goods_category` WHERE ( `pid` = 0 ) ORDER BY sort desc  [ RunTime:0.000455s ]
+SQL: SHOW COLUMNS FROM `on_goods_category` [ RunTime:0.000534s ]
+SQL: SELECT * FROM `on_goods_category` WHERE ( pid=0 ) ORDER BY sort desc  [ RunTime:0.000431s ]
+SQL: SHOW COLUMNS FROM `on_goods_category` [ RunTime:0.000954s ]
+SQL: SELECT * FROM `on_goods_category` ORDER BY sort desc  [ RunTime:0.001164s ]
+SQL: SELECT Auction.pid AS pid,Auction.gid AS gid,Auction.bidnb AS bidnb,Auction.type AS type,Auction.status AS status,Auction.pname AS pname,Auction.onset AS onset,Auction.price AS price,Auction.nowprice AS nowprice,Auction.freight AS freight,Auction.pledge_type AS pledge_type,Auction.pledge AS pledge,Auction.broker_type AS broker_type,Auction.broker AS broker,Auction.stepsize_type AS stepsize_type,Auction.stepsize AS stepsize,Auction.starttime AS starttime,Auction.endtime AS endtime,Auction.uid AS uid,Auction.bidcount AS bidcount,Auction.endstatus AS endstatus,Auction.steptime AS steptime,Auction.deferred AS deferred,Auction.clcount AS clcount,Auction.pattern AS pattern,Auction.sid AS sid,Auction.mid AS mid,Auction.msort AS msort,Auction.succtype AS succtype,Auction.succprice AS succprice,Auction.agency_uid AS agency_uid,Auction.agency_price AS agency_price,Goods.cid AS cid,Goods.aid AS aid,Goods.keywords AS keywords,Goods.filtrate AS filtrate,Goods.pictures AS pictures,Goods.province AS province,Goods.city AS city,Goods.area AS area,Goods.description AS description,Goods.content AS content,Goods.sellerid AS sellerid,Member.organization AS organization,Member.intro AS intro,Member.score AS score,Special_auction.spledge AS spledge,Meeting_auction.mpledge AS mpledge FROM on_auction Auction LEFT JOIN on_goods Goods ON Auction.gid = Goods.id LEFT JOIN on_member Member ON Goods.sellerid = Member.uid LEFT JOIN on_special_auction Special_auction ON Auction.sid = Special_auction.sid LEFT JOIN on_meeting_auction Meeting_auction ON Auction.mid = Meeting_auction.mid WHERE ( Auction.starttime <= 1486171017 ) AND ( Auction.endtime >= 1486171017 ) AND ( Goods.cid IN ('68','67','54','55','56','57','58','59','60','61','62','63','64','65','66','2') ) ORDER BY Auction.bidcount desc,Auction.endtime ASC LIMIT 12   [ RunTime:0.001085s ]
+SQL: SELECT * FROM `on_goods_category` ORDER BY sort desc  [ RunTime:0.000587s ]
+SQL: SELECT Auction.pid AS pid,Auction.gid AS gid,Auction.bidnb AS bidnb,Auction.type AS type,Auction.status AS status,Auction.pname AS pname,Auction.onset AS onset,Auction.price AS price,Auction.nowprice AS nowprice,Auction.freight AS freight,Auction.pledge_type AS pledge_type,Auction.pledge AS pledge,Auction.broker_type AS broker_type,Auction.broker AS broker,Auction.stepsize_type AS stepsize_type,Auction.stepsize AS stepsize,Auction.starttime AS starttime,Auction.endtime AS endtime,Auction.uid AS uid,Auction.bidcount AS bidcount,Auction.endstatus AS endstatus,Auction.steptime AS steptime,Auction.deferred AS deferred,Auction.clcount AS clcount,Auction.pattern AS pattern,Auction.sid AS sid,Auction.mid AS mid,Auction.msort AS msort,Auction.succtype AS succtype,Auction.succprice AS succprice,Auction.agency_uid AS agency_uid,Auction.agency_price AS agency_price,Goods.cid AS cid,Goods.aid AS aid,Goods.keywords AS keywords,Goods.filtrate AS filtrate,Goods.pictures AS pictures,Goods.province AS province,Goods.city AS city,Goods.area AS area,Goods.description AS description,Goods.content AS content,Goods.sellerid AS sellerid,Member.organization AS organization,Member.intro AS intro,Member.score AS score,Special_auction.spledge AS spledge,Meeting_auction.mpledge AS mpledge FROM on_auction Auction LEFT JOIN on_goods Goods ON Auction.gid = Goods.id LEFT JOIN on_member Member ON Goods.sellerid = Member.uid LEFT JOIN on_special_auction Special_auction ON Auction.sid = Special_auction.sid LEFT JOIN on_meeting_auction Meeting_auction ON Auction.mid = Meeting_auction.mid WHERE ( Auction.starttime <= 1486171017 ) AND ( Auction.endtime >= 1486171017 ) AND ( Goods.cid IN ('3','69','70','71','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','4','5','6','1') ) ORDER BY Auction.bidcount desc,Auction.endtime ASC LIMIT 12   [ RunTime:0.000936s ]
+SQL: SHOW COLUMNS FROM `on_category` [ RunTime:0.001076s ]
+SQL: SELECT `name` FROM `on_category` WHERE ( `cid` = 2 ) LIMIT 1   [ RunTime:0.000768s ]
+SQL: SELECT `name` FROM `on_category` WHERE ( `cid` = 3 ) LIMIT 1   [ RunTime:0.000389s ]
+SQL: SELECT Auction.pid AS pid,Auction.gid AS gid,Auction.bidnb AS bidnb,Auction.type AS type,Auction.status AS status,Auction.pname AS pname,Auction.onset AS onset,Auction.price AS price,Auction.nowprice AS nowprice,Auction.freight AS freight,Auction.pledge_type AS pledge_type,Auction.pledge AS pledge,Auction.broker_type AS broker_type,Auction.broker AS broker,Auction.stepsize_type AS stepsize_type,Auction.stepsize AS stepsize,Auction.starttime AS starttime,Auction.endtime AS endtime,Auction.uid AS uid,Auction.bidcount AS bidcount,Auction.endstatus AS endstatus,Auction.steptime AS steptime,Auction.deferred AS deferred,Auction.clcount AS clcount,Auction.pattern AS pattern,Auction.sid AS sid,Auction.mid AS mid,Auction.msort AS msort,Auction.succtype AS succtype,Auction.succprice AS succprice,Auction.agency_uid AS agency_uid,Auction.agency_price AS agency_price,Goods.cid AS cid,Goods.aid AS aid,Goods.keywords AS keywords,Goods.filtrate AS filtrate,Goods.pictures AS pictures,Goods.province AS province,Goods.city AS city,Goods.area AS area,Goods.description AS description,Goods.content AS content,Goods.sellerid AS sellerid,Member.organization AS organization,Member.intro AS intro,Member.score AS score,Special_auction.spledge AS spledge,Meeting_auction.mpledge AS mpledge FROM on_auction Auction LEFT JOIN on_goods Goods ON Auction.gid = Goods.id LEFT JOIN on_member Member ON Goods.sellerid = Member.uid LEFT JOIN on_special_auction Special_auction ON Auction.sid = Special_auction.sid LEFT JOIN on_meeting_auction Meeting_auction ON Auction.mid = Meeting_auction.mid WHERE ( Auction.nowprice>=Auction.price ) AND ( Auction.endtime <= 1486171017 ) AND ( Auction.uid <> 0 ) AND ( Auction.endstatus <> 4 ) ORDER BY Auction.endtime desc LIMIT 8   [ RunTime:0.001987s ]
+SQL: SHOW COLUMNS FROM `on_link` [ RunTime:0.000906s ]
+SQL: SELECT * FROM `on_link` WHERE ( rec = 1 ) ORDER BY sort desc  [ RunTime:0.000801s ]
+SQL: SELECT * FROM `on_link` WHERE ( rec = 0 ) ORDER BY sort desc  [ RunTime:0.000425s ]
+INFO: [ view_parse ] --START--
+SQL: SHOW COLUMNS FROM `on_navigation` [ RunTime:0.001172s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 3 ) ORDER BY sort desc LIMIT 5   [ RunTime:0.000528s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 11 ) ORDER BY sort desc  [ RunTime:0.000439s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 14 ) ORDER BY sort desc  [ RunTime:0.000376s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 17 ) ORDER BY sort desc  [ RunTime:0.000344s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 21 ) ORDER BY sort desc  [ RunTime:0.000341s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 1 ) ORDER BY sort desc LIMIT 5   [ RunTime:0.000348s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 4 ) ORDER BY sort desc  [ RunTime:0.000492s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 2 ) ORDER BY sort desc LIMIT 10   [ RunTime:0.000413s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 6 ) ORDER BY sort desc  [ RunTime:0.000340s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 7 ) ORDER BY sort desc  [ RunTime:0.000332s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 8 ) ORDER BY sort desc  [ RunTime:0.000329s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 9 ) ORDER BY sort desc  [ RunTime:0.000334s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 28 ) ORDER BY sort desc  [ RunTime:0.000303s ]
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000310s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000409s ]
+NOTIC: [8] Undefined index: summary E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\f1ed81fd8b2cfad78cc6d73deb529dc3.php 第 45 行.
+NOTIC: [8] Undefined index: tel E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\f1ed81fd8b2cfad78cc6d73deb529dc3.php 第 59 行.
+SQL: SHOW COLUMNS FROM `on_advertising_position` [ RunTime:0.001325s ]
+SQL: SHOW COLUMNS FROM `on_advertising` [ RunTime:0.001058s ]
+SQL: SELECT * FROM `on_advertising_position` WHERE ( `tagname` = 'web_logo' ) LIMIT 1   [ RunTime:0.000542s ]
+SQL: SELECT * FROM `on_advertising` WHERE ( `status` = 1 ) AND ( `pid` = '1' ) AND ( ((adv_start_time <='1486171017' and adv_end_time >='1486171017') or (adv_start_time =0 and adv_end_time = 0 ) or (adv_start_time <='1486171017' and adv_end_time = 0 ) or (adv_start_time =0 and adv_end_time >='1486171017' )) ) ORDER BY sort desc,id asc  [ RunTime:0.000492s ]
+SQL: SELECT * FROM `on_advertising_position` WHERE ( `tagname` = 'web_logo_right' ) LIMIT 1   [ RunTime:0.000362s ]
+SQL: SELECT * FROM `on_advertising` WHERE ( `status` = 1 ) AND ( `pid` = '3' ) AND ( ((adv_start_time <='1486171017' and adv_end_time >='1486171017') or (adv_start_time =0 and adv_end_time = 0 ) or (adv_start_time <='1486171017' and adv_end_time = 0 ) or (adv_start_time =0 and adv_end_time >='1486171017' )) ) ORDER BY sort desc,id asc  [ RunTime:0.000450s ]
+NOTIC: [8] Undefined variable: gt E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\f1ed81fd8b2cfad78cc6d73deb529dc3.php 第 109 行.
+NOTIC: [8] Undefined variable: gt E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\f1ed81fd8b2cfad78cc6d73deb529dc3.php 第 109 行.
+SQL: SELECT * FROM `on_advertising_position` WHERE ( `tagname` = 'index_notice_top' ) LIMIT 1   [ RunTime:0.000419s ]
+SQL: SELECT * FROM `on_advertising` WHERE ( `status` = 1 ) AND ( `pid` = '4' ) AND ( ((adv_start_time <='1486171017' and adv_end_time >='1486171017') or (adv_start_time =0 and adv_end_time = 0 ) or (adv_start_time <='1486171017' and adv_end_time = 0 ) or (adv_start_time =0 and adv_end_time >='1486171017' )) ) ORDER BY sort desc,id asc  [ RunTime:0.000435s ]
+SQL: SHOW COLUMNS FROM `on_news` [ RunTime:0.000907s ]
+SQL: SELECT `id`,`cid`,`title`,`update_time`,`published` FROM `on_news` WHERE ( `status` = 1 ) AND ( `cid` = 2 ) ORDER BY published desc LIMIT 5   [ RunTime:0.000491s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000056s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.031633s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003795s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003910s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000827s ]
+INFO: Run Behavior\TokenBuildBehavior [ RunTime:0.000862s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001870s ]
+SQL: SELECT `id`,`cid`,`title`,`update_time`,`published` FROM `on_news` WHERE ( `status` = 1 ) AND ( `cid` = 3 ) ORDER BY published desc LIMIT 5   [ RunTime:0.000836s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000054s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.039011s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003345s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.003798s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000034s ]
+INFO: Run Behavior\TokenBuildBehavior [ RunTime:0.000068s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.005362s ]
+SQL: SELECT * FROM `on_advertising_position` WHERE ( `tagname` = 'index_slides' ) LIMIT 1   [ RunTime:0.000591s ]
+SQL: SELECT * FROM `on_advertising` WHERE ( `status` = 1 ) AND ( `pid` = '2' ) AND ( ((adv_start_time <='1486171017' and adv_end_time >='1486171017') or (adv_start_time =0 and adv_end_time = 0 ) or (adv_start_time <='1486171017' and adv_end_time = 0 ) or (adv_start_time =0 and adv_end_time >='1486171017' )) ) ORDER BY sort desc,id asc  [ RunTime:0.000500s ]
+SQL: SELECT * FROM `on_category` WHERE ( `pid` = 1 ) ORDER BY sort desc LIMIT 4   [ RunTime:0.000834s ]
+SQL: SELECT `id`,`title` FROM `on_news` WHERE ( `cid` = 5 ) AND ( `status` = 1 ) ORDER BY published desc LIMIT 10   [ RunTime:0.000515s ]
+SQL: SELECT `id`,`title` FROM `on_news` WHERE ( `cid` = 6 ) AND ( `status` = 1 ) ORDER BY published desc LIMIT 10   [ RunTime:0.000389s ]
+SQL: SELECT `id`,`title` FROM `on_news` WHERE ( `cid` = 7 ) AND ( `status` = 1 ) ORDER BY published desc LIMIT 10   [ RunTime:0.000358s ]
+SQL: SELECT `id`,`title` FROM `on_news` WHERE ( `cid` = 8 ) AND ( `status` = 1 ) ORDER BY published desc LIMIT 10   [ RunTime:0.000346s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000056s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.057068s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005908s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.020953s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000023s ]
+INFO: Run Behavior\TokenBuildBehavior [ RunTime:0.000093s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.025082s ]
+SQL: SELECT * FROM `on_advertising_position` WHERE ( `tagname` = 'common_help_right' ) LIMIT 1   [ RunTime:0.000818s ]
+SQL: SELECT * FROM `on_advertising` WHERE ( `status` = 1 ) AND ( `pid` = '9' ) AND ( ((adv_start_time <='1486171017' and adv_end_time >='1486171017') or (adv_start_time =0 and adv_end_time = 0 ) or (adv_start_time <='1486171017' and adv_end_time = 0 ) or (adv_start_time =0 and adv_end_time >='1486171017' )) ) ORDER BY sort desc,id asc  [ RunTime:0.000742s ]
+NOTIC: [8] Undefined index: summary E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\f1ed81fd8b2cfad78cc6d73deb529dc3.php 第 409 行.
+NOTIC: [8] Undefined index: version E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\f1ed81fd8b2cfad78cc6d73deb529dc3.php 第 410 行.
+NOTIC: [8] Undefined index: icp E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\f1ed81fd8b2cfad78cc6d73deb529dc3.php 第 411 行.
+SQL: SELECT * FROM `on_advertising_position` WHERE ( `tagname` = 'weixin' ) LIMIT 1   [ RunTime:0.000610s ]
+SQL: SELECT * FROM `on_advertising` WHERE ( `status` = 1 ) AND ( `pid` = '10' ) AND ( ((adv_start_time <='1486171017' and adv_end_time >='1486171017') or (adv_start_time =0 and adv_end_time = 0 ) or (adv_start_time <='1486171017' and adv_end_time = 0 ) or (adv_start_time =0 and adv_end_time >='1486171017' )) ) ORDER BY sort desc,id asc  [ RunTime:0.000677s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010959s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.020953s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000028s ]
+INFO: Run Behavior\TokenBuildBehavior [ RunTime:0.000939s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.030150s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000853s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000944s ]
+
+[ 2017-02-04T11:36:12+08:00 ] 127.0.0.1 /Auction/details/pid/23.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000366s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000761s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000866s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead E:\www\www.fjsxpmh.com\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `on_auction` [ RunTime:0.001603s ]
+SQL: SHOW COLUMNS FROM `on_goods` [ RunTime:0.001098s ]
+SQL: SHOW COLUMNS FROM `on_member` [ RunTime:0.001034s ]
+SQL: SHOW COLUMNS FROM `on_special_auction` [ RunTime:0.000839s ]
+SQL: SHOW COLUMNS FROM `on_meeting_auction` [ RunTime:0.000903s ]
+SQL: SELECT Auction.pid AS pid,Auction.gid AS gid,Auction.bidnb AS bidnb,Auction.type AS type,Auction.status AS status,Auction.pname AS pname,Auction.onset AS onset,Auction.price AS price,Auction.nowprice AS nowprice,Auction.freight AS freight,Auction.pledge_type AS pledge_type,Auction.pledge AS pledge,Auction.broker_type AS broker_type,Auction.broker AS broker,Auction.stepsize_type AS stepsize_type,Auction.stepsize AS stepsize,Auction.starttime AS starttime,Auction.endtime AS endtime,Auction.uid AS uid,Auction.bidcount AS bidcount,Auction.endstatus AS endstatus,Auction.steptime AS steptime,Auction.deferred AS deferred,Auction.clcount AS clcount,Auction.pattern AS pattern,Auction.sid AS sid,Auction.mid AS mid,Auction.msort AS msort,Auction.succtype AS succtype,Auction.succprice AS succprice,Auction.agency_uid AS agency_uid,Auction.agency_price AS agency_price,Goods.cid AS cid,Goods.aid AS aid,Goods.keywords AS keywords,Goods.filtrate AS filtrate,Goods.pictures AS pictures,Goods.province AS province,Goods.city AS city,Goods.area AS area,Goods.description AS description,Goods.content AS content,Goods.sellerid AS sellerid,Member.organization AS organization,Member.intro AS intro,Member.score AS score,Special_auction.spledge AS spledge,Meeting_auction.mpledge AS mpledge FROM on_auction Auction LEFT JOIN on_goods Goods ON Auction.gid = Goods.id LEFT JOIN on_member Member ON Goods.sellerid = Member.uid LEFT JOIN on_special_auction Special_auction ON Auction.sid = Special_auction.sid LEFT JOIN on_meeting_auction Meeting_auction ON Auction.mid = Meeting_auction.mid WHERE ( Auction.endtime < 1486179371 ) AND ( Auction.endstatus = 0 )  [ RunTime:0.000943s ]
+SQL: SHOW COLUMNS FROM `on_goods_category` [ RunTime:0.001183s ]
+SQL: SELECT * FROM `on_goods_category` WHERE ( `pid` = 0 ) ORDER BY sort desc  [ RunTime:0.001119s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `on_auction` WHERE ( `pid` = 23 ) LIMIT 1   [ RunTime:0.003123s ]
+SQL: SHOW COLUMNS FROM `on_auction_record` [ RunTime:0.002894s ]
+SQL: SHOW COLUMNS FROM `on_goods_user` [ RunTime:0.002466s ]
+SQL: UPDATE `on_auction` SET `clcount`=clcount+1 WHERE ( `pid` = 23 ) [ RunTime:0.006398s ]
+SQL: SELECT Auction.pid AS pid,Auction.gid AS gid,Auction.bidnb AS bidnb,Auction.type AS type,Auction.status AS status,Auction.pname AS pname,Auction.onset AS onset,Auction.price AS price,Auction.nowprice AS nowprice,Auction.freight AS freight,Auction.pledge_type AS pledge_type,Auction.pledge AS pledge,Auction.broker_type AS broker_type,Auction.broker AS broker,Auction.stepsize_type AS stepsize_type,Auction.stepsize AS stepsize,Auction.starttime AS starttime,Auction.endtime AS endtime,Auction.uid AS uid,Auction.bidcount AS bidcount,Auction.endstatus AS endstatus,Auction.steptime AS steptime,Auction.deferred AS deferred,Auction.clcount AS clcount,Auction.pattern AS pattern,Auction.sid AS sid,Auction.mid AS mid,Auction.msort AS msort,Auction.succtype AS succtype,Auction.succprice AS succprice,Auction.agency_uid AS agency_uid,Auction.agency_price AS agency_price,Goods.cid AS cid,Goods.aid AS aid,Goods.keywords AS keywords,Goods.filtrate AS filtrate,Goods.pictures AS pictures,Goods.province AS province,Goods.city AS city,Goods.area AS area,Goods.description AS description,Goods.content AS content,Goods.sellerid AS sellerid,Member.organization AS organization,Member.intro AS intro,Member.score AS score,Special_auction.spledge AS spledge,Meeting_auction.mpledge AS mpledge FROM on_auction Auction LEFT JOIN on_goods Goods ON Auction.gid = Goods.id LEFT JOIN on_member Member ON Goods.sellerid = Member.uid LEFT JOIN on_special_auction Special_auction ON Auction.sid = Special_auction.sid LEFT JOIN on_meeting_auction Meeting_auction ON Auction.mid = Meeting_auction.mid WHERE ( Auction.pid = '23' ) LIMIT 1   [ RunTime:0.001072s ]
+SQL: SELECT `nickname` FROM `on_member` WHERE ( uid=523 ) LIMIT 1   [ RunTime:0.001069s ]
+SQL: SELECT * FROM `on_auction_record` WHERE ( `pid` = 23 ) ORDER BY time desc,bided desc  [ RunTime:0.001054s ]
+SQL: SELECT `nickname` FROM `on_member` WHERE ( uid=523 ) LIMIT 1   [ RunTime:0.000611s ]
+SQL: SHOW COLUMNS FROM `on_special_auction` [ RunTime:0.000827s ]
+SQL: SELECT * FROM `on_special_auction` WHERE ( `sid` = 6 ) LIMIT 1   [ RunTime:0.000719s ]
+SQL: SELECT Auction.pid AS pid,Auction.pname AS pname,Goods.pictures AS pictures FROM on_auction Auction LEFT JOIN on_goods Goods ON Auction.gid = Goods.id LEFT JOIN on_member Member ON Goods.sellerid = Member.uid LEFT JOIN on_special_auction Special_auction ON Auction.sid = Special_auction.sid LEFT JOIN on_meeting_auction Meeting_auction ON Auction.mid = Meeting_auction.mid WHERE ( Auction.sid = '6' ) ORDER BY Auction.endtime desc  [ RunTime:0.000893s ]
+SQL: SELECT `pledge`,`limsum` FROM `on_goods_user` WHERE ( `gid` = 6 ) AND ( `uid` = null ) AND ( `g-u` = 's-u' ) LIMIT 1   [ RunTime:0.000564s ]
+SQL: SHOW COLUMNS FROM `on_goods_category` [ RunTime:0.000895s ]
+NOTIC: [8] Undefined offset: 3 E:\www\www.fjsxpmh.com\ThinkPHP\Library\Org\Util\Category.class.php 第 38 行.
+SQL: SELECT * FROM `on_goods_category` WHERE ( `cid` = 62 ) LIMIT 1   [ RunTime:0.000695s ]
+SQL: SELECT * FROM `on_goods_category` WHERE ( `cid` = 2 ) LIMIT 1   [ RunTime:0.000874s ]
+SQL: SELECT `uid` FROM `on_auction_record` WHERE ( `pid` = 23 )  [ RunTime:0.000715s ]
+SQL: SHOW COLUMNS FROM `on_attention` [ RunTime:0.002174s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `on_attention` WHERE ( `gid` = 23 ) AND ( `rela` = 'p-u' ) LIMIT 1   [ RunTime:0.000579s ]
+SQL: SHOW COLUMNS FROM `on_goods_extend` [ RunTime:0.001840s ]
+SQL: SHOW COLUMNS FROM `on_goods_category_extend` [ RunTime:0.001817s ]
+SQL: SELECT `pid` FROM `on_goods_category` WHERE ( cid=62 ) LIMIT 1   [ RunTime:0.000447s ]
+SQL: SELECT `pid` FROM `on_goods_category` WHERE ( cid=62 ) LIMIT 1   [ RunTime:0.000351s ]
+SQL: SELECT `pid` FROM `on_goods_category` WHERE ( cid=2 ) LIMIT 1   [ RunTime:0.000306s ]
+SQL: SHOW COLUMNS FROM `on_goods_fields` [ RunTime:0.001879s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `on_goods_category_extend` WHERE (  ( `cid` IN ('2','62') ) ) AND (  ( `eid` = 0 ) ) LIMIT 1   [ RunTime:0.000507s ]
+SQL: SELECT `eid` FROM `on_goods_category_extend` WHERE ( cid=2 )  [ RunTime:0.000410s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\www\www.fjsxpmh.com\ThinkPHP\Library\Think\Db.class.php 第 498 行.
+SQL: SELECT * FROM `on_goods_extend` WHERE ( `eid` IN () ) AND ( `status` = 1 ) ORDER BY rank desc  [ RunTime:0.000352s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') ) AND ( `status` = 1 ) ORDER BY rank desc' at line 1
+ [ SQL语句 ] : SELECT * FROM `on_goods_extend` WHERE ( `eid` IN () ) AND ( `status` = 1 ) ORDER BY rank desc 
+SQL: SELECT `eid` FROM `on_goods_category_extend` WHERE ( cid=62 )  [ RunTime:0.000384s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\www\www.fjsxpmh.com\ThinkPHP\Library\Think\Db.class.php 第 498 行.
+SQL: SELECT * FROM `on_goods_extend` WHERE ( `eid` IN () ) AND ( `status` = 1 ) ORDER BY rank desc  [ RunTime:0.000291s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') ) AND ( `status` = 1 ) ORDER BY rank desc' at line 1
+ [ SQL语句 ] : SELECT * FROM `on_goods_extend` WHERE ( `eid` IN () ) AND ( `status` = 1 ) ORDER BY rank desc 
+SQL: SELECT COUNT(*) AS tp_count FROM `on_attention` WHERE ( `uid` = null ) AND ( `gid` = 23 ) LIMIT 1   [ RunTime:0.000401s ]
+SQL: SHOW COLUMNS FROM `on_scheduled` [ RunTime:0.002020s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `on_scheduled` WHERE ( `uid` = null ) AND ( `pid` = 23 ) AND ( `stype` = 'end' ) LIMIT 1   [ RunTime:0.000462s ]
+SQL: SHOW COLUMNS FROM `on_attention_seller` [ RunTime:0.002394s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `on_attention_seller` WHERE ( `uid` = null ) AND ( `sellerid` = 1 ) LIMIT 1   [ RunTime:0.000647s ]
+SQL: SELECT `uid`,`qq`,`organization`,`avatar`,`score` FROM `on_member` WHERE ( `uid` = 1 ) LIMIT 1   [ RunTime:0.000572s ]
+NOTIC: [2] Missing argument 2 for getlevel(), called in E:\www\www.fjsxpmh.com\Application\Home\Controller\AuctionController.class.php on line 692 and defined E:\www\www.fjsxpmh.com\Application\Common\Common\function.php 第 2004 行.
+NOTIC: [8] Undefined variable: buy E:\www\www.fjsxpmh.com\Application\Common\Common\function.php 第 2005 行.
+SQL: SHOW COLUMNS FROM `on_goods_evaluate` [ RunTime:0.002288s ]
+NOTIC: [2] Missing argument 3 for getstarval(), called in E:\www\www.fjsxpmh.com\Application\Home\Controller\AuctionController.class.php on line 694 and defined E:\www\www.fjsxpmh.com\Application\Common\Common\function.php 第 1994 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `on_goods_evaluate` WHERE ( `sellerid` = 1 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT SUM(conform) AS tp_sum FROM `on_goods_evaluate` WHERE ( `sellerid` = 1 ) LIMIT 1   [ RunTime:0.001377s ]
+SQL: SELECT SUM(service) AS tp_sum FROM `on_goods_evaluate` WHERE ( `sellerid` = 1 ) LIMIT 1   [ RunTime:0.000580s ]
+SQL: SELECT SUM(express) AS tp_sum FROM `on_goods_evaluate` WHERE ( `sellerid` = 1 ) LIMIT 1   [ RunTime:0.000352s ]
+NOTIC: [8] Memcache::connect(): Server 127.0.0.1 (tcp 11211, udp 0) failed with: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ (10060) E:\www\www.fjsxpmh.com\ThinkPHP\Library\Think\Cache\Driver\Memcache.class.php 第 43 行.
+NOTIC: [2] Memcache::connect(): Can't connect to 127.0.0.1:11211, A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ (10060) E:\www\www.fjsxpmh.com\ThinkPHP\Library\Think\Cache\Driver\Memcache.class.php 第 43 行.
+SQL: SHOW COLUMNS FROM `on_member` [ RunTime:0.003977s ]
+SQL: SELECT `alerttype` FROM `on_member` WHERE ( `uid` = null ) LIMIT 1   [ RunTime:0.001942s ]
+INFO: [ view_parse ] --START--
+SQL: SHOW COLUMNS FROM `on_navigation` [ RunTime:0.001561s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 3 ) ORDER BY sort desc LIMIT 5   [ RunTime:0.000950s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 11 ) ORDER BY sort desc  [ RunTime:0.000662s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 14 ) ORDER BY sort desc  [ RunTime:0.000598s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 17 ) ORDER BY sort desc  [ RunTime:0.000735s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 21 ) ORDER BY sort desc  [ RunTime:0.001051s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 1 ) ORDER BY sort desc LIMIT 5   [ RunTime:0.000969s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 4 ) ORDER BY sort desc  [ RunTime:0.001048s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 2 ) ORDER BY sort desc LIMIT 10   [ RunTime:0.001075s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 6 ) ORDER BY sort desc  [ RunTime:0.000894s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 7 ) ORDER BY sort desc  [ RunTime:0.000903s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 8 ) ORDER BY sort desc  [ RunTime:0.000585s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 9 ) ORDER BY sort desc  [ RunTime:0.000472s ]
+SQL: SELECT * FROM `on_navigation` WHERE ( `pid` = 28 ) ORDER BY sort desc  [ RunTime:0.000446s ]
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000675s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000808s ]
+NOTIC: [8] Undefined index: summary E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 59 行.
+NOTIC: [8] Undefined index: tel E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 73 行.
+SQL: SHOW COLUMNS FROM `on_advertising_position` [ RunTime:0.002565s ]
+SQL: SHOW COLUMNS FROM `on_advertising` [ RunTime:0.001574s ]
+SQL: SELECT * FROM `on_advertising_position` WHERE ( `tagname` = 'web_logo' ) LIMIT 1   [ RunTime:0.000767s ]
+SQL: SELECT * FROM `on_advertising` WHERE ( `status` = 1 ) AND ( `pid` = '1' ) AND ( ((adv_start_time <='1486179372' and adv_end_time >='1486179372') or (adv_start_time =0 and adv_end_time = 0 ) or (adv_start_time <='1486179372' and adv_end_time = 0 ) or (adv_start_time =0 and adv_end_time >='1486179372' )) ) ORDER BY sort desc,id asc  [ RunTime:0.000706s ]
+SQL: SELECT * FROM `on_advertising_position` WHERE ( `tagname` = 'web_logo_right' ) LIMIT 1   [ RunTime:0.000599s ]
+SQL: SELECT * FROM `on_advertising` WHERE ( `status` = 1 ) AND ( `pid` = '3' ) AND ( ((adv_start_time <='1486179372' and adv_end_time >='1486179372') or (adv_start_time =0 and adv_end_time = 0 ) or (adv_start_time <='1486179372' and adv_end_time = 0 ) or (adv_start_time =0 and adv_end_time >='1486179372' )) ) ORDER BY sort desc,id asc  [ RunTime:0.000579s ]
+NOTIC: [8] Undefined index: tel E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 312 行.
+SQL: SELECT * FROM `on_advertising_position` WHERE ( `tagname` = 'details_add' ) LIMIT 1   [ RunTime:0.000518s ]
+SQL: SELECT * FROM `on_advertising` WHERE ( `status` = 1 ) AND ( `pid` = '12' ) AND ( ((adv_start_time <='1486179372' and adv_end_time >='1486179372') or (adv_start_time =0 and adv_end_time = 0 ) or (adv_start_time <='1486179372' and adv_end_time = 0 ) or (adv_start_time =0 and adv_end_time >='1486179372' )) ) ORDER BY sort desc,id asc  [ RunTime:0.000516s ]
+NOTIC: [8] Undefined variable: page E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 693 行.
+SQL: SELECT `avatar` FROM `on_member` WHERE ( `uid` = 1 ) LIMIT 1   [ RunTime:0.000493s ]
+SQL: SHOW COLUMNS FROM `on_category` [ RunTime:0.001384s ]
+SQL: SELECT * FROM `on_category` WHERE ( `pid` = 1 ) ORDER BY sort desc LIMIT 4   [ RunTime:0.000734s ]
+SQL: SHOW COLUMNS FROM `on_news` [ RunTime:0.000906s ]
+SQL: SELECT `id`,`title` FROM `on_news` WHERE ( `cid` = 5 ) AND ( `status` = 1 ) ORDER BY published desc LIMIT 10   [ RunTime:0.000589s ]
+SQL: SELECT `id`,`title` FROM `on_news` WHERE ( `cid` = 6 ) AND ( `status` = 1 ) ORDER BY published desc LIMIT 10   [ RunTime:0.000878s ]
+SQL: SELECT `id`,`title` FROM `on_news` WHERE ( `cid` = 7 ) AND ( `status` = 1 ) ORDER BY published desc LIMIT 10   [ RunTime:0.000589s ]
+SQL: SELECT `id`,`title` FROM `on_news` WHERE ( `cid` = 8 ) AND ( `status` = 1 ) ORDER BY published desc LIMIT 10   [ RunTime:0.000507s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000057s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.045360s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006184s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006300s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000711s ]
+INFO: Run Behavior\TokenBuildBehavior [ RunTime:0.000835s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001724s ]
+SQL: SELECT * FROM `on_advertising_position` WHERE ( `tagname` = 'common_help_right' ) LIMIT 1   [ RunTime:0.001617s ]
+SQL: SELECT * FROM `on_advertising` WHERE ( `status` = 1 ) AND ( `pid` = '9' ) AND ( ((adv_start_time <='1486179372' and adv_end_time >='1486179372') or (adv_start_time =0 and adv_end_time = 0 ) or (adv_start_time <='1486179372' and adv_end_time = 0 ) or (adv_start_time =0 and adv_end_time >='1486179372' )) ) ORDER BY sort desc,id asc  [ RunTime:0.001228s ]
+NOTIC: [8] Undefined index: summary E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 763 行.
+NOTIC: [8] Undefined index: version E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 764 行.
+NOTIC: [8] Undefined index: icp E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 765 行.
+SQL: SELECT * FROM `on_advertising_position` WHERE ( `tagname` = 'weixin' ) LIMIT 1   [ RunTime:0.000700s ]
+SQL: SELECT * FROM `on_advertising` WHERE ( `status` = 1 ) AND ( `pid` = '10' ) AND ( ((adv_start_time <='1486179372' and adv_end_time >='1486179372') or (adv_start_time =0 and adv_end_time = 0 ) or (adv_start_time <='1486179372' and adv_end_time = 0 ) or (adv_start_time =0 and adv_end_time >='1486179372' )) ) ORDER BY sort desc,id asc  [ RunTime:0.000666s ]
+NOTIC: [8] Undefined variable: mtdata E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 837 行.
+NOTIC: [8] Undefined variable: mtdata E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 840 行.
+NOTIC: [8] Undefined variable: mtdata E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 841 行.
+NOTIC: [8] Undefined variable: mtdata E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 843 行.
+NOTIC: [8] Undefined variable: mtdata E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 844 行.
+NOTIC: [8] Undefined variable: mtdata E:\www\www.fjsxpmh.com\Application\Runtime\Cache\Home\547ff8e74aa3398d734fac23b9d05825.php 第 846 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016504s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006300s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000023s ]
+INFO: Run Behavior\TokenBuildBehavior [ RunTime:0.000825s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.008582s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000899s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000991s ]
+
+[ 2017-02-04T11:36:23+08:00 ] 127.0.0.1 /Public/getusercard.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000041s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000607s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000934s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001138s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead E:\www\www.fjsxpmh.com\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `on_auction` [ RunTime:0.001414s ]
+SQL: SHOW COLUMNS FROM `on_goods` [ RunTime:0.001104s ]
+SQL: SHOW COLUMNS FROM `on_member` [ RunTime:0.001040s ]
+SQL: SHOW COLUMNS FROM `on_special_auction` [ RunTime:0.000792s ]
+SQL: SHOW COLUMNS FROM `on_meeting_auction` [ RunTime:0.000850s ]
+SQL: SELECT Auction.pid AS pid,Auction.gid AS gid,Auction.bidnb AS bidnb,Auction.type AS type,Auction.status AS status,Auction.pname AS pname,Auction.onset AS onset,Auction.price AS price,Auction.nowprice AS nowprice,Auction.freight AS freight,Auction.pledge_type AS pledge_type,Auction.pledge AS pledge,Auction.broker_type AS broker_type,Auction.broker AS broker,Auction.stepsize_type AS stepsize_type,Auction.stepsize AS stepsize,Auction.starttime AS starttime,Auction.endtime AS endtime,Auction.uid AS uid,Auction.bidcount AS bidcount,Auction.endstatus AS endstatus,Auction.steptime AS steptime,Auction.deferred AS deferred,Auction.clcount AS clcount,Auction.pattern AS pattern,Auction.sid AS sid,Auction.mid AS mid,Auction.msort AS msort,Auction.succtype AS succtype,Auction.succprice AS succprice,Auction.agency_uid AS agency_uid,Auction.agency_price AS agency_price,Goods.cid AS cid,Goods.aid AS aid,Goods.keywords AS keywords,Goods.filtrate AS filtrate,Goods.pictures AS pictures,Goods.province AS province,Goods.city AS city,Goods.area AS area,Goods.description AS description,Goods.content AS content,Goods.sellerid AS sellerid,Member.organization AS organization,Member.intro AS intro,Member.score AS score,Special_auction.spledge AS spledge,Meeting_auction.mpledge AS mpledge FROM on_auction Auction LEFT JOIN on_goods Goods ON Auction.gid = Goods.id LEFT JOIN on_member Member ON Goods.sellerid = Member.uid LEFT JOIN on_special_auction Special_auction ON Auction.sid = Special_auction.sid LEFT JOIN on_meeting_auction Meeting_auction ON Auction.mid = Meeting_auction.mid WHERE ( Auction.endtime < 1486179383 ) AND ( Auction.endstatus = 0 )  [ RunTime:0.001348s ]
+SQL: SHOW COLUMNS FROM `on_goods_category` [ RunTime:0.001382s ]
+SQL: SELECT * FROM `on_goods_category` WHERE ( `pid` = 0 ) ORDER BY sort desc  [ RunTime:0.000743s ]
+ERR: 页面错误！
+

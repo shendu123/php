@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+        <meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>微信安全支付-{$site.SITE_INFO.title}</title>
+    </head>
+    <body>
+    <include file="Common:header"/>
+    <section>
+        <!---右侧开始-->
+        <div class="mbsecbox">
+            <div class="my_info" style="margin-top: 5px;">
+                <!-- 微信安全支付 -->
+                <ul class="sea_list">
+                    <li>
+                        <div class="pth"><a href="{:U('Auction/details',array('pid'=>$odinfo['pid']))}">{$payvalue.pname}</a></div>
+                        <div class="pcon clearfix">
+                            <div class="imbox">
+                                <a href="{:U('Auction/details',array('pid'=>$odinfo['pid']))}">
+                                    <img src="{$upWholeUrl}{$payvalue.pictures||getPicUrl=###,3,0}" alt="">
+                                </a>
+                            </div>
+                            <div class="infobox">
+                                <p>订单共计：<span class="qipai">{$payvalue.total}元</span></p>
+                                <p>余额支付：<span class="qipai">{$payvalue.yuemn}元</span></p>
+                                <p>保证金抵货款：<span class="qipai">{$payvalue.pledge}元</span></p>
+                                <p>需要在线支付：<span class="qipai">{$payvalue.money}元</span></p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <dl class="clearfix">
+                    <dt>&nbsp;</dt>
+                    <dd><input type="submit" onclick="callpay()" value="确认支付" class="submitBtn"></dd>
+                </dl>
+            </div>
+        </div>
+        <!---右侧结束-->
+    </section>
+    <!---底部开始-->
+<script type="text/javascript">
+    //调用微信JS api 支付
+    function jsApiCall(){
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest',
+            <?php echo $jsApiParameters; ?>,
+            function(res){
+                alert("{$jsApiParameters}");
+                WeixinJSBridge.log(res.err_msg);
+                if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                    document.location.href = od_url;
+                }else{
+                    alert(res.err_code+res.err_desc+res.err_msg);
+                }
+            }
+        );
+    }
+    function callpay(){
+        if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){
+                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+            }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+            }
+        }else{
+            jsApiCall();
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>添加、编辑扩展字段-商品管理-后台管理-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='商品管理 > 添加、编辑扩展字段';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">添加、编辑扩展字段</div>
+                    </div>
+                    <form>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th width="100">字段名：</th>
+                                <td>商品详情</td>
+                            </tr>
+                            <tr>
+                                <th>默认值：</th>
+                                <td><textarea id="default" style="width: 90%; height:400px;" name="FIELDS_DESCRIBE">{$describe}</textarea></td>
+                            </tr>
+                        </table>
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <js href="--PUBLIC--/ueditor/ueditor.config.js,--PUBLIC--/ueditor/ueditor.all.min.js,--PUBLIC--/ueditor/lang/zh-cn/zh-cn.js"/>
+        <script type="text/javascript">
+            $(function(){
+                window.UEDITOR_CONFIG.imageUrl = "{:U('Upload/editorUpload')}";
+                window.UEDITOR_CONFIG.imagePath = '{$upWholeUrl}';
+                window.UEDITOR_CONFIG.savePath = ['{$upWholeUrl}'];
+                UE.getEditor('default');
+
+                $("#checkNewsTitle").click(function(){
+                    $.getJSON("__URL__/checkNewsTitle", { title:$("#title").val(),id:"{$info.id}"}, function(json){
+                        $("#checkNewsTitle").css("color",json.status==1?"#0f0":"#f00").html(json.info);
+                    });
+                });
+                $(".submit").click(function(){
+                    commonAjaxSubmit();
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

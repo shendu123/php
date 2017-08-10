@@ -1,0 +1,14 @@
+<include file="Common:meta" />
+<title>{$list.title}-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+  <article data-am-widget="paragraph" class="am-paragraph am-paragraph-default" data-am-paragraph="{ tableScrollable: true, pureview: true }">
+    <h2 class="am-margin-vertical">{$list.title}</h2>
+      {$list.content}
+  </article>
+<include file="Common:navbar"/>
+</body>
+</html>
+

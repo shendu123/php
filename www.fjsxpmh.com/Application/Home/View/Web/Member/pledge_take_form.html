@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>保证金取款申请-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;账号中心&nbsp;&gt;&gt;&nbsp;保证金取款&nbsp;&gt;&gt;&nbsp;取款申请</div>
+
+        
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+           	  <div class="sider">
+                    <ul class="inquiry">
+                        <li class="hover">保证金取款申请</li>
+                    </ul>
+                    <div class="inquiry-con">
+                        <form id="take" name="take" action="" method="post">
+                            <div class="ontips"> 
+                            为了您的提现尽快完成，请仔细检查填写的信息后在提交！
+                            </div>
+                            <div class="my_info clearfix">
+                                <dl class="clearfix">
+                                    <dt>提现金额：</dt>
+                                    <dd><input id="money" type="text" size="30" less="{$pledge.usable}" class="input" name="money" value="{$pledge.usable}"/></dd>
+                                    <dd><div id="moneyTip"></div></dd>
+                                </dl> 
+                                <dl class="clearfix">
+                                    <dt>银行：</dt>
+                                    <dd><input id="bank" type="text" size="30" class="input" name="bank" value=""/></dd>
+                                    <dd><div id="bankTip"></div></dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>开户行：</dt>
+                                    <dd><input id="bankhome" type="text" size="30" class="input" name="bankhome" value=""/></dd>
+                                    <dd><div id="bankhomeTip"></div></dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>姓名：</dt>
+                                    <dd><input id="name" type="text" size="30" class="input" name="name" value=""/></dd>
+                                    <dd><div id="nameTip"></div></dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>账号：</dt>
+                                    <dd><input id="account" type="text" size="30" class="input" name="account" value=""/></dd>
+                                    <dd><div id="accountTip"></div></dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>备注：</dt>
+                                    <dd><textarea id="remark" name="remark" class="input" style=" padding: 5px; width:350px; height:48px;" placeholder="有什么要给我们说的！"></textarea></dd>
+                                    <dd><div id="remarkTip"></div></dd>
+                                </dl>
+                                <dl id="btn_box">
+                                    <button class="btn_blue submit" id="submit">提交</button>
+                                </dl>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<script type="text/javascript">
+var pledge = '{$pledge.usable}';
+    $(function(){
+        // 表单验证【
+		$.formValidator.initConfig({formID:"take",submitButtonID:"submit"});
+		$("#submit").click(function(){
+			if($.formValidator.pageIsValid('1')==true){
+				commonAjaxSubmit('','','');
+			}
+			return false;
+		});
+
+        $("#money").formValidator({onShow:"请输入提现金额",onFocus:"提现金额不得大于"+pledge+"，必须为数字，小数点后最多可有两位",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+        $("#bank").formValidator({onShow:"您收款的银行或平台名称",onFocus:"如：建设银行或支付宝",onCorrect:"输入正确"}).inputValidator({min:4,onError:"你输入平台名称不正确,请确认"});
+        $("#bankhome").formValidator({onShow:"如果为支付平台可不填写",onFocus:"如果为支付平台可不填写",onCorrect:"输入正确"});
+        $("#name").formValidator({onShow:"对应您银行或平台的开户名称",onFocus:"要求真实不能为空",onCorrect:"输入正确"}).functionValidator({fun:trueName});
+        $("#account").formValidator({onShow:"对应您银行或平台的收款账号",onFocus:"要求真实不能为空",onCorrect:"输入正确"}).inputValidator({min:4,onError:"你输入平台名称不正确,请确认"});
+        $("#remark").formValidator({onShow:"填写备注",onFocus:"可以为空，需小于120个字符",onCorrect:"输入正确"}).inputValidator({min:0,max:120,onError:"你输入的昵称不正确,请确认"});
+    });
+</script>
+</body>
+</html>

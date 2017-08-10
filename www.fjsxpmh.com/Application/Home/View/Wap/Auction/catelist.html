@@ -1,0 +1,24 @@
+<!-- sidebar start -->
+  <div class="on-cate-sidebar am-offcanvas" id="on-cate-offcanvas">
+    <div class="am-offcanvas-bar on-cate-offcanvas-bar">
+        <ul class="am-list on-cate-sidebar-list">
+            <notempty name="precate">
+                <li>
+                    <a href="{:U('Auction/index',array('gt'=>$precate['cid']))}" class="am-cf">
+                        <span class="on-cate-ico"><img alt="{$cv.name}" src="<eq name='precate.ico' value=''>__IMG__/cate_default.png<else/>{$upWholeUrl}{$precate.ico}</eq>"></span>返回上级分类<span class="am-icon-angle-right am-fr am-margin-right"></span>
+                    </a>
+                </li>
+            </notempty>
+            <notempty name="catli">
+                <foreach name="catli" item="cv">
+                    <li>
+                        <a href="{:U('Auction/index',array('gt'=>$cv['cid']))}" class="am-cf">
+                            <span class="on-cate-ico"><img alt="{$cv.name}" src="<eq name='cv.ico' value=''>__IMG__/cate_default.png<else/>{$upWholeUrl}{$cv.ico}</eq>"></span> {$cv.name} <span class="am-icon-angle-right am-fr am-margin-right"></span>
+                        </a>
+                    </li>
+                </foreach>
+            </notempty>
+        </ul>
+    </div>
+  </div>
+  <!-- sidebar end -->

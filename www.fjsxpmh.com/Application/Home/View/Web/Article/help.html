@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$list.keyword}" />
+		<meta name="description" content="{$list.description}" />
+        <title>{$list.title}-{$list.cname}-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top cuit_over"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;{$list.cname}&nbsp;&gt;&gt;&nbsp;{$list.title}</div>
+
+        
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="help_menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="main_b7_2 fl">
+            	<h1>{$list.title}</h1>
+                <div class="editbox">
+                    {$list.content}
+                </div>
+				
+			</div>
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<script src="--PUBLIC--/ueditor/ueditor.parse.js"></script>
+<script>
+setTimeout(function(){uParse('.editbox',
+{
+ 'highlightJsUrl':'--PUBLIC--/ueditor/third-party/SyntaxHighlighter/shCore.js',
+ 'highlightCssUrl':'--PUBLIC--/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css'})
+},300);
+</script>

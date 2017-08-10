@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+        <meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>{$cname}-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/wap/index.css"/>
+        <eq name="iswei" value="1">
+          <script type="text/javascript">
+            var shareTitle = "{$cname}【{$site.SITE_INFO.name}】";
+          </script>
+        </eq>
+    </head>
+    <body>
+    <include file="Common:header" />
+    <!-- 主题部分【 -->
+<div class="decorate_index designer_info">
+       <div class="content_text">
+           <div class="title">{$data.title}</div>
+           <div class="date">{$data.published|date="Y-m-d H:i",###}</div>
+           <div class="cont">
+               {$data.content}
+           </div>
+       </div>
+   </div>
+    <!-- 主题部分】 -->
+<!---底部开始-->
+<include file="Common:footer"/>
+</body>
+</html>
+

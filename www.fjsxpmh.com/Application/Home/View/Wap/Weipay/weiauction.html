@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+        <meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>微信安全支付-{$site.SITE_INFO.title}</title>
+        <php>
+            $currentNav = '订单支付';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+    <include file="Common:header"/>
+    <section>
+        <!---右侧开始-->
+        <div class="mbsecbox">
+            <div class="my_info" style="margin-top: 5px;">
+                <!-- 微信安全支付 -->
+                <ul class="sea_list">
+                    <li>
+                        <div class="pth"><a href="{:U('Auction/details',array('pid'=>$odinfo['pid']))}"  >{$paydata.pname}</a></div>
+                        <div class="pcon clearfix">
+                            <div class="imbox">
+                                <img src="{$upWholeUrl}{$paydata.pictures||getPicUrl=###,3,0}" alt="">
+                            </div>
+                            <div class="infobox">
+                                <p>订单共计：<span class="qipai">{$paydata.total}元</span></p>
+                                <p>余额支付：<span class="qipai">{$paydata.yuemn}元</span></p>
+                                <p>保证金抵货款：<span class="qipai">{$paydata.pledge}元</span></p>
+                                <p>需要在线支付：<span class="qipai">{$paydata.money}元</span></p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <dl class="clearfix">
+                    <dt>&nbsp;</dt>
+                    <dd><input type="submit" onclick="callpay()" value="确认支付" class="submitBtn"></dd>
+                </dl>
+            </div>
+        </div>
+        <!---右侧结束-->
+    </section>
+    </body>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script type="text/javascript">
+        var od_url = "<?php echo $paydata['od_url']; ?>";
+        var porder = "<?php echo $paydata['porder']; ?>";
+        var weiajax = "<?php echo U('Public/weiauction_ajax'); ?>";
+        // window.onload = function(){
+        //     if (typeof WeixinJSBridge == "undefined"){
+        //         if( document.addEventListener ){
+        //             document.addEventListener('WeixinJSBridgeReady', editAddress, false);
+        //         }else if (document.attachEvent){
+        //             document.attachEvent('WeixinJSBridgeReady', editAddress);
+        //             document.attachEvent('onWeixinJSBridgeReady', editAddress);
+        //         }
+        //     }else{
+        //         editAddress();
+        //     }
+        // };
+            //调用微信JS api 支付
+            function jsApiCall(){
+                WeixinJSBridge.invoke('getBrandWCPayRequest',<?php echo $dtb['params']; ?>,function(res){
+                        WeixinJSBridge.log(res.err_msg);
+                        if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                            // ajax异步处理支付结果
+                            $.post(weiajax,{'porder':porder},function(data){      //ajax后台
+                                if (data.status) {
+                                        document.location.href = od_url;
+                                    } else {
+                                        alert(data.msg);
+                                    }
+                            },'json'); 
+                        }
+                    }
+                );
+            }
+            function callpay(){
+                if (typeof WeixinJSBridge == "undefined"){
+                    if( document.addEventListener ){
+                        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                    }else if (document.attachEvent){
+                        document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                    }
+                }else{
+                    jsApiCall();
+                }
+            }
+            //获取共享地址
+            // function editAddress(){
+            //     WeixinJSBridge.invoke('editAddress',<?php echo $dtb['addr']; ?>,function(res){
+            //         var value1 = res.proviceFirstStageName;
+            //         var value2 = res.addressCitySecondStageName;
+            //         var value3 = res.addressCountiesThirdStageName;
+            //         var value4 = res.addressDetailInfo;
+            //         var tel = res.telNumber;
+            //         alert(value1 + value2 + value3 + value4 + ":" + tel);
+            //         //todo 收货地址处理
+            //         }
+            //     );
+            // }
+
+            
+        </script>
+</html>

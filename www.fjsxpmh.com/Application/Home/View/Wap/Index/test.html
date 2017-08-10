@@ -1,0 +1,28 @@
+<include file="Common:meta" />
+<title>{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+
+<include file="Common:link" />
+<css href="--PUBLIC--/Js/datetimepicker/amazeui.datetimepicker.css"/>
+        <js href="--PUBLIC--/Js/datetimepicker/amazeui.datetimepicker.min.js"/>
+<body>
+<div class="am-input-group date form_datetime-2">
+  <input size="16" type="text"  class="am-form-field" readonly>
+  <span class="am-input-group-label add-on"><i class="icon-th am-icon-calendar"></i></span>
+</div>
+
+<script>
+  $(function() {
+    $('.form_datetime-2').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: 'bottom-left'
+    });
+  })
+</script>
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+</body>
+</html>

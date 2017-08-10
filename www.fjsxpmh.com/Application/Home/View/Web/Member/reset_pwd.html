@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>修改密码-账号中心-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;账号中心&nbsp;&gt;&gt;&nbsp;修改密码</div>
+
+        
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <form id="restPwd" name="restPwd" action="" method="post">
+           	  <div class="sider">
+                    <ul class="inquiry">
+                        <li class="hover">修改密码</li>
+                    </ul>
+                    <div class="inquiry-con">
+                        <ul class="my_info clearfix">
+                            <dl class="clearfix">
+                                <dt>当前密码：</dt>
+                                <dd><input id="pwd" type="password" size="30" class="input" name="pwd"/></dd>
+                                <dd><div id="pwdTip"></div></dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt>新密码：</dt>
+                                <dd><input id="new_pwd" type="password" size="30" class="input" name="new_pwd" /></dd>
+                                <dd><div id="new_pwdTip"></div></dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt>确认密码：</dt>
+                                <dd><input id="new_pwded" type="password" size="30" class="input" name="new_pwded" /></dd>
+                                <dd><div id="new_pwdedTip"></div></dd>
+                            </dl>
+                            <dl id="btn_box">
+                                <input type="hidden" name="type" value="{$type}">
+                                <button class="btn_blue" id="submit">修改</button>
+                            </dl>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<script type="text/javascript">
+    $(function(){
+        // 表单验证【
+		$.formValidator.initConfig({formID:"restPwd",submitButtonID:"submit"});
+		$("#submit").click(function(){
+			if($.formValidator.pageIsValid('1')==true){
+				commonAjaxSubmit('','','');
+			}
+			return false;
+		});
+
+
+        $("#pwd").formValidator({onShow:"请输入原始密码",onFocus:"原始密码不能为空",onCorrect:"密码格式正确"}).inputValidator({min:1,empty:{leftEmpty:false,rightEmpty:false,emptyError:"密码两边不能有空符号"},onError:"原始密码不能为空"});
+        $("#new_pwd").formValidator({onShow:"请设置密码",onFocus:"至少6个字符",onCorrect:"密码格式正确"}).inputValidator({min:6,empty:{leftEmpty:false,rightEmpty:false,emptyError:"密码两边不能有空符号"},onError:"密码至少6个字符,请确认"});
+        $("#new_pwded").formValidator({onShow:"输再次输入设置密码",onFocus:"需要和设置密码一致",onCorrect:"密码一致"}).inputValidator({min:6,empty:{leftEmpty:false,rightEmpty:false,emptyError:"重复密码两边不能有空符号"},onError:"重复密码至少6个字符,请确认"}).compareValidator({desID:"new_pwd",operateor:"=",onError:"2次密码不一致,请确认"});
+    });
+</script>
+</body>
+</html>

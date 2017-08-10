@@ -1,0 +1,94 @@
+<include file="Common:meta" />
+<title>发货处理-我是卖家</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body onload="express();">
+<include file="Member:menu" />
+
+<div class="deliver">
+    <form id="deliver" name="deliver" class="am-form" action="" method="post">
+            <ul class="addr_list am-avg-sm-1 am-avg-md-2">
+                <li class="thead-tbl-address  address-default">
+                    <p>收件人：{$address.truename}</p>
+                    <p>地址：{$address.province}{$address.city}{$address.area}{$address.address}</p>
+                    <p>手机：{$address.mobile} <neq name="v.phone" value="">电话：{$address.phone}</neq></p>
+                    <p>邮编：{$address.postalcode}</p>
+                </li>
+            </ul>
+            <dl class="user-frame">
+                <dd class="dd">
+                    <select id="express" name="info[express]">
+                        <volist name="express_list" id="vo">
+                            <option value="">请选择快递</option>
+                            <option value="*" <eq name="info.express" value="*">selected="selected"</eq>>其他快递/物流</option>
+                            <!-- 字母 -->
+                            <option disabled="disabled" class="sltit"><eq name="key" value="com">常用快递<else/>{$key}</eq></option>
+                            <volist name="vo" id="ca">
+                                <if condition="$info['express'] eq $ca['en']">
+                                    <option value="{$ca.en}" selected="selected">{$ca.ch}</option>
+                                <else/>
+                                    <option value="{$ca.en}">{$ca.ch}</option>
+                                </if>
+                            </volist>
+                        </volist>
+                    </select>
+                </dd>
+                <dd id="expressTip"></dd>
+            </dl>
+            <dl id="express_other_box" class="user-frame <neq name="info.express" value="*">hidden</neq>" >
+                <dd><input id="expressother" placeholder="快递名称" class="input" type="text" name="info[express_other]" value="{$info.express_other}" /></dd>
+                <dd id="expressotherTip"></dd>
+            </dl>
+            <dl class="user-frame">
+                <dd class="dd"><input id="expressno" placeholder="快递单号" type="number" class="input" size="40" name="info[express_no]" value="{$info.express_no}"/></dd>
+                <dd id="expressnoTip"></dd>
+            </dl>
+            <dl class="user-frame">
+                <dd class="dd"><textarea id="remark" class="input" name="info[remark]"><eq name="ac" value="1">{$info.remark}</eq></textarea></dd>
+                <span id="remarkTip"></span>
+            </dl>
+            <input type="hidden" value="{$info.order_no}" name="info[order_no]">
+            <dl id="btn_box">
+                <button class="submitBtn am-btn am-btn-danger on-btn-danger am-radius" id="submit"><eq name="ac" value="1">编辑发货<else/>提交发货</eq></button>
+            </dl>
+    </form>
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+<!-- 表单验证【 -->
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<!-- 表单验证】 -->
+<script type="text/javascript">
+    $(function(){
+        $.formValidator.initConfig({formID:"deliver"});
+        $("#submit").click(function(){
+            if($.formValidator.pageIsValid('1')==true){
+                commonAjaxSubmit();
+            }
+            return false;
+        });
+        
+        $("#express").formValidator({onShow:"请选快递公司",onFocus:"快递公司必选",onCorrect:"谢谢你的配合"}).inputValidator({min:1,onError: "请选择快递!"});
+        $("#expressother").formValidator({onShow:"请填写您发货的快递公司名称",onFocus:"请填写您发货的快递公司名称",onCorrect:"输入正确"}).inputValidator({min:3,onError:"你输入的名称不正确,请确认"});
+        $("#expressno").formValidator({onShow:"请填写您发货的快递单号",onFocus:"请填写您发货的快递单号",onCorrect:"输入正确"}).inputValidator({min:3,onError:"你输入的名称不正确,请确认"});
+        
+        $("#remark").formValidator({onShow:"有哪些需要给买家说明的",onFocus:"有哪些需要给买家说明的",onCorrect:"输入正确"});
+        // 表单验证】
+        $('#express').on("change",function(){
+            express();
+        });
+    });
+function express(tval){
+    if($('#express').val()=='*'){
+        $('#express_other_box').removeClass('hidden');
+        $("#expressother").unFormValidator(false);
+    }else{
+        $('#express_other_box').addClass('hidden');
+        $("#expressother").unFormValidator(true);
+    }
+}
+</script>
+</body>
+</html>

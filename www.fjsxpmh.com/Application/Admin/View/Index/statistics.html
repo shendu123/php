@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>
+            资金统计-{$site.SITE_INFO.name}
+        </title>
+        <php>
+            $currentNav ='资金统计';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+
+                        <div class="Item hr clearfix">
+                            <div class="current">网站账户信息</div>
+                        </div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th width="10%" align="right">余额信息：</th>
+                                <td>
+                                    共计：{$walletsum.wallet_pledge}&nbsp;&nbsp;&nbsp;&nbsp;
+                                    冻结：{$walletsum.wallet_pledge_freeze} &nbsp;&nbsp;&nbsp;&nbsp;
+                                    可用：{$walletsum.wallet_pledge_usable}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">信誉额度信息：</th>
+                                <td>
+                                    共计：{$walletsum.wallet_limsum}&nbsp;&nbsp;&nbsp;&nbsp;
+                                    冻结：{$walletsum.wallet_limsum_freeze} &nbsp;&nbsp;&nbsp;&nbsp;
+                                    可用：{$walletsum.wallet_limsum_usable}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">佣金：</th>
+                                <td>
+                                    已收：{$walletsum.broker}&nbsp;&nbsp;&nbsp;&nbsp;
+                                    待收：{$walletsum.broker_predict}
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="Item hr clearfix">
+                            <div class="current"><empty name="keys.account">网站<else/>{$keys.account}</empty>账户详情</div>
+                            <form class="fr" action="{:U('Index/statistics')}" method='get'>
+                                开始时间：<input id="start_time" type="text" value="{$keys.start_time}" name="start_time" class="input" placeholder="默认为建站时间" />&nbsp;&nbsp;
+                                结束时间：<input id="end_time" type="text" value="{$keys.end_time}" name="end_time" class="input" placeholder="默认为当前时间" />&nbsp;&nbsp;
+                                用户账号：<input type="text" value="{$keys.account}" name="account" class="input" placeholder="请输入用户" />&nbsp;&nbsp;
+                                &nbsp;&nbsp;<button class="btn">筛选</button>
+                            </form>
+                        </div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th width="10%" align="right">佣金：</th>
+                                <td>
+                                    已收：{$walletsum.broker_where|default=0}&nbsp;&nbsp;&nbsp;&nbsp;
+                                    待收：{$walletsum.broker_where_predict|default=0}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="10"><strong>余额信息</strong></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">
+                                    <eq name="keys.start_time" value="">建站时间&nbsp;至&nbsp;<else/>{$keys.start_time}&nbsp;至&nbsp;</eq><eq name="keys.end_time" value="">当前时间<else/>{$keys.end_time}</eq>：
+                                </th>
+                                <td>
+                                    余额：<strong>{$walletsum.wallet_pledge_where|default=0}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    冻结：<strong>{$walletsum.wallet_pledge_where_freeze|default=0}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    可用：<strong>{$walletsum.wallet_pledge_where_usable|default=0}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="10"><strong>余额详情</strong></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">拍卖冻结：</th>
+                                <td>{$walletsum.wallet_pledge_bid_expend|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'bid_freeze'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">发布拍卖冻结：</th>
+                                <td>{$walletsum.wallet_pledge_add_expend|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'add_freeze'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">管理员冻结：</th>
+                                <td>{$walletsum.wallet_pledge_admin_freeze|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'admin_freeze'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">提现冻结：</th>
+                                <td>{$walletsum.wallet_pledge_take_freeze|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'extract_freeze'))}">查看记录</a></td>
+                            </tr>
+
+                            <tr>
+                                <th width="10%" align="right">拍卖解冻：</th>
+                                <td>{$walletsum.wallet_pledge_bid_income|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'bid_unfreeze'))}">查看记录</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <th width="10%" align="right">交易成功解冻：</th>
+                                <td>{$walletsum.wallet_pledge_add_income|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'add_unfreeze'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">管理员解冻：</th>
+                                <td>{$walletsum.wallet_pledge_admin_unfreeze|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'admin_unfreeze'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">在线充值：</th>
+                                <td>{$walletsum.wallet_pledge_inlin_income|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'pay_deposit'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">交易收入：</th>
+                                <td>{$walletsum.wallet_pledge_profit_income|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'profit'))}">查看记录</a></td>
+                            </tr>
+
+<!--                             <tr>
+                                <th width="10%" align="right">分享奖励：</th>
+                                <td>{$walletsum.wallet_pledge_share_income|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'share'))}">查看记录</a></td>
+                            </tr> -->
+                            <tr>
+                                <th width="10%" align="right">管理员充值：</th>
+                                <td>{$walletsum.wallet_pledge_admin_income|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'admin_deposit'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">买家订单过期收入：</th>
+                                <td>{$walletsum.wallet_pledge_seller_break_nopay|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'seller_break_nopay'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">卖家未按时发货收入：</th>
+                                <td>{$walletsum.wallet_pledge_buy_break_deliver|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'buy_break_deliver'))}">查看记录</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <th width="10%" align="right">保证金抵货款：</th>
+                                <td>{$walletsum.wallet_pledge_paypledge_expend|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'pay_pledge'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">支付扣除：</th>
+                                <td>{$walletsum.wallet_pledge_pay_expend|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'pay_deduct'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">提现扣除：</th>
+                                <td>{$walletsum.wallet_pledge_take|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'extract'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">管理员扣除：</th>
+                                <td>{$walletsum.wallet_pledge_admin_expend|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'admin_deduct'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">订单过期扣除：</th>
+                                <td>{$walletsum.wallet_pledge_buy_break_nopay|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'buy_break_nopay'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">未按时发货扣除：</th>
+                                <td>{$walletsum.wallet_pledge_seller_break_deliver|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'seller_break_deliver'))}">查看记录</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="10"><strong>信誉额度信息</strong></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">
+                                    <eq name="keys.start_time" value="">建站时间&nbsp;至&nbsp;<else/>{$keys.start_time}&nbsp;至&nbsp;</eq><eq name="keys.end_time" value="">当前时间<else/>{$keys.end_time}</eq>：
+                                </th>
+                                <td>
+                                    信誉额度：<strong>{$walletsum.wallet_limsum_where|default=0}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    冻结：<strong>{$walletsum.wallet_limsum_where_freeze|default=0}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    可用：<strong>{$walletsum.wallet_limsum_where_usable|default=0}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="10"><strong>信誉额度详情</strong></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">拍卖冻结：</th>
+                                <td>{$walletsum.wallet_limsum_bid_expend|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'bid_freeze'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">发布拍卖冻结：</th>
+                                <td>{$walletsum.wallet_limsum_add_expend|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'add_freeze'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">管理员冻结：</th>
+                                <td>{$walletsum.wallet_limsum_admin_freeze|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'admin_freeze'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">拍卖解冻：</th>
+                                <td>{$walletsum.wallet_limsum_bid_income|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'bid_unfreeze'))}">查看记录</a></td>
+                            </tr>
+                            
+                            <tr>
+                                <th width="10%" align="right">交易成功解冻：</th>
+                                <td>{$walletsum.wallet_limsum_add_income|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'add_unfreeze'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">管理员解冻：</th>
+                                <td>{$walletsum.wallet_limsum_admin_unfreeze|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'admin_unfreeze'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">分享奖励：</th>
+                                <td>{$walletsum.wallet_limsum_share_income|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'share'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">买家订单过期收入：</th>
+                                <td>{$walletsum.wallet_limsum_seller_break_nopay|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'seller_break_nopay'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">卖家未按时发货收入：</th>
+                                <td>{$walletsum.wallet_limsum_buy_break_deliver|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'buy_break_deliver'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">订单过期扣除：</th>
+                                <td>{$walletsum.wallet_limsum_buy_break_nopay|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'buy_break_nopay'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">未按时发货扣除：</th>
+                                <td>{$walletsum.wallet_limsum_seller_break_deliver|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'seller_break_deliver'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">管理员充值：</th>
+                                <td>{$walletsum.wallet_limsum_admin_income|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'admin_deposit'))}">查看记录</a></td>
+                            </tr>
+
+                            <tr>
+                                <th width="10%" align="right">管理员扣除：</th>
+                                <td>{$walletsum.wallet_limsum_admin_expend|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'wallet'=>'limsum','changetype'=>'admin_deduct'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">订单过期扣除：</th>
+                                <td>{$walletsum.wallet_limsum_buy_break_nopay|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'buy_break_nopay'))}">查看记录</a></td>
+                            </tr>
+                            <tr>
+                                <th width="10%" align="right">未按时发货扣除：</th>
+                                <td>{$walletsum.wallet_limsum_seller_break_deliver|default=0}&nbsp;&nbsp;<a target="_blank" href="{:U('Member/walletbill',array('start_time'=>$keys['start_time'],'end_time'=>$keys['end_time'],'account'=>$keys['account'],'changetype'=>'seller_break_deliver'))}">查看记录</a></td>
+                            </tr>
+                        </table>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+    </body>
+<!-- 日期时间插件 -->
+<css href="--PUBLIC--/Js/datetimepicker/jquery.datetimepicker.css"/>
+<js href="--PUBLIC--/Js/datetimepicker/jquery.datetimepicker.js"/>
+<!-- 日期时间插件 -->
+<script type="text/javascript">
+    //为input添加时间插件
+    $('#start_time').datetimepicker({lang:'ch'});
+    $('#end_time').datetimepicker({lang:'ch'});
+</script>
+</html>

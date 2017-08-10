@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>已发送站内信-账号中心-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;账号中心&nbsp;&gt;&gt;&nbsp;已发送站内信</div>
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                <ul class="inquiry">
+                    <li><a href="{:U('Member/sendmsg')}">发送站内信</a></li>
+                    <li class="hover">已发送站内信</li>
+                </ul>
+                <div class="inquiry-con">
+                <form method="post" name="theForm">
+                    <table width="100%" cellspacing="0" cellpadding="0" class="systemTable" id="tabList"  style="margin-top: 10px;">
+                        <tbody>
+                            <tr class="xiaoxzt">
+                                <th width="27%">接收者</th>
+                                <th width="60%">内容</th>
+                                <th width="10%">接收时间</th>
+                            </tr>
+                            <empty name="list">
+                                <tr><td colspan="4">没有发送过私信</td></tr>
+                            </empty>
+                            <notempty name="list">
+                                <volist name="list" id="vo">
+                                    <tr>
+                                        <td class="suse">
+                                            <img style="width: 34px; padding: 2px;" src="{$vo.uid|getUserpic=###,2}">
+                                            <div class="susnm fl">
+                                                <neq name="vo.uid" value="0"> <div class="clearfix"><div class="th">账号：</div><div class="td">{$vo.user.account}</div></div></neq>
+                                                <div class="clearfix">
+                                                    <neq name="vo.uid" value="0">
+                                                        <div class="th">昵称：</div>
+                                                        <a class="td" target="_blank"  href="{:U('Seller/index',array('sellerid'=>$vo['uid']))}">{$vo.user.nickname}</a>
+                                                        <else/>
+                                                        <a class="td renzheng clearfix"  target="_blank" style="margin-top: 9px;" href="{:U('Seller/index',array('sellerid'=>$vo['uid']))}">
+                                                            <div class="rzl"></div>
+                                                            <div class="rzc cuit_over">{$vo.user.nickname}</div>
+                                                            <div class="rzr"></div>
+                                                        </a>
+                                                    </neq>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td  style="text-align: left;">
+                                            <neq name="vo.pid" value="0">
+                                                <span>关于拍品:</span><a target="_blank" href="{:U('Auction/details',array('pid'=>$vo['pid']))}">{$vo.auction.pname}</a>
+                                            </neq>
+                                            {$vo.content}
+                                            <p style="text-align: right;"><a href="{:U('Member/exchange',array('sid'=>$vo['sid']))}">[对话记录]</a></p>
+                                        </td>
+                                        <td>{$vo.time||date='Y-m-d H:i',###}</td>
+                                    </tr>
+                                </volist>
+                                <tr class="duibi">
+                                    <td valign="middle" colspan="4" align="right">
+                                        <div class="page" style="padding: 0px; margin-right: 10px;">{$page}</div>
+                                    </td>
+                                </tr>
+                            </notempty>
+                        </tbody>
+                    </table>
+                </form>
+                </div>
+            </div>
+            <!---右侧结束-->
+        </div>
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<js href="--PUBLIC--/Js/jquery-validate.js"/>
+<script type="text/javascript">
+$(function(){
+
+    $("#allcbox").click(function() {
+        $('input[name="sid[]"]').prop("checked",this.checked);
+    });
+    var $subBox = $("input[name='sid[]']");
+    $subBox.click(function(){
+        $("#allcbox").prop("checked",$subBox.length == $("input[name='sid[]']:checked").length ? true : false);
+    });
+    $(".submit").click(function(){
+        if($("input[name='sid[]']:checked").length!=0){
+            commonAjaxSubmit(); 
+        }else{
+           popup.alert('您至少需要选中一个要删除的私信');
+            setTimeout(function(){
+                popup.close("asyncbox_alert");
+            },2000);
+        }
+        return false;
+    });
+});
+</script>
+</body>
+</html>

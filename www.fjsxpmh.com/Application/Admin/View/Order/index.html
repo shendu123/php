@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>
+            <eq name="ACTION_NAME" value="index">有效拍卖订单列表</eq>
+            <eq name="ACTION_NAME" value="search">搜索结果</eq>
+            -{$site.SITE_INFO.name}
+        </title>
+        <php>
+            if(ACTION_NAME == 'index'){
+                $pagname = '拍卖订单列表';
+            }elseif(ACTION_NAME == 'search'){
+                $pagname = '搜索结果';
+            };
+            $currentNav ='订单管理 > '.$pagname;
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current fl">
+                            <eq name="ACTION_NAME" value="index">拍卖订单列表</eq>
+                            <eq name="ACTION_NAME" value="search">搜索结果</eq>
+                        </div>
+                        <div class="fl">
+                            <a href="{:U('Order/index')}" class="sbtn <empty name='where'>on</empty>">全部订单</a>
+                            <a href="{:U('Order/index',array('field'=>'deftime1st','val'=>'0'))}" class="sbtn <eq name='where.deftime1st' value='0'>on</eq>">有效订单</a>
+                            <a href="{:U('Order/index',array('field'=>'deftime1st','val'=>'1'))}" class="sbtn <eq name='where.deftime1st' value='1'>on</eq>">过期订单</a>
+                            <a href="{:U('Order/index',array('field'=>'deftime2st','val'=>'1'))}" class="sbtn <eq name='where.deftime2st' value='1'>on</eq>">卖家违约</a>
+                            <a href="{:U('Order/index',array('field'=>'deftime3st','val'=>'1'))}" class="sbtn <eq name='where.deftime3st' value='1'>on</eq>">默认收货</a>
+                            <a href="{:U('Order/index',array('field'=>'deftime4st','val'=>'1'))}" class="sbtn <eq name='where.deftime4st' value='1'>on</eq>">默认评价卖家</a>
+                            <a href="{:U('Order/index',array('field'=>'deftime10st','val'=>'1'))}" class="sbtn <eq name='where.deftime10st' value='1'>on</eq>">默认评价买家</a>
+                        </div>
+                        <div class="search">
+                            <form action="{:U('search')}" method='get'>
+                                订单号：
+                                <input type="text" value="{$keys.order_no}" name="order_no" class="input" placeholder="搜索订单号" />
+                                &nbsp;&nbsp;用户账号：
+                                <input type="text" value="{$keys.account}" name="account" class="input" placeholder="用户账号" />
+                                &nbsp;&nbsp;类型：
+                                <select name="type">
+                                    <option value="" <eq name="keys.type" value=""> selected="selected"</eq>>全部拍卖</option>
+                                    <option value="0" <eq name="keys.type" value="0"> selected="selected"</eq>>竞拍订单</option>
+                                    <option value="1" <eq name="keys.type" value="1"> selected="selected"</eq>>竞标订单</option>
+                                </select>
+                                &nbsp;&nbsp;状态：
+                                <select name="status">
+                                    <option value="" <eq name="keys.status" value=""> selected="selected"</eq>>全部订单</option>
+                                    <option value="0" <eq name="keys.status" value="0"> selected="selected"</eq>>待支付</option>
+                                    <option value="1" <eq name="keys.status" value="1"> selected="selected"</eq>>待发货</option>
+                                    <option value="2" <eq name="keys.status" value="2"> selected="selected"</eq>>待收货</option>
+                                    <option value="3" <eq name="keys.status" value="3"> selected="selected"</eq>>已收货</option>
+                                    <option value="4" <eq name="keys.status" value="4"> selected="selected"</eq>>已评价</option>
+                                    <option value="10" <eq name="keys.status" value="10"> selected="selected"</eq>>已互评</option>
+                                </select>
+                                &nbsp;&nbsp;<button class="btn">筛选</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td width="10%">订单号</td>
+                                <td width="7%">生成时间</td>
+                                <td width="15%">对应拍品</td>
+                                <td width="10%">拍品/运费</td>
+                                <td>订单佣金</td>
+                                <td width="10%">所属用户账号</td>
+                                <td width="10%">买家保证金</td>
+                                <td width="10%">卖家保证金</td>
+                                <td width="10%">类型/状态</td>
+                                <td width="10%">操作</td>
+                            </tr>
+                        </thead>
+                        <empty name="list">
+                            <tr><td colspan="10">哎哟！什么也没有！</td></tr>
+                        <else /> 
+                            <volist name="list" id="vo">
+                                <tr align="center">
+                                    <td align="left">{$vo.order_no}</td>
+                                    <td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+                                    <td align="left">
+                                        <a style="color:#ff6600;line-height: 20px;" href="{:U('Home/Auction/details',array('pid'=>$vo[gid]))}" target="_blank">
+                                        <img style="margin-right: 5px; display: inline; float:left;" src="{$upWholeUrl}{$vo.pimg|picRep=###,3}" width="50px" />
+                                        【<eq name="vo.type" value="0">竞拍</eq><eq name="vo.type" value="1">竞标</eq>】
+                                        {$vo.pname}
+                                        </a>
+                                    </td>
+                                    <td>{$vo.price}/{$vo.freight}<br/>共计：{$vo.prcsum}</td>
+                                    <td>{$vo.broker}</td>
+                                    <td>{$vo.account}</td>
+
+                                    <td align="left">
+                                        {$vo.pledge_type}
+                                        <p>保证金：{$vo.pledge}</p>
+                                        <neq name="vo.pledge" value="0"><p>信用额度：{$vo.limsum}</p></neq>
+                                    </td>
+                                    <td align="left">
+                                        {$vo.sell_type}
+                                        <p>保证金：{$vo.sell_pledge}</p>
+                                        <neq name="vo.sell_limsum" value="0"><p>信用额度：{$vo.sell_limsum}</p></neq>
+                                    </td>
+                                    <td>
+                                        <if condition="$vo['status'] eq 0">
+                                            <eq name="vo.deftime1st" value="0">
+                                                待付款
+                                            <else/>
+                                                买家违约
+                                            </eq>
+                                        </if>
+                                        <if condition="$vo['status'] eq 1">
+                                            <eq name="vo.deftime2st" value="0">
+                                                待发货
+                                            <else/>
+                                                卖家违约
+                                            </eq>
+                                        </if>
+                                        <eq name="vo.status" value="2">待收货</eq>
+                                        <eq name="vo.status" value="3">交易成功</eq>
+                                        <eq name="vo.status" value="4">买家已评价</eq>
+                                        <eq name="vo.status" value="5">申请退货</eq>
+                                        <eq name="vo.status" value="6">卖家拒绝退货</eq>
+                                        <eq name="vo.status" value="7">卖家同意退货，待发货</eq>
+                                        <eq name="vo.status" value="8">已发货等待卖家收货</eq>
+                                        <eq name="vo.status" value="9">已完成退货</eq>
+                                        <eq name="vo.status" value="10">已互评</eq>
+                                    </td>
+                                    <td>
+                                        [ <a href="__URL__/edit?order_no={$vo.order_no}">编辑 </a> ] 
+                                        [ <a link="{:U('Order/del/',array('order_no'=>$vo['order_no']))}" href="javascript:void(0)" name="{$vo.order_no}" class="del">删除 </a> ]
+                                    </td>
+                                </tr>
+                            </volist>
+                            <tr>
+                                <td colspan="20"><div class="fl">买家订单总额：{$mct.odmn} &nbsp;&nbsp;卖家佣金总额：{$mct.bkmn}</div><div class="page"  style="width: 60%; text-align: right; float: right;">{$page}</div></td>
+                            </tr>
+                        </empty>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            var paylistUrl = "{:U('Order/edit','','')}";
+            var thisUrl = "{:U('Order/lose')}";
+            $(function(){
+                $("#allcbox").click(function() {
+                    $('input[name="pid[]"]').prop("checked",this.checked);
+                });
+                var $subBox = $("input[name='pid[]']");
+                $subBox.click(function(){
+                    $("#allcbox").prop("checked",$subBox.length == $("input[name='pid[]']:checked").length ? true : false);
+                });
+                $(".submit").click(function(){
+                    if($("input[name='pid[]']:checked").length!=0){
+                        asyncbox.alert('为了数据的正常，请确保您所选择的订单状态是相同的！','操作提示',function(buttonResult){
+                            if(buttonResult == 'ok'){
+                                var str="";
+                                for (var i=0;i<$("input[name='pid[]']").length;i++ ){
+                                    if($("input[name='pid[]']")[i].checked){
+                                        str=str+$("input[name='pid[]']")[i].value + "_";
+                                    }
+                                }
+                                str=str.substring(0,str.length-1);
+                                document.location.href =paylistUrl+'?order_no='+str;
+                            }
+                        });
+                         
+                    }else{
+                       popup.alert('您至少需要选中一个要处理的订单');
+                        setTimeout(function(){
+                            popup.close("asyncbox_alert");
+                        },2000);
+                    }
+                    return false;
+                });
+                // 删除订单【
+                $(".del").click(function(){
+                    var delLink=$(this).attr("link");
+                    popup.confirm('你真的打算删除【<b>'+$(this).attr("name")+'</b>】吗?','温馨提示',function(action){
+                        if(action == 'ok'){
+                            top.window.location.href=delLink;
+                        }
+                    });
+                    return false;
+                });
+                // 删除订单】
+            });
+        </script>
+    </body>
+</html>

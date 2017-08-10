@@ -1,0 +1,78 @@
+<!-- 导航菜单【 -->
+<div class="am-navbar am-cf am-navbar-default am-no-layout on-navbar" data-am-widget="navbar">
+    <ul class="am-navbar-nav am-cf am-avg-sm-4">
+        <li <eq name="CONTROLLER_NAME" value="Index"><neq name="ACTION_NAME" value="search">class="am-on-active"</neq></eq>>
+            <a class="" href="{:U('Index/index')}">
+                <span class="am-icon-home"></span>
+                <span class="am-navbar-label">首页</span>
+            </a>
+        </li>
+        <eq name="CONTROLLER_NAME" value="Member">
+            <li <if condition="(CONTROLLER_NAME eq 'addGoods') or (CONTROLLER_NAME eq 'addAuction')">class="am-on-active"</if>>
+                <a class="am-active" href="{:U('Member/addGoods')}">
+                    <span class="am-icon-camera"></span>
+                    <span class="am-navbar-label">发布</span>
+                </a>
+            </li>
+        <else/>
+            <li <eq name="CONTROLLER_NAME" value="Auction">class="am-on-active"</eq>>
+                <a class="am-active" href="{:U('Auction/channel')}">
+                    <span class="am-icon-list-ul"></span>
+                    <span class="am-navbar-label">分类</span>
+                </a>
+            </li>
+        </eq>
+        <li <eq name="CONTROLLER_NAME" value="Special">class="am-on-active"</eq>>
+            <a class="" href="{:U('Special/index')}">
+                <span class="am-icon-gavel"></span>
+                <span class="am-navbar-label">专场拍</span>
+            </a>
+        </li>
+        <li <eq name="CONTROLLER_NAME" value="Meeting">class="am-on-active"</eq>>
+            <a class="" href="{:U('Meeting/index')}">
+                <span class="am-icon-pie-chart"></span>
+                <span class="am-navbar-label">拍卖会</span>
+            </a>
+        </li>
+        <li <eq name="CONTROLLER_NAME" value="Member">class="am-on-active"</eq>>
+            <a class="" href="{:U('Member/index')}">
+                <span class="am-icon-user"></span>
+                <span class="am-navbar-label">我的</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- 导航菜单【 -->
+<!-- 工具栏【 -->
+<div class="on-toolbar">
+    <a data-am-widget="gotop" class="am-icon-btn am-icon-arrow-up am-active am-gotop" title="回到顶部" href="#top"></a>
+    <a class="am-icon-btn am-icon-search am-active  am-margin-top-sm" title="搜索" href="{:U('Index/search')}"></a>
+    <if condition="(CONTROLLER_NAME eq 'Auction') and ((ACTION_NAME eq 'endbid') or (ACTION_NAME eq 'waitbid') or (ACTION_NAME eq 'index'))">
+    	<a class="am-icon-faq am-icon-btn am-icon-list" title="频道分类" href="javascript:void(0);" data-am-offcanvas="{target: '#on-cate-offcanvas'}"></a>
+    </if>
+</div>
+<if condition="($iswei == 1) and ($mapstate != 1) and ($showcodemap == 1)">
+    <div class="am-modal am-modal-no-btn" tabindex="-1" id="codeMapModal">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">~长按二维码关注我们~
+                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
+            <div class="am-modal-bd">
+                <img width="100%" src="{$codemapimg}">
+                <div>关注后就能接到消息提醒了哦！</div>
+            </div>
+        </div>
+    </div>
+    <script>
+      $(function() {
+        $('#codeMapModal').modal();
+      });
+    </script>
+</if>
+<!-- 工具栏】 -->
+<if condition="(CONTROLLER_NAME eq 'Auction') and ((ACTION_NAME eq 'endbid') or (ACTION_NAME eq 'waitbid') or (ACTION_NAME eq 'index'))">
+    {:W('Oncoo/catelist',array($gt[0]))}
+</if>
+
+
+

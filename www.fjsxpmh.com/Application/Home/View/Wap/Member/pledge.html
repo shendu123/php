@@ -1,0 +1,42 @@
+<include file="Common:meta" />
+<title>账户信息-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+    <div class="on-tips">
+        账户金额：<strong>{$pledge.wallet_pledge}</strong>元&nbsp;&nbsp;
+        冻结：<strong>{$pledge.wallet_pledge_freeze}</strong>元&nbsp;&nbsp;
+        可用：<strong>{$pledge.usable}</strong>元
+    </div>
+    <div class="on-minbtn">
+        <a href="{:U('payment',array('use'=>pledge))}" style="font-size: 12px;width: 100%;" class="am-btn am-btn-danger on-btn-danger am-radius">账户充值</a>
+    </div>
+    
+    <div style="font-size: 12px; margin:5px;" data-am-alert="" class="am-alert am-alert-warning zhyts"><button class="am-close" type="button">×</button><p>拍中，可做货款支付或支付订单后解冻保证金；未拍中，拍品结束自动解冻保证金。</p></div>
+    <ul class="on-shouzhi am-avg-sm-1 am-avg-md-2">
+        <volist name="bill" id="bv">
+            <li class="on-li">
+                <div class="on-li-con">
+                    单号：{$bv.order_no}<br/>
+                    <neq name="bv.expend" value="0">支出：<strong class="on-expend">{$bv.expend}</strong></neq>
+                    <neq name="bv.income" value="0">收入：<strong class="on-income">{$bv.income}</strong></neq>【{$bv.changetype|changetype=###}】<br/>
+                    {$bv.annotation}<span class="on-time">{$bv.time|date='Y-m-d H:i',###}</span><br/>
+                </div>
+            </li>
+        </volist>
+    </ul>
+
+    <!--分页【-->
+    <notempty name="page">
+        <div class="pagestyle">
+            {$page}
+        </div>
+    </notempty>
+    <!--分页】-->
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+</body>
+</html>

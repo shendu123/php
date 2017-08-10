@@ -1,0 +1,78 @@
+<include file="Common:meta" />
+<title>账户充值-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+        <!---右侧开始-->
+        <div class="mbsecbox">
+            <!-- 保证金充值显示 -->
+            <div class="on-tips">
+                <strong>尊敬的客户，账户充值成功后你将享有对应拍品的出价权限!出价后冻结保证金，如未拍到拍品，保证金将退回到您的账户！你可以选择提现来获得充值的保证金！详情查看帮助中心</strong>
+            </div>
+            <form id="remaining" class="am-form" action="{:U('Payment/index')}" name="remaining" method="post">
+                <div class="am-margin-xs">
+                    <!-- 保证金充值 -->
+                    <dl class="user-frame">
+                        <dt class="pdt">充值金额&nbsp;↓</dt>
+                        <dd><input placeholder="充值金额" type="text" id="money" name="data[money]" class="input"></dd>
+                        <dd><div id="moneyTip"></div></dd>
+                        <input type="hidden" name="data[purpose]" value="pledge">
+                    </dl>
+                    <!-- 保证金充值——end -->
+                    <dl class="user-frame">
+                        <dt class="pdt">在线支付&nbsp;↓</dt>
+                        <dd>
+                            <ul class="payTypeList am-avg-sm-3">
+                                <foreach name="channel" item="v">
+                                    <li>
+                                        <label>
+                                            <div class="icobox">
+                                                <input type="radio" id="pay<neq name='key' value='0'>{$key}</neq>" value="{$v.value}" name="data[channel]">
+                                                <img width="73px;" src="{$v.img}">
+                                            </div>
+                                        </label>
+                                        
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </dd>
+                        <dd><div id="payTip"></div></dd>
+                    </dl>
+                    <dl class="am-margin-top-xs">
+                        <input type="hidden" name="data[payType]" value="recharge" />
+                        <dd><input id="submit" type="submit" value="支付" class="submitBtn am-btn am-btn-danger on-btn-danger am-radius"></dd>
+                    </dl>
+                </div>
+            </form>
+        </div>
+        <!---右侧结束-->
+    <!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<script type="text/javascript">
+    $(function(){
+        $("#submit").click(function(){
+            popStatus(3, '正在进行支付...', 0,'',true);
+            return true;
+        });
+        // 初始化radio
+        $(".payTypeList").find("li:first-child").find("input[name='data[channel]']").attr('checked','checked');
+        $(".payTypeList input[name='data[channel]']:checked").parents('li').addClass('cur');
+        $(".payTypeList :radio").change(function() {
+            $("input[name='data[channel]']").parents('li').removeClass('cur');
+            $("input[name='data[channel]']:checked").parents('li').addClass('cur');
+        });
+        // 表单验证【
+        $.formValidator.initConfig({formID:"remaining",submitButtonID:"submit"});
+        $("#money").formValidator({onShow:"请输入充值金额",onFocus:"必须为数字，小数点后最多可有两位",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+        $(":radio[name='data[channel]']").formValidator({tipID:"payTip",onShow:"请选择一种支付方式",onFocus:"请选择一种支付方式，才能支付",onCorrect:"已选择"}).inputValidator({min:1,max:1,onError:"性别忘记选了,请确认"});
+        // 表单验证】
+    });
+</script>
+</body>
+</html>

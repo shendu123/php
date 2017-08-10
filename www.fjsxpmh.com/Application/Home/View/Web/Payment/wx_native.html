@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+        <meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>微信扫码充值-账号中心-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+        <css href="__CSS__/user.css"/>
+        <js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;账号中心&nbsp;&gt;&gt;&nbsp;在线充值&nbsp;&gt;&gt;&nbsp;微信扫码支付</div>
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                <div class="payIng">
+                    <ul id="payCard">
+                        <li class="title">{$adata.title}</li>
+                        <li class="payitem">
+                            <eq name="adata.purpose" value="pledge"><div class="bill_no">单号：{$adata.order_no}</div></eq>
+                            <eq name="adata.purpose" value="auction">
+                                <div class="bill_no">单号：{$adata.order_no}</div>
+                                <div class="pinfo">
+                                    <img src="{$pinfo.pictures}">
+                                    <div class="con">
+                                        <div class="pname cuit_over"><a href="">{$pinfo.pname}</a></div>
+                                        <div class="total">总价：<span title="（成交价{$oinfo.price}+运费{$oinfo.freight}）">{$oinfo.total}</span>元</div>
+                                    </div>
+                                </div>
+                                <div class="othpay clearfix"><span class="fl oth">余额支付：<span>{$adata.yuemn}</span></span><span class="fr oth">保证金抵货款：<span>{$adata.pledge}</span></span></div>
+                            </eq>
+                        </li>
+                        <li class="moneybox"><span class="money">{$adata.money}</span><span class="danwei">元</span></li>
+                        <li class="qrcode"></li>
+                        <button style="margin-bottom: 10px;" id="query" class="on-btn on-btn-blue">已扫码支付？</button>
+                    </ul>
+                </div>
+            </div>
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<script src="__STATIC__/dependency/qrcode.js"></script>
+<script type="text/javascript">
+var code_url = '{$code_url}';
+var native_query = "{:U('Payment/native_query')}";
+var bill_no = '{$adata.bill_no}';
+var return_url = '{$adata.return_url}';
+var channel = '{$adata.paytype}';
+if(code_url) {
+    var options = {text: code_url};
+    //参数1表示图像大小，取值范围1-10；参数2表示质量，取值范围'L','M','Q','H'
+    var canvas = BCUtil.createQrCode(options);
+    $("#payCard .qrcode").html(canvas);
+}
+$('#payCard').on("click",'#query',function(){
+    popStatus(3, '查询中...', 0,'',true);
+    querypost(1);
+});
+querytimer = setInterval(function(){
+    querypost(0);
+}, 2000);
+function querypost(type){
+    $.post(native_query,{'billNo':bill_no,'channel':channel},function(result){      //ajax后台
+        if (result && result.result_msg == "OK" && result.count > 0) {
+            if(result.bills[0].spay_result && result.bills[0].bill_no == bill_no){
+                clearInterval(querytimer);
+                $('#payCard #query').text('支付成功');
+                popStatus(1, '支付成功！', 2,return_url,true);
+            }else{
+                if(type==1){
+                    popStatus(2, '未支付', 2,'',true);
+                }
+            }
+        }
+    },'json');
+}
+</script>
+</body>
+</html>

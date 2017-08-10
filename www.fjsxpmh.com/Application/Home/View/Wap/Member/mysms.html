@@ -1,0 +1,122 @@
+<include file="Common:meta" />
+<title>消息提醒-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+<ul class="tabMenu am-avg-sm-2">
+    <li <eq name="tp" value="">class="on"</eq>>
+        <a href="{:U('Member/mysms')}">系统提醒<neq name="sc" value="0"><strong>（{$sc}）</strong></neq></a>
+    </li>
+    <li <eq name="tp" value="usend">class="on"</eq> >
+        <a href="{:U('Member/mysms',array('tp'=>'usend'))}">站内信<neq name="uc" value="0"><strong>（{$uc}）</strong></neq></a>
+    </li>
+</ul>
+<div class="am-margin-top-xs">
+<form method="post" name="theForm">
+    <ul class="on-shouzhi am-avg-sm-1 am-avg-md-2">
+        <empty name="slist">
+            <li class="on-li"><div>没有收到的消息</div></li>
+        <else/>
+            <volist name="slist" id="svo">
+                <li class="on-li">
+                    <div class="on-li-con">
+
+                        <eq name="tp" value="usend">
+                            <div class="on-sms-list clearfix">
+                                <div class="on-le on-lin">
+                                    <label class="am-checkbox am-danger am-margin-0">
+                                      <input name="sid[]" type="checkbox" value="{$svo.sid}" data-am-ucheck>
+                                    </label>
+                                </div>
+                                <img class="on-le"src="{$svo.sendid|getUserpic=###,2}">
+                                <div class="on-le">
+                                    <div>账号：{$svo.user.account}</div>
+                                    <div>昵称：<a class="td"  href="{:U('Seller/index',array('sellerid'=>$svo['sendid']))}">{$svo.user.nickname}</a></div>
+                                </div>
+                                <if condition="$svo['auction']">
+                                    <div class="on-le on-lin">关于拍品</div>
+                                    <div class="on-dif">
+                                        <a style="color: #980000;" href="{:U('Auction/details',array('pid'=>$svo['auction']['pid']))}">{$svo.auction.pname}</a>
+                                    </div>
+                                </if>
+                            </div>
+                            <div class="on-content">{$svo.content}</div>
+                            <eq name="tp" value="usend">
+                                <ul class="on-mini-morebtn am-avg-sm-2">
+                                    <li><a class="am-btn am-btn-primary on-btn-primary" href="{:U('Member/exchange',array('sid'=>$svo['sid']))}">会话记录</a></li>
+                                    <li><a class="am-btn am-btn-danger on-btn-danger" href="{:U('Member/sendmsg',array('sid'=>$svo['sid']))}">回复</a></li>
+                                </li>
+                            </eq>
+                        <else/>
+                            <label class="am-checkbox am-danger am-margin-0">
+                              <input name="sid[]" type="checkbox" value="{$svo.sid}" data-am-ucheck> {$svo.type}
+                            </label>
+                            {$svo.content}<span class="on-time">{$svo.time||date='m-d H:i',###}</span>
+                        </eq>
+                        <eq name="svo.status" value="0"><span class="smsc am-badge am-badge-danger am-round">未读</span></eq>
+                    </div>
+                </li>
+            </volist>
+            <li style="width: 100%; padding: 0px 5px;">
+                <ul class="am-avg-sm-2 am-margin-bottom-xs labbtn-box">
+                    <label class="am-checkbox am-danger am-margin-0">
+                      <input type="checkbox" id="allcbox" value="0" data-am-ucheck> 全选
+                    </label>
+                    <li><input type="button" value="设已读" style="width:100%;" class="read am-btn am-btn-secondary on-btn-secondary"></li>
+                    <li><input type="button" value="删除" style="width:100%;" class="del am-btn am-btn-danger on-btn-danger"></li>
+                </ul>
+            </li>
+        </empty>
+    </ul>
+
+    </form>
+</div>
+        <!--分页【-->
+    <notempty name="page">
+        <div class="pagestyle">
+            {$page}
+        </div>
+    </notempty>
+    <!--分页】-->
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+<script type="text/javascript">
+$(function(){
+    var delsms = "{:U('Member/mysms')}";
+    $("#allcbox").click(function() {
+        $('input[name="sid[]"]').prop("checked",this.checked);
+    });
+    var $subBox = $("input[name='sid[]']");
+    $subBox.click(function(){
+        $("#allcbox").prop("checked",$subBox.length == $("input[name='sid[]']:checked").length ? true : false);
+    });
+    $(".del").click(function(){
+
+        if($("input[name='sid[]']:checked").length!=0){
+            commonAjaxSubmit(delsms,'',{'ac':'del'}); 
+        }else{
+           popup.alert('您至少需要选中一个要删除的消息');
+            setTimeout(function(){
+                popup.close("asyncbox_alert");
+            },2000);
+        }
+        return false;
+    });
+    $(".read").click(function(){
+        if($("input[name='sid[]']:checked").length!=0){
+            commonAjaxSubmit('','',{'ac':'read'}); 
+        }else{
+           popup.alert('您至少需要选中一个要删除的消息');
+            setTimeout(function(){
+                popup.close("asyncbox_alert");
+            },2000);
+        }
+        return false;
+    });
+});
+</script>
+</body>
+</html>

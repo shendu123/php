@@ -1,0 +1,156 @@
+<eq name="pid" value="0">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+            <meta name="description" content="{$site.SITE_INFO.description}" />
+            <title>个人信息-{$site.SITE_INFO.title}</title>
+            <include file="Common:intoHead" />
+			<css href="__CSS__/user.css"/>
+			<js href="__JS__/user.js"/>
+        </head>
+        <body>
+        <include file="Common:head_narrow" />
+        <div id="container_white">
+            <div class="main_b9">
+                <div class="h8 clearfix"></div>
+                <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;账号中心&nbsp;&gt;&gt;&nbsp;拍卖提醒设置</div>
+                <div class="main_b9_1 clearfix">
+                    <!--左侧导航开始-->
+                    <include file="Member:menu" />
+                    <!--左侧导航结束-->
+                    <!---右侧开始-->
+                      <div class="sider">
+                            <ul class="inquiry">
+                                <li class="hover">拍卖提醒设置</li> 
+                            </ul>
+                            <div class="inquiry-con">
+<else/>
+    <html>
+        <head>
+            <css href="__CSS__/base.css"/>
+            <css href="__CSS__/common.css"/>
+            <js href="--PUBLIC--/Js/jquery-1.9.0.min.js"/>
+        </head>
+        <body style="width:440px; padding:10px 20px;">
+</eq>
+<style type="text/css">
+    .settcbox{ width: 100%; margin:0 auto;}
+    .settcbox li{border: 1px solid #f1f1f1;
+        color: #999;
+        display: block;
+        margin: 5px 0;
+        padding: 5px;
+    line-height: 35px;}
+    .settcbox li .checkico{ background: url(--PUBLIC--/Home/Img/checkbox_tx.png) no-repeat 0 -35px;display: block;
+        float: left;
+        width: 35px;
+        height: 35px;
+        margin-right: 10px; }
+    .settcbox li .txname{ font-size: 14px;}
+    .settcbox li .txno{ color: #980000;margin-left: 10px;}
+    .settcbox li.allow{cursor: pointer;}
+    .settcbox li.allow:hover{border: solid 1px #e4e4e4; color: #666; background-color: #f1f1f1;}
+    .settcbox li.allow:hover .checkico,.settcbox li.on .checkico{ background-position: 0 0;}
+    .settcbox li.on,.settcbox li.on:hover{ border: solid 1px #f59494; color: #980000; background-color: #fdd3d3;}
+</style>
+
+<form id="tixingtype" name="tixingtype">
+    <div class="settcbox">
+        <ul class="settxul">
+            <li altp="email" class="clearfix <eq name='myinfo.verify_email' value='1'> allow</eq> <if condition="in_array('email',$alerttype)">on</if>">
+                <span class="checkico"></span><span class="txname fl">邮箱提醒</span>
+                <span class="txno">{$myinfo.email|default='未设置邮箱'}</span>
+                <eq name='myinfo.verify_email' value='0'><span class="fr">未设置\认证，请先<a target="_parent" href="{:U('Member/check',array('type'=>'email','pid'=>$pid))}">设置\认证</a></span></eq>
+                <if condition="in_array('email',$alerttype)">
+                    <input type="hidden" value="1" name="email">
+                    <else/>
+                    <input type="hidden" value="0" name="email">
+                </if>
+            </li>
+            <li altp="mobile" class="clearfix <eq name='myinfo.verify_mobile' value='1'> allow</eq> <if condition="in_array('mobile',$alerttype)">on</if>">
+                <span class="checkico"></span><span class="txname fl">短信提醒</span>
+                <span class="txno">{$myinfo.mobile|default='未设置手机'}</span>
+                <eq name='myinfo.verify_mobile' value='0'><span class="fr">未设置\认证，请先<a target="_parent" href="{:U('Member/check',array('type'=>'mobile','pid'=>$pid))}">设置认证</a></span></eq></span></li>
+                <if condition="in_array('mobile',$alerttype)">
+                    <input type="hidden" value="1" name="mobile">
+                    <else/>
+                    <input type="hidden" value="0" name="mobile">
+                </if>
+            <li altp="weixin" class="clearfix <eq name='myinfo.verify_weixin' value='1'> allow</eq> <if condition="in_array('weixin',$alerttype)">on</if>">
+                <span class="checkico"></span><span class="txname fl">微信提醒</span>
+                <eq name='myinfo.verify_weixin' value='0'><span class="txno">未绑定微信</span><span class="fr">请登录微信进行绑定！</span></span><else/><span class="txno">已绑定微信</span></eq>
+                <if condition="in_array('weixin',$alerttype)">
+                    <input type="hidden" value="1" name="weixin">
+                    <else/>
+                    <input type="hidden" value="0" name="weixin">
+                </if>
+            </li>
+        </ul>
+    </div>
+</form>
+
+<eq name="pid" value="0">
+<div id="btn_box">
+    <button id="submit" class="btn_blue">保存</button>
+</div>
+
+                            </div>
+                    </div>
+                <!---右侧结束-->
+            </div>
+            <!--auction.html结束-->
+        </div>
+    </div>
+    <!---底部开始-->
+    <include file="Common:help_narrow" />
+    <include file="Common:footer"/>
+    <script type="text/javascript">
+        $("#submit").click(function(){
+            commonAjaxSubmit('','','');
+            return false;
+        });
+
+        $('.settxul li').click(function(){
+            if ($(this).hasClass('allow')) {
+                if ($(this).hasClass('on')) {
+                    $(this).removeClass('on');
+                    $("input[name='"+$(this).attr('altp')+"']").val(0);
+                }else{
+                    $(this).addClass('on');
+                    $("input[name='"+$(this).attr('altp')+"']").val(1);
+                }
+            };
+        });
+    </script>
+<else/>
+    <script type="text/javascript">
+        var dialog = frameElement.api;
+        //alert(dialog.data.id)
+        $('.settxul li').click(function(){
+            if ($(this).hasClass('allow')) {
+                if ($(this).hasClass('on')) {
+                    $(this).removeClass('on');
+                    $("input[name='"+$(this).attr('altp')+"']").val(0);
+                }else{
+                    $(this).addClass('on');
+                    $("input[name='"+$(this).attr('altp')+"']").val(1);
+                }
+            };
+            dialog.returnValue = {'email':$("input[name='email']").val(),'mobile':$("input[name='mobile']").val(),'weixin':$("input[name='weixin']").val()};
+        });
+    </script>
+
+</eq>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

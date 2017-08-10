@@ -1,0 +1,5 @@
+<ul class="notice">
+    <foreach name="list" item="nv">
+        <li><a target="_blank" href="{:U('Article/notice_details',array('cid'=>$nv['cid'],'id'=>$nv['id']))}">{$nv.title}</a></li>
+    </foreach>
+</ul>

@@ -1,0 +1,72 @@
+<include file="Common:meta" />
+<title>出价记录-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+    <div class="recordall boxstyle">
+        <table>
+            <tr class="th">
+                <eq name="info.type" value="0">
+                    <th>状态</th>
+                    <th>出价人</th>
+                    <th>出价方式</th>
+                    <th>出价</th>
+                    <th>时间</th>
+                </eq>
+                <eq name="info.type" value="1">
+                    <th>出价人</th>
+                    <th>出价方式</th>
+                    <th>价格</th>
+                    <th>时间</th>
+                </eq>
+            </tr>
+            <empty name="bidRecord">
+                <tr class="nobody"><td colspan="6" align="center">暂时没有拍友出价</td></tr>
+            <else />
+                <volist name="bidRecord" id="brvo">
+                <!-- 竞拍出价记录 -->
+                    <eq name="info.type" value="0">
+                    <tr>
+                        <td><div class="bidlistico"></div></td>
+                        <td><span class="on_over" style="width: 60px;">{$brvo.nickname}</span></td>
+                        <td align="center"><eq name="brvo.type" value="代理"><span title="代理出价" class="agency_ico"></span></eq>{$brvo.type}</td>
+                        <td align="right">{$brvo.bided}</td>
+                        <td align="center">{$brvo.time|date='m-d H:i',###}</td>
+                    </tr>
+                    </eq>
+                <!-- 竞拍出价记录——end -->
+                <!-- 竞标出价记录 -->
+                    <eq name="info.type" value="1">
+                    <tr>
+                        <td><span class="on_over" style="width: 60px;">竞标保密</span></td>
+                        <td align="center">{$brvo.type}</td>
+                        <td align="right"><span class="red1 fb">竞标保密</span></td>
+                        <td align="center">{$brvo.time|date='m-d H:i',###}</td>
+                    </tr>
+                    </eq>
+                <!-- 竞标出价记录——end -->
+                </volist>
+            </empty>
+        </table>
+    </div>
+    <notempty name="page">
+    <!--分页【-->
+        <div class="pagestyle">{$page}</div>
+    <!--分页】-->
+    </notempty>
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+</body>
+<script type="text/javascript">
+ var endStatus ="{$info.endstatus}"
+    $(function(){
+        if(endStatus==0){
+            // 初始化拍卖记录状态
+            $(".recordall tr:eq(1)").addClass('lingxian');
+        }else if(endStatus==1){
+            $(".recordall tr:eq(1)").addClass('chengjiao');
+        }
+    });
+</script>
+</html>

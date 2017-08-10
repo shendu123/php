@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>拍卖配置-后台管理-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='拍卖管理 > 拍卖配置';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <form>
+                        <div class="Item hr clearfix">
+                            <div class="current">微信平台配置</div>
+                        </div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <td colspan="2">开发者id</td>
+                            </tr>
+                            <tr>
+                                <th width="20%">AppID(应用ID)：</th>
+                                <td>
+                                    <input type="text" class="input" size="30" name="Weixin[appid]" value="{$weixin.appid}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>AppSecret(应用密钥)：</th>
+                                <td><input type="text" class="input" size="47" name="Weixin[appsecret]" value="{$weixin.appsecret}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">服务器配置</td>
+                            </tr>
+                            <tr>
+                                <th>URL(服务器地址)：</th>
+                                <td>
+                                    {$weixin.url}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Token(令牌)：</th>
+                                <td><input type="text" class="input" size="30" name="Weixin[token]" value="{$weixin.token}"/></td>
+                            </tr>
+                            <tr>
+                                <th>EncodingAESKey(消息加解密密钥)：</th>
+                                <td><input type="text" class="input" size="47" name="Weixin[encodingaeskey]" value="{$weixin.encodingaeskey}"/></td>
+                            </tr>
+                        </table>
+                        <div class="Item hr clearfix">
+                            <div class="current">微信登录模式</div>
+                        </div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th width="20%">绑定PC版账号：</th>
+                                <td>
+                                <label>
+                                    <input type="radio" value="1" name="Weixin[diversity]" <eq name="weixin.diversity" value="1">checked="checked"</eq>> 是
+                                </label>
+                                微信进入网站时显示登录、注册页面，可选择绑定PC版账号、自动登录、公众号提醒<br/>
+                                <label>
+                                <input type="radio" value="0" name="Weixin[diversity]" <eq name="weixin.diversity" value="0">checked="checked"</eq>> 否
+                                </label>
+                                微信进入网站时不显示登录、注册页面，直接进行登录或自动生成账号登录
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="20%">微信授权模式：</th>
+                                <td>
+                                <label>
+                                    <input type="radio" value="snsapi_userinfo" name="Weixin[scope]" <eq name="weixin.scope" value="snsapi_userinfo">checked="checked"</eq>> snsapi_userinfo模式
+                                </label>
+                                （未关注公众账号的人点击用户分享的链接会进入授权登陆页面，授权登陆后直接跳转到所分享的页面）<br/>
+                                <label>
+                                <input type="radio" value="snsapi_base" name="Weixin[scope]" <eq name="weixin.scope" value="snsapi_base">checked="checked"</eq>> snsapi_base模式
+                                </label>
+                                （未关注公众账号的人点击用户分享的链接会进入关注公众号引导页面，关注公众账号后直接进入公众账号通过微信菜单进入网站）
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="20%">公众号二维码弹窗：</th>
+                                <td>
+                                    <label>
+                                        <input type="radio" value="1" name="Weixin[codemap]" <eq name="weixin.codemap" value="1">checked="checked"</eq>> 开启
+                                    </label>
+                                    <label>
+                                    <input type="radio" value="0" name="Weixin[codemap]" <eq name="weixin.codemap" value="0">checked="checked"</eq>> 关闭
+                                    </label>
+                                    （未关注公众号用户点击朋友圈分享的网站链接【通过snsapi_userinfo模式】授权登陆后，浏览网页时候会以弹窗显示二维码方式提醒用户关注公众号！）
+                                    <div id="codemapimg" style="margin-top: 10px;">
+                                        <div class="up_btn_box">
+                                            <div class="up_explain">图片格式：*.gif; *.jpg; 尺寸为200*200。</div>
+                                            <input id="codemapbtn" type="file" multiple="true">
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <ul id="uploadImageList" class="clearfix codemapImgList">
+                                            <notempty name="weixin.codemapimg">
+                                            <li class="photo">
+                                            <img id="upImgSize" src="{$weixin.codemapimg}" height="100"/>
+                                            <div class="imper"><a class="bigImg" href="{$weixin.codemapimg}"  target="_blank"></a></div>
+                                            <input type="hidden" name="Weixin[codemapimg]" value="{$weixin.codemapimg}" />
+                                            </li>
+                                            </notempty>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="20%">公众号关注引导页地址：</th>
+                                <td>
+                                    <input type="text" class="input" size="60" name="Weixin[attention]" value="{$weixin.attention}"/><br/>
+                                    （授权模式为snsapi_base时候此处必填）可登陆公众平台【素材管理】->【新建图文消息】（编辑好图文消息后）->【预览】->【发送到手机预览】（获取图文地址填写到该处）
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="Item hr clearfix">
+                            <div class="current">微信模板ID配置</div>
+                        </div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <td colspan="2">
+                                    进入微信公众平台【功能】->【消息模板】(如果没有消息模板选择添加功能插件获得该功能) 消息模板所在行业为：IT科技 互联网|电子商务<br/>
+                                    1.在【模板库】内搜索下方模板名称，对比模板库编号找到对应模板，点击[详情]后进入详情页面点击[添加]<br/>
+                                    2.在【我的模板】内找到添加的模板，复制模板ID到下方对应位置
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>出价成功通知-模板ID：</th>
+                                <td><input type="text" class="input" size="40" name="Weixin[template][bidsuccess]" value="{$weixin.template.bidsuccess}"/>（模板库编号：OPENTM400094089）</td>
+                            </tr>
+                            <tr>
+                                <th width="20%">竞拍价格被超越通知-模板ID：</th>
+                                <td>
+                                    <input type="text" class="input" size="40" name="Weixin[template][surpass]" value="{$weixin.template.surpass}"/>（模板库编号：OPENTM406437454）
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="20%">拍卖状态改变提醒-模板ID：</th>
+                                <td>
+                                    <input type="text" class="input" size="40" name="Weixin[template][bidstatus]" value="{$weixin.template.bidstatus}"/>（模板库编号：OPENTM206927467）
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="20%">竞拍成功通知-模板ID：</th>
+                                <td>
+                                    <input type="text" class="input" size="40" name="Weixin[template][success]" value="{$weixin.template.success}"/>（模板库编号：OPENTM202440123）
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="20%">订单状态提醒-模板ID：</th>
+                                <td>
+                                    <input type="text" class="input" size="40" name="Weixin[template][orderstatus]" value="{$weixin.template.orderstatus}"/>（模板库编号：OPENTM405955935）
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="20%">账户余额变动通知-模板ID：</th>
+                                <td>
+                                    <input type="text" class="input" size="40" name="Weixin[template][walletchange]" value="{$weixin.template.walletchange}"/>（模板库编号：OPENTM205454780）
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="20%">拍品上架通知-模板ID：</th>
+                                <td>
+                                    <input type="text" class="input" size="40" name="Weixin[template][addsuccess]" value="{$weixin.template.addsuccess}"/>（模板库编号：OPENTM207294943）
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="Item hr clearfix">
+                            <div class="current">微信分享配置</div>
+                        </div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th width="20%">分享朋友圈赠送：</th>
+                                <td>
+                                    <input style="text-align: right;" type="text" class="input" size="5" name="Weixin[giveintegral]" value="{$weixin.giveintegral}"/>元信誉额度；每天最多获得<input style="text-align: right;" type="text" class="input" size="5" name="Weixin[limitday]" value="{$weixin.limitday}"/>次奖励；永久最多获取<input style="text-align: right;" type="text" class="input" size="5" name="Weixin[limitlife]" value="{$weixin.limitlife}"/>次奖励（为空或者0则不限制上限）。
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>分享链接默认图片：</th>
+                                <td id="shareimg">
+                                    <div class="up_btn_box">
+                                        <div class="up_explain">图片格式：*.gif; *.jpg; 尺寸为200*200，分享页面没有设置图片时候显示的默认图片。</div>
+                                        <input id="userShow" type="file" multiple="true">
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <ul id="uploadImageList" class="clearfix shareImgList">
+                                        <notempty name="weixin.shareimg">
+                                        <li class="photo">
+                                        <img id="upImgSize" src="{$weixin.shareimg}" width="100" height="100"/>
+                                        <div class="imper"><a class="bigImg" href="{$weixin.shareimg}"  target="_blank"></a></div>
+                                        <input type="hidden" name="Weixin[shareimg]" value="{$weixin.shareimg}" />
+                                        </li>
+                                        </notempty>
+                                    </ul>
+                                </td>
+                            </tr>
+                            
+                            
+                        </table>
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <!-- Uploadify插件 -->
+<css href="--PUBLIC--/uploadify/uploadify.css"/>
+<js href="--PUBLIC--/uploadify/jquery.uploadify.min.js"/>
+        <script type="text/javascript">
+        var uploadPath ="{:C('UPLOADS_PICPATH')}"; //图片上传根目录
+        var upPathRoot="{$upWholeUrl}"; //图片上传根目录完整路径
+        var upUserPic = '{:U("Upload/upSharePic")}';
+        var upCodemapPic = '{:U("Upload/upCodemapPic")}';
+        var uplode_path = '__PUBLIC__';
+        var sid = '{:session_id()}';//sessionID
+            $(function(){
+                // 微信二维码【
+                $('#codemapbtn').uploadify({
+                    swf      : uplode_path+'/uploadify/uploadify.swf', //加载swf
+                    uploader : upCodemapPic, //PHP处理脚本地址
+                    width : 118,    //上传按钮宽度
+                    height : 33,    //上传按钮高度
+                    multi:false,      //是否允许同时上传多文件，可设定true或false。
+                    fileTypeDesc : 'Image Files',                 //类型描述
+                    //'removeCompleted' : false,    //是否自动消失
+                    fileTypeExts : '*.gif; *.jpg; *.jpeg',     //允许选择类型
+                    fileExt : '*.gif; *.jpg; *.jpeg',          //允许上传类型
+                    fileSizeLimit : '3MB',       //允许上传最大值
+                    buttonText :'<div class="btn up_but"><div class="up_but_ico"></div>上传图片</div>',  //按钮的文字
+                    formData : {'session_id' : sid,'width':100,'height':100},
+                    onUploadSuccess : function(file, data, response) { //成功上传返回
+                        eval('var data = ' + data);
+                        if (data.status) {
+                            $('.codemapImgList').remove();
+                            //插入到image标签内，显示图片的缩略图
+                            $('#codemapimg').append('<ul id="uploadImageList" class="clearfix codemapImgList"><li class="photo"><img id="upImgSize" src="'+data.path+'" width="100" height="100"/><div class="imper"><a class="bigImg" href="'+data.path+'"  target="_blank"></a></div><input type="hidden" name="Weixin[codemapimg]" value="'+data.path+'" /></li></ul>');
+                            popup.success(data.msg);
+                            setTimeout(function(){
+                                popup.close("asyncbox_success");
+                            },1000);
+                        } else {
+                            popup.error(data.msg);
+                            setTimeout(function(){
+                                popup.close("asyncbox_success");
+                            },2000);
+                        }
+
+                    }
+                });
+                // 微信二维码】
+                // 分享链接默认【
+                $('#userShow').uploadify({
+                    swf      : uplode_path+'/uploadify/uploadify.swf', //加载swf
+                    uploader : upUserPic, //PHP处理脚本地址
+                    width : 118,    //上传按钮宽度
+                    height : 33,    //上传按钮高度
+                    multi:false,      //是否允许同时上传多文件，可设定true或false。
+                    fileTypeDesc : 'Image Files',                 //类型描述
+                    //'removeCompleted' : false,    //是否自动消失
+                    fileTypeExts : '*.gif; *.jpg; *.jpeg',     //允许选择类型
+                    fileExt : '*.gif; *.jpg; *.jpeg',          //允许上传类型
+                    fileSizeLimit : '3MB',       //允许上传最大值
+                    buttonText :'<div class="btn up_but"><div class="up_but_ico"></div>上传图片</div>',  //按钮的文字
+                    formData : {'session_id' : sid,'width':100,'height':100},
+                    onUploadSuccess : function(file, data, response) { //成功上传返回
+                        eval('var data = ' + data);
+                        if (data.status) {
+                            $('.shareImgList').remove();
+                            //插入到image标签内，显示图片的缩略图
+                            $('#shareimg').append('<ul class="clearfix shareImgList"><li class="photo"><img id="upImgSize" src="'+data.path+'" width="100" height="100"/><div class="imper"><a class="bigImg" href="'+data.path+'"  target="_blank"></a></div><input type="hidden" name="Weixin[shareimg]" value="'+data.path+'" /></li></ul>');
+                            popup.success(data.msg);
+                            setTimeout(function(){
+                                popup.close("asyncbox_success");
+                            },1000);
+                        } else {
+                            popup.error(data.msg);
+                            setTimeout(function(){
+                                popup.close("asyncbox_success");
+                            },2000);
+                        }
+
+                    }
+                });
+                // 分享链接默认】
+                $(".submit").click(function(){
+                    commonAjaxSubmit();
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

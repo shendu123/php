@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>拍卖配置-后台管理-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='拍卖管理 > 拍卖配置';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">拍卖公共配置</div>
+                    </div>
+                    <form>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th>显示拍场聊天室：</th>
+                                <td>
+                                    <label>
+                                        <input value="1" name="Auction[chat]" type="radio" <eq name="bidcof.chat" value="1">checked="checked"</eq>>是
+                                    </label>
+                                    <label>
+                                        <input value="0" name="Auction[chat]" type="radio" <eq name="bidcof.chat" value="0">checked="checked"</eq>>否
+                                    </label>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;仅电脑版有该功能
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>参拍必须手机号认证：</th>
+                                <td>
+                                    <label>
+                                        <input value="1" name="Auction[verify_mobile]" type="radio" <eq name="bidcof.verify_mobile" value="1">checked="checked"</eq>>是
+                                    </label>
+                                    <label>
+                                        <input value="0" name="Auction[verify_mobile]" type="radio" <eq name="bidcof.verify_mobile" value="0">checked="checked"</eq>>否
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>参拍用户昵称处理：</th>
+                                <td>
+                                    <label>
+                                        <input type="radio" value="1" name="Auction[nikdis]" <eq name="bidcof.nikdis" value="1">checked="checked"</eq>>昵称做处理
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="0" name="Auction[nikdis]" <eq name="bidcof.nikdis" value="0">checked="checked"</eq>>昵称不做处理
+                                    </label>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;（如果选择【昵称做处理】则参拍用户的昵称仅显示部分；如：“昂酷”处理后为“昂**”。）
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>价格阶梯浮动：</th>
+                                <td>
+                                    初始浮动额度为<input type="text" class="input" size="5" name="Auction[stepsize_ratio_r]" value="{$bidcof.stepsize_ratio_r}" placeholder="浮动额度"/>,
+                                    当前价大于<input type="text" class="input" size="5" name="Auction[stepsize_ratio_s]" value="{$bidcof.stepsize_ratio_s}" placeholder="当前价"/>以后，开始按照单位（十百千...）
+                                    <input type="text" class="input" size="5" name="Auction[stepsize_ratio]" value="{$bidcof.stepsize_ratio}" placeholder="比例"/>%规则实行浮动，浮动最高不超过
+                                    <input type="text" class="input" size="5" name="Auction[stepsize_ratio_t]" value="{$bidcof.stepsize_ratio_t}" placeholder="浮动价"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>价格定额浮动：</th>
+                                <td><input type="text" class="input" size="5" name="Auction[step_fixation]" value="{$bidcof.step_fixation}"/>&nbsp;&nbsp;每次出价固定加价额度</td>
+                            </tr>
+                            <tr>
+                                <th>时间浮动：</th>
+                                <td>
+                                    最后
+                                    <input type="text" class="input" size="5" name="Auction[steptime]" value="{$bidcof.steptime}"/>
+                                    秒内出价，时间延时
+                                    <input type="text" class="input" size="5" name="Auction[deferred]" value="{$bidcof.deferred}"/>
+                                    秒&nbsp;&nbsp;&nbsp;&nbsp;（60秒=1分钟）
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>保证金比例：</th>
+                                <td>
+                                    <input type="text" class="input" size="5" name="Auction[pledge_ratio]" value="{$bidcof.pledge_ratio}" placeholder="比例"/>%按照比例冻结保证金(如：1%，就是拍1000元的商品冻结10元保证金。)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>固定保证金：</th>
+                                <td>
+                                    <input type="text" class="input" size="5" name="Auction[pledge_fixation]" value="{$bidcof.pledge_fixation}"/> 按照每件拍品冻结保证金（如：填写100，就是每件商品冻结100，与商品价格无关）
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    <div class="Item hr clearfix">
+                        <div class="current">卖家相关配置</div>
+                    </div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th style="width: 11%;">发布拍卖缴纳保证金：</th>
+                                <td>
+                                    <p>
+                                        <label>
+                                            <input type="radio" value="seller_pledge_disposable" name="Auction[seller_pledge_type]" <eq name="bidcof.seller_pledge_type" value="seller_pledge_disposable">checked="checked"</eq>>一次性缴纳保证金
+                                        </label>
+                                        <input type="text" class="input" size="7" name="Auction[seller_pledge_disposable]" value="{$bidcof.seller_pledge_disposable}" />元,即可无限制发布拍卖。
+                                    </p>
+                                    <p style="margin: 5px 0px;">
+                                        <label>
+                                            <input type="radio" value="seller_pledge_every" name="Auction[seller_pledge_type]" <eq name="bidcof.seller_pledge_type" value="seller_pledge_every">checked="checked"</eq>>发布每件拍品缴纳 
+                                        </label>
+                                        <input type="text" class="input" size="7" name="Auction[seller_pledge_every]" value="{$bidcof.seller_pledge_every}"/>元。
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input type="radio" value="seller_pledge_proportion" name="Auction[seller_pledge_type]" <eq name="bidcof.seller_pledge_type" value="seller_pledge_proportion">checked="checked"</eq>>按拍品起拍价比例 
+                                        </label>
+                                        <input type="text" class="input" size="7" name="Auction[seller_pledge_proportion]" value="{$bidcof.seller_pledge_proportion}"/>%缴纳。
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>佣金名称：</th>
+                                <td>
+                                    <input type="text" class="input" size="7" name="Auction[broker_name]" value="{$bidcof.broker_name}"/>&nbsp;&nbsp;订单成交需要扣除网站所得的费用名称
+                                </td>
+                            </tr>
+                            <tr>    
+                                <th style="width: 11%;">收取卖家{$bidcof.broker_name}：</th>
+                                <td>
+                                    <p style="margin:0 0 5px 0px;">
+                                    <label>
+                                        <input type="radio" value="ratio" name="Auction[broker_type]" <eq name="bidcof.broker_type" value="ratio">checked="checked"</eq>>按成交价比例收取 
+                                    </label>
+                                    <input type="text" class="input" size="7" name="Auction[broker_ratio]" value="{$bidcof.broker_ratio}"/>%。
+                                    </p>
+                                    <p>
+                                    <label>
+                                        <input type="radio" value="fixation" name="Auction[broker_type]" <eq name="bidcof.broker_type" value="fixation">checked="checked"</eq>>按照固定费用收取
+                                    </label>
+                                    <input type="text" class="input" size="7" name="Auction[broker_fixation]" value="{$bidcof.broker_fixation}"/>元。
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            $(function(){
+                $(".submit").click(function(){
+                    commonAjaxSubmit();
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

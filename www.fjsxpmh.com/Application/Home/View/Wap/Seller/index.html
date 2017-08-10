@@ -1,0 +1,101 @@
+<include file="Common:meta" />
+<title>{$seller.organization}-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<js href="--PUBLIC--/Js/jquery_raty/jquery.raty.min.js"/>
+<js href="__JS__/user.js"/>
+<eq name="iswei" value="1">
+  <script type="text/javascript">
+    var imgUrl = "{$shimg}";
+    var descContent = "{$seller.organization}的拍品[<eq name='type' value='ing'>正在拍卖</eq><eq name='type' value='wait'>即将开拍</eq><eq name='type' value='end'>已结束</eq>]";
+    var shareTitle = "{$seller.organization}的拍品";
+  </script>
+</eq>
+<body>
+<div class="upage_content clearfix">
+    <!-- 卖家页页面顶部 -->
+    <div class="up_header">
+        <div class="ha">
+            <ul class="">
+                <li class="clearfix"><div class="lh">成交率：</div><div class="ld lda">{$bid_count.cjl}</div></li>
+                <li class="clearfix"><div class="lh">发布拍品：</div><div class="ld ldb"><span>{$bid_count.all}</span>件</div></li>
+                <li class="clearfix"><div class="lh">卖家级别：</div><div class="ld"><img src="{$seller.leval}"></div></li>
+                <li class="clearfix"><div class="lh">综合信誉：</div><div class="ld" id="credit"></div></li>
+            </ul>
+        </div>
+        <div class="hb clearfix">
+            <div class="phto">
+                <img title="{$seller.organization}" src="{$seller.uid|getuserpic=###,0}">
+            </div>
+            <div class="nikname cuit_over">{$seller.organization}<span>(账号:{$seller.account})</span></div>
+            
+            <div class="clearfix hbb">
+                <ul class="moinfo">
+                    <li>粉丝：<span class="c09c">{$fanscount}</span>个</li>
+                    <li>注册时间：{$seller.reg_date|date='Y-m-d',###}</li>
+                </ul>
+                <div class="sell">
+                    <div class="gzbox fr clearfix">
+                        <a class="gz_sell selatt{$seller.uid} gz fl" sellerid="{$seller.uid}" st="{$usgz}" href="javascript:void(0);">
+                            <div class="ico"></div>
+                            <div class="txt cuit_over"><eq name='usgz' value='0'>关注卖家<else />已关注</eq></div>
+                        </a>
+                        <a class="ly fl" href="{:U('Member/sendmsg',array('uid'=>$seller['uid']))}">
+                            <div class="ico"></div>
+                            <div class="txt cuit_over">给我留言</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <ul class="umenu am-avg-sm-3">
+                <li><a  class="um_ing <eq name='type' value='ing'>curr</eq>" href="{:U('Seller/index',array('sellerid'=>$sellerid,'type'=>'ing'))}"><span class="umico"></span>正在拍卖<em class="count">{$bid_count.ing}</em></a></li>
+                <li><a  class="um_wait <eq name='type' value='wait'>curr</eq>" href="{:U('Seller/index',array('sellerid'=>$sellerid,'type'=>'wait'))}"><span class="umico"></span>即将开拍<em class="count">{$bid_count.wait}</em></a></li>
+                <li><a class="um_end <eq name='type' value='end'>curr</eq>" href="{:U('Seller/index',array('sellerid'=>$sellerid,'type'=>'end'))}"><span class="umico"></span>已结束<em class="count">{$bid_count.end}</em></a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 卖家页页面顶部——end -->
+</div>
+
+
+
+<ul  class="on-auction-list am-avg-sm-2 gallery-list">
+    <foreach name="list" item="bav">
+        <empty name="bav.blist">
+            <li class="datanone">很抱歉该条件下暂无拍品，您可以重新查询！</li>
+        <else />
+            <volist name="bav.blist" id="avo">
+                <include file="Auction/bidbox" />
+            </volist>
+        </empty>
+    </foreach>
+</ul>
+
+    <!--分页【-->
+    <notempty name="page">
+        <div class="pagestyle">
+            {$page}
+        </div>
+    </notempty>
+    <!--分页】-->
+<!-- 商品列表】 -->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+<script type="text/javascript">
+var start_path = "--PUBLIC--/Js/jquery_raty/img"
+var credit_score = "{$credit_score}";
+var sellerid = "{$sellerid}";
+// 关注商家地址
+var setAttentionSellerUrl ="{:U('Seller/attention')}";
+$(function(){
+    $('#credit').raty({
+        readOnly: true,
+        score: Number(credit_score),
+        path : start_path
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+        <meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>提醒/站内信-账号中心-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;账号中心&nbsp;&gt;&gt;&nbsp;提醒/站内信</div>
+
+        
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                <ul class="inquiry">
+                    <li <eq name="tp" value="">class="hover"</eq> >
+                        <a style="position: relative;" href="{:U('Member/mysms')}">系统提醒<neq name="sc" value="0"><span style="right:0;top:-5px;" class="smsc" >{$sc}</span></neq></a>
+                    </li>
+                    <li <eq name="tp" value="usend">class="hover"</eq> ><a style="position: relative;" href="{:U('Member/mysms',array('tp'=>'usend'))}">站内信<neq name="uc" value="0"><span style="right:0;top:-5px;" class="smsc" >{$uc}</span></neq></a></li>
+                </ul>
+                <div class="inquiry-con">
+                <form method="post" name="theForm">
+                    <table width="100%" cellspacing="0" cellpadding="0" class="systemTable" id="tabList">
+                        <tbody>
+                            <tr class="xiaoxzt">
+                                <th width="5%">选择</th>
+                                <th width="25%">
+                                    <eq name="tp" value="usend">发送者<else/>消息类型</eq>
+                                </th>
+                                <th width="60%">内容</th>
+                                <th>时间</th>
+                            </tr>
+                            <empty name="slist">
+                                <tr><td colspan="4">没有收到的消息</td></tr>
+                            </empty>
+                            <notempty name="slist">
+                                <volist name="slist" id="svo">
+                                    <tr>
+                                        <td><input name="sid[]" type="checkbox" value="{$svo.sid}" ></td>
+                                        <td class="suse">
+                                            <eq name="tp" value="usend">
+                                                <img style="width: 34px; padding: 2px;" src="{$svo.sendid|getUserpic=###,2}">
+                                                <div class="susnm fl"  style="text-align: left;">
+                                                    <neq name="svo.sendid" value="0"> <div class="clearfix"><div class="th">账号：</div><div class="td">{$svo.user.account}</div></div></neq>
+                                                    <div class="clearfix">
+                                                        {$svo.user.sendid}
+                                                        <div class="th">昵称：</div>
+                                                        <a class="td" target="_blank"  href="{:U('Seller/index',array('sellerid'=>$svo['sendid']))}">{$svo.user.nickname}</a>
+                                                    </div>
+                                                </div>
+                                            <else/>
+                                            {$svo.type}
+                                            </eq>
+                                        </td>
+                                        <td  style="text-align: left; position: relative;">
+                                            <eq name="svo.status" value="0"><span class="smsc" style="right: -8px;top: -7px;">未读</span></eq>
+                                            <if condition="$svo['auction']">关于拍品:<a style="color: #980000;" target="_blank" href="{:U('Auction/details',array('pid'=>$svo['auction']['pid']))}">{$svo.auction.pname}</a></if>
+                                            
+                                            {$svo.content}
+                                            <eq name="tp" value="usend"><p style="text-align: right;"><a href="{:U('Member/exchange',array('sid'=>$svo['sid']))}">[会话记录]</a><neq name="svo.sendid" value="0"><a href="{:U('Member/sendmsg',array('sid'=>$svo['sid']))}">[回复]</a></neq></p></eq>
+                                        </td>
+                                        <td>{$svo.time||date='Y-m-d H:i',###}</td>
+                                    </tr>
+                                </volist>
+                                <tr class="duibi">
+                                    <td valign="middle" align="center" class="boderb">
+                                    <input type="checkbox" id="allcbox" value="0"></td>
+                                    <td valign="middle" colspan="4" align="right">
+                                        <input type="button" value="设为已读" class="back_but2 fl read">
+                                        <input type="button" value="删除" class="back_but2 fl del">
+                                        <div class="page" style="padding: 0px; margin-right: 10px;">{$page}</div>
+                                    </td>
+                                </tr>
+                            </notempty>
+                        </tbody>
+                    </table>
+                </form>
+                </div>
+            </div>
+            <!---右侧结束-->
+        </div>
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<script type="text/javascript">
+$(function(){
+    $("#allcbox").click(function() {
+        $('input[name="sid[]"]').prop("checked",this.checked);
+    });
+    var $subBox = $("input[name='sid[]']");
+    $subBox.click(function(){
+        $("#allcbox").prop("checked",$subBox.length == $("input[name='sid[]']:checked").length ? true : false);
+    });
+    $(".del").click(function(){
+        if($("input[name='sid[]']:checked").length!=0){
+            commonAjaxSubmit('','',{'ac':'del'}); 
+        }else{
+           popup.alert('您至少需要选中一个要删除的消息');
+            setTimeout(function(){
+                popup.close("asyncbox_alert");
+            },2000);
+        }
+        return false;
+    });
+
+    $(".read").click(function(){
+        if($("input[name='sid[]']:checked").length!=0){
+            commonAjaxSubmit('','',{'ac':'read'}); 
+        }else{
+           popup.alert('您至少需要选中一个要删除的消息');
+            setTimeout(function(){
+                popup.close("asyncbox_alert");
+            },2000);
+        }
+        return false;
+    });
+
+});
+</script>
+</body>
+</html>

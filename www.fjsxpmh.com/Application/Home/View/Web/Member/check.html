@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+        <meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>
+            <eq name="type" value="email">邮箱认证</eq>
+            <eq name="type" value="mobile">手机认证</eq>
+            -{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;账号中心&nbsp;&gt;&gt;&nbsp;<eq name="type" value="email">邮箱认证</eq><eq name="type" value="mobile">手机认证</eq></div>
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            
+              <div class="sider">
+                    <ul class="inquiry">
+                        <li <eq name="type" value="email">class="hover"</eq>><a href="{:U('Member/check',array('type'=>'email','pid'=>$pid))}">邮箱认证</a></li>
+                        <li <eq name="type" value="mobile">class="hover"</eq> ><a href="{:U('Member/check',array('type'=>'mobile','pid'=>$pid))}">手机认证</a></li>
+                    </ul>
+                    <div class="inquiry-con">
+                        <!-- 邮箱验证 -->
+                        <eq name="type" value="email">
+                            <div class="my_info clearfix">
+                                <eq name="info['verify_email']" value="0">
+                                    <form id="checkform" name="checkform" action="" method="post">
+                                        <dl class="clearfix">
+                                            <dt>邮箱：</dt>
+                                            <dd><input id="email" type="text" size="30" class="input checkadr" name="email" value="{$info.email}"/>&nbsp;&nbsp;&nbsp;&nbsp;</dd>
+                                            <dd>
+                                                <input checktp="email" class="checkbtnto" type="button" value="发送验证码" />
+                                            </dd>
+                                            <dd><div id="emailTip"></div></dd>
+                                        </dl>
+                                        <dl class="clearfix">
+                                            <dt>邮箱验证码：</dt>
+                                            <dd><input id="email_verify" type="text" class="input" name="email_verify" value=""></dd>
+                                            <dd><div id="email_verifyTip"></div></dd>
+                                        </dl>
+                                        <input type="hidden" name="type" value="email">
+                                        <input  type="hidden" name="pid" value="{$pid}" />
+                                    </form>
+                                    <dl id="btn_box">
+                                        <button class="btn_blue submit" id="submit">确认验证</button>
+                                    </dl>
+                                <else/>
+                                    <dl class="clearfix">
+                                        <dt>邮箱：</dt>
+                                        <dd>{$my_info.email}&nbsp;&nbsp;</dd>
+                                        <dd class="clearfix">
+                                            <div class="email_ico yes fl"></div>
+                                            <div class="etxt1 fl"> &nbsp;已认证&nbsp;&nbsp;</div>
+                                        </dd>
+                                    </dl>
+                                </eq>
+                            </div>
+                        </eq>
+                        <!-- 邮箱验证——end -->
+                        <!-- 手机验证 -->
+                        <eq name="type" value="mobile">
+                            <div class="my_info clearfix">
+                                <eq name="info['verify_mobile']" value="0">
+                                    <form id="checkform" name="checkform" action="" method="post">
+                                        <dl class="clearfix">
+                                            <dt>手机号码：</dt>
+                                            <dd><input id="mobile" type="text" size="30" class="input checkadr" name="mobile" value="{$info.mobile}"/>&nbsp;&nbsp;&nbsp;&nbsp;</dd>
+                                            <dd>
+                                                <input checktp="mobile" class="checkbtnto" type="button" value="发送验证码" />
+                                            </dd>
+                                            <dd><div id="mobileTip"></div></dd>
+                                        </dl>
+                                        <dl class="clearfix">
+                                            <dt>手机验证码：</dt>
+                                            <dd><input id="mobile_verify" type="text" class="input" name="mobile_verify" value=""></dd>
+                                            <dd><div id="mobile_verifyTip"></div></dd>
+                                        </dl>
+                                        <input type="hidden" name="type" value="mobile">
+                                        <input  type="hidden" name="pid" value="{$pid}" />
+                                    </form>
+                                    <dl id="btn_box">
+                                        <button class="btn_blue submit" id="submit">确认验证</button>
+                                    </dl>
+                                <else/>
+                                    <dl class="clearfix">
+                                        <dt>手机号码：</dt>
+                                        <dd>{$info.mobile}&nbsp;&nbsp;</dd>
+                                        <dd class="clearfix">
+                                            <div class="mobile_ico yes fl"></div>
+                                            <div class="etxt1 fl"> &nbsp;已认证&nbsp;&nbsp;</div>
+                                        </dd>
+                                    </dl>
+                                </eq>
+                            </div>
+                        </eq>
+                        <!-- 手机验证——end -->
+                    </div>
+                </div>
+           
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<script type="text/javascript">
+var checkMobile = "{:U('Login/checkMobile')}";
+var checkEmail = "{:U('Login/checkEmail')}";
+
+var sendCodeUlrl = "{:U('Login/sendCode')}";
+var wait=60;
+    $(function(){
+        // 重新发送验证码
+        $('.checkbtnto').click(function(){
+            popStatus(3, '发送中...', 0,'',true);
+            var checkadr = $('#'+$(this).attr('checktp')).val();
+            var checktp = $(this).attr('checktp');
+            $.post(sendCodeUlrl,{'checkadr':checkadr,'checktp':checktp,'how':'verify'},function(data){
+                popStatusOff();
+                if (data.status) {
+                    popup.success(data.info);
+                    setTimeout(function(){
+                        popup.close("asyncbox_success");
+                    },2000);
+                    $('.checkadrbox input').attr("disabled", 'disabled');
+                    time($('.checkbtnto'));
+                } else {
+                    popup.error(data.info);
+                    setTimeout(function(){
+                        popup.close("asyncbox_error");
+                    },2000);
+                }
+            },'json');
+        });
+        // 重新发送验证码】
+        // 表单验证【
+		$.formValidator.initConfig({formID:"checkform"});
+		$("#submit").click(function(){
+            if($.formValidator.pageIsValid('1')==true){
+                commonAjaxSubmit('','','');
+            }
+            return false;
+		});
+    $("#mobile").formValidator({onShow:"主要用于交易通知",onFocus:"11位数字，如“13812345678”",onCorrect:"输入手机号",onEmpty:"该项为必填项"}).inputValidator({min:11,max:11,onError:"手机号码必须是11位的,请确认"}).regexValidator({regExp:"mobile",dataType:"enum",onError:"你输入的手机号码格式不正确"}).ajaxValidator({
+        url : checkMobile,
+        type : 'POST',
+        dataType : "json",
+        data : "&mobile="+$('#mobile').val()+"&how=verify",
+        async : true,
+        success : function(data){
+            return data;
+        },
+        error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+        onError : "该手机号已被注册！请更换",
+        onWait : "正在对手机号进行合法性校验，请稍候..."
+    }).defaultPassed('输入手机号码');
+
+    $("#email").formValidator({onShow:"请输入邮箱",onFocus:"邮箱6-100个字符",onCorrect:"输入邮箱",onEmpty:"该项为必填项"}).inputValidator({min:6,max:100,onError:"你输入的邮箱长度不正确,请确认"}).regexValidator({regExp:"^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$",onError:"你输入的邮箱格式不正确"}).ajaxValidator({
+        url : checkEmail,
+        type : 'POST',
+        dataType : "json",
+        data : "&email="+$('#email').val()+"&how=verify",
+        async : true,
+        success : function(data){
+            return data;
+        },
+        error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+        onError : "该邮箱已被注册！请更换",
+        onWait : "正在对邮箱进行合法性校验，请稍候..."
+    }).defaultPassed('输入邮箱');
+
+
+    $("#mobile_verify").formValidator({onShow:"收到手机中的验证码",onFocus:"完成注册必须项",onCorrect:"输入正确"}).inputValidator({min:1,max:8,onError:"验证码错误,请确认"});
+    $("#email_verify").formValidator({onShow:"收到邮件中的验证码",onFocus:"完成注册必须项",onCorrect:"输入正确"}).inputValidator({min:1,max:8,onError:"验证码错误,请确认"});
+    });
+// 重新发送验证码
+function time(o) {
+    if (wait == 0) {
+        o.attr("disabled", false);
+        o.attr('value','重新发送');       
+        wait = 60;
+    } else {
+        o.attr("disabled", true);
+        o.attr('value','重新发送(' + wait + ')');
+        wait--;
+        setTimeout(function() {
+            time(o)
+        },
+        1000)
+    }
+} 
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>站点配置-系统设置-{$site.SITE_INFO.title}</title>
+        <php>
+            
+            
+            $currentNav ='系统设置 > 站点配置';
+        </php>
+    <include file="Common:intoHead" />
+</head>
+<body>
+    <div class="wrap"> <include file="Common:head" />
+        <div class="mainBody"> <include file="Common:left" />
+            <div id="Right">
+                <div class="contentArea">
+                    <div class="Item hr clearfix">
+                        <div class="current">站点配置</div>
+                    </div>
+                    <form action="" method="post">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <td colspan="2">
+                                <div class="say_remark"><strong>等级说明：</strong>每成交一笔卖家最多可获取15分！其中【描述相符】5分；【卖家服务】5分；【物流服务】5分。请根据情况设置用户等级！</div>
+                                </td>
+                            </tr>
+                            <foreach name="level" item="v" key="k">
+                                <tr>
+                                    <th width="120">
+                                        <img src="{$v.ico}">
+                                        <input type="hidden" name="level[{$k}][ico]" class="input" name="" value="{$v.ico}">
+                                    </th>
+                                    <td>总信誉:
+                                    <neq name="v.score_gt" value=""> 大于：<input type="text" class="input" name="level[{$k}][score_gt]" value="{$v.score_gt}">分&nbsp;&nbsp;</neq>
+                                    <neq name="v.score_lt" value=""> 小于：<input class="input" type="text" name="level[{$k}][score_lt]" value="{$v.score_lt}">分</neq>
+                                    </td>
+                                </tr>
+                            </foreach>
+                        </table>
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+<include file="Common:foot" />
+
+<script type="text/javascript">
+    $(".submit").click(function(){
+        commonAjaxSubmit();
+    });
+</script>
+</body>
+</html>
