@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-10 13:57:21
+Date: 2017-05-12 14:53:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -715,397 +715,6 @@ INSERT INTO `on_attention` VALUES ('14', '3482', 'p-u');
 INSERT INTO `on_attention` VALUES ('14', '3518', 'p-u');
 INSERT INTO `on_attention` VALUES ('14', '3523', 'p-u');
 INSERT INTO `on_attention` VALUES ('14', '3530', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '18', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '31', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '72', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '84', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '90', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '129', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '146', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '195', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '248', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '249', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '254', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '259', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '322', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '358', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '402', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '439', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '483', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '534', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '544', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '554', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '609', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '664', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '748', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '755', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '775', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '807', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '823', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '828', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '835', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '838', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '864', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '879', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '920', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '954', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '960', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '975', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '998', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1023', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1210', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1251', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1263', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1265', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1287', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1304', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1313', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1371', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1408', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1411', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1431', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1470', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1476', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1502', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1550', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1562', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1581', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1665', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1695', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1703', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1713', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1725', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1821', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1841', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1844', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1859', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1866', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1903', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1907', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '1946', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2027', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2116', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2126', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2166', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2189', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2196', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2209', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2223', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2246', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2324', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2370', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2495', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2538', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2562', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2569', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2570', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2608', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2620', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2637', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2647', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2680', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2722', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2774', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2824', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2832', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2884', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2971', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2977', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '2986', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3047', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3063', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3087', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3098', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3112', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3126', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3166', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3188', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3200', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3210', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3249', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3288', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3330', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3342', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3351', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3359', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3434', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3452', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3465', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3471', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3480', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3483', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3527', 'p-u');
-INSERT INTO `on_attention` VALUES ('15', '3528', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '12', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '13', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '16', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '22', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '24', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '58', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '65', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '87', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '100', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '145', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '166', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '191', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '196', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '210', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '232', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '235', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '285', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '322', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '331', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '340', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '341', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '362', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '397', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '420', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '430', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '451', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '453', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '487', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '537', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '545', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '570', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '598', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '632', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '661', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '699', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '701', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '703', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '704', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '714', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '716', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '796', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '837', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '910', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '974', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '994', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1007', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1019', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1040', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1041', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1053', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1071', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1095', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1165', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1183', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1201', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1208', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1290', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1327', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1352', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1353', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1376', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1377', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1418', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1454', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1466', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1472', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1491', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1495', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1498', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1514', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1520', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1527', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1539', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1578', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1583', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1593', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1621', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1624', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1639', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1705', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1733', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1736', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1739', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1769', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1808', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1820', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1857', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1887', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1913', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '1998', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2008', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2023', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2032', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2052', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2053', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2093', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2125', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2154', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2175', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2189', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2203', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2206', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2224', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2231', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2357', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2366', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2390', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2408', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2433', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2505', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2512', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2517', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2529', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2540', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2628', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2653', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2706', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2715', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2725', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2731', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2773', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2780', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2791', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2799', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2836', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2871', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2896', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2914', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2980', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '2992', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3005', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3011', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3065', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3106', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3179', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3272', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3274', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3286', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3320', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3323', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3359', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3380', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3384', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3465', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3525', 'p-u');
-INSERT INTO `on_attention` VALUES ('16', '3587', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '21', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '61', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '98', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '137', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '141', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '145', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '146', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '153', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '329', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '339', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '348', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '401', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '404', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '418', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '481', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '508', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '512', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '522', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '617', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '671', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '723', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '731', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '759', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '762', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '784', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '825', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '826', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '875', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '881', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '899', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '938', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '949', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '952', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1007', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1048', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1055', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1063', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1089', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1102', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1129', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1202', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1229', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1253', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1266', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1359', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1360', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1368', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1422', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1427', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1449', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1484', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1600', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1618', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1646', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1657', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1694', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1720', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1730', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1802', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1828', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1836', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1850', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1851', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1856', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1869', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1937', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1954', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1969', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1987', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '1991', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2056', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2118', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2124', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2139', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2167', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2170', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2199', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2271', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2300', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2399', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2464', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2465', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2494', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2646', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2686', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2701', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2740', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2791', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2830', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2872', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2895', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2921', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2934', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2935', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2936', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2940', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '2986', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3009', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3026', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3028', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3053', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3068', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3085', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3091', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3117', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3125', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3128', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3166', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3219', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3239', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3259', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3268', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3273', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3284', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3337', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3380', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3437', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3445', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3463', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3486', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3495', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3560', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3569', 'p-u');
-INSERT INTO `on_attention` VALUES ('17', '3583', 'p-u');
 
 -- ----------------------------
 -- Table structure for `on_attention_seller`
@@ -1174,7 +783,7 @@ CREATE TABLE `on_auction` (
   KEY `starttime` (`starttime`),
   KEY `endtime` (`endtime`),
   KEY `endstatus` (`endstatus`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='拍卖表';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='拍卖表';
 
 -- ----------------------------
 -- Records of on_auction
@@ -1183,17 +792,14 @@ INSERT INTO `on_auction` VALUES ('1', '34', '0', '5', 'M1-1491547249', '0', '0',
 INSERT INTO `on_auction` VALUES ('2', '34', '0', '6', 'M2-1491547600', '0', '0', '0.00', '0.00', '4', '0', 'HKHKJ', '8989.00', '8989.00', '9189.00', '1491547800', '1491961390', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '0', '0', '0.00', '1', '3', '0', '1', '1', '0', '0', '');
 INSERT INTO `on_auction` VALUES ('4', '34', '0', '7', 'M4-1491547903', '0', '0', '0.00', '0.00', '4', '0', 'HKHKJ', '8989.00', '8989.00', '8989.00', '1491547920', '1491548000', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '17', '0', '0.00', '1', '1', '7', '1', '1', '0', '0', '');
 INSERT INTO `on_auction` VALUES ('5', '31', '0', '8', 'M5-1491549700', '0', '0', '0.00', '0.00', '4', '0', '无敌电球', '10000.00', '10000.00', '10000.00', '1491549900', '1491550445', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '17', '0', '0.00', '1', '1', '3', '1', '1', '0', '0', '');
-INSERT INTO `on_auction` VALUES ('7', '34', '0', '10', 'M7-1491550020', '0', '0', '0.00', '0.00', '4', '0', 'HKHKJ', '8989.00', '8989.00', '32189.00', '1491550080', '1591550528', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '794', '0', '0.00', '18', '0', '42', '1', '1', '0', '0', '');
+INSERT INTO `on_auction` VALUES ('7', '34', '0', '10', 'M7-1491550020', '0', '0', '0.00', '0.00', '4', '0', 'HKHKJ', '8989.00', '8989.00', '32189.00', '1491550080', '1591550528', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '794', '0', '0.00', '18', '0', '41', '1', '1', '0', '0', '');
 INSERT INTO `on_auction` VALUES ('8', '34', '0', '11', 'M8-1491550665', '0', '0', '0.00', '0.00', '4', '0', 'HKHKJ', '8989.00', '8989.00', '12189.00', '1491550680', '1491551888', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '17', '0', '0.00', '7', '1', '6', '1', '1', '0', '0', '');
 INSERT INTO `on_auction` VALUES ('9', '32', '0', '12', 'M9-1491556534', '0', '0', '0.00', '0.00', '4', '0', '121', '5.00', '5.00', '6.00', '1491556560', '1491962974', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '3319', '0', '0.00', '0', '3', '67', '1', '1', '0', '1', '');
-INSERT INTO `on_auction` VALUES ('10', '32', '0', '13', 'M10-1491787534', '0', '0', '0.00', '0.00', '4', '0', '121', '5.00', '5.00', '19.00', '1491787560', '1591790507', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '17', '0', '0.00', '333', '0', '409', '1', '1', '0', '1', '');
+INSERT INTO `on_auction` VALUES ('10', '32', '0', '13', 'M10-1491787534', '0', '0', '0.00', '0.00', '4', '0', '121', '5.00', '5.00', '18.00', '1491787560', '1591790507', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '2383', '0', '0.00', '332', '0', '403', '1', '1', '0', '1', '');
 INSERT INTO `on_auction` VALUES ('11', '34', '0', '14', 'M11-1491790858', '0', '0', '0.00', '0.00', '4', '0', 'HKHKJ', '8989.00', '8989.00', '8989.00', '1491790920', '1491794520', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '0', '0', '0.00', '0', '3', '27', '1', '1', '0', '0', '');
 INSERT INTO `on_auction` VALUES ('12', '28', '0', '15', 'M12-1491811668', '0', '0', '0.00', '0.00', '4', '0', '18K金伴钻镶嵌阳绿翡翠蛋面吊坠3.09g', '300.00', '300.00', '300.00', '1491811680', '1491815280', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '0', '0', '0.00', '0', '3', '0', '1', '1', '0', '1', '');
-INSERT INTO `on_auction` VALUES ('13', '25', '0', '16', 'M13-1491966100', '0', '0', '0.00', '0.00', '4', '0', '武夷大红袍', '5000.00', '5000.00', '5200.00', '1491966180', '1591967542', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '2709', '0', '0.00', '9', '0', '30', '1', '1', '0', '1', '');
+INSERT INTO `on_auction` VALUES ('13', '25', '0', '16', 'M13-1491966100', '0', '0', '0.00', '0.00', '4', '0', '武夷大红袍', '5000.00', '5000.00', '5200.00', '1491966180', '1591967542', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '2709', '0', '0.00', '9', '0', '29', '1', '1', '0', '1', '');
 INSERT INTO `on_auction` VALUES ('14', '28', '0', '17', 'M14-1491988285', '0', '0', '0.00', '0.00', '4', '0', '18K金伴钻镶嵌阳绿翡翠蛋面吊坠3.09g', '300.00', '300.00', '300.00', '1491988380', '1491991980', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '0', '0', '0.00', '0', '3', '37', '1', '1', '0', '1', '');
-INSERT INTO `on_auction` VALUES ('15', '35', '0', '0', 'M15-1495171318', '0', '0', '500.00', '0.00', '0', '0', 'qqqqq', '1.00', '200.00', '1.00', '1495170000', '1495171800', '20,100,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '17', '0', '0.00', '1', '2', '49', '0', '1', '0', '1', '');
-INSERT INTO `on_auction` VALUES ('16', '36', '0', '0', 'M16-1495173261', '0', '0', '300.00', '0.00', '0', '0', '123123', '100.00', '100.00', '2600.00', '1495173180', '1495173780', '20,100,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '8', '0', '0.00', '19', '1', '33', '0', '1', '0', '0', '');
-INSERT INTO `on_auction` VALUES ('17', '37', '0', '0', 'M17-1495177078', '0', '0', '0.00', '0.00', '0', '0', '111', '100.00', '100.00', '102.00', '1495173600', '1495177500', '20,1,1000,2000', '0', 'ratio', 'ratio', '20.00', '20.00', '120', '300', '17', '0', '0.00', '3', '1', '40', '0', '1', '0', '0', '');
 
 -- ----------------------------
 -- Table structure for `on_auction_agency`
@@ -1351,29 +957,6 @@ INSERT INTO `on_auction_record` VALUES ('10', '2367', '1492048714', '1.00', '16.
 INSERT INTO `on_auction_record` VALUES ('10', '485', '1492048719', '1.00', '17.00', '手动');
 INSERT INTO `on_auction_record` VALUES ('10', '2383', '1493099344', '1.00', '18.00', '手动');
 INSERT INTO `on_auction_record` VALUES ('7', '794', '1493099404', '2000.00', '32189.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('10', '17', '1495161518', '1.00', '19.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('15', '17', '1495171485', '0.00', '1.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '17', '1495173330', '0.00', '100.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '8', '1495173344', '100.00', '200.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '17', '1495173363', '100.00', '300.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '8', '1495173372', '100.00', '400.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '17', '1495173381', '100.00', '500.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '8', '1495173384', '100.00', '600.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '17', '1495173388', '100.00', '700.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '8', '1495173424', '100.00', '800.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '17', '1495173441', '100.00', '900.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '8', '1495173447', '100.00', '1000.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '17', '1495173452', '200.00', '1200.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '8', '1495173452', '200.00', '1400.00', '代理');
-INSERT INTO `on_auction_record` VALUES ('16', '17', '1495173454', '200.00', '1600.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '8', '1495173464', '200.00', '1800.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '17', '1495173467', '200.00', '2000.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '8', '1495173470', '200.00', '2200.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '17', '1495173489', '200.00', '2400.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('16', '8', '1495173503', '200.00', '2600.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('17', '17', '1495177108', '0.00', '100.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('17', '8', '1495177246', '1.00', '101.00', '手动');
-INSERT INTO `on_auction_record` VALUES ('17', '17', '1495177253', '1.00', '102.00', '手动');
 
 -- ----------------------------
 -- Table structure for `on_business`
@@ -1468,9 +1051,9 @@ INSERT INTO `on_crowd` VALUES ('19', '1', '1', 'yu', 'undefined', '', '148998786
 INSERT INTO `on_crowd` VALUES ('20', '2', '18', '测试', '', '', '1490928060', '1490928180', 'yes', '260.00', '简介', '&lt;p&gt;15545&lt;br/&gt;&lt;/p&gt;', '0', '0.00', 'ratio', '0.00', '0', '0');
 INSERT INTO `on_crowd` VALUES ('21', '1', '18', '12', '', '', '1490928180', '1490928240', 'yes', '152.00', '1212', '&lt;p&gt;112&lt;/p&gt;', '0', '0.00', 'ratio', '0.00', '0', '0');
 INSERT INTO `on_crowd` VALUES ('22', '1', '18', '121', '', '', '1490928240', '1490928420', 'yes', '1552.00', '12122', '&lt;p&gt;1215545&lt;/p&gt;', '1', '1.00', 'ratio', '0.00', '0', '0');
-INSERT INTO `on_crowd` VALUES ('23', '1', '18', '1212', 'undefined', 'undefined', '1489632780', '1893607180', 'yes', '1000000.00', '1212', '&lt;p&gt;21212121212122122&lt;/p&gt;', '11', '16640.00', 'ratio', '0.00', '0', '0');
-INSERT INTO `on_crowd` VALUES ('24', '1', '1', 'aaa', '', '', '1493712720', '1498291920', 'yes', '150.00', 'fsfdsf', '', '3', '99.00', 'ratio', '0.00', '0', '0');
-INSERT INTO `on_crowd` VALUES ('25', '0', '1', 'ttt', '', '', '1494317520', '1496218320', 'yes', '1.00', 'ttt', '', '2', '18989.00', 'ratio', '0.00', '0', '0');
+INSERT INTO `on_crowd` VALUES ('23', '1', '18', '1212', 'undefined', 'undefined', '1489632780', '1893607180', 'yes', '1000000.00', '1212', '&lt;p&gt;21212121212122122&lt;/p&gt;', '9', '13512.00', 'ratio', '0.00', '0', '0');
+INSERT INTO `on_crowd` VALUES ('24', '1', '1', 'aaa', '', '', '1493712720', '1498291920', 'yes', '100.00', 'fsfdsf', '', '2', '66.00', 'ratio', '0.00', '0', '0');
+INSERT INTO `on_crowd` VALUES ('25', '0', '1', 'ttt', '', '', '1494317520', '1496218320', 'yes', '1.00', 'ttt', '', '0', '0.00', 'ratio', '0.00', '0', '0');
 
 -- ----------------------------
 -- Table structure for `on_crowd_items`
@@ -1492,7 +1075,7 @@ CREATE TABLE `on_crowd_items` (
   `limit_stock` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '限购库存',
   PRIMARY KEY (`ciid`),
   UNIQUE KEY `idx_crowd_items_unique` (`crowd_id`,`gid`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='众筹商品子项';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='众筹商品子项';
 
 -- ----------------------------
 -- Records of on_crowd_items
@@ -1510,13 +1093,11 @@ INSERT INTO `on_crowd_items` VALUES ('12', '14', '25', '50000.00', '1', '50000.0
 INSERT INTO `on_crowd_items` VALUES ('13', '14', '22', '10000.00', '13', '130000.00', 'ratio', '0.00', 'no', '0.00', 'no', '0', '0');
 INSERT INTO `on_crowd_items` VALUES ('14', '15', '21', '35000.00', '2', '70000.00', 'ratio', '0.00', 'no', '0.00', 'no', '0', '0');
 INSERT INTO `on_crowd_items` VALUES ('15', '14', '20', '24000.00', '4', '96000.00', 'ratio', '1.00', 'no', '0.00', 'no', '0', '0');
-INSERT INTO `on_crowd_items` VALUES ('16', '23', '32', '1564.00', '11', '16640.00', 'ratio', '0.00', 'no', '0.00', 'yes', '3', '0');
+INSERT INTO `on_crowd_items` VALUES ('16', '23', '32', '1564.00', '9', '13512.00', 'ratio', '0.00', 'no', '0.00', 'no', '0', '0');
 INSERT INTO `on_crowd_items` VALUES ('17', '24', '32', '1.00', '0', '0.00', 'ratio', '0.00', 'no', '0.00', 'no', '0', '0');
-INSERT INTO `on_crowd_items` VALUES ('18', '24', '26', '33.00', '3', '99.00', 'ratio', '0.00', 'no', '0.00', 'no', '0', '0');
-INSERT INTO `on_crowd_items` VALUES ('19', '25', '34', '8989.00', '1', '8989.00', 'ratio', '0.00', 'no', '0.00', 'no', '0', '0');
-INSERT INTO `on_crowd_items` VALUES ('20', '25', '31', '10000.00', '1', '10000.00', 'ratio', '0.00', 'no', '0.00', 'no', '0', '0');
-INSERT INTO `on_crowd_items` VALUES ('21', '23', '35', '1.00', '0', '0.00', 'ratio', '0.00', 'no', '0.00', 'yes', '2', '0');
-INSERT INTO `on_crowd_items` VALUES ('22', '0', '35', '1.00', '0', '0.00', 'ratio', '0.00', 'no', '0.00', 'yes', '5', '5');
+INSERT INTO `on_crowd_items` VALUES ('18', '24', '26', '33.00', '2', '66.00', 'ratio', '0.00', 'no', '0.00', 'no', '0', '0');
+INSERT INTO `on_crowd_items` VALUES ('19', '25', '34', '8989.00', '0', '0.00', 'ratio', '0.00', 'no', '0.00', 'no', '0', '0');
+INSERT INTO `on_crowd_items` VALUES ('20', '25', '31', '10000.00', '0', '0.00', 'ratio', '0.00', 'no', '0.00', 'no', '0', '0');
 
 -- ----------------------------
 -- Table structure for `on_crowd_order`
@@ -1672,24 +1253,6 @@ INSERT INTO `on_crowd_order` VALUES ('CRD149430955814168', '24', '18', '26', '17
 INSERT INTO `on_crowd_order` VALUES ('CRD149431857769133', '25', '19', '34', '18', '8989.00', '8989.00', '0.00', '', '', '', '', '', '', '', '', '', '', '', '0', '0', '', '1494318577', '0', '0', '0', null, null, '', '0', '0', '0', '0');
 INSERT INTO `on_crowd_order` VALUES ('CRD149431877572478', '25', '20', '31', '18', '10000.00', '10000.00', '0.00', '', '', '', '', '', '', '', '', '', '', '', '0', '0', '', '1494318775', '0', '0', '0', null, null, '', '0', '0', '0', '0');
 INSERT INTO `on_crowd_order` VALUES ('CRD149446698367977', '24', '17', '32', '17', '1.00', '1.00', '0.00', '', '', '', '', '', '', '', '', '', '', '', '0', '0', '', '1494466983', '0', '0', '0', null, null, '', '1', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD14954355959615', '24', '18', '26', '17', '33.00', '33.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '1', '0', '', '1495435595', '1495435624', '0', '0', null, '', '', '1', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149551996808354', '24', '17', '32', '17', '1.00', '1.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '0', '0', '', '1495519968', '0', '0', '0', null, '', '', '1', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149551999625717', '24', '17', '32', '17', '1.00', '1.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '0', '0', '', '1495519996', '0', '0', '0', null, '', '', '1', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149786276134366', '25', '20', '31', '17', '10000.00', '10000.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '1', '0', '', '1497862761', '1497862834', '0', '0', null, '', '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149786285079961', '25', '20', '31', '17', '10000.00', '10000.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '0', '0', '', '1497862850', '0', '0', '0', null, '', '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149786483591252', '25', '20', '31', '17', '10000.00', '10000.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '0', '0', '', '1497864835', '0', '0', '0', null, '', '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149786497424676', '25', '20', '31', '17', '10000.00', '10000.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '0', '0', '', '1497864974', '0', '0', '0', null, '', '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149786602935280', '25', '20', '31', '17', '10000.00', '10000.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '0', '0', '', '1497866029', '0', '0', '0', null, '', '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149786603655271', '25', '20', '31', '17', '10000.00', '10000.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '0', '0', '', '1497866036', '0', '0', '0', null, '', '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149786605229871', '25', '20', '31', '17', '10000.00', '10000.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '0', '0', '', '1497866052', '0', '0', '0', null, '', '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149792311947828', '25', '20', '31', '17', '10000.00', '10000.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '0', '0', '', '1497923119', '0', '0', '0', null, '', '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149792314173978', '25', '20', '31', '17', '10000.00', '10000.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '0', '0', '', '1497923141', '0', '0', '0', null, '', '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149794146545914', '25', '19', '34', '17', '8989.00', '8989.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '0', '0', '', '1497941465', '0', '0', '0', null, '', '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149794202993215', '25', '19', '34', '17', '0.01', '0.01', '0.00', '', '', '', '', '', '', '', '', '', '', '', '0', '0', '', '1497942029', '0', '0', '0', null, null, '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149794208370765', '25', '19', '34', '17', '0.01', '0.01', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '1', '0', '', '1497942083', '1497943046', '0', '0', null, '', '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149794306723472', '25', '19', '34', '17', '0.01', '0.01', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '0', '0', '', '1497943067', '0', '0', '0', null, '', '', '0', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149794335481968', '23', '16', '32', '17', '1564.00', '1564.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', '', '', '', '', '1', '0', '', '1497943354', '1497943375', '0', '0', null, '', '', '1', '0', '0', '0');
-INSERT INTO `on_crowd_order` VALUES ('CRD149794478338090', '23', '16', '32', '17', '1564.00', '1564.00', '0.00', '张埼', '15263524654', '236541', '辽宁省', '本溪市', '本溪满族自治县', 'fsf', 'COE', '', '', '21', '3', '0', '', '1497944783', '1497945716', '1502257521', '1502267398', null, '', '', '1', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `on_deliver_address`
@@ -1864,7 +1427,7 @@ CREATE TABLE `on_goods` (
   `business_id` int(10) NOT NULL DEFAULT '0' COMMENT '企业id',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='商品表';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COMMENT='商品表';
 
 -- ----------------------------
 -- Records of on_goods
@@ -1901,10 +1464,6 @@ INSERT INTO `on_goods` VALUES ('31', '42', '无敌电球', '49_111', '', '无限
 INSERT INTO `on_goods` VALUES ('32', '1', '121', '7_27_18_13_10_46', '1', '1', '1.00', '<p>我是商品详情的默认值，每当发布商品时候我都会出现。你可以把我当成商品详情的模板，可以修改我达到快速发布的效果。</p><p>通常对于有网站商品有共同的商品参数或者内容的时候设置我可以快速发布商品！</p><p>如果不需要我，可以在登陆后台【商品管理】-》【扩展字段、默认值】中选择商品详情进行编辑！<br/></p>', '0', '0', '0', '', '1488938663', '0', '9', '1', '1');
 INSERT INTO `on_goods` VALUES ('33', '1', '21', '8_28_19_14_11_46', '1', '1', '1.00', '<p>我是商品详情的默认值，每当发布商品时候我都会出现。你可以把我当成商品详情的模板，可以修改我达到快速发布的效果。</p><p>通常对于有网站商品有共同的商品参数或者内容的时候设置我可以快速发布商品！</p><p>如果不需要我，可以在登陆后台【商品管理】-》【扩展字段、默认值】中选择商品详情进行编辑！<br/></p>', '0', '0', '0', '', '1488950787', '0', '12', '18', '2');
 INSERT INTO `on_goods` VALUES ('34', '1', 'HKHKJ', '1_5_4_3_2_6_59_60_61_62_63_89_95_108', '', 'HKJHKJHKJHKJ', '8989.00', '<p>我是商品详情的默认值，每当发布商品时候我都会出现。你可以把我当成商品详情的模板，可以修改我达到快速发布的效果。</p><p>通常对于有网站商品有共同的商品参数或者内容的时候设置我可以快速发布商品！</p><p>如果不需要我，可以在登陆后台【商品管理】-》【扩展字段、默认值】中选择商品详情进行编辑！<br/></p>', '0', '0', '0', 'undefined', '1490669257', '0', '8', '0', '0');
-INSERT INTO `on_goods` VALUES ('35', '1', 'qqqqq', '1_5_4_3_2_6_95_89_63_62_61_60_59_108', '', '', '1.00', '<p>我是商品详情的默认值，每当发布商品时候我都会出现。你可以把我当成商品详情的模板，可以修改我达到快速发布的效果。</p><p>通常对于有网站商品有共同的商品参数或者内容的时候设置我可以快速发布商品！</p><p>如果不需要我，可以在登陆后台【商品管理】-》【扩展字段、默认值】中选择商品详情进行编辑！<br/></p>', '0', '0', '0', null, '1495171237', null, '3621', '1', '1');
-INSERT INTO `on_goods` VALUES ('36', '1', '123123', '1_5_4_3_2_6_95_89_63_62_61_60_59_108', '11', '', '100.00', '<p>我是商品详情的默认值，每当发布商品时候我都会出现。你可以把我当成商品详情的模板，可以修改我达到快速发布的效果。</p><p>通常对于有网站商品有共同的商品参数或者内容的时候设置我可以快速发布商品！</p><p>如果不需要我，可以在登陆后台【商品管理】-》【扩展字段、默认值】中选择商品详情进行编辑！<br/></p>', '0', '0', '0', null, '1495173176', null, '3622', '1', '0');
-INSERT INTO `on_goods` VALUES ('37', '1', '111', '1_5_4_3_2_6_95_89_63_62_61_60_59_108', '111', '', '100.00', '<p>我是商品详情的默认值，每当发布商品时候我都会出现。你可以把我当成商品详情的模板，可以修改我达到快速发布的效果。</p><p>通常对于有网站商品有共同的商品参数或者内容的时候设置我可以快速发布商品！</p><p>如果不需要我，可以在登陆后台【商品管理】-》【扩展字段、默认值】中选择商品详情进行编辑！<br/></p>', '0', '0', '0', null, '1495176902', null, '3622', '1', '0');
-INSERT INTO `on_goods` VALUES ('38', '1', '123', '1_5_4_3_2_6_95_89_63_62_61_60_59_108', '111', '', '100.00', '<p>我是商品详情的默认值，每当发布商品时候我都会出现。你可以把我当成商品详情的模板，可以修改我达到快速发布的效果。</p><p>通常对于有网站商品有共同的商品参数或者内容的时候设置我可以快速发布商品！</p><p>如果不需要我，可以在登陆后台【商品管理】-》【扩展字段、默认值】中选择商品详情进行编辑！<br/></p>', '0', '0', '0', null, '1495180621', null, '3622', '1', '0');
 
 -- ----------------------------
 -- Table structure for `on_goods_category`
@@ -2255,11 +1814,9 @@ CREATE TABLE `on_goods_order` (
 -- ----------------------------
 INSERT INTO `on_goods_order` VALUES ('BID149154818663162', '0', '4', '17', '8', '8989.00', '0.00', '1797.80', '1491548186', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1492152986', '0', '0', '0', '', '', '', '', '', '竞拍成功，请在订单有效期内进行支付！', '0');
 INSERT INTO `on_goods_order` VALUES ('BID149155044700117', '0', '5', '17', '10', '10000.00', '0.00', '2000.00', '1491550447', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1492155247', '0', '0', '0', '', '', '', '', '', '竞拍成功，请在订单有效期内进行支付！', '0');
-INSERT INTO `on_goods_order` VALUES ('BID149155052942038', '0', '7', '17', '8', '8989.00', '0.00', '1797.80', '1491550529', '1495161588', '1495162266', '1495162285', '0', '0', '0', '0', '0', '0', '0', '0', '1495766388', '0', '1495767066', '0', '1495767085', '0', '0', '0', '1492155329', '0', '3', '0', '', 'a:11:{s:4:\"adid\";s:2:\"20\";s:3:\"uid\";s:2:\"17\";s:8:\"province\";s:9:\"辽宁省\";s:4:\"city\";s:9:\"本溪市\";s:4:\"area\";s:21:\"本溪满族自治县\";s:7:\"address\";s:3:\"fsf\";s:10:\"postalcode\";s:6:\"236541\";s:8:\"truename\";s:6:\"张埼\";s:6:\"mobile\";s:11:\"15263524654\";s:5:\"phone\";s:11:\"0236-236545\";s:7:\"default\";s:1:\"1\";}', '', '', '1334', '', '0');
+INSERT INTO `on_goods_order` VALUES ('BID149155052942038', '0', '7', '17', '8', '8989.00', '0.00', '1797.80', '1491550529', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1492155329', '0', '0', '0', '', '', '', '', '', '竞拍成功，请在订单有效期内进行支付！', '0');
 INSERT INTO `on_goods_order` VALUES ('BID149179050890365', '0', '10', '1435', '9', '12.00', '0.00', '2.40', '1491550508', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1492395308', '0', '0', '0', '', '', '', '', '', '竞拍成功，请在订单有效期内进行支付！', '1');
 INSERT INTO `on_goods_order` VALUES ('BID149196754626785', '0', '13', '2695', '1', '5200.00', '0.00', '1040.00', '1491967546', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1492572346', '0', '0', '0', '', '', '', '', '', '竞拍成功，请在订单有效期内进行支付！', '1');
-INSERT INTO `on_goods_order` VALUES ('BID149517378107545', '0', '16', '8', '3622', '2600.00', '0.00', '520.00', '1495173781', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1495778581', '0', '0', '0', '', '', '', '', '', '竞拍成功，请在订单有效期内进行支付！', '0');
-INSERT INTO `on_goods_order` VALUES ('BID149517750121371', '0', '17', '17', '3622', '102.00', '0.00', '20.40', '1495177501', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1495782301', '0', '0', '0', '', '', '', '', '', '竞拍成功，请在订单有效期内进行支付！', '0');
 
 -- ----------------------------
 -- Table structure for `on_goods_user`
@@ -2290,7 +1847,7 @@ INSERT INTO `on_goods_user` VALUES ('13', '5', '0.00', '300.00', 's-u', '1488957
 INSERT INTO `on_goods_user` VALUES ('8', '5', '300.00', '0.00', 's-u', '1489975130', '0', '0');
 INSERT INTO `on_goods_user` VALUES ('17', '4', '1797.80', '0.00', 'p-u', '1491547999', '0', '0');
 INSERT INTO `on_goods_user` VALUES ('17', '5', '2000.00', '0.00', 'p-u', '1491550444', '0', '0');
-INSERT INTO `on_goods_user` VALUES ('17', '7', '1797.80', '0.00', 'p-u', '1491550527', '1495161588', '1');
+INSERT INTO `on_goods_user` VALUES ('17', '7', '1797.80', '0.00', 'p-u', '1491550527', '0', '0');
 INSERT INTO `on_goods_user` VALUES ('17', '8', '1797.80', '0.00', 'p-u', '1491550688', '0', '0');
 INSERT INTO `on_goods_user` VALUES ('18', '8', '1797.80', '0.00', 'p-u', '1491550776', '1491551889', '1');
 INSERT INTO `on_goods_user` VALUES ('1713', '10', '0.00', '0.20', 'p-u', '1491788108', '1491790509', '1');
@@ -2497,12 +2054,6 @@ INSERT INTO `on_goods_user` VALUES ('3527', '10', '0.00', '1.00', 'p-u', '149196
 INSERT INTO `on_goods_user` VALUES ('3252', '10', '0.00', '1.00', 'p-u', '1491960974', '0', '0');
 INSERT INTO `on_goods_user` VALUES ('2612', '10', '0.00', '1.00', 'p-u', '1491960993', '0', '0');
 INSERT INTO `on_goods_user` VALUES ('1749', '10', '0.00', '1.00', 'p-u', '1491961006', '0', '0');
-INSERT INTO `on_goods_user` VALUES ('17', '10', '1.00', '0.00', 'p-u', '1495161518', '0', '0');
-INSERT INTO `on_goods_user` VALUES ('17', '15', '0.20', '0.00', 'p-u', '1495171485', '1495171801', '1');
-INSERT INTO `on_goods_user` VALUES ('17', '16', '20.00', '0.00', 'p-u', '1495173330', '1495173781', '1');
-INSERT INTO `on_goods_user` VALUES ('8', '16', '20.00', '0.00', 'p-u', '1495173344', '0', '0');
-INSERT INTO `on_goods_user` VALUES ('17', '17', '20.00', '0.00', 'p-u', '1495177108', '0', '0');
-INSERT INTO `on_goods_user` VALUES ('8', '17', '20.00', '0.00', 'p-u', '1495177246', '1495177501', '1');
 
 -- ----------------------------
 -- Table structure for `on_link`
@@ -2562,7 +2113,7 @@ INSERT INTO `on_meeting_auction` VALUES ('9', 'zxltest2', '', '', 'zxltest2', '1
 INSERT INTO `on_meeting_auction` VALUES ('10', 'zxltest2', '', '', 'zxltest2', '1491550080', '1591550528', '4800', '1', '1', '1', '0', '18', '0', '1', '0');
 INSERT INTO `on_meeting_auction` VALUES ('11', '11111', '', '', '212', '1491550680', '1491551888', '3600', '1200', '1200', '1', '0', '7', '0', '1', '0');
 INSERT INTO `on_meeting_auction` VALUES ('12', 'ttt', '', '', 'tt', '1491556560', '1491962974', '3600', '1200', '1200', '1', '0', '1', '0', '1', '1');
-INSERT INTO `on_meeting_auction` VALUES ('13', 'zxl', '', '', 'zxl', '1491787560', '1591790507', '9000', '1200', '1200', '1', '0', '333', '0', '1', '1');
+INSERT INTO `on_meeting_auction` VALUES ('13', 'zxl', '', '', 'zxl', '1491787560', '1591790507', '9000', '1200', '1200', '1', '0', '332', '0', '1', '1');
 INSERT INTO `on_meeting_auction` VALUES ('14', 'zxlttt', '', '', 'zxlttt', '1491790920', '1491794520', '3600', '3600', '3600', '1', '0', '0', '0', '1', '0');
 INSERT INTO `on_meeting_auction` VALUES ('15', 'shendu', '', '', 'shendu', '1491811680', '1491815280', '3600', '1200', '1200', '1', '0', '0', '0', '1', '1');
 INSERT INTO `on_meeting_auction` VALUES ('16', 'zxl333', '', '', 'zxl333', '1491966180', '1591967542', '3600', '1200', '1200', '1', '0', '9', '0', '1', '1');
@@ -2623,7 +2174,7 @@ CREATE TABLE `on_member` (
   KEY `email` (`email`),
   KEY `account_2` (`account`),
   KEY `status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=3623 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='网站前台会员表';
+) ENGINE=InnoDB AUTO_INCREMENT=3621 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='网站前台会员表';
 
 -- ----------------------------
 -- Records of on_member
@@ -2635,7 +2186,7 @@ INSERT INTO `on_member` VALUES ('4', '', '', '', 'a123456', '天天', '', '', '7
 INSERT INTO `on_member` VALUES ('5', '', '', '', 'lilili', '', '', '', '14e1b600b1fd579f47433b88e8d85291', '李李李', '', '1485160157', '117.136.75.81', '0', '0', '', '0', '0', '', '0', '0', '', '0', '0', '0', '0', '', '', '', '0', '', '0.00', '0.00', '0.00', '0.00', '0', '0', '117.136.75.81', '1485160157', '1', '0', '', '1', '0', '0');
 INSERT INTO `on_member` VALUES ('6', '', '', '', 'wsxecdr', '贝勒爷', '', '', '8057b63e84885dc0a8cfa4cc5077547d', '彭先生', '', '1486056468', '124.166.233.68', '0', '0', '', '0', '0', 'headimgurl', '0', '1', '', '0', '7', '83', '0', '', '', '', '0', '', '0.00', '0.00', '0.00', '0.00', '0', '0', '124.166.233.68', '1486056468', '1', '1', 'weixin', '1', '0', '0');
 INSERT INTO `on_member` VALUES ('7', '', '', '', 'dream', 'biubiubiu', '', '', 'c78db6d4e237a58f6629ba74934758ca', '杨延君', '', '1486056502', '120.34.204.243', '0', '0', '', '0', '0', 'headimgurl', '0', '1', '', '0', '0', '1', '0', '', '', '', '0', '', '0.00', '0.00', '0.00', '0.00', '0', '0', '120.34.204.243', '1486056502', '1', '1', 'weixin', '1', '0', '0');
-INSERT INTO `on_member` VALUES ('8', '', '', '', 'jzbis', 'jzbis', 'yyu', 'yuyu', '63ee451939ed580ef3c4b6f0109d1fd0', '小白', '13067216008', '1486692231', '211.72.118.101', '0', '1', '', '0', '0', '', '0', '0', '', '0', '0', '0', '0', '', '', '', '0', '', '915627.19', '1.00', '123000.00', '320.00', '0', '0', '192.168.70.20', '1495171716', '1', '0', '', '1', '0', '156');
+INSERT INTO `on_member` VALUES ('8', '', '', '', 'jzbis', 'jzbis', 'yyu', 'yuyu', 'a0cdcc766192c9365d6a8676d3fdfd99', '小白', '13067216008', '1486692231', '211.72.118.101', '0', '1', '', '0', '0', '', '0', '0', '', '0', '0', '0', '0', '', '', '', '0', '', '908436.00', '1.00', '123000.00', '300.00', '0', '0', '127.0.0.1', '1490937020', '1', '0', '', '1', '0', '156');
 INSERT INTO `on_member` VALUES ('9', '', '', '', 'ddd123', '对对对', '', '', '9db06bcff9248837f86d1a6bcf41c9e7', '对对对', '13811111111', '1486708312', '61.152.234.179', '0', '0', '', '0', '0', '', '0', '0', '', '0', '0', '0', '0', '', '', '', '0', '', '0.00', '0.00', '0.00', '0.00', '0', '0', '61.152.234.179', '1486708312', '1', '0', '', '1', '0', '0');
 INSERT INTO `on_member` VALUES ('10', '', '', '', 'sxguoxian', '放个电', '放个电', '我家的电比国家电网的好', '14e1b600b1fd579f47433b88e8d85291', '老陈', '18650728487', '1487925414', '220.249.191.44', '0', '0', '', '0', '0', '', '0', '0', '', '0', '0', '0', '0', '', '', '', '0', '', '0.10', '0.00', '0.00', '0.00', '0', '0', '220.249.191.44', '1488349439', '1', '0', '', '1', '0', '0');
 INSERT INTO `on_member` VALUES ('11', '', '', '3325209424@qq.com', 'on_3325209424', '顺昌玉石协会', '', '', '7f9df4c6b30951dd64c68365e6f4ed4e', '郑郑', '18559077183', '1488346049', '58.22.190.200', '1', '0', '', '0', '0', '', '0', '0', '', '0', '0', '0', '0', '', '', '', '0', '', '0.00', '0.00', '0.00', '0.00', '0', '0', '58.22.190.200', '1488346049', '1', '0', 'email', '1', '0', '0');
@@ -2644,7 +2195,7 @@ INSERT INTO `on_member` VALUES ('13', '', '', '', 'jzbisjj', 'jkjk', '', '', '86
 INSERT INTO `on_member` VALUES ('14', '', '', '', 'jj', 'jkjk', '', '', 'a0cdcc766192c9365d6a8676d3fdfd99', 'jkjk', '13067216009', '1490322439', '127.0.0.1', '0', '0', '', '0', '0', '', '0', '0', '', '0', '0', '0', '0', '', '', '', '0', '', '0.00', '0.00', '0.00', '0.00', '0', '0', '127.0.0.1', '1490322439', '1', '0', '', '1', '0', '0');
 INSERT INTO `on_member` VALUES ('15', '', '', '', 'ui', 'ui', '', '', 'a0cdcc766192c9365d6a8676d3fdfd99', 'ui', '13067216001', '1490333292', '127.0.0.1', '0', '0', '', '0', '0', '', '0', '0', '', '0', '0', '0', '0', '', '', '', '0', '', '0.00', '0.00', '0.00', '0.00', '0', '0', '127.0.0.1', '1490333292', '1', '0', '', '1', '0', '0');
 INSERT INTO `on_member` VALUES ('16', '', '', '', 'uihui', 'hiuhiu', '', '', 'a0cdcc766192c9365d6a8676d3fdfd99', 'hiuhi', '13067211009', '1490333940', '127.0.0.1', '0', '0', '', '0', '0', '', '0', '0', '', '0', '0', '0', '0', '', '', '', '0', '', '0.00', '0.00', '0.00', '0.00', '0', '0', '127.0.0.1', '1490333940', '1', '0', '', '1', '0', '0');
-INSERT INTO `on_member` VALUES ('17', null, null, '', 'rob_298114345', '真的爱你sss', '', '', '63ee451939ed580ef3c4b6f0109d1fd0', '', '15220191592', '1491541593', '127.0.0.1', '0', '1', null, '0', '0', '', '0', '0', '', '0', '0', '0', '0', '', null, null, '0', null, '95900.98', '150.00', '1202102.00', '5616.60', '0', '0', '192.168.74.113', '1502257427', '1', '0', 'mobile', '0', '0', '12855');
+INSERT INTO `on_member` VALUES ('17', null, null, '', 'rob_298114345', '真的爱你sss', '', '', '63ee451939ed580ef3c4b6f0109d1fd0', '', '15220191592', '1491541593', '127.0.0.1', '0', '1', null, '0', '0', '', '0', '0', '', '0', '0', '0', '0', '', null, null, '0', null, '99922032.00', '150.00', '1202102.00', '7393.40', '0', '0', '192.168.70.85', '1494481319', '1', '0', 'mobile', '0', '0', '9460');
 INSERT INTO `on_member` VALUES ('18', null, null, null, 'rob_100860234', '好年华', '', '', '63ee451939ed580ef3c4b6f0109d1fd0', null, null, '1491541593', '127.0.0.1', '0', '0', null, '0', '0', null, '0', '0', null, '0', '0', '0', '0', null, null, null, '0', null, '100000000.00', '1000000.00', '10000000.00', '1797.80', '0', '0', '192.168.70.85', '1494403945', '1', '0', '', '0', '0', null);
 INSERT INTO `on_member` VALUES ('19', null, null, null, 'rob_318073478', '真的爱你', '', '', '63ee451939ed580ef3c4b6f0109d1fd0', null, null, '1491543921', '127.0.0.1', '0', '0', null, '0', '0', null, '0', '0', null, '0', '0', '0', '0', null, null, null, '0', null, '0.00', '0.00', '0.00', '0.00', '0', '0', null, '1491543921', '1', '0', '', '0', '0', null);
 INSERT INTO `on_member` VALUES ('20', null, null, null, 'rob_113362516', '好年华', '', '', '63ee451939ed580ef3c4b6f0109d1fd0', null, null, '1491543921', '127.0.0.1', '0', '0', null, '0', '0', null, '0', '0', null, '0', '0', '0', '0', null, null, null, '0', null, '0.00', '0.00', '0.00', '0.00', '0', '0', null, '1491543921', '1', '0', '', '0', '0', null);
@@ -6248,8 +5799,6 @@ INSERT INTO `on_member` VALUES ('3617', null, null, null, 'rob_dsspojhlrtmg', '�
 INSERT INTO `on_member` VALUES ('3618', null, null, null, 'rob_mspwnrsycfvj', '无语', '', '', '63ee451939ed580ef3c4b6f0109d1fd0', null, null, '1491793188', '127.0.0.1', '0', '0', null, '0', '0', null, '0', '0', null, '0', '0', '0', '0', null, null, null, '0', null, '0.00', '0.00', '0.00', '0.00', '0', '0', null, '1491793188', '1', '0', '', '0', '0', null);
 INSERT INTO `on_member` VALUES ('3619', null, null, null, 'rob_bxratplqewhe', '一阵风', '', '', '63ee451939ed580ef3c4b6f0109d1fd0', null, null, '1491793188', '127.0.0.1', '0', '0', null, '0', '0', null, '0', '0', null, '0', '0', '0', '0', null, null, null, '0', null, '0.00', '0.00', '0.00', '0.00', '0', '0', null, '1491793188', '1', '0', '', '0', '0', null);
 INSERT INTO `on_member` VALUES ('3620', null, null, null, 'rob_jeljutysrynq', '留下微笑', '', '', '63ee451939ed580ef3c4b6f0109d1fd0', null, null, '1491793188', '127.0.0.1', '0', '0', null, '0', '0', null, '0', '0', null, '0', '0', '0', '0', null, null, null, '0', null, '0.00', '0.00', '0.00', '0.00', '0', '0', null, '1491793188', '1', '0', '', '0', '0', null);
-INSERT INTO `on_member` VALUES ('3621', null, null, 'asdasd@asd.com', 'xxxx2220', '123', '111', '', '9db06bcff9248837f86d1a6bcf41c9e7', '123', '18888888888', null, null, '1', '1', null, null, null, null, null, '1', '', '0', '14', '150', '1524', '', '', null, null, null, '0.00', '0.00', '0.00', '0.00', '0', '11111', '192.168.70.20', '1495171343', '1', '0', '', '1', '1', null);
-INSERT INTO `on_member` VALUES ('3622', null, null, '123@123.COM', '123123', '123123', '', '', '63ee451939ed580ef3c4b6f0109d1fd0', '123123', '123123', null, null, '1', '1', null, null, null, null, null, '1', '', '0', '0', '0', '0', '123123', '123123', null, null, null, '0.00', '0.00', '0.00', '0.00', '0', '111111', null, null, '0', '0', '', '0', '1', null);
 
 -- ----------------------------
 -- Table structure for `on_member_evaluate`
@@ -6327,16 +5876,6 @@ INSERT INTO `on_member_limsum_bill` VALUES ('guf149155188958128', '18', 'bid_unf
 INSERT INTO `on_member_limsum_bill` VALUES ('plg149178959971293', '18', 'bid_freeze', '1491789599', '参拍“<a href=\"/index.php/Auction/details/pid/10/aptitude/1.html\">121</a>”冻结信誉额度！', '0.00', '1.00', null);
 INSERT INTO `on_member_limsum_bill` VALUES ('guf149179050931868', '18', 'bid_unfreeze', '1491790509', '解冻保证金1.00元；', '1.00', '0.00', null);
 INSERT INTO `on_member_limsum_bill` VALUES ('plg149180491808999', '18', 'bid_freeze', '1491804918', '参拍“<a href=\"/index.php/Auction/details/pid/7/aptitude/1.html\">HKHKJ</a>”冻结信誉额度！', '0.00', '1797.80', null);
-INSERT INTO `on_member_limsum_bill` VALUES ('plg149516151870610', '17', 'bid_freeze', '1495161518', '参拍“<a href=\"/index.php/Auction/details/pid/10/aptitude/1.html\">121</a>”冻结信誉额度！', '0.00', '1.00', null);
-INSERT INTO `on_member_limsum_bill` VALUES ('BID149155052942038', '17', 'paybid_unfreeze', '1495161588', '按时(在线)支付拍品订单<a href=\"/index.php/Home/Auction/details/pid/7/aptitude/1.html\">【HKHKJ】</a>', '1797.80', '0.00', null);
-INSERT INTO `on_member_limsum_bill` VALUES ('plg149517148592428', '17', 'bid_freeze', '1495171485', '参拍“<a href=\"/index.php/Auction/details/pid/15/aptitude/1.html\">qqqqq</a>”冻结信誉额度！', '0.00', '0.20', null);
-INSERT INTO `on_member_limsum_bill` VALUES ('guf149517180169420', '17', 'bid_unfreeze', '1495171801', '拍品结束【<a  target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/15/aptitude/1.html\">qqqqq</a>】流拍', '0.20', '0.00', null);
-INSERT INTO `on_member_limsum_bill` VALUES ('plg149517333087821', '17', 'bid_freeze', '1495173330', '参拍“<a href=\"/index.php/Auction/details/pid/16/aptitude/1.html\">123123</a>”冻结信誉额度！', '0.00', '20.00', null);
-INSERT INTO `on_member_limsum_bill` VALUES ('plg149517334481780', '8', 'bid_freeze', '1495173344', '参拍“<a href=\"/index.php/Auction/details/pid/16/aptitude/1.html\">123123</a>”冻结信誉额度！', '0.00', '20.00', null);
-INSERT INTO `on_member_limsum_bill` VALUES ('guf14951737811064', '17', 'bid_unfreeze', '1495173781', '拍品结束【<a  target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>】结束', '20.00', '0.00', null);
-INSERT INTO `on_member_limsum_bill` VALUES ('plg149517710828127', '17', 'bid_freeze', '1495177108', '参拍“<a href=\"/index.php/Auction/details/pid/17/aptitude/1.html\">111</a>”冻结信誉额度！', '0.00', '20.00', null);
-INSERT INTO `on_member_limsum_bill` VALUES ('plg149517724629545', '8', 'bid_freeze', '1495177246', '参拍“<a href=\"/index.php/Auction/details/pid/17/aptitude/1.html\">111</a>”冻结信誉额度！', '0.00', '20.00', null);
-INSERT INTO `on_member_limsum_bill` VALUES ('guf149517750123591', '8', 'bid_unfreeze', '1495177501', '拍品结束【<a  target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/17/aptitude/1.html\">111</a>】结束', '20.00', '0.00', null);
 
 -- ----------------------------
 -- Table structure for `on_member_pledge_bill`
@@ -6624,13 +6163,6 @@ INSERT INTO `on_member_pledge_bill` VALUES ('CRD149379610880510', 'zc', '17', 'p
 INSERT INTO `on_member_pledge_bill` VALUES ('CRD149379661427287', 'zc', '17', 'pay_crowd', '1493796784', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/23.html\">121</a>”，支付成功！', '0.00', '1564.00', null);
 INSERT INTO `on_member_pledge_bill` VALUES ('CRD149380040145899', 'zc', '17', 'pay_crowd', '1493800403', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/24.html\">fsfafaffdsafdasfdafdsfsafdasf</a>”，支付成功！', '0.00', '33.00', null);
 INSERT INTO `on_member_pledge_bill` VALUES ('CRD149385857542824', 'zc', '17', 'pay_crowd', '1493858587', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/24.html\">fsfafaffdsafdasfdafdsfsafdasf</a>”，支付成功！', '0.00', '33.00', null);
-INSERT INTO `on_member_pledge_bill` VALUES ('BID149155052942038', 'pm', '17', 'pay_deduct', '1495161588', '支付商品：“<a href=\"/index.php/Home/Auction/details/pid/7/aptitude/1.html\">HKHKJ</a>”订单号：“<a href=\"/index.php/Home/Member/order_details/order_no/BID149155052942038/aptitude/1.html\">BID149155052942038</a>”，支付成功！', '0.00', '8989.00', null);
-INSERT INTO `on_member_pledge_bill` VALUES ('pro149516228601590', 'pm', '8', 'profit', '1495162286', '买家确认收到拍品“<a href=\"/index.php/Home/Auction/details/pid/7/aptitude/1.html\">HKHKJ】</a>”；拍品订单：“<a target=\"_blank\" href=\"/index.php/Home/Member/order_details/order_no/BID149155052942038/aptitude/1.html\">BID149155052942038</a>”，拍品成交价：8989.00元+运费：0.00元=订单总额：8989元，扣除网站佣金：1797.80元后收入7191.2元', '7191.20', '0.00', null);
-INSERT INTO `on_member_pledge_bill` VALUES ('CRD14954355959615', 'zc', '17', 'pay_crowd', '1495435624', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/24.html\">fsfafaffdsafdasfdafdsfsafdasf</a>”，支付成功！', '0.00', '33.00', null);
-INSERT INTO `on_member_pledge_bill` VALUES ('CRD149786276134366', 'zc', '17', 'pay_crowd', '1497862834', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/25.html\">无敌电球</a>”，支付成功！', '0.00', '10000.00', null);
-INSERT INTO `on_member_pledge_bill` VALUES ('CRD149794208370765', 'zc', '17', 'pay_crowd', '1497943046', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/25.html\">HKHKJ</a>”，支付成功！', '0.00', '0.01', null);
-INSERT INTO `on_member_pledge_bill` VALUES ('CRD149794335481968', 'zc', '17', 'pay_crowd', '1497943374', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/23.html\">121</a>”，支付成功！', '0.00', '1564.00', null);
-INSERT INTO `on_member_pledge_bill` VALUES ('CRD149794478338090', 'zc', '17', 'pay_crowd', '1497945716', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/23.html\">121</a>”，支付成功！', '0.00', '1564.00', null);
 
 -- ----------------------------
 -- Table structure for `on_member_pledge_take`
@@ -6713,7 +6245,7 @@ CREATE TABLE `on_mysms` (
   KEY `aid` (`aid`),
   KEY `time` (`time`),
   KEY `status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=323 DEFAULT CHARSET=utf8 COMMENT='用户消息提醒';
+) ENGINE=InnoDB AUTO_INCREMENT=253 DEFAULT CHARSET=utf8 COMMENT='用户消息提醒';
 
 -- ----------------------------
 -- Records of on_mysms
@@ -6970,76 +6502,6 @@ INSERT INTO `on_mysms` VALUES ('249', '17', '0', '0', '0', '0', '支付订单', 
 INSERT INTO `on_mysms` VALUES ('250', '17', '0', '0', '0', '0', '支付订单', '0', '0', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/23.html\">121</a>”扣除余额1564.00元', '1493796784', '0');
 INSERT INTO `on_mysms` VALUES ('251', '17', '0', '0', '0', '0', '支付订单', '0', '0', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/24.html\">fsfafaffdsafdasfdafdsfsafdasf</a>”扣除余额33.00元', '1493800403', '1');
 INSERT INTO `on_mysms` VALUES ('252', '17', '0', '0', '0', '0', '支付订单', '0', '0', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/24.html\">fsfafaffdsafdasfdafdsfsafdasf</a>”扣除余额33.00元', '1493858587', '0');
-INSERT INTO `on_mysms` VALUES ('253', '17', '0', '0', '0', '0', '参拍冻结信誉额度', '0', '0', '参拍“<a href=\"/index.php/Home/Auction/details/pid/10/aptitude/1.html\">121</a>”冻结信誉额度【1.00元】', '1495161518', '0');
-INSERT INTO `on_mysms` VALUES ('254', '2383', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/10/aptitude/1.html\">121</a>”出价【18.00元】已被超过。', '1495161518', '0');
-INSERT INTO `on_mysms` VALUES ('255', '9', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/10/aptitude/1.html\">121</a>”当前价【19.00元】，目前领先', '1495161519', '0');
-INSERT INTO `on_mysms` VALUES ('256', '17', '0', '0', '0', '0', '支付订单', '0', '0', '支付商品：“<a href=\"/index.php/Home/Auction/details/pid/7/aptitude/1.html\">HKHKJ</a>”订单号：“<a href=\"/index.php/Home/Member/order_details/order_no/BID149155052942038/aptitude/1.html\">BID149155052942038</a>”扣除余额8989.00元', '1495161588', '0');
-INSERT INTO `on_mysms` VALUES ('257', '17', '0', '0', '0', '0', '信用额度解冻', '0', '0', '按时(在线)支付拍品订单<a href=\"/index.php/Home/Auction/details/pid/7/aptitude/1.html\">【HKHKJ】</a>解冻缴纳拍品信誉额度1797.80元', '1495161588', '0');
-INSERT INTO `on_mysms` VALUES ('258', '17', '0', '0', '0', '0', '订单状态通知', '0', '0', '订单号：“<a target=\"_blank\" href=\"/index.php/Home/Member/order_details/order_no/BID149155052942038/aptitude/1.html\">BID149155052942038</a>”您已支付，等待卖家发货！商品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/7/aptitude/1.html\">HKHKJ</a>”。', '1495161588', '0');
-INSERT INTO `on_mysms` VALUES ('259', '8', '0', '0', '0', '0', '订单状态通知', '0', '0', '订单号：“<a target=\"_blank\" href=\"/index.php/Home/Member/order_details/order_no/BID149155052942038/aptitude/1.html\">BID149155052942038</a>”买家已支付，请尽快给买家发货！商品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/7/aptitude/1.html\">HKHKJ</a>”。', '1495161588', '0');
-INSERT INTO `on_mysms` VALUES ('260', '17', '0', '0', '0', '0', '订单状态通知', '0', '0', '订单号：“<a target=\"_blank\" href=\"/index.php/Home/Member/order_details/order_no/BID149155052942038/aptitude/1.html\">BID149155052942038</a>”卖家已发货，请保持电话畅通以便顺利收货！商品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/7/aptitude/1.html\">HKHKJ</a>”。', '1495162266', '1');
-INSERT INTO `on_mysms` VALUES ('261', '8', '0', '0', '0', '0', '订单状态通知', '0', '0', '订单号：“<a target=\"_blank\" href=\"/index.php/Home/Member/order_details/order_no/BID149155052942038/aptitude/1.html\">BID149155052942038</a>”您已发货，等待买家确认收货！商品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/7/aptitude/1.html\">HKHKJ</a>”。', '1495162266', '1');
-INSERT INTO `on_mysms` VALUES ('262', '8', '0', '0', '0', '0', '交易收入', '0', '0', '买家确认收到拍品“<a href=\"/index.php/Home/Auction/details/pid/7/aptitude/1.html\">HKHKJ】</a>”；拍品订单：“<a target=\"_blank\" href=\"/index.php/Home/Member/order_details/order_no/BID149155052942038/aptitude/1.html\">BID149155052942038</a>”，拍品成交价：8989.00元+运费：0.00元=订单总额：8989元，扣除网站佣金：1797.80元后收入7191.2元', '1495162286', '0');
-INSERT INTO `on_mysms` VALUES ('263', '17', '0', '0', '0', '0', '订单状态通知', '0', '0', '订单号：“<a target=\"_blank\" href=\"/index.php/Home/Member/order_details/order_no/BID149155052942038/aptitude/1.html\">BID149155052942038</a>”您确认收货，请对卖家做出评价，其他小伙伴需要您的建议哦！商品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/7/aptitude/1.html\">HKHKJ</a>”。', '1495162286', '0');
-INSERT INTO `on_mysms` VALUES ('264', '8', '0', '0', '0', '0', '订单状态通知', '0', '0', '订单号：“<a target=\"_blank\" href=\"/index.php/Home/Member/order_details/order_no/BID149155052942038/aptitude/1.html\">BID149155052942038</a>”买家已确认收货，买家将对您的商品做出评价！商品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/7/aptitude/1.html\">HKHKJ</a>”。', '1495162286', '0');
-INSERT INTO `on_mysms` VALUES ('265', '3621', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/15/aptitude/1.html\">qqqqq</a>”当前价【1.00元】，目前领先', '1495171486', '0');
-INSERT INTO `on_mysms` VALUES ('266', '17', '0', '0', '0', '0', '参拍冻结信誉额度', '0', '0', '参拍“<a href=\"/index.php/Home/Auction/details/pid/15/aptitude/1.html\">qqqqq</a>”冻结信誉额度【0.20元】', '1495171486', '0');
-INSERT INTO `on_mysms` VALUES ('267', '17', '0', '0', '0', '0', '保证金解冻', '0', '0', '解冻信誉额度0.20元；', '1495171801', '0');
-INSERT INTO `on_mysms` VALUES ('268', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【100.00元】，目前领先', '1495173331', '0');
-INSERT INTO `on_mysms` VALUES ('269', '17', '0', '0', '0', '0', '参拍冻结信誉额度', '0', '0', '参拍“<a href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”冻结信誉额度【20.00元】', '1495173331', '0');
-INSERT INTO `on_mysms` VALUES ('270', '17', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【100.00元】已被超过。', '1495173344', '1');
-INSERT INTO `on_mysms` VALUES ('271', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【200.00元】，目前领先', '1495173344', '1');
-INSERT INTO `on_mysms` VALUES ('272', '8', '0', '0', '0', '0', '参拍冻结信誉额度', '0', '0', '参拍“<a href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”冻结信誉额度【20.00元】', '1495173345', '1');
-INSERT INTO `on_mysms` VALUES ('273', '8', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【200.00元】已被超过。', '1495173363', '0');
-INSERT INTO `on_mysms` VALUES ('274', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【300.00元】，目前领先', '1495173363', '0');
-INSERT INTO `on_mysms` VALUES ('275', '17', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【300.00元】已被超过。', '1495173372', '1');
-INSERT INTO `on_mysms` VALUES ('276', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【400.00元】，目前领先', '1495173372', '1');
-INSERT INTO `on_mysms` VALUES ('277', '8', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【400.00元】已被超过。', '1495173381', '0');
-INSERT INTO `on_mysms` VALUES ('278', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【500.00元】，目前领先', '1495173381', '0');
-INSERT INTO `on_mysms` VALUES ('279', '17', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【500.00元】已被超过。', '1495173384', '1');
-INSERT INTO `on_mysms` VALUES ('280', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【600.00元】，目前领先', '1495173384', '1');
-INSERT INTO `on_mysms` VALUES ('281', '8', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【600.00元】已被超过。', '1495173388', '0');
-INSERT INTO `on_mysms` VALUES ('282', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【700.00元】，目前领先', '1495173388', '0');
-INSERT INTO `on_mysms` VALUES ('283', '17', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【700.00元】已被超过。', '1495173425', '1');
-INSERT INTO `on_mysms` VALUES ('284', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【800.00元】，目前领先', '1495173425', '1');
-INSERT INTO `on_mysms` VALUES ('285', '8', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【800.00元】已被超过。', '1495173441', '0');
-INSERT INTO `on_mysms` VALUES ('286', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【900.00元】，目前领先', '1495173441', '0');
-INSERT INTO `on_mysms` VALUES ('287', '17', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【900.00元】已被超过。', '1495173447', '1');
-INSERT INTO `on_mysms` VALUES ('288', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【1000.00元】，目前领先', '1495173447', '1');
-INSERT INTO `on_mysms` VALUES ('289', '17', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【1200.00元】已被超过。', '1495173452', '0');
-INSERT INTO `on_mysms` VALUES ('290', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【1400.00元】，目前领先', '1495173452', '0');
-INSERT INTO `on_mysms` VALUES ('291', '8', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【1400.00元】已被超过。', '1495173454', '0');
-INSERT INTO `on_mysms` VALUES ('292', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【1600.00元】，目前领先', '1495173454', '0');
-INSERT INTO `on_mysms` VALUES ('293', '17', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【1600.00元】已被超过。', '1495173464', '1');
-INSERT INTO `on_mysms` VALUES ('294', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【1800.00元】，目前领先', '1495173464', '1');
-INSERT INTO `on_mysms` VALUES ('295', '8', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【1800.00元】已被超过。', '1495173467', '0');
-INSERT INTO `on_mysms` VALUES ('296', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【2000.00元】，目前领先', '1495173467', '0');
-INSERT INTO `on_mysms` VALUES ('297', '17', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【2000.00元】已被超过。', '1495173470', '1');
-INSERT INTO `on_mysms` VALUES ('298', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【2200.00元】，目前领先', '1495173470', '1');
-INSERT INTO `on_mysms` VALUES ('299', '8', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【2200.00元】已被超过。', '1495173489', '0');
-INSERT INTO `on_mysms` VALUES ('300', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【2400.00元】，目前领先', '1495173489', '0');
-INSERT INTO `on_mysms` VALUES ('301', '17', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”出价【2400.00元】已被超过。', '1495173503', '1');
-INSERT INTO `on_mysms` VALUES ('302', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”当前价【2600.00元】，目前领先', '1495173503', '1');
-INSERT INTO `on_mysms` VALUES ('303', '17', '0', '0', '0', '0', '保证金解冻', '0', '0', '解冻信誉额度20.00元；', '1495173781', '0');
-INSERT INTO `on_mysms` VALUES ('304', '8', '0', '0', '0', '0', '系统提示', '0', '0', '恭喜您以2600.00元拍到[【<a target=\"_blank\" href=\"/index.php/Auction/details/pid/16/aptitude/1.html\">123123</a>】请在2017-05-26 14:03之前支付完成支付。否则将扣除您参与该拍卖所缴纳的保证金或信用额度！', '1495173781', '0');
-INSERT INTO `on_mysms` VALUES ('305', '8', '0', '0', '0', '0', '订单状态通知', '0', '0', '订单号：“<a target=\"_blank\" href=\"/index.php/Home/Member/order_details/order_no/BID149517378107545/aptitude/1.html\">BID149517378107545</a>”已生成订单，请在2017-05-26 14:03前支付订单！商品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”。', '1495173781', '0');
-INSERT INTO `on_mysms` VALUES ('306', '3622', '0', '0', '0', '0', '订单状态通知', '0', '0', '订单号：“<a target=\"_blank\" href=\"/index.php/Home/Member/order_details/order_no/BID149517378107545/aptitude/1.html\">BID149517378107545</a>”已生成订单，等待买家支付！商品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/16/aptitude/1.html\">123123</a>”。', '1495173781', '0');
-INSERT INTO `on_mysms` VALUES ('307', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/17/aptitude/1.html\">111</a>”当前价【100.00元】，目前领先', '1495177108', '0');
-INSERT INTO `on_mysms` VALUES ('308', '17', '0', '0', '0', '0', '参拍冻结信誉额度', '0', '0', '参拍“<a href=\"/index.php/Home/Auction/details/pid/17/aptitude/1.html\">111</a>”冻结信誉额度【20.00元】', '1495177108', '0');
-INSERT INTO `on_mysms` VALUES ('309', '17', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/17/aptitude/1.html\">111</a>”出价【100.00元】已被超过。', '1495177246', '1');
-INSERT INTO `on_mysms` VALUES ('310', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/17/aptitude/1.html\">111</a>”当前价【101.00元】，目前领先', '1495177246', '1');
-INSERT INTO `on_mysms` VALUES ('311', '8', '0', '0', '0', '0', '参拍冻结信誉额度', '0', '0', '参拍“<a href=\"/index.php/Home/Auction/details/pid/17/aptitude/1.html\">111</a>”冻结信誉额度【20.00元】', '1495177246', '1');
-INSERT INTO `on_mysms` VALUES ('312', '8', '0', '0', '0', '0', '竞拍出价被超越', '0', '0', '您参拍拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/17/aptitude/1.html\">111</a>”出价【101.00元】已被超过。', '1495177253', '0');
-INSERT INTO `on_mysms` VALUES ('313', '3622', '0', '0', '0', '0', '拍品出价更新', '0', '0', '拍品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/17/aptitude/1.html\">111</a>”当前价【102.00元】，目前领先', '1495177253', '0');
-INSERT INTO `on_mysms` VALUES ('314', '8', '0', '0', '0', '0', '保证金解冻', '0', '0', '解冻信誉额度20.00元；', '1495177501', '1');
-INSERT INTO `on_mysms` VALUES ('315', '17', '0', '0', '0', '0', '系统提示', '0', '0', '恭喜您以102.00元拍到[【<a target=\"_blank\" href=\"/index.php/Auction/details/pid/17/aptitude/1.html\">111</a>】请在2017-05-26 15:05之前支付完成支付。否则将扣除您参与该拍卖所缴纳的保证金或信用额度！', '1495177501', '1');
-INSERT INTO `on_mysms` VALUES ('316', '17', '0', '0', '0', '0', '订单状态通知', '0', '0', '订单号：“<a target=\"_blank\" href=\"/index.php/Home/Member/order_details/order_no/BID149517750121371/aptitude/1.html\">BID149517750121371</a>”已生成订单，请在2017-05-26 15:05前支付订单！商品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/17/aptitude/1.html\">111</a>”。', '1495177501', '1');
-INSERT INTO `on_mysms` VALUES ('317', '3622', '0', '0', '0', '0', '订单状态通知', '0', '0', '订单号：“<a target=\"_blank\" href=\"/index.php/Home/Member/order_details/order_no/BID149517750121371/aptitude/1.html\">BID149517750121371</a>”已生成订单，等待买家支付！商品：“<a target=\"_blank\" href=\"/index.php/Home/Auction/details/pid/17/aptitude/1.html\">111</a>”。', '1495177501', '1');
-INSERT INTO `on_mysms` VALUES ('318', '17', '0', '0', '0', '0', '支付订单', '0', '0', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/24.html\">fsfafaffdsafdasfdafdsfsafdasf</a>”扣除余额33.00元', '1495435624', '0');
-INSERT INTO `on_mysms` VALUES ('319', '17', '0', '0', '0', '0', '支付订单', '0', '0', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/25.html\">无敌电球</a>”扣除余额10000.00元', '1497862834', '0');
-INSERT INTO `on_mysms` VALUES ('320', '17', '0', '0', '0', '0', '支付订单', '0', '0', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/25.html\">HKHKJ</a>”扣除余额0.01元', '1497943046', '0');
-INSERT INTO `on_mysms` VALUES ('321', '17', '0', '0', '0', '0', '支付订单', '0', '0', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/23.html\">121</a>”扣除余额1564.00元', '1497943375', '0');
-INSERT INTO `on_mysms` VALUES ('322', '17', '0', '0', '0', '0', '支付订单', '0', '0', '支付申购商品：“<a href=\"/index.php/Home/Crowd/items/cid/23.html\">121</a>”扣除余额1564元', '1497945716', '0');
 
 -- ----------------------------
 -- Table structure for `on_navigation`
@@ -7674,20 +7136,15 @@ CREATE TABLE `on_point_school` (
   `course_count` int(11) DEFAULT NULL COMMENT '课程套数',
   `video_pic_url` varchar(255) DEFAULT NULL COMMENT '视频图片',
   `content` text COMMENT '内容',
-  `is_limit_buy` tinyint(1) DEFAULT '0' COMMENT '是否限购，0不限购，1限购',
-  `limit_buy` int(11) DEFAULT '0' COMMENT '限购数量',
-  `limit_stock` int(11) DEFAULT '0' COMMENT '限购库存',
-  `school_level` tinyint(1) DEFAULT '1' COMMENT '课程级别，1，初级；2中级，3高级',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of on_point_school
 -- ----------------------------
-INSERT INTO `on_point_school` VALUES ('33', 'test', '7', '&lt;p&gt;fdsf&lt;/p&gt;', '11', '33', '2', '44', null, '&lt;p&gt;faaa&lt;/p&gt;', '0', '0', '0', '1');
-INSERT INTO `on_point_school` VALUES ('34', 'tttttttttttttttttttttttttttttttttttttttttttt', '6', '&lt;p&gt;acccc&lt;/p&gt;', '20', '11', '2', '3', null, '&lt;p&gt;sssss&lt;/p&gt;', '0', '0', '0', '2');
-INSERT INTO `on_point_school` VALUES ('35', 'zxzzzxzzzxzzzxzzzxzzzxzzzxzzzxzzzxzzzxzzzxzz', '3', '&lt;p&gt;aaaa&lt;/p&gt;', '11', '22', '33', '99', null, '&lt;p&gt;bbbbb&lt;/p&gt;', '1', '2', '2', '1');
-INSERT INTO `on_point_school` VALUES ('36', 'testtesttesttesttesttesttesttesttesttesttesttesttest', '5', '&lt;p&gt;dsf&lt;/p&gt;', '1', '1', '21', '32', null, '', '0', '0', '0', '3');
+INSERT INTO `on_point_school` VALUES ('33', 'test', '7', '&lt;p&gt;fdsf&lt;/p&gt;', '11', '33', '2', '44', null, '&lt;p&gt;faaa&lt;/p&gt;');
+INSERT INTO `on_point_school` VALUES ('34', 'tttt', '6', '&lt;p&gt;acccc&lt;/p&gt;', '20', '11', '2', '3', null, '&lt;p&gt;sssss&lt;/p&gt;');
+INSERT INTO `on_point_school` VALUES ('35', 'zxzz', '3', '&lt;p&gt;aaaa&lt;/p&gt;', '11', '22', '33', '99', null, '&lt;p&gt;bbbbb&lt;/p&gt;');
 
 -- ----------------------------
 -- Table structure for `on_region`
@@ -11403,7 +10860,7 @@ CREATE TABLE `on_system_log` (
   `ip` varchar(255) NOT NULL DEFAULT '',
   `create_time` int(11) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of on_system_log
@@ -11437,25 +10894,6 @@ INSERT INTO `on_system_log` VALUES ('30', 'super@fjsxpmh.com', '0', '1', '/index
 INSERT INTO `on_system_log` VALUES ('31', '好年华', '1', '1', '/index.php/Crowd/support/org/pc/ciid/19.html', '生成申购订单', '对商品名为”HKHKJ“,价格为”8989.00“的商品生成申购订单CRD149431857769133', '192.168.70.85', '1494318577');
 INSERT INTO `on_system_log` VALUES ('32', '好年华', '1', '1', '/index.php/Crowd/support/org/pc/ciid/20.html', '申购', '对商品名为”无敌电球“,价格为”10000.00“的商品生成申购订单CRD149431877572478', '192.168.70.85', '1494318775');
 INSERT INTO `on_system_log` VALUES ('33', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/17.html', '申购', '对商品名为”121“,价格为”1.00“的商品生成申购订单CRD149446698367977', '192.168.70.85', '1494466983');
-INSERT INTO `on_system_log` VALUES ('34', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/18.html', '申购', '对商品名为”fsfafaffdsafdasfdafdsfsafdasf“,价格为”33.00“的商品生成申购订单CRD14954355959615', '192.168.70.85', '1495435595');
-INSERT INTO `on_system_log` VALUES ('35', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/17.html', '申购', '对商品名为”121“,价格为”1.00“的商品生成申购订单CRD149551996808354', '192.168.70.85', '1495519968');
-INSERT INTO `on_system_log` VALUES ('36', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/17.html', '申购', '对商品名为”121“,价格为”1.00“的商品生成申购订单CRD149551999625717', '192.168.70.85', '1495519996');
-INSERT INTO `on_system_log` VALUES ('37', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/20.html', '申购', '对商品名为”无敌电球“,价格为”10000.00“的商品生成申购订单CRD149786276134366', '192.168.70.85', '1497862761');
-INSERT INTO `on_system_log` VALUES ('38', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/20.html', '申购', '对商品名为”无敌电球“,价格为”10000.00“的商品生成申购订单CRD149786285079961', '192.168.70.85', '1497862850');
-INSERT INTO `on_system_log` VALUES ('39', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/20.html', '申购', '对商品名为”无敌电球“,价格为”10000.00“的商品生成申购订单CRD149786483591252', '192.168.70.85', '1497864835');
-INSERT INTO `on_system_log` VALUES ('40', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/20.html', '申购', '对商品名为”无敌电球“,价格为”10000.00“的商品生成申购订单CRD149786497424676', '192.168.70.85', '1497864974');
-INSERT INTO `on_system_log` VALUES ('41', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/20.html', '申购', '对商品名为”无敌电球“,价格为”10000.00“的商品生成申购订单CRD149786602935280', '192.168.70.85', '1497866029');
-INSERT INTO `on_system_log` VALUES ('42', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/20.html', '申购', '对商品名为”无敌电球“,价格为”10000.00“的商品生成申购订单CRD149786603655271', '192.168.70.85', '1497866036');
-INSERT INTO `on_system_log` VALUES ('43', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/20.html', '申购', '对商品名为”无敌电球“,价格为”10000.00“的商品生成申购订单CRD149786605229871', '192.168.70.85', '1497866052');
-INSERT INTO `on_system_log` VALUES ('44', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/20.html', '申购', '对商品名为”无敌电球“,价格为”10000.00“的商品生成申购订单CRD149792311947828', '192.168.70.85', '1497923119');
-INSERT INTO `on_system_log` VALUES ('45', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/20.html', '申购', '对商品名为”无敌电球“,价格为”10000.00“的商品生成申购订单CRD149792314173978', '192.168.70.85', '1497923141');
-INSERT INTO `on_system_log` VALUES ('46', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/19.html', '申购', '对商品名为”HKHKJ“,价格为”8989.00“的商品生成申购订单CRD149794146545914', '192.168.70.85', '1497941465');
-INSERT INTO `on_system_log` VALUES ('47', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/19.html', '申购', '对商品名为”HKHKJ“,价格为”0.01“的商品生成申购订单CRD149794202993215', '192.168.70.85', '1497942029');
-INSERT INTO `on_system_log` VALUES ('48', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/19.html', '申购', '对商品名为”HKHKJ“,价格为”0.01“的商品生成申购订单CRD149794208370765', '192.168.70.85', '1497942083');
-INSERT INTO `on_system_log` VALUES ('49', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/19.html', '申购', '对商品名为”HKHKJ“,价格为”0.01“的商品生成申购订单CRD149794306723472', '192.168.70.85', '1497943067');
-INSERT INTO `on_system_log` VALUES ('50', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/16.html', '申购', '对商品名为”121“,价格为”1564.00“的商品生成申购订单CRD149794335481968', '192.168.70.85', '1497943354');
-INSERT INTO `on_system_log` VALUES ('51', '真的爱你sss', '1', '1', '/index.php/Crowd/support/org/pc/ciid/16.html', '申购', '对商品名为”121“,价格为”1564.00“的商品生成申购订单CRD149794478338090', '192.168.70.85', '1497944783');
-INSERT INTO `on_system_log` VALUES ('52', 'super@fjsxpmh.com', '0', '1', '/index.php/Admin/Order/crowd_edit?crd_no=CRD149794478338090', '订单管理->申购订单->编辑', '编辑订单号为CRD149794478338090的申购订单', '192.168.74.113', '1502257521');
 
 -- ----------------------------
 -- Table structure for `on_verify_email`
@@ -11490,21 +10928,6 @@ INSERT INTO `on_verify_mobile` VALUES ('13067216007', '15518', '1488442214', '14
 INSERT INTO `on_verify_mobile` VALUES ('18120856005', '95747', '1488528248', '1488614648');
 INSERT INTO `on_verify_mobile` VALUES ('13067216009', '51992', '1489825640', '1489912040');
 INSERT INTO `on_verify_mobile` VALUES ('15220191592', '70478', '1493694045', '1493780445');
-
--- ----------------------------
--- Table structure for `on_weiautoreply`
--- ----------------------------
-DROP TABLE IF EXISTS `on_weiautoreply`;
-CREATE TABLE `on_weiautoreply` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `reply_content` text COMMENT '回复内容',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of on_weiautoreply
--- ----------------------------
-INSERT INTO `on_weiautoreply` VALUES ('4', 'test');
 
 -- ----------------------------
 -- Table structure for `on_weiurl`
