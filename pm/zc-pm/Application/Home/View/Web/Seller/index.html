@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>{$seller.organization}-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/cuitindex.css"/>
+		<css href="__CSS__/list.css"/>
+		<js href="--PUBLIC--/Js/jquery_raty/jquery.raty.min.js"/>
+    </head>
+    <body>
+    <include file="Common:head_wide" />
+    <div  class="container upage auction_list">
+        <div class="upage_content clearfix">
+            <!-- 卖家页页面顶部 -->
+            <div class="up_header">
+                <div class="ha">
+                    <ul class="">
+                        <li class="clearfix"><div class="lh">成交率：</div><div class="ld lda">{$bid_count.cjl}</div></li>
+                        <li class="clearfix"><div class="lh">发布拍品：</div><div class="ld ldb"><span>{$bid_count.all}</span>件</div></li>
+                        <li class="clearfix"><div class="lh">卖家级别：</div><div class="ld"><img src="{$seller.leval}"></div></li>
+                        <li class="clearfix"><div class="lh">综合信誉：</div><div class="ld" id="credit"></div></li>
+                    </ul>
+                    <div class="sell">
+                        <div class="gzbox ac-attention-box fr clearfix">
+                            <a class="gz_sell gz fl selatt{$seller.uid}" st="{$usgz}" sellerid="{$seller.uid}" href="javascript:void(0);">
+                                <div class="ico"></div>
+                                <div class="txt cuit_over"><eq name='usgz' value='0'>关注卖家<else />已关注</eq></div>
+                            </a>
+                            <a target="_blank" class="ly fl" href="{:U('Member/sendmsg',array('uid'=>$seller['uid']))}">
+                                <div class="ico"></div>
+                                <div class="txt cuit_over">给我留言</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hb clearfix">
+                    <div class="phto">
+                        <img title="{$seller.organization}" src="{$seller.uid|getuserpic=###,1}">
+                    </div>
+                    <p class="nikname">{$seller.organization}<neq name="sellerid" value="0"><span>(账号：{$seller.account})</span></neq></p>
+                    <ul class="moinfo">
+                        <li>粉丝：<span class="c09c">{$fanscount}</span>个</li>
+                        <li>注册时间：{$seller.reg_date|date='Y-m-d',###}</li>
+                    </ul>
+                    <ul class="umenu clearfix">
+                        <li><a class="um_end <eq name='type' value='end'>curr</eq>" href="{:U('Seller/index',array('sellerid'=>$sellerid,'type'=>'end'))}"><span class="umico"></span>已结束<em class="count">{$bid_count.end}</em></a></li>
+                        <li><a  class="um_wait <eq name='type' value='wait'>curr</eq>" href="{:U('Seller/index',array('sellerid'=>$sellerid,'type'=>'wait'))}"><span class="umico"></span>即将开拍<em class="count">{$bid_count.wait}</em></a></li>
+                        <li><a  class="um_ing <eq name='type' value='ing'>curr</eq>" href="{:U('Seller/index',array('sellerid'=>$sellerid,'type'=>'ing'))}"><span class="umico"></span>正在拍卖<em class="count">{$bid_count.ing}</em></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 卖家页页面顶部——end -->
+            <!-- 卖家拍品列表【 -->
+            <div class="pmboxcenter">
+                <div class="clearfix">
+                    <foreach name="list" item="bav">
+                    <!-- 全部未开拍 -->
+                        <div id="blist" class="auctionbox tab_con clearfix" style="display:block;">
+                            <empty name="bav.blist">
+                                <div class="datanone">很抱歉该条件下暂无拍品，您可以重新查询！</div>
+                            <else />
+                                <volist name="bav.blist" id="avo">
+                                    <include file="Auction/bidbox" />
+                                </volist>
+                            </empty>
+                        </div>
+                    </foreach>
+                </div>
+            </div>
+            <!-- 卖家拍品列表】 -->
+            <!--分页开始-->
+        <div class="mod_page clearfix">
+            <div class="bid_list_page">{$page}</div>
+        </div>
+        <!--------分页结束-------->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_wide" />
+<include file="Common:footer"/>
+<script type="text/javascript">
+var start_path = "--PUBLIC--/Js/jquery_raty/img"
+var credit_score = "{$credit_score}";
+var sellerid = "{$sellerid}";
+// 关注商家地址
+var setAttentionSellerUrl ="{:U('Seller/attention')}";
+$(function(){
+    $('#credit').raty({
+        readOnly: true,
+        score: Number(credit_score),
+        path : start_path
+    });
+});
+</script>
+</body>
+</html>

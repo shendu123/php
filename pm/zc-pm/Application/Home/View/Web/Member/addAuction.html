@@ -1,0 +1,648 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+        <meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>个人信息-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body onload="succcheck();">
+    <include file="Common:head_narrow" />
+        <div class="main_b9 main_b9_1">
+            <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;我是卖家&nbsp;&gt;&gt;&nbsp;<eq name="ACTION_NAME" value="addAuction">添加拍品</eq><eq name="ACTION_NAME" value="editAuction">编辑拍品</eq></div>
+            <ul class="inquiry">
+                <eq name="ACTION_NAME" value="addAuction">
+                    <if condition="empty($info['crd_no'])">
+                        <li <eq name="info.to" value="js">class="hover"</eq>><a href="{:U('addAuction',array('to'=>'js','gid'=>$info[gid]))}">发布拍卖</a></li>
+                        <li <eq name="info.to" value="zc">class="hover"</eq>><a href="{:U('addAuction',array('to'=>'zc','gid'=>$info[gid]))}">发布拍卖到专场</a></li>
+                        <li <eq name="info.to" value="pmh">class="hover"</eq>><a href="{:U('addAuction',array('to'=>'pmh','gid'=>$info[gid]))}">发布拍卖到拍卖会</a></li>
+                    <else/>
+                        <li <eq name="info.to" value="js">class="hover"</eq>><a href="{:U('addAuction',array('to'=>'js','crd_no'=>$info[crd_no]))}">发布拍卖</a></li>
+                        <li <eq name="info.to" value="zc">class="hover"</eq>><a href="{:U('addAuction',array('to'=>'zc','crd_no'=>$info[crd_no]))}">发布拍卖到专场</a></li>
+                        <li <eq name="info.to" value="pmh">class="hover"</eq>><a href="{:U('addAuction',array('to'=>'pmh','crd_no'=>$info[crd_no]))}">发布拍卖到拍卖会</a></li>
+                    </if>
+                <else/>
+                    <li <eq name="ACTION_NAME" value="editAuction">class="hover"</eq>><a href="{:U('editAuction',array('pid'=>$info['pid']))}">编辑拍卖</a></li>
+                    <li <eq name="ACTION_NAME" value="editGoods">class="hover"</eq>><a href="{:U('editGoods',array('id'=>$info['gid'],'pid'=>$info['pid']))}">编辑商品</a></li>
+                </eq>
+            </ul>
+            <div class="inquiry-con">
+                <notempty name="uLimit.alert">
+                    <div class="show-msgbox">{$uLimit.alert}</div>
+                </notempty>
+                <form>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="on-form-table">
+                        <eq name="info.to" value="zc">
+                        <!-- 专场显示字段 -->
+                        <tr>
+                            <th width="100">发布的专场</th>
+                            <td>
+                                <select id="sidselect">
+                                    <option value="0" <eq name="info.sse" value="0">selected="selected"</eq> >未开拍专场</option>
+                                    <option value="1" <eq name="info.sse" value="1">selected="selected"</eq> >已开拍专场</option>
+                                </select>&nbsp;&nbsp;下的&nbsp;&nbsp;
+                                <select class="hide" id="futureSelect" name="info[sid]">
+                                    <volist name="futureList" id="fvo">
+                                        <option value="{$fvo.sid}" spledge="{$fvo.special_pledge_type}" sttime="{$fvo.starttime|date='Y-m-d H:i',###}" edtime="{$fvo.endtime|date='Y-m-d H:i',###}" <eq name="info[sid]" value="fvo.sid">selected="selected"</eq> >{$fvo.sname}</option>
+                                    </volist>
+                                </select>
+                                <select class="hide" id="bidingSelect" name="info[sid]">
+                                    <volist name="bidingList" id="fvo">
+                                        <option value="{$fvo.sid}" spledge="{$fvo.special_pledge_type}" sttime="{$fvo.starttime|date='Y-m-d H:i',###}" edtime="{$fvo.endtime|date='Y-m-d H:i',###}" <eq name="info[sid]" value="fvo.sid">selected="selected"</eq> >{$fvo.sname}</option>
+                                    </volist>
+                                </select>
+                                专场
+                            </td>
+                        </tr>
+                        <!-- 专场显示字段——end -->
+                        </eq>
+                        <eq name="info.to" value="pmh">
+                        <!-- 拍卖会显示字段 -->
+                        <tr>
+                            <th width="100">发布的拍卖会：</th>
+                            <td>
+                                <select id="midselect">
+                                    <option value="0" <eq name="info.mse" value="0">selected="selected"</eq> >未开拍拍卖会</option>
+                                </select>&nbsp;&nbsp;下的&nbsp;&nbsp;
+
+                                <select name="info[mid]">
+                                    <volist name="futureList" id="fvo">
+                                        <option value="{$fvo.mid}" spledge="{$fvo.special_pledge_type}" <eq name="info[mid]" value="fvo.mid">selected="selected"</eq> >{$fvo.mname}</option>
+                                    </volist>
+                                </select>
+                                拍卖会
+                            </td>
+                        </tr>
+                        <!-- 拍卖会显示字段——end -->
+                        </eq>
+                        <tr>
+                            <th>拍卖标题：</th>
+                            <td>
+                                <input id="pname" type="text" class="input" size="60" name="info[pname]" value="{$info.pname}"/>
+                                <span id="pnameTip"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>拍卖模式：</th>
+                            <td>
+                                <label>
+                                    <input id="type1" name="info[type]" type="radio" value="0" <eq name="info.type" value="0">checked="checked"</eq><eq name="info.type" value="">checked="checked"</eq> />竞拍 
+                                </label> 
+                                <eq name="info.to" value="js">
+                                    <label>
+                                        <input id="type" name="info[type]" type="radio" value="1" <eq name="info.type" value="1">checked="checked"</eq> />竞标 
+                                    </label>
+                                </eq>
+                                <span id="typeTip"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>成交模式：</th>
+                            <td>
+                                <label>
+                                    <input id="succtype1" name="info[succtype]" type="radio" value="0" <neq name="info.succtype" value="">checked="checked"</neq><eq name="info[succtype]" value="">checked="checked"</eq> />普通模式
+                                </label> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <label>
+                                    <input id="succtype" name="info[succtype]" type="radio" value="1" <eq name="info.succtype" value="1">checked="checked"</eq> />即时成交
+                                </label>
+                                <span id="succprice-box">
+                                     -->成交价：<input id="succprice" type="text" class="input" size="6" name="info[succprice]" value="{$info.succprice}"/>&nbsp;&nbsp;元
+                                </span>
+                                
+                                <span id="succtypeTip"></span>
+                                <span id="succpriceTip"></span>
+                            </td>
+                        </tr>
+                        <!-- 单品拍下才可以设置开始结束时间 -->
+                        <eq name="info.to" value="js">
+                            <tr>
+                                <th>开始时间：</th>
+                                <td>
+                                    <input id="start_time" type="text" class="input" size="20" name="info[starttime]" value="<neq name='info[starttime]' value=''>{$info.starttime|date='Y-m-d H:i',###}</neq>"/>
+                                    <span id="start_timeTip"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>结束时间：</th>
+                                <td>
+                                    <input id="end_time" type="text" class="input" size="20" name="info[endtime]" value="<neq name='info[starttime]' value=''>{$info.endtime|date='Y-m-d H:i',###}</neq>"/>
+                                    <span id="end_timeTip"></span>
+                                </td>
+                            </tr>
+                        </eq>
+                        <!-- 单品拍下才可以设置开始结束时间——end -->
+                        <eq name="ACTION_NAME" value="edit">
+                            <tr>
+                                <th>当前价：</th>
+                                <td>
+                                    <input class="nowprice" type="text" class="input" size="10" name="info[nowprice]" value="{$info.nowprice}"/>
+                                    <span id="nowpriceTip"></span>
+                                </td>
+                            </tr>
+                        </eq>
+                        
+                        <tr>
+                            <th>拍卖起拍价：</th>
+                            <td>
+                                <input id="onset" type="text" class="input" size="10" name="info[onset]" value="{$info.onset}"/>
+                                <span id="onsetTip"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>拍卖保留价：</th>
+                            <td>
+                                <input id="price" type="text" class="input" size="10" name="info[price]" value="{$info.price}"/>
+                                <span id="priceTip"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>运费：</th>
+                            <td>
+                                <input id="freight" type="text" class="input" size="10" name="info[freight]" value="{$info.freight}"/>
+                                <span id="freightTip"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>价格浮动：</th>
+                            <td>
+                                <select id="stepsize_type" name="info[stepsize_type]">
+                                
+                                    <option value="0" <eq name="info.stepsize_type" value="0">selected="selected"</eq> >阶梯</option>
+                                    <option value="1" <if condition="($info['stepsize_type'] eq '') or ($info['stepsize_type'] eq 1)">selected="selected"</if>>定额</option>
+                                </select>
+                                <span id="step_ratio_box" class="hide">
+                                    初始浮动额度为<input id="stepsizeratior" type="text" class="input" size="5" name="info[stepsize_ratio_r]" value="{$info.stepsize_ratio_r}" placeholder="浮动额度"/>,
+                                    当前价大于等于<input id="stepsizeratios" type="text" class="input" size="5" name="info[stepsize_ratio_s]" value="{$info.stepsize_ratio_s}" placeholder="当前价"/>以后，开始按照单位
+                                    <input id="stepsizeratio" type="text" class="input" size="5" name="info[stepsize_ratio]" value="{$info.stepsize_ratio}" placeholder="比例"/>%规则实行浮动，浮动最高不超过
+                                    <input id="stepsizeratiot" type="text" class="input" size="5" name="info[stepsize_ratio_t]" value="{$info.stepsize_ratio_t}" placeholder="浮动价"/>
+                                </span>
+                                <span id="step_fixation_box" class="hide">
+                                    <input id="stepfixation" type="text" class="input" size="5" name="info[step_fixation]" value="{$info.step_fixation}"/> &nbsp;&nbsp;每次出价固定加价额度
+                                </span>
+                                <span id="stepsizeTip"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>时间延时：</th>
+                            <td>最后
+                                <input id="steptime" type="text" class="input" size="5" name="info[steptime]" value="{$info.steptime}"/>
+                                秒内出价，时间延时
+                                <input id="deferred" type="text" class="input" size="5" name="info[deferred]" value="{$info.deferred}"/>
+                                秒
+                                <span id="stepTip">（60秒=1分钟）</span>
+                            </td>
+                        </tr>
+                        <tr id="pledge_box">
+                            <th>保证金：</th>
+                            <td>
+                                <select id="pledge_type" name="info[pledge_type]">
+                                    <option value="ratio" <eq name="info.pledge_type" value="ratio">selected="selected"</eq> >比例</option>
+                                    <option value="fixation" <if condition="($info['pledge_type'] eq '') or ($info['pledge_type'] eq 'fixation')">selected="selected"</if>>定额</option>
+                                </select>
+                                <span>
+                                    <input id="pledge" type="text" class="input" size="5" name="info[pledge]" value="{$info.pledge}"/>
+                                    <span class="ratioTip hidden">% 起拍价的比例冻结保证金</span><span class="fixationTip hidden">该拍品冻结的保证金</span>
+                                </span>
+                                <span id="pledgeTip"></span>
+                            </td>
+                        </tr>
+                        <if condition="C('Weixin.appid') and C('Weixin.appsecret')">
+                            <tr>
+                                <th>微信推送：</th>
+                                <td>
+                                    <label>
+                                        <input  id="send" name="weixin[send]" <notempty name="weixin">checked="checked"</notempty> type="radio" value="0"/>不设置推送 
+                                    </label> 
+                                    <label>
+                                        <input id="send1" name="weixin[send]" type="radio" value="1"/>以后推送 
+                                    </label>
+                                    <label>
+                                        <input id="send2" name="weixin[send]" type="radio" value="2"/>立即推送 
+                                    </label>
+                                    <span id="sendTip"></span>
+                                </td>
+                                
+                            </tr>
+                            <tr id="weicontent">
+                                <th>推送内容(选填)：</th>
+                                <td>
+                                    <ul class="trul">
+                                        <li class="li">
+                                            标题：<input id="weiname" type="text" class="input" size="50" name="weixin[name]" value="{$weixin.name}"/>
+                                            <span id="weinameTip"></span>
+                                        </li>
+                                        <li class="li">
+                                            描述：<input id="weicomment" type="text" class="input" size="70" name="weixin[comment]" value="{$weixin.comment}"/>
+                                            <span id="weicommentTip"></span>
+                                        </li>
+                                        <li class="li" id="topPicBox">
+                                            <div class="up_btn_box"><div class="up_explain">图片格式：*.gif; *.jpg; 尺寸：宽{:C('WEI_TOP_WIDTH')}&nbsp; 高{:C('WEI_TOP_HEIGHT')}。不上传则使用对应商品第一张图片</div>
+                                            <div id="topPic_upload" class="sbtn up_but"><div class="up_but_ico"></div>头条图片</div>
+                                            <div class="clearfix"></div>
+                                            <ul id="uploadImageList" class="clearfix">
+                                                <notempty name="weixin.toppic">
+                                                <li class="photo"><img id="upImgSize" src="{$upWholeUrl}{$weixin.toppic}" width="{:C('WEI_TOP_WIDTH')}" height="{:C('WEI_TOP_HEIGHT')}"/>
+                                                <div class="imper">
+                                                <a class="bigImg" href="{$upWholeUrl}{$info.picture}"  target="_blank"></a></div>
+                                                <input type="hidden" name="weixin[toppic]" value="{$weixin.toppic}" />
+                                                </li>
+                                                </notempty>
+                                            </ul>
+                                        </li>
+                                        <li class="li" id="listPicBox">
+                                            <div class="up_btn_box"><div class="up_explain">图片格式：*.gif; *.jpg; 尺寸：宽{:C('WEI_LIST_WIDTH')}&nbsp; 高{:C('WEI_LIST_HEIGHT')}。不上传则使用对应商品第一张图片</div>
+                                            <div id="listPic_upload" class="sbtn up_but"><div class="up_but_ico"></div>列表图片</div>
+                                            <div class="clearfix"></div>
+                                            <ul id="uploadImageList" class="clearfix">
+                                                <notempty name="weixin.picture">
+                                                <li class="photo"><img id="upImgSize" src="{$upWholeUrl}{$weixin.picture}" width="{:C('WEI_LIST_WIDTH')}" height="{:C('WEI_LIST_HEIGHT')}"/>
+                                                <div class="imper">
+                                                <a class="bigImg" href="{$upWholeUrl}{$info.picture}"  target="_blank"></a></div>
+                                                <input type="hidden" name="weixin[picture]" value="{$weixin.picture}" />
+                                                </li>
+                                                </notempty>
+                                            </ul>
+                                        </li>
+                                        <input type="hidden" name="weixin[id]" value="{$weixin.id}" />
+                                    </ul>
+                                </td>
+                            </tr>
+                        </if>
+                        <eq name="ACTION_NAME" value="edit">
+                        <tr>
+                            <th>注意：</th>
+                            <td>如果拍品已开始且已有人出价。请不要编辑除标题以外的数据。否则会导致数据混乱！请根据情况酌情处理！</td>
+                        </tr>
+                        </eq>
+                    </table>
+                    <input type="hidden" name="info[to]" value="{$info.to}" />
+                    <input type="hidden" name="info[pid]" value="{$info.pid}" />
+                    <input type="hidden" name="info[gid]" value="{$info.gid}" />
+                    <input type="hidden" name="info[crd_no]" value="{$info.crd_no}" />
+                </form>
+                <div id="btn_box">
+                    <button class="on-btn on-btn-red submit">发布拍卖</button>
+                </div>
+            </div>
+        </div>
+        <include file="Common:help_narrow" />
+        <include file="Common:footer"/>
+        <!-- 日期时间插件 -->
+        <css href="--PUBLIC--/Js/datetimepicker/jquery.datetimepicker.css"/>
+        <js href="--PUBLIC--/Js/datetimepicker/jquery.datetimepicker.js"/>
+        <!-- 日期时间插件 -->
+        <!-- 表单验证【 -->
+        
+        <js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+    <js href="--PUBLIC--/Js/formValidator/themes/Default/js/theme.js"/>
+        <js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+        <!-- 表单验证】 -->
+        <!-- 上传插件【 -->
+        <script type="text/javascript" src="__STATIC__/plupload/plupload.full.min.js"></script>
+        <script type="text/javascript" src="__STATIC__/plupload/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
+        <script type="text/javascript" src="__STATIC__/plupload/i18n/zh_CN.js"></script>
+        <!-- 上传插件】 -->
+        <script type="text/javascript">
+        // 上传变量配置【
+        var moxieswf = "__STATIC__/plupload/Moxie.swf";
+        var moxiesxap = "__STATIC__/plupload/Moxie.xap";
+
+        
+        // 上传变量配置】
+        function succcheck(){
+            if ($("input[name='info[succtype]']:checked").val()!=1) {
+                $('#succprice-box').hide();
+                $("#succprice").unFormValidator(true);
+            }else{
+                $('#succprice-box').show();
+                $("#succprice").unFormValidator(false);
+            } 
+        }
+        var addto = "{$info.to}";
+        var toTip ="竞拍:规定时间，多次出价，价高者得;";
+        var succtypeTip = "即时成交:当用户出价等于或大于成交价,拍品结束,以成交价拍得到";
+        var pledge_ratio = "{$info.pledge_ratio}";
+        var pledge_fixation = "{$info.pledge_fixation}";
+        var pledgealert = "";
+
+        var maxprice = "{$uLimit.maxprice}";
+
+            $(function(){
+                //上传初始化变量【
+                var uplode_weitop_url = '{:U("Upload/upWeiTopPic")}';//PHP处理脚本地址
+                var uplode_weilist_url = '{:U("Upload/upWeiListPic")}';//PHP处理脚本地址
+                var uplode_path = '__PUBLIC__'; //插件公共目录
+                var sid = '{:session_id()}';//sessionID
+                var upPathRoot="{$upWholeUrl}"; //图片上传根目录完整路径
+                var uploadPath ="{:C('UPLOADS_PICPATH')}"; //图片上传根目录
+                var topPicW = "{:C('WEI_TOP_WIDTH')}";
+                var topPicH = "{:C('WEI_TOP_HEIGHT')}";
+                var listPicW = "{:C('WEI_LIST_WIDTH')}";
+                var listPicH = "{:C('WEI_LIST_HEIGHT')}";
+                //上传初始化变量】
+                // 表单验证【
+                
+                $.formValidator.initConfig({formID:"goodsForm"});
+                $(".submit").click(function(){
+                        if($(this).attr('disabled')!='disabled'){
+                            $(this).attr('disabled','disabled');
+                            if($.formValidator.pageIsValid('1')==true){
+                                var pushstr = '';
+                                if($('input:radio[name="weixin[send]"]:checked').val()==2){
+                                    pushstr = '、推送图文'
+                                }
+                                popStatus(3, '正在发送提醒'+pushstr+'，请等待...', 0,'',true);
+                                commonAjaxSubmit('','',{'to' : $(this).attr('to')});
+                            }else{
+                                $(this).removeAttr("disabled");
+                            }
+                        }
+                    return false;
+                });
+                $("#pname").formValidator({onShow:"请填写商品标题",onFocus:"要求最少2个不超过8个字",onCorrect:"输入正确"}).inputValidator({min:3,max:300,onError:"你输入的标题不正确,请确认"});
+                if(addto=='js'){
+                    toTip +="竞标:规定时间，一次出价，价高者得";
+                }
+                $(":radio[name='info[type]']").formValidator({tipID:"typeTip",onShow:toTip,onFocus:toTip,onCorrect:toTip}).inputValidator({min:1,max:1,onError:toTip});//.defaultPassed();
+
+                $(":radio[name='info[succtype]']").click(function(){
+                    succcheck();
+                 });
+
+                $(":radio[name='info[succtype]']").formValidator({tipID:"succtypeTip",onShow:succtypeTip,onFocus:succtypeTip,onCorrect:succtypeTip}).inputValidator({min:1,max:1,onError:succtypeTip});//.defaultPassed();
+                $("#succprice").formValidator({onShow:"请输入成交价",onFocus:"必须为数字，小数点后最多可有两位",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+
+                $("#start_time").formValidator({onShow:"请输入开拍时间",onFocus:"请输入开拍时间",onCorrect:"输入正确"}).inputValidator({min:15,max:16,onError:"开拍时间不能为空"});
+                $("#end_time").formValidator({onShow:"请输入截拍时间",onFocus:"请输入截拍时间",onCorrect:"输入正确"}).inputValidator({min:15,max:16,onError:"截拍时间不能为空"});
+
+                
+                if(maxprice==0){
+                    $("#onset").formValidator({onShow:"请输入起拍价",onFocus:"必须为数字，小数点后最多可有两位",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+                }else{
+                    $("#onset").formValidator({onShow:"请输入起拍价",onFocus:"必须为数字，小数点后最多可有两位",onCorrect:"输入正确"}).functionValidator({fun:isMoney}).inputValidator({min:0,max:maxprice,type:"value",onErrorMin:"你输入的值必须大于等于0",onError:"起拍价必须小于"+maxprice});
+                }
+
+                $("#price").formValidator({onShow:"请输入保留价",onFocus:"必须为数字，小数点后最多可有两位",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+                $("#freight").formValidator({onShow:"请输入运费",onFocus:"必须为数字；0为免运费；小数点后最多可有两位",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+
+                $("#stepsizeratior").formValidator({tipID:"stepsizeTip",onFocus:"必须为数字",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+                $("#stepsizeratios").formValidator({tipID:"stepsizeTip",onFocus:"必须为数字",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+                $("#stepsizeratio").formValidator({tipID:"stepsizeTip",onFocus:"必须为数字",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+                $("#stepsizeratiot").formValidator({tipID:"stepsizeTip",onFocus:"必须为数字",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+                $("#stepfixation").formValidator({onShow:"请输入浮动额度",tipID:"stepsizeTip",onFocus:"必须为数字",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+
+                $("#steptime").formValidator({tipID:"stepTip",onShow:"请输入整数",onCorrect:"谢谢你的合作，你的正数正确"}).regexValidator({regExp:"num1",dataType:"enum",onError:"正数格式不正确"});
+                $("#deferred").formValidator({tipID:"stepTip",onShow:"请输入整数",onCorrect:"谢谢你的合作，你的正数正确"}).regexValidator({regExp:"num1",dataType:"enum",onError:"正数格式不正确"});
+
+                $("#pledge").formValidator({tipID:"pledgeTip",onShow:"请输入整数",onCorrect:"谢谢你的合作，你的正数正确"}).regexValidator({regExp:"num1",dataType:"enum",onError:"正数格式不正确"});
+
+                $(":radio[name='weixin[send]']").formValidator({tipID:"sendTip",onShow:"仅推送与官方公众号有过交流不超过48小时且关注过您和与您交易过的用户，直接推送可不上传列表图片",onFocus:"仅推送与官方公众号有过交流不超过48小时且关注过您和与您交易过的用户，直接推送可不上传列表图片",onCorrect:"仅推送与官方公众号有过交流不超过48小时且关注过您和与您交易过的用户，直接推送可不上传列表图片"});
+
+                $("#weiname").formValidator({onShow:"请填写推送标题",onFocus:"要求最少2个不超过8个字",onCorrect:"输入正确"}).inputValidator({min:3,max:300,onError:"你输入的标题不正确,请确认"});
+                $("#weicomment").formValidator({onShow:"请填写推送描述",onFocus:"要求最少2个不超过8个字",onCorrect:"输入正确"}).inputValidator({min:3,max:300,onError:"你输入的标题不正确,请确认"});
+                
+                
+                // 表单验证】
+                // 微信头条图片上传【
+                <literal>
+                    var uploaderTop = new plupload.Uploader({//创建实例的构造方法
+                        runtimes: 'html5,flash,silverlight,html4', //上传插件初始化选用那种方式的优先级顺序
+                        browse_button: 'topPic_upload', // 上传按钮
+                        url: uplode_weitop_url, //远程上传地址
+                        flash_swf_url: moxieswf, //flash文件地址
+                        silverlight_xap_url: moxiesxap, //silverlight文件地址
+                        filters: {
+                            max_file_size: '4mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+                            mime_types: [//允许文件上传类型
+                                {title: "files", extensions: "jpg,gif"}
+                            ]
+                        },
+                        multi_selection: false, //true:ctrl多文件上传, false 单文件上传
+                        init: {
+                            FilesAdded: function(up, files) { //文件上传前
+                                if ($("#topPicBox #uploadImageList").children("li").length > 1) {
+                                    alert("您上传的图片太多了！");
+                                    uploaderTop.destroy();
+                                } else {
+                                    var li = '';
+                                    plupload.each(files, function(file) { //遍历文件
+                                        li += "<li class='photo' id='" + file['id'] + "'><div style='width: "+topPicW+"px;' class='progress'><span class='bar'></span><span class='percent'>0%</span></div></li>";
+                                    });
+                                    $("#topPicBox #uploadImageList").html(li);
+                                    uploaderTop.start();
+                                }
+                            },
+                            UploadProgress: function(up, file) { //上传中，显示进度条
+                         var percent = file.percent;
+                                $("#" + file.id).find('.bar').css({"width": percent + "%"});
+                                $("#" + file.id).find(".percent").text(percent + "%");
+                            },
+                            FileUploaded: function(up, file, info) { //文件上传成功的时候触发
+                                var data = JSON.parse(info.response);
+                                 $("#" + file.id).html('<img id="upImgSize" src="'+upPathRoot+data.path+'" width="'+topPicW+'" height="'+topPicH+'"/><div class="imper"><a class="bigImg" href="'+uploadPath+data.path+'"  target="_blank"></a></div><input type="hidden" name="weixin[toppic]" value="'+data.path+'" />');
+                            },
+                            Error: function(up, err) { //上传出错的时候触发
+                                alert(err.message);
+                            }
+                        }
+                    });
+                    uploaderTop.init();
+                </literal>
+                // 微信头条图片上传】
+                // 微信列表图片上传【
+                <literal>
+                    var uploaderList = new plupload.Uploader({//创建实例的构造方法
+                        runtimes: 'html5,flash,silverlight,html4', //上传插件初始化选用那种方式的优先级顺序
+                        browse_button: 'listPic_upload', // 上传按钮
+                        url: uplode_weilist_url, //远程上传地址
+                        flash_swf_url: moxieswf, //flash文件地址
+                        silverlight_xap_url: moxiesxap, //silverlight文件地址
+                        filters: {
+                            max_file_size: '4mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+                            mime_types: [//允许文件上传类型
+                                {title: "files", extensions: "jpg,gif"}
+                            ]
+                        },
+                        multi_selection: false, //true:ctrl多文件上传, false 单文件上传
+                        init: {
+                            FilesAdded: function(up, files) { //文件上传前
+                                if ($("#listPicBox #uploadImageList").children("li").length > 1) {
+                                    alert("您上传的图片太多了！");
+                                    uploaderList.destroy();
+                                } else {
+                                    var li = '';
+                                    plupload.each(files, function(file) { //遍历文件
+                                        li += "<li class='photo' id='" + file['id'] + "'><div  style='width: "+listPicW+"px;' class='progress'><span class='bar'></span><span class='percent'>0%</span></div></li>";
+                                    });
+                                    $("#listPicBox #uploadImageList").html(li);
+                                    uploaderList.start();
+                                }
+                            },
+                            UploadProgress: function(up, file) { //上传中，显示进度条
+                         var percent = file.percent;
+                                $("#" + file.id).find('.bar').css({"width": percent + "%"});
+                                $("#" + file.id).find(".percent").text(percent + "%");
+                            },
+                            FileUploaded: function(up, file, info) { //文件上传成功的时候触发
+                                var data = JSON.parse(info.response);
+                                 $("#" + file.id).html('<img id="upImgSize" src="'+upPathRoot+data.path+'" width="'+listPicW+'" height="'+listPicH+'"/><div class="imper"><a class="bigImg" href="'+uploadPath+data.path+'"  target="_blank"></a></div><input type="hidden" name="weixin[picture]" value="'+data.path+'" />');
+                            },
+                            Error: function(up, err) { //上传出错的时候触发
+                                alert(err.message);
+                            }
+                        }
+                    });
+                    uploaderList.init();
+                </literal>
+                // 微信列表图片上传】
+                // 微信推送内容设置显示隐藏【
+                if($('input:radio[name="weixin[send]"]:checked').val()>0){
+                    $('#weicontent').show();
+                }else{
+                    $('#weicontent').hide();
+                }
+                $('input:radio[name="weixin[send]"]').click(function(){
+                    if($(this).val()>0){
+                        $('#weicontent').show();
+                    }else{
+                        $('#weicontent').hide();
+                    }
+                });
+                // 微信推送内容设置显示隐藏【
+                //初始化价格浮动字段
+                restepsize($('#stepsize_type').val()); //初始化扩展字段
+                resid($('#sidselect').val()); //初始化专场
+                remid($('#midselect').val()); //初始化扩展字段
+                //为input添加时间插件
+                $('#start_time').datetimepicker({lang:'ch'});
+                $('#end_time').datetimepicker({lang:'ch'});
+                //为input添加插件_end
+            });
+            //初始化价格浮动字段 ---------------------------------
+            // 价格浮动动态监听
+            $('#stepsize_type').on("change",function(){
+                var type = $(this).children('option:selected').val();
+                restepsize(type);
+            });
+            // 价格浮动函数
+            function restepsize(stepsize_type){
+                if(stepsize_type==0){
+                    $('#step_ratio_box').show();
+                    $('#step_fixation_box').hide();
+                    $("#stepfixation").unFormValidator(true);
+
+                    $("#stepsizeratior").unFormValidator(false);
+                    $("#stepsizeratios").unFormValidator(false);
+                    $("#stepsizeratio").unFormValidator(false);
+                    $("#stepsizeratiot").unFormValidator(false);
+                }else if(stepsize_type==1){
+                    $('#step_fixation_box').show();
+                    $('#step_ratio_box').hide();
+                    $("#stepsizeratior").unFormValidator(true);
+                    $("#stepsizeratios").unFormValidator(true);
+                    $("#stepsizeratio").unFormValidator(true);
+                    $("#stepsizeratiot").unFormValidator(true);
+                    $("#stepfixation").unFormValidator(false);
+                }
+            }
+            //初始化价格浮动字段_end ---------------------------------
+            // 根据select动态改变时间
+            $('#bidingSelect').on("change",function(){
+                changtime($(this));
+            });
+            $('#futureSelect').on("change",function(){
+                changtime($(this));
+            });
+            // 专场动态改变结束时间函数
+            function changtime(thisobj){
+                var etim = thisobj.children('option:selected').attr('edtime');
+                $('#end_time').val(etim);
+            }
+            //初始化专场选项-------------------------------------------
+            $('#sidselect').on("change",function(){
+                var stype = $(this).children('option:selected').val();
+                resid(stype);
+            });
+            function resid(sid){
+                if(sid==0){
+                    $('#bidingSelect').addClass('hide');
+                    $('#bidingSelect').removeAttr('name');
+
+                    $('#futureSelect').removeClass('hide');
+                    $('#futureSelect').attr('name','info[sid]');
+                    rhs($('#futureSelect').children('option:selected').attr('spledge'));
+                    changtime($('#futureSelect'));
+                }else if(sid==1){
+                    $('#bidingSelect').removeClass('hide');
+                    $('#bidingSelect').attr('name','info[sid]');
+
+                    $('#futureSelect').addClass('hide');
+                    $('#futureSelect').removeAttr('name');
+                    rhs($('#bidingSelect').children('option:selected').attr('spledge'));
+                    changtime($('#bidingSelect'));
+                }
+            }
+            //初始化专场选项_end -----------------------------------------
+            //初始化拍卖会选项------------------------------------------
+            $('#midselect').on("change",function(){
+                var stype = $(this).children('option:selected').val();
+                remid(stype);
+            });
+            function remid(sid){
+                if(sid==0){
+                    $('#bidingSelect').addClass('hide');
+                    $('#bidingSelect').removeAttr('name');
+                    $('#futureSelect').removeClass('hide');
+                    $('#futureSelect').attr('name','info[mid]');
+                }else if(sid==1){
+                    $('#bidingSelect').removeClass('hide');
+                    $('#bidingSelect').attr('name','info[mid]');
+                    $('#futureSelect').addClass('hide');
+                    $('#futureSelect').removeAttr('name');
+                }
+            }
+            //初始化拍卖会选项——end------------------------------------------
+            // 专场动态增加删除保证金字段
+            $('#bidingSelect').on("change",function(){
+                rhs($(this).children('option:selected').attr('spledge'));
+            });
+            $('#futureSelect').on("change",function(){
+                rhs($(this).children('option:selected').attr('spledge'));
+            });
+            // 动态添加删除保证金字段-------------------------------------
+            function rhs(rhsv){
+                if(rhsv==0){
+                    $('#pledge_box').addClass('hide');
+                    $('#pledge_box select').removeAttr('name');
+                    $('#pledge').removeAttr('name');
+                }else{
+                    $('#pledge_box').removeClass('hide');
+                    $('#pledge_box select').attr('name','info[pledge_type]');
+                    $('#pledge').attr('name','info[pledge]');
+                }
+            }
+            // 动态添加删除保证金字段——end-------------------------------------
+            //初始化保证金字段----------------------------------------
+            repledge($('#pledge_type').val()); //初始化扩展字段
+            $('#pledge_type').on("change",function(){
+                var type = $(this).children('option:selected').val();
+                repledge(type);
+            });
+            function repledge(pledge_type){
+                if(pledge_type=='ratio'){
+                    $('#pledge').val(pledge_ratio);
+                    $('.ratioTip').show();
+                    $('.fixationTip').hide();
+                }else if(pledge_type=='fixation'){
+                    $('#pledge').val(pledge_fixation);
+                    $('.ratioTip').hide();
+                    $('.fixationTip').show();
+                }
+            }
+            //初始化保证金字段_end ------------------------------------------
+        </script>
+    </body>
+</html>

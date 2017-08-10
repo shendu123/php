@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>申购订单编辑-后台管理-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='申购订单管理 > 订单编辑';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">订单编辑</div>
+                    </div>
+                    <form>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <neq name="info.status" value="0">
+                                <tr>
+                                    <th>买家地址：</th>
+                                    <td>
+                                    收件人：{$info.truename}<br/>
+                                    邮编：{$info.postalcode}<br/>
+                                    手机：{$info.mobile|default="无"}<br/>
+                                    省份：{$info.province|default="无"}<br/>
+                                    城市：{$info.city|default="无"}<br/>
+                                    区县：{$info.area|default="无"}<br/>
+                                    地址：{$info.address}<br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>买家留言：</th>
+                                    <td>{$info.buyer_msg|default="无"}</td>
+                                </tr>
+                            </neq>
+                            <tr>
+                                <th>状态：</th>
+                                <td>
+                                    <label><input type="radio" value="0" name="info[status]"<eq name="info.status" value="0"> checked="checked"</eq>> 待支付</label> &nbsp; 
+                                    <label><input type="radio" value="1" name="info[status]"<eq name="info.status" value="1"> checked="checked"</eq>> 待发货</label> &nbsp; 
+                                    <label><input type="radio" value="2" name="info[status]"<eq name="info.status" value="2"> checked="checked"</eq>> 已发货</label> &nbsp; 
+                                    <label><input type="radio" value="3" name="info[status]"<eq name="info.status" value="3"> checked="checked"</eq>> 已收货</label>
+
+                                    &nbsp; &nbsp; &nbsp; 此处仅修改状态，不做连带的处理，请谨慎操作！
+                                </td>
+                            </tr>
+                            <in name="info.status" value="0,1,2,3">
+                                <tr>
+                                    <th>给买家发货：</th>
+                                    <td>
+                                        快递公司：
+                                        <select style="height: 29px;" id="typecom" name="info[express]">
+                                            <volist name="express_list" id="vo">
+                                                <option value="">请选择快递</option>
+                                                <option value="*" <eq name="info.express" value="*">selected="selected"</eq>>其他快递/物流</option>
+                                                <!-- 字母 -->
+                                                <option disabled="disabled" class="sltit"><eq name="key" value="com">常用快递<else/>{$key}</eq></option>
+                                                <volist name="vo" id="ca">
+                                                    <if condition="$info['express'] eq $ca['en']">
+                                                        <option value="{$ca.en}" selected="selected">{$ca.ch}</option>
+                                                    <else/>
+                                                        <option value="{$ca.en}">{$ca.ch}</option>
+                                                    </if>
+                                                </volist>
+                                            </volist>
+                                        </select>
+                                        <span id="express_other" <neq name="info.express" value="*">class="hidden"</neq>>-><input class="input" type="text" name="info[express_other]" value="{$info.express_other}" /></span>
+                                        快递单号：<input class="input" type="text" name="info[express_no]" value="{$info.express_no}" />
+
+                                        操作此项，请设置【状态】为已发货！
+                                    </td>
+                                </tr>
+                            </in>
+                            <tr>
+                            <th>备注：</th>
+                                <td>
+                                    <textarea name="info[remark]" style="height: 60px; width: 300px;" class="input">{$info.remark}</textarea>
+                                    &nbsp;*这里的信息会在用户订单列表内显示，如果发物流或快递可以填写快递号和提醒。您可以根据编辑的状态填写相应的备注！
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="info[crd_no]" value="{$info.crd_no}" />
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            $(function(){
+                $('#typecom').on("change",function(){
+                    if($(this).val()=='*'){
+                        $('#express_other').removeClass('hidden');
+                    }else{
+                        $('#express_other').addClass('hidden');
+                    }
+                });
+                $(".submit").click(function(){
+                    commonAjaxSubmit();
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

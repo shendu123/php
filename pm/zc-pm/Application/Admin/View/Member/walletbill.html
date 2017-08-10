@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>
+            用户账户记录-{$site.SITE_INFO.name}
+        </title>
+        <php>
+            $currentNav ='用户账户记录';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current fl">
+                            用户账户记录
+                        </div>
+                        <div class="fl">
+                            <a class="sbtn <eq name='wallet' value='pledge'>on</eq>" href="{:U('Member/walletbill',array('wallet'=>'pledge'))}">余额记录</a>
+                            <a class="sbtn <eq name='wallet' value='limsum'>on</eq>" href="{:U('Member/walletbill',array('wallet'=>'limsum'))}">信用记录</a>
+                        </div>
+                        <div class="search">
+                            <form action="{:U('Member/walletbill')}" method='get'>
+                                开始时间：<input id="start_time" size="15" type="text" value="{$keys.start_time}" name="start_time" class="input" placeholder="默认为建站时间" />&nbsp;&nbsp;
+                                结束时间：<input id="end_time" size="15" type="text" value="{$keys.end_time}" name="end_time" class="input" placeholder="默认为当前时间" />&nbsp;&nbsp;
+                                单号：<input type="text" size="10" value="{$keys.order_no}" name="order_no" class="input" placeholder="搜索单号" />
+                                &nbsp;&nbsp;
+                                用户账号：<input type="text" size="10" value="{$keys.account}" name="account" class="input" placeholder="用户账号" />
+                                &nbsp;&nbsp;
+                                类型：
+                                <select name="changetype">
+                                    <option value="" <eq name="keys.changetype" value=""> selected="selected"</eq>>全部</option>
+                                    <foreach name="changetype" item="cv">
+                                        <option value="{$key}" <eq name="keys.changetype" value="$key"> selected="selected"</eq>>{$cv}</option>
+                                    </foreach>
+                                </select>
+                                <input type="hidden" name="wallet" value="{$wallet}" />
+                                &nbsp;&nbsp;<button class="btn">筛选</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                    
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td width="10%">单号</td>
+                                <td width="15%">所属用户</td>
+                                <td width="10%">类型</td>
+                                <td width="10%">收入</td>
+                                <td width="10%">支出</td>
+                                <td width="20%">说明</td>
+                                <td width="5%">时间</td>
+                            </tr>
+                        </thead>
+                        <empty name="list">
+                            <tr><td colspan="10">哎哟！什么也没有！</td></tr>
+                        <else /> 
+                            <volist name="list" id="vo">
+                                <tr align="center">
+                                    <td align="left">{$vo.order_no}</td>
+                                    <td align="left">
+                                        <div class="ushow">
+                                            <img class="usimg" src="{$vo.sellerid|getUserpic=###,2}" alt="" />
+                                            <p class="fl">账号：{$vo.account}<br/>昵称：{$vo.nickname}</p>
+                                        </div>
+                                    </td>
+                                    <td>{:changetype($vo['changetype'])}</td>
+                                    <td>{$vo.income}</td>
+                                    <td>{$vo.expend}</td>
+                                    <td align="left">{$vo.annotation}</td>
+                                    <td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+                                </tr>
+                            </volist>
+                            <tr>
+                                <td colspan="20"><div class="page"  style="width: 60%; text-align: right; float: right;">{$page}</div></td>
+                            </tr>
+                        </empty>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+    </body>
+<!-- 日期时间插件 -->
+<css href="--PUBLIC--/Js/datetimepicker/jquery.datetimepicker.css"/>
+<js href="--PUBLIC--/Js/datetimepicker/jquery.datetimepicker.js"/>
+<!-- 日期时间插件 -->
+<script type="text/javascript">
+    //为input添加时间插件
+    $('#start_time').datetimepicker({lang:'ch'});
+    $('#end_time').datetimepicker({lang:'ch'});
+</script>
+</html>

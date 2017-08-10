@@ -1,0 +1,97 @@
+<include file="Common:meta" />
+<title>{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<js href="__JS__/masonry.pkgd.min.js"/>
+<div class="on-search-header">
+    <ul class="tab_menu am-avg-sm-3">
+        <li class="tab <eq name='searchtype' value='0'>on</eq>"><a  val="0" href="javascript:void(0)">搜索全部</a></li>
+        <li class="tab <eq name='searchtype' value='1'>on</eq>"><a  val="1" href="javascript:void(0)">搜索拍卖</a></li>
+        <li class="tab <eq name='searchtype' value='2'>on</eq>"><a val="2" href="javascript:void(0)">搜索资讯</a></li>
+    </ul>
+    <div class="search-panel clearfix">
+        <form id="form_search" name="form_search" class="am-form" method="post" action="{:U('Index/search')}">
+            <div class="input_box">
+                <input id="seakey" class="input"  type="text"  value="请输入关键词"  name="searchkey" autocomplete="off" />
+                <div class="pos_sval_box">
+                    <ul id="sval_box"></ul>
+                </div>
+            </div>
+            <input type="hidden" id="searchtype" name="searchtype" value = "0" />
+            <input id="seaForm" type="button" class="am-btn am-btn-danger on-btn-danger" value="查 询" />
+        </form>
+   </div>
+</div>
+    <div class="contopcenter">
+        <eq name="searchtype" value="0">
+            <include file="Index:search_auction" />
+            <include file="Index:search_news" />
+        </eq>
+        <eq name="searchtype" value="1">
+            <include file="Index:search_auction" />
+        </eq>
+        <eq name="searchtype" value="2">
+            <include file="Index:search_news" />
+        </eq>
+    </div>
+<include file="Common:navbar"/>
+</body>
+<script type="text/javascript">
+    var seakey =$('#seakey');
+    var searchAjax = "{:U('Public/search_ajax')}";
+    $(function(){
+        // input实时搜索功能【
+        $('#seakey').focus(function(){
+            if($('#sval_box').html()!=''){
+                $('#sval_box').show();
+            }
+            $(this).keyup(function(){
+                var searchkey = $(this).val();
+                var searchtype = $('#searchtype').val();
+                if(searchkey!=''){
+                    $.post(searchAjax,{'searchtype':searchtype,'searchkey':searchkey},function(data){
+                        if (data.status) {
+                            $('#sval_box').html(data.shtml);
+                            $('#sval_box').show();
+                        }else{
+                            $('#sval_box').html('');
+                            $('#sval_box').hide();
+                        }
+                    },'json');
+                }
+            });
+        }).blur(function(){
+            $(this).unbind("keyup");
+            setTimeout(function(){
+                $('#sval_box').hide();
+            },500);
+            
+        });
+        $('#sval_box').on("click",'li a',function(){
+            var newval=$(this).html().replace("<span>","");
+            newval=newval.replace("</span>","");
+            $('#seakey').val(newval);
+            $('#sval_box').hide();
+        });
+        // input实时搜索功能】
+        // 搜索框
+        var keyval = seakey.val();  
+        seakey.focus(function() {if ($(this).val() == keyval) {$(this).val("");}});
+        seakey.blur(function() {if ($(this).val()== "") {$(this).val(keyval);}}); 
+        $('#seaForm').click(function(){
+            if (seakey.val()==""||seakey.val()=="请输入关键词"){ 
+              popup.error("请输入关键词");
+              setTimeout(function(){
+                popup.close("asyncbox_error");
+              },2000);
+              seakey.focus();
+              return false;
+            }else{
+              $('#form_search').submit();
+            }
+        });
+    });
+</script>
+    </body>
+</html>

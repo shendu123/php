@@ -1,0 +1,158 @@
+<include file="Common:meta" />
+<title>账户充值-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<js href="--PUBLIC--/Js/jquery-1.7.2.min.js"/>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        var bill = $('#billid').val();
+        var isweixin = $('#isweixin').val();
+        if(isweixin){
+            if (parseInt(bill) != 1) {
+                callpay();
+                return;
+            }
+        }
+        
+        
+    });
+
+    $(function(){
+
+        $("#submit").click(function(){
+             var mon = $('#money').val();
+             if((typeof(mon) == undefined)&&(parseInt(mon)<=0)){
+                 popStatus(3, '请填入要充值的金额...', 0,'',true);
+                 return true;
+             }else{
+                popStatus(3, '正在进行支付...', 0,'',true);
+                return true;
+             }
+        });
+        // 初始化radio
+        $(".payTypeList").find("li:first-child").find("input[name='data[channel]']").attr('checked','checked');
+        $(".payTypeList input[name='data[channel]']:checked").parents('li').addClass('cur');
+        $(".payTypeList :radio").change(function() {
+            $("input[name='data[channel]']").parents('li').removeClass('cur');
+            $("input[name='data[channel]']:checked").parents('li').addClass('cur');
+        });
+        // 表单验证【
+         $.formValidator.initConfig({formID:"remaining",submitButtonID:"submit"});
+         $("#money").formValidator({onShow:"请输入充值金额",onFocus:"必须为数字，小数点后最多可有两位",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+         $(":radio[name='data[channel]']").formValidator({tipID:"payTip",onShow:"请选择一种支付方式",onFocus:"请选择一种支付方式，才能支付",onCorrect:"已选择"}).inputValidator({min:1,max:1,onError:"性别忘记选了,请确认"});
+        // 表单验证】
+        // 
+        
+
+
+    });
+
+    
+    //调用微信JS api 支付
+    function jsApiCall()
+    {
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest',
+            <?php echo $jsApiParameters; ?>,
+            function(res){
+                WeixinJSBridge.log(res.err_msg);
+                if(res.err_msg=="get_brand_wcpay_request:ok"){
+                    window.location.replace("index");
+                }else if(res.err_msg=="get_brand_wcpay_request:cancel"){
+                    
+                }
+                // alert(res.err_code+res.err_desc+res.err_msg);
+            }
+        );
+    }
+
+    function callpay(){
+        
+        if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){
+                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+            }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+            }
+        }else{
+            jsApiCall();
+        }
+    }
+
+</script>
+
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+        <!---右侧开始-->
+        <div class="mbsecbox">
+            <!-- 保证金充值显示 -->
+            <div class="on-tips">
+                <strong>尊敬的客户，账户充值成功后你将享有对应拍品的出价权限!出价后冻结保证金，如未拍到拍品，保证金将退回到您的账户！你可以选择提现来获得充值的保证金！详情查看帮助中心</strong>
+            </div>
+            <input type="hidden" name="billid" id="isweixin" value="{$isweixin}">
+            <input type="hidden" name="billid" id="billid" value="{$bill}">
+            <form id="remaining" class="am-form" action="{:U('Payment/index')}" name="remaining" method="post">
+                <input type="hidden" name="data[purpose]" value="pledge">
+                <div class="am-margin-xs">
+                    <!-- 保证金充值 -->
+                    <dl class="user-frame">
+                        <dt class="pdt">充值金额&nbsp;↓</dt>
+                        <if condition="$bill neq 1 ">
+                            <dd><input placeholder="充值金额" type="text" value="{$mon}" id="money" name="data[money]" class="input"></dd>
+                        <else/>
+                            <dd><input placeholder="1" type="text" id="money" value="1" name="data[money]" class="input"></dd>
+                        </if>
+
+                      
+                        <dd><div id="moneyTip"></div></dd>
+                    </dl>
+                    <!-- 保证金充值——end -->
+                    <dl class="user-frame">
+                        <dt class="pdt">在线支付&nbsp;↓</dt>
+                        <dd>
+                            <ul class="payTypeList am-avg-sm-3">
+                                <foreach name="channel" item="v">
+                                    <li>
+                                        <label>
+                                            <div class="icobox">
+                                                <input type="radio" id="pay<neq name='key' value='0'>{$key}</neq>" value="{$v.value}" name="data[channel]">
+                                                <img width="73px;" src="{$v.img}">
+                                            </div>
+                                        </label>
+                                        
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </dd>
+                        <dd><div id="payTip"></div></dd>
+                    </dl>
+                    <dl class="am-margin-top-xs">
+                        <dd><p>手机端微信支付，请关注微信公众号 首玺拍卖行</p></dd>
+                        <input type="hidden" name="data[payType]" value="recharge" />
+                        <if condition="$bill neq 1 ">
+                            <dd><input id="submit" type="submit" value="支付" class="submitBtn am-btn am-btn-danger on-btn-danger am-radius"></dd>
+                        <else/>
+                            <dd><input id="submit" type="submit" value="支付" class="submitBtn am-btn am-btn-danger on-btn-danger am-radius"></dd>
+                        </if>
+
+                        <!-- <dd><br></dd> -->
+                        <!-- <dd><input id="submit2" type="submit" value="微信支付" class="submitBtn am-btn am-btn-danger on-btn-danger am-radius"></dd> -->
+                        <!-- <dd><button type="button" onclick="callpay()">支付</button></dd> -->
+                    </dl>
+                </div>
+            </form>
+        </div>
+        <!---右侧结束-->
+    <!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+
+</body>
+</html>

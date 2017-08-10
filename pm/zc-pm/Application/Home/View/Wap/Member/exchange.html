@@ -1,0 +1,62 @@
+ <include file="Common:meta" />
+<title>消息提醒-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+<div class="am-margin-top-xs">
+    <div class="on-tips">
+        <strong>我</strong>和<strong style="color: #09c;">{$guest.nickname}<neq name="guest.uid" value="0">(账号：{$guest.account})</neq></strong><if condition="$auction">关于<a style="color: #980000;font-weight: bold;padding: 0 5px;" target="_blank" href="{:U('Auction/details',array('pid'=>$auction['pid']))}">{$auction.pname}</a></if>的会话记录
+    </div>
+    
+    <ul class="am-comments-list am-comments-list-flip">
+        <foreach name="list" item="v">
+        <li class="am-comment">
+            <!-- 评论容器 -->
+            <a href="javascript:void(0);">
+                <img class="am-comment-avatar" src="{$v.userid|getUserpic=###,1}" />
+                <!-- 评论者头像 -->
+            </a>
+            <div class="am-comment-main">
+                <!-- 评论内容容器 -->
+                <header class="am-comment-hd">
+                    <!--<h3 class="am-comment-title">评论标题</h3>-->
+                    <div class="am-comment-meta">
+                        <!-- 评论元数据 -->
+                        <a href="javascript:void(0);" class="am-comment-author">
+                            <eq name="v.userid" value="$myid"><span class="me">我</span><else/><span class="he">{$guest.nickname}</span></eq>
+                            @
+                            <eq name="v.uid" value="$myid"><span class="me">我</span><else/><span class="he">{$guest.nickname}</span></eq>
+                        </a>
+                        <time datetime="">{$v.time|date='m-d H:i',###}</time>
+                    </div>
+                </header>
+
+                <div class="am-comment-bd">
+                    <div class="tb-rev-item " data-id="255776406962">
+                        <div class="J_TbcRate_ReviewContent tb-tbcr-content ">
+                            {$v.content}
+                        </div>
+                        <!-- <div class="tb-r-act-bar">尺码：S</div> -->
+                    </div>
+
+                </div>
+                <!-- 评论内容 -->
+            </div>
+        </li>
+        </foreach>
+    </ul>
+</div>
+        <!--分页【-->
+    <notempty name="page">
+        <div class="pagestyle">
+            {$page}
+        </div>
+    </notempty>
+    <!--分页】-->
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+</body>
+</html>

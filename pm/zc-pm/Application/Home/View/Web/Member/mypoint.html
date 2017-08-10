@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+        <meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>{$whopage.name}-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_wide" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;我的积分兑换&nbsp;&gt;&gt;&nbsp;我的积分兑换</div>
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                <ul class="inquiry">
+                    <li class="hover">我的积分兑换</li>
+                    <!-- <li>退货订单</i> -->
+                </ul>
+                <div class="xunj">
+                    <ul class="sea clearfix">
+                        <li class="th">状态筛选：</li>
+                        <if condition="$whopage['type'] eq 'buy'">
+                            <li><a <eq name="st" value="">class="on"</eq> href="{:U($whopage['action'])}">全部订单</a></li>
+                            <!-- <li><a <eq name="st" value="3">class="on"</eq> href="{:U($whopage['action'],array('st'=>3))}">交易成功</a></li> -->
+                        </if>
+                        <if condition="$whopage['type'] eq 'return'">
+                            <eq name="whopage.seller" value="0">
+                                <!-- 买家退款订单 -->
+                            </eq>
+                            <eq name="whopage.seller" value="1">
+                                <!-- 卖家退款订单 -->
+                            </eq>
+                        </if>
+                    </ul>
+                    <empty name="alist">
+                        <table width="100%" cellspacing="0" cellpadding="0" class="tabela">
+                            <tr>
+                                <td>哎哟！这里空空如也！</td>
+                            </tr>
+                        </table>
+                    <else/>
+                        <volist name="alist" id="oinfo">
+                            <include file="Member:point_order_box" />
+                        </volist>
+                        <div class="page">{$page}</div>
+                    </empty>  
+                </div>
+            </div>
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<script type="text/javascript">
+$(function () {
+    var receiptUrl = "{:U('Member/receipt')}";
+    $("#receipt").click(function(){
+        var order = $(this).attr("order");
+        popup.confirm('你确认已经收到申购商品【<b>'+$(this).attr("pname")+'</b>】吗?','温馨提示',function(action){
+            if(action == 'ok'){
+                $.post(receiptUrl,{'order':order},function(data){      //ajax后台
+                    if (data.status) {
+                        popup.success(data.msg);
+                        setTimeout(function(){
+                            popup.close("asyncbox_success");
+                            top.window.location.href=data.url;
+                        },2000);
+                    } else {
+                        alert(data.msg);
+                    }
+                },'json');
+            }
+        });
+        return false;
+    });
+});
+</script>
+</body>
+</html>

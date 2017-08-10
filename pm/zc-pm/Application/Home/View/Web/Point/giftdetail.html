@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$info.keywords}" />
+        <meta name="description" content="{$info.description}" />
+        <title>{$info.name}-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+        <css href="__CSS__/cuitindex.css"/>
+        <css href="__CSS__/picshow.css"/>
+        <!-- <js href="__WEBSOCKET__/js/swfobject.js"/> -->
+        <!-- <js href="__WEBSOCKET__/js/web_socket.js"/> -->
+        <js href="--PUBLIC--/Js/jquery_raty/jquery.raty.min.js"/>
+        <!-- <js href="__JS__/bid_details.js"/> -->
+        <js href="__JS__/picshow.js"/>
+        <!-- 图片查看器【 -->
+        <css href="__STATIC__/Js/viewer/viewer.min.css"/>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="__STATIC__/Js/viewer/html5shiv.min.js"></script>
+        <script src="__STATIC__/Js/viewer/respond.min.js"></script>
+        <![endif]-->
+        <js href="__STATIC__/Js/viewer/viewer.min.js"/>
+        <js href="__STATIC__/Js/viewer/main.js"/>
+        
+        <!-- 图片查看器】 -->
+    </head>
+    <body >
+    <include file="Common:head_wide" />
+
+    <style type="text/css">
+     #loginarea a {
+        line-height: 35px;
+        text-align: center;
+        margin-left: 32px;
+        float: left;
+        display: inline;
+            text-decoration:none; 
+    }
+
+    .title-gitf-detail{
+        text-align:center;
+        font-size: 20px;
+        color: #7b600f;
+    }
+    .time-g-detail{
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    .content-gift-detail{
+        min-height: 400px;
+        _height:400px;
+
+    }
+    .juzhong{
+        margin-top: 20px;
+        text-align:center;
+    }
+
+    .biankuan{
+        text-align:center;
+        display:inline-block;
+        width:760px; 
+        height:120px;
+        line-height: 80px;
+        border:1px solid black;
+        font-size: 18px;
+
+    }
+    .color-red{
+        color: red;
+    }
+    .main_b3_4_main{
+        margin: 0 180px;
+
+    }
+    </style>
+
+
+    <div class="container">
+        <input type="hidden" id="verphone" value="{$verphone}">
+        <input type="hidden" id="mobile" value="{$mobile}">
+        <input type="hidden" id="choseid" value="{$info.id}">
+        <input type="hidden" id="name_gift" value="{$info.name}">
+        <input type="hidden" id="name_point" value="{$info.point}">
+
+        <if condition="$isbuy eq 1">
+            <!-- <input type="text" name="" value="{$isbuy}"> -->
+            <div class="content content-gift-detail">
+                <div class="clearfix"></div>
+                <dl>
+                    <dd class="title-gitf-detail"> {$info.name} </dd>
+                    <div class="clearfix"></div>
+                    <dd class="title-gitf-detail time-g-detail"> <span>[{$info.createtime}]</span></dd>
+                </dl>
+                <dl class="juzhong">
+                    <p class="biankuan">您必须一次性兑换完积分，才可以完整查看该篇文章，<a href="javascript:;" onclick="clickduihuan({$info.id},'{$info.name}',{$info.point},{$jifenbuzu})" class="color-red">点击兑换</a></p>
+                </dl>
+                <div class="clearfix"></div>
+            </div>
+        
+
+        <else/>
+
+            <div class="content content-gift-detail">
+                <div class="clearfix"></div>
+                <dl>
+                    <dd class="title-gitf-detail"> {$info.name} </dd>
+                    <div class="clearfix"></div>
+                    <dd class="title-gitf-detail time-g-detail"> <span>[{$info.createtime}]</span></dd>
+                </dl>
+                <dl >
+                    <div class="main_b3_4_main">{$info.description|html_entity_decode}</div>
+                </dl>
+                <div class="clearfix"></div>
+            </div>
+
+        </if>
+    </div>
+
+        
+
+<!---底部开始-->
+<include file="Common:help_wide" />
+<include file="Common:footer"/>
+
+ <script src="--PUBLIC--/ueditor/ueditor.parse.js"></script>
+</body>
+</html>
+
+<script type="text/javascript">
+var acpid = '{$info.pid}';
+
+var setTixingUrl ="{:U('Point/tixing')}";
+var handler ="function_name()";
+
+
+function clickduihuan(id,name,jifen,isjifen) {
+
+
+
+    if(login==0){
+        popStatus(2, '请先登陆后进行积分兑换！', 2,'',true);
+    }else{
+        var verphone = $('#verphone').val();
+        var mobile = $('#mobile').val();
+        if(mobile.length!=11){
+            popStatus(1, '您的手机未验证，请正在为您跳转到手机验证页面', 3,'/Member/check/type/mobile',true);
+        }else{
+
+            if(isjifen==0){
+                setTixingUrl = "{:U('Point/tixingb')}";
+                asyncbox.open({
+                    id : "open_0",
+                    title : '积分兑换',
+                    args : {pid:acpid},
+                    modal : true,
+                    buttons : asyncbox.btn.CANCEL,
+                    url : setTixingUrl+'?name='+name+'&jifen='+jifen,
+                    callback: handlerF
+                })
+            }else{
+                asyncbox.open({
+                    id : "open_0",
+                    title : '积分兑换',
+                    args : {pid:acpid},
+                    modal : true,
+                    buttons : asyncbox.btn.OKCANCEL,
+                    url : setTixingUrl+'?name='+name+'&jifen='+jifen,
+                    callback: handlerF
+                })
+            }
+            
+        }
+    }
+}
+
+function handlerF(buttonResult,contentWindow,returnValue){
+    var ggid = $('#choseid').val();
+    var name = $('#name_gift').val();
+    var jifen = $('#name_point').val();
+
+    if(buttonResult=='ok'){
+        $.ajax({
+            url: setTixingUrl,
+            type: 'POST',
+            dataType: 'json',
+            data: {jifen: jifen,
+                   ggid: ggid,
+                   name: name,
+                   type: '2'},
+        })
+        .done(function(data) {
+            popStatus(data.type, data.info, data.time,'',true);
+            location.reload();
+        })
+        .fail(function(data) {
+            popStatus(2, "系统故障了，请稍候", 1,'',true);
+        });
+    }
+}
+</script>

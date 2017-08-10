@@ -1,0 +1,108 @@
+<include file="Common:meta" />
+<title>我关注的拍卖-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+<ul class="tabMenu am-avg-sm-3">
+    <li <eq name="st" value="ing">class="on"</eq>><a href="{:U('myatt',array('type'=>'pm'))}">正在拍卖</a></li>
+    <li <eq name="st" value="future">class="on"</eq>><a href="{:U('myatt',array('type'=>'pm','st'=>'future'))}">未开始拍卖</a></li>
+    <li <eq name="st" value="end">class="on"</eq>><a href="{:U('myatt',array('type'=>'pm','st'=>'end'))}">已结束</a></li>
+</ul>
+     
+<ul class="sea_list am-avg-sm-1 am-avg-md-2">
+    <empty name="alist">
+    <li class="datanone">哎哟！这里空空如也！</li>
+    <else/>
+        <volist name="alist" id="avo">
+            <li>
+                <div class="on-licon">
+                    <div class="pth"><a href="{:U('Auction/details',array('pid'=>$avo['pid']))}">{$avo.pname}</a></div>
+                    <div class="pcon am-cf">
+                        <div class="imbox">
+                            <a href="{:U('Auction/details',array('pid'=>$avo['pid']))}">
+                                <img src="{$upWholeUrl}{$avo.pictures||getPicUrl=###,3,0}" alt="">
+                            </a>
+                        </div>
+                        <div class="infobox">
+                            起拍价：<span class="qipai">{$avo.onset}元</span><br/>
+                            保证金：
+                            <span class="p_col">
+                                {:pledgeShow($avo['pattern'],$avo['pledge_type'],$avo['onset'],$avo['pledge'],$avo['spledge'],$avo['mpledge'])}<br/>
+                            
+                            拍卖模式：
+                                <span class="blue1">
+                                <eq name="avo.type" value="0">竞拍</eq>
+                                <eq name="avo.type" value="1">竞标</eq>
+                                </span><br/>
+                            
+                            结束时间：{$avo.endtime|date='m-d H:i',###}<br/>
+                        </div>
+                    </div>
+                    <ul class="dqup am-avg-sm-2">
+                        <li class="li">
+                            领先者：
+                            <span class="org1">
+                            <eq name="avo.type" value="0">
+                                
+                                <empty name="avo[nickname]">
+                                    无
+                                    <else/>
+                                    {$avo.nickname}
+                                </empty>
+                            </eq>
+                            <eq name="avo.type" value="1">竞标保密</eq>
+                            </span>
+                        </li>
+                        <li class="li">
+                            当前价：
+                            <span class="red1 fb">
+                            <eq name="avo.type" value="0">{$avo.nowprice}</eq>
+                            <eq name="avo.type" value="1">竞标保密</eq>
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="on-minbtn">
+                        <a pid="{$avo.pid}" rela="p-u" yn="y" href="javascript:void(0)" class="att am-btn am-btn-danger on-btn-danger am-radius" style="font-size: 12px;width: 100%;">取消关注</a>
+                    </div>
+                    
+                </div>
+                
+            </li>
+        </volist>
+    </empty>
+</ul>
+    <!--分页【-->
+    <notempty name="page">
+        <div class="pagestyle">
+            {$page}
+        </div>
+    </notempty>
+    <!--分页】-->
+    <!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+<script type="text/javascript">
+$(function(){
+    // 取消关注
+    $('li').on("click",".att",function(){
+        var thisObj = $(this);
+        var gid = $(this).attr('pid');
+        var rela = $(this).attr('rela');
+        $.post(attUrl,{'gid':gid , 'rela':rela, 'yn':'y'},function(data){
+            if (data.status) {
+                thisObj.parents('li').remove();
+            } else {
+                popup.error(data.msg);
+                setTimeout(function(){
+                    popup.close("asyncbox_error");
+                },2000);
+            }
+        },'json');  
+         
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$info.keywords}" />
+        <meta name="description" content="{$info.description}" />
+        <title>{$info.name}-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+        <css href="__CSS__/cuitindex.css"/>
+        <css href="__CSS__/home.css"/>
+        <css href="__CSS__/picshow.css"/>
+        <!-- <js href="__WEBSOCKET__/js/swfobject.js"/> -->
+        <!-- <js href="__WEBSOCKET__/js/web_socket.js"/> -->
+        <js href="--PUBLIC--/Js/jquery_raty/jquery.raty.min.js"/>
+        <!-- <js href="__JS__/bid_details.js"/> -->
+        <js href="__JS__/picshow.js"/>
+        <!-- 图片查看器【 -->
+        <css href="__STATIC__/Js/viewer/viewer.min.css"/>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="__STATIC__/Js/viewer/html5shiv.min.js"></script>
+        <script src="__STATIC__/Js/viewer/respond.min.js"></script>
+        <![endif]-->
+        <js href="__STATIC__/Js/viewer/viewer.min.js"/>
+        <js href="__STATIC__/Js/viewer/main.js"/>
+        
+        <!-- 图片查看器】 -->
+    </head>
+    <style>
+        
+.content-gift-detail  .js-detail .intro{
+    min-height: 16px;
+    font-size: 16px;
+    width: 100%;
+    float: left;
+    line-height:2;
+    color: #354e62;
+    margin-bottom: 20px;
+    overflow: hidden;
+    text-indent: 0em;
+}
+.content-gift-detail  .js-detail .price{
+    line-height: 30px;
+    height:40px;
+    font-size: 18px;
+    color: #7f7f7f;
+    background: #f7f7f7;
+    width: 80%;
+    float: left;
+    padding: 20px;
+}
+.content-gift-detail  .js-detail .price .price-1{
+    float: left;
+    font-size: 16px;
+}
+.content-gift-detail  .js-detail .price .dh-bt{
+    margin: 0px 20px 10px 0px;
+    float:right;
+
+}
+.content-gift-detail  .js-detail .price .dh-bt a.btn{
+    background: #bf0000;
+    color: #fff;
+    width: 110px;
+    height: 40px;
+    padding-top: 5px;
+    float: left;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+}        
+.content-gift-detail  .js-detail .table{
+    padding: 7px 0;
+    border-top: 1px solid #c4d4e2;
+    border-bottom: 1px solid #c4d4e2;
+    margin:20px 0px 30px 0px;
+    overflow: hidden;
+    float: left;
+}
+.content-gift-detail  .js-detail .table li:first-child{
+    border-left: none;
+}
+.content-gift-detail  .js-detail .table li{
+    float: left;
+    width: 100px;
+    height: 26px;
+    border-left: 1px solid #c4d4e2;
+    text-align: center;
+    font-size: 14px;
+    line-height: 26px;
+    color: #354e62;
+    text-shadow: 1px 1px 1px #fff;
+}
+.content-gift-detail  .js-detail .table li span{
+    line-height: 1;
+    color: #f30;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+    </style>
+    <body >
+        <script type="text/javascript">
+    $(function() {
+     $(".zjls").mouseover(function(){
+            $(".zjlsdt").css("display","block");
+        });
+        $(".zjls").mouseleave(function(){
+            $(".zjlsdt").css("display","none");
+        });
+    })
+  </script>
+    <include file="Common:head_wide" />
+     <input type="hidden" id="verphone" value="{$verphone}">
+        <input type="hidden" id="mobile" value="{$mobile}">
+        <input type="hidden" id="choseid" value="{$info.id}">
+        <input type="hidden" id="name_gift" value="{$info.name}">
+        <input type="hidden" id="name_point" value="{$info.point}">
+	<div class="content content-gift-detail">
+	   <h1>{$info.name}</h1>
+	   <div class="ig">
+	   		<img src="{$upWholeUrl}{$info.video_pic_url}" alt="" width="582" height="268"/>
+	   </div>
+	   <div class="js-detail">
+			<div class="zhujiang">
+				<span class="zj">主讲：</span>
+				<a href="#" class="zjls">{$info.teacher_name}</a>
+				<div class="zjlsdt">
+                  <div class="dtimgs">
+                    <img src="{$upWholeUrl}{$info.teacher_pic_url}"><span class="imgbg"></span>
+                  </div>
+                  <div class="divname-text">   
+                  <a href>{$info.teacher_name}</a>
+                  {$info.type}
+                   </div>
+                   <!-- <p class="clear"></p> -->
+                   <div class="synopsis-text">
+                    {$info.jianjie}
+                   </div>
+                 </div>
+			</div>
+      <p class="intro">{$info.description|html_entity_decode}</p>
+			<div class="price"><div class="price-1">价格：<span class="jf">{$info.point}积分</span></div><div class="dh-bt"><a class="btn" href="javascript:;" onclick="clickduihuan({$info.id},'{$info.name}',{$info.point},{$jifenbuzu})">立即兑换</a></div></div>
+			<!-- <div class="living-time">
+				<span class="livingtimetit">首播时间 </span>
+				<span>04月25日 17:40-18:40</span>
+			</div>
+			<div class="buy"><span>已购买：18人</span><span> 限购：100人</span><span class="hs"> VIP不限购</span></div> -->
+      <ul class="table">
+        <li>累计销量：<span>{$info.sale_count}</span></li>
+        <li>学员好评：<span>{$info.good_comment}</span></li>
+        <li>课程套数：<span>{$info.course_count}</span></li>
+        <eq name="info['is_limit_buy']" value="1">
+        <li>限购：<span>{$info.limit_buy}</span></li>
+        </eq>
+      </ul>
+		</div>
+		<div class="nr-detail">
+				<h2 class="title">内容介绍</h2>
+				{$info.content|html_entity_decode}
+		</div>	
+	</div>
+	<!-- <script>
+
+		$(document).ready(function(){
+        $(".zjls").mouseover(function(){
+            $(".zjlsdt").css("display","block");
+        });
+        $(".zjls").mouseleave(function(){
+            $(".zjlsdt").css("display","none");
+        });
+    })
+   
+	</script> -->
+<!---底部开始-->
+<include file="Common:help_wide" />
+<include file="Common:footer"/>
+
+ <script src="--PUBLIC--/ueditor/ueditor.parse.js"></script>
+</body>
+</html>
+
+<script type="text/javascript">
+var acpid = '{$info.pid}';
+
+var setTixingUrl ="{:U('Point/tixing')}";
+var handler ="function_name()";
+
+
+function clickduihuan(id,name,jifen,isjifen) {
+
+
+
+    if(login==0){
+        popStatus(2, '请先登陆后进行积分兑换！', 2,'',true);
+    }else{
+        var verphone = $('#verphone').val();
+        var mobile = $('#mobile').val();
+        if(mobile.length!=11){
+            popStatus(1, '您的手机未验证，请正在为您跳转到手机验证页面', 3,'/Member/check/type/mobile',true);
+        }else{
+
+            if(isjifen==0){
+                setTixingUrl = "{:U('Point/tixingb')}";
+                asyncbox.open({
+                    id : "open_0",
+                    title : '积分兑换',
+                    args : {pid:acpid},
+                    modal : true,
+                    buttons : asyncbox.btn.CANCEL,
+                    url : setTixingUrl+'?name='+name+'&jifen='+jifen,
+                    callback: handlerF
+                })
+            }else{
+                asyncbox.open({
+                    id : "open_0",
+                    title : '积分兑换',
+                    args : {pid:acpid},
+                    modal : true,
+                    buttons : asyncbox.btn.OKCANCEL,
+                    url : setTixingUrl+'?name='+name+'&jifen='+jifen,
+                    callback: handlerF
+                })
+            }
+            
+        }
+    }
+}
+
+function handlerF(buttonResult,contentWindow,returnValue){
+    var ggid = $('#choseid').val();
+    var name = $('#name_gift').val();
+    var jifen = $('#name_point').val();
+
+    if(buttonResult=='ok'){
+        $.ajax({
+            url: setTixingUrl,
+            type: 'POST',
+            dataType: 'json',
+            data: {jifen: jifen,
+                   ggid: ggid,
+                   name: name,
+                   type: '2'},
+        })
+        .done(function(data) {
+            popStatus(data.type, data.info, data.time,'',true);
+            location.reload();
+        })
+        .fail(function(data) {
+            popStatus(2, "系统故障了，请稍候", 1,'',true);
+        });
+    }
+}
+</script>
+

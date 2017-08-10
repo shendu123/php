@@ -1,0 +1,103 @@
+$(function() {
+	
+  	//20150319headopenbox
+	$(".jygjsbox" ).hover(function(){	
+		$('.jygjsbox .jytopcompanyopen').stop().slideToggle(); 
+		});
+	$(".jyoilbox" ).hover(function(){	
+		$('.jyoilbox .jytopcompanyopen').stop().slideToggle(); 
+		});
+
+
+});
+$(function(){
+  $("#xj-box").mCustomScrollbar({
+		scrollButtons:{
+			enable:false
+		}
+	});
+});
+
+if($('.jyaboutnavright').length){
+	$(window).scroll(function(){
+	var roll = document.body.scrollTop + document.documentElement.scrollTop;
+	//获取滚动条的高度跟内容宽度比较
+	var winTop = $(window).scrollTop();
+	var scrollTop=0;
+	if(scrollTop<=$('.jyaboutnavright').offset().top&&roll>306 ){
+		setTimeout(function(){
+			$(".jyaboutnavright").css({"position":"fixed","top":"80px"});
+			}, 30);
+		}
+	else{
+		setTimeout(function(){
+			$(".jyaboutnavright").css({"position":"absolute","top":"80px"});
+			}, 30);
+		}
+	if(scrollTop<=$('.jyaboutnavright').offset().top&&roll>2450 ){
+		setTimeout(function(){
+			$(".jyaboutnavright").css({"display":"none"});
+			}, 30);	
+		}
+	else{
+		setTimeout(function(){
+			$(".jyaboutnavright").css({"display":"block"});
+			}, 30);
+		}
+	});
+}
+
+
+$(function(){
+	
+	$(".ploydownbtn").click(function(){	
+		$('.room-downwin').lightbox_me({
+			centered: true
+			});
+		});
+	var c, g, h = $("#jyaboutnav a:lt(6)"),
+		n = $("#marker");
+    $(window).scroll(function() {
+        var a = $(this).scrollTop(),
+        b;
+        for (b in c) if (c[b] > a - 1E2) break;
+        n.css({
+            left: g[b] + "px"
+        });
+        h.removeClass("stopli").eq(b).addClass("stopli")
+    });
+    $(window).resize(function() {
+        c = [];
+        g = [];
+        h.each(function(a) {
+            g.push($(this).offset().left + $(this).width() / 2 + (a == 0 ? -16 : 0));
+            a = $(this).attr("href");
+            c.push($(a).offset().top)
+        });
+        c[1] += 200;
+        $(window).trigger("scroll")
+    }).trigger("resize");
+    h.click(function(a) {
+        a.preventDefault();
+        a = $(this).attr("href");
+        $("html,body").addClass("stopli").animate({
+            scrollTop: $(a).offset().top + "px"
+        },
+        1000).removeClass("stopli");
+        return false
+    });
+
+})
+$(function(){ 
+	$(".schooltabconlist h2").click(function(){
+		var n = $(this).next(".schooltabconlist .listopenbox").is(":hidden");
+		if(n==true){
+		$(".schooltabconlist .listopenbox").slideUp();
+		$(this).next(".schooltabconlist .listopenbox").slideDown();
+		$(".schooltabconlist h2").removeClass("select");
+		$(this).addClass("select");
+		    }else{
+			$(this).next(".schooltabconlist .listopenbox").show();
+		    }
+		});
+});

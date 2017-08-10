@@ -1,0 +1,96 @@
+<include file="Common:meta" />
+<title>我评价的卖家-我是买家</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+<ul class="tabMenu am-avg-sm-2">
+    <li <eq name="ACTION_NAME" value="sendmsg">class="on"</eq>><a href="{:U('Member/sendmsg')}">发送站内信</a></li>
+    <li <eq name="ACTION_NAME" value="sendlist">class="on"</eq>><a href="{:U('Member/sendlist')}">已发送站内信</a></li>
+</ul>
+<div class="am-margin-top-xs">
+<form method="post" name="theForm">
+    <ul class="on-shouzhi am-avg-sm-1 am-avg-md-2">
+        <empty name="list">
+            <li class="on-li"><div>没发送的消息</div></li>
+        <else/>
+            <volist name="list" id="vo">
+                <li class="on-li">
+                    <div class="on-li-con">
+                            <div class="on-sms-list clearfix">
+                                <div class="on-le on-lin">
+                                    <label class="am-checkbox am-danger am-margin-0">
+                                      <input name="sid[]" type="checkbox" value="{$vo.sid}" data-am-ucheck>
+                                    </label>
+                                </div>
+                                <img class="on-le"src="{$vo.sendid|getUserpic=###,2}">
+                                <div class="on-le">
+                                    <div>账号：{$vo.user.account}</div>
+                                    <div>昵称：<a class="td" target="_blank"  href="{:U('Seller/index',array('sellerid'=>$vo['sendid']))}">{$vo.user.nickname}</a></div>
+                                </div>
+                                <if condition="$vo['auction']">
+                                    <div class="on-le on-lin">关于拍品</div>
+                                    <div class="on-dif">
+                                        <a style="color: #980000;" target="_blank" href="{:U('Auction/details',array('pid'=>$vo['auction']['pid']))}">{$vo.auction.pname}</a>
+                                    </div>
+                                </if>
+                            </div>
+                            <div class="on-content">{$vo.content}</div>
+                            <ul class="on-mini-morebtn am-avg-sm-1">
+                                <li><a class="am-btn am-btn-primary on-btn-primary" href="{:U('Member/exchange',array('sid'=>$vo['sid']))}">会话记录</a></li>
+                            </li>
+                        <eq name="vo.status" value="0"><span class="smsc am-badge am-badge-danger am-round">未读</span></eq>
+                    </div>
+                </li>
+            </volist>
+            <li style="width: 100%; padding: 0px 5px;">
+                <ul class="am-avg-sm-2 am-margin-bottom-xs labbtn-box">
+                    <label class="am-checkbox am-danger am-margin-0">
+                        <input type="checkbox" id="allcbox" value="0" data-am-ucheck> 全选
+                    </label>
+                    <li><input type="button" value="设已读" style="width:100%;" class="read am-btn am-btn-secondary on-btn-secondary"></li>
+                    <li><input type="button" value="删除" style="width:100%;" class="del am-btn am-btn-danger on-btn-danger"></li>
+                </ul>
+            </li>
+        </empty>
+    </ul>
+    
+</form>
+</div>
+    <!--分页【-->
+    <notempty name="page">
+        <div class="pagestyle">
+            {$page}
+        </div>
+    </notempty>
+    <!--分页】-->
+<!-- 商品列表】 -->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+<script type="text/javascript">
+$(function(){
+    var delsms = "{:U('Member/mysms')}";
+    $("#allcbox").click(function() {
+        $('input[name="sid[]"]').prop("checked",this.checked);
+    });
+    var $subBox = $("input[name='sid[]']");
+    $subBox.click(function(){
+        $("#allcbox").prop("checked",$subBox.length == $("input[name='sid[]']:checked").length ? true : false);
+    });
+    $(".del").click(function(){
+        // alert($("input[name='sid[]']:checked").length);
+        if($("input[name='sid[]']:checked").length!=0){
+            commonAjaxSubmit(delsms,'',{'ac':'read'}); 
+        }else{
+           popup.alert('您至少需要选中一个要删除的私信');
+            setTimeout(function(){
+                popup.close("asyncbox_alert");
+            },2000);
+        }
+        return false;
+    });
+});
+</script>
+</body>
+</html>

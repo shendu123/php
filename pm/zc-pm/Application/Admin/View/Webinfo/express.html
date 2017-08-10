@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>快递管理-系统配置-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='系统配置 > 快递管理';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">快递管理</div>
+                    </div>
+                    <form action="" id="quickForm">
+                        <b>快递鸟配置：</b>
+                        商户ID：
+                        <input placeholder="商户ID" id="newName" class="input" type="text" name="id" value="{$site.EXPRESS.id}" /> &nbsp;
+                        API Key：
+                        <input placeholder="API Key" id="newName" class="input" type="text" name="key" value="{$site.EXPRESS.key}" /> &nbsp;
+                        <button class="btn quickSubmit">提交</button>
+                        <a href="{:U('Webinfo/express_test')}">快递查询测试</a>
+                    </form>
+                    <div class="say_remark" style="margin-top: 10px;">快递接口及数据来自快递鸟。商户ID、API Key请到<a  style="margin-left: 5px;" href="http://www.kdniao.com/ServiceApply.aspx" target="_blank">快递鸟申请接口</a>；已包括常用快递。<br/>1.设置【排序】，将变动快递显示的排列顺序。2.设置【禁用】用户将无法选择禁用的快递。3.设置【常用】，将显示在常用快递内。</div>
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab">
+                        <thead>
+                            <tr align="center">
+                                <td width="10%">快递标示</td>
+                                <td width="20%">显示名称</td>
+                                <td width="10%">排序</td>
+                                <td width="10%">操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <volist name="list" id="tree">
+                                <tr>
+                                    <td colspan="20"><strong>{$key}</strong></td>
+                                </tr>
+                                <volist name="tree" id="vo">
+                                    <tr id="{$vo.id}">
+                                        <td>{$vo.en}</td>
+                                        <td>{$vo.ch}</td>
+                                        <td>
+                                            <div  style="margin: 0px auto;" class="ajax_order">
+                                                <a class="rising" href="javascript:void(0)">加</a>
+                                                <span class="input tc" eid="{$vo.id}">{$vo.sort}</span>
+                                                <a class="drop" href="javascript:void(0)">减</a>
+                                            </div>
+                                        </td>
+                                        <td align="center">
+                                            <div class="onOffBox">
+                                                <div val="0" act="<if condition='$vo.status eq 0'>act</if>" eid="{$vo.id}" class="onOff checkIco clearfix">
+                                                    <div class="fl hd_ico <if condition='$vo.status eq 0'>act</if>"></div>
+                                                    <div class="fl">启用</div>
+                                                </div>
+                                                <div val="1" act="<if condition='$vo.status eq 1'>act</if>" eid="{$vo.id}" class="onOff checkIco clearfix">
+                                                    <div class="fl hd_ico <if condition='$vo.status eq 1'>act</if>"></div>
+                                                    <div class="fl">禁用</div>
+                                                </div>
+                                                <div val="2" act="<if condition='$vo.status eq 2'>act</if>" eid="{$vo.id}" class="onOff checkIco clearfix">
+                                                    <div class="fl hd_ico <if condition='$vo.status eq 2'>act</if>"></div>
+                                                    <div class="fl">常用</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </volist>
+                                
+                            </volist>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            $(function(){
+                var onOffUrl = "{:U('Webinfo/onOff_express')}";
+                // 异步设置状态
+                $('.onOff').click(function(){
+                    var thisObj = $(this);
+                    var id=thisObj.attr('eid');
+                    var vl=thisObj.attr('val');
+                    var act=thisObj.attr('act');
+                    if(act == ''){
+                        $.post(onOffUrl,{'eid':id,'val':vl},function(data){      //ajax后台
+                            if (data.status) {
+                                thisObj.siblings('.onOff').attr('act','');
+                                thisObj.siblings('.onOff').children('.hd_ico').removeClass('act');
+                                thisObj.attr('act','act');
+                                thisObj.children('.hd_ico').addClass('act');
+                            } else {
+                                alert(data.msg);
+                            }
+                        },'json');
+                    }
+                });
+
+                //异步编辑排序字段
+                var odUrl = "{:U('Webinfo/order_express')}"; //排序提交地址
+                $('.ajax_order a').on("click",function(){
+                    var odType = $(this).attr('class');
+                    var odShow = $(this).parents('.ajax_order').children('.input');
+                    var odVal = odShow.html();
+                    var eid = odShow.attr('eid');
+                    $.post(odUrl,{'odType':odType,'eid':eid},function(data){      //ajax后台
+                        if (data.status) {
+                            if(odType == 'rising'){
+                                odShow.html(parseInt(odVal) + 1);
+                            }else if(odType == 'drop'){
+                                odShow.html(parseInt(odVal) - 1);
+                            }
+                            
+                        } else {
+                            alert(data.msg);
+                        }
+                    },'json');        
+                });
+
+                $(".quickSubmit").click(function(){
+                    commonAjaxSubmit();
+                    return false;
+                });
+
+
+            });
+        </script>
+    </body>
+</html>

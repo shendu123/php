@@ -1,0 +1,391 @@
+(function(){
+  /* var Zhibon = 'http://test.jry.baidao.com'
+  var zhibo = 'http://test.js.baidao.com/jryjs' */
+  var Zhibon = 'http://jry.baidao.com'
+  var zhibo = 'http://js.baidao.com/jryjs'
+  var Star = {}
+  var defaultText = '输入手机号，发送下载链接到手机'
+  Star.hasOldPoint = true
+  //Star.roomId = 18 || 155
+  Star.roomId = 155
+  var room = function(){
+    this.url = Zhibon + '/business/ajax/getNoUserRoom.do?callback=?&roid=' + Star.roomId
+    this.getJson()
+  }
+
+  room.prototype = {
+    getJson : function(){
+      var self = this
+      $.getJSON(self.url,function(data){
+        //console.log(data)
+        if(data.currentRecordId == 0){
+          $('.ptext1').html('直播未开始')
+		  //console.log($('.liveroommiddle').html());
+          $('.liveroommiddle').html('<div class="noBegin"><p>市场精彩纷呈 直播尚未开始</p>"专属服务热线：021-95049"</div>');
+          $('.liveroommiddle').addClass('livenone');
+		  return;
+        }
+		self.detailRoom(data);
+      })
+    },
+    detailRoom:function(data){
+      Star.currentRecordId = data.room.currentRecordId
+      //console.log(data)
+      new point
+      new topMessage
+    }
+  }
+
+  var topMessage = function(){
+    this.url = zhibo + '/getInitList?callback=?&roomId=' + Star.roomId
+      +'&rid=' + Star.currentRecordId + '&direction=down&tmid=0' 
+    this.getJson()
+    setInterval(this.getJson,30*1000)
+  }
+
+  topMessage.prototype = {
+    getJson:function(){
+      var self = this;
+      $.getJSON(this.url,function(data){
+        if(!data.topMsgList || !data.topMsgList.length){
+          return;
+        }
+        $('#topMessage').show()
+        var html,itemlength,allLength;
+		html = '<p class="ptext">置顶讯息</p>';
+        itemlength = data.topMsgList[0] && data.topMsgList[0].content.replace(/<\/?[^>]*>/g,'').substring(0,24)
+		allLength = '<div class="lististop-open"><p class="ptext">置顶讯息</p>'+(data.topMsgList[0] &&  data.topMsgList[0].content.replace(/<\/?[^>]*>/g,''))+'</div>';
+        $('#topMessage').html(html+itemlength+allLength)
+      })
+    }
+  }
+
+
+  var newPoint = function(){
+    var self = this
+    this.allUrl = zhibo + '/getInitNum2?callback=?&roomId=' + Star.roomId + '&rid=' + Star.currentRecordId + '&mid=0'
+    $.getJSON(this.allUrl,function(data){
+      $('#allPointNumber').html(data.msgNum)
+    })
+    setInterval(function(){
+      self.numberRush.call(self)
+    } ,30*1000)
+  }
+
+  newPoint.prototype = {
+    numberRush:function(){
+      var self = this;
+      this.newUrl = zhibo + '/getInitNum2?callback=?&roomId=' + Star.roomId + '&rid=' + Star.currentRecordId + '&mid=' + Star.pointMaxId
+      $.getJSON(self.allUrl,function(data){
+        $('#allPointNumber').html(data.msgNum)
+      })
+      $.getJSON(this.newUrl,function(data){
+        if(data.msgNum){
+			$('#newPonitNumber').unbind('click').click(function(){
+				point.prototype.addNewPoint();
+			})
+          Star.hasNewPoint = true
+          $('#newPonitNumber').show()
+          $('#newPonitNumber').html(data.msgNum)
+          if($('.liveroommiddle')[0].scrollHeight<=1000){
+            point.prototype.addNewPoint();
+          }
+        }else{
+          $('#newPonitNumber').hide()
+        }
+      })
+    }
+  }
+
+
+  var point = function(){
+    this.url = zhibo + '/getInitList?callback=?&roomId=' + Star.roomId+'&rid=' + Star.currentRecordId 
+    + '&direction=up&mid=99999999'
+    this.getJson()
+  }
+
+  point.prototype = {
+    getJson:function(){
+      var self = this
+      $.getJSON(self.url,function(data){
+        self.detailPoint(data)
+        //console.log(data)
+      })
+    },
+	addPoint : function(){
+		var self = this;
+        self.params.direction = "down";
+        self.params.mid = self.maxId;
+
+        $.getJSON(self.url, self.params, function(data){
+            $('.jyzhiboinfobox').prepend(self.addAll(data.msgList))
+        })
+	},
+    detailPoint:function(data){
+      var data = data.msgList
+      var pointHtml = [],pointId = []
+      for(var i = 0 ; i<(data && data.length);i++){
+        pointHtml.push(this.addHtml(data[i]))
+        pointId.push(data[i].id)
+      }
+      $('.liveroommiddle').html(pointHtml.join(''))
+      Star.pointMaxId = Math.max.apply(null,pointId)
+      Star.pointMinId = Math.min.apply(null,pointId)
+      new newPoint
+    },
+    addHtml:function(point){
+      var img = point.userImage || 'images/temp-1.jpg'
+      var nickName = point.nickname
+      var cTime = point.createTime
+      var content = point.content
+      var replyContent = point.replyContent
+      if(replyContent){
+        replyContent = replyContent.replace(/\n/g,function(a,b){
+          return ''
+        }).replace(/[\s\n\r]/g,'').replace(/[^\/]nnnnn/,function(a,b){
+          return '<div class="name-text"'
+        }).replace(/\/nnnnn/,function(a,b){
+          return ''
+        }).replace('<>','').replace('<strong>回复</strong>','').replace(/style=\"[^\"]*"/g,'')
+		var teacherApply = /\<mmmmm\>(.+)\<\/mmmmm\>/.exec(replyContent)
+        replyContent = replyContent.replace(/<mmmmm.*mmmmm>/,'').replace('</br>','')
+      }
+
+      var html = ['<div class="listtext-div"><div class="leftimg-div">']
+      html.push('<img src='+ img +' /><span class="imgbg"></span></div>')
+      html.push('<div class="rightsider-text"><div class="name-text"><span>')
+      html.push(nickName+'</span>'+changeTime(cTime)+'</div>')
+      html.push('<div class="teacher-text">')
+      html.push(content.replace(/style=\"[^\"]*"/g,'')+'</div>')
+      if(replyContent && teacherApply){
+        html.push('<div class="reply-texts"><p class="p-Triangle"></p>')
+        html.push(replyContent)
+        html.push('</div><div class="teacher-text">'+teacherApply[1]+'</div></div>')
+      }
+      html.push('</div></div>')
+
+      return html.join('')
+    },
+    addNewPoint:function(){
+      var self = this;
+      var url =   zhibo + '/getInitList?callback=?&roomId=' + Star.roomId+'&rid=' + Star.currentRecordId 
+      + '&direction=down&mid=' + Star.pointMaxId
+      $.getJSON(url,function(data){
+        var data = data.msgList
+        var pointHtml = [],pointId = []
+        for(var i = 0 ; i<data.length;i++){
+          pointHtml.push(self.addHtml(data[i]))
+          pointId.push(data[i].id)
+        }
+        $('.liveroommiddle').prepend(pointHtml.join(''))
+        $('#newPonitNumber').hide()
+        Star.pointMaxId = Math.max.apply(null,pointId)
+      })
+    },
+    addOldPoint:function(){
+      var self = this;
+      var url =   zhibo + '/getInitList?callback=?&roomId=' + Star.roomId+'&rid=' + Star.currentRecordId 
+      + '&direction=up&mid=' + Star.pointMinId
+      $.getJSON(url,function(data){
+        var data = data.msgList
+        var pointHtml = [],pointId = []
+        if( data && data.length < 50){
+          Star.hasOldPoint = false
+        }else{
+          Star.hasOldPoint = true
+        }
+        for(var i = 0 ; i<(data &&data.length);i++){
+          pointHtml.push(self.addHtml(data[i]))
+          pointId.push(data[i].id)
+        }
+        $('.liveroommiddle').append(pointHtml.join(''))
+        if(pointId.length){
+          Star.pointMinId = Math.min.apply(null,pointId)
+        }
+      })      
+    }
+  }
+
+  var teacherList = function(){
+    this.url = 'http://jry.baidao.com/business/ajax/initRoomerList.do?roid=' + Star.roomId + '&callback=?'
+    this.getJson()
+  }
+
+  teacherList.prototype = {
+    getJson:function(){
+      var self = this
+      $.getJSON(this.url,function(data){
+        self.addTeacher(data)
+      })
+    },
+    addTeacher:function(data){
+      var html = ['<p class="fn14 pb-6">直播老师</p>']
+	  var _len = (data.length > 5) ? 5 : data.length;
+      for(var i = 0 ; i< _len; i++){
+	  if('左安龙' == data[i].nickname){aa= '首席策略分析师'}else{aa= '高级研究员'}
+        html.push('<dl><dt><img src="'+(data[i].imgUrl || 'images/temp-1.jpg')+'"><span class="imgbg"></span></dt>')
+        html.push('<dd><p>'+data[i].nickname+'</a></p>'+aa+'</dd><div class="teacher-listinfo"  style="display:none">')
+        html.push('<div class="dtimgs">')
+        html.push('<img src="'+(data[i].imgUrl || 'images/temp-1.jpg')+'"><span class="imgbg"></span>')
+        html.push('</div><div class="divname-text"><p ><a href="">'+data[i].nickname+'</a></p>'+aa+'</div><p class="clear"></p>')
+        html.push('<div class="synopsis-text">'+(data[i].desc || '')+'</div></div>')
+        html.push('</dl>') 
+      }
+      $('.teacher-list').html(html.join(''))
+      $('.teacher-list dl').mouseenter(function(){
+        $(this).find('.teacher-listinfo').show()
+      })
+      $('.teacher-list dl').mouseleave(function(){
+        $(this).find('.teacher-listinfo').hide()
+      })
+    }
+
+  }
+
+  var hangqing = function(){
+    this.url = 'http://api.baidao.com/api/hq/npdata.do?ids=1,7,8,5,6,9&JSONP=?'
+    this.getJson()
+    setInterval(this.getJson,30*1000)
+  }
+
+  hangqing.prototype = {
+    getJson:function(){
+      var self = this;
+      $.getJSON(this.url,function(data){
+        var id = ['silverKind','tongKind','niKind','dallarKind','pecKind','lvKind']
+        for(var i = 0 ; i <data.length;i++){
+          self.add(id[i],data[i])
+        }
+      })
+    },
+    add:function(id,data){
+      //console.log(data)
+      //if(data.percent.replace('%','')>0){
+		if(data.updrop>0){ 
+			$('#'+id).addClass('red')
+			$('#'+id).html(data.name+'<div>'+data.now+'<p>'+data.updrop+' '+data.percent+'</p></div>')
+		}else{
+			$('#'+id).html(data.name+'<div>'+data.now+'<p>'+data.updrop+' '+data.percent+'</p></div>')
+		}
+    }
+  }
+
+
+
+
+  var liveRoomNumber = function(){
+    var number = 0
+    if(!getCookie('liveNumber')){
+      number = 15 + parseInt(Math.random()*5)
+      setCookie('liveNumber',number,1)
+    }else{
+      number = getCookie('liveNumber')
+    }
+    $('#liveNumber').html(number)
+  }
+
+
+
+
+  function setCookie(c_name,value,expiredays) {
+    var exdate=new Date();
+    exdate.setDate(exdate.getDate()+expiredays);
+    document.cookie=c_name+ "=" +escape(value)+ ((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
+  };
+  
+  function getCookie(c_name) {
+    if (document.cookie.length>0) {
+      c_start=document.cookie.indexOf(c_name + "=");
+      if (c_start!=-1){
+        c_start=c_start + c_name.length+1;
+        c_end=document.cookie.indexOf(";",c_start);
+        if (c_end==-1) c_end=document.cookie.length;
+          return unescape(document.cookie.substring(c_start,c_end));
+      }
+    }
+    return "";
+  }
+
+  function changeTime(date){
+    var time = new Date(date)
+    return addZero(time.getHours()) + ':' + addZero(time.getMinutes())
+  }
+
+  function addZero(number){
+    if(number<10){
+      return '0' + number
+    }
+    return number
+  }
+
+  $('#phoneBox').focus(function(){
+    if(this.value == defaultText){
+      this.value = ''
+    }
+  })
+  $('#phoneBox').blur(function(){
+    if(this.value.length == 0){
+      this.value = defaultText
+    }
+  })
+
+  
+   document.onclick = function(e){
+    e = e ? e : window.event
+    e.target = e.target ? e.target : e.srcElement
+    if(e.target.tagName.toLowerCase() == 'img' && e.target.parentNode.className =='close'){
+      $('.room-downwin').hide()
+      $('#overCss').hide()
+      return;
+    }
+    if(e.target.tagName.toLowerCase() == 'img' && e.target.parentNode.className != 'leftimg-div'){
+      var img = document.createElement('IMG')
+      img.src = e.target.src.replace(/100size\//,'')
+      img.onload = function(){
+        $('#bigImg')[0].src = img.src
+		$('#overCss').show()
+        $('#bigImg').css({width:img.width+'px',height:img.height+'px',display:'block',marginTop:-img.height/2+'px',marginLeft:-img.width/2+'px'})
+      }
+    }
+    if(e.target.id == 'overCss'){
+      $('#overCss').hide()
+      $('#bigImg').hide(200)
+      $('.room-downwin').hide()
+    }
+    if(e.target.id == 'newPonitNumber'){
+      //alert(1111)
+    }
+    if(e.target.className == 'liveroom-pose'){
+      $('.p-textwin').show()
+      setTimeout(function(){
+        $('.p-textwin ').hide()
+      },3000)
+    }
+    if(e.target.tagName == 'a' && e.target.parentNode.className == 'downlinks'){
+      $('.room-downwin').show()
+      $('#overCss').show()
+    }
+  } 
+  $('#overCss').css({opacity:0.6,width:(document.body.clientWidth || document.documentElement.clientWidth)+'px',
+    height:(document.body.clientHeight || document.documentElement.clientHeight)+'px'})
+
+  $('.liveroommiddle')[0].onscroll = function(e){
+    e = e ? e : window.event
+    e.target = e.target ? e.target : e.srcElement    
+    if(e.target.scrollTop < 50 && Star.hasNewPoint){
+      point.prototype.addNewPoint()
+      Star.hasNewPoint = false
+    }
+    if(e.target.scrollTop + e.target.clientHeight +200 > e.target.scrollHeight && Star.hasOldPoint){
+      Star.hasOldPoint = false
+      point.prototype.addOldPoint()
+      //console.log(Star.pointMinId)
+    }
+
+  }
+
+  new room
+  new liveRoomNumber
+  new teacherList
+  new hangqing
+}).call()

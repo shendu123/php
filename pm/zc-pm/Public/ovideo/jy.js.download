@@ -1,0 +1,7 @@
+$(function() {
+  $('#img-news ul').bxSlider({
+      mode: 'fade',
+      captions: true,
+      controls: false
+    });
+  });

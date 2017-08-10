@@ -1,0 +1,20 @@
+<!-- 正在拍卖【 -->
+<div class="on-plate">
+    <h1 class="on-channel-title am-cf">拍卖中<span class="on-searchkey">“{$searchkey}”</span>搜索结果
+      <span class="am-fr">
+          <a class="on-mor" href="{:U('Index/search',array('searchtype'=>1,'searchkey'=>$searchkey))}">更多</a>
+      </span>
+   </h1>
+    <ul  class="on-auction-list am-avg-sm-2 gallery-list">
+        <foreach name="search.ing" item="bav">
+            <empty name="bav.auction">
+                <li class="datanone">很抱歉该条件下暂无拍品，您可以重新查询！</li>
+            <else />
+                <volist name="bav.auction" id="avo">
+                    <include file="Auction/bidbox" />
+                </volist>
+            </empty>
+        </foreach>
+    </ul>
+</div>
+<!-- 正在拍卖】 -->

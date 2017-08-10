@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>添加、编辑直播老师-后台管理-{$site.SITE_INFO.name}</title>
+        <php>
+            $currentNav ='视讯 > 添加直播老师';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">添加编辑直播老师</div>
+                    </div>
+                    <form>
+                        <input id="ol_teacher_id" type="hidden" class="input" size="60" name="info[ol_teacher_id]" value="{$info.ol_teacher_id}"/>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th width="100">所属帐号：</th>
+                                <td><input id="title" type="text" placeholder="填入拍卖网注册帐号" class="input" size="60" name="member_name" value="{$member_name}"/></td>
+                            </tr>
+
+                            <tr>
+                                <th width="100">名字：</th>
+                                <td><input id="title" type="text" class="input" size="60" name="info[name]" value="{$info.name}"/></td>
+                            </tr>
+                            <tr>
+                                <th width="100">简介：</th>
+                                <td><input id="jianjie" type="text" class="input" size="60" name="info[jianjie]" value="{$info.jianjie}"/></td>
+                            </tr>
+                            <tr>
+                                <th width="100">称号：</th>
+                                <td><input id="type" type="text" class="input" size="60" name="info[type]" value="{$info.type}"/></td>
+                            </tr>
+     
+   
+                            <tr>
+                                <th width="100">头像：</th>
+                                <td id="speListPicBox">
+                                    <div class="up_btn_box">
+                                        <div class="up_explain">图片格式：*.gif; *.jpg; *.png；尺寸：宽{:C('SPECIAL_ICO_WIDTH')}&nbsp; 高{:C('SPECIAL_ICO_HEIGHT')}。如果上传的图片让您看着不舒服，请检查图片尺寸是否符合要求</div>
+                                        <div id="specPic_upload" class="btn up_but"><div class="up_but_ico"></div>上传图片</div>
+                                        <div class="clearfix"></div>
+                                        <ul id="uploadImageList" class="clearfix">
+                                            <notempty name="info[picurl]">
+                                                <li class="photo"><img id="upImgSize" src="{$upWholeUrl}{$info.picurl}" width="{:C('SPECIAL_ICO_WIDTH')}" height="{:C('SPECIAL_ICO_HEIGHT')}"/>
+                                                    <div class="imper">
+                                                        <a class="delImg" picw="picurl" imgurl="{$info.picurl}" href="javascript:;"></a><a class="bigImg" href="{$upWholeUrl}{$info.picurl}"  target="_blank"></a></div>
+                                                    <input type="hidden" name="info[picurl]" value="{$info.picurl}" />
+                                                </li>
+                                            </notempty>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <!-- <input type="hidden" name="info[ol_teacher_id]" value="{$info.ol_teacher_id}" /> -->
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <!-- 日期时间插件 -->
+        <css href="--PUBLIC--/Js/datetimepicker/jquery.datetimepicker.css"/>
+        <js href="--PUBLIC--/Js/datetimepicker/jquery.datetimepicker.js"/>
+        <!-- 日期时间插件 -->
+        <!-- 上传插件【 -->
+        <script type="text/javascript" src="__STATIC__/plupload/plupload.full.min.js"></script>
+        <script type="text/javascript" src="__STATIC__/plupload/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
+        <script type="text/javascript" src="__STATIC__/plupload/i18n/zh_CN.js"></script>
+        <!-- 上传插件】 -->
+        <!-- Ueditor编辑器js -->
+        <js href="--PUBLIC--/ueditor/ueditor.config.js,--PUBLIC--/ueditor/ueditor.all.min.js,--PUBLIC--/ueditor/lang/zh-cn/zh-cn.js"/>
+<script type="text/javascript">
+    // 上传变量配置【
+    var moxieswf = "__STATIC__/plupload/Moxie.swf";
+    var moxiesxap = "__STATIC__/plupload/Moxie.xap";
+    // 上传变量配置】
+    var spesId = "{$info.sid}";
+    //初始化保证金字段
+    repledge($('#special_pledge_type').val()); //初始化扩展字段
+    $('#special_pledge_type').on("change",function(){
+        var type = $(this).children('option:selected').val();
+        repledge(type);
+    });
+    function repledge(special_pledge_type){
+        if(special_pledge_type==0){
+            $('#special_pledge').html($('#ratio').html());
+        }else if(special_pledge_type==1){
+            $('#special_pledge').html($('#fixation').html());
+        }
+    }
+    $(function(){
+        // 百度编辑器
+        window.UEDITOR_CONFIG.imageUrl = "{:U('Upload/editorUpload')}";
+        window.UEDITOR_CONFIG.wordImageUrl = "{:U('Upload/editorUpload')}";
+        window.UEDITOR_CONFIG.imagePath = '{$upWholeUrl}';
+        window.UEDITOR_CONFIG.wordImagePath = '{$upWholeUrl}';
+        window.UEDITOR_CONFIG.savePath = ['{$upWholeUrl}'];
+        UE.getEditor('description');
+        // 百度编辑器_end
+
+        //为input添加时间插件
+        $('#start_time').datetimepicker({lang:'ch'});
+        $('#end_time').datetimepicker({lang:'ch'});
+
+        //上传初始化变量
+        var uplode_url = '{:U("Upload/upSpecialIco")}';//PHP处理脚本地址
+        var uplode_path = '__PUBLIC__'; //插件公共目录
+        var sid = '{:session_id()}';//sessionID
+        var upPathRoot="{$upWholeUrl}"; //图片上传根目录完整路径
+        var uploadPath ="{:C('UPLOADS_PICPATH')}"; //图片上传根目录
+        var specPicW = "{:C('SPECIAL_ICO_WIDTH')}";
+        var specPicH = "{:C('SPECIAL_ICO_HEIGHT')}";
+        // 列表图片上传【
+        <literal>
+            var uploaderLi = new plupload.Uploader({//创建实例的构造方法
+                runtimes: 'html5,flash,silverlight,html4', //上传插件初始化选用那种方式的优先级顺序
+                browse_button: 'specPic_upload', // 上传按钮
+                url: uplode_url, //远程上传地址
+                flash_swf_url: moxieswf, //flash文件地址
+                silverlight_xap_url: moxiesxap, //silverlight文件地址
+                filters: {
+                    max_file_size: '4mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+                    mime_types: [//允许文件上传类型
+                        {title: "files", extensions: "jpg,gif"}
+                    ]
+                },
+                multi_selection: false, //true:ctrl多文件上传, false 单文件上传
+                init: {
+                    FilesAdded: function(up, files) { //文件上传前
+                        if ($("#speListPicBox #uploadImageList").children("li").length > 1) {
+                            alert("您上传的图片太多了！");
+                            uploaderLi.destroy();
+                        } else {
+                            var li = '';
+                            plupload.each(files, function(file) { //遍历文件
+                                li += "<li class='photo' id='" + file['id'] + "'><div style='width: "+specPicW+"px;' class='progress'><span class='bar'></span><span class='percent'>0%</span></div></li>";
+                            });
+                            $("#speListPicBox #uploadImageList").html(li);
+                            uploaderLi.start();
+                        }
+                    },
+                    UploadProgress: function(up, file) { //上传中，显示进度条
+                 var percent = file.percent;
+                        $("#" + file.id).find('.bar').css({"width": percent + "%"});
+                        $("#" + file.id).find(".percent").text(percent + "%");
+                    },
+                    FileUploaded: function(up, file, info) { //文件上传成功的时候触发
+                        var data = JSON.parse(info.response);
+                         $("#" + file.id).html('<img id="upImgSize" src="'+upPathRoot+data.path+'" width="'+specPicW+'" height="'+specPicH+'"/><div class="imper"><a class="delImg" imgurl="'+data.path+'" href="javascript:;"></a><a class="bigImg" href="'+uploadPath+data.path+'"  target="_blank"></a></div><input type="hidden" name="info[picurl]" value="'+data.path+'" />');
+                    },
+                    Error: function(up, err) { //上传出错的时候触发
+                        alert(err.message);
+                    }
+                }
+            });
+            uploaderLi.init();
+        </literal>
+        // 列表图片上传】
+        // 列表图片上传】
+        var uplodeBanner_url = '{:U("Upload/upSpecialBnner")}';//PHP处理脚本地址
+        var specBannerPicW = "{:C('CROWD_BANNER_WIDTH')}";
+        var specBannerPicH = "{:C('CROWD_BANNER_HEIGHT')}";
+        // BANNER图片上传【
+        <literal>
+        var uploaderTop = new plupload.Uploader({//创建实例的构造方法
+            runtimes: 'html5,flash,silverlight,html4', //上传插件初始化选用那种方式的优先级顺序
+            browse_button: 'specBannerPic_upload', // 上传按钮
+            url: uplodeBanner_url, //远程上传地址
+            flash_swf_url: moxieswf, //flash文件地址
+            silverlight_xap_url: moxiesxap, //silverlight文件地址
+            filters: {
+                max_file_size: '4mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+                mime_types: [//允许文件上传类型
+                    {title: "files", extensions: "jpg,gif"}
+                ]
+            },
+            multi_selection: false, //true:ctrl多文件上传, false 单文件上传
+            init: {
+                FilesAdded: function(up, files) { //文件上传前
+                    if ($("#specBannerPicBox #uploadImageList").children("li").length > 1) {
+                        alert("您上传的图片太多了！");
+                        uploaderTop.destroy();
+                    } else {
+                        var li = '';
+                        plupload.each(files, function(file) { //遍历文件
+                            li += "<li class='photo' id='" + file['id'] + "'><div style='width: "+specBannerPicW+"px;' class='progress'><span class='bar'></span><span class='percent'>0%</span></div></li>";
+                        });
+                        $("#specBannerPicBox #uploadImageList").html(li);
+                        uploaderTop.start();
+                    }
+                },
+                UploadProgress: function(up, file) { //上传中，显示进度条
+                    var percent = file.percent;
+                    $("#" + file.id).find('.bar').css({"width": percent + "%"});
+                    $("#" + file.id).find(".percent").text(percent + "%");
+                },
+                FileUploaded: function(up, file, info) { //文件上传成功的时候触发
+                    var data = JSON.parse(info.response);
+                    $("#" + file.id).html('<img id="upImgSize" src="'+upPathRoot+data.path+'" width="'+specBannerPicW+'" height="'+specBannerPicH+'"/><div class="imper"><a class="delImg" imgurl="'+data.path+'" href="javascript:;"></a><a class="bigImg" href="'+uploadPath+data.path+'"  target="_blank"></a></div><input type="hidden" name="info[banner_img]" value="'+data.path+'" />');
+                },
+                Error: function(up, err) { //上传出错的时候触发
+                    alert(err.message);
+                }
+            }
+        });
+        uploaderTop.init();
+        </literal>
+        // BANNER图片上传】
+         // 文章图片删除
+        var delUrl = "{:U('Auction/del_specpic')}";
+        $(document).on("click",".delImg",function(){
+            var delImgUrl = $(this).attr('imgurl');
+            var picw = $(this).attr('picw');
+            var delDiv = $(this);
+            $.post(delUrl,{'spesId':spesId,'picw':picw,'imgUrl':delImgUrl},function(data){      //ajax后台
+                if (data.status) {
+                    delDiv.parents('.photo').fadeOut().remove();
+
+                    popup.success(data.msg);
+                    setTimeout(function(){
+                        popup.close("asyncbox_success");
+                    },1000);
+                } else {
+                    alert(data.msg);
+                }
+            },'json');        
+        });
+        // 文章片删除_end
+        $("#checkNewsTitle").click(function(){
+            $.getJSON("__URL__/checkNewsTitle", { title:$("#title").val(),id:"{$info.id}"}, function(json){
+                $("#checkNewsTitle").css("color",json.status==1?"#0f0":"#f00").html(json.info);
+            });
+        });
+        $(".submit").click(function(){
+            commonAjaxSubmit();
+            return false;
+        });
+    });
+</script>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+{:W('Oncoo/catelist',array($gt[0]))}
+<!-- 今日拍卖【 -->
+<div class="bla">
+    <div class="brand">
+        <ul class="clearfix">
+            <li class="brtit_today">
+                <eq name="ACTION_NAME" value="index">在拍分类</eq>
+                <eq name="ACTION_NAME" value="waitbid">待拍分类</eq>
+                <eq name="ACTION_NAME" value="endbid">成交分类</eq>
+            </li>
+            <li class="brmore">更多<eq name="ACTION_NAME" value="index">在拍</eq><eq name="ACTION_NAME" value="waitbid">待拍</eq><eq name="ACTION_NAME" value="endbid">成交</eq></li>
+            <empty name="clist">
+                    <li style="text-align: center; line-height: 56px;">无</li>
+                <else/>
+                    <volist name="clist" id="cvo">
+                        <li class="">
+                            <a <eq name="cvo.cid" value="$gt.0">class="brandcur"</eq> title="" target="_self" href="{:U('',array('gt'=>$cvo['gt']))}">
+                                <notempty name="cvo.ico">
+                                    <span class="m_9_b">
+                                        <img src="{$upWholeUrl}{$cvo.ico}">
+                                    </span>
+                                </notempty>
+                                <font>{$cvo.name}</font>
+                            </a>
+                        </li>
+                    </volist>
+            </empty>
+            
+        </ul>
+    </div>
+</div>
+<!-- 今日拍卖】 -->
+    <notempty name="filt_html">
+    <div class="clearfix list_fielt_box">
+        <div id="fielt_box">{$filt_html}</div>
+        <div class="notice">
+            <ul>
+                <li class="bot_border n1"><a target="_blank" href="{:U('Article/help',array('id'=>1))}">拍卖须知></a></li>
+                <li class="n2"><a target="_blank" href="{:U('Member/payment')}">充值保证金></a></li>
+            </ul>
+        </div>
+    </div>
+    </notempty>
+    <div class="selection">
+        <div id="contit" class="contitle">
+            <a <if condition="(ACTION_NAME eq 'index')and($gt[6] eq 'a')">class="on"</if> href="{:U('Auction/index',array('gt'=>$gt0))}">全部在拍</a>  
+            <a <if condition="(ACTION_NAME eq 'index')and($gt[6] eq 'n')">class="on"</if>  href="{$ynUrl.n}">未出价</a>
+            <a <if condition="(ACTION_NAME eq 'index')and($gt[6] eq 'y')">class="on"</if>  href="{$ynUrl.y}">已出价</a>
+            <a <if condition="(ACTION_NAME eq 'waitbid')">class="on"</if> href="{:U('Auction/waitbid',array('gt'=>$gt0))}">即将开拍</a>
+            <a <if condition="(ACTION_NAME eq 'endbid')">class="on"</if> href="{:U('Auction/endbid',array('gt'=>$gt0))}">已成交</a> 
+        </div>
+        <div class="jiesao">
+            <strong><a <eq name="gt[5]" value="0">class="on"</eq> href="{$typeUrl.pai}">竞拍</a>：</strong>  规定时间，多次出价，价高者得。 
+            <strong><a <eq name="gt[5]" value="1">class="on"</eq>  href="{$typeUrl.biao}">竞标</a>：</strong>  规定时间，一次出价，价高者得。 
+        </div>
+     </div>

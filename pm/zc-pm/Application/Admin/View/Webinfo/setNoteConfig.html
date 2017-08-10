@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>短息配置-系统设置-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='系统设置 > 短息配置';
+        </php>
+    <include file="Common:intoHead" />
+</head>
+<body>
+    <div class="wrap"> <include file="Common:head" />
+        <div class="mainBody"> <include file="Common:left" />
+            <div id="Right">
+                <div class="contentArea">
+                    <div class="Item hr clearfix">
+                        <div class="current">短息配置</div>
+                    </div>
+                    <form action="" method="post">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                        <tr>
+                            <td colspan="2">为方便客户，我们代理有短信接口，详情咨询客服！</td>
+                        </tr>
+                            <tr>
+                                <th>编号：</th>
+                                <td>
+                                    <input class="input" name="uid" type="text" size="10" value="{$site.SYSTEM_NOTE.uid}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>密码：</th>
+                                <td>
+                                    <input class="input" name="pwd" type="text" size="10" value="{$site.SYSTEM_NOTE.pwd}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>测试接收手机号：</th>
+                                <td>
+                                    <input class="input" name="test" type="text" size="30" value="{$site.SYSTEM_NOTE.test}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="page">
+                                    <span>提示：如果提示发送成功，且并未收到短信，请登录短信管理平台查看是否关键字被屏蔽！</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                        <button class="btn test">测试配置是否成功</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+<include file="Common:foot" />
+<script type="text/javascript">
+    $(".submit").click(function(){
+        commonAjaxSubmit();
+    });
+    $(".test").click(function(){
+        if($.trim($("input[name='test']").val())==''){
+            popup.alert("没有填写接收测试短信的手机号，无法发送测试短信");
+            return;
+        }
+        commonAjaxSubmit('{:U("Webinfo/testNoteConfig")}');
+    });
+</script>
+</body>
+</html>

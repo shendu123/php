@@ -1,0 +1,27 @@
+$(function(){
+  $('.goldPrice-tab .bd').bxSlider({
+    mode: 'fade',
+    captions: true,
+    controls: false
+  });
+  $("#liveroom-box").mCustomScrollbar({
+		scrollButtons:{
+			enable:false
+		}
+	});
+  $("#question-list").mCustomScrollbar({
+		scrollButtons:{
+			enable:false
+		}
+	});
+});
+//直播老师简介
+	$(".teacher-list dl").hover(function(){
+
+	
+		$(this).find(".teacher-listinfo").show();
+	}, function() {
+
+		$(this).find(".teacher-listinfo").hide();
+
+	})

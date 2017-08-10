@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>我评价的买家-我是买家-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="--PUBLIC--/Js/jquery_raty/jquery.raty.min.js"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;我是买家&nbsp;&gt;&gt;&nbsp;我评价的买家</div>
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                <ul class="inquiry">
+                    <li><a href="{:U('Member/seller_myevaluate')}">收买家的评价</a></li>
+                    <li class="hover"><a href="{:U('Member/my_evaluatebuy')}">我评价的买家</a></li>
+                </ul>
+                <div class="inquiry-con">
+                    <table width="100%" cellspacing="0" cellpadding="0" class="tabela">
+                        <thead>
+                            <tr bgcolor="#fbfaf7" align="center">
+                                <th width="5%" class="brno" scope="col">评价</th>
+                                <th width="45%" valign="middle" align="center" class="brno" scope="col">评论</th>
+                                <th width="20%" valign="middle" align="center" class="brno" style="text-align: center;" scope="col">买家</th>
+                                <th width="30%" valign="middle" align="center" scope="col">拍品信息</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <empty name="list">
+                            <tr><td colspan="5" align="center">
+                                哎哟！这里空空如也！
+                            </td></tr>
+                            <else/>
+                            <volist name="list" id="vo">
+                                <tr valign="top" align="left">
+                                    <td align="left" class="tablea_pic">
+                                        <eq name="vo.score" value="0"><img width="20" height="20" src="--PUBLIC--/Img/level/bad.gif" alt="差评" /></eq>
+                                        <eq name="vo.score" value="1"><img width="20" height="20" src="--PUBLIC--/Img/level/middle.gif" alt="中评" /></eq>
+                                        <eq name="vo.score" value="2"><img width="20" height="20" src="--PUBLIC--/Img/level/good.gif" alt="好评" /></eq>
+                                         
+                                    </td>
+                                    <td valign="middle">
+                                        <p>{$vo.evaluate}</p>
+                                        <div style=" color: #999;text-align: right;">[&nbsp;{$vo.time|date='Y-m-d H:i',###}&nbsp;]</div>
+                                    </td>
+                                    <td>
+                                        <span class="ac-show-userbox clearfix" pid="{$vo.pid}" cardtips="0" uid="{$vo.uid}" seller="0">
+                                            <a class="ac-show-usercard" href="javascript:void(0);">{$vo.nickname}</a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <img style="float: left; margin-right: 10px; display: inline; width:72px; height:auto; " src="{$upWholeUrl}{$vo.pictures|getPicUrl=###,3,0}"/>
+                                        <p><a href="{:U('Auction/details',array('pid'=>$vo['pid']))}">{$vo.pname}</a></p>
+                                        <p>价格：<span style="color: #ff6600;">{$vo.price}</span></p>
+                                        
+                                    </td>
+                                </tr>
+                            </volist> 
+                            </empty>  
+                            <tr valign="top" align="left">
+                                <td bgcolor="#fbfaf7" align="left" colspan="5">
+                                    <div class="page">
+                                        {$page}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<script type="text/javascript">
+var start_path = "--PUBLIC--/Js/jquery_raty/img"
+var credit_score = "{$einfo.credit_score}";
+$(function(){
+    $('#credit').raty({
+        readOnly: true,
+        score: Number(credit_score),
+        path : start_path
+      });
+
+
+});
+</script>
+</body>
+</html>

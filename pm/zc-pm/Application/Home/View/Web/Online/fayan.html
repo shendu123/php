@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>发表 - 会员中心 - 前景财富</title>
+		<link href="/Public/online/fayan.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" charset="utf-8" src="/Public/ueditor/ueditor.config.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/Public/ueditor/ueditor.all.js"></script>
+		<link rel="stylesheet" type="text/css" href="/Public/ueditor/themes/default/css/ueditor.css"/>
+	</head>
+	<body>
+		<div id="main">
+			<div id="content" class="w960 clearfix">
+				<div id="mcpmain">
+					<div id="appTab">
+						<ul><li class="thisTab"><a href="#"><span>发表直播观点</span></a></li></ul>
+					</div>
+					<form name="addcontent" action="http://www.fjsxpmh.com/Online/fayan" method="post" enctype="multipart/form-data" onsubmit="return checkSubmit();">
+						<input type="hidden" name="id" value="{$id}" />
+						<input type="hidden" name="teacher_name" value="{$teacher_name}">
+						<div class="contentShow postForm">
+							<p>
+								<textarea name="body" id="body" style="width:100%;">{$mes}</textarea>
+							</p>
+							<p>
+								<button class="button2" type="submit">提交</button>
+								<button class="button2 ml10" type="reset" onclick="location.reload();">重置</button>
+							</p>
+						</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script type="text/javascript">
+	var ue = new baidu.editor.ui.Editor();
+	ue.render("body");
+</script>

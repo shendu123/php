@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+        <meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>评价买家-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="--PUBLIC--/Js/jquery_raty/jquery.raty.min.js"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+    <div id="container_white">
+        <div class="main_b9">
+            <div class="h8 clearfix"></div>
+            <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;我是卖家&nbsp;&gt;&gt;&nbsp;评价买家</div>
+            <div class="main_b9_1 clearfix">
+                <!--左侧导航开始-->
+                <include file="Member:menu" />
+                <!--左侧导航结束-->
+                <!---右侧开始-->
+                    <div class="sider">
+                        <ul class="inquiry">
+                            <li class="hover">评价买家</li>
+                        </ul>
+                        <div class="inquiry-con">
+                            <div class="ainfo clearfix">
+                                <div class="aimbox">
+                                    <a target="_blank" href="{:U('Auction/details',array('pid'=>$ainfo['pid']))}">
+                                    <img width="175" title="{$ainfo.pname}" src="{$upWholeUrl}{$ainfo.pictures|getPicUrl=###,2,0}" alt="{$ainfo.pname}">
+                                    </a>
+                                </div>
+                                <div class="aimcon">
+                                    <p class="pname"><a target="_blank" href="{:U('Auction/details',array('pid'=>$ainfo['pid']))}">{$ainfo.pname}</a></p>
+                                    <ul>
+                                        <li class="clearfix"><div class="th">成交价：</div><div class="td qipai">{$ainfo.nowprice}</div></li>
+                                        <li class="clearfix">
+                                            <div class="th">保证金：</div>
+                                            <div class="td blue1">
+												{:pledgeShow($ainfo['pattern'],$ainfo['pledge_type'],$ainfo['onset'],$ainfo['pledge'],$ainfo['spledge'],$ainfo['mpledge'])}
+                                            </div>
+                                        </li>
+                                        <li class="clearfix"><div class="th">开始时间：</div><div class="td">{$ainfo.starttime|date='Y-m-d H:i',###}</div></li>
+                                        <li class="clearfix"><div class="th">结束时间：</div><div class="td">{$ainfo.endtime|date='Y-m-d H:i',###}</div></li>
+                                        <li class="clearfix"><div class="th">{$ainfo.member.role}：</div><div class="td"><a href="{:U('Seller/index',array('sellerid'=>$ainfo['member']['uid']))}">{$ainfo.member.nickname}</a></div></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="evalu_tit">对买家做出评价</div>
+                            <form id="evaluate" name="evaluate" class="validateClass" action="" method="post">
+                                <div class="evaluate_box clearfix">
+                                    <div class="rate-right-side fl">
+                                        <div class="rate-box item-rate clearfix">
+                                            <div class="rate-box-title">评价买家</div>
+                                            <div class="text-input-box rate-input-box">
+                                                <textarea maxlength="400" name="info[evaluate]"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="rate-left-buy fr">
+                                        <li><label><input type="radio" checked="checked" name="info[score]" value="2" /><img width="20" height="20" src="--PUBLIC--/Img/level/good.gif" alt="好评" />好评</label></li>
+                                        <li><label><input type="radio" name="info[score]" value="1" /><img width="20" height="20" src="--PUBLIC--/Img/level/middle.gif" alt="中评" />中评</label></li>
+                                        <li><label><input type="radio" name="info[score]" value="0" /><img width="20" height="20" src="--PUBLIC--/Img/level/bad.gif" alt="差评" />差评</label></li>
+                                    </ul>
+                                </div>
+                                <input type="hidden" name="info[order_no]" value="{$info.order_no}" />
+                            </form>
+                            <div id="btn_box">
+                                <button class="on-btn on-btn-red submit">提交评价</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!--auction.html结束-->
+        </div>
+    </div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<script type="text/javascript">
+    $(function(){
+        // 评价星级】
+        $(".submit").click(function(){
+            commonAjaxSubmit();
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

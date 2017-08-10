@@ -1,0 +1,326 @@
+<include file="Common:meta" />
+<title>订单支付-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+<!-- 拍品订单支付 -->
+<div class="am-margin-xs">
+    <form id="payment" class="am-form" action="{:U('Payment/index')}" name="payment" method="post">
+        <ul class="payment_address am-avg-sm-1">
+            <li class="pdt">选择收件地址&nbsp;↓</li>
+            <foreach name="address" item="av">
+                <li class="li">
+                    <label>
+                        <span class="am-text-truncate">{$av.truename} {$av.mobile}&nbsp;{$av.ctstr}{$av.address}，{$av.postalcode}，{$av.phone}</span>
+                        <input class="radio" name="data[adid]" type="radio" value="{$av.adid}" <eq name="av.default" value="1">checked="checked"</eq> />
+                    </label>
+                </li>
+            </foreach>
+        </ul>
+        <!-- 拍品订单支付 -->
+        <div class="pdt">订单信息&nbsp;↓</div>
+        <ul class="sea_list am-avg-sm-1">
+            <include file="Member:crd_order_box" />
+        </ul>
+        <div class="pay-count">
+            支持：{$oinfo.price|wipezero=###}元 + 运费：{$oinfo.delivery_fee|wipezero=###}元）。<br/>您需要为此订单支付<span class="red1 fb">{$oinfo.total_price}元</span>
+        </div>
+        <input type="hidden" name="data[money]" class="input" value="{$oinfo.total}">
+        <input type="hidden" name="data[payType]" class="input" value="crowd">
+        <input type="hidden" name="data[order_no]" class="input" value="{$oinfo.crd_no}">
+ 
+            <dl class="clearfix">
+                <dt class="pdt">支付方式&nbsp;↓</dt>
+                <dd class="ptp">
+                    <label class="cur"><input type="checkbox" name="ptp[]" id="yue" ptp="yue"  value="0" <neq name="uLimit.usable" value="0">checked="checked"<else/>disabled="true"</neq>>余额支付</label>
+                    <label <eq name="uLimit.satisfy" value="n">class="cur"</eq>><input name="ptp[]" id="lin" ptp="lin" type="checkbox" value="1" <eq name="uLimit.satisfy" value="n">checked="checked"</eq>>在线支付</label>
+                </dd>
+            </dl>
+            <dl class="clearfix yuep">
+                <dt class="pdt">余额支付&nbsp;↓</dt>
+                <dd class="ptpbox user-frame">
+                    账户总额为<span class="red1 fb">{$uLimit.wallet_pledge}</span>元，已冻结<span class="red1 fb">{$uLimit.wallet_pledge_freeze}</span>元!<br/>可用余额<span class="red1 fb">{$uLimit.usable}</span>元!<br/>
+                    <p class="red1" style="text-align: center; font-weight: bold;">
+                        我想用<input type="text" size="8" name="data[yuemn]" id="paymn" class="input paymn" value="{$uLimit.yfmn}"/>元进行支付！<eq name="uLimit.satisfy" value="n"><br/>余额不足以支付该订单情况下使用在线支付补齐。</eq>
+                    </p>
+                </dd>
+            </dl>
+            <dl class="linp" <if condition="$uLimit['satisfy'] eq 'y'">style="display: none;"</if>>
+            <dt class="pdt">在线支付&nbsp;↓</dt>
+            <dd>
+                <ul class="payTypeList am-avg-sm-3">
+                    <foreach name="channel" item="v">
+                        <li>
+                            <label>
+                                <div class="icobox">
+                                    <input type="radio" id="pay<neq name='key' value='0'>{$key}</neq>" value="{$v.value}" name="data[channel]">
+                                    <img width="73px;" src="{$v.img}">
+                                </div>
+                            </label>
+
+                        </li>
+                    </foreach>
+                </ul>
+            </dd>
+            <dd><div id="payTip"></div></dd>
+            </dl>
+
+        <dl>
+            <dt class="pdt">留言&nbsp;↓</dt>
+            <dd>
+                <input type="text" style="width: 100%;" name="data[buyer_msg]" class="input" value=""/>
+            </dd>
+        </dl>
+        <dl class="am-margin-top-xs">
+            <dd><input id="submit" type="submit" value="支付" class="submitBtn am-btn am-btn-danger on-btn-danger am-radius"></dd>
+        </dl>
+    </form>
+</div>
+<!---右侧结束-->
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+
+<script type="text/javascript">
+    // 需要支付总额
+    var total = "{$oinfo.total}";
+    // 可用余额
+    var usable = "{$uLimit.usable}";
+    // 缴纳的保证金
+    var pledge = "{$oinfo.pledge}";
+    // 余额是否足够支付订单
+    var satisfy = "{$uLimit.satisfy}";
+    // 余额框金额
+    var yfmn = "{$uLimit.yfmn}";
+    // 余额框最高金额
+    var newyfmn = 0;
+    // 在线支付价格
+    var actual = 0;
+    // 保证金直接抵货款
+    var onlypledge = "{$onlypledge}";
+    // 提交地址
+    var payment_url = "{:U('payment')}";
+    $(function(){
+        $("#submit").click(function(){
+            popStatus(3, '正在进行支付...', 0,'',true);
+            return true;
+        });
+        // 表单验证【
+        $.formValidator.initConfig({formID:"remaining",submitButtonID:"submit"});
+        $("#money").formValidator({onShow:"请输入充值金额",onFocus:"必须为数字，小数点后最多可有两位",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+        $(":radio[name='data[channel]']").formValidator({tipID:"payTip",onShow:"请选择一种支付方式",onFocus:"请选择一种支付方式，才能支付",onCorrect:"已选择"}).inputValidator({min:1,max:1,onError:"性别忘记选了,请确认"});
+        // 表单验证】
+        // 初始化radio
+        $(".payTypeList").find("li:first-child").find("input[name='data[channel]']").attr('checked','checked');
+        $(".payTypeList input[name='data[channel]']:checked").parents('li').addClass('cur');
+        $(".payTypeList :radio").change(function() {
+            $("input[name='data[channel]']").parents('li').removeClass('cur');
+            $("input[name='data[channel]']:checked").parents('li').addClass('cur');
+        });
+        // 初始化支付选项【
+        // 余额支付初始化
+        if($('#yue').prop("checked")){
+            $('.yuep').show();
+            $('#yue').attr('checked',true);
+            $('#yue').parents('label').addClass('cur');
+            yuechange();
+        }else{
+            $('.yuep').hide();
+            $('#yue').attr('checked',false);
+            $('#yue').parents('label').removeClass('cur');
+            actual = Number(pledge);
+        }
+        // 在线支付初始化
+        if($('#lin').prop("checked")){
+            $('.linp').show();
+            $('#lin').attr('checked',true);
+            $('#lin').parents('label').addClass('cur');
+        }else{
+            $('.linp').hide();
+            $('#lin').attr('checked',false);
+            $('#lin').parents('label').removeClass('cur');
+        }
+        // 保证金抵货款初始化
+        if($('#bpy').prop("checked")){
+            $('#bpy').attr('checked',true);
+            $('#bpy').parents('label').addClass('cur');
+            // 变动余额支付金额【
+            if($('#yue').prop("checked")){
+                if(satisfy == "y"){
+                    newyfmn = Number(yfmn)-Number(pledge);
+                    $("#paymn").val(newyfmn.toFixed(2));
+                    actual = newyfmn+Number(pledge);
+                    // 余额不足够
+                }else if(satisfy == "n"){
+                    if((Number(yfmn)+Number(pledge))>=Number(total)){
+                        newyfmn = (Number(yfmn)-(Number(yfmn)+Number(pledge)-Number(total)));
+                        $("#paymn").val(newyfmn.toFixed(2));
+                    }else{
+                        newyfmn = Number(yfmn);
+                        $("#paymn").val(newyfmn.toFixed(2));
+                    }
+                    actual = newyfmn+Number(pledge);
+                }
+            }
+            // 变动余额支付金额】
+        }else{
+            // 改变无需在线的金额
+            actual = Number($('#paymn').val());
+            $('#bpy').attr('checked',false);
+            $('#bpy').parents('label').removeClass('cur');
+            // 变动余额支付金额【
+            if($('#yue').prop("checked")){
+                if(satisfy == "y"){
+                    newyfmn = Number(yfmn);
+                    $("#paymn").val(newyfmn.toFixed(2));
+                    // 余额不足够
+                }else if(satisfy == "n"){
+                    newyfmn = Number(yfmn);
+                    $("#paymn").val(Number(yfmn));
+                }
+            }
+            // 变动余额支付金额】
+            // 改变无需在线的金额
+            actual = Number(pledge);
+        }
+        // 初始化无需在线的金额
+        actual = Number(pledge)+Number($('#paymn').val());
+
+        // 初始化支付选项】
+        // 保证金抵货款】
+        $("#bpy").click(function(){
+            if($(this).prop("checked")){
+                $(this).attr('checked',true);
+                $(this).parents('label').addClass('cur');
+                // 变动余额支付金额【
+                if($('#yue').prop("checked")){
+                    if(satisfy == "y"){
+                        newyfmn = Number(yfmn)-Number(pledge);
+                        $("#paymn").val(newyfmn.toFixed(2));
+                        actual = newyfmn+Number(pledge);
+                        // 余额不足够
+                    }else if(satisfy == "n"){
+                        if((Number(yfmn)+Number(pledge))>=Number(total)){
+                            newyfmn = (Number(yfmn)-(Number(yfmn)+Number(pledge)-Number(total)));
+                            $("#paymn").val(newyfmn.toFixed(2));
+                        }else{
+                            newyfmn = Number(yfmn);
+                            $("#paymn").val(newyfmn.toFixed(2));
+                        }
+                        actual = newyfmn+Number(pledge);
+                    }
+
+                }else{
+                    actual = Number(pledge);
+                }
+                // 变动余额支付金额】
+            }else{
+                if (onlypledge==0) {
+                    $(this).attr('checked',false);
+                    $(this).parents('label').removeClass('cur');
+                    // 变动余额支付金额【
+                    if($('#yue').prop("checked")){
+                        newyfmn = Number(yfmn);
+                        $("#paymn").val(newyfmn.toFixed(2));
+                        actual = newyfmn;
+                    }else{
+                        actual = 0;
+                    }
+                }else{
+                    popStatus(2, '仅支持保证金抵货款！', 2,'',true);
+                    $(this).attr('checked',true);
+                    $(this).parents('label').addClass('cur');
+                }
+                // 变动余额支付金额】
+            }
+        });
+        // 保证金抵货款】
+        // 支付方式选择【
+        $(".ptp label input").click(function(){
+            if($(this).attr('ptp')=='yue'){
+                if(!$('#lin').prop("checked")){
+                    popStatus(2, '必须选择一种支付方式进行支付！', 2,'',true);
+                    return false;
+                }
+                if($(this).prop("checked")){
+                    if(usable<=0){
+                        $(this).attr('checked',false);
+                        popStatus(2, '您的可用余额为0请无法选择余额支付！', 2,'',true);
+                    }else{
+                        $('.yuep').show();
+                        $(this).attr('checked',true);
+                        $(this).parents('label').addClass('cur');
+                        yuechange();
+                    }
+                }else{
+                    $('.yuep').hide();
+                    $(this).attr('checked',false);
+                    $(this).parents('label').removeClass('cur');
+                    if($('#bpy').prop("checked")){
+                        actual = Number(pledge);
+                    }else{
+                        actual = 0;
+                    }
+
+                }
+            }
+            if($(this).attr('ptp')=='lin'){
+                if(!$('#yue').prop("checked")){
+                    popStatus(2, '必须选择一种支付方式进行支付！', 2,'',true);
+                    return false;
+                }
+                if($(this).prop("checked")){
+                    $('.linp').show();
+                    $(this).attr('checked',true);
+                    $(this).parents('label').addClass('cur');
+                }else{
+                    $('.linp').hide();
+                    $(this).attr('checked',false);
+                    $(this).parents('label').removeClass('cur');
+                }
+            }
+        });
+        // 支付方式选择】
+    });
+    function yuechange(){
+        // 检查保证金是否抵货款【
+        // 余额足够
+        if(satisfy == "y"){
+            if($('#bpy').prop("checked")){
+                newyfmn = Number(yfmn)-Number(pledge);
+                $("#paymn").val(newyfmn.toFixed(2));
+                // 改变无需在线的金额
+                actual = Number(pledge)+Number(newyfmn.toFixed(2));
+            }else{
+                newyfmn = Number(yfmn);
+                $("#paymn").val(newyfmn.toFixed(2));
+                // 改变无需在线的金额
+                actual = Number(newyfmn.toFixed(2));
+            }
+            // 余额不足够
+        }else if(satisfy == "n"){
+            if($('#bpy').prop("checked")){
+                if((Number(yfmn)+Number(pledge))>=Number(total)){
+                    newyfmn = (Number(yfmn)-(Number(yfmn)+Number(pledge)-Number(total)));
+                    $("#paymn").val(newyfmn.toFixed(2));
+                }else{
+                    newyfmn = Number(yfmn);
+                    $("#paymn").val(newyfmn.toFixed(2));
+                }
+                actual = newyfmn+Number(pledge);
+            }else{
+                newyfmn = Number(yfmn);
+                $("#paymn").val(Number(yfmn));
+                actual = Number($('#paymn').val());
+            }
+        }
+        // 检查保证金是否抵货款】
+    }
+</script>
+</body>
+</html>

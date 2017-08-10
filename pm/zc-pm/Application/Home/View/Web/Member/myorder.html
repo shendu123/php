@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>我的出价-交易管理-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_wide" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;交易管理&nbsp;&gt;&gt;&nbsp;我的出价&nbsp;&gt;&gt;&nbsp;拍品</div>
+
+        
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                <ul class="inquiry">
+                    <li class="hover">我拍到的</li>
+                </ul>
+                <div class="xunj">
+                <ul class="sea clearfix">
+                    <li class="th">状态筛选：</li>
+                    <li><a <eq name="st" value="">class="on"</eq> href="{:U('mysucc')}">全部订单</a></li>
+                    <li><a <eq name="st" value="0">class="on"</eq> href="{:U('mysucc',array('st'=>0))}">待付款</a></li>
+                    <li><a <eq name="st" value="1">class="on"</eq> href="{:U('mysucc',array('st'=>1))}">待发货</a></li>
+                    <li><a <eq name="st" value="2">class="on"</eq> href="{:U('mysucc',array('st'=>2))}">待收货</a></li>
+                    <li><a <eq name="st" value="3">class="on"</eq> href="{:U('mysucc',array('st'=>3))}">已收货</a></li>
+                    <li><a <eq name="st" value="4">class="on"</eq> href="{:U('mysucc',array('st'=>4))}">已评价</a></li>
+                </ul>
+                <table width="100%" cellspacing="0" cellpadding="0" class="tabela">
+                    <thead>
+                        <tr bgcolor="#fbfaf7" align="center">
+                            <th width="45%" class="brno" scope="col">拍品信息</th>
+                            <th width="15%" valign="middle" align="center" class="brno" scope="col">拍到价</th>
+                            <th width="30%" valign="middle" align="center" class="brno" style="text-align: center;" scope="col">订单信息</th>
+                            <th width="9%" valign="middle" align="center" scope="col">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <empty name="alist">
+                            <tr>
+                                <td colspan="5" align="center">哎哟！这里空空如也！</td>
+                            </tr>
+                        <else/>
+                            <volist name="alist" id="avo">
+                                <include file="order_item" />
+                            </volist> 
+                        </empty>  
+                        <tr valign="top" align="left">
+                            <td bgcolor="#fbfaf7" align="left" colspan="5">
+                                <div class="page">
+                                    {$page}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<script type="text/javascript">
+    // 我的出价
+    var mybidUrl="{:U('Member/mybid_list')}";
+    $(".mybid").click(function(){
+        var pid = $(this).attr('pid');
+        asyncbox.open({id : 'mybid_list',url : mybidUrl,args :{'pid' : pid},title : '我的出价',scroll:false,drag : false,modal : true,fixed : false,reset : true,});
+    });
+    var receiptUrl = "{:U('Member/receipt')}";
+    $("#receipt").click(function(){
+        var order = $(this).attr("order");
+        popup.confirm('你确认已经收到拍品【<b>'+$(this).attr("pname")+'</b>】吗?','温馨提示',function(action){
+            if(action == 'ok'){
+                $.post(receiptUrl,{'order':order},function(data){      //ajax后台
+                if (data.status) {
+                        popup.success(data.msg);
+                        setTimeout(function(){
+                            popup.close("asyncbox_success");
+                            top.window.location.href=data.url;
+                        },2000);
+                    } else {
+                        alert(data.msg);
+                    }
+                },'json'); 
+            }
+        });
+        return false;
+    });
+</script>
+</body>
+</html>

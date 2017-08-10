@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>发送站内信-账号中心-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_wide" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;账号中心&nbsp;&gt;&gt;&nbsp;发送站内信</div>
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <form id="sendMsg" name="sendMsg" class="validateClass" action="" method="post">
+           	  <div class="sider">
+                    <ul class="inquiry">
+                        <li class="hover">发送站内信</li>
+                        <li><a href="{:U('Member/sendlist')}">已发送站内信</a></li>
+                    </ul>
+                    <div class="inquiry-con">
+                        <div class="my_info clearfix">
+                            <dl class="clearfix">
+                                <eq name="tp" value="gp">
+                                    <dt>收件人：</dt>
+                                    <dd class="suse clearfix">
+                                        <select name="gp">
+                                            <option value="0">关注我的({$sendct.0}个)</option>
+                                            <option value="1">我的客户({$sendct.1}个)</option>
+                                            <!-- <option value="2">全部用户({$sendct.2}个)</option> -->
+                                        </select>
+                                    </dd>
+                                <else/>
+                                    <dt style="line-height: 42px;">发送给：</dt>
+                                    <dd class="suse clearfix">
+                                        <img style="width: 34px;" src="{$info.uid|getUserpic=###,2}">
+                                        <div class="susnm fl">
+                                            <neq name="info.uid" value="0"> <div class="clearfix"><div class="th">账号：</div><div class="td">{$info.account}</div></div></neq>
+                                            <div class="clearfix">
+                                                <neq name="info.uid" value="0">
+                                                    <div class="th">昵称：</div>
+                                                    <a class="td" target="_blank"  href="{:U('Seller/index',array('userid'=>$info['uid']))}">{$info.nickname}</a>
+                                                    <else/>
+                                                    <a class="td renzheng clearfix"  target="_blank" style="margin-top: 9px;" href="{:U('Seller/index',array('userid'=>$info['uid']))}">
+                                                        <div class="rzl"></div>
+                                                        <div class="rzc cuit_over">{$info.nickname}</div>
+                                                        <div class="rzr"></div>
+                                                    </a>
+                                                </neq>
+                                            </div>
+                                        </div>
+                                        <!-- 关于拍品【 -->
+                                        <if condition="$auction">
+                                            <div class="fl" style="line-height: 42px;  margin-left: 10px;"><label><input style="vertical-align: sub; margin-right: 3px;" name="topid" type="checkbox" checked="checked" value="1" />关于拍卖：</label></div>
+                                            <div class="suse clearfix fl">
+                                                <img style="width: 45px;" src="{$upWholeUrl}{$auction.pictures|getPicUrl=###,2,0}">
+                                                <div class="fl" style=" padding: 0 5px; max-width: 300px;"><a target="blank" style="color: #980000;" href="{:U('Auction/details',array('pid'=>$auction['pid']))}">{$auction.pname}</a></div>
+                                                <div class="fl">的留言。</div>
+                                            </div>
+                                            <input type="hidden" name="info[pid]" value="{$auction.pid}" />
+                                        </if>
+                                        <!-- 关于拍品】 -->
+                                        <input type="hidden" name="info[uid]" value="{$info.uid}" />
+                                        <input type="hidden" name="info[rsid]" value="{$info.rsid}" />
+                                    </dd>
+                                    
+                                </eq>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt>发送内容：</dt>
+                                <dd>
+                                    <textarea id="content" name="info[content]" class="input" style="padding: 5px; height: 130px; width: 450px;" placeholder="填写你要发送的消息，小于120个字符">{$my_info.content}</textarea>
+                                </dd>
+                                <dd><div id="contentTip"></div></dd>
+                            </dl>
+                            <input type="hidden" name="tp" value="{$tp}" />
+                            <dl id="btn_box">
+                                <button id="submit" class="btn_blue">发送</button>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<script type="text/javascript">
+    $(function(){
+        // 表单验证【
+        $.formValidator.initConfig({formID:"myInfo",submitButtonID:"submit"});
+        $("#submit").click(function(){
+            if($.formValidator.pageIsValid('1')==true){
+                commonAjaxSubmit('',"form[name='sendMsg']",'');
+            }
+            return false;
+        });
+
+        $("#content").formValidator({onShow:"请填写发送内容",onFocus:"小于120个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:120,onError:"你输入的内容不正确,请确认"});
+
+        // 表单验证】
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+    <meta name="description" content="{$site.SITE_INFO.description}" />
+    <title>积分兑换-{$site.SITE_INFO.title}</title>
+    <include file="Common:intoHead" />
+    <css href="__CSS__/cuitindex.css"/>
+    <css href="__CSS__/list.css"/>
+    <js href="__JS__/indexjs.js"/>
+</head>
+<style type="text/css">
+      /*内容详情页*/
+.content-gift-detail{
+    min-height: 400px;
+    width: 1200px;
+    margin: 0px auto;
+}
+.content-gift-detail h3{
+    width: 100%;
+    margin: 103px auto 0px auto;
+    font-size: 35px;
+    font-family: "微软雅黑";
+    height: 43px;
+    color: #000;
+    text-align: center;
+    float: left;
+}
+.content-gift-detail .time{
+    width: 100%;
+    margin:23px auto 0px auto;
+    font-size: 18px;
+    font-family: "微软雅黑";
+    height: 20px;
+    color: #000;
+    text-align: center;
+    float: left;
+}
+.content-gift-detail .tj{
+    width: 100%;
+    margin: 78px 0px 43px 0px;
+    font-size: 26px;
+
+    font-family: "微软雅黑";
+    height: 34px;
+    color: rgba(255,0,0);
+    float: left;
+}
+.content-gift-detail .tj .circle{
+    width: 5px;
+    height: 5px;
+    float: left;
+    margin: 15px;
+    border-radius: 2px;
+    background-color: rgba(255,0,0);
+}
+.content-gift-detail h4{
+    width: 100%;
+    font-size:26px;
+    margin: 20px 0px 20px 0px;
+    font-family: "微软雅黑";
+    height: 30px;
+    color: #000;
+    text-indent: 30px;
+    float: left;
+}
+.content-gift-detail .reg img{
+    margin: 50px 100px 50px 250px;
+    float: left;
+
+}
+.content-gift-detail p{
+    width: 100%;
+    
+    font-size:15px;
+    font-family: "微软雅黑";
+    color: #000;
+    text-indent: 18px;
+    float: left;
+}
+/*领牛股*/
+.ts{
+    width: 570px;
+    height: 100px;
+    float: left;
+    border:1px solid #000;
+    background:#ffffff;
+}
+.dt{
+    font-size: 13px;
+    font-family: "微软雅黑";
+    height:22px;
+    width: 367px;
+    margin: 20px 0px 0px 0px;
+    text-align: center;
+    float: left;
+    color: #000;
+}
+.an{
+    font-size: 15px;
+    font-family: "微软雅黑";
+    border:1px solid #000;
+    color: #000;
+    text-align: center;
+    width: 69px;
+    height: 29px;
+    float: right;
+    margin: 20px 20px 0px 0px;
+}
+/*积分商城*/
+.title{
+    width: 100%;
+    margin-top: 20px;
+    font-size:25px;
+    font-family: "微软雅黑";
+    height:23px;
+    color: #000;
+    float: left;
+}
+.title .red{
+    color:rgba(255,0,0);
+    font-size: 23px;
+}
+.gp-list{
+    margin: 7px 0px 69px 0px;
+    width: 100%;
+    height: 370px;
+    float: left;
+}
+.gp-detail{
+    width: 268px;
+    height: 160px;
+    float: left;
+    margin: 25px 32px 25px 0px;
+}
+.gp-detail img{
+    width: 268px;
+    height: 160px;
+    position: absolute;
+    float: left;
+    margin: 0px;
+}
+.gp-detail .bg{
+    position:relative;
+    width: 268px;
+    background-color: rgba(181,3,1,0.85);
+    height: 45px;
+    margin-top: 115px;
+}
+.gp-detail .bg .t1{
+    width: 100%;
+    height: 20px;
+    color: #fff;
+    float: left;
+    font-size: 18px;
+    text-align: center;
+    line-height: 20px;
+    font-family: "微软雅黑";
+  
+
+}
+.gp-detail .bg .t2{
+    width:190px;
+    height: 24px;
+    color: #fff;
+    font-size: 15px;
+    float: left;
+    margin: 0px 40px;
+    line-height: 22px;
+    font-family: "微软雅黑";
+}
+.gp-detail .bg .t2 .sldetail-1{
+    float: left;
+    width: 85px;
+    height: 24px;
+
+}
+.gp-detail .bg .t2 .sldetail-1 .bf{
+    width: 35px;
+    height: 19px;
+    float: left;
+    background:url(/Public/Img/point/u40.png) no-repeat top center;
+}
+.gp-detail .bg .t2 .sldetail-2{
+    float: right;
+    width: 70px;
+    height: 24px;
+    
+}
+.gp-detail .bg .t2 .sldetail-2 .zan{
+    width: 24px;
+    height: 24px;
+    float: left;
+    background:url(/Public/Img/point/u44.png) no-repeat top center;
+}
+.ng-list{
+    margin: 30px 0px 0px 0px;
+    width: 100%;
+    height: auto;
+    float: left;
+}
+.ng{
+    width:267px;
+    height: 136px;
+    float: left;
+    margin: 30px 33px 0px 0px;
+}
+.ng img{
+    width:267px;
+    height: 136px;
+    position: absolute;
+    float: left;
+    margin: 0px;
+}
+.ng .bg{
+    position:relative;
+    width: 267px;
+    background-color: rgba(181,3,1,0.85);
+    height: 30px;
+    margin-top: 106px;
+
+}
+.ng .bg .ddt{
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; //文本不换行，这样超出一行的部分被截取，显示...
+}
+.ng .bg .ddt{
+    height:30px;
+    color: #fff;
+    float: left;
+    font-size: 18px;
+    text-align: center;
+    line-height: 30px;
+    font-family: "微软雅黑";
+    width: 120px;
+
+}
+.lp-list{
+    margin: 30px 0px 0px 0px;
+    width: 100%;
+    height:203px;
+    float: left;
+}
+.lp{
+    width:206px;
+    height: 203px;
+    float: left;
+    margin: 0px 34px 0px 0px;
+}
+.lp img{
+    width:206px;
+    height: 160px;
+    position: absolute;
+    float: left;
+    margin: 0px;
+    position: relative;
+}
+.lp .bg{
+    position: relative;
+    width: 220px;
+    margin-top: 20px;
+    height: 30px;
+    float: left;
+}
+.lp .bg .dddt{
+    height:30px;
+    color: #000;
+    font-size: 18px;
+    text-align: center;
+    line-height: 30px;
+    font-family: "微软雅黑";
+   
+
+}
+.lp .bg  .dddt-1{
+    width: 120px;
+     float: left;
+}
+.lp .bg  .dddt-2{
+    width: 90px;
+     float: right;
+}
+
+/*培训高级课*/
+*{margin:0;padding:0;}
+a{text-decoration:none;}
+.clearfix{*zoom:1;}
+.clearfix:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;}
+.content-gift-detail h1{
+    width: 100%;
+    margin:0px auto 20px auto;
+    font-size: 35px;
+    font-family: "微软雅黑";
+    height: 43px;
+    color: #000;
+    text-align: center;
+    float: left;
+}
+.box-info{width:650px;margin:30px auto;}
+.box-info .box-intro{float:left;}
+.box-info .box-text{float:right;margin-left:0px;}
+.box-info .box-text .footer-btn{
+        width:180px;
+        height:60px;display:block;
+        margin:0px auto;
+        line-height:60px;
+        text-align:center;
+        color:#fff;
+        font-size:16px;
+        background:rgba(152,0,0);
+        border:0;font-family: "微软雅黑";
+}
+.box-info .box-text p{margin-bottom: 20px;}
+.box-footer{width:660px;margin:0 auto;}
+.box-footer .footer-title{margin-bottom:20px;}
+.content_list{padding-bottom: 50px;border-bottom:1px solid #333;}
+</style>
+<body>
+    <include file="Common:head_wide" />
+
+     <div class="content content-gift-detail">
+     <!-- 股票培训高级课（小积分赚大学问） -->
+      <empty name="list">
+      <else />
+<!--      <div class="title">股票培训高级课<span class="red">（小积分赚大学问）</span></div>-->
+      <div class="title">小积分赚大学问</div>
+      <div class="gp-list content_list">
+        <volist name="list" id="avo">
+                <include file="Point/pointcourse" />
+          <!-- <div class="gp-detail gp-detail-1">
+           <img src="{$upWholeUrl}{$avo.picurl}">
+           <div class="bg">
+            <div class="t1">{$avo.name}</div>
+            <div class="t2">
+              <div class=" sldetail-1"><span class="bf"></span>{$avo.watched}万</div>
+              <div class=" sldetail-2"><span class="zan"></span>{$avo.shared}万</div>
+            </div>
+           </div>
+          </div> -->
+
+        </volist>
+      </div>
+      </empty>
+    <empty name="school_list">
+      <else />
+<!--      <div class="title">积分学堂</div>-->
+      <div class="ng-list content_list">
+        <volist name="school_list" id="sc">
+           <div class="title">{$sc.level_name}</div>
+            <volist name="sc.list" id="avo">
+                <a href="{:U('Point/schooldetail',array('id'=>$avo['id']))}" target="_blank">
+                    <div class="ng ng-1" >
+                            <img src="{$upWholeUrl}{$avo.video_pic_url}">
+                            <div class="bg">
+                              <div class="ddt ddt-1">{$avo.name}</div>
+                              <div class="ddt ddt-2">{$avo.point}积分</div>
+                              <div class="ddt ddt-3"></div>
+                            </div>
+                    </div>
+                </a>
+            </volist>
+        </volist>
+      </div>
+      </empty>
+      
+      <!-- 个股内参 -->
+      <empty name="listb">
+      <else />
+<!--      <div class="title">积分换牛股</div>-->
+      <div class="title">积分换礼品</div>
+      <div class="ng-list content_list">
+        <volist name="listb" id="avo">
+         <a href="{:U('Point/giftdetail',array('id'=>$avo['id']))}" target="_blank">
+          <div class="ng ng-1" >
+             <img src="{$upWholeUrl}{$avo.picurl}">
+             <div class="bg">
+                  <div class="ddt ddt-1">{$avo.name}</div>
+                  <div class="ddt ddt-2">{$avo.point}积分</div>
+                  <div class="ddt ddt-3"></div>
+             </div>
+            </div></a>
+        </volist>
+      </div>
+      </empty>
+
+
+            <!-- 涨停战法秘籍 -->
+      <empty name="listc">
+      <else />
+      <div class="title">涨停战法秘籍</div>
+      <div class="ng-list content_list">
+        <volist name="listb" id="avo">
+        <a href="{:U('Point/giftdetail',array('id'=>$avo['id']))}" target="_blank">
+          <div class="ng ng-1">
+             <img src="{$upWholeUrl}{$avo.picurl}">
+             <div class="bg">
+                  <div class="ddt ddt-1">{$avo.teacher}</div>
+                  <div class="ddt ddt-2">{$avo.point}积分</div>
+                  <div class="ddt ddt-3">{$avo.starttime}</div>
+             </div>
+            </div></a>
+        </volist>
+      </div>
+      </empty>
+
+
+
+
+      <!-- 积分兑换礼品 -->
+<empty name="listd">
+<else />
+     <div class="title">积分兑礼品</div>
+      <div class="lp-list content_list">
+        <volist name="listd" id="avo">
+         <a href="{:U('Point/giftdetailc',array('id'=>$avo['id']))}" target="_blank">
+            <div class="lp lp-1">
+             <img src="{$upWholeUrl}{$avo.picurl}">
+              <div class="bg">
+             <div class="dddt dddt-1">{$avo.name} </div>
+             <div class="dddt dddt-2">{$avo.point}积分</div>
+             </div>
+            </div>
+     </a>
+
+</volist> </div>
+</empty>
+
+
+
+
+
+
+
+
+<p><br></p>
+
+
+
+
+
+            
+    <!-- 广告列表 -->
+    <include file="footer_add" />
+    <!-- 广告列表 -->
+<!---底部开始-->
+<include file="Common:help_wide" />
+<include file="Common:footer"/>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

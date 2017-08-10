@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$crowd.seo_desc}" />
+        <title>{$crowd.name}-申购详情-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/cuitindex.css"/>
+		<css href="__CSS__/list.css"/>
+        <style>
+            .project{background:#fff none repeat scroll 0 0;border:1px solid #f2f2f2;box-shadow:0 0 40px rgba(216,216,216,.5);height:260px;padding:20px 0 20px 20px}.project .project-img{float:left;height:260px;position:relative;width:790px}.project .project-introduce{color:#323232;float:right;height:258px;position:relative;width:370px}.project .project-introduce .p-title{font-size:24px;height:42px;line-height:42px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:370px}.project .project-introduce .p-have{font-size:16px;height:24px;line-height:24px;margin:10px 0 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:370px}.project .project-introduce .p-num{font-family:Arial;font-size:48px;height:60px;line-height:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:370px}.project .project-introduce .p-num span{font-family:"Microsoft Yahei","微软雅黑";font-size:24px}.p-bar-purple{background:#690;background-position:0 0;display:block;height:8px}.p-bar{background:#b6b6b6 none repeat scroll 0 0;border-radius:4px;height:8px;overflow:hidden;width:350px}.project .project-introduce .p-progress{font-size:14px;font-weight:700;height:32px;line-height:32px;margin-top:5px;width:350px}.fl{float:left}.fr{float:right}.project .project-introduce .p-target{color:#5e5e5e;font-size:14px;line-height:24px;margin-top:5px;width:350px}.project .project-introduce .p-target span{color:#ff6262;font-family:Arial}.wrap-details{margin-top:20px}.lr-con-box{position:relative}.cb{clear:both}.lr-bottom-box{height:1px;width:1200px}.promotion{margin:0 auto;width:1200px}.pb50{padding-bottom:50px}.details-l{border:1px solid #f2f2f2;box-shadow:0 0 40px rgba(216,216,216,.5);float:left;width:810px}.details-l .tab-bg{background:#fff none repeat scroll 0 0}.details-l .tab-wrap{background:#fff none repeat scroll 0 0;border-bottom:1px solid #e6e6e6;height:60px;margin:0 20px}.details-l .tab-wrap .tab-name{color:#323232;cursor:pointer;float:left;font-size:18px;height:56px;line-height:56px;text-align:center;width:192px}.details-l .tab-wrap .current-now{color:#2fd6a2;font-weight:700}.details-l .tab-wrap .tab-name .tab-bubble{background:#323232 none repeat scroll 0 0;border-radius:7px;color:#fff;display:inline-block;font-family:Arial;font-size:12px;height:14px;line-height:14px;margin-left:5px;padding:0 8px;position:relative;top:-2px}.details-l .tab-body .tab-div{display:none}.details-l .tab-body .tab-current{display:block}.details-l .tab-body .tab-img-group{background:#fff none repeat scroll 0 0;overflow:hidden;padding:20px;line-height:25px;font-size:14px}.details-l .tab-body .pjc-progress{background:#fff none repeat scroll 0 0;padding:20px 20px 40px}.details-l .tab-body .pjc-progress .pjc-cue{background:#fffcf5 none repeat scroll 0 0;border-radius:19px;color:#a5a5a5;font-size:14px;height:38px;line-height:38px;margin:0 auto;text-align:center;width:532px}.details-l .tab-body .pjc-progress .pro-list{border-left:1px solid #e6e6e6;margin-left:74px;padding-top:26px;width:675px}.details-l .tab-body .pjc-progress .pro-list .pro-list-wrap{margin-bottom:30px}.details-l .tab-body .pjc-progress .pro-list .pro-detail{margin-left:17px;position:relative}.details-l .tab-body .pjc-progress .pro-list .pro-detail .pro-point{background-position:0 -678px;display:block;height:12px;left:-24px;position:absolute;top:4px;width:12px}.details-l .tab-body .pjc-progress .pro-list .pro-detail .pro-day{color:#a5a5a5;display:block;left:-86px;position:absolute;text-align:right;top:2px;width:50px}.details-l .tab-body .pjc-progress .pro-list .pro-detail p{color:#5e5e5e;font-size:14px;line-height:22px}.details-r{float:right;width:370px}.details-r .box-grade{background:#fff none repeat scroll 0 0;border:1px solid #f2f2f2;box-shadow:0 0 40px rgba(216,216,216,.5);margin-bottom:20px;padding:0 20px}.common-title{color:#323232;height:60px;overflow:hidden;position:relative}.common-title .t-price{color:#323232;float:left;font-size:18px;line-height:60px}.common-title span{font-family:Arial}.common-title .t-people{color:#5e5e5e;cursor:pointer;float:right;line-height:60px}.details-r .box-grade .box-content{border-top:1px solid #e6e6e6;display:block;width:100%}.details-r .box-grade .box-limit{height:50px;width:100%}.details-r .box-grade .box-limit .limit-num{color:#323232;font-size:14px;font-weight:700;margin-top:20px;display:block;float:left}.details-r .box-grade .box-intro,.details-r .box-grade .box-item{font-size:14px;line-height:22px}.details-r .box-grade .box-imglist{overflow:hidden;padding-bottom:10px}.details-r .box-grade .box-imglist li{float:left;margin:10px 10px 0 0}.details-r .box-grade .box-imglist img{height:70px;width:70px}.details-r .box-grade .box-intro,.details-r .box-grade .box-item{font-size:14px;line-height:22px}.details-r .box-grade .box-item .font-b{color:#323232}.details-r .box-grade .font-b{font-weight:700}.details-r .box-grade .font-red{color:#ff5256}.details-r .box-grade .box-btn{padding:15px 0 30px}.common-btn{background:#2fd6a2 none repeat scroll 0 0;cursor:pointer}.common-btn,.common-btn-unuse{border-radius:4px;color:#fff;font-family:"Microsoft Yahei","微软雅黑";font-size:18px;height:40px;overflow:visible;padding:0 30px}input{color:#333;font-size:12px;outline:0 none;vertical-align:middle}button,dd,div,dl,dt,form,img,input,li,ol,p,td,th,ul{border:0 none;margin:0;padding:0}.common-btn-unuse{background:#a5a5a5 none repeat scroll 0 0}.common-btn,.common-btn-unuse{border-radius:4px;color:#fff;font-family:"Microsoft Yahei","微软雅黑";font-size:18px;height:40px;overflow:visible;padding:0 30px}i.zc-gray-over,i.zc-green-ing,i.zc-orange-preheat{background-image:url(/Public/Home/Img/tags.png);background-repeat:no-repeat}.project .project-img i.zc-green-ing{background-position:0 -1482px}.project .project-img i.zc-orange-preheat{background-position:0 -1596px}.project .project-img i.zc-gray-over{background-position:0 -1140px}.project .project-img i{display:block;height:110px;left:-20px;position:absolute;top:-20px;width:110px}
+        </style>
+		<js href="__JS__/indexjs.js"/>
+		<js href="__JS__/bid_list.js"/>
+    </head>
+    <body>
+    <include file="Common:head_wide" />
+    <div class="container clearfix">
+        <div class="project">
+            <div class="project-img">
+                <eq name="crowd.status" value="future"><i class="zc-orange-preheat"></i></eq>
+                <eq name="crowd.status" value="biding"><i class="zc-green-ing"></i></eq>
+                <eq name="crowd.status" value="bidend"><i class="zc-gray-over"></i></eq>
+                <img src="{$upWholeUrl}{$crowd.banner_img}" alt="" width="790" height="260">
+            </div>
+            <div class="project-introduce">
+                <p class="p-title">{$crowd.name}</p>
+                <!-- 申购中等其他状态 -->
+                <p class="p-have">已申购到</p>
+                <p class="p-num"><span>￥</span>{$crowd.support_money|round}</p>
+                <!-- 非永久 -->
+                <div class="p-bar">
+                    <div style="width: {$crowd.percent|min=100,###}%" class="p-bar-purple"></div>
+                </div>
+                <p class="p-progress">
+                    <span class="fl" style="color: rgb(161, 6, 224);">当前进度{$crowd.percent}%</span><span class="fr">{$crowd.support_count}名申购者</span>
+                </p>
+                <p class="p-target" id="projectMessage">
+<!--                     此项目必须在
+                    <span class="f_red">
+                        {$crowd.endtime|date="Y年m月d日",###}
+                    </span>
+                    前得到
+                    <span class="f_red"><i>￥</i>{$crowd.target_money|round}</span>
+                    的申购才可成功！ --> 
+                    剩余
+                    <span class="f_red"> {$crowd.endtime|timediff=time(),###,"str","hourse"}</span>
+                    天!
+                </p>
+            </div>
+        </div>
+        <div class="wrap-details">
+            <div class="lr-con-box clearfix">
+                <div class="details-l">
+                    <!--选项卡头部-->
+                    <div class="tab-bg">
+                        <div class="tab-wrap" id="tabWrap">
+                            <div class="tab-name current-now">主页</div>
+                            <div id="qaBtn" class="tab-name">
+                                进展
+                                <span class="tab-bubble">0</span>
+                            </div>
+                            <div id="topicBtn" class="tab-name">
+                                申购者
+                                <span class="tab-bubble">0</span>
+                            </div>
+                            <div class="cb"></div>
+                            <div class="tab-line" style="margin-left: 0px;"></div>
+                        </div>
+                    </div>
+
+                    <!--选项卡头部end-->
+                    <div class="tab-body" id="tabBody">
+                        <!--项目主页-->
+                        <div class="tab-div tab-current">
+                            <div class="tab-img-group">
+                                {$crowd.description|html_entity_decode}
+                            </div>
+                        </div>
+                        <!--项目主页end-->
+                        <!--项目进展-->
+                        <div class="tab-div">
+                            <div class="tab-img-group">
+                                进展
+                            </div>
+                        </div>
+                        <!--项目进展end-->
+                        <!--支持者-->
+                        <div class="tab-div">
+                            <div class="tab-img-group">
+                                申购者
+                            </div>
+                        </div>
+                        <!--支持者end-->
+                    </div>
+                </div>
+                <div class="details-r">
+                    <div class="details-right-fixed-box">
+                        <volist name="items" id="item">
+                            <!--price-box-->
+                            <div class="box-grade ">
+                                <!--通用的头部-->
+                                <div class="common-title Jfold">
+                                    <!--t-price t-delete同时用加中横线-->
+                                    <div class="t-price ">
+                                        ￥<span>{$item.price}</span>
+                                    </div>
+                                    <div class="t-people">
+                                        <span>{$item.support_count}</span>位申购者
+                                    </div>
+                                    <div class="cb"></div>
+                                </div>
+                                <!--通用的头部end-->
+                                <!--box content--><!--折叠展开控制-->
+                                <div class="box-content">
+                                    <div class="box-limit">
+                                        <if condition="($item.is_limit_buy eq 'yes')">
+                                            <span class="limit-num">限额 <span>{$item.limit_buy}</span>份 | 剩余 <span>{$item.limit_stock}</span>份</span>
+                                        <else />
+                                            <span class="limit-num">不限额</span>
+                                        </if>
+
+                                    </div>
+                                    <p class="box-intro">
+                                        {$item.description}
+                                    </p>
+                                    <div class="box-imglist">
+                                        <ul>
+                                            <li>
+                                                <volist name="item.pictures" id="picture">
+                                                    <img src="{$upWholeUrl}{$picture}">
+                                                </volist>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="box-item">配送费用：
+                                        <span class="font-b">
+                                        <if condition="$item.is_delivery eq 'yes'">
+                                            免运费
+                                            <else />
+                                            {$item.delivery_fee}
+                                        </if>
+                                        </span>
+                                    </p>
+                                    <p class="box-item"><span class="font-b"><span class="font-red"></span></span></p>
+                                    <p class="box-btn" style="float:left">
+                                        <if condition="($crowd.status eq 'biding') AND (($item.is_limit_buy eq 'no') OR (($item.is_limit_buy eq 'yes') AND ($item.limit_stock gt 0)))  AND ($crowd['target_money']-$crowd['support_money'] gt 0)">
+                                            <a class="common-btn" href = "{:U('Crowd/support',array('org'=>'pc','ciid'=>$item['ciid']))}" target="_blank" style="display:inline-block; height: 40px;line-height: 40px; text-decoration: none; ">  申购￥{$item.price}  </a>
+                                        <else />
+                                            <input class="common-btn-unuse" disabled="true" value="  申购￥{$item.price}  " type="button">
+                                        </if>
+                                        <if condition="$Think.get.cid eq 48">                                            
+                                            <a class="common-btn" href = "{:U('Crowd/support',array('org'=>'pc','ciid'=>$item['ciid']))}" target="_blank" style="display:inline-block; height: 40px;line-height: 40px; text-decoration: none; ">  申购￥0.01  </a>
+                                        </if>
+                                    </p>
+                                    
+                                    <div class="bdsharebuttonbox"><p style="float:left; margin:35px 0 0 6px;">分享到：</p><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信" style="margin-top:22px;"></a></div>
+                                    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>                                    
+                                </div>
+                                <!--box content end-->
+                            </div>
+                            <!--price-box end-->
+                        </volist>
+                    </div>
+                </div>
+            </div>
+            <div class="cb"></div>
+            <div class="lr-bottom-box"></div>
+        </div>
+    </div>
+    <!-- 广告列表 -->
+    <include file="footer_add" />
+    <!-- 广告列表 -->
+<!---底部开始-->
+<include file="Common:help_wide" />
+<include file="Common:footer"/>
+<script type="text/javascript">
+
+$(function(){
+    // 内容选项卡
+    $('#tabWrap').on('click','div',function(){
+        $(this).addClass("current-now").siblings().removeClass("current-now");
+        var div_index = $(this).index();
+        $("#tabBody>div").eq(div_index).show().siblings().hide();
+    });
+});
+</script>
+</body>
+</html>

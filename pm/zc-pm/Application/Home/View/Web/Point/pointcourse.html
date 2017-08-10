@@ -1,0 +1,94 @@
+
+
+<js href="--PUBLIC--/Js/asyncbox/asyncbox.js"/>
+    <input type="hidden" id="verphone" value="{$verphone}">
+        <input type="hidden" id="choseid" value="56">
+        <input type="hidden" id="mobile" value="{$mobile}">
+        <input type="hidden" id="name_course{$avo.id}" value="{$avo.name}">
+        <input type="hidden" id="name_point{$avo.id}" value="{$avo.point}">
+<div class="gp-detail gp-detail-1">
+   <img onclick="clickduihuan({$avo.id})" title="{$avo.name}" src="{$upWholeUrl}{$avo.picurl}">
+   <div class="bg" onclick="clickduihuan({$avo.id})">
+    <div class="t1">{$avo.name}</div>
+    <div class="t2">
+      <div class=" sldetail-1"><span class="bf"></span>{$avo.watched}万</div>
+      <div class=" sldetail-2"><span class="zan"></span>{$avo.shared}万</div>
+    </div>
+   </div>
+  </div>
+
+
+
+<script type="text/javascript">
+var acpid = '{$info.pid}';
+var setTixingUrl ="{:U('Point/tixing')}";
+var handler ="function_name()";
+var setTixingUrlB ="{:U('Point/isbuy')}";
+
+
+function clickduihuan(id) {
+    window.location.href="{:U('Point/coursedetail')}"+'?id='+id
+}
+
+function clickduihuanB(id) {
+    $('#choseid').val(id);
+
+
+    if(login==0){
+        popStatus(2, '请先登陆后进行积分兑换！', 2,'',true);
+    }else{
+        $.ajax({
+            url: setTixingUrlB+'?&ggid='+id+'&type=1',
+            type: 'GET',
+            async: false,
+            dataType: 'json'
+        })
+        .done(function(data) {
+            if(data.code==0){
+                popStatus(1, '恭喜您！您已经购买过该课程，我们的客服人员正在联系您，请耐心等待，谢谢！', 2,'',true);
+            }else{
+                var verphone = $('#verphone').val();
+                var mobile = $('#mobile').val();
+                console.log(mobile.length); 
+                if(mobile.length!=11){
+                    popStatus(1, '您的手机未验证，正在为您跳转到手机验证页面', 3,'/Member/check/type/mobile',true);
+                }else{
+                    asyncbox.open({
+                        id : "open_0",
+                        title : '积分兑换',
+                        args : {pid:acpid},
+                        modal : true,
+                        buttons : asyncbox.btn.OKCANCEL,
+                        url : setTixingUrl+'?name='+$('#name_course'+id).val()+'&jifen='+$('#name_point'+id).val(),
+                        callback: handlerF
+                    })
+                }
+            }
+        });
+    }
+}
+
+function handlerF(buttonResult,contentWindow,returnValue){
+    var ggid = $('#choseid').val();
+    var name = $('#name_course'+ggid).val();
+    var jifen = $('#name_point'+ggid).val();
+
+    if(buttonResult=='ok'){
+        $.ajax({
+            url: setTixingUrl,
+            type: 'POST',
+            dataType: 'json',
+            data: {jifen: jifen,
+                   ggid: ggid,
+                   name: name,
+                   type: '1'},
+        })
+        .done(function(data) {
+            popStatus(data.type, data.info, data.time,'',true);
+        })
+        .fail(function(data) {
+            popStatus(2, "系统故障了，请稍候", 1,'',true);
+        });
+    }
+}
+</script>

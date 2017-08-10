@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>登录-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+	<div id="container_white">
+		<div class="main_b3">
+			<!--登录开始-->
+			<div class="main_b8_1 mainlogin">
+				<div class="main_b8_1_main">
+					<div class="wellcome">
+						<ul>
+							<li class="welltitle">欢迎登录{$site.SITE_INFO.name}</li>
+							<li class="denglu">未注册？&nbsp;<a href="{:U('Login/register')}">注册</a></li>
+						</ul>
+					</div>
+					<form id="LoginForm" class="reg-form" action="" method="post" name="LoginForm">
+						   <dl class="clearfix">
+							  <dt>登录账号</dt>
+							  <dd><input name="account" size="30" type="text" class="input cl9" value="{$ltr}" /></dd>
+						  </dl>
+						  <dl class="clearfix">
+							 <dt>登录密码</dt>
+							 <dd>
+							 	<input name="pwd" size="30" type="password" class="input" />
+								<a href="{:U('Login/findPwd')}">忘记密码？</a>
+							 </dd>
+						 </dl>
+						 <dl class="clearfix">
+							<dt>验 证 码</dt>
+							<dd><input class="input" id="verify_code" name="verify_code" type="text" size="5" /> <img class="verify" src="{:U('Public/verify_code')}"  title="看不清？单击此处刷新" onclick="this.src+='?rand='+Math.random();" />
+						 	</dd>
+						 </dl>
+						 <dl class="clearfix">
+						   <dt>&nbsp;</dt>
+							<dd>
+								<input  type="hidden" name="referer" value="{$referer}" />
+								<input class="submit pm_btn_5" type="submit" value='登录'/>
+							</dd>
+						  </dl>
+					</form>
+				</div>
+				<div class="logadd">{:showAdvPosition('logadd','span','false')}</div>
+			</div>
+			<!--登录结束-->
+		</div>
+	</div>
+	<!---底部开始---->
+	<div class="main_a8 clearfix">
+	    <div class="main_a8_main clearfix">
+	        <include file="Common:advertorial" />
+	    </div>
+	</div>
+	<include file="Common:footer"/>
+<script type="text/javascript">
+    var ltr = "{$ltr}";
+    $(function(){
+        // 账号input显示效果
+        var accObj=$("input[name='account']");
+        var accD = accObj.val();
+        if(accD!=ltr){accObj.addClass("cl9");}
+        accObj.focus(function() {if ($(this).val() == accD) {$(this).val(""); accObj.removeClass("cl9");}});  
+        accObj.blur(function() {if ($(this).val()== "") {$(this).val(accD); accObj.addClass("cl9");}}); 
+        // ajax提交
+        $(".submit").click(function(){
+            commonAjaxSubmit('','','',function(){
+                    var newcode = $('.verify').attr('src');
+                    $('.verify').attr('src',newcode+'?rand='+Math.random());
+                    $('#verify_code').val('');
+                });
+
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

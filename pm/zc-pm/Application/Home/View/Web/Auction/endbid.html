@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>{$channelName}已成交-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/cuitindex.css"/>
+		<css href="__CSS__/list.css"/>
+		<js href="__JS__/indexjs.js"/>
+		<js href="__JS__/bid_list.js"/>
+    </head>
+    <body>
+    <include file="Common:head_wide" />
+    <div  class="container auction_list">
+    <include file="filtrate" />
+     <div class="auction">
+        <div class="auctionhead clearfix">
+            <div class="acactop">
+                <h2 class="autit"><a href="">已成交</a></h2>
+                <!-- 时间段条件和统计循环输出 -->
+                <ul class="autittxt">
+                    <foreach name="end_section" item="svo">
+                    <li>
+                        <a <eq name="svo['key']" value="$gt.2"> class="on"</eq> href="{$svo.href}">{$svo.name}（<span>{$svo.count}</span>个）
+                            <span class="downsanjiao"></span>
+                        </a>
+                    </li>
+                    </foreach>
+                </ul>
+                <!-- 时间段条件和统计循环输出_end -->
+            </div>
+            <!-- 地区循环输出 -->
+            <if condition="$region">
+            <ul class="list_region clearfix">
+                <foreach name="region" item="rvo">
+                    <li class="region_p">
+                        <a class="p_s <eq name="rvo['mark']" value="$reg_gt.0">on</eq>"  rid="{$rvo.mark}" href="{$rvo.href}">{$rvo.name}(<span>{$rvo.count}</span>个)</a>
+                        <ul class="p_c">
+                            <foreach name="rvo['city']" item="cvo">
+                            <li>
+                                <a rid="{$cvo.mark}" class="<eq name="cvo['mark']" value="$reg_gt.1">on</eq>" href="{$cvo.href}">{$cvo.name}(<span>{$cvo.count}</span>个)</a>
+                                <ul class="p_a">
+                                    <foreach name="cvo['area']" item="avo">
+                                    <li>
+                                        <a rid="{$avo.mark}" class="<eq name="avo['mark']" value="$reg_gt.2">on</eq>" href="{$avo.href}">{$avo.name}(<span>{$avo.count}</span>个)</a>
+                                    </li>
+                                    </foreach>
+                                </ul>
+                            </li>
+                            </foreach>
+                        </ul>
+                    </li>
+                </foreach>
+            </ul>
+            </if>
+        </div>
+        <!-- 地区循环输出——end -->
+        <!-- 正在拍卖上方广告 -->
+        <div class="ad_list_a">
+            {:showAdvPosition('auction_list_a','span','false')} 
+        </div>
+        <!-- 正在拍卖上方广告——end -->
+        <!-- 正在拍卖 -->
+        <div class="auctionbox clearfix">
+            <foreach name="bidArr" item="bav">
+                <empty name="bav.bid_list">
+                    <div class="datanone">很抱歉该条件下暂无拍品，您可以重新查询！</div> 
+                <else />
+                    <volist name="bav.bid_list" id="avo">
+                        <include file="bidbox" />
+                    </volist>
+                </empty>
+            </foreach>
+        </div>
+        <!-- 正在拍卖——end -->
+        <!--分页开始-->
+        <div class="mod_page clearfix">
+            <div class="bid_list_page">
+            {$page}
+            </div>
+            <div class="fr">
+                <span class='mod_page_lk'>每页显示</span>
+                <!-- 设置每页显示数循环 -->
+                <foreach name="set_page" item="svo">
+                    <if condition="$svo['key'] == $gt[1]">
+                        <span class='mod_page_on'>{$svo.sz}</span>
+                    <else />
+                        <a class='mod_page_lk' href='{$svo.href}'>{$svo.sz}</a>
+                    </if>
+                </foreach>
+                <!-- 设置每页显示数循环_end -->
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </div>
+            
+        </div>
+        <!--------分页结束-------->
+                    
+        </div>
+        <!-- 正在拍卖中部广告 -->
+        <div class="ad_list_a">
+            {:showAdvPosition('auction_list_b','span','false')} 
+        </div>
+        <!-- 正在拍卖中部广告——end -->
+    
+  <!-- 正在拍卖   -->
+     <div class="yugao">
+         <div class="auctionhead clearfix">
+                <div class="acactop" >
+                    <h2 class="autit"><a href="{:U('Auction/waitbid',array('gt'=>$gt0))}">正在拍卖</a></h2>
+                    <ul class="tab_menu" id="yugaolist">                         
+                        <li class="on" style="display: block;"><a href="#zlistA">全部</a></li>
+                        <foreach name="zlist" item="bav">
+                        <notempty name="bav.zlistJ"><li><a href="#zlistJ">今天结束</a></li></notempty>
+                        <notempty name="bav.zlistM"><li><a href="#zlistM">明天结束</a></li></notempty>
+                        <notempty name="bav.zlistH"><li><a href="#zlistH">后天结束</a></li></notempty>
+                        <notempty name="bav.zlistQ"><li><a href="#zlistQ">其他结束</a></li></notempty>
+                        </foreach>
+                    </ul>
+                    <a id="yugaolink" href="{:U('Auction/waitbid',array('gt'=>$gt0))}" target="_blank" class="showmore">查看更多</a>
+                </div>
+         </div>
+         <foreach name="zlist" item="bav">
+            <!-- 全部未开拍 -->
+            <div id="zlistA" class="auctionbox tab_con clearfix" style="display:block;">
+                <empty name="bav.zlistA">
+                    <div class="datanone">很抱歉该条件下暂无拍品，您可以重新查询！</div>
+                <else />
+                    <volist name="bav.zlistA" id="avo">
+                        <include file="bidbox" />
+                    </volist>
+                </empty>
+            </div>
+            <!-- 全部未开拍_end -->
+            <!-- 即将开拍 -->
+            <notempty name="bav.zlistJ">
+                <div id="zlistJ" class="auctionbox tab_con clearfix">
+                    <volist name="bav.zlistJ" id="avo">
+                        <include file="bidbox" />
+                    </volist>
+                </div>
+            </notempty>
+            <!-- 即将开拍_end -->
+            <!-- 明天开拍 -->
+            <notempty name="bav.zlistM">
+                <div id="zlistM" class="auctionbox tab_con clearfix">
+                    <volist name="bav.zlistM" id="avo">
+                        <include file="bidbox" />
+                    </volist>
+                </div>
+            </notempty>
+            <!-- 明天开拍_end -->
+            <!-- 后天开拍 -->
+            <notempty name="bav.zlistH">
+                <div id="zlistH" class="auctionbox tab_con clearfix">
+                    <volist name="bav.zlistH" id="avo">
+                        <include file="bidbox" />
+                    </volist>
+                </div>
+            </notempty>
+            <!-- 后天开拍_end -->
+            <!-- 其他开拍 -->
+            <notempty name="bav.zlistQ">
+                <div id="zlistQ" class="auctionbox tab_con clearfix">
+                    <volist name="bav.zlistQ" id="avo">
+                        <include file="bidbox" />
+                    </volist>
+                </div>
+            </notempty>
+            <!-- 其他开拍_end -->
+        </foreach>
+    </div>
+    <!-- 正在拍卖下方广告 -->
+    <div class="ad_list_a">
+        {:showAdvPosition('auction_list_c','span','false')} 
+    </div>
+    <!-- 正在拍卖下方广告——end -->
+    
+    <!-- 拍卖预告   -->
+     <div class="yugao">
+         <div class="auctionhead clearfix">
+                <div class="acactop" >
+                    <h2 class="autit"><a href="{:U('Auction/waitbid',array('gt'=>$gt0))}">拍卖预告</a></h2>
+                    <ul class="tab_menu" id="yugaolist">                         
+                        <li class="on" style="display: block;"><a href="#slistA">全部</a></li>
+                        <foreach name="slist" item="bav">
+                        <notempty name="bav.slistJ"><li><a href="#slistJ">即将开拍</a></li></notempty>
+                        <notempty name="bav.slistM"><li><a href="#slistM">明天开拍</a></li></notempty>
+                        <notempty name="bav.slistH"><li><a href="#slistH">后天开拍</a></li></notempty>
+                        <notempty name="bav.slistQ"><li><a href="#slistQ">后天开拍</a></li></notempty>
+                        </foreach>
+                    </ul>
+                    <a id="yugaolink" href="{:U('Auction/waitbid',array('gt'=>$gt0))}" target="_blank" class="showmore">查看更多</a>
+                </div>
+         </div>
+         <foreach name="slist" item="bav">
+            <!-- 全部未开拍 -->
+            <div id="slistA" class="auctionbox tab_con clearfix" style="display:block;">
+                <empty name="bav.slistA">
+                    <div class="datanone">很抱歉该条件下暂无拍品，您可以重新查询！</div>
+                <else />
+                    <volist name="bav.slistA" id="avo">
+                        <include file="bidbox" />
+                    </volist>
+                </empty>
+            </div>
+            <!-- 全部未开拍_end -->
+            <!-- 即将开拍 -->
+            <notempty name="bav.slistJ">
+                <div id="slistJ" class="auctionbox tab_con clearfix">
+                    <volist name="bav.slistJ" id="avo">
+                        <include file="bidbox" />
+                    </volist>
+                </div>
+            </notempty>
+            <!-- 即将开拍_end -->
+            <!-- 明天开拍 -->
+            <notempty name="bav.slistM">
+                <div id="slistM" class="auctionbox tab_con clearfix">
+                    <volist name="bav.slistM" id="avo">
+                        <include file="bidbox" />
+                    </volist>
+                </div>
+            </notempty>
+            <!-- 明天开拍_end -->
+            <!-- 后天开拍 -->
+            <notempty name="bav.slistH">
+                <div id="slistH" class="auctionbox tab_con clearfix">
+                    <volist name="bav.slistH" id="avo">
+                        <include file="bidbox" />
+                    </volist>
+                </div>
+            </notempty>
+            <!-- 后天开拍_end -->
+            <!-- 其他开拍 -->
+            <notempty name="bav.slistQ">
+                <div id="slistQ" class="auctionbox tab_con clearfix">
+                    <volist name="bav.slistQ" id="avo">
+                        <include file="bidbox" />
+                    </volist>
+                </div>
+            </notempty>
+            <!-- 其他开拍_end -->
+        </foreach>
+    </div>
+    <!-- 广告列表 -->
+    <include file="footer_add" />
+    <!-- 广告列表 -->
+<!---底部开始-->
+<include file="Common:help_wide" />
+<include file="Common:footer"/>
+</body>
+</html>

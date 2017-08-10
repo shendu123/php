@@ -1,0 +1,26 @@
+<include file="Common:meta" />
+<title>{$list.cname}-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+    <div class="on-help">
+        <section data-am-widget="accordion" class="am-accordion am-accordion-gapped on-help-list" data-am-accordion='{  }'>
+            <foreach name="newlist" key="ak" item="cv">
+                <dl class="am-accordion-item <eq name='ak' value='0'>am-active</eq>">
+                    <dt class="am-accordion-title">
+                      {$cv.cname}
+                    </dt>
+                    <dd class="am-accordion-bd am-collapse <eq name='ak' value='0'>am-in</eq>">
+                        <foreach name="cv.list" key="nk" item="nv">
+                            <a href="{:U('help',array('id'=>$nk))}" class="am-accordion-content">{$nv}</a>
+                        </foreach>
+                    </dd>
+                </dl>
+            </foreach> 
+        </section>
+    </div>
+
+<include file="Common:navbar"/>
+</body>
+</html>

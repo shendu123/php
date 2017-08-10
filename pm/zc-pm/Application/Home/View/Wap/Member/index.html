@@ -1,0 +1,143 @@
+<include file="Common:meta" />
+<title>用户中心-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+    <div class="member_box">
+        <div class="mb_index">
+            <div class="am-g" style="position: relative;" >
+                <div class="am-u-sm-4 userpic">
+                    <img class="am-circle" src="{$info.uid|getUserpic=###,1}">
+                </div>
+                <div class="am-u-sm-8 usertxt">
+                    <dl class="clearfix">
+                        <dt>账号：</dt>
+                        <dd>{$info.account}</dd>
+                    </dl>
+                    <dl class="clearfix">
+                        <dt>昵称：</dt>
+                        <dd>{$info.nickname}</dd>
+                    </dl>
+                </div>
+                <neq name="iswei" value="1"><a class="am-btn am-btn-danger on-btn-danger am-radius loginOut" href="{:U('Public/loginOut')}">退出登录</a></neq>
+            </div>
+            <div class="usercheck">
+                <div class="checkbox" style="width:100%">
+                    邮箱：{$info.email}&nbsp;&nbsp;
+                    <eq name="info['verify_email']" value="0">
+                        <span>
+                            <i style="font-size: 16px" class="checkico am-icon-envelope"></i>
+                            <span>&nbsp;未认证&nbsp;&nbsp;</span>
+                        </span>
+                        
+                    </eq>
+                    <eq name="info['verify_email']" value="1">
+                        <span class="on-active">
+                            <i style="font-size: 16px;" class="checkico am-icon-envelope"></i>
+                            <span>&nbsp;已认证&nbsp;&nbsp;</span>
+                        </span>
+                    </eq>
+                    <eq name="info['verify_email']" value="0">
+                        <a class="checkbtn am-btn am-btn-danger on-btn-danger am-radius" href="{:U('Member/check',array('type'=>'email'))}">邮箱认证</a>
+                    </eq>
+                </div>
+                <div class="checkbox" style="width:100%">
+                    手机：{$info.mobile}&nbsp;&nbsp;
+                    <eq name="info['verify_mobile']" value="0">
+                        <span>
+                            <i style="font-size: 25px; vertical-align: bottom;" class="checkico am-icon-mobile"></i>
+                            <span>&nbsp;未认证&nbsp;&nbsp;</span>
+                        </span>
+                        
+                    </eq>
+                    <eq name="info['verify_mobile']" value="1">
+                        <span class="on-active">
+                            <i style="font-size: 25px; vertical-align: bottom;" class="checkico am-icon-mobile"></i>
+                            <span>&nbsp;已认证&nbsp;&nbsp;</span>
+                        </span>
+                    </eq>
+                    <eq name="info['verify_mobile']" value="0">
+                        <a class="checkbtn am-btn am-btn-secondary on-btn-default am-radius" href="{:U('Member/check',array('type'=>'mobile'))}">手机认证</a>
+                    </eq>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="trade">
+        <table width="100%" bgcolor="dddddd" class="trade-table">
+            <thead>
+                <tr>
+                    <th width="30%">通知/站内信</th>
+                    <th width="30%">提醒方式</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>
+                消息提醒共：<a href="{:U('Member/mysms')}"><em class="red1 fb">{$info.smsc}</em>&nbsp;条</a><br/>
+                未读：<a href="{:U('Member/mysms')}"><em class="blue1 fb">{$smsc}</em>&nbsp;条</a>
+                </td>
+                <td>
+                    <empty name="alerttype">
+                        未设置提醒方式
+                    <else/>
+                        <foreach name="alerttype" item="tv">
+                            <eq name="tv" value="email">邮箱提醒&nbsp;&nbsp;<br/></eq>
+                            <eq name="tv" value="mobile">短信提醒&nbsp;&nbsp;<br/></eq>
+                            <eq name="tv" value="weixin">微信提醒&nbsp;&nbsp;<br/></eq>
+                        </foreach>
+                    </empty>
+                    <a style="font-size: 10px; vertical-align: initial;" class="am-btn am-btn-danger on-btn-danger am-radius" href="{:U('Member/settixing',array('pid'=>0))}">设置提醒方式</a>
+                </td>
+            </tr>                       
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <th width="50%">余额</th>
+                    <th width="50%">信用额度</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                    余额：<a href="{:U('Member/pledge')}"><em class="red1 fb">{$info.wallet_pledge}</em>元</a><br/>
+                    冻结：<em class="blue1 fb">{$info.wallet_pledge_freeze}</em><br/>
+                    可用：<span class="org1 fb">{$info.pledge_live}</span>
+                    <a style="font-size: 10px; vertical-align: initial;" class="am-btn am-btn-danger on-btn-danger am-radius" href="{:U('Member/payment')}">充值</a>
+                    </td>
+                    <td>
+                    信用额度：<a href="{:U('Member/limsum')}"><em class="red1 fb">{$info.wallet_limsum}</em>元</a><br/>
+                    冻结：<em class="blue1 fb">{$info.wallet_limsum_freeze}</em><br/>
+                    可用：<span class="org1 fb">{$info.limsum_live}</span>
+                    可用积分：<span class="red1 fb">{$info.point}</span>
+                    </td>
+                </tr> 
+            </tbody>                      
+        </table>
+        <table style="margin-top:20px;" width="100%" bgcolor="dddddd" class="trade-table">
+            <thead>
+                <tr>
+                    <th width="30%">拍卖订单（我是买家）</th>
+                    <th width="30%">拍卖订单（我是卖家）</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>
+                    待付款：<a href="{:U('Member/mysucc',array('st'=>0))}"><em class="red1 fb">{$info.buy.waitpay}</em>&nbsp;条</a><br/>
+                    待收货：<a href="{:U('Member/mysucc',array('st'=>2))}"><em class="blue1 fb">{$info.buy.waitgain}</em>&nbsp;条</a><br/>
+                    待评价：<a href="{:U('Member/mysucc',array('st'=>3))}"><em class="blue1 fb">{$info.buy.waitgain}</em>&nbsp;条</a>
+                </td>
+                <td>
+                    待发货：<a href="{:U('Member/myorder',array('st'=>1))}"><em class="red1 fb">{$info.sel.waitdeliver}</em>&nbsp;条</a><br/>
+                    待评价：<a href="{:U('Member/myorder',array('st'=>5))}"><em class="blue1 fb">{$info.sel.waiteval}</em>&nbsp;条</a>
+                </td>
+            </tr>                       
+        </table>
+    </div>
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+</body>
+</html>

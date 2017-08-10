@@ -1,0 +1,63 @@
+<table width="100%" cellspacing="0" cellpadding="0" class="tabela">
+    <thead>
+    <tr bgcolor="#fbfaf7">
+        <th colspan="10">
+            <if condition="$oinfo['type'] eq 1" >
+                <div class="on-title">
+                    <p class="l_color" target="_blank">
+                        {$oinfo.name}【积分视频】
+                    </p>
+                </div>
+            <else/>
+                <div class="on-title">
+                    <a href="{:U('Point/giftdetail',array('id'=>$oinfo['ggid']))}" class="l_color" target="_blank">
+                        {$oinfo.name}【积分礼品】
+                    </a>
+                </div>
+            </if>
+
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr align="left">
+        <td align="left" class="tablea_pic" style="width: 315px;">
+            <div class="newPic">
+                <if condition="$oinfo['type'] eq 1" >
+                    <a >
+                        <img src="{$upWholeUrl}{$oinfo.item.picurl||getPicUrl=###,3,0}" alt="">
+                    </a>
+                <else/>
+                    
+                    <a href="{:U('Point/giftdetail',array('id'=>$oinfo['ggid']))}" target="_blank">
+                        <img src="{$upWholeUrl}{$oinfo.item.picurl||getPicUrl=###,3,0}" alt="">
+                    </a>
+                </if>
+            </div>
+            <div class="newCar clearfix">
+                <p>&nbsp;</p>
+                <p>花费积分：
+                    <span class="blue1">
+                        {$oinfo.point|wipezero=###}
+                    </span>
+                </p>
+            </div>
+        </td>
+        <td>
+            <ul>
+                <li>订单号：{$oinfo.id}</li>
+                <if condition="$oinfo['type'] eq 1" >
+                    <li>讲师：{$oinfo.item.teacher}</li>
+                    <li>开始时间：{$oinfo.item.starttime}</li>
+                </if>
+
+                <li>状态：
+                    <span class="blue1">
+                        <if condition="$oinfo['status'] eq 0">交易成功</if>
+                    </span>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>

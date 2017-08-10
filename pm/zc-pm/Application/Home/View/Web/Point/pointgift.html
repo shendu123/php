@@ -1,0 +1,46 @@
+<style>
+    .p-bar-now{background:#690; background-position:0 0; display: block; height: 8px;}
+    .p-bar {background: #b6b6b6 none repeat scroll 0 0; border-radius: 4px; height: 8px; overflow: hidden;}
+    .fore1 {float: left; padding-left: 8px; position: relative; width: 60px;}
+    .fore2 {float: left; padding-left: 8px; position: relative; width: 98px;}
+    .fore3 {float: left; padding-left: 8px; position: relative; width: 50px;}
+    .p-percent {color: #5e5e5e; font-size: 14px; line-height: 18px;}
+    .p-extra {color: #a5a5a5;}
+    .v-line {background: #e7e7e7 none repeat scroll 0 0; height: 36px; position: absolute; right: 0; top: 0; width: 1px;}
+    ul.box-progress-tbl {width: 237px; margin-left: 0px;padding: 10px; border: none;}
+    ul.box-progress-tbl:hover{border: none; box-shadow:none;}
+    li.crowd-title{height: 32px; line-height: 14px; margin-top: 19px;}
+
+    #auctionbox_jzb {
+        background-color:  rgb(255, 255, 255);
+        border: 1px solid  rgb(255, 255, 255);
+        float: left;
+        /*margin: 0 7px 14px;*/
+        /*padding: 12px 12px 0;*/
+        width: 259px;
+        /*margin-right: 10px;*/
+        position: relative;
+        /*padding: 12px;*/
+    }
+    .jifen_color{
+        font-weight: 800;
+        color: red;
+    }
+    .txt05b{
+        font-size: 14px;
+        margin-top: 0px;
+    }
+</style>
+
+
+<ul class="bidbox "  id="auctionbox_jzb">
+    <li class="txt01" gid="{$avo.id}">
+        <a href="{:U('Point/giftdetail',array('id'=>$avo['id']))}" target="_blank">
+            <img width="259" title="{$avo.name}" height="115" src="{$upWholeUrl}{$avo.picurl}" alt="{$avo.name}"></img>
+            <!-- <img width="167" title="{$avo.name}" height="150" src="{$avo.picurl}" alt="{$avo.name}"></img> -->
+        </a>
+    </li>
+    <li class="txt05 txt05b"><span>{$avo.name} </span><span>{$avo.point}</span>积分</li>
+    <!-- <li class="txt05 txt05b"><span class="jifen_color">{$avo.point}</span>积分</li> -->
+    <!-- <li class="txt05 txt05b">市场价：￥600.00</li> -->
+</ul>

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>
+            <eq name="ACTION_NAME" value="webmail">站内信列表</eq>
+            <eq name="ACTION_NAME" value="search_sms">站内信搜索结果</eq>
+            -{$site.SITE_INFO.name}
+        </title>
+        <php>
+            if(ACTION_NAME == 'webmail'){
+                $pagname = '站内信列表';
+            }elseif(ACTION_NAME == 'search_sms'){
+                $pagname = '搜索结果';
+            };
+            
+            
+            $currentNav ='注册用户管理 > '.$pagname;
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">
+                            <eq name="ACTION_NAME" value="webmail">站内信列表</eq>
+                            <eq name="ACTION_NAME" value="search_sms">搜索结果</eq>
+                        </div>
+                        <div class="search">
+                            <form action="{:U('search_sms')}" method='get'>
+                            消息类型：
+                            <select name="tp">
+                                <option value="0" <eq name="keys.tp" value="0">selected="selected"</eq>>系统-->用户</option>
+                                <option value="1" <eq name="keys.tp" value="1">selected="selected"</eq>>管理员-->用户</option>
+                            </select>
+                            发送者：<input type="text" value="{$keys.ho}" name="ho" class="input" placeholder="发送者账号" />&nbsp;&nbsp;
+                            接受者：<input type="text" value="{$keys.to}" name="to" class="input" placeholder="接受者账号" />
+                                &nbsp;&nbsp;<button class="btn">筛选</button>
+                            </form>
+                        </div>
+                    </div>
+                    <eq name="ACTION_NAME" value="search_sms">
+                        <div class="seamsg">
+                            找到关于<span class="keyword">{$keys.ho}</span>和<span class="keyword">{$keys.to}</span>的会话<span class="keyword">{$keys.count}</span>条记录！
+                        </div>
+                    </eq>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td>SID</td>
+                                <td>发送者</td>
+                                <td>接受者</td>
+                                <td width="45%">内容</td>
+                                <td>状态</td>
+                                <td>发送时间</td>
+                                <td width="150">操作</td>
+                            </tr>
+                        </thead>
+                        <volist name="list" id="vo">
+                            <tr align="center" id="{$vo.sid}">
+                                <td align="left">{$vo.sid}</td>
+                                <td align="left">{$vo.ho}</td>
+                                <td align="left">{$vo.to}</td>
+                                <td align="left">{$vo.content}</td>
+                                <td>
+                                    <eq name="vo.status" value="0">未读</eq>
+                                    <eq name="vo.status" value="1">已读</eq>
+                                    <eq name="vo.delmark" value="1">已设为删除</eq>
+                                </td>
+                                <td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+                                <td>
+                                [ <a href="javascript:void(0)" sid="{$vo.sid}" delmark="<eq name='vo.delmark' value='1'>1<else/>0</eq>" class="ac-setdel"><eq name="vo.delmark" value="1">取消删除<else/>设置删除</eq></a> ]
+
+
+                                [ <a link="{:U('Member/delsms/',array('sid'=>$vo['sid']))}" name="是否设置该条信息的删除" href="javascript:void(0)"  class="del">删除</a> ]
+                                </td>
+                            </tr>
+                        </volist>
+                        <tr>
+                            <td colspan="7" align="right" class="page">{$page}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+        var setdelUrl = "{:U('Member/setdelsms')}"
+            $(function(){
+
+                // 设置删除
+                $(".ac-setdel").click(function(){
+                    var thisObj = $(this)
+                    var sid = $(this).attr('sid');
+                    var delmark = $(this).attr('delmark');
+                    $.post(setdelUrl,{'sid':sid,'delmark':delmark},function(data){      //ajax后台
+                        if (data.status) {
+                            popup.success(data.msg);
+
+                            if(delmark==1){
+                                thisObj.html('设置删除'); 
+                                thisObj.attr('delmark',0);
+                            }else{
+                                thisObj.html('取消删除'); 
+                                thisObj.attr('delmark',1);
+                            }
+
+
+                            setTimeout(function(){
+                                popup.close("asyncbox_success");
+                            },1000);
+                        } else {
+                            alert(data.msg);
+                        }
+                    },'json');
+                });
+                // 删除消息
+                $(".del").click(function(){
+                    var delLink=$(this).attr("link");
+                    popup.confirm($(this).attr("name"),'温馨提示',function(action){
+                        if(action == 'ok'){
+                            top.window.location.href=delLink;
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

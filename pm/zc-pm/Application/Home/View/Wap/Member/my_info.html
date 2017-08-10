@@ -1,0 +1,147 @@
+<include file="Common:meta" />
+<title>个人信息-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+
+<ul class="tabMenu am-avg-sm-2">
+    <li <eq name="ACTION_NAME" value="my_info">class="on"</eq>><a href="{:U('Member/my_info')}">基本信息</a></li>
+    <li <eq name="ACTION_NAME" value="imseller">class="on"</eq>><a href="{:U('Member/imseller')}">卖家信息</a></li>
+</ul>
+
+    <div class="am-margin-top">
+        <form id="myInfo" name="myInfo" class="am-form" action="" method="post">
+            <dl class="user-frame">
+                <dd><input id="account" type="text" placeholder="账号" readonly="readonly" class="input" value="{$my_info.account}"/></dd>
+                <dd><div id="accountTip"></div></dd>
+            </dl>
+            <dl class="user-frame">
+                <dd><input placeholder="昵称" id="nickname" type="text" class="input" name="nickname" value="{$my_info.nickname}"/></dd>
+                <dd><div id="nicknameTip"></div></dd>
+            </dl>
+            <dl class="user-frame">
+                <dd><input placeholder="个性签名" id="intr" type="text" size="60" class="input" name="intr" value="{$my_info.intr}"/></dd>
+                <dd><div id="intrTip"></div></dd>
+            </dl>
+            <dl class="user-frame">
+                <dd><input placeholder="联系人" id="truename" type="text" class="input" name="truename" value="{$my_info.truename}"/></dd>
+                <dd><div id="truenameTip"></div></dd>
+            </dl>
+            <dl class="user-frame">
+                <dd>
+                    <label class="am-radio-inline">
+                        <input id="sex" type="radio" name="sex" value="1" <eq name="my_info.sex" value="1">checked</eq> >男
+                    </label>
+                    <label class="am-radio-inline"><input id="sex1" type="radio" name="sex" value="0" <eq name="my_info.sex" value="0">checked</eq>>女</label>
+                </dd>
+                <dd><div id="sexTip"></div></dd>
+            </dl>
+            <dl class="user-frame">
+                <eq name="my_info['verify_mobile']" value="1">
+                    <dd><input readonly="readonly" placeholder="手机号码" type="text" class="input" value="{$my_info.mobile}(已认证)"/></dd>
+                <else/>
+                    <dd><input placeholder="手机号码" id="mobile" type="text" class="input" name="mobile" value="{$my_info.mobile}"/></dd>
+                    <dd><div id="mobileTip"></div></dd>
+                </eq> 
+            </dl>
+            <dl class="user-frame">
+                <eq name="my_info['verify_email']" value="1">
+                    <dd><input readonly="readonly"  placeholder="邮箱" type="text" class="input" value="{$my_info.email}(已认证)"/></dd>
+                <else/>
+                    <dd><input  placeholder="邮箱" id="email" type="text" class="input" name="email" value="{$my_info.email}"/></dd>
+                    <dd><div id="emailTip"></div></dd>
+                </eq>
+            </dl>
+            <dl class="user-frame">
+                <dd><input placeholder="邮政编码" id="postalcode" name="postalcode" class="input" type="text" value="{$my_info.postalcode}" /></dd>
+                <dd><div id="postalcodeTip"></div></dd>
+            </dl>
+            <dl class="user-frame">
+                <dd>
+                    <ul class="region am-avg-sm-3">
+                        {:W('Oncoo/region',array($my_info[province],$my_info['city'],$my_info['area'],3))}
+                    </ul>
+                </dd>
+                <dd class="clearfix"><div id="provinceTip" style="float: left; margin-right: 10px;"></div><div id="cityTip" style="float: left; margin-right: 10px;"></div><div id="areaTip" style="float: left; margin-right: 10px;"></div></dd>
+
+            </dl>                    
+            <dl class="user-frame">
+                <dd><textarea id="address" name="address" placeholder="不需要重复填写省市区，必须大于5个字符，小于120个字符">{$my_info.address}</textarea></dd>
+                <dd><div id="addressTip"></div></dd>
+            </dl>
+            <dl id="btn_box">
+                <input type="hidden" name="uid" value="{$my_info.uid}" />
+                <button class="submitBtn am-btn am-btn-danger on-btn-danger am-radius" id="submit">保存</button>
+            </dl>
+        </form>
+    </div>
+    <!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<script type="text/javascript">
+var checkMobile = "{:U('Login/checkMobile')}";
+var checkEmail = "{:U('Login/checkEmail')}";
+    $(function(){
+    // 表单验证【
+	$.formValidator.initConfig({formID:"myInfo",submitButtonID:"submit"});
+	$("#submit").click(function(){
+        $.formValidator.pageIsValid('1');
+        setTimeout(function(){
+            if($.formValidator.pageIsValid('1')==true){
+                commonAjaxSubmit('','','');
+            }
+        },200);
+        return false;
+    });
+    $("#account").formValidator({onShow:"这个不能修改",onFocus:"账号，这个真不能修改",onCorrect:"该用账号可以注册"}).defaultPassed();
+    $("#nickname").formValidator({onShow:"你在这里的名字",onFocus:"昵称，要求最少3个不超过20个字符(一个汉字占用2个字符)",onCorrect:"输入正确"}).inputValidator({min:3,max:20,onError:"你输入的昵称不正确,请确认"});
+    $("#intr").formValidator({onShow:"个性签名",onFocus:"要求最少2个不超过(汉字25个;英文字符50个)字",onCorrect:"输入正确"}).inputValidator({min:3,max:50,onError:"你输入的昵称不正确,请确认"});
+    $("#truename").formValidator({onShow:"请输入你的中文姓名",onFocus:"真实姓名，要求2-10个中文字符",onCorrect:"输入正确"}).functionValidator({fun:trueName});
+    $("#mobile").formValidator({onShow:"主要用于交易通知",onFocus:"11位数字，如“13812345678”",onCorrect:"输入手机号",onEmpty:"该项为必填项"}).inputValidator({min:11,max:11,onError:"手机号码必须是11位的,请确认"}).regexValidator({regExp:"mobile",dataType:"enum",onError:"你输入的手机号码格式不正确"}).ajaxValidator({
+        url : checkMobile,
+        type : 'POST',
+        dataType : "json",
+        data : "&mobile="+$('#mobile').val()+"&how=verify", 
+        async : true,
+        success : function(data){
+            return data;
+        },
+        error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+        onError : "该手机号已被注册！请更换",
+        onWait : "正在对手机号进行合法性校验，请稍候..."
+    }).defaultPassed('输入手机号');
+
+    $("#email").formValidator({onShow:"请输入邮箱",onFocus:"邮箱6-100个字符",onCorrect:"输入邮箱",onEmpty:"该项为必填项"}).inputValidator({min:6,max:100,onError:"你输入的邮箱长度不正确,请确认"}).regexValidator({regExp:"^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$",onError:"你输入的邮箱格式不正确"}).ajaxValidator({
+        url : checkEmail,
+        type : 'POST',
+        dataType : "json",
+        data : "&email="+$('#email').val()+"&how=verify", 
+        async : true,
+        success : function(data){
+            return data;
+        },
+        error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+        onError : "该邮箱已被注册！请更换",
+        onWait : "正在对邮箱进行合法性校验，请稍候..."
+    }).defaultPassed('输入手机号');
+    
+    $("#province").formValidator({onShow:"请选择省",onFocus:"省份必须选择",onCorrect:"谢谢你的配合"}).inputValidator({min:1,onError: "请选择省份!"});
+    $("#city").formValidator({onShow:"请选择市",onFocus:"城市必须选择",onCorrect:"谢谢你的配合"}).inputValidator({min:1,onError: "请选择城市!"});
+    $("#area").formValidator({onShow:"请选择区",onFocus:"区域必须选择",onCorrect:"谢谢你的配合"}).inputValidator({min:1,onError: "请选择区域!"});
+    
+    $("#postalcode").formValidator({onShow:"请填写邮编",onFocus:"邮编，必须大于5个字符，小于120个字符",onCorrect:"输入正确"}).functionValidator({fun:isZipCode});
+
+    $("#address").formValidator({onShow:"请填写详细地址",onFocus:"详细地址，必须大于5个字符，小于120个字符",onCorrect:"输入正确"}).inputValidator({min:5,max:120,onError:"你输入的昵称不正确,请确认"});
+
+    $(":radio[name='sex']").formValidator({tipID:"sexTip",onShow:"性别，请选择你的性别",onFocus:"没有第三种性别了，你选一个吧",onCorrect:"输入正确"}).inputValidator({min:1,max:1,onError:"性别忘记选了,请确认"});//.defaultPassed();
+
+    // 表单验证】
+    });
+</script>
+</body>
+</html>

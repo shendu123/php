@@ -1,0 +1,315 @@
+<include file="Common:meta" />
+<title>{$saytyp.ch}-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<!-- <link rel="stylesheet" type="text/css" href="//static.fjsxpmh.com/Public/Home/Css/amazeui.css" />
+<link rel="stylesheet" type="text/css" href="//static.fjsxpmh.com/Public/Home/Css/app.css" />
+<link rel="stylesheet" type="text/css" href="//static.fjsxpmh.com/Public/Css/pop_status.css" />
+<link rel="stylesheet" type="text/css" href="//static.fjsxpmh.com/Public/Js/asyncbox/skins/oncoo.css" />
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/pop_status.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/functions.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/jquery.form.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/asyncbox/asyncbox.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Home/Js/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Home/Js/wap_common.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Home/Js/amazeui.min.js"></script>
+<script type="text/javascript">
+
+// 关注商家地址
+      var setAttentionSellerUrl ="/index.php/Seller/attention.html";
+      var attUrl = "/index.php/Member/attention.html";
+      var login = "0";
+      var iswei = "0";
+      var ismobile = "1";
+</script>
+<meta name="__oncoo__" content="b35ad819eb24d71d9a7125331eace363_0e7240a0ef86e954fdf874c99c2f89ee" /> --></head>
+
+<body>
+ <nav class="on-common-menu"> 
+    <ul class="am-avg-sm-2">
+        <li class="on-mli <eq name="saytyp.get" value="biding">on-active</eq>">
+            <a href="{:U('Point/index',array('typ'=>'1'))}">积分视频</a>
+        </li>
+        <li class="on-mli <eq name="saytyp.get" value="future">on-active</eq>">
+            <a style="border-left: 1px solid #f1f1f1; border-right: 1px solid #f1f1f1;" href="{:U('Point/index',array('typ'=>'3'))}">积分学堂</a>
+        </li>
+        <li class="on-mli <eq name="saytyp.get" value="future">on-active</eq>">
+            <a style="border-left: 1px solid #f1f1f1;" href="{:U('Point/index',array('typ'=>'2'))}">积分礼品</a>
+        </li>
+    </ul>
+</nav> 
+<style>
+    
+    /*积分商城*/
+.title{
+    width: 100%;
+    margin-top: 2%;
+    font-size:1.25rem;
+    font-family: "微软雅黑";
+/*    height:23px;*/
+    color: #000;
+    float: left;
+}
+.title .red{
+    color:#C12424;
+    font-size: 1.25rem;
+}
+.gp-list{
+    margin: 2% 0 0 0;
+    width: 100%;
+/*    height: 370px;*/
+    float: left;
+}
+.gp-detail{
+    width:100%;
+/*    height: 160px;*/
+    float: left;
+    margin: 2% 2% 2% 0;
+}
+.gp-detail img{
+    width: 100%;
+    position: relative;
+    float: left;
+    margin: 0px;
+}
+.gp-detail .bg{
+    position:relative;
+    width:100%;
+    float: left;
+    background-color: rgba(181,3,1,0.85);
+    height:28%;
+
+}
+.gp-detail .bg .t1{
+    width: 100%;
+    height: 5%;
+    color: #fff;
+    float: left;
+    font-size:1.25rem;
+    text-align: center;
+    line-height: 110%;
+    font-family: "微软雅黑";
+  
+
+}
+.gp-detail .bg .t2{
+    width:80%;
+    height: 2%;
+    color: #fff;
+    float: left;
+    margin: 0 10%;
+    line-height: 100%;
+    font-family: "微软雅黑";
+}
+.gp-detail .bg .t2 .sldetail-1{
+    float: left;
+    width: 30%;
+    height: 100%;
+    font-size: 1.06rem;
+}
+.gp-detail .bg .t2 .sldetail-1 .bf{
+    width: 35px;
+    height: 19px;
+    float: left;
+    background:url(images/u40.png) no-repeat top center;
+}
+.gp-detail .bg .t2 .sldetail-2{
+    float: right;
+    width:40%;
+    height:100%;
+    font-size: 1.06rem;
+}
+.gp-detail .bg .t2 .sldetail-2 .zan{
+    width: 24px;
+    height: 24px;
+    float: left;
+    background:url(images/u44.png) no-repeat top center;
+}
+.ng-list{
+    margin: 2% 0% 0% 0%;
+    width: 100%;
+    float: left;
+}
+.ng{
+    width:100%;
+/*    height: 136px;*/
+    float: left;
+    margin: 2% 2% 2% 0;
+}
+.ng img{
+    width:100%;
+    position:relative;
+    float: left;
+    margin: 0px;
+}
+.ng .bg{
+    position:relative;
+    width:100%;
+    float: left;
+    background-color: rgba(181,3,1,0.85);
+    height:28%;
+}
+.ng .bg .ddt{
+    height:28%;
+    color: #fff;
+    float: left;
+    font-size:1.25rem;
+    text-align: center;
+    line-height: 100%;
+    font-family: "微软雅黑";
+    width:32%;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; //文本不换行，这样超出一行的部分被截取，显示...
+
+}
+.lp-list{
+    margin: 2% 0% 0% 0%;
+    width: 100%;
+/*    height:203px;*/
+    float: left;
+}
+.lp{
+    width:100%;
+/*    height: 203px;*/
+    float: left;
+    margin: 2% 2% 2% 0%;
+}
+.lp img{
+    width:100%;
+/*    height: 160px;*/
+    position: relative;
+    float: left;
+    margin: 0px;
+}
+.lp .bg{
+    position: relative;
+    width: 100%;
+    height:28%;
+    float: left;
+}
+.lp .bg .dddt{
+    height:28%;
+    color: #000;
+    font-size: 1.25rem;
+    text-align: center;
+    line-height: 100%;
+    font-family: "微软雅黑";
+   
+
+}
+.lp .bg  .dddt-1{
+    width: 70%;
+     float: left;
+}
+.lp .bg  .dddt-2{
+    width: 30%;
+     float: right;
+}
+.on-group-index{
+      margin-top: 5px;
+}
+</style>
+<div class="on-group-index">
+<!--         <p class="datanone">暂时没有{$saytyp.ch}</p>-->
+      <empty name="list">
+      <else />
+      <if condition="($type eq 1)or($type eq '')"> 
+        <div class="title">股票培训高级课<span class="red">（小积分赚大学问）</span></div>
+        <volist name="list" id="avo">
+          <div class="gp-list" onclick="clickduihuan({$avo.id})">
+                <div class="gp-detail gp-detail-1">
+                 <img src="{$upWholeUrl}{$avo.picurl}">
+                 <div class="bg">
+                      <div class="t1">{$avo.name}</div>
+                      <div class="t2">
+                            <div class=" sldetail-1"><span class="bf"></span>{$avo.watched}万</div>
+                            <div class=" sldetail-2"><span class="zan"></span>{$avo.liked}万</div>
+                      </div>
+                 </div>
+                </div>
+             
+          </div>
+          </volist>
+        </if>
+      </empty>  
+    <empty name="school_list">
+      <else />
+<!--      <div class="title">积分学堂</div>-->
+      <div class="ng-list content_list">
+        <volist name="school_list" id="sc">
+           <div class="title">{$sc.level_name}</div>
+            <volist name="sc.list" id="avo">
+                <a href="{:U('Point/schooldetail',array('id'=>$avo['id']))}" target="_blank">
+                    <div class="ng ng-1" >
+                            <img src="{$upWholeUrl}{$avo.video_pic_url}">
+                            <div class="bg">
+                              <div class="ddt ddt-1">{$avo.name}</div>
+                              <div class="ddt ddt-2">{$avo.point}积分</div>
+                              <div class="ddt ddt-3"></div>
+                            </div>
+                    </div>
+                </a>
+            </volist>
+        </volist>
+      </div>
+      </empty> 
+      <empty name="listb">
+      <else />
+       <if condition="($type eq 2)or($type eq '')"> 
+      <div class="title">积分换礼品</div>
+      <volist name="listb" id="avo">
+        <a href="{:U('Point/giftdetail',array('id'=>$avo['id']))}">
+            <div class="ng-list">
+                  <div class="ng ng-1">
+                   <img src="{$upWholeUrl}{$avo.picurl}">
+                   <div class="bg">
+                        <div class="ddt ddt-1">{$avo.teacher}</div>
+                        <div class="ddt ddt-2">{$avo.point}积分</div>
+                        <div class="ddt ddt-3">{$avo.starttime}</div>
+                   </div>
+                  </div>
+            </div>
+           </a>  
+       </volist>
+      </if>
+      </empty> 
+<!--      <empty name="listd">
+      <else />
+      <if condition="($type eq 2)or($type eq '')"> 
+      <div class="title">积分兑礼品</div>
+       <volist name="listd" id="avo">
+           <a href="{:U('Point/giftdetail',array('id'=>$avo['id']))}">
+                <div class="lp-list">
+                      <div class="lp lp-1">
+                       <img src="{$upWholeUrl}{$avo.picurl}">
+                        <div class="bg">
+                       <div class="dddt dddt-1">{$avo.name}  </div>
+                       <div class="dddt dddt-2">{$avo.point}积分</div>
+                       </div>
+                      </div>
+                </div>
+            </a>
+       </volist>
+     </if> 
+      </empty>-->
+</div>
+<!--分页【-->
+<notempty name="page">
+    <div class="pagestyle">
+        {$page}
+    </div>
+</notempty>
+<!--分页】-->
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+</body>
+<script>
+    function clickduihuan(id) {
+    window.location.href="{:U('Point/coursedetail')}"+'?id='+id
+}
+</script>
+</html>

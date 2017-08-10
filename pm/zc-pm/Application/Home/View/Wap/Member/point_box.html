@@ -1,0 +1,53 @@
+<li>
+    <div class="on-licon">
+        <div class="pth">
+            <if condition="$oinfo['type'] eq 1" >
+                <div class="on-title">
+                    <p class="l_color" target="_blank">
+                        {$oinfo.name}【积分视频】
+                    </p>
+                </div>
+            <else/>
+                <div class="on-title">
+                    <a href="{:U('Point/giftdetail',array('id'=>$oinfo['ggid']))}" class="l_color" target="_blank">
+                        {$oinfo.name}【积分礼品】
+                    </a>
+                </div>
+            </if>
+
+        </div>
+        <div class="pcon clearfix">
+            <div class="imbox">
+                <if condition="$oinfo['type'] eq 1" >
+                    <a >
+                        <img src="{$upWholeUrl}{$oinfo.item.picurl||getPicUrl=###,3,0}" alt="">
+                    </a>
+                <else/>
+                    
+                    <a href="{:U('Point/giftdetail',array('id'=>$oinfo['ggid']))}" target="_blank">
+                        <img src="{$upWholeUrl}{$oinfo.item.picurl||getPicUrl=###,3,0}" alt="">
+                    </a>
+                </if>
+
+            </div>
+            <div class="infobox">
+                花费积分：<span class="qipai">{$oinfo.point|wipezero=###}</span><br/>
+                订单号：
+                <span class="blue1">
+                    {$oinfo.id}
+                </span>
+                状态：
+                <span class="blue1">
+                    <if condition="$oinfo['status'] eq 0">交易成功</if>
+                </span>
+                <if condition="$oinfo['type'] eq 1" >
+                    讲师：<span>{$oinfo.item.teacher}</span>
+                    开始时间：<span>{$oinfo.item.starttime}</span>
+                </if>
+            </div>
+        </div>
+
+
+       
+    </div>
+</li>

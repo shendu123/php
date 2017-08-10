@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>网站注册会员管理-后台管理首页-{$site.SITE_INFO.name}</title>
+        <php>
+            $currentNav ='网站注册会员管理 > 会员列表';
+        </php>
+        <include file="Common:intoHead" />
+		<js href="--PUBLIC--/Js/jquery_raty/jquery.raty.min.js"/>
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">
+                            <eq name="ACTION_NAME" value="index">用户列表</eq>
+                            <eq name="ACTION_NAME" value="search">搜索结果</eq>
+                        </div>
+                       <div class="search">
+                            <form action="{:U('search')}" method='get'>
+                            搜索字段：
+                                <select name="field">
+                                    <option value="account" <eq name="keys.field" value="account">selected="selected"</eq>>账号</option>
+                                    <option value="nickname" <eq name="keys.field" value="nickname">selected="selected"</eq>>昵称</option>
+                                    <option value="email" <eq name="keys.field" value="email">selected="selected"</eq>>邮箱</option>
+                                    <option value="mobile" <eq name="keys.field" value="mobile">selected="selected"</eq>>手机</option>
+                                </select>
+                            &nbsp;&nbsp;关键字：
+                                <input type="text" value="{$keys.keyword}" name="keyword" class="input" placeholder="搜索对应字段关键字" />
+                                &nbsp;&nbsp;<button class="btn">筛选</button>
+                            </form>
+                        </div>
+                    </div>
+                    <eq name="ACTION_NAME" value="search">
+                        <div class="seamsg">
+                            搜索的关键词<span class="keyword">{$keys.keyword}</span>在<span class="keyword">{$keys.field}</span>字段内找到<span class="keyword">{$keys.count}</span>条
+                        </div>
+                    </eq>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                        <tr>
+                            <td width="5%">选择/UID</td>
+                            <td width="15%">登录账号</td>
+                            <td width="12%">昵称/买家等级</td>
+                            <td width="15%">邮箱/手机号</td>
+                            <td width="13%">买家等级</td>
+                            <td width="13%">卖家等级/信誉</td>
+                            <td width="10%">登录IP</td>
+                            <td width="5%">地址薄</td>
+                            <td width="20%">操作</td>
+                        </tr>
+                        </thead>
+                        <volist name="list" id="vo">
+                            <tr align="center" id="{$vo.id}">
+                                <td align="left"><input name="uid[]" type="checkbox" value="{$vo.uid}" >&nbsp;/&nbsp;{$vo.uid}</td>
+                                <td align="left">
+                                    <img class="usimg" src="{$vo.uid|getUserpic=###,2}" alt="" />
+                                    <p>账号：{$vo.account}</p>
+                                    <p align="right"><a href="{:U('Member/sendsms',array('uid'=>$vo['uid']))}">[发站内信]</a></p>
+                                </td>
+                                <td align="left">
+                                    昵称：{$vo.nickname}<br/>性别：<if condition="$vo['sex'] eq 0">女<else />男</if>
+                                </td>
+                                <td align="left">
+                                    邮箱：{$vo.email}<br/>
+                                    手机号：{$vo.mobile}
+                                </td>
+                                <td align="left"><img  style="vertical-align: middle;" src="{$vo.levalbuy}" /></td>
+                                <td align="left">
+                                    等级：<img  style="vertical-align: middle;" src="{$vo.leval}" /><br/>
+                                    信誉：<span style="vertical-align: middle;" id="credit{$key}"></span>
+                                    <script type="text/javascript">
+                                        $(function(){
+                                            $('#credit{$key}').raty({
+                                                readOnly: true,
+                                                score: Number("{$vo.evaluate}"),
+                                                path : start_path
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                                <td>{$vo.login_ip}</td>
+                                <td><a href="{:U('Member/deliver_address',array('uid'=>$vo['uid']))}">{$vo.adcount}个地址</a></td>
+                                <td>[ <a href="__URL__/edit?uid={$vo.uid}">信息编辑 </a> ] [ <a href="__URL__/wallet?uid={$vo.uid}">账户编辑 </a> ] <br/>[ <a link="{:U('Member/del/',array('uid'=>$vo['uid']))}" href="javascript:void(0)" name="{$vo.nickname}" class="del">删除 </a> ]</td>
+                            </tr>
+                        </volist>
+                        <tr>
+                            <td colspan="11"><div class="page"  style="width: 60%; text-align: right; float: right;">{$page}</div></td>
+                        </tr>
+                    </table>
+                    <div class="commonBtnArea" >
+                    <label><input type="checkbox" id="allcbox" value="0">&nbsp;全选</label>
+                        <input type="button" value="批量发送站内信" class="btn submit">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+        var paylistUrl = "{:U('Member/sendsms','','')}";
+        var start_path = "--PUBLIC--/Js/jquery_raty/img";
+        var paylistUrl = "{:U('Member/sendsms','','')}";
+            $(function(){
+                $("#allcbox").click(function() {
+                    $('input[name="uid[]"]').prop("checked",this.checked);
+                });
+                var $subBox = $("input[name='uid[]']");
+                $subBox.click(function(){
+                    $("#allcbox").prop("checked",$subBox.length == $("input[name='uid[]']:checked").length ? true : false);
+                });
+                $(".submit").click(function(){
+                    if($("input[name='uid[]']:checked").length!=0){
+                        var str="";
+                        for (var i=0;i<$("input[name='uid[]']").length;i++ ){
+                            if($("input[name='uid[]']")[i].checked){
+                                str=str+$("input[name='uid[]']")[i].value + "_";
+                            }
+                        }
+                        str=str.substring(0,str.length-1);
+                        document.location.href =paylistUrl+'?uid='+str;
+                    }else{
+                       popup.alert('您至少需要选中一个要处理的订单');
+                        setTimeout(function(){
+                            popup.close("asyncbox_alert");
+                        },2000);
+                    }
+                    return false;
+                });
+
+                $(".del").click(function(){
+                    var delLink=$(this).attr("link");
+                    popup.confirm('你真的打算删除【<b>'+$(this).attr("name")+'</b>】吗?','温馨提示',function(action){
+                        if(action == 'ok'){
+                            top.window.location.href=delLink;
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

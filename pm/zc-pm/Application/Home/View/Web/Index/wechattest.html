@@ -1,0 +1,106 @@
+
+<input type="hidden" id="accesstoken" name="accesstoken" value="{$po['accesstoken']}">
+<input type="hidden" id="balance" name="balance" value="{ $po['balance']}">
+<input type="hidden" id="money" name="money" value="{ $po['money']}">
+<input type="hidden" id="from" name="from" value="{ $po['from']}">
+<input type="hidden" id="desc" name="desc" value="{ $po['desc']}">
+<input type="hidden" id="uid" name="uid" value="{ $po['uid']}">
+<input type="hidden" id="payment" name="payment" value="{ $po['payment']}">
+<input type="hidden" id="order_no" name="order_no" value="{ $po['order_no']}">
+<input type="hidden" id="title" name="title" value="{ $po['title']}">
+<input type="hidden" id="goodtag" name="goodtag" value="{ $po['goodtag']}">
+<input type="hidden" id="addressid" name="addressid" value="{ $po['addressid']}">
+
+
+<script type="text/javascript">
+	(function(win,doc){
+	var docEl = doc.documentElement || document.body;//获取HTML标签
+	var container = doc.getElementById('container');//container元素
+	//判断是移动端设备还是PC,移动 就采用'orientationchange',横竖屏事件，PC端就采用onresize，窗口改变时间
+	var resize = 'orientationchange' in win ? 'orientationchange':'resize';
+	function rem(){
+		//alert(1);
+		docEl.style.fontSize= 100*(container.clientWidth/750)+'px';
+	}	
+	doc.addEventListener('DOMContentLoaded',rem,false);
+	//监听'DOMContent事件:DOM加载完成执行,如果DOMContent事件，那么执行rem函数
+	//alert(resize);
+	win.addEventListener(resize,rem,false);
+	//win下监听resize事件,如果resize事件，那么执行rem函数
+})(window,document);
+</script>
+
+<script type="text/javascript" src="http://www.wode-mall.com/static/home/js/jq/jquery.js"></script>
+<script type="text/javascript" src="http://www.wode-mall.com/static/home/js/jquery.json-2.4.js"></script>
+<script type="text/javascript" src="http://www.wode-mall.com/static/home/js/layer_mobile/layer/layer.js"></script>
+<script type="text/javascript" src="http://www.wode-mall.com/static/home/js/common.js"></script>
+<script type="text/javascript" src="https://wx.gtimg.com/wxpay_h5/fingerprint2.min.1.5.1.js"></script>
+<script type="text/javascript">
+
+
+$(document).ready(function ($) {
+	 	
+ 	var fp=new Fingerprint2();
+ 	fingerprint = '';
+   	fp.get(function(result){
+       fingerprint = result;
+    });
+
+    var money = $('#money').val();
+    var from = $('#from').val();
+    var uid = $('#uid').val();
+    var order_no = $('#order_no').val();
+    var title = $('#title').val();
+    var goodtag = $('#goodtag').val();
+    var addressid = $('#addressid').val();
+    var accesstoken = $('#accesstoken').val();
+
+	//确认提交申购
+	$("#submit_order_wx").click(function(){
+
+		alert(1);
+		var payment = "WWAP";
+		var op ={
+			balance:0,
+			money: money,
+			fingerprint:fingerprint,
+			from:from,
+			desc:"微信支付",
+			uid:uid,
+			payment:"WWAP",
+			order_no:order_no,
+			title:title,
+			goodtag:goodtag,
+			addressid:addressid
+		}
+
+		// var a_token = $("#access_token").val();
+		$.ajax({
+			url: apiurl+"pay/Pay/payall",
+			type: 'post',
+			data:op,
+			crossDomain: true,
+			headers: {
+				"accesstoken":accesstoken,
+			}
+		}).done(function(data) {
+
+			var d = $.evalJSON(data); 
+			if(d.type=="success"){
+				window.location.href=d.data;
+			}
+		}).fail(function(data) {});
+	});
+  
+});
+
+ 
+
+
+
+ 
+
+</script>
+
+</body>
+</html>

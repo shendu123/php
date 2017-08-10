@@ -1,0 +1,39 @@
+<foreach name="channel" item="vo">
+<div class="paimai clearfix">
+    <div class="boxtit">
+        <h2>{$vo.name}</h2>
+        <p>
+            <span class="boxtitblack">竞拍</span>
+            <span>&nbsp;规定时间，多次出价，价高者得。</span>
+            <span class="boxtitblack">竞标</span> 
+            <span>&nbsp;规定时间，一次出价，价高者得。</span> 
+        </p>
+        <a target="_blank" href="{:U('Auction/index',array('gt'=>$vo['cid']))}">进入频道</a>
+    </div>
+    <div class="pmboxcenter">
+        <h3 class="pmlisttit clearfix">
+            <p class="pmlisttitleft"><a target="_blank" href="{:U('Auction/index',array('gt'=>$vo['cid']))}">正在火热拍卖</a>
+                <span></span>
+            </p>
+            <p class="pmlisttitright">
+            <a target="_blank" href="{:U('Auction/endbid',array('gt'=>$vo['cid']))}">最新成交</a>|
+            <a target="_blank" href="{:U('Auction/waitbid',array('gt'=>$vo['cid']))}">拍卖预告</a>
+            </p>
+        </h3>
+        <div class="pmlistdetail clearfix">
+            <foreach name="vo.bid" item="bav">
+            <!-- 全部未开拍 -->
+                <div id="elistA" class="auctionbox tab_con clearfix" style="display:block;">
+                    <empty name="bav.elistA">
+                        <div class="datanone">很抱歉该条件下暂无拍品，您可以重新查询！</div>
+                    <else />
+                        <volist name="bav.elistA" id="avo">
+                            <include file="Auction/bidbox" />
+                        </volist>
+                    </empty>
+                </div>
+            </foreach>
+        </div>
+    </div>
+</div>
+</foreach>

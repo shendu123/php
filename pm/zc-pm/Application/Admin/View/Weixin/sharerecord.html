@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>微信图文列表-微信配置-{$site.SITE_INFO.title}</title>
+        <php>
+            
+            
+            $currentNav ='微信配置 > 微信图文列表';
+        </php>
+    <include file="Common:intoHead" />
+</head>
+<body>
+    <div class="wrap"> <include file="Common:head" />
+        <div class="mainBody"> <include file="Common:left" />
+            <div id="Right">
+                <div class="contentArea">
+                    <div class="Item hr clearfix">
+                        <div class="current">微信用户分享记录</div>
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr align="center">
+                                <td width="5%">ID</td>
+                                <td>分享用户</td>
+                                <td>分享至</td>
+                                <td>分享标题</td>
+                                <td width="20%">分享链接</td>
+                                <td>奖励信誉额度</td>
+                                <td>分享时间</td>
+                            </tr>
+                        </thead>
+                        <foreach name="list" item="vo">
+                            <tr align="center">
+                                <td>{$vo.id}</td>
+                                <td align="left">账号：{$vo.account}<br/>昵称：{$vo.nickname}</td>
+                                <td>{$vo.sharename}</td>
+                                <td align="left">{$vo.title}</td>
+                                <td align="left">{$vo.link}</td>
+                                <td>{$vo.limsum}</td>
+                                <td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+                            </tr>
+                        </foreach>
+                        <tr>
+                            <td colspan="20" align="right" class="page">{$page}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+<include file="Common:foot" />
+</body>
+</html>

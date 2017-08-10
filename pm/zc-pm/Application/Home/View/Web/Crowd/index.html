@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+    <meta name="description" content="{$site.SITE_INFO.description}" />
+    <title>{$saytyp.ch}-{$site.SITE_INFO.title}</title>
+    <include file="Common:intoHead" />
+    <css href="__CSS__/cuitindex.css"/>
+    <css href="__CSS__/list.css"/>
+    <js href="__JS__/indexjs.js"/>
+</head>
+<body>
+    <include file="Common:head_wide" />
+    <div  class="container auction_list">
+        <div class="auction">
+            <!-- 顶部广告（与专场共享） -->
+            <div class="ad_special_top">
+                {:showAdvPosition('auction_special_top','span')} 
+            </div>
+            <!-- 顶部广告——end -->
+            <!-- 专场列表 -->
+            <div class="container clearfix">
+                <div class="sl_left">
+                    <div class="selection mt0">
+                        <div class="contitle" id="contit">
+                            <a href="{:U('Crowd/index',array('typ'=>'biding'))}" <eq name="saytyp.get" value="biding"> class="on"</eq>>正在申购</a>
+                            <a href="{:U('Crowd/index',array('typ'=>'future'))}" <eq name="saytyp.get" value="future"> class="on"</eq>>即将开始申购</a>
+                            <a href="{:U('Crowd/index',array('typ'=>'bidend'))}" <eq name="saytyp.get" value="bidend"> class="on"</eq>>已结束申购</a>
+                        </div>
+                    </div>
+                </div>
+            <!-- 专场列表——end -->
+            </div>
+            <div class="auctionbox clearfix">
+                <empty name="list">
+                    <div class="datanone">暂时没有{$saytyp.ch}</div>
+                <else />
+                    <volist name="list" id="avo">
+                        <include file="Crowd/crowdbox" />
+                    </volist>
+                </empty>
+            </div>
+            <div class="mod_page clearfix">
+                <div class="bid_list_page">
+                    {$page}
+                </div>
+            </div>
+    <!-- 广告列表 -->
+    <include file="footer_add" />
+    <!-- 广告列表 -->
+<!---底部开始-->
+<include file="Common:help_wide" />
+<include file="Common:footer"/>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>微信图文列表-微信配置-{$site.SITE_INFO.title}</title>
+        <php>
+            
+            
+            $currentNav ='微信配置 > 微信图文列表';
+        </php>
+    <include file="Common:intoHead" />
+</head>
+<body>
+    <div class="wrap"> <include file="Common:head" />
+        <div class="mainBody"> <include file="Common:left" />
+            <div id="Right">
+                <div class="contentArea">
+                    <div class="Item hr clearfix">
+                        <div class="current">微信图文列表</div>
+                    </div>
+                    <div>由于微信规则，仅推送从微信公众账号进入本站时间不超48小时的用户！</div>
+                    <form id="formObj">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                            <thead>
+                                <tr align="center">
+                                    <td width="3%">选择</td>
+                                    <td width="5%">ID</td>
+                                    <td width="15%">所属用户</td>
+                                    <td width="15%">图文标题</td>
+                                    <td>头条图片</td>
+                                    <td>列表图片</td>
+                                    <td>本站页面网址</td>
+                                    <td width="20%">图文说明</td>
+                                    <td width="10%">发送结果</td>
+                                    <td width="10%">操作</td>
+                                </tr>
+                            </thead>
+                            <foreach name="list" item="vo">
+                                <tr align="center">
+                                    <td style="vertical-align: middle;">
+                                        <input name="wid[]" type="checkbox" value="{$vo.id}" >
+                                    </td>
+                                    <td>{$vo.id}</td>
+                                    <td >
+                                        <eq name="vo.sellerid" value="0">
+                                            网站
+                                        <else/>
+                                            <div class="clearfix" style="line-height: 22px; text-align: left;">
+                                                <img class="usimg" src="{$vo.sellerid|getUserpic=###,2}"/>
+                                                <p class="fl">账号：{$vo.seller.account}<br/>昵称：{$vo.seller.nickname}</p>
+                                            </div>
+                                        </eq>
+                                        
+                                    </td>
+                                    <td>{$vo.name}</td>
+                                    <td><img style="margin-right: 5px; display: inline; float:left;" src="{$upWholeUrl}{$vo.toppic}" height="50px" /></td>
+                                    <td><img style="margin-right: 5px; display: inline; float:left;" src="{$upWholeUrl}{$vo.picture}" height="50px" /></td>
+                                    <td style="word-break:break-all;"><input class="input" type="text" size="30" value="{$vo.url}"></td>
+                                    <td align="left">
+                                        <eq name="vo.type" value="auction">图文类型：拍卖图文<br/></eq>
+                                        <eq name="vo.type" value="admin">图文类型：管理员添加<br/></eq>
+                                        图文描述：{$vo.comment}</td>
+                                    <td>成功：{$vo.succount}条<br/>失败：{$vo.errcount}条</td>
+                                    <td>[ <a href="__URL__/editurl?id={$vo.id}">修改</a> ][ <a link="{:U('Weixin/delurl',array('id'=>$vo['id']))}" href="javascript:void(0)" name="{$vo.name}" class="del">删除 </a> ]</td>
+                                </tr>
+                            </foreach>
+                            <tr>
+                                <td valign="middle" align="center" >
+                                    
+                                </td>
+                                <td colspan="20" align="right" class="page">{$page}</td>
+                            </tr>
+                        </table>
+                    </form>
+                    <div class="commonBtnArea" >
+                        <label class="boderb"><input type="checkbox" id="allcbox" value="0">全选</label>
+                        <button class="btn submit">发送图文</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+<include file="Common:foot" />
+<script type="text/javascript">
+    $(function(){
+        var weipush = "{:U('Weixin/weipush')}";
+        $(".submit").click(function(){
+            popStatus(3, '正在提交数据至微信，请等待...', 0,'',true);
+            commonAjaxSubmit(weipush,formObj,{"type":'image-text'},'');
+            return false;
+        });
+
+
+         $("#allcbox").click(function() {
+            $('input[name="wid[]"]').prop("checked",this.checked);
+        });
+        var $subBox = $("input[name='wid[]']");
+        $subBox.click(function(){
+            $("#allcbox").prop("checked",$subBox.length == $("input[name='wid[]']:checked").length ? true : false);
+        });
+
+
+
+
+
+        $(".del").click(function(){
+            var delLink=$(this).attr("link");
+            popup.confirm('你真的打算删除【<b>'+$(this).attr("name")+'</b>】这条图文吗?','温馨提示',function(action){
+                if(action == 'ok'){
+                    top.window.location.href=delLink;
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

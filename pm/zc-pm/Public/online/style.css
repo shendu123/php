@@ -1,0 +1,11 @@
+ul, li{list-style:none outside none;margin:0;padding:0}
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, p, blockquote, th, td, ol, ul, li, img, input{margin:0;padding:0;border:0}
+img{vertical-align:middle}
+.clear{clear:both;margin:0;padding:0}
+.clearFix:after{clear:both;content:".";display:block;height:0;visibility:hidden}
+.clearFix{ *display:inline-block;
+}
+textarea{resize:none}
+a{text-decoration:none;color:#222}
+a:hover{text-decoration:none;color:#ff6d00}
+body{font-size:14px;color:#222;padding:0;margin:0;background:#eee url(images/analysisTool-body.jpg);line-height:1.6;font-family:"microsoft yahei", Helvetica, Arial, sans-serif;min-width:1200px;font-family:Microsoft YaHei, SimHei, Helvetica, Arial, sans-serif}

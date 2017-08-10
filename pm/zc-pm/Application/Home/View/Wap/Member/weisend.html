@@ -1,0 +1,95 @@
+<include file="Common:meta" />
+<title>微信推送-我是卖家</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+<div class="on-tips">仅推送与官方公众号有过交流不超过48小时且关注过您和与您交易过的用户！</div>
+<form id="formObj">
+    <ul class="on-shouzhi am-avg-sm-1 am-avg-md-2">
+        <empty name="list">
+            <li class="on-li"><div>没有收到的消息</div></li>
+        <else/>
+            <volist name="list" id="vo">
+                <li class="on-li wei-send-list">
+                    <div class="on-li-con">
+                        <div class="wei-title">
+                            <label class="am-checkbox am-danger am-margin-0">
+                              <input name="wid[]" type="checkbox" value="{$vo.id}" data-am-ucheck> {$vo.name}
+                            </label>
+                        </div>
+                        
+                        <div class="wei-img clearfix">
+                            <div class="wei-imgli">
+                                <img style="display: inline; float:left;" src="{$upWholeUrl}{$vo.toppic}" height="50px" /><br/>
+                                头条图片
+                            </div>
+                            <div class="wei-imgli">
+                                <img style="display: inline; float:left;" src="{$upWholeUrl}{$vo.picture}" height="50px" /><br/>
+                                列表图片
+                            </div>
+                            描述：{$vo.comment}
+                        </div>
+                        <div class="wei-count">
+                                成功：{$vo.succount}条  失败：{$vo.errcount}条
+                        </div>
+                        <ul class="on-mini-morebtn am-avg-sm-3">
+                            <li><a class="am-btn am-btn-danger on-btn-danger" href="{$vo.url}">对应拍卖</a></li>
+                            <li><a class="am-btn am-btn-primary on-btn-primary" href="__URL__/editweisend?id={$vo.id}">编辑 </a></li>
+                            <li><a class="del am-btn am-btn-secondary" link="{:U('Weixin/delweisend',array('id'=>$vo['id']))}" href="javascript:void(0)" name="{$vo.title}" class="del">删除 </a> </li>
+                        </ul>
+                    </div>
+                </li>
+            </volist>
+            <li class="on-labbtn"> 
+                <div class="labbtn-box" >
+                    <label class="am-checkbox am-danger am-margin-0">
+                      <input name="wid[]" type="checkbox" id="allcbox" value="0" data-am-ucheck> 全选
+                    </label>
+                    <div class="labbtn-btbox">
+                        <input type="button" value="发送图文" style="width:100%;" class="submit am-btn am-btn-danger on-btn-danger">
+                    </div>
+                </div>
+                
+            </li>
+        </empty>
+    </ul>
+</form>
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+
+<script type="text/javascript">
+    $(function(){
+        var weipush = "{:U('Member/weipush')}";
+        $(".submit").click(function(){
+            popStatus(3, '正在提交数据至微信，请等待...', 0,'',true);
+            commonAjaxSubmit(weipush,formObj,{"type":'image-text'},'');
+            return false;
+        });
+
+         $("#allcbox").click(function() {
+            $('input[name="wid[]"]').prop("checked",this.checked);
+        });
+        var $subBox = $("input[name='wid[]']");
+        $subBox.click(function(){
+            $("#allcbox").prop("checked",$subBox.length == $("input[name='wid[]']:checked").length ? true : false);
+        });
+
+
+
+
+
+        $(".del").click(function(){
+            var delLink=$(this).attr("link");
+            popup.confirm('你真的打算删除【<b>'+$(this).attr("name")+'</b>】这条图文吗?','温馨提示',function(action){
+                if(action == 'ok'){
+                    top.window.location.href=delLink;
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

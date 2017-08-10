@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>我关注的一口价-交易管理-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;交易管理&nbsp;&gt;&gt;&nbsp;我关注的&nbsp;&gt;&gt;&nbsp;一口价</div>
+
+        
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                <ul class="inquiry">
+                    <li><a href="{:U('myatt',array('type'=>'pm'))}">我关注的拍卖</a></li>
+                    <li class="hover">我关注的一口价</li>
+                </ul>
+                <div class="xunj">
+                <table width="100%" cellspacing="0" cellpadding="0" class="tabela">
+                    <thead>
+                        <tr bgcolor="#fbfaf7" align="left">
+                            <th width="45%" class="brno" scope="col">拍品信息</th>
+                            <th width="10%" valign="middle" align="center" class="brno" scope="col" style="text-align: center;">当前价</th>
+                            <th width="20%" class="brno" scope="col" style="text-align: center;">我的出价</th>
+                            <th width="15%" valign="middle" align="center" class="brno" style="text-align: center;" scope="col">竞价剩余时间</th>
+                            <th width="9%" valign="middle" align="center" style="text-align: center;" scope="col">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <volist name="alist" id="avo">
+                            <tr valign="top" align="left">
+                                <td align="left" class="tablea_pic">
+                                    <div class="bid_title"><a href="" class="l_color">{$avo.ginfo.pname}</a><span class="bidnb">[拍品编号：{$avo.ginfo.bidnb}]</span></div>
+                                    <div class="newPic">
+                                        <img src="{$upWholeUrl}{$avo.ginfo.pictures|picRep=###,3}" alt="">
+                                    </div>
+                                    <div class="newCar clearfix">
+                                        <p></p>
+                                        <p>起拍价：<span class="qipai">{$avo.ginfo.onset}元</span></p>
+                                        <p>参拍条件：
+                                        <span class="p_col">
+											{:pledgeShow($avo[ginfo]['pattern'],$avo[ginfo]['pledge_type'],$avo[ginfo]['onset'],$avo[ginfo]['pledge'],$avo[ginfo]['spledge'],$avo[ginfo]['mpledge'])}
+                                        </span>
+                                        </p>
+                                        <p>拍卖模式：
+                                            <eq name="avo.ginfo.type" value="0">竞拍</eq>
+                                            <eq name="avo.ginfo.type" value="1">竞标</eq>
+                                        </p>
+                                        <p>结束时间：{$avo.ginfo.endtime|date='m-d H:i',###}</p>
+                                    </div>
+                                    <p style="color:#999;">{$avo.ginfo.keywords|str_replace=',','&nbsp;&nbsp;&nbsp;',###}</p>
+                                </td>
+                                <td valign="middle" align="center">{$avo.ginfo.nowprice}</td>
+                                <td valign="middle" align="center">
+                                        <span style="color:#f60;">无</span>
+                                </td>
+                                <td valign="middle" align="center">
+                                    <span>出价中</span>
+                                    <div class="timedown clearfix" id="bid{$avo.gid}">
+                                        <span class="day">-</span>
+                                        <span class="hour">-</span>
+                                        <span class="minute">-</span>
+                                        <span class="second">-</span>
+                                    </div>
+                                    {$nowtime}
+                                    <script type="text/javascript">
+                                        $(function(){
+                                            countDown("{$avo.ginfo.endtime}","{$nowtime}","#bid{$avo.gid} .day","#bid{$avo.gid} .hour","#bid{$avo.gid} .minute","#bid{$avo.gid} .second");
+                                        });
+                                    </script>
+                                </td>
+                                <td valign="middle" align="center">
+                                    <a href="{:U('Auction/details',array('pid'=>$avo[gid]))}">出价</a><br>
+                                    <a pid="{$avo.gid}" rela="p-u" yn="y" href="javascript:void(0)" class="att">取消关注</a>
+                                </td>
+                            </tr>
+                        </volist>   
+                           
+                        <tr valign="top" align="left">
+                            <td bgcolor="#fbfaf7" align="left" colspan="5">
+                                <div class="page">
+                                    {$page}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<js href="--PUBLIC--/Js/jquery-validate.js"/>
+<script type="text/javascript">
+
+$(function(){
+    // 取消关注
+    $('tr').on("click",".att",function(){
+        if(login == 1){
+            var thisObj = $(this);
+            var gid = $(this).attr('pid');
+            var rela = $(this).attr('rela');
+            $.post(attUrl,{'gid':gid , 'rela':rela, 'yn':'y'},function(data){
+                if (data.status) {
+                    thisObj.parents('tr').remove();
+                } else {
+                    popup.error(data.msg);
+                    setTimeout(function(){
+                        popup.close("asyncbox_error");
+                    },2000);
+                }
+            },'json');  
+            
+        }else{
+            popup.alert('<div class="sayOnelin">您没有登录！请登录</div>');
+        }
+         
+    });
+});
+</script>
+</body>
+</html>

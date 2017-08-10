@@ -1,0 +1,200 @@
+<include file="Common:meta" />
+<title>{$saytyp.ch}-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<script type="text/javascript" src="js/reset.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="//static.fjsxpmh.com/Public/Home/Css/amazeui.css" />
+<link rel="stylesheet" type="text/css" href="//static.fjsxpmh.com/Public/Home/Css/app.css" />
+<link rel="stylesheet" type="text/css" href="//static.fjsxpmh.com/Public/Css/pop_status.css" />
+<link rel="stylesheet" type="text/css" href="//static.fjsxpmh.com/Public/Js/asyncbox/skins/oncoo.css" />
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/pop_status.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/functions.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/jquery.form.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/asyncbox/asyncbox.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Home/Js/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Home/Js/wap_common.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Home/Js/amazeui.min.js"></script>
+<script type="text/javascript">
+
+// 关注商家地址
+      var setAttentionSellerUrl ="/index.php/Seller/attention.html";
+      var attUrl = "/index.php/Member/attention.html";
+      var login = "0";
+      var iswei = "0";
+      var ismobile = "1";
+</script>
+<meta name="__oncoo__" content="b35ad819eb24d71d9a7125331eace363_0e7240a0ef86e954fdf874c99c2f89ee" /> --></head>
+
+<body>
+<!-- <nav class="on-common-menu"> 
+    <ul class="am-avg-sm-2">
+        <li class="on-mli ">
+            <a href="/index.php/Point/index/typ/1.html">积分视频</a>
+        </li>
+        <li class="on-mli ">
+            <a style="border-left: 1px solid #f1f1f1; border-right: 1px solid #f1f1f1;" href="/index.php/Point/index/typ/2.html">积分礼品</a>
+        </li>
+    </ul>
+</nav> -->
+<style>
+    .bgt{
+    width: 96%;
+    height: 100%;
+    position: fixed;
+    z-index: 12;
+    background: rgba(0,0,0,0.74);
+}
+.lng-detail{
+    font-size:0.85rem;
+    font-family: "微软雅黑";
+    height:140px;
+    width: 80%;
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    text-align: center;
+    float: left;
+    color: #000;
+    background: #fff;
+    border-radius: 5px;
+}
+.lng-detail .detail{
+    width:100%;
+    text-align: center;
+    height: 26px;
+    font-size: 0.55rem;
+    color: #000;
+    font-family: "微软雅黑";
+    margin: 10% 0 0 0;
+    float: left;
+}
+.lng-detail .dh{
+    width: 35%;
+    height: 41px;
+    float: left;
+    color: #fff;
+    font-size:0.75rem;
+    margin:5% 0 0 34%; 
+    background: #980000;
+    border-radius: 5px;
+}
+.lng-detail .dh a{
+    width: 100%;
+    float: left;
+    line-height: 200%;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+}
+.an{
+    font-size: 15px;
+    font-family: "微软雅黑";
+    border:1px solid #000;
+    color: #000;
+    text-align: center;
+    width: 69px;
+    height: 29px;
+    float: right;
+    margin: 20px 20px 0px 0px;
+}
+  
+</style>
+       <input type="hidden" name="" id="loginid" value="{{$login}}">
+               <input type="hidden" id="verphone" value="{$verphone}">
+        <input type="hidden" id="mobile" value="{$mobile}">
+        <input type="hidden" id="choseid" value="{$info.id}">
+        <input type="hidden" id="name_gift" value="{$info.name}">
+        <input type="hidden" id="name_point" value="{$info.point}">
+<div class="on-group-index">
+   <div class="bgt">
+      <div class="lng-detail">
+            <div class="detail">您必须一次性兑换XXX积分才可完整查看该篇文章</div>
+            <div class="dh"><a href="javascript:;" onclick="clickduihuan({$info.id},'{$info.name}',{$info.point},{$jifenbuzu})" >马上兑换</a></div>
+      </div>
+</div>
+</div>
+<!--分页【-->
+<notempty name="page">
+    <div class="pagestyle">
+        {$page}
+    </div>
+</notempty>
+<!--分页】-->
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+</body>
+</html>
+
+<script type="text/javascript">
+var acpid = '{$info.pid}';
+var setTixingUrl ="{:U('Point/tixing')}";
+var handler ="function_name()";
+
+
+function clickduihuan(id,name,jifen,isjifen) {
+        var login = $('#loginid').val();
+
+    if(login==0){
+        popStatus(2, '请先登陆后进行积分兑换！', 2,'',true);
+    }else{
+        var verphone = $('#verphone').val();
+        var mobile = $('#mobile').val();
+        if(mobile.length!=11){
+            popStatus(1, '您的手机未验证，请正在为您跳转到手机验证页面', 3,'/Member/check/type/mobile',true);
+        }else{    
+
+            if(isjifen==0){
+                setTixingUrl = "{:U('Point/tixingb')}";
+                asyncbox.open({
+                    id : "open_0",
+                    title : '积分兑换',
+                    args : {pid:acpid},
+                    modal : true,
+                    buttons : asyncbox.btn.CANCEL,
+                    url : setTixingUrl+'?name='+name+'&jifen='+jifen,
+                    callback: handlerF
+                })
+            }else{
+                asyncbox.open({
+                    id : "open_0",
+                    title : '积分兑换',
+                    args : {pid:acpid},
+                    modal : true,
+                    buttons : asyncbox.btn.OKCANCEL,
+                    url : setTixingUrl+'?name='+name+'&jifen='+jifen,
+                    callback: handlerF
+                })
+            }
+            
+        }
+    }
+}
+
+function handlerF(buttonResult,contentWindow,returnValue){
+    var ggid = $('#choseid').val();
+    var name = $('#name_gift').val();
+    var jifen = $('#name_point').val();
+
+    if(buttonResult=='ok'){
+        $.ajax({
+            url: setTixingUrl,
+            type: 'POST',
+            dataType: 'json',
+            data: {jifen: jifen,
+                   ggid: ggid,
+                   name: name,
+                   type: '2'},
+        })
+        .done(function(data) {
+            popStatus(data.type, data.info, data.time,'',true);
+            location.reload();
+        })
+        .fail(function(data) {
+            popStatus(2, "系统故障了，请稍候", 1,'',true);
+        });
+    }
+}
+</script>

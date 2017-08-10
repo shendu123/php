@@ -1,0 +1,728 @@
+/**
+ * Created by xdanger.liu on 2017/3/14.
+ */
+var YK = {};
+YK.https = location.protocol == "https:" ? "https:" : "http:";
+
+var DEBUG__ = 0;
+
+var console = window.console;
+if (!console) {
+    console = {};
+    console.log = function() {};
+}
+
+var debug = {};
+debug.log = function(log) {
+    if (DEBUG__) {
+        console.log(log);
+    }
+};
+window.YKU = {};
+var YKP = {
+    playerType: "",
+
+    playerState: {
+        PLAYER_STATE_INIT: 'PLAYER_STATE_INIT',
+        PLAYER_STATE_READY: 'PLAYER_STATE_READY',
+        PLAYER_STATE_AD: 'PLAYER_STATE_AD',
+        PLAYER_STATE_PLAYING: 'PLAYER_STATE_PLAYING',
+        PLAYER_STATE_END: 'PLAYER_STATE_END',
+        PLAYER_STATE_ERROR: 'PLAYER_STATE_ERROR'
+    },
+
+    playerCurrentState: 'PLAYER_STATE_INIT',
+    isLoadFinishH5: false,
+    isPC: true,
+    videoList: []
+};
+
+var StaticDomain = YK.https + "//player.youku.com";
+
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+        // YKP.isPC = false;
+        YKP.isSupportFlash = false;
+    } else {
+        // YKP.isPC = true;
+        YKP.isSupportFlash = true;
+    }
+}
+browserRedirect();
+
+function createViewport() {
+    if (YKP.isSupportFlash == false) {
+        var oMeta = document.createElement('meta');
+        oMeta.name = "viewport";
+        oMeta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no";
+        document.getElementsByTagName('head')[0].appendChild(oMeta);
+    }
+}
+//createViewport();
+
+var urlParameter = function(object) {
+    var arr = [];
+    for (var o in object) {
+        arr.push(o + '=' + object[o]);
+    }
+    return arr.join('&');
+};
+
+//èŽ·å–å‚æ•°
+window.QS = function() {
+    var args = {};
+
+    var result = window.location.search.match(new RegExp("[\?\&][^\?\&]+=[^\?\&]+", "g"));
+    if (result != null) {
+        for (var i = 0; i < result.length; i++) {
+            var ele = result[i];
+            var inx = ele.indexOf("=");
+            //args[ele.substring(1, inx)] = ele.substring(inx + 1);
+            var key = ele.substring(1, inx);
+            var val = ele.substring(inx + 1);
+            try {
+                val = decodeURI(val);
+            } catch (e) {
+
+            }
+            //è½¬æ¢val Boolean Number Object
+            val == "true" ? val = true : (val == "false" ? val == false : isNaN(val) ? val = parseJsonStr(val) : val = +val);
+            if ('undefined' == typeof args[key]) {
+                args[key] = val;
+            } else {
+                if (args[key] instanceof Array) {
+                    args[key].push(val);
+                } else {
+                    args[key] = [args[key], val];
+                }
+            }
+        }
+    }
+    return args;
+}
+
+function parseJsonStr(str) {
+    if ('string' != typeof str) {
+        return str;
+    }
+    if (/{[^{^}]{0,}}/.test(str)) {
+        try {
+            str = JSON.parse(str);
+        } catch (e) {
+
+        }
+    }
+    return str;
+}
+
+var dynamicLoading = {
+    css: function(path) {
+        if (!path || path.length === 0) {
+            throw new Error('argument "path" is required !');
+        }
+        var head = document.getElementsByTagName('head')[0];
+        var link = document.createElement('link');
+        link.href = path;
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        head.appendChild(link);
+    },
+    js: function(path, obj) {
+        if (!path || path.length === 0) {
+            throw new Error('argument "path" is required !');
+        }
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = path;
+        script.type = 'text/javascript';
+        head.appendChild(script);
+
+        script.onload = function() {
+            if (obj) {
+                obj.selectH5();
+                YKP.isLoadFinishH5 = true;
+            }
+        }
+    }
+}
+
+var YoukuPlayerSelect = function(params) {
+
+    YKP.videoList.push(this);
+    YK.initConfig = params;
+    this._vid = params.vid;
+    this._target = params.target;
+    this._partnerId = params.partnerId;
+    this._showViewPort = (params.showViewPort == null ? true : params.showViewPort);
+    if (params.client_id) {
+        //å…¼å®¹openapiä¸­çš„client_idçš„è®¾ç½®
+        this._partnerId = params.client_id;
+    }
+
+    if (!(this._vid && this._target && this._partnerId)) {
+        alert(
+            "[Fail]The params of {vid,target,client_id} are necessary !"
+        );
+        return;
+    }
+
+    this._events = params.events;
+    YK.playerEvents = params.events;
+    YKP._target = this._target; // ä¸»è¦æ˜¯ä¸ºäº†  selectDirectUrl()ä¸­å…¨å±€è°ƒç”¨çš„è€ƒè™‘
+
+    this._id = params.id;
+    if (this._id == null) this._id = "youku-player";
+    YKP.playerId = this._id;
+    this._width = params.width;
+    this._height = params.height;
+    this._expand = params.expand;
+    if (params.width == null || params.height == null) {
+        //å®½é«˜æŒ‡å®šä¸å…¨ï¼Œé»˜è®¤ä¸º0
+        if (params.expand == null) {
+            this._expand = 0;
+        }
+    } else {
+        //å®½é«˜éƒ½æŒ‡å®šï¼Œé»˜è®¤ä¸º1
+        if (params.expand == null) {
+            this._expand = 1;
+        }
+    }
+
+    // this._prefer = (params.prefer ? params.prefer.toLowerCase() : "flash");
+    this._starttime = params.starttime;
+    this._password = params.password;
+    this._poster = params.poster;
+    this._autoplay = !! params.autoplay; // 0 ,1 ,true ,false,'true','false'..
+    this._canWide = params.canWide;
+    if ('undefined' != typeof params.show_related) {
+        this._showRelated = !! params.show_related;
+    }
+    this._winType = params.wintype;
+
+    //æ’­æ”¾é¡µä¸“é—¨å‚æ•°
+    this._playlistconfig = params.playlistconfig;
+    this._isMobile = YKP.isMobile;
+    this._isMobileIOS = YKP.isMobileIOS;
+
+    //this._weixin = params.weixin;
+    YK.isWeixin = YKP.isWeixin; //false;
+    //å¾®ä¿¡ä¸“ç”¨å‚æ•°
+    if ('undefined' != typeof params.weixin) {
+        YK.isWeixin = !! params.weixin; //!!å¤–éƒ¨ä¼ å…¥ weixin=fasle ä¹Ÿå¯ä»¥ç”Ÿæ•ˆ
+    }
+
+    this._loop = !! params.loop || false;
+    // more ..
+    // ä»¥ä¸‹æ˜¯ä¸­é—´ç»“æžœ
+    this._playerType = "";
+
+};
+YoukuPlayerSelect.prototype = {
+    isSupportFlash: function() {
+        return YKP.isSupportFlash;
+    }, //todo
+    playerType: function() {
+        if (this._playerType != "") return this._playerType;
+        if (this.isSupportFlash()) {
+            this._playerType = "flash";
+        } else {
+            this._playerType = "h5";
+        }
+        return this._playerType;
+    },
+    select: function() {
+        //debug.log('playerType = ' + this.playerType());
+        /**
+         if (this.isThirdParty()) {
+            var self = this;
+            this.processThirdParty(function(e) {
+                self.selectHandler();
+            });
+            return;
+        }
+         */
+        this.selectHandler();
+    },
+    selectHandler: function() {
+        if (this.playerType() == "h5") {
+            YKP.playerType = "h5";
+            if (YKP.isLoadFinishH5) {
+                this.selectH5();
+            } else {
+                dynamicLoading.js(YK.https + "//player.youku.com/unifull/js/unifull.min.js", this);
+            }
+
+        } else if (this.playerType() == "flash") {
+            YKP.playerType = "flash";
+            this.selectFlash();
+        }
+
+        if (this._events && this._events.onPlayerReady) {
+            var callback = this._events.onPlayerReady;
+            if (YKP.playerType == "h5") {
+                var check = setInterval(function() {
+                    // if ($(YKP.playerId)) {
+                    //     YKP.playerCurrentState = YKP.playerState.PLAYER_STATE_READY;
+                    //     debug.log(YKP.playerCurrentState);
+
+                    try {
+                        //    LocalStorage.appendItem('phase', 'playerready');
+                        callback();
+                    } catch (e) {}
+                    clearInterval(check);
+                    //}
+                }, 500);
+            } else if (YKP.playerType == 'flash') {
+                var check = setInterval(function() {
+                    //   if (YKU.swfLoaded == 1) {
+                    //      YKP.playerCurrentState = YKP.playerState.PLAYER_STATE_READY;
+                    //      debug.log(YKP.playerCurrentState);
+
+                    try {
+                        //   LocalStorage.appendItem('phase', 'playerready');
+                        callback();
+                    } catch (e) {
+
+                    }
+                    clearInterval(check);
+                    //  }
+                }, 500);
+            } else {
+
+            }
+        }
+    },
+    selectH5: function() {
+        var self = this;
+        var playerDom = document.getElementById(this._target);
+        if (this._width > 0 && this._height > 0)
+        {
+            playerDom.style.width = this._width + "px";
+            playerDom.style.height = this._height  + "px";
+        }
+        else
+        {
+            //var cw = document.documentElement.clientWidth;
+            //var ch = document.documentElement.clientHeight;
+            var cw = playerDom.style.offsetWidth;
+            var ch = playerDom.style.offsetHeight;
+            function resize(playerDom) {
+                //playerDom.style.width = cw + "px";
+                //playerDom.style.height = 9 * cw / 16 + "px";
+
+                playerDom.style.width = cw + "px";
+                playerDom.style.height = ch + "px";
+            }
+            resize(playerDom);
+        }
+
+        var config = {
+            videoId: YK.initConfig.vid, //è§†é¢‘id
+            //    ccode:"0501", //æ¸ é“id
+            ccode: "0590",
+            client_id: YK.initConfig.client_id, //ä¼˜é…·è§†é¢‘äº‘åˆ›å»ºåº”ç”¨çš„client_id
+            control: {
+                laguange: "", //é»˜è®¤ä½¿ç”¨çš„è¯­è¨€ç±»åž‹
+                hd: "mp4hd", //é»˜è®¤ä½¿ç”¨çš„ç çŽ‡
+                //   hd:"m3u8",
+                autoplay: false //æ˜¯å¦è‡ªåŠ¨æ’­æ”¾
+            },
+            logconfig: {
+
+            }, //ç»Ÿè®¡æ‰©å±•å‚æ•°ï¼ŒåŒ…æ‹¬aplusæŽ¥å£ä¸­çš„å…¨å±€å¯¹è±¡æ—¶æ•°æ®ï¼Œç”¨äºŽä¼ é€’ç»™ç»Ÿè®¡æŽ¥å£
+            adConfig: {
+
+            }, //å¹¿å‘Šæ‰©å±•å‚æ•°
+            password: YK.initConfig.password, //è§†é¢‘æ’­æ”¾å¯†ç ï¼Œç”¨äºŽåŠ å¯†è§†é¢‘ï¼ˆè¿™ä¸ªæ˜¯å¦å¯ä»¥ä¼ å…¥æš‚å®šï¼‰
+            wintype: "", //æ¯ç«¯å›ºå®šçš„å‚æ•°ï¼Œå¤šç”¨äºŽç»Ÿè®¡ï¼Œä¸ç¡®å®šæ˜¯å¦è¿˜éœ€è¦
+            type: "", //æ’­æ”¾ç±»åž‹ï¼ˆpc,pad,mobileï¼‰æš‚å®š,
+            events: YK.playerEvents
+        };
+        this._h5player = YKPlayer.Player(this._target, config);
+    },
+
+    onorientationchange: function() {
+        //var self = this;
+        var playerDom = document.getElementById(this._target);
+        setTimeout(function() {
+            var cw = document.documentElement.clientWidth;
+            var ch = document.documentElement.clientHeight;
+            playerDom.style.width = cw + "px";
+            playerDom.style.height = 9 * cw / 16 + "px";
+
+        }, 300);
+    },
+    isThirdParty: function() {
+
+        var cid = YK.initConfig.client_id;
+        if (cid != null && (cid + '').length == 16) {
+            return true;
+        };
+
+        return false;
+    },
+    selectFlash: function() {
+
+        // åµŒå…¥ä»¥åŽä¼šè°ƒç”¨å¤–éƒ¨çš„é‚£ä¸ª onYoukuPlayerReady()å‡½æ•°
+
+        var flashvars = {
+            imglogo: this._poster || '',
+            //    isAutoPlay: this._autoplay||false,
+            //    isShowRelatedVideo: this._showRelated===false?false:true,
+            partnerId: YK.initConfig.client_id
+        };
+        if (this._loop) {
+            flashvars.isLoop = 'true';
+        }
+        if (YK.initConfig.firsttime != null) {
+            flashvars.firsttime = YK.initConfig.firsttime;
+        }
+        //if (this._autoplay != null) {
+        //    flashvars.isAutoPlay = this._autoplay;
+        //}
+        if (YK.initConfig.embsig != null) {
+            flashvars.embsig = YK.initConfig.embsig;
+        }
+
+        if (YK.initConfig.password != null) {
+            flashvars.passwordstr = YK.initConfig.password;
+        }
+        if (YK.initConfig.styleid != null) {
+            flashvars.styleid = YK.initConfig.styleid;
+        }
+        if (YK.initConfig.vext != null) {
+            flashvars.vext = YK.initConfig.vext;
+        }
+        ////360å…¨æ™¯ æŽ¥å£æ¥å–ä¸éœ€è¦
+        //if(YK.initConfig.panorama) {
+        //    flashvars.panorama = YK.initConfig.panorama;
+        //}
+        for (var key in YK.initConfig.adconfig) {
+            flashvars[key] = YK.initConfig.adconfig[key];
+        }
+        for (var key in YK.initConfig.flashconfig) {
+            flashvars[key] = YK.initConfig.flashconfig[key];
+        }
+
+        var urlParam = {
+            sid: this._vid,
+            isAutoPlay: this._autoplay,
+            isShowRelatedVideo: this._showRelated,
+            winType: this._winType,
+            newPlayer: YK.initConfig.newPlayer
+        };
+        //var partner = "";
+        if (this.isThirdParty() && !flashvars['delayload']) {
+            //16ä½ 16è¿›åˆ¶çš„æ•°å­—
+            //partner = "/partnerid/" + this._partnerId;
+            urlParam.partnerid = this._partnerId;
+        }
+
+        var src = StaticDomain + '/player.php/';
+        for (var k in urlParam) {
+            var value = urlParam[k];
+            if ('undefined' != typeof value && '' !== value) {
+                src += k + '/' + value + '/';
+            }
+        }
+        src += 'v.swf';
+
+        // if (YK.initConfig.flashsrc) {
+        //    src = YK.initConfig.flashsrc;
+        // }
+
+        if (YK.initConfig.events) {
+            /**
+             var onPlayerReady = YK.initConfig.events.onPlayerReady;
+             if ('function' == typeof onPlayerReady && 'undefined' == typeof window.onPlayerReady) {
+                window.onPlayerReady = function(obj) {
+                    onPlayerReady(obj);
+                }
+            }*/
+
+            var onPlayStart = YK.initConfig.events.onPlayStart;
+            if ('function' == typeof onPlayStart && 'undefined' == typeof window.onPlayerStart) {
+                window.onPlayerStart = function(obj) {
+                    onPlayStart(obj);
+                }
+            }
+
+            var onPlayEnd = YK.initConfig.events.onPlayEnd;
+            if ('function' == typeof onPlayEnd && 'undefined' == typeof window.onPlayerComplete) {
+                window.onPlayerComplete = function(obj) {
+                    onPlayEnd(obj);
+                }
+            }
+
+            var onPlay = YK.initConfig.events.onPlay;
+            if ('function' == typeof onPlay && 'undefined' == typeof window.onPlay) {
+                window.onPlay = function(obj) {
+                    onPlay(obj);
+                }
+            }
+
+            var onPause = YK.initConfig.events.onPause;
+            if ('function' == typeof onPause && 'undefined' == typeof window.onPause) {
+                window.onPause = function(obj) {
+                    onPause(obj);
+                }
+            }
+
+            var onWaiting = YK.initConfig.events.onWaiting;
+            if ('function' == typeof onWaiting && 'undefined' == typeof window.onWaiting) {
+                window.onWaiting = function(obj) {
+                    onWaiting(obj);
+                }
+            }
+
+            var onFullScreen = YK.initConfig.events.onFullScreen;
+            if ('function' == typeof onFullScreen && 'undefined' == typeof window.onFullScreen) {
+                window.onFullScreen = function(obj) {
+                    onFullScreen(obj);
+                }
+            }
+
+            var onPlayError = YK.initConfig.events.onPlayError;
+            if ('function' == typeof onPlayError && 'undefined' == typeof window.onPlayerError) {
+                window.onPlayerError = function(obj) {
+                    var _code = obj.code || '1000';
+                    //if(parseInt(_code) >= 3000 || _code=="2200"){//è¯¥æ¡ä»¶åœºæ™¯ä¸‹æ’­æ”¾å™¨å·²å¤„ç†é”™è¯¯æç¤º
+                    //    return
+                    //}
+                    if (_code == '4000') { //éœ€è¦å¯†ç 
+                        return
+                    }
+                    onPlayError(obj.message || 'æ’­æ”¾å‡ºé”™', obj);
+                }
+            }
+
+        }
+
+        var param = {
+            allowFullScreen: true,
+            allowScriptAccess: "always",
+            movie: src,
+            flashvars: flashvars
+        };
+
+        if (YK.initConfig.wmode) {
+            param.wmode = YK.initConfig.wmode;
+        }
+        var flashparam = YK.initConfig.flashparam;
+        if (flashparam && 'object' == typeof flashparam) {
+            for (var k in flashparam) {
+                param[k] = flashparam[k];
+            }
+        }
+        var flashtxt = "";
+        for (var key in param) {
+            var value = param[key];
+            if ("object" == typeof value) {
+                value = urlParameter(value);
+            }
+            flashtxt += '<param name=' + key + ' value=' + value + '>';
+        }
+
+        flashtxt += decodeURI(YK.initConfig.flashext || '');
+
+        //flashvars = urlParameter(flashvars);
+        //$(this._target).innerHTML =  "<embed id="+this._id+" src=" + src + " allowFullScreen=\"true\" quality=\"high\" width=100% height=100% align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\" flashvars="+flashvars+">";
+        document.getElementById(this._target).innerHTML =
+            "<object type=application/x-shockwave-flash data= " + src + " width=100% height=100% id=" + this._id + ">" +
+                //"<param name=allowFullScreen value=true><param name=allowScriptAccess value=always><param name=movie value=" +
+                //src + "><param name=flashvars value=" + flashvars + ">" +
+                //    decodeURI(YK.initConfig.flashext || '')
+            flashtxt +
+            "</object>";
+        if (this._expand) {
+            document.getElementById(this._target).style.width = this._width + "px";
+            document.getElementById(this._target).style.height = this._height + "px";
+        }
+    }
+};
+
+window.onload = function() {
+    /**
+     window.onorientationchange = function() {
+        for (var item in YKP.videoList) {
+            var player = YKP.videoList[item];
+            player.onorientationchange();
+        }
+    }
+     */
+};
+
+/**
+ * ä»¥ä¸‹æ˜¯ç»Ÿä¸€çš„æŽ¥å£ï¼Œç”¨äºŽå¤–éƒ¨ç»Ÿä¸€æ“ä½œ Flash å’Œ H5æ’­æ”¾å™¨
+ *   20121108: ç›´æŽ¥ä¼ å…¥å‚æ•°è¿›è¡Œåˆå§‹åŒ–
+ *    -- api document --
+ *   //open.youku.com/docs/api/player
+ *   ç”¨æˆ·åï¼šapi
+ *   å¯†ç ï¼šyoukuopenapi
+ *
+ */
+YKU.Player = function(target, config) {
+    config.target = target;
+    this.select = new YoukuPlayerSelect(config);
+    this.select.select();
+    this._player = "";
+};
+YKU.Player.prototype = {
+    player: function() {
+        if (this._player != "") {
+            return this._player;
+        }
+        if (YKP.playerType == "h5") {
+            this._player = new YKH5Player(this.select._h5player);
+        } else if (YKP.playerType == "flash") {
+            this._player = new YKFlashPlayer();
+        } else {
+            this._player = "error";
+        }
+        return this._player;
+    },
+    //@deprecated
+    resize: function(width, height) {
+        this.player().resize(width, height);
+    },
+    currentTime: function() {
+        return this.player().currentTime();
+    },
+    totalTime: function() {
+        return this.player().totalTime();
+    },
+    playVideo: function() {
+        this.player().playVideo();
+    },
+    startPlayVideo: function() {
+        this.player().startPlayVideo();
+    },
+    pauseVideo: function() {
+        this.player().pauseVideo();
+    },
+    seekTo: function(timeoffset) {
+        this.player().seekTo(timeoffset);
+    },
+    hideControls: function() {
+        this.player().hideControls();
+    },
+    showControls: function() {
+        this.player().showControls();
+    },
+    /** mute:function(){},
+     unmute:function(){},
+     setVolume:function(){},
+     getVideoMetaData:function(){},*/
+    playVideoById: function(vid) {
+        this.player().playVideoById(vid);
+    },
+    //special api for youku h5,not open api
+    switchFullScreen: function() {
+        try {
+            this.player().switchFullScreen();
+        } catch (e) {
+
+        }
+
+    }
+
+};
+
+var YKFlashPlayer = function() {
+    this._player = document.getElementById(YKP.playerId);
+};
+YKFlashPlayer.prototype = {
+    resize: function(width, height) {
+        this._player.style.width = width + 'px';
+        this._player.style.height = height + 'px';
+    },
+    currentTime: function() {
+        var arr = this._player.getPlayerState().split("|");
+        if (arr.length >= 3)
+            return arr[2];
+        else
+            return -1;
+    },
+    totalTime: function() {
+        var arr = this._player.getPlayerState().split("|");
+        if (arr.length >= 4)
+            return arr[3];
+        else
+            return -1;
+    },
+    playVideo: function() {
+        this._player.pauseVideo(false);
+    },
+    pauseVideo: function() {
+        this._player.pauseVideo(true);
+    },
+    seekTo: function(timeoffset) {
+        this._player.nsseek(timeoffset);
+    },
+    playVideoById: function(vid) { //encoded vid  å­—ç¬¦ä¸²å½¢å¼çš„vid
+        this._player.playVideoByID(vid);
+    },
+    hideControls: function() {
+        this._player.showControlBar(false);
+    },
+    showControls: function() {
+        this._player.showControlBar(true);
+    },
+    state: function() {
+        this._player.state();
+    }
+};
+
+/**
+ * @param player  YoukuHTML5Player
+ */
+var YKH5Player = function(player) {
+
+    this._player = player;
+};
+YKH5Player.prototype = {
+    currentTime: function() {
+        return this._player.currentTime;
+    },
+    totalTime: function() {
+        return this._player.totalTime;
+
+    },
+    playVideo: function() {
+        this._player.play();
+    },
+
+    pauseVideo: function() {
+        this._player.pause();
+    },
+
+    seekTo: function(timeoffset) {
+        try {
+            //  this._player.currentTime = timeoffset;
+            this._player.seek(timeoffset);
+        } catch (e) {}
+    }
+};
+
+/**
+ * 执行javascript标签中的代码
+ */
+function executeScript(){
+    var _scripts = document.getElementsByTagName("script"),_len = _scripts.length;
+    for(var i = 0 ; i < _len ;i++){
+        if(_scripts[i].src.indexOf("//player.youku.com/jsapi") > -1){
+            eval(_scripts[i].innerHTML);
+            break;
+        }
+    }
+}
+executeScript();

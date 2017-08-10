@@ -1,0 +1,9 @@
+<foreach name="hlist" item="hav">
+<ul>
+	<li class="helptit">{$hav.cname}</li>
+	<foreach name="hav.nlist" item="hbv">
+		<li><a href="{:U('Article/help',array('id'=>$hbv['id']))}">{$hbv.title}</a></li>
+	</foreach>
+</ul>
+</foreach>
+

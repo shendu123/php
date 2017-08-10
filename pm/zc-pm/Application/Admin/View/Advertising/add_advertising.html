@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>添加，编辑广告-广告管理-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='广告管理 > 添加，编辑广告';
+        </php>
+        <base href="{$site.WEB_ROOT}"/>
+		<css href="__CSS__/base.css"/>
+		<css href="__CSS__/layout.css"/>
+		<css href="__CSS__/common.css"/>
+		<css href="--PUBLIC--/Css/pop_status.css"/>
+		<css href="--PUBLIC--/Js/asyncbox/skins/default.css"/>
+		<js href="--PUBLIC--/Js/jquery-1.7.2.min.js"/>
+		<js href="--PUBLIC--/Js/pop_status.js"/>
+		<js href="--PUBLIC--/Js/functions.js"/>
+		<js href="__JS__/base.js"/>
+		<js href="--PUBLIC--/Js/jquery.form.js"/>
+		<js href="--PUBLIC--/Js/asyncbox/asyncbox.js"/>
+        <!-- 日期时间插件 -->
+        <css href="--PUBLIC--/Js/datetimepicker/jquery.datetimepicker.css"/>
+        <js href="--PUBLIC--/Js/datetimepicker/jquery.datetimepicker.js"/>
+        <!-- 日期时间插件 -->
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">添加，编辑广告</div>
+                    </div>
+                    <form>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th width="100">广告名称：</th>
+                                <td>
+                                    <input id="title" type="text" class="input" size="25" name="info[name]" value="{$info.name}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>广告类型：</th>
+                                <td>
+                                    <select id="advType" name="info[type]">
+                                        <option value="1" <eq name="info['type']" value="1">selected="selected"</eq>>图片广告</option>
+                                        <option value="2" <eq name="info['type']" value="2">selected="selected"</eq>>Flash广告</option>
+                                        <option value="3" <eq name="info['type']" value="3">selected="selected"</eq>>自定义代码广告</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>广告位置：</th>
+                                <td>
+                                    <select id="advpid" name="info[pid]" class="required">
+                                        <option value="">==广告位置==</option>
+                                        <volist name="posName" id="pos">
+                                            <option value="{$pos.id}" advw="{$pos.width}" advh="{$pos.height}"<eq name="info['pid']" value="$pos['id']">selected="selected"</eq>>{$pos.name}</option>
+                                        </volist>
+                                    </select>
+                                    <span  class="remark">您广告位的尺寸宽度：<strong id="advw"></strong>px；高度：<strong id="advh"></strong>px<span>
+                                </td>
+                            </tr>
+                            <tr id="advUrl">
+                                <th>链接地址：</th>
+                                <td><input id="title" type="text" class="input" size="50" name="info[url]" value="{$info.url}"/></td>
+                            </tr>
+                            <tr>
+                                <th>广告<span id="tpCold" class="hidden">代码</span><span id="tpImg" class="hidden">文件</span>：</th>
+                                <td id="advCode">
+                                    <div id="advPic_upload" class="btn up_but"><div class="up_but_ico"></div>广告图片</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>广告描述：</th>
+                                <td>
+                                    <textarea cols="60" rows="3" name="info[desc]">{$info.desc}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>广告排序：</th>
+                                <td>
+                                    <input type="text" class="input" name="info[sort]" value="{$info.sort}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>有效期：</th>
+                                <td><label><input id="ynTime" type="checkbox">启用</label></td>
+                            </tr>
+                            <tr id="startT" class="hidden">
+                                <th>开始时间：</th>
+                                <td>
+                                    <input id="start_time" type="text" class="input"name="info[adv_start_time]" value="{$info.adv_start_time|toDate}"> 
+                                </td>
+                            </tr>
+                            <tr id="endT" class="hidden">
+                                <th>结束时间：</th>
+                                <td>
+                                    <input id="end_time" type="text" class="input" name="info[adv_end_time]" value="{$info.adv_end_time|toDate}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>状态：</th>
+                                <td>
+                                    <select class="combox" name="info[status]">
+                                        <option value="1" <eq name="info['status']" value='1'>selected="selected"</eq>>启用</option>
+                                        <option value="0" <eq name="info['status']" value='0'>selected="selected"</eq>>禁用</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="info[id]" value="{$info.id}" />
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <!-- 上传插件【 -->
+        <script type="text/javascript" src="__STATIC__/plupload/plupload.full.min.js"></script>
+        <script type="text/javascript" src="__STATIC__/plupload/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
+        <script type="text/javascript" src="__STATIC__/plupload/i18n/zh_CN.js"></script>
+        <!-- 上传插件】 -->
+<script type="text/javascript">
+    // 上传变量配置【
+    var moxieswf = "__STATIC__/plupload/Moxie.swf";
+    var moxiesxap = "__STATIC__/plupload/Moxie.xap";
+    // 上传变量配置】
+    // 开始时间
+    var startTM = "{$info.adv_start_time|toDate}";
+    var endTM = "{$info.adv_end_time|toDate}";
+    var isType = "{$info.type}"; //广告类型
+    var typeCold = "{$info.code}";  //广告
+    var advId = "{$info.id}";
+
+    $(function(){
+        //上传初始化变量
+        var uplode_url = '{:U("Upload/upAdvFile")}';//PHP处理脚本地址
+        var uplode_path = '__PUBLIC__'; //插件公共目录
+        var sid = '{:session_id()}';//sessionID
+
+        var upPathRoot="{$upWholeUrl}"; //图片上传根目录完整路径
+        var uploadPath ="{:C('UPLOADS_PICPATH')}"; //图片上传根目录
+        //初始化时间启用
+        if(startTM !=''){
+            $('#ynTime').attr('checked',true);
+            $('#startT').removeClass('hidden');
+            $('#endT').removeClass('hidden');
+        }
+        
+        //为input添加时间插件
+        $('#start_time').datetimepicker({lang:'ch'});
+        $('#end_time').datetimepicker({lang:'ch'});
+        //为input添加插件_end
+        
+        
+        //是否设置有效期
+        $('#ynTime').on("click",function(){
+            if($(this).is(":checked")){
+                $('#startT').show();
+                $('#endT').show();
+                $('#startT input').val(startTM);
+                $('#endT input').val(endTM);
+            }else{
+                $('#startT').hide();
+                $('#endT').hide();
+                $('#startT input').attr('value','');
+                $('#endT input').attr('value','');
+            }
+        });
+        //获取上传图片需要的尺寸
+        var pidObj = $('#advpid').children('option:selected'); 
+        var advW = pidObj.attr('advw');
+        var advH = pidObj.attr('advh');
+        $('#advw').html(advW);
+        $('#advh').html(advH);
+        resizeImg(); //初始化图片尺寸
+        $('#advpid').on("change",function(){
+            var pidSun = $(this).children('option:selected');
+            $('#advpid').next('.remark').children('#advw').html(pidSun.attr('advw'));
+            $('#advpid').next('.remark').children('#advh').html(pidSun.attr('advh'));
+            resizeImg();
+        });
+        var codeImageBut = '<div class="up_btn_box"><div class="up_explain">图片格式：*.gif; *.jpg; *.png。如果上传的图片让您看着不舒服，请检查图片尺寸是否符合要求</div><div id="advPic_upload" class="btn up_but"><div class="up_but_ico"></div>广告</div></div>';
+        var codeFlashBut = '<div class="up_btn_box"><div class="up_explain">上传文件为flash，后缀为*.swf</div><div id="advPic_upload" class="btn up_but"><div class="up_but_ico"></div>广告</div></div>';
+        var codeImageShow ='<ul id="uploadImageList" class="clearfix"><notempty name="info[code]"><li class="photo"><img width="'+advW+'" height="'+advH+'" id="upImgSize" src="{$upWholeUrl}'+typeCold+'"/><div class="imper clearfix"><a class="delImg" title="删除" imgurl="'+typeCold+'" href="javascript:;"></a><a class="bigImg" title="大图" href="{:C("UPLOADS_PICPATH")}'+typeCold+'"  target="_blank"></a></div><input type="hidden"name="info[code]" value="'+typeCold+'" /></li></notempty></ul>';
+        var codeFlashShow ='<div id="isflash"><notempty name="info[code]"><object width="'+advW+'" height="'+advH+'" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"><param value="{:C("UPLOADS_PICPATH")}'+typeCold+'" name="movie"><param value="high" name="quality"><param value="false" name="menu"><embed width="'+advW+'" height="'+advH+'" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="{:C("UPLOADS_PICPATH")}'+typeCold+'"></object></notempty><input type="hidden"name="info[code]" value="'+typeCold+'" /></div>'
+        var codeTextarea = '<textarea id="advText" cols="60" rows="3" name="info[code]">'+typeCold+'</textarea> <span class="remark">此处代码请确保您已熟悉其用途，为了网站安全请不要粘贴不明来历的代码！</span>';
+        resetType(isType); //初始化code
+        //根据下拉不同变换code
+        $('#advType').on("change",function(){
+            var type = $(this).children('option:selected').val();
+            resetType(type);
+            resizeImg();
+        });
+
+        
+
+
+
+
+
+
+
+        // 广告图片上传
+        function advUpload(uplode_url,uplode_path,sid,up_type){
+            if(up_type == '1'){
+                var typeExts ='gif,jpg,jpeg';
+            }else{
+                var typeExts ='swf';
+            }
+
+            // 微信广告上传【
+            <literal>
+            var advPicW = $('#advw').html();
+            var advPicH = $('#advh').html();
+                var uploader = new plupload.Uploader({//创建实例的构造方法
+                    runtimes: 'html5,flash,silverlight,html4', //上传插件初始化选用那种方式的优先级顺序
+                    browse_button: 'advPic_upload', // 上传按钮
+                    url: uplode_url, //远程上传地址
+                    flash_swf_url: moxieswf, //flash文件地址
+                    silverlight_xap_url: moxiesxap, //silverlight文件地址
+                    filters: {
+                        max_file_size: '4mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+                        mime_types: [//允许文件上传类型
+                            {title: "files", extensions: typeExts}
+                        ]
+                    },
+                    multi_selection: false, //true:ctrl多文件上传, false 单文件上传
+                    multipart_params:[{'advId' : advId,'up_type' : up_type}],
+                    init: {
+                        FilesAdded: function(up, files) { //文件上传前
+                            $("#advCode .up_btn_box").after("<div style='width: "+advPicW+"px;' class='progress'><span class='bar'></span><span class='percent'>0%</span></div>");
+                            uploader.start();
+                        },
+                        UploadProgress: function(up, file) { //上传中，显示进度条
+                     var percent = file.percent;
+                            $("#advCode").find('.bar').css({"width": percent + "%"});
+                            $("#advCode").find(".percent").text(percent + "%");
+                        },
+                        FileUploaded: function(up, file, info) { //文件上传成功的时候触发
+                            var data = JSON.parse(info.response);
+                            
+                            if(up_type == '1'){
+                                $('#advCode #uploadImageList').remove();
+                                //插入到image标签内，显示图片的缩略图
+                                $('#advCode').html('<ul id="uploadImageList" class="clearfix"><notempty name="info[code]"><li class="photo"><img id="upImgSize" src="'+upPathRoot+data.path+'" width="'+advPicW+'" height="'+advPicH+'"/><div class="imper"><a class="delImg" imgurl="'+data.path+'" href="javascript:;"></a><a class="bigImg" href="'+uploadPath+data.path+'"  target="_blank"></a></div><input type="hidden" name="info[code]" value="'+data.path+'" /></li></ul>');
+                                
+                            }else if(up_type == '2'){
+                                $('#advCode #isflash').remove();
+                                $('#advCode').html('<div id="isflash"><object width="'+advPicW+'" height="'+advPicH+'" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"><param value="'+upPathRoot+data.path+'" name="movie"><param value="high" name="quality"><param value="false" name="menu"><embed width="'+advPicW+'" height="'+advPicH+'" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="'+upPathRoot+data.path+'"></object><input type="hidden" name="info[code]" value="'+data.path+'" /></div>');
+
+                            }
+                            $("#advCode .progress").remove();
+                            popup.success(data.msg);
+                            setTimeout(function(){
+                                popup.close("asyncbox_success");
+                            },1000);
+                        },
+                        Error: function(up, err) { //上传出错的时候触发
+                            alert(err.message);
+                        }
+                    }
+                });
+                uploader.init();
+            </literal>
+            // 微信广告上传】
+        }
+        //广告图片上传_end
+        //初始化广告code
+        function resetType(isType){
+            switch (isType){
+                case '1':  ////图片类型
+                    $('#advCode').html(codeImageBut+codeImageShow);
+                    $('#advUrl').show();
+                    $('#tpImg').removeClass('hidden');
+                    advUpload(uplode_url,uplode_path,sid,'1'); //网页加载完毕时候执行uploadify
+                break;
+                case '2': //flash类型
+                    $('#advCode').html(codeFlashBut+codeFlashShow);
+                    $('#advUrl').show();
+                    $('#tpImg').removeClass('hidden');
+                    advUpload(uplode_url,uplode_path,sid,'2'); //网页加载完毕时候执行uploadify
+                break;
+                case '3': //文本类型
+                    $('#advCode').html(codeTextarea);
+                    $('#advUrl').hide();
+                    $('#tpCold').removeClass('hidden');
+                break;
+                default:
+                    $('#advCode').html(codeImageBut);
+                    $('#advUrl').show();
+                    $('#tpImg').removeClass('hidden');
+                    advUpload(uplode_url,uplode_path,sid,'1');
+                break;
+            }
+        }
+        //初始化图片尺寸
+        function resizeImg(){
+            $('#upImgSize').attr('width',$('#advw').html());
+            $('#upImgSize').attr('height',$('#advh').html());
+            $('#isflash object').attr('width',$('#advw').html());
+            $('#isflash object').attr('height',$('#advh').html());
+            $('#isflash object embed').attr('width',$('#advw').html());
+            $('#isflash object embed').attr('height',$('#advh').html());
+            
+        }
+        // 广告图片删除
+        var delUrl = "{:U('Advertising/del_pic')}";
+        $(document).on("click",".delImg",function(){
+            var delImgUrl = $(this).attr('imgurl');
+            var delDiv = $(this);
+            $.post(delUrl,{'advId':advId,'imgUrl':delImgUrl},function(data){      //ajax后台
+                if (data.status) {
+                    delDiv.parents('.photo').fadeOut().remove();
+
+                    popup.success(data.msg);
+                    setTimeout(function(){
+                        popup.close("asyncbox_success");
+                    },1000);
+                } else {
+                    alert(data.msg);
+                }
+            },'json');        
+        });
+        // 广告片删除_end
+        // ajax提交表单
+        $(".submit").click(function(){
+            commonAjaxSubmit();
+            return false;
+        });
+    });
+</script>
+    </body>
+</html>

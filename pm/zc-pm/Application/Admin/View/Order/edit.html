@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>拍卖订单编辑-后台管理-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='拍卖订单管理 > 订单编辑';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">订单编辑</div>
+                    </div>
+                    <form>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <neq name="info.time2" value="0">
+                                <tr>
+                                    <th>买家地址：</th>
+                                    <td>
+                                    收件人：{$info.address.truename}<br/>
+                                    邮编：{$info.address.postalcode}<br/>
+                                    手机：{$info.address.mobile|default="无"}<br/>
+                                    电话：{$info.address.phone|default="无"}<br/>
+                                    地址：{$info.address.address}<br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>买家留言：</th>
+                                    <td>{$info.buyer_msg|default="无"}</td>
+                                </tr>
+                            </neq>
+                            <in name="info.status" value="0,1">
+                                <tr>
+                                    <th>过期时间：</th>
+                                    <td>
+                                        修改
+                                        <select name="info[deftime]">
+                                            <if condition="($info['status'] eq 0) and ($info['deftime1st'] eq 0)">
+                                                <option value="deftime1">支付过期时间</option>
+                                            </if>
+                                            <if condition="($info['status'] eq 1) and ($info['deftime2st'] eq 0)">
+                                                <option value="deftime2">支付过期时间</option>
+                                            </if>
+                                        </select>
+                                        <select name="info[act]">
+                                            <option value="" selected="selected">不操作</option>
+                                            <option value="add">加</option>
+                                            <option value="sub">减</option>
+                                        </select>
+                                        <input  style="text-align: right;" type="text" class="input" size="5" name="info[day]" value=""/>&nbsp;天&nbsp;&nbsp;*根据需要选填
+                                    </td>
+                                </tr>
+                            </in>
+                            <tr>
+                                <th>状态：</th>
+                                <td>
+                                    <label><input type="radio" value="0" name="info[status]"<eq name="info.status" value="0"> checked="checked"</eq>> 待支付</label> &nbsp; 
+                                    <label><input type="radio" value="1" name="info[status]"<eq name="info.status" value="1"> checked="checked"</eq>> 待发货</label> &nbsp; 
+                                    <label><input type="radio" value="2" name="info[status]"<eq name="info.status" value="2"> checked="checked"</eq>> 已发货</label> &nbsp; 
+                                    <label><input type="radio" value="3" name="info[status]"<eq name="info.status" value="3"> checked="checked"</eq>> 已收货</label>
+                                    <label><input type="radio" value="4" name="info[status]"<eq name="info.status" value="4"> checked="checked"</eq>> 买家已评价</label>
+                                    <label><input type="radio" value="10" name="info[status]"<eq name="info.status" value="10"> checked="checked"</eq>> 已互评</label>
+
+                                    &nbsp; &nbsp; &nbsp; 此处仅修改状态，不做连带的处理，请谨慎操作！
+                                </td>
+                            </tr>
+                            <in name="info.status" value="0,1,2,3">
+                                <tr>
+                                    <th>给买家发货：</th>
+                                    <td>
+                                        快递公司：
+                                        <select style="height: 29px;" id="typecom" name="info[express]">
+                                            <volist name="express_list" id="vo">
+                                                <option value="">请选择快递</option>
+                                                <option value="*" <eq name="info.express" value="*">selected="selected"</eq>>其他快递/物流</option>
+                                                <!-- 字母 -->
+                                                <option disabled="disabled" class="sltit"><eq name="key" value="com">常用快递<else/>{$key}</eq></option>
+                                                <volist name="vo" id="ca">
+                                                    <if condition="$info['express'] eq $ca['en']">
+                                                        <option value="{$ca.en}" selected="selected">{$ca.ch}</option>
+                                                    <else/>
+                                                        <option value="{$ca.en}">{$ca.ch}</option>
+                                                    </if>
+                                                </volist>
+                                            </volist>
+                                        </select>
+                                        <span id="express_other" <neq name="info.express" value="*">class="hidden"</neq>>-><input class="input" type="text" name="info[express_other]" value="{$info.express_other}" /></span>
+                                        快递单号：<input class="input" type="text" name="info[express_no]" value="{$info.express_no}" />
+
+                                        操作此项，请设置【状态】为已发货！
+                                    </td>
+                                </tr>
+                            </in>
+                            <tr>
+                            <th>备注：</th>
+                                <td>
+                                    <textarea name="info[remark]" style="height: 60px; width: 300px;" class="input">{$info.remark}</textarea>
+                                    &nbsp;*这里的信息会在用户订单列表内显示，如果发物流或快递可以填写快递号和提醒。您可以根据编辑的状态填写相应的备注！
+                                </td>
+                            </tr>
+                            <th>O2O操作：</th>
+                                <td>
+                                    <label><input type="checkbox" value="1" name="info[downpay]" <eq name="info.downpay" value="1"> checked="checked" disabled="disabled"</eq>  >
+                                    <eq name="info.downpay" value="1"><input type="hidden" value="1" name="info[downpay]"/> </eq>
+                                    线下已支付</label>&nbsp;&nbsp;&nbsp;&nbsp;*请在状态为【待支付】状态下操作，选择【线下已支付】将解冻保证金！为解决用户线下支付线上同步显示进度的操作!
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="info[order_no]" value="{$info.order_no}" />
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            $(function(){
+                $('#typecom').on("change",function(){
+                    if($(this).val()=='*'){
+                        $('#express_other').removeClass('hidden');
+                    }else{
+                        $('#express_other').addClass('hidden');
+                    }
+                });
+                $(".submit").click(function(){
+                    commonAjaxSubmit();
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

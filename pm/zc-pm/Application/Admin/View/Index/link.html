@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>修改账号密码-系统设置-{$site.SITE_INFO.name}</title>
+    <include file="Common:intoHead" />
+        <php>
+            $currentNav ='网站管理 > 会员推广';
+        </php>
+</head>
+<body>
+    <div class="wrap"> <include file="Common:head" />
+        <div class="mainBody"> <include file="Common:left" />
+            <div id="Right">
+                <div class="contentArea">
+                    <div class="Item hr clearfix">
+                        <div class="current">会员推广</div>
+                    </div>
+
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th width="120">会员推广连接：</th>
+                                <td><textarea rows="1" cols="70"   id='linkid2' >{$url}</textarea><input type='button' value="复制" onclick="copyText()"></td>
+                            </tr>
+                            <tr>
+                                <th>会员推广连接二维码：</th>
+                                <td><img src="{$qrurl}" download><a href="{$qrurl}" download="分享连接.png"><button type="submit">下载</button></a></td>
+                            </tr>
+                        </table>
+        
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+<include file="Common:foot" />
+
+<script type="text/javascript">
+
+    function copyText(){
+        var Url2=document.querySelector('#linkid2');
+        Url2.select();
+        msg = document.execCommand("copy");
+    }
+
+
+</script>
+</body>
+</html>

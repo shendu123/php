@@ -1,0 +1,86 @@
+<include file="Common:meta" />
+<title>{$saytyp.ch}-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<nav class="on-common-menu"> 
+    <ul class="am-avg-sm-3">
+        <li class="on-mli <eq name="saytyp.get" value="biding">on-active</eq>">
+            <a href="{:U('Crowd/index',array('typ'=>'biding'))}">申购中</a>
+        </li>
+        <li class="on-mli <eq name="saytyp.get" value="future">on-active</eq>">
+            <a style="border-left: 1px solid #f1f1f1; border-right: 1px solid #f1f1f1;" href="{:U('Crowd/index',array('typ'=>'future'))}">即将开始</a>
+        </li>
+        <li class="on-mli <eq name="saytyp.get" value="bidend">on-active</eq>">
+            <a href="{:U('Crowd/index',array('typ'=>'bidend'))}">已结束</a>
+        </li>
+    </ul>
+</nav>
+<style>
+    .progress_wrapper{height: 18px; line-height: 18px;}
+    ul.on-group-ul li{ line-height: 24px;}
+    .p-bar-now{background:#690; background-position:0 0; display: block; height: 8px;}
+    .p-bar {background: #b6b6b6 none repeat scroll 0 0; border-radius: 4px; height: 8px; overflow: hidden;}
+</style>
+<div class="on-group-index">
+    <ul  class="on-group-list am-avg-sm-1 am-avg-md-2 gallery-list">
+        <empty name="list">
+            <li class="datanone">暂时没有{$saytyp.ch}</li>
+        <else /> 
+           <volist name="list" id="vo">
+                <li class="on-li li">
+                    <a title="{$vo.name}" class="clearfix li_a" href="{:U('Crowd/items',array('cid'=>$vo['crowd_id']))}">
+                        <div class="img_sp">
+                            <notempty name="vo.main_img">
+                                <img alt="{$vo.name}" src="{$upWholeUrl}{$vo.main_img}">
+                            <else/>
+                                <img alt="{$vo.name}" src="__IMG__/Wap/spec_bg.png">
+                            </notempty>
+                            <div class="countbid">
+                                <eq name="saytyp.get" value="biding">
+                                    <span class="side-num">{$vo.support_count}</span>
+                                    <span class="side-text">人申购</span>
+                                </eq>
+                                <eq name="saytyp.get" value="future">
+                                    <span class="side-text">即将开始</span>
+                                </eq>
+                                <eq name="saytyp.get" value="bidend">
+                                    <span class="side-text">已经结束</span>
+                                </eq>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="info_sp">
+                        <h3 title="{$vo.name}" class="am-text-truncate on-group-title">{$vo.name}</h3>
+                        <div class="progress_wrapper">
+                            <div class="p-bar">
+                                <span class="p-bar-now" style="width:{$vo.percent|min=100,###}%"></span>
+                            </div>
+                        </div>
+                        <ul class="am-avg-sm-2 on-group-ul">
+                            <li>已购：<strong>¥{$vo.support_money}</strong></li>
+                            <li>已达：<strong>{$vo.percent}%</strong></li>
+                            <li>{$vo.dt-tag}：<strong>{$vo.dt}</strong></li>
+                        </ul>
+                    </div>
+                </li>
+            </volist>
+        </empty>
+    </ul>
+</div>
+<!--分页【-->
+<notempty name="page">
+    <div class="pagestyle">
+        {$page}
+    </div>
+</notempty>
+<!--分页】-->
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+<script>
+
+</script>
+</body>
+</html>

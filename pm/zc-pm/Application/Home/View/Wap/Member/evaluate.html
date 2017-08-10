@@ -1,0 +1,163 @@
+<include file="Common:meta" />
+<title>评价商品-我是买家</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<js href="--PUBLIC--/Js/jquery_raty/jquery.raty.min.js"/>
+<body>
+<include file="Member:menu" />
+
+<ul class="sea_list am-avg-sm-1">
+    <li>
+        <div class="on-licon">
+            <div class="pth"><a href="{:U('Auction/details',array('pid'=>$ainfo['pid']))}">【<eq name="ainfo.type" value="0">竞拍</eq><eq name="ainfo.type" value="1">竞标</eq>】{$ainfo.pname}</a><span class="bidnb">[拍品编号：{$ainfo.bidnb}]</span></div>
+            <div class="pcon clearfix">
+                <div class="imbox">
+                    <a href="{:U('Auction/details',array('pid'=>$ainfo['pid']))}">
+                        <img src="{$upWholeUrl}{$ainfo.pictures||getPicUrl=###,2,0}" alt="">
+                    </a>
+                </div>
+                <div class="infobox">
+                    成交价：<span class="qipai">{$ainfo.nowprice|wipezero=###}元</span><br/>
+                    运费：
+                    <span class="blue1">
+                        {$ainfo.freight|wipezero=###}元
+                    </span><br/>
+                    保证金：
+                    <span class="p_col">
+						{:pledgeShow($ainfo['pattern'],$ainfo['pledge_type'],$ainfo['onset'],$ainfo['pledge'],$ainfo['spledge'],$ainfo['mpledge'])}
+					</span>
+                    <br/>
+                    结束时间：{$ainfo.endtime|date='m-d H:i',###}<br/>
+                </div>
+                
+            </div>
+            <span class="ac-show-userbox clearfix" cardtips="0" pid="{$ainfo.pid}" uid="{$ainfo.sellerid}" seller="1">
+                <span class="userrole">卖家：</span>
+                <a class="ac-show-usercard" href="{:U('Seller/index',array('sellerid'=>$ainfo['sellerid']))}">{$ainfo.organization}</a>
+            </span>
+        </div>
+    </li>
+</ul>
+<eq name="ACTION_NAME" value="evaluate"><div class="evalu_tit">其他买家，需要你的建议哦！</div></eq>
+<form id="evaluate" name="evaluate" class="am-form" action="" method="post">
+    <dl class="user-frame">
+        <dd class="on-eval-txt">
+            <eq name="ACTION_NAME" value="evaluate">
+                <textarea placeholder="评价商品" maxlength="400" name="info[service_evaluate]"></textarea>
+            <else/>
+                <p>评价商品：<span>{$info.conform_evaluate}</span></p>
+            </eq>
+        </dd>
+    </dl>
+    <dl class="user-frame">
+        <dd class="on-eval-txt">
+            <eq name="ACTION_NAME" value="evaluate">
+                <textarea placeholder="评价服务" maxlength="100" name="info[conform_evaluate]"></textarea>
+            <else/>
+                <p>评价服务：<span>{$info.service_evaluate}</span></p>
+            </eq>
+        </dd>
+    </dl>
+    <dl class="user-frame">
+        <dd class="clearfix starbox">
+            <div class="fl th">描述相符：</div>
+            <div class="fl starbox" id="conform"></div>
+            <div class="fl target" id="conform-target"></div>
+        </dd>
+    </dl>
+    <dl class="user-frame">
+        <dd class="clearfix starbox">
+            <div class="fl th">卖家服务：</div>
+            <div class="fl starbox" id="service"></div>
+            <div class="fl target" id="service-target">asdfasdf</div>
+        </dd>
+    </dl>
+    <dl class="user-frame">
+        <dd class="clearfix starbox">
+            <div class="fl th">物流服务：</div>
+            <div class="fl starbox" id="express"></div>
+            <div class="fl target" id="express-target"></div>
+        </dd>
+    </dl>
+    <input type="hidden" name="info[order_no]" value="{$info.order_no}" />
+    <eq name="ACTION_NAME" value="evaluate">
+        <dl class="user-frame">
+            <dd id="btn_box">
+                <button class="submitBtn am-btn am-btn-danger on-btn-danger am-radius">提交评价</button>
+            </dd>
+        </dl>
+    </eq>
+</form>
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+<script type="text/javascript">
+var start_path = "--PUBLIC--/Js/jquery_raty/img"
+var start_msg = "--PUBLIC--/Img/star_msg.png"
+
+var conform_score = "{$info.conform}";
+var service_score = "{$info.service}";
+var express_score = "{$info.express}";
+    $(function(){
+        // 评价星级【
+        $('#conform').raty({
+            scoreName: 'info[conform]',
+            <neq name="ACTION_NAME" value="evaluate">
+                readOnly: true,
+                score: conform_score,
+            </neq>
+            path     : start_path,
+            cancelOff: 'cancel-off-big.png',
+            cancelOn : 'cancel-on-big.png',
+            size     : 24,
+            numberMax: 5,
+            starOff  : 'star-off-big.png',
+            starOn   : 'star-on-big.png',
+            hints: ['描述1分', '描述2分', '描述3分', '描述4分', '描述5分'],
+            target : '#conform-target',
+            
+          });
+        $('#service').raty({
+            scoreName: 'info[service]',
+            <neq name="ACTION_NAME" value="evaluate">
+                readOnly: true,
+                score: service_score,
+            </neq>
+            path     : start_path,
+            cancelOff: 'cancel-off-big.png',
+            cancelOn : 'cancel-on-big.png',
+            size     : 24,
+            numberMax: 5,
+            starOff  : 'star-off-big.png',
+            starOn   : 'star-on-big.png',
+            hints: ['服务1分', '服务2分', '服务3分', '服务4分', '服务5分'],
+            target : '#service-target',
+            
+          });
+        $('#express').raty({
+            scoreName: 'info[express]',
+            <neq name="ACTION_NAME" value="evaluate">
+                readOnly: true,
+                score: express_score,
+            </neq>
+            path     : start_path,
+            cancelOff: 'cancel-off-big.png',
+            cancelOn : 'cancel-on-big.png',
+            size     : 24,
+            numberMax: 5,
+            starOff  : 'star-off-big.png',
+            starOn   : 'star-on-big.png',
+            hints: ['物流1分', '物流2分', '物流3分', '物流4分', '物流5分'],
+            target : '#express-target',
+            
+          });
+        // 评价星级】
+        $(".submitBtn").click(function(){
+            commonAjaxSubmit();
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

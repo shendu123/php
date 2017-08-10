@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>快递查询-快递配置及管理-系统配置-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='系统配置 > 快递配置及管理 > 快递查询';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">快递查询</div>
+                    </div>
+                    快递公司：
+                    <select style="height: 29px;" id="typecom" name="typecom">
+                        <option value="">请选择快递</option>
+                        <volist name="list" id="vo">
+                            <!-- 字母 -->
+                            <option disabled="disabled" class="sltit"><eq name="key" value="com">常用快递<else/>{$key}</eq></option>
+                            <volist name="vo" id="ca">
+                                <option value="{$ca.en}">{$ca.ch}</option>
+                            </volist>
+                        </volist>
+                    </select>
+                    &nbsp;
+                    快递单号：
+                    <input placeholder="快递单号" id="typenu" class="input" type="text" name="typenu" value="" /> &nbsp;
+                    <button class="btn quickSubmit">提交</button>
+
+                    <div id="queryContext">
+                    
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="loadcon"><div class="loadbox">数据获取中请稍后...</div></div>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            var getHtmlUrl ="{:U('Webinfo/express_test')}";
+            $('.quickSubmit').click(function(){
+                $('#queryContext').html($('#loadcon').html());
+                var typecom = $('#typecom').val();
+                var typenu = $('#typenu').val();
+                $.post(getHtmlUrl,{'typecom':typecom,'typenu':typenu},function(data){      //ajax后台
+                if (data.status) {
+                        $('#queryContext').html(data.html);
+                    } else {
+                        $('#queryContext').html('<span class="">'+data.html+'</span>');
+                    }
+                },'json'); 
+            });
+        </script>
+    </body>
+</html>

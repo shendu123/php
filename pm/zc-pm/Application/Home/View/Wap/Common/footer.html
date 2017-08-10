@@ -1,0 +1,214 @@
+<footer class="am-footer am-footer-default">
+ 	<if condition="(C('WEB_ROOT') neq C('WEB_ROOT'))and $iswei neq 1">
+	    <div class="am-footer-switch">
+	    	<span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">触屏版</span>
+	      	<span class="am-footer-divider"> | </span>
+	      	<a href="{:C('WEB_ROOT')}">电脑版</a>
+	    </div>
+    </if>
+    <div class="am-footer-miscs ">
+        <p>客服电话：{$site.SITE_INFO.tel}&nbsp;&nbsp;客服邮箱：{$site.SITE_INFO.service}</p>
+        <p>地址：{$site.SITE_INFO.address}</p>
+        <p>{$site.SITE_INFO.icp}</p>
+    </div>
+</footer>
+<eq name="iswei" value="1">
+    <script type="text/javascript">
+    var shareaward = "{:U('Public/shareaward')}";
+    var weiUploadUrl = "{:U('Upload/weiUploadTool')}";
+    wx.ready(function(){
+        // wx.hideMenuItems({
+     //        menuList: ['menuItem:share:appMessage','menuItem:share:timeline','menuItem:share:qq','menuItem:share:weiboApp','menuItem:share:facebook','menuItem:share:QZone'] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+     //    });
+        //分享朋友圈【可奖励信誉额度】
+        wx.onMenuShareTimeline({
+            title: shareTitle,
+            link:sharelink,
+            imgUrl: imgUrl,
+            trigger: function (res) {
+                alert('用户点击并朋友圈');
+             },
+            success: function () { 
+                // 用户确认分享后执行的回调函数
+                sharepost('Timeline');
+            },
+            cancel: function () { 
+                // 用户取消分享后执行的回调函数
+    //             alert('您取消了分享到朋友圈，不能获取奖励！');
+            }
+        });
+    // 分享给朋友【可识别分享成功，不做分享奖励项】
+        wx.onMenuShareAppMessage({
+            title: shareTitle,
+            link:sharelink,
+            desc: descContent,
+            imgUrl: imgUrl,
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () { 
+                // sharepost('AppMessage');
+            },
+            cancel: function () { 
+     //            alert('您取消了分享给朋友，不能获取奖励！');
+            }
+        });
+    // qq分享成功【该接口无法识别分享成功】
+        wx.onMenuShareQQ({
+            title: shareTitle,
+            desc: descContent,
+            link: sharelink,
+            imgUrl: imgUrl,
+            success: function () { 
+                // sharepost('QQ');
+                // sharepost('QQ',0);
+            },
+            cancel: function () { 
+                //alert('您取消了分享给qq');
+            }
+        });
+    // weibo分享成功【该接口无法识别分享成功】
+        wx.onMenuShareWeibo({
+            title: shareTitle,
+            desc: descContent,
+            link: sharelink,
+            imgUrl: imgUrl,
+            success: function () { 
+    //                alert('weibo分享成功');
+            },
+            cancel: function () { 
+                  //alert('weibo取消');
+            }
+        });
+    // QQ空间分享成功【该接口无法识别分享成功】
+        wx.onMenuShareQZone({
+            title: shareTitle,
+            desc: descContent,
+            link: sharelink,
+            imgUrl: imgUrl,
+            success: function () {
+                // sharepost('QZone');
+                //alert('QQ空间分享成功');
+            },
+            cancel: function () { 
+                  //alert('QQ空间取消');
+            }
+        });
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+
+// 微信图片上传【
+// 5.1 拍照、本地选图
+    var images = {
+        localId: [],
+        serverId: [],
+    };
+    document.querySelector('.chooseImage').onclick = function () {
+        var that = $(this);
+        var uptype = $(this).attr('uptype');
+    //选择图片后开始异步上传到微信服务器，在syncUpload中接受微信服务器返回的资源id，组合后uploadserverid异步上传到服务器，服务器处理后返回图片的路径，客户端js接受图片路径后组合成html，动态插入。
+        wx.chooseImage({
+            success: function (res) {
+                images.localId = res.localIds;
+                len = images.localId.length;
+                popStatus(3, '已选'+len+'张,准备上传', 0,'',true);
+                syncUpload(images.localId,uptype,that);  
+            }
+        });
+    };
+ 
+  //异步上传图片到微信服务器
+    var syncUpload = function(localIds,uptype,that){
+        var localId = localIds.shift();
+        wx.uploadImage({
+            localId: localId,
+            isShowProgressTips: 0,
+            success: function (res) {
+                images.serverId.push(res.serverId);// 返回图片的服务器端ID
+                popStatus(3, '正在上传:'+images.serverId.length+'/'+len, 0,'',true);
+                if(len==images.serverId.length){
+                    //异步上传图片id到服务器
+                    var  serverids = images.serverId.join(',');
+                    uploadserverid(serverids,uptype,that);
+                    popStatus(3, '上传完毕，处理中...', 0,'',true);
+                    //销毁数据
+                    images.localId = images.serverId  = [];
+                }
+                //其他对serverId做处理的代码
+                if(localIds.length > 0){
+                    syncUpload(localIds,uptype,that);
+                }        
+            },
+            error: function(){
+              alert("asasasas");
+            }
+        });   
+    };
+ 
+ 
+    //异步上传图片id到服务器，服务器返回真正的图片地址，js组装后显示在页面上
+    var uploadserverid = function(serverId,uptype,that){
+        $.ajax({
+            url: weiUploadUrl,
+            type: "POST",
+            data: {'serverid':serverId,'uptype':uptype},
+            success: function(data){
+            if(data.length==0){
+                alert("上传失败，请重试");
+            }else{
+                var html = '';
+                for (var i =0; i<=data.length - 1; i++) {
+                    html += '<li><div class="on-li-con">';
+                    if(uptype=='goods'){
+                        html += '<a href="javascript:void(0);" imgurl="'+data[i]['path']+'" class="am-icon-close delImg"></a>';
+                    }
+                    html += '<img data-rel='+data[i]['showurl']+' src="'+data[i]['showimg']+'"><input type="hidden" name="pic[]" value="'+data[i]['path']+'" /></div></li>';
+                };
+                that.parents('.on-uploadimg-list').children('.on-addimg-box').before(html);
+                popStatusOff();
+            }
+            
+            },
+            error:function(){
+                alert("上传失败，请重试");
+            } 
+        });
+    }
+// 微信图片上传】
+
+
+
+
+    });
+    // wx.error(function (res) {
+    //       alert(res.errMsg);
+    // });
+    // 微信图片浏览【
+    $('.on-uploadimg-list').on('click', 'img',function(event) {
+        var imgArray = [];
+        var curImageSrc = $(this).attr('data-rel');
+        if (curImageSrc) {
+            $('.on-uploadimg-list img').each(function(index, el) {
+                var itemSrc = $(this).attr('data-rel');
+                imgArray.push(itemSrc);
+            });
+            wx.previewImage({
+                current: curImageSrc,
+                urls: imgArray
+            });
+        }
+    });
+    // 微信图片浏览】
+
+
+
+
+    function sharepost(terrace){
+        $.post(shareaward,{'link':sharelink,'terrace':terrace,'title':shareTitle},function(data){      //ajax后台
+            if (data.status) {
+                alert(data.status);
+            } else {
+                alert(data.msg);
+            }
+        },'json'); 
+    }
+    </script>
+</eq>

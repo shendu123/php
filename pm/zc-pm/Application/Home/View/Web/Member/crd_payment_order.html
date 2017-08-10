@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>订单支付-账号中心-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;账号中心&nbsp;&gt;&gt;&nbsp;订单支付</div>
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                <!-- 申购订单支付 -->
+                <h2>申购订单支付</h2>
+                <form id="payment" action="{:U('Payment/index')}" name="payment" method="post">
+                    <div class="my_info">
+                        <div class="payment_address">
+                            <table>
+                                <caption class="history">收货地址：</caption>
+                                <tbody>
+                                    <tr>
+                                        <th>收货人</th><th>所在地区</th><th>详细地址</th><th>邮编</th><th>手机</th><th>电话</th><th>选择</th>
+                                    </tr>
+                                    <foreach name="address" item="av">
+                                        <tr>
+                                            <td>{$av.truename}</td><td> {$av.ctstr} </td><td>{$av.address}</td><td>{$av.postalcode}</td><td>{$av.mobile}</td><td>{$av.phone}</td>
+                                            <td align="center"><input name="data[adid]" type="radio" value="{$av.adid}" <eq name="av.default" value="1">checked="checked"</eq> /></td>
+                                        </tr>
+                                    </foreach>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="history">订单详情：</div>
+                        <include file="Member:crd_order_box" />
+                        <input type="hidden" name="data[money]" class="input" value="{$oinfo.total_price}">
+                        <input type="hidden" name="data[order_no]" class="input" value="{$oinfo.crd_no}">
+
+                        <dl class="clearfix">
+                            <dt>支付方式：</dt>
+                            <dd class="ptp">
+                                <label class="cur">
+                                    <input type="checkbox" name="ptp[]" id="yue" ptp="yue" value="0" <neq name="uLimit.usable" value="0">checked="checked"<else/>disabled="true"</neq>>
+                                    余额支付
+                                </label>
+                                <label <eq name="uLimit.satisfy" value="n">class="cur"</eq> >
+                                    <input type="checkbox" name="ptp[]" id="lin" ptp="lin" value="1" <eq name="uLimit.satisfy" value="n">checked="checked"</eq>>在线支付
+                                </label>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix yuep">
+                            <dt style="line-height: 70px;">余额支付：</dt>
+                            <dd class="ptpbox">
+                                账户总额为<span class="red1 fb">{$uLimit.wallet_pledge}</span>元，已冻结<span class="red1 fb">{$uLimit.wallet_pledge_freeze}</span>元，可用余额<span class="red1 fb">{$uLimit.usable}</span>元!<br/>我想用<input type="text" size="8" name="data[yuemn]" id="paymn" class="input paymn" value="{$uLimit.yfmn}"/>元进行支付！<eq name="uLimit.satisfy" value="n">余额不足以支付该订单情况下使用在线支付补齐。</eq>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix linp" <if condition="$uLimit['satisfy'] eq 'y'">style="display: none;"</if>>
+                            <dt style="line-height: 42px;">在线支付：</dt>
+                            <dd>
+                                <ul class="payTypeList clearfix">
+                                    <foreach name="channel" item="v">
+                                        <li>
+                                            <label>
+                                                <div class="icobox">
+                                                    <input type="radio" id="pay<neq name='key' value='0'>{$key}</neq>" value="{$v.value}" name="data[channel]">
+                                                    <img src="{$v.img}">
+                                                </div>
+                                            </label>
+
+                                        </li>
+                                    </foreach>
+                                </ul>
+                            </dd>
+                            <dd style="padding-left: 80px;"><div id="payTip"></div></dd>
+                        </dl>
+
+                        <!-- 保证金小于订单总额时候才会显示余额支付和在线支付】 -->
+                        <dl class="clearfix">
+                            <dt>留言：</dt>
+                            <dd class="ptpbox">
+                                <input type="text" size="40" name="data[buyer_msg]" class="input" value=""/>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix">
+                           <dt>&nbsp;</dt>
+                           <dd class="xieyi"><input type="checkbox" id="isAgree" value="1" checked="checked" /><span class="text">我已阅读并接受《<a href="{:U('Public/information')}" target="_blank">{$site.SITE_INFO.name}服务协议</a>》</span><span id="clauseTips"></span>
+                           </dd>
+                        </dl>
+                        <dl class="clearfix">
+                            <dt>&nbsp;</dt>
+                            <input type="hidden" name="data[payType]" value="crowd" />
+                            <input type="hidden" name="data[from]" value="pm" />
+                            <dd><input type="submit" value="支付" class="search5 submit"></dd>
+                        </dl>
+                    </div>
+                </form>
+            </div>
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<div id="hint" class="hidden">
+    <div class="asyncbox_alert mb0 payAlert"><span></span>
+        <h1>请在新打开的页面中完成付款！</h1>
+        <p>付款完成前请不要关闭窗口。<br/>
+        完成付款后请您根据您的情况点击下面的按钮；</p>
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+
+<script>
+// 需要支付总额
+var total = "{$oinfo.total_price}";
+// 可用余额
+var usable = "{$uLimit.usable}";
+
+// 余额是否足够支付订单
+var satisfy = "{$uLimit.satisfy}";
+// 余额框金额
+var yfmn = "{$uLimit.yfmn}";
+// 余额框最高金额
+var newyfmn = 0;
+// 在线支付价格
+var actual = 0;
+// 提交地址
+var payment_url = "{:U('payment')}";
+
+$(function(){
+    // 表单验证【
+//    $.formValidator.initConfig({formID:"remaining",submitButtonID:"submit"});
+//    $("#money").formValidator({onShow:"请输入充值金额",onFocus:"必须为数字，小数点后最多可有两位",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+//    $(":radio[name='data[channel]']").formValidator({tipID:"payTip",onShow:"请选择一种支付方式",onFocus:"请选择一种支付方式，才能支付",onCorrect:"已选择"}).inputValidator({min:1,max:1,onError:"性别忘记选了,请确认"});
+//    $(":checkbox[name='isAgree']").formValidator({tipID:"isAgreeTip",onShow:"选择网站服务条款",onFocus:"必须同意网站服务条款",onCorrect:"已同意网站服务条款"}).inputValidator({min:1,onError:"必须同意网站服务条款"});
+    // 表单验证】
+    // 初始化radio
+    $(".payTypeList").find("li:first-child").find("input[name='data[channel]']").attr('checked','checked');
+    $(".payTypeList input[name='data[channel]']:checked").parents('li').addClass('cur');
+    $(".payTypeList :radio").change(function() {
+        $("input[name='data[channel]']").parents('li').removeClass('cur');
+        $("input[name='data[channel]']:checked").parents('li').addClass('cur');
+    });
+
+    // 初始化支付选项【
+    // 余额支付初始化
+    if($('#yue').prop("checked")){
+        $('.yuep').show();
+        $('#yue').attr('checked',true);
+        $('#yue').parents('label').addClass('cur');
+    }else{
+        $('.yuep').hide();
+        $('#yue').attr('checked',false);
+        $('#yue').parents('label').removeClass('cur');
+    }
+    // 在线支付初始化
+    if($('#lin').prop("checked")){
+        $('.linp').show();
+        $('#lin').attr('checked',true);
+        $('#lin').parents('label').addClass('cur');
+    }else{
+        $('.linp').hide();
+        $('#lin').attr('checked',false);
+        $('#lin').parents('label').removeClass('cur');
+    }
+
+    // 改变无需在线的金额
+    actual = Number($('#paymn').val());
+    // 变动余额支付金额【
+    if($('#yue').prop("checked")){
+        newyfmn = Number(yfmn);
+        $("#paymn").val(Number(yfmn));
+    }
+    // 变动余额支付金额】
+
+    // 初始化无需在线的金额
+    actual = Number($('#paymn').val());
+
+    // 初始化支付选项】
+
+    // 支付方式选择【
+    $(".ptp label input").click(function(){
+         if($(this).attr('ptp')=='yue'){
+           if(!$('#lin').prop("checked")){
+            popStatus(2, '必须选择一种支付方式进行支付！', 2,'',true);
+            return false;
+           }
+            if($(this).prop("checked")){
+                if(usable<=0){
+                    $(this).attr('checked',false);
+                    popStatus(2, '您的可用余额为0请无法选择余额支付！', 2,'',true);
+                }else{
+                    $('.yuep').show();
+                    $(this).attr('checked',true);
+                    $(this).parents('label').addClass('cur');
+                }
+            }else{
+                $('.yuep').hide();
+                $(this).attr('checked',false);
+                $(this).parents('label').removeClass('cur');
+                actual = 0;
+            }
+        }
+        if($(this).attr('ptp')=='lin'){
+            if(!$('#yue').prop("checked")){
+            popStatus(2, '必须选择一种支付方式进行支付！', 2,'',true);
+            return false;
+           }
+            if($(this).prop("checked")){
+                $('.linp').show();
+                $(this).attr('checked',true);
+                $(this).parents('label').addClass('cur');
+            }else{
+                $('.linp').hide();
+                $(this).attr('checked',false);
+                $(this).parents('label').removeClass('cur');
+            }
+        }
+    });
+    // 支付方式选择】
+});
+</script>
+</body>
+</html>

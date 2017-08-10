@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>
+            <eq name="ACTION_NAME" value="system_log">系统日志</eq>
+            <eq name="ACTION_NAME" value="search">搜索结果</eq>
+            -{$site.SITE_INFO.name}
+        </title>
+        <php>
+            if(ACTION_NAME == 'system_log'){
+                $pagname = '系统日志';
+            }elseif(ACTION_NAME == 'search'){
+                $pagname = '搜索结果';
+            };
+            $currentNav ='网站管理 > '.$pagname;
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current fl">
+                            <eq name="ACTION_NAME" value="system_log">系统日志</eq>
+                            <eq name="ACTION_NAME" value="search">搜索结果</eq>
+                        </div>
+                        <div class="search">
+                            <form action="" method='get'>
+                                用户名：
+                                <input type="text" value="{$keys.user_name}" name="user_name" class="input" placeholder="搜索用户名" />
+                                &nbsp;&nbsp;用户类型：
+                                <select name="user_type">
+                                    <option value="" <eq name="keys.user_type" value=""> selected="selected"</eq>>所有类型</option>
+                                    <option value="1" <eq name="keys.user_type" value="1"> selected="selected"</eq>>前台用户</option>
+                                    <option value="0" <eq name="keys.user_type" value="0"> selected="selected"</eq>>后台用户</option>
+                                </select>
+                                &nbsp;&nbsp;状态：
+                                <select name="status">
+                                    <option value="" <eq name="keys.status" value=""> selected="selected"</eq>>全部</option>
+                                    <option value="1" <eq name="keys.status" value="1"> selected="selected"</eq>>成功</option>
+                                    <option value="0" <eq name="keys.status" value="0"> selected="selected"</eq>>失败</option>
+                                </select>
+                                &nbsp;&nbsp;<button class="btn">筛选</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td width="3%">日志id</td>
+                                <td width="8%">用户名</td>
+                                <td width="5%">用户类型</td>
+                                <td width="8%">操作url</td>
+                                <td width="10%">操作行为</td>
+                                <td width="15%">操作描述</td>
+                                <td width="10%">操作时间</td>
+                                <td width="7%">ip</td>
+                                <td width="5%">操作状态</td>
+                            </tr>
+                        </thead>
+                        <empty name="list">
+                            <tr><td colspan="10">哎哟！什么也没有！</td></tr>
+                        <else /> 
+                            <volist name="list" id="vo">
+                                <tr align="center">
+                                    <td>{$vo.id}</td>
+                                    <td>{$vo.user_name}</td>
+                                    <td>{$vo['user_type']==1?'前台':'后台'}</td>
+                                    <td>{$vo.url}</td>
+                                    <td>{$vo.action}</td>
+                                    <td >{$vo.description}</td>
+                                    <td>{$vo.create_time|date="Y-m-d H:i:s",###}</td>  
+                                    <td>{$vo.ip}</td>
+                                    <td>{$vo['status']==1?'成功':'失败'}</td>
+                                </tr>
+                            </volist>
+                        </empty>
+                        <tr>
+                            <td colspan="10"><div class="page"  style="width: 60%; text-align: right; float: right;">{$page}</div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        
+    </body>
+</html>

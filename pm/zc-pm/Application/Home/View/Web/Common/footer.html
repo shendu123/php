@@ -1,0 +1,35 @@
+
+
+<div class="main_a9">
+    <menu menupos="2" maxsize="10"/>
+    <div>
+    <notempty name="site['SITE_INFO']['tel']">客服电话：{$site.SITE_INFO.tel}&nbsp;&nbsp;</notempty>
+    <notempty name="site['SITE_INFO']['service']">客服邮箱：{$site.SITE_INFO.service}&nbsp;&nbsp;</notempty>
+    <notempty name="site['SITE_INFO']['address']">地址：{$site.SITE_INFO.address}&nbsp;&nbsp;</notempty>
+    <br/>
+    {$site.SITE_INFO.name}—{$site.SITE_INFO.summary}&nbsp;&nbsp;
+    {$site.SITE_INFO.name}_{$site.SITE_INFO.version}&nbsp;&nbsp;
+    {$site.SITE_INFO.icp}
+    </div>
+</div>
+<!-- 底部浮动广告 -->
+<!-- <a class="reg" id="reg" href="http://www.qianjingtv.com/room/" target="_blank"> -->
+<a class="reg" id="reg" href="{:U('Login/register')}" target="_blank">
+    <img src="__IMG__/regift.gif" width="43" height="43"/>
+</a>
+<!-- 底部浮动广告——结束 -->
+<div class="linktips" id="linktips" >
+    <ul>
+        <li class="tipstit"></li>
+        <notempty name="site.SITE_INFO.tweibo">
+            <li class="tipsweibo"><a href="{$site.SITE_INFO.tweibo}" target="_blank">关注微博</a></li>
+        </notempty>
+        <li class="tipsweixin">
+            <p>微信扫二维码</p>
+            <div class="ad">{:showAdvPosition('weixin','span','false')} </div>
+        </li>
+        <li id="returnTop" class="tiptop"></li>
+        <li class="tipbot"></li>
+    </ul>
+</div>
+

@@ -1,0 +1,186 @@
+<include file="Common:meta" />
+<title>{$saytyp.ch}-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<nav class="on-common-menu"> 
+    <ul class="am-avg-sm-2">
+        <li class="on-mli <eq name="saytyp.get" value="biding">on-active</eq>">
+            <a href="{:U('Point/index',array('typ'=>'1'))}">积分视频</a>
+        </li>
+        <li class="on-mli <eq name="saytyp.get" value="future">on-active</eq>">
+            <a style="border-left: 1px solid #f1f1f1; border-right: 1px solid #f1f1f1;" href="{:U('Point/index',array('typ'=>'2'))}">积分礼品</a>
+        </li>
+    </ul>
+</nav>
+<style>
+    .progress_wrapper{height: 18px; line-height: 18px;}
+    ul.on-group-ul li{ line-height: 24px;}
+    .p-bar-now{background:#690; background-position:0 0; display: block; height: 8px;}
+    .p-bar {background: #b6b6b6 none repeat scroll 0 0; border-radius: 4px; height: 8px; overflow: hidden;}
+
+
+/*jzb*/
+    .weizhipic_point_jzb{
+        position:static;
+        /*top:-30px;*/
+    } 
+    .p-percent_jzb {color: #5e5e5e; font-size: 11px; line-height: 18px;}
+    .weizhizi_point_jzb{
+        position: relative; 
+        top:-30px;
+        left: 30px;
+        font-weight:bold;
+        font-size: 13px;
+
+    }
+    .stvideo_fx a {
+    display: block;
+    width: 90px;
+    height: 44px;
+    line-height:44px;
+    float: left;
+    color: #7a7a7a;
+    padding-left: 35px;
+    text-align: left;
+    text-decoration:none; 
+}
+
+    .stvideo_fx_1 a{background:url(../../../../Public/Img/point/share01.png) no-repeat 7px 10px}
+    .stvideo_fx_2 a{background:url(../../../../Public/Img/point/share01.png) no-repeat 7px -55px}
+    .stvideo_fx_3 a{background:url(../../../../Public/Img/point/share01.png) no-repeat 7px -127px}
+    #ul_jzb_nopad ,#ul_jzb_nopad li{
+        padding: 0px;
+        padding-left: 0px;
+        padding-right: 12px;
+        margin-bottom: 0px;
+    }
+    #txt05088{
+        margin-top: 0px;
+    }
+</style>
+<div class="on-group-index">
+    <ul  class="on-group-list am-avg-sm-1 am-avg-md-2 gallery-list" >
+        <empty name="list">
+                <li class="datanone">暂时没有{$saytyp.ch}</li>
+        <else /> 
+            <volist name="list" id="avo">
+                <li class="txt01" gid="{$avo.id}">
+                    <p class="dianji"  href="javascript:void(0);" target="_blank" onclick="clickduihuan({$avo.id})">
+                         <img alt="{$vo.name}" src="{$upWholeUrl}{$avo.picurl}">
+                        <!-- <img width="259" title="{$avo.name}" height="150" src="{$avo.picurl}" alt="{$avo.name}"></img> -->
+                    </p>
+                    <if condition="$type eq 1">
+                        <a href="javascript:;">
+                        <span onclick="clickduihuan({$avo.id})" >
+                            <img class="weizhipic_point_jzb" width="259" title="{$avo.name}" height="27" src="../../../../Public/Img/point/u12.jpg" alt="{$avo.name}"></img>
+                        </span>
+                        <span class="weizhizi_point_jzb" onclick="clickduihuan({$avo.id})"><span>{$avo.point}</span>积分  即可兑换</span></a>
+                    <else/>
+                        <a href="{:U('Point/giftdetail',array('id'=>$avo['id']))}">
+                        <span >
+                            <img class="weizhipic_point_jzb" width="259" title="{$avo.name}" height="27" src="../../../../Public/Img/point/u12.jpg" alt="{$avo.name}"></img>
+                        </span>
+                        <span class="weizhizi_point_jzb" ><span>{$avo.point}</span>积分  即可兑换</span></a>
+                    </if>
+                </li>
+                <li class="txt05" id="txt05088">
+                    <input type="hidden" id="verphone" value="{$verphone}">
+                    <input type="hidden" id="choseid" value="56">
+                    <input type="hidden" id="mobile" value="{$mobile}">
+                    <input type="hidden" id="name_course{$avo.id}" value="{$avo.name}">
+                    <input type="hidden" id="name_point{$avo.id}" value="{$avo.point}">
+
+                    <if condition="$type eq 1">                
+                        <ul id = "ul_jzb_nopad" class="p-i-infos box-progress-tbl clearfix ">
+                            <li class="fore1_jzb stvideo_fx">
+                                <p class=" p-percent_jzb stvideo_fx_2" onclick="clickduihuan({$avo.id})"><a href="javascript:;" >点击兑换</a></p>
+                            </li>
+                            <li class="fore2_jzb stvideo_fx">
+                                <p class=" p-percent_jzb stvideo_fx_1"><a >{$avo.watched}万次</a></p>
+                            </li>
+                            <li class="fore3_jzb stvideo_fx">
+                                <p class=" p-percent_jzb stvideo_fx_3"><a >{$avo.liked}万</a></p>
+                            </li>
+                        </ul>
+                    <else/>
+                        
+                    </if> 
+  
+                </li>
+            </volist>
+        </empty>
+    </ul>
+</div>
+
+
+
+<!--分页【-->
+<notempty name="page">
+    <div class="pagestyle">
+        {$page}
+    </div>
+</notempty>
+<!--分页】-->
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+
+<script type="text/javascript">
+var acpid = '{$info.pid}';
+var setTixingUrl ="{:U('Point/tixing')}";
+var handler ="function_name()";
+
+
+function clickduihuan(id) {
+    // $('#choseid').val(id);
+
+    if(login==0){
+        popStatus(2, '请先登陆后进行积分兑换！', 2,'',true);
+    }else{
+        var verphone = $('#verphone').val();
+        var mobile = $('#mobile').val();
+        // console.log(mobile.length);
+        if(mobile.length!=11){
+            popStatus(1, '您的手机未验证，请正在为您跳转到手机验证页面', 3,'/Member/check/type/mobile',true);
+        }else{
+            asyncbox.open({
+                id : "open_0",
+                title : '积分兑换',
+                args : {pid:acpid},
+                modal : true,
+                buttons : asyncbox.btn.OKCANCEL,
+                url : setTixingUrl+'?name='+$('#name_course'+id).val()+'&jifen='+$('#name_point'+id).val(),
+                callback: handlerF
+            })
+        }
+    }
+}
+
+function handlerF(buttonResult,contentWindow,returnValue){
+    var ggid = $('#choseid').val();
+    var name = $('#name_course'+ggid).val();
+    var jifen = $('#name_point'+ggid).val();
+
+    if(buttonResult=='ok'){
+        $.ajax({
+            url: setTixingUrl,
+            type: 'POST',
+            dataType: 'json',
+            data: {jifen: jifen,
+                   ggid: ggid,
+                   name: name,
+                   type: '1'},
+        })
+        .done(function(data) {
+            popStatus(data.type, data.info, data.time,'',true);
+        })
+        .fail(function(data) {
+            popStatus(2, "系统故障了，请稍候", 1,'',true);
+        });
+    }
+}
+</script>
+</body>
+</html>

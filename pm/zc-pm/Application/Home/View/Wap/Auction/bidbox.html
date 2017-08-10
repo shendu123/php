@@ -1,0 +1,70 @@
+<li>
+    <div class="on-bidbox <eq name='bav.abc' value='0'>biding</eq><eq name='bav.abc' value='1'>future</eq><eq name='bav.abc' value='2'>bidend</eq>">
+        <div class="icobox">
+            <!-- 正在拍图标 -->
+            <eq name="bav.abc" value="0">
+                <eq name='avo.status' value='0'><em class="xz">新增</em></eq>
+                <eq name='avo.status' value='1'><em class="jj">降价</em></eq>
+            </eq>
+            <em class="typ">
+                <eq name="avo.type" value="0">竞拍</eq>
+                <eq name="avo.type" value="1">竞标</eq>
+            </em>
+            <!-- 成交图标 -->
+            <eq name='bav.abc' value='2'><em class="cj">成交</em></eq>
+            <!-- 预告图标 -->
+            <eq name="bav.abc" value="1"><em class="yg">预告</em></eq>
+            <!-- 拍卖会图标 -->
+            <in name="avo.pattern" value="3,4"><em class="pmh">拍卖会<in name="CONTROLLER_NAME" value="Meeting">{$avo.msort}号</in></em></in>
+            <!-- 专场图标 -->
+            <in name="avo.pattern" value="1,2"><em class="zc">专场</em></in>
+        </div>
+        <in name="CONTROLLER_NAME" value="Special,Meeting"><in name='avo.endstatus' value='1,2,3,4'><div style="right:75px;" class="speend_bg"></div></in></in>
+        <a class="imgboxa" href="<if condition="$avo['mid'] eq 0">{:U('Auction/details',array('pid'=>$avo['pid']))}<else />{:U('Auction/details',array('mid'=>$avo['mid'],'pid'=>$avo['pid']))}</if>">
+            <img class="lazy" src="__IMG__/wap/auction_box_defauli.gif" data-original="{$upWholeUrl}{$avo.pictures|getPicUrl=###,1,0}" alt="{$avo.pname}"/>
+            <div class="countshow">
+                <eq name="bav.abc" value="1">
+                    <span class="side-num">{$avo.clcount}</span>人想拍
+                </eq>
+                <in name='bav.abc' value='0,2'>
+                    <span class="side-num">{$avo.bidcount}</span>次出价
+                </in>
+            </div>
+        </a>
+        <div class="pname">{$avo.pname}</div>
+        <div class="pric" style="height: 27px;overflow: hidden;">
+            <eq name="bav.abc" value="1">
+                <font >￥<strong>{$avo.onset}</strong><span>元</span></font> 起拍
+            </eq>
+            <eq name="bav.abc" value="0">
+                <eq name="avo.type" value="1">
+                    <!-- 竞标显示起拍价 -->
+                    <font >￥<strong>{$avo.onset|wipezero=###}</strong><span>元</span></font> 起拍
+                <else/>
+                    <!-- 竞拍显示当前价 -->
+                    <font >￥<strong>{$avo.nowprice|wipezero=###}</strong><span>元</span></font> 当前价
+                </eq>
+            </eq>
+            <eq name="bav.abc" value="2">
+                <font >￥<strong>{$avo.nowprice|wipezero=###}</strong><span>元</span></font>
+                <eq name="avo.endstatus" value="1">成交</eq>
+                <in name="avo.endstatus" value="2,3">流拍</in>
+                <eq name="avo.endstatus" value="4">撤拍</eq>
+            </eq>
+        </div>
+        <div class="info" style="height: 60px; overflow: hidden;">
+            <in name='bav.abc' value='0,1'>保证金:
+                <span class="plg">
+                    {:pledgeShow($avo['pattern'],$avo['pledge_type'],$avo['onset'],$avo['pledge'],$avo['spledge'],$avo['mpledge'])}
+                </span>
+                <br>
+            </in>
+            <eq name="bav.abc" value="1">距离开始：{$avo.starttime|date='m-d H:i',###}<br/></eq>
+            <eq name="bav.abc" value="0">距离结束：{$avo.endtime|date='m-d H:i',###}<br/></eq>
+            <eq name="bav.abc" value="2">
+                起拍价：{$avo.onset}<br/>
+                成交：{$avo.endtime|date='m-d H:i',###}<br/>
+            </eq>
+        </div>
+    </div>
+</li>

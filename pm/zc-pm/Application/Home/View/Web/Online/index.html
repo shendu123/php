@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+    <meta name="description" content="{$site.SITE_INFO.description}" />
+    <title>在线直播-{$site.SITE_INFO.title}</title>
+
+	<meta name="keywords" content="在线直播,商品股市直播室,商品股市直播室">
+	<meta name="description" content="前景财富每个交易日8:00-24:00,122位前景资深分析师时刻在线,与千万投资者互动交流,秒杀行情波动。">
+
+	<link rel="stylesheet" type="text/css" href="/Public/online/base.css">
+	<link rel="stylesheet" type="text/css" href="/Public/online/common.css">
+	<link rel="icon" href="http://www.fdcf.com.cn/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="http://www.fdcf.com.cn/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="/Public/online/emotion.min.css">
+
+	<style>
+	.face{margin:15px 0px 0px 15px;}
+	.twk .send {
+	    height: 25px;
+	    margin: 10px 15px 0 0;
+	    width: 58px;
+		float:right;
+	}
+	</style>
+
+	<link rel="stylesheet" href="/Public/online/layer.css" id="layui_layer_skinlayercss">
+
+
+
+
+    <include file="Common:intoHead" />
+    <css href="__CSS__/cuitindex.css"/>
+    <css href="__CSS__/list.css"/>
+    <js href="__JS__/indexjs.js"/>
+
+</head>
+<body>
+    <include file="Common:head_wide" />
+    <!-- <div  class="container auction_list"> -->
+
+	<script src="/Public/online/hm.js.download"></script>
+	<!-- <script src="/Public/online/loginjs.php" language="javascript" type="text/javascript"></script> -->
+	<script type="text/javascript" src="/Public/online/jquery-1.11.3.min.js.download"></script>
+	<script type="text/javascript" language="javascript" src="/Public/online/jquery.dropdown.js.download"></script>
+	<script type="text/javascript" src="/Public/online/layer.js.download"></script>
+	<script type="text/javascript" src="/Public/online/c.js.download"></script>
+	<link rel="stylesheet" type="text/css" href="/Public/online/c.css">
+	<script src="/Public/online/login_js.php" language="javascript" type="text/javascript"></script>
+
+	<div class="livebg-wrap">
+		<div class="liveroom">
+		  <div class="liveroomleft">
+		  <p class="ptext1"><img src="/Public/online/zbz.png"> </p>
+		    <div class="teacher-list">
+		    <p class="fn14 pb-6">直播老师</p>
+		    	<foreach name="teacher" item="c">
+					<dl>
+					    <dt><img src="{$upWholeUrl}{$c.picurl}"><span class="imgbg"></span></dt>
+					    <dd><p>{$c.name}</p>{$c.type}</dd>
+					    <div class="teacher-listinfo" style="display: none;">
+						    <div class="dtimgs"><img src="{$upWholeUrl}{$c.picurl}"><span class="imgbg"></span></div>
+						    <div class="divname-text"><p><a href="">{$c.name}</a></p>{$c.type}</div><p class="clear"></p>
+						    <div class="synopsis-text">{$c.jianjie}</div>
+					    </div>
+				    </dl>
+				</foreach>
+		    </div>
+		</div>
+		<div id="liveroom-box" class="liveroommiddle">
+			<iframe width="493px" height="730px" frameborder="0" src="http://www.fjsxpmh.com/Online/chat" noresize="" scrolling="yes" name="newest" style="overflow-x:no"></iframe>
+		</div>
+		<div class="liveroomright">
+			<div class="liveroom-listbg">
+				<p class="p-title"></p>
+				<p class="p-text"></p>
+			</div>
+			<iframe width="298px" height="125px" frameborder="0" src="http://www.fjsxpmh.com/Online/livegunhq" noresize="" scrolling="no" name="newest"></iframe>
+			<ul class="hd">
+				<li class="on"></li>
+				<li></li>
+			</ul>
+			<div id="question-list" class="tw">
+				<div class="tw1">
+					<iframe width="260px" height="390px" frameborder="0" src="http://www.fjsxpmh.com/Online/tiwen" noresize="" scrolling="no" name="newest1"></iframe>
+				</div>
+			</div>
+			<div class="twk">
+				<input type="hidden" id="rankid" value="{$rank}">
+				<form name="form1" id="form1" method="POST" action="http://www.fjsxpmh.com/Online/tiwen" target="newest1">
+					<input type="hidden" name="member_id" value="{$member_id}">
+					<input type="hidden" name="member_name" value="{$member_name}">
+					<div class="input-wrap">
+						<script>
+							if(login == 0){
+								document.write('<textarea readonly="readonly" class="user-question content1" id="result1"  type="text" placeholder="向老师提问......." autofocus tabindex="1" ></textarea>');
+							}else{
+								document.write('<textarea name="question" class="user-question content1" type="text" placeholder="向老师提问......." autofocus tabindex="1" ></textarea>');
+							}
+						</script>
+					</div>
+					
+					<!-- <img src="/Public/online/huanglianwx_thumb.gif" class="face"> -->
+					<div class="send">
+						<div id="result" style="display:none"></div>
+						<button id="btnSignCheckX" class="reg-btn submit" type="button" style="background-image:url(&#39;http://www.fdcf.com.cn/live/templets/live/images/send.png&#39;);border:0px;width:58px;height:25px"></button>
+					</div>
+				</form>
+			</div>
+		</div>
+		</div>
+	</div>
+
+
+	<script>
+		var rank = $('#rankid').val();
+		if(rank == '50' ){
+			document.write( '<div class="liveroom1" style="margin: 0 auto;width: 1000px;height:30px">');
+			document.write( '<button type="button" class="reg-btn" id="btnSignCheck" style="background-image:url(\'http://www.fdcf.com.cn/live/templets/live/images/send1.png\');;color:#fff;border:0px">发布直播</button>&nbsp;&nbsp;');
+			document.write( '<button type="button" class="reg-btn" id="btnSignCheck0" style="background-image:url(\'http://www.fdcf.com.cn/live/templets/live/images/send1.png\');color:#fff;border:0px">直播管理</button>&nbsp;&nbsp;');
+			document.write( '<button type="button" class="reg-btn" id="btnSignCheck1" style="background-image:url(\'http://www.fdcf.com.cn/live/templets/live/images/send1.png\');color:#fff;border:0px">回复提问</button>');
+			 document.write( '</div>');
+		}
+	</script>
+
+	<script type="text/javascript" src="/Public/online/jquery-1.11.3.min.js(1).download"></script>
+	<script type="text/javascript" src="/Public/online/layer.js.download"></script>
+	<script>
+
+	$(function () {
+	    $('#btnSignCheck').click(function () {
+	        layer.closeAll();
+			layer.open({
+				type: 2,
+				title: '发布直播',
+				shadeClose: true,
+				shade: 0.8,
+				area: ['800px', '90%'],
+				content: 'http://www.fjsxpmh.com/Online/fayan' //iframe的url
+				// content: 'http://www.fdcf.com.cn/live/index_do.php?livetype=live_fayan' //iframe的url
+			}); 
+	    });
+	    $('#btnSignCheck0').click(function () {
+	        layer.closeAll();
+			layer.open({
+				type: 2,
+				title: '直播管理',
+				shadeClose: true,
+				shade: 0.8,
+				area: ['800px', '90%'],
+				content: 'http://www.fjsxpmh.com/Online/guanli' //iframe的url
+				// content: 'http://www.fdcf.com.cn/live/index_do.php?livetype=liveadmin' //iframe的url
+			}); 
+	    });
+	    $('#btnSignCheck1').click(function () {
+	        layer.closeAll();
+			layer.open({
+				type: 2,
+				title: '回复提问',
+				shadeClose: true,
+				shade: 0.8,
+				area: ['800px', '90%'],
+				content: 'http://www.fjsxpmh.com/Online/huifu?delete=' //iframe的url
+				// content: 'http://www.fdcf.com.cn/live/index_do.php?livetype=chatadmin' //iframe的url
+			}); 
+	    });
+	    $('#result1').click(function () {
+			layer.confirm('您还未注册会员,请注册后在发言!', {icon: 3}, function(index){
+				layer.close(index);
+				window.location.href="http://www.fjsxpmh.com/Login/index.html";
+			});
+	    });
+
+		
+	});
+	</script>
+	<script type="text/javascript" src="/Public/online/emotion.min.js.download"></script>
+	<script type="text/javascript">
+		$('.face').bind({
+			click: function(event){
+				if(! $('#sinaEmotion').is(':visible')){
+					$(this).sinaEmotion();
+					event.stopPropagation();
+				}
+			}
+		});
+
+		$('.submit').bind({
+			click : function(){
+				var content = $(this).parents('form').find('.content1').val();
+				if(content == ''){alert('提问不能为空！');return;}
+				// $('#result').html(content).parseEmotion();
+				// alert(content);return;
+				// $('#qainfo').val($('#result').html());
+				// $('#result1').val('');
+				$('#form1').submit();
+			}
+		});
+	</script>
+	<script type="text/javascript" src="/Public/online/jquery.bxslider.min.js.download"></script>
+	<script src="/Public/online/jquery.mousewheel.min.js.download"></script>
+	<!-- <script type="text/javascript" src="/Public/online/index.js.download"></script> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- </div>  -->
+    <!-- 广告列表 -->
+    <include file="footer_add" />
+    <!-- 广告列表 -->
+<!---底部开始-->
+<include file="Common:help_wide" />
+<include file="Common:footer"/>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
+<!-- 
+<!DOCTYPE html>
+
+<html>
+	<head>
+
+	</head>
+
+	<body>
+		
+
+	</body>
+</html> -->

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$data.keywords}" />
+		<meta name="description" content="{$data.description}" />
+        <title>{$data.title}{$cname}-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<js href="__JS__/menu.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b3">
+            <div class="h8 clearfix"></div>
+            <div class="main_b3_top"><a href="{:U('Index/index')}">首&#12288;页</a>&nbsp;&gt;&gt;&nbsp;<a href="{:U('Article/notice',array('cid'=>$cid))}">{$cname}</a></div>
+            <div class="h8 clearfix"></div>
+            <div class="main_b4_1 fl">
+                    <h1>{$data.title}</h1>
+                    <div class="mt15"></div>
+                    <p class="text tr">来源：{$site.SITE_INFO.name}&nbsp;&nbsp;&nbsp;&nbsp;发布时间：{$data.published|date="Y-m-d H:i",###}</p>
+                    <div class="review editbox">{$data.content}</div>
+            </div>
+<!--------右侧开始-------->
+    <include file="Article:notice_right" />
+<!--------右侧结束-------->
+            <div class="h8 clearfix"></div>
+        </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<script src="--PUBLIC--/ueditor/ueditor.parse.js"></script>
+<script>
+setTimeout(function(){uParse('.editbox',
+{
+ 'highlightJsUrl':'--PUBLIC--/ueditor/third-party/SyntaxHighlighter/shCore.js',
+ 'highlightCssUrl':'--PUBLIC--/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css'})
+},300);
+</script>

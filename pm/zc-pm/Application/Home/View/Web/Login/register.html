@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>注册-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+    <!-- 主体开始 -->
+	<div id="container_white">
+		<div class="main_b3">
+        	<div class="register_add">
+				{:showAdvPosition('register_add','span')}
+			</div>
+			<!--注册开始-->	
+			<div class="main_b8_1">
+				<div class="main_b8_1_main">
+					<div class="wellcome">
+						<ul>
+							<li class="welltitle">欢迎注册{$site.SITE_INFO.name}</li>
+							<li class="denglu">已注册？&nbsp;<a href="{:U('Login/index')}">登录</a></li>
+						</ul>
+					</div>
+					<empty name="registerType">
+						<div class="closRegister">
+							网站已暂停用户注册！请和管理员联系
+						</div>
+					<else/>
+						<div class="loginTypeTit">
+							<div class="loginType">
+								<eq name="rtype.account" value="on">
+									<a <eq name="registerType" value="account"> class="on"</eq> href="{:U('Login/register')}">账号注册</a>
+								</eq>
+								<eq name="rtype.email" value="on">
+									<a <eq name="registerType" value="email"> class="on"</eq> href="{:U('Login/register',array('registerType'=>'email' ))}">邮箱注册</a>
+								</eq>
+								<eq name="rtype.mobile" value="on">
+									<a <eq name="registerType" value="mobile"> class="on"</eq> href="{:U('Login/register',array('registerType'=>'mobile'))}">手机注册</a>
+								</eq>
+							</div>
+						</div>
+					</empty>
+					<form id="RegForm" class="reg-form" name="register" method="post">
+						<eq name="registerType" value="account"> 
+							<!-- 账号注册 -->
+							 <dl class="clearfix">
+								 <dt>选择加盟商</dt>
+								 <dd>
+								 	<select id="franchisee1" name="business_id" class="input">
+									 	<volist name="busi" id="busi">
+											<option value="{$busi.business_id}">{$busi.name}</option>
+										</volist>	
+									</select>
+								 </dd>
+								 <dd><div id="franchiseeTip1"></div></dd>   
+							 </dl>
+							 <dl class="clearfix">
+								 <dt>登陆账号</dt>
+								 <dd><input id="account" name="account" size="30" type="text" class="input"/></dd>
+								 <dd><div id="accountTip"></div></dd>
+							 </dl>
+							 <dl class="clearfix">
+								 <dt>昵称</dt>
+								 <dd><input id="nickname" name="nickname" size="30" type="text" class="input"/></dd>
+								 <dd><div id="nicknameTip"></div></dd>
+							 </dl>
+							 <dl class="clearfix">
+								 <dt>用户姓名</dt>
+								 <dd><input id="truename" name="truename" size="30" type="text" class="input"/></dd>
+								 <dd><div id="truenameTip"></div></dd>  
+							 </dl>
+							 <dl class="clearfix">
+		                        <dt>手机号码</dt>
+		                        <dd><input id="mobile" type="text" size="30" class="input" name="mobile" value="{$my_info.mobile}"/></dd>
+		                        <dd><div id="mobileTip"></div></dd>
+		                     </dl>
+							<input type="hidden" name="registerType" value="account">
+						</eq>
+						<!-- 账号注册——end -->
+						<!-- 邮箱注册表单2 -->
+						<eq name="registerType" value="email">
+							 <dl class="clearfix">
+								 <dt>选择加盟商</dt>
+								 <dd>
+								 	<select id="franchisee2" name="business_id" class="input">
+									 	<volist name="busi" id="busi">
+											<option value="{$busi.business_id}">{$busi.name}</option>
+										</volist>	
+									</select>
+								 </dd>
+								 <dd><div id="franchiseeTip2"></div></dd>   
+							 </dl>
+							 <dl class="clearfix">
+								 <dt>邮箱</dt>
+								 <dd><input id="email" name="email" size="30" type="text" class="input" value="{$email}" /></dd>
+								 <dd><input checktp="email" class="checkbtnto"  style="margin-left: 5px;" type="button" value="发送验证码" /></dd>
+								 <dd><div id="emailTip"></div></dd>
+							 </dl>
+							 <dl class="clearfix">
+								 <dt>邮箱验证码</dt>
+								 <dd><input size="10" id="email_verify" name="email_verify" type="text" class="input" value="" /></dd>
+								 <dd><div id="email_verifyTip"></div></dd>
+							 </dl>
+							 <dl class="clearfix">
+								 <dt>昵称</dt>
+								 <dd><input id="nickname" name="nickname" size="30" type="text" class="input"/></dd>
+								 <dd><div id="nicknameTip"></div></dd>
+							 </dl>
+							 <dl class="clearfix">
+								 <dt>用户姓名</dt>
+								 <dd><input id="truename" name="truename" size="30" type="text" class="input"/></dd>
+								 <dd><div id="truenameTip"></div></dd>   
+							 </dl>
+							 <dl class="clearfix">
+		                        <dt>手机号码</dt>
+		                        <dd><input id="mobile" type="text" size="30" class="input" name="mobile" value="{$my_info.mobile}"/></dd>
+		                        <dd><div id="mobileTip"></div></dd>
+		                     </dl>
+							<input type="hidden" name="registerType" value="email">
+						</eq>
+						<!-- 邮箱注册表单——end -->
+						<!-- 手机注册表单 -->
+						<eq name="registerType" value="mobile">
+							 <dl class="clearfix">
+								 <dt>选择加盟商</dt>
+								 <dd>
+								 	<select id="franchisee3" name="business_id" class="input">
+									 	<volist name="busi" id="busi">
+											<option value="{$busi.business_id}">{$busi.name}</option>
+										</volist>
+									</select>
+								 </dd>
+								 <dd><div id="franchiseeTip3"></div></dd>   
+							 </dl>
+							 <dl class="clearfix">
+								 <dt>手机号码</dt>
+								 <dd><input size="30" id="mobile" name="mobile" type="text" class="input" value="" /></dd>
+								 <dd><input checktp="mobile" class="checkbtnto"  style="margin-left: 5px;" type="button" value="发送验证码" /></dd>
+								 <dd><div id="mobileTip"></div></dd>
+							 </dl>
+							 <dl class="clearfix">
+								 <dt>手机验证码</dt>
+								 <dd><input size="10" id="mobile_verify" name="mobile_verify" type="text" class="input" value="" /></dd>
+								 <dd><div id="mobile_verifyTip"></div></dd>
+							 </dl>
+							 <dl class="clearfix">
+								 <dt>昵称</dt>
+								 <dd><input id="nickname" name="nickname" size="30" type="text" class="input"/></dd>
+								 <dd><div id="nicknameTip"></div></dd>
+							 </dl>
+							 <dl class="clearfix">
+								 <dt>用户姓名</dt>
+								 <dd><input id="truename" name="truename" size="30" type="text" class="input"/></dd>
+								 <dd><div id="truenameTip"></div></dd>   
+							 </dl>
+							 <dl class="clearfix">
+		                        <dt>邮箱</dt>
+		                        <dd><input id="email" type="text" size="30" class="input" name="email"/></dd>
+								<dd><div id="emailTip"></div></dd>
+		                     </dl>
+							<input type="hidden" name="registerType" value="mobile">
+						</eq>
+						<notempty name="registerType">
+							<!-- 手机注册表单——end -->
+							<dl class="clearfix">
+								 <dt>登录密码</dt>
+								 <dd><input id="pwd" name="pwd" size="30" type="password" class="input" /></dd>
+								 <dd><div id="pwdTip"></div></dd>
+							 </dl>
+							 <dl class="clearfix">
+								<dt>确认密码</dt>
+								<dd><input id="pwded" name="pwded" size="30" type="password" class="input" /></dd>
+								<dd><div id="pwdedTip"></div></dd>
+							 </dl>
+							 
+							 <dl class="clearfix">
+							 	<dt>验证码</dt>
+							 	<dd>
+							 		<input class="input" id="verify_code" name="verify_code" type="text" size="5" /> <img class="verify" src="{:U('Public/verify_code')}"  title="看不清？单击此处刷新" onclick="this.src+='?rand='+Math.random();" />
+							 	</dd>
+							 	<dd><div id="verify_codeTip"></div></dd>
+
+							 </dl>
+							 <notempty name="feedback">
+								 <dl class="clearfix">
+								 	<dt>&nbsp;</dt>
+									<dd class="feedback">
+										<div class="tit">你是通过什么途径了解到{$site.SITE_INFO.name}的?</div>
+										<volist name="feedback" id="vo">
+											<label><input name="feedback" type="radio" value="{$vo.id}"/>&nbsp;{$vo.name}&nbsp;</label>
+										</volist>
+									</dd>
+								 </dl>
+							 </notempty>
+							 <dl class="clearfix">
+							   <dt>&nbsp;</dt>
+							   <dd class="xieyi"><input name="isAgree" name="isAgree" type="checkbox" id="isAgree" value="1" checked="checked" /><span class="text">我已阅读并接受《<a href="{:U('Public/information')}" target="_blank">{$site.SITE_INFO.name}服务协议</a>》</span><span id="clauseTips"></span>
+							   </dd>
+							   <dd><div id="isAgreeTip"></div></dd>
+							   <input  type="hidden" name="referer" value="{$referer}" />
+							</dl>
+							 <dl>
+							   <dt>&nbsp;</dt>
+								<dd><input class="submit pm_btn_5" type="submit" value='马上注册' id='submit'/></dd>
+							</dl>
+						</notempty>
+					</form>
+				</div>
+			</div>
+			<!--注册结束-->
+
+		</div>
+	</div>
+	<!---底部开始---->
+	<div class="main_a8 clearfix">
+	    <div class="main_a8_main clearfix">
+	        <include file="Common:advertorial" />
+	    </div>
+	</div>
+	<include file="Common:footer"/>
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+
+<script type="text/javascript">
+
+
+var checkAccount = "{:U('Login/checkAccount')}";
+var checkMobile = "{:U('Login/checkMobile')}";
+var checkEmail = "{:U('Login/checkEmail')}";
+var checkVerify = "{:U('Login/checkVerify')}";
+var checkEmailCode = "{:U('Login/checkEmailCode')}";
+var checkMobileCode = "{:U('Login/checkMobileCode')}";
+
+var sendCodeUlrl = "{:U('Login/sendCode')}";
+var wait=60;
+    $(function(){
+    	// 重新发送验证码
+    	$('.checkbtnto').click(function(){
+    		popStatus(3, '发送中...', 0,'',true);
+    		var checkadr = $('#'+$(this).attr('checktp')).val();
+    		console.log(checkadr);
+			var checktp = $(this).attr('checktp');
+    		console.log(checktp);
+
+			$.post(sendCodeUlrl,{'checkadr':checkadr,'checktp':checktp,'how':'register','type':'zhuce'},function(data){
+				popStatusOff();
+				// console.log(data.status);
+				// console.log(data.info);
+
+				if (data.status) {
+					popStatus(1,data.info,2,'',true);
+                    // popup.success(data.info);
+                    // setTimeout(function(){
+                    //     popup.close("asyncbox_success");
+                    // },2000);
+                    // $('.checkadrbox input').attr("disabled", 'disabled');
+                    // time($('.checkbtnto'));
+                } else {
+                	popStatus(3,data.info,2,'',true);
+                    // popup.error(data.info);
+                    // setTimeout(function(){
+                    //     popup.close("asyncbox_error");
+                    // },2000);
+                }
+            },'json');
+        });
+        // 重新发送验证码】
+	// 表单验证【
+	$.formValidator.initConfig({formID:"RegForm",submitButtonID:"submit"});
+	$("#submit").click(function(){
+        if($.formValidator.pageIsValid('1')==true){
+            commonAjaxSubmit('','','',function(){
+                var newcode = $('.verify').attr('src');
+                $('.verify').attr('src',newcode+'?rand='+Math.random());
+                $('#verify_code').val('');
+            });
+        }
+        return false;
+    });
+
+
+	$("#account").formValidator({onShow:"请输入用账号",onFocus:"以字母开头，5-17 字母、数字、下划线'_'",onCorrect:"该用账号可以注册"}).inputValidator({min:5,max:17,onError:"你输入的用账号不正确,请确认"}).functionValidator({fun:formAccount}).ajaxValidator({
+			url : checkAccount,
+			type : 'POST',
+			dataType : "json",
+			data : "&account="+$('#account').val(),
+			async : true,
+			success : function(data){
+				if(data){
+					return true;
+				}else{
+					return false;
+				}
+			},
+			buttons: $("#button"),
+			error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+			onError : "该用账号已被注册，请更换用账号",
+			onWait : "正在对用账号进行合法性校验，请稍候..."
+		});
+	$("#nickname").formValidator({onShow:"你在这里的名字",onFocus:"要求最少3个不超过20个字符(一个汉字占用2个字符)",onCorrect:"输入正确"}).inputValidator({min:3,max:20,onError:"你输入的昵称不正确,请确认"});
+
+	$("#truename").formValidator({onShow:"请输入你的中文姓名",onFocus:"要求2-10个中文字符",onCorrect:"输入正确"}).functionValidator({fun:trueName});
+	$("#email").formValidator({onShow:"请输入邮箱",onFocus:"邮箱6-100个字符",onCorrect:"输入正确",defaultValue:"@"}).inputValidator({min:6,max:100,onError:"你输入的邮箱长度不正确,请确认"}).regexValidator({regExp:"^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$",onError:"你输入的邮箱格式不正确"}).ajaxValidator({
+			url : checkEmail,
+			type : 'POST',
+			dataType : "json",
+			data : "&email="+$('#email').val()+"&how=register", 
+			async : true,
+			success : function(data){
+				return data;
+			},
+			error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+			onError : "该邮箱已被注册！请更换",
+			onWait : "正在对邮箱进行合法性校验，请稍候..."
+		});
+	$("#email_verify").formValidator({onShow:"收到邮件中的验证码",onFocus:"完成注册必须项",onCorrect:"输入正确"}).inputValidator({min:1,max:8,onError:"验证码错误,请确认"}).ajaxValidator({
+			url : checkEmailCode,
+			type : 'POST',
+			dataType : "json",
+			data : "&email="+$('#email').val()+"&email_verify="+$('#email_verify').val(),
+			async : true,
+			success : function(data){
+				return data;
+			},
+			error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+			onError : "邮箱验证码错误！请检查",
+			onWait : "正在对邮箱验证码进行合法性校验，请稍候..."
+		});
+	$("#mobile").formValidator({onShow:"主要用于交易通知",onFocus:"11位数字，如“13812345678”",onCorrect:"谢谢你的合作",onEmpty:"该项为必填项"}).inputValidator({min:11,max:11,onError:"手机号码必须是11位的,请确认"}).regexValidator({regExp:"mobile",dataType:"enum",onError:"你输入的手机号码格式不正确"}).ajaxValidator({
+			url : checkMobile,
+			type : 'POST',
+			dataType : "json",
+			data : '&mobile='+$('#mobile').val()+'&how=register',
+			async : true,
+			success : function(data){
+				return data;
+			},
+			error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+			onError : "手机号已被注册！请更换",
+			onWait : "正在对手机号进行合法性校验，请稍候..."
+		});
+	$("#mobile_verify").formValidator({onShow:"收到手机中的验证码",onFocus:"完成注册必须项",onCorrect:"输入正确"}).inputValidator({min:1,max:8,onError:"验证码错误,请确认"}).ajaxValidator({
+			url : checkMobileCode,
+			type : 'POST',
+			dataType : "json",
+			data : "&mobile="+$('#mobile').val()+"&mobile_verify="+$('#mobile_verify').val(),
+			async : true,
+			success : function(data){
+				return data;
+			},
+			error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+			onError : "手机验证码错误！请检查",
+			onWait : "正在对手机验证码进行合法性校验，请稍候..."
+		});
+
+	$("#pwd").formValidator({onShow:"请输入密码",onFocus:"至少6个字符",onCorrect:"密码合法"}).inputValidator({min:6,empty:{leftEmpty:false,rightEmpty:false,emptyError:"密码两边不能有空符号"},onError:"密码至少6个字符,请确认"});
+	$("#pwded").formValidator({onShow:"输再次输入密码",onFocus:"至少6个字符",onCorrect:"密码一致"}).inputValidator({min:6,empty:{leftEmpty:false,rightEmpty:false,emptyError:"重复密码两边不能有空符号"},onError:"重复密码至少6个字符,请确认"}).compareValidator({desID:"pwd",operateor:"=",onError:"2次密码不一致,请确认"});
+	$("#verify_code").formValidator({onShow:"请输入验证码",onFocus:"验证码不能为空",onCorrect:"输入正确"}).inputValidator({min:1,max:8,onError:"验证码错误,请确认"});
+	// .ajaxValidator({
+	// 		url : checkVerify,
+	// 		type : 'POST',
+	// 		dataType : "json",
+	// 		data : "&verify_code="+$('#verify_code').val(),
+	// 		async : true,
+	// 		success : function(data){
+	// 			return data;
+	// 		},
+	// 		error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+	// 		onError : "验证码错误！请检查",
+	// 		onWait : "正在对验证码进行合法性校验，请稍候..."
+	// 	});
+	$(":checkbox[name='isAgree']").formValidator({tipID:"isAgreeTip",onShow:"选择网站服务协议",onFocus:"必须同意网站服务协议",onCorrect:"已同意网站服务协议"}).inputValidator({min:1,onError:"必须同意网站服务协议"});
+	// 表单验证】
+    });
+// 重新发送验证码
+function time(o) {
+    if (wait == 0) {
+        o.attr("disabled", false);
+        o.attr('value','重新发送');       
+        wait = 60;
+    } else {
+        o.attr("disabled", true);
+        o.attr('value','重新发送(' + wait + ')');
+        wait--;
+        setTimeout(function() {
+            time(o)
+        },
+        1000)
+    }
+}
+</script>
+</body>
+</html>

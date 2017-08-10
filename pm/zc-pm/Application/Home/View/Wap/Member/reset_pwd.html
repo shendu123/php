@@ -1,0 +1,58 @@
+<include file="Common:meta" />
+<title>修改密码-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+<eq name="type" value="set">
+    <div class="on-tips">
+        您为微信注册用户，在此处可设置电脑版登陆密码!<br/>设置后可通过账号、邮箱、手机号在电脑版登陆！
+    </div>
+</eq>
+    <div class="mbsecbox">
+        
+        <form id="restPwd" class="am-form" name="restPwd" action="" method="post">
+            <eq name="type" value="reset">
+                <dl class="user-frame memframe">
+                    <dd><input placeholder="当前密码" id="pwd" type="password" name="pwd"/></dd>
+                    <dd><div id="pwdTip"></div></dd>
+                </dl>
+            </eq>
+            <dl class="user-frame memframe">
+                <dd><input placeholder="<eq name='type' value='reset'>新</eq>密码" id="new_pwd" type="password" name="new_pwd" /></dd>
+                <dd><div id="new_pwdTip"></div></dd>
+            </dl>
+            <dl class="user-frame memframe">
+                <dd><input placeholder="确认密码" id="new_pwded" type="password" name="new_pwded" /></dd>
+                <dd><div id="new_pwdedTip"></div></dd>
+            </dl>
+            <input type="hidden" name="type" value="{$type}">
+            <dl id="btn_box">
+                <button class="submitBtn am-btn am-btn-danger on-btn-danger am-radius" id="submit">修改</button>
+            </dl>
+        </form>
+    </div>
+    <!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<script type="text/javascript">
+    $(function(){
+        // 表单验证【
+		$.formValidator.initConfig({formID:"restPwd",submitButtonID:"submit"});
+		$("#submit").click(function(){
+			if($.formValidator.pageIsValid('1')==true){
+				commonAjaxSubmit('','','');
+			}
+			return false;
+		});
+        $("#pwd").formValidator({onShow:"请输入原始密码",onFocus:"原始密码不能为空",onCorrect:"密码格式正确"}).inputValidator({min:1,empty:{leftEmpty:false,rightEmpty:false,emptyError:"密码两边不能有空符号"},onError:"原始密码不能为空"});
+        $("#new_pwd").formValidator({onShow:"请设置密码",onFocus:"至少6个字符",onCorrect:"密码格式正确"}).inputValidator({min:6,empty:{leftEmpty:false,rightEmpty:false,emptyError:"密码两边不能有空符号"},onError:"密码至少6个字符,请确认"});
+        $("#new_pwded").formValidator({onShow:"输再次输入设置密码",onFocus:"需要和设置密码一致",onCorrect:"密码一致"}).inputValidator({min:6,empty:{leftEmpty:false,rightEmpty:false,emptyError:"重复密码两边不能有空符号"},onError:"重复密码至少6个字符,请确认"}).compareValidator({desID:"new_pwd",operateor:"=",onError:"2次密码不一致,请确认"});
+    });
+</script>
+</body>
+</html>

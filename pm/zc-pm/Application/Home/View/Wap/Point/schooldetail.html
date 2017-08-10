@@ -1,0 +1,387 @@
+<include file="Common:meta" />
+<title>{$saytyp.ch}-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<script type="text/javascript" src="js/reset.js"></script>
+<base href=""/>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+   <script type="text/javascript">
+    $(function() {
+     $(".zjls").mouseover(function(){
+            $(".zjlsdt").css("display","block");
+        });
+        $(".zjls").mouseleave(function(){
+            $(".zjlsdt").css("display","none");
+        });
+    })
+  </script>
+<!-- <link rel="stylesheet" type="text/css" href="//static.fjsxpmh.com/Public/Home/Css/amazeui.css" />
+<link rel="stylesheet" type="text/css" href="//static.fjsxpmh.com/Public/Home/Css/app.css" />
+<link rel="stylesheet" type="text/css" href="//static.fjsxpmh.com/Public/Css/pop_status.css" />
+<link rel="stylesheet" type="text/css" href="//static.fjsxpmh.com/Public/Js/asyncbox/skins/oncoo.css" />
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/pop_status.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/functions.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/jquery.form.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Js/asyncbox/asyncbox.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Home/Js/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Home/Js/wap_common.js"></script>
+<script type="text/javascript" src="//static.fjsxpmh.com/Public/Home/Js/amazeui.min.js"></script>
+<script type="text/javascript">
+
+// 关注商家地址
+      var setAttentionSellerUrl ="/index.php/Seller/attention.html";
+      var attUrl = "/index.php/Member/attention.html";
+      var login = "0";
+      var iswei = "0";
+      var ismobile = "1";
+</script>
+<meta name="__oncoo__" content="b35ad819eb24d71d9a7125331eace363_0e7240a0ef86e954fdf874c99c2f89ee" /> --></head>
+
+<body>
+<!-- <nav class="on-common-menu"> 
+    <ul class="am-avg-sm-2">
+        <li class="on-mli ">
+            <a href="/index.php/Point/index/typ/1.html">积分视频</a>
+        </li>
+        <li class="on-mli ">
+            <a style="border-left: 1px solid #f1f1f1; border-right: 1px solid #f1f1f1;" href="/index.php/Point/index/typ/2.html">积分礼品</a>
+        </li>
+    </ul>
+</nav> -->
+<style>
+   /*培训高级课*/
+
+.on-group-index  h1{
+    width: 100%;
+    margin:0 auto 2% auto;
+    font-size:0.855rem;
+    font-family: "微软雅黑";
+    color: #000;
+    text-align: center;
+    float: left;
+}
+.on-group-index  .ig{
+    float:left;
+    width: 100%;
+/*    height: 268px;*/
+}
+.on-group-index  .ig  img{
+    float:left;
+    width: 100%;
+    position: relative;
+    margin: 0px;
+}
+.on-group-index  .js-detail{
+    float:right;
+    width: 100%;
+    margin-top: 2%;
+}
+.on-group-index  .js-detail .zhujiang{
+    width: 100%;
+    margin-bottom: 2%;
+    float: left;
+    font-size: 0.85rem;
+    line-height: 100%;
+}
+.on-group-index  .js-detail .zhujiang .zj{
+    float: left;
+    color: #000;
+    font-size:0.85rem;
+}
+.on-group-index  .js-detail .zhujiang .zjlsdt{
+   border: 1px solid #d9d9d9;
+  box-shadow: 0 0 5px #cdcdcd;
+  background: #fff url(../images/Livelist-8.png) no-repeat;
+  padding:2%;
+  z-index: 100;
+  width: 58%;
+  overflow: hidden;
+  position: absolute;
+  left: 35%;
+  display: none;
+}
+
+.on-group-index  .js-detail .zhujiang .zjlsdt .dtimgs {
+  float: left;
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+.on-group-index  .js-detail .zhujiang .zjlsdt .dtimgs img {
+  display: block;
+  width: 55px;
+  height: 55px;
+  margin: 0px;
+  border-radius: 60px;
+}
+.on-group-index  .js-detail .zhujiang .zjlsdt .dtimgs .imgbg {
+  width: 55px;
+  height: 55px;
+  display: block;
+  background: url(../images/Livelist-2.png) no-repeat -258px -161px;
+  position: absolute;
+  top: -0px;
+  left: 0;
+}
+.on-group-index  .js-detail .zhujiang .zjlsdt .divname-text {
+  font-size: 0.65rem;
+  padding-left:2%;
+  float: left;
+  line-height: 35px;
+  color: #a8a7a7;
+}
+
+.on-group-index  .js-detail .zhujiang .zjlsdt .divname-text  a {
+  color: #bf0000;
+  font-size: 18px;
+  width: 100%;
+  float: left;
+  height: 20px;
+}
+.on-group-index  .js-detail .zhujiang .zjlsdt .divname-text  a:hover {
+  color: #000;
+}
+.on-group-index  .js-detail .zhujiang .zjlsdt .synopsis-text {
+  border-top: 1px dotted #6c7281;
+  padding-top: 5px;
+  margin-top: 65px;
+/*  line-height: 1.3;*/
+  position: relative;
+  z-index: 11;
+  font-size: 0.65rem;
+  text-indent: 2em;
+}
+.on-group-index  .js-detail .zhujiang a{
+    float: left;
+    color: #222;
+    font-size:0.85rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+.on-group-index  .js-detail .zhujiang a:hover{
+    color: #bf0000;
+}
+.on-group-index  .js-detail .intro{
+  min-height: 20%;
+    font-size: 0.65rem;
+    line-height:20px;
+    float: left;
+    color: #354e62;
+    margin-bottom:2%;
+    overflow: hidden;
+    text-indent: 0em;
+}
+.on-group-index  .js-detail .table{
+    padding: 7px 0;
+    border-top: 1px solid #c4d4e2;
+    border-bottom: 1px solid #c4d4e2;
+    margin:5% 0 5% 0;
+    overflow: hidden;
+    float: left;
+    width: 100%;
+}
+.on-group-index  .js-detail .table li:first-child{
+    border-left: none;
+}
+.on-group-index  .js-detail .table li{
+    float: left;
+    width: 33%;
+    height: 26px;
+    border-left: 1px solid #c4d4e2;
+    text-align: center;
+    font-size: 14px;
+    line-height: 26px;
+    color: #354e62;
+    list-style-type: none;
+    text-shadow: 1px 1px 1px #fff;
+}
+.on-group-index  .js-detail .table li span{
+    line-height: 1;
+    color: #f30;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.on-group-index  .js-detail .price{
+    line-height: 40px;
+    height:40px;
+    font-size: 0.85rem;
+    color: #7f7f7f;
+    background: #f7f7f7;
+    width: 98%;
+    float: left;
+    padding: 2%;
+    margin-top: 2%;
+}
+.on-group-index  .js-detail .price .price-1{
+  float: left;
+}
+/*.on-group-index  .js-detail .living-time{
+    width: 100%;
+    color: #999;
+    font-size: 0.65rem;
+    float: left;
+    line-height: 200%;
+    margin-top: 10px;
+}
+.on-group-index  .js-detail .living-time .livingtimetit{
+    display: inline-block;
+    margin-right:2%;
+    width: 20%;
+    text-align: center;
+    background: #f6a515;
+    color: #fff;
+}
+.on-group-index  .js-detail .buy{
+    width: 100%;
+    margin:10px 0px 10px 0px;
+    float: left;
+}
+.on-group-index  .js-detail .buy span{
+    padding-right:8%;
+    font-size: 0.65rem;
+}
+.on-group-index  .js-detail .buy .hs{
+    color: #ff0000;
+}*/
+.on-group-index  .js-detail .price .price-1 .jf{
+    color: #bf0000;
+    font-weight: bold;
+}
+.on-group-index  .js-detail .price .dh-bt{
+    margin: 1% 8% 1% 0;
+    float: right;
+}
+.on-group-index  .js-detail .price .dh-bt a.btn{
+    background: #bf0000;
+    color: #fff;
+    width: 120%;
+/*    height: 40px;*/
+/*    padding-top: 5px;*/
+/*    margin-top: 10px;*/
+    float: left;
+    font-size: 0.85rem;
+    line-height:200%;
+    text-align: center;
+    text-decoration: none;
+}
+.on-group-index .nr-detail {margin-bottom: 20px;float: left;}
+.on-group-index .nr-detail .title{
+    margin-bottom:2%;
+    font-size: 0.85rem;
+    color: #bf0000;
+    line-height: 100%;
+    font-weight: inherit;
+    font-family: "微软雅黑";
+}
+.on-group-index .nr-detail p{
+    text-indent: 2em;
+    margin-bottom: 2%;
+    line-height: 100%;
+    font-size: 0.65rem;
+}
+.on-group-index .nr-detail img{
+    width: 100%;
+    float: left;
+    margin: 2% 0 2% 0;
+}
+</style>
+<div class="on-group-index">
+    <input type="hidden" name="" id="loginid" value="{{$login}}">
+               <input type="hidden" id="verphone" value="{$verphone}">
+        <input type="hidden" id="mobile" value="{$mobile}">
+        <input type="hidden" id="choseid" value="{$info.id}">
+        <input type="hidden" id="name_gift" value="{$info.name}">
+        <input type="hidden" id="name_point" value="{$info.point}">
+   <h1>{$info.name}</h1>
+     <div class="ig">
+        <img src="{$upWholeUrl}{$info.video_pic_url}" alt="" width="582" height="268"/>
+     </div>
+     <div class="js-detail">
+      <div class="zhujiang">
+        <span class="zj">主讲：</span>
+        <a href="#" class="zjls">{$info.teacher_name} </a>
+        <div class="zjlsdt">
+                  <div class="dtimgs">
+                      <img src="{$upWholeUrl}{$info.teacher_pic_url}"><span class="imgbg"></span>
+                  </div>
+                  <div class="divname-text">   
+                  <a href>{$info.teacher_name} </a>
+                  {$info.type} 
+                   </div>
+                   <!-- <p class="clear"></p> -->
+                   <div class="synopsis-text">
+                  {$info.jianjie} 
+                   </div>
+                 </div>
+      </div>
+       <p class="intro">{$info.teacher_name} </p>
+      <div class="price">
+        <div class="price-1">价格：<span class="jf">{$info.point} 积分</span></div>
+        <div class="dh-bt"><a class="btn" href="javascript:;" onclick="clickduihuan({$info.id},'{$info.name}',{$info.point},{$jifenbuzu})">立即兑换</a></div>
+      </div>
+      <ul class="table">
+        <li>累计销量：<span>{$info.sale_count}</span></li>
+        <li>学员好评：<span>{$info.good_comment}</span></li>
+        <li>课程套数：<span>{$info.course_count}</span></li>
+      </ul>
+      <!-- <div class="living-time">
+        <span class="livingtimetit">首播时间 </span>
+        <span>04月25日 17:40-18:40</span>
+      </div>
+      <div class="buy"><span>已购买：18人</span><span> 限购：100人</span><span class="hs"> VIP不限购</span></div> -->
+      
+    </div>
+    <div class="nr-detail">
+        <h2 class="title">内容介绍</h2>
+         {$info.description|html_entity_decode}
+    </div>  
+</div>
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+
+<script>
+    function clickduihuan(id,name,jifen,isjifen) {
+
+
+var login = "{$login}";
+    if(login==0){
+        popStatus(2, '请先登陆后进行积分兑换！', 2,'',true);
+    }else{
+        var verphone = $('#verphone').val();
+        var mobile = $('#mobile').val();
+        if(mobile.length!=11){
+            popStatus(1, '您的手机未验证，请正在为您跳转到手机验证页面', 3,'/Member/check/type/mobile',true);
+        }else{
+
+            if(isjifen==0){
+                setTixingUrl = "{:U('Point/tixingb')}";
+                asyncbox.open({
+                    id : "open_0",
+                    title : '积分兑换',
+                    args : {pid:acpid},
+                    modal : true,
+                    buttons : asyncbox.btn.CANCEL,
+                    url : setTixingUrl+'?name='+name+'&jifen='+jifen,
+                    callback: handlerF
+                })
+            }else{
+                asyncbox.open({
+                    id : "open_0",
+                    title : '积分兑换',
+                    args : {pid:acpid},
+                    modal : true,
+                    buttons : asyncbox.btn.OKCANCEL,
+                    url : setTixingUrl+'?name='+name+'&jifen='+jifen,
+                    callback: handlerF
+                })
+            }
+            
+        }
+    }
+}
+</script>
+</body>
+</html>

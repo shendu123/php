@@ -1,0 +1,18 @@
+<div class="main_b3_top">
+    <foreach name="chalist" item="clv">
+        <a href="{:U(ACTION_NAME,array('gt'=>$clv['cid']))}">{$clv.name}<eq name="clv.pid" value="0">拍卖</eq></a>&nbsp;&gt;&gt;&nbsp;
+    </foreach>
+    <if condition="(ACTION_NAME eq 'index')and($gt[6] eq 'a')">全部在拍列表</if>
+    <if condition="(ACTION_NAME eq 'index')and($gt[6] eq 'n')">在拍未出价列表</if>
+    <if condition="(ACTION_NAME eq 'index')and($gt[6] eq 'y')">在拍已出价列表</if>
+    <if condition="(ACTION_NAME eq 'waitbid')">即将开拍列表</if>
+    <if condition="(ACTION_NAME eq 'endbid')">已成交列表</if>
+</div>
+<div class="screen_box clearfix">
+    <div class="titl">全部分类</div>
+    <ul class="clearfix">
+        <volist name="catli" id="cv">
+            <li><a <eq name="gt.0" value="$cv['cid']">class="on"</eq> href="{:U(ACTION_NAME,array('gt'=>$cv['cid']))}">{$cv.name}</a></li>
+        </volist>
+    </ul>
+</div>

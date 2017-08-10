@@ -1,0 +1,28 @@
+<include file="Common:meta" />
+<title>余额不足-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+<div class="on-tipage">
+    <div class="on-tit">余额不足</div>
+    <div class="on-con">
+        <p>账户可用余额不足；请先充值账户余额后发布拍卖！</p>
+        <p>为了买家的权益，需要冻结您保证金后才可以发布拍卖！流拍、撤拍、交易结束后保证金自动解冻并退回到您的资金账户！</p>
+        <p>{$uLimit.msg}</p>
+         <neq name="uLimit.limsum" value="0" ><p>信用额度：<span class="prc">{$uLimit.limsum|wipezero=###}元</span>可用</p></neq>
+        <p>余额：<span class="prc">{$uLimit.pledge|wipezero=###}元</span>可用</p>
+    </div>
+    
+</div>
+<div id="btn_box">
+    <a class="submitBtn am-btn am-btn-danger on-btn-danger am-radius" href="{:U('Member/payment')}">充值</a>
+</div>
+
+
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+</body>
+</html>

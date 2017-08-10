@@ -1,0 +1,80 @@
+document.write('<style type="text/css">');
+document.write('ul li{ list-style: none;}');
+document.write('ul{ display: block;}');
+document.write('.pannel{position: fixed;z-index: 9999;right:0px;width:59px; height:380px;top: 35%;	}');
+document.write('.pannel a{height: 59px;}');
+document.write('.wlkh a{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/wskhq.jpg);width: 59px;display: block;height: 59px;}');
+document.write('.wlkh a:hover{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/wskhh.jpg);}');
+document.write('.zx a{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/zx.jpg);width: 59px;display: block;height:59px;}');
+document.write('.zx a:hover{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/zxx.jpg) no-repeat;}');
+document.write('.xz a{background:url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/xz.jpg);width: 59px;display: block;height:59px;}');
+document.write('.xz a:hover{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/xzz.jpg) no-repeat;}');
+document.write('.gz a{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/gz.jpg);display: block;width: 59px;height:59px;}');
+document.write('.gz a:hover{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/gzz.jpg) no-repeat;}');
+document.write('.xs a{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/xs.jpg);display: block;width: 59px;height:59px;}');
+document.write('.xs a:hover{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/xss.jpg) no-repeat;}');
+document.write('.qq a{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/qq.jpg);}');
+document.write('.qq a:hover{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/qqkf.jpg) no-repeat;}');
+document.write('.kefu a{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/kefu.jpg);}');
+document.write('.kefu a:hover{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/zxkf.jpg) no-repeat;}');
+document.write('.code{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/code.jpg);position: absolute;right:59px;top:0px;width: 128px;height: 253px;display:none;}');
+document.write('.wx a{width: 40px;height: 72px;position: absolute;z-index: ;margin-top: 173px;background:url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/wx.png);margin-left: 20px;}');
+document.write('.wx a:hover{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/wx.png);}');
+document.write('.gg a{width: 40px;height: 72px;position: absolute;background:url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/gg.png);margin-top: 171px;margin-left: 70px;}');
+document.write('.gg a:hover{background: url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/gg.png);}');
+document.write('*{ padding:0px; margin:0px;}');
+document.write('.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}');
+document.write('.clearfix{*zoom:1;}');
+document.write('.zx,.xz,.gz,.xs{ position:relative;float:right; width:59px; }');
+document.write('.barIcon{position:relative; top:0px; right:0px; z-index:9;}');
+document.write('.aniConsult{ position:absolute; top:0px; right:-200px; width:118px; z-index:8;}');
+document.write('.kefu{ float:right;}');
+document.write('.qq{ float:right;}');
+document.write('.frame{width: 164px; height: 281px; position: fixed; float: left; top:35%; left: 16px;z-index: 980; float: right;background:url(http://www.fdcf.com.cn/uploads/kefu/20151015/images/cs.png) no-repeat center center}')
+document.write('.close{width: 18px; height: 18px; position: absolute; float: right;z-index: 988; right:0px;}')
+document.write('</style>');
+$(function(){
+	$("#BackToTop").click(function(){
+		$("html,body").animate({scrollTop:0},1000);
+	});
+	$("#zx").hover(function(){
+		$("#aniConsult").css({width:"200px",right:"0px"});
+		$("#aniConsult").stop(true).animate({right:"59px"},100);
+	},function(){
+		$("#aniConsult").stop(true).animate({right:"-200px"},0);
+		$("#aniConsult").css({width:"59px",overflow:"hidden"});
+	});
+	$("#gz").hover(function(){
+		$("#code").stop(true).slideDown(200);
+	},function(){
+		$("#code").stop(true).slideUp(100);
+	});
+});
+$(document).ready(function(){
+            $(".close").click(function(){
+                $(".frame").hide()
+            })
+        })
+document.write('<div class="MainCon"></div>');
+document.write('<div id="bar"  class="pannel clearfix">');
+document.write('<div class="wlkh"><a href="http://mgr.jyxpjy.com:7777/memberweb/frontweb/openaccount/index/103.html" target="_blank"></a></div>');
+	document.write('<div class="zx clearfix" id="zx"><a class="barIcon" href="javascript:;" style=""></a>');
+		document.write('<div class="aniConsult  clearfix" id="aniConsult">');
+		document.write('<div class="qq"><a href="http://wpa.qq.com/msgrd?v=3&uin=2850820350&site=qq&menu=yes" target="_blank"></a></div>');
+		document.write('<div class="kefu"><a href="http://wpa.qq.com/msgrd?v=3&uin=2850820356&site=qq&menu=yes" target="_blank"></a></div>');
+		document.write('</div>');
+	document.write('</div>');
+	document.write('<div class="xz clearfix" style=""><a class="barIcon" href="http://news.fdcf.com.cn/softdown/" target="_blank"></a></div>');
+	document.write('<div class="gz clearfix" id="gz"><a href="javascript:;" class="gzz barIcon" ></a>');
+		document.write('<div class="code" id="code">');
+			document.write('<div class="wx"><a href="http://blog.sina.com.cn/u/2758995652" target="_blank"></a></div>');
+			document.write('<div class="gg"><a href="http://s.p.qq.com/pub/jump?d=AAAT9J-h" rel="nofollow" target="_blank"></a></div>');
+		document.write('</div>');
+	document.write('</div>');
+	document.write('<div class="xs clearfix" id="BackToTop" ><a class="barIcon" href="javascript:void(0)"></a></div>');
+document.write('</div>');
+document.write('<div class="frame"><a href="javaScript:" class="close"></a></div>')
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+

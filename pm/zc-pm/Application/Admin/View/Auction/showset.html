@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>查看拍卖-后台管理-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='拍卖管理 > 查看拍卖';
+        </php>
+
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">拍卖设置</div>
+                    </div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <td colspan="2">
+                                <eq name="info.to" value="js">
+                                <!-- 单品拍说明 -->
+                                <div class="say_remark"><strong>添加拍品到单品拍：</strong>在昂酷将拍卖发布到单品拍是指该拍品的开始时间、结束时间、保证金的冻结和解冻都是独立的且仅针对该拍品的。<br>单品拍仅在频道内显示,用户在频道内可通过分类和条件进行筛选来找到该拍品。</div>
+                                <!-- 单品拍说明——end -->
+                                </eq>
+                                <eq name="info.to" value="zc">
+                                <!-- 专场说明 -->
+                                <div class="say_remark"><strong>添加拍品到专场：</strong>在昂酷将拍卖发布到专场是指该专场开始时间都是相同的,结束时间可以单独设置，默认是专场结束时间。  专场的结束时间会根据专场内最后结束拍品的时间的不同而变动，专场时间的变动会有以下动作触发：1，发布拍品的结束时间比专场大；2：待最后结束拍品有被触发时间延时。发布到专场的拍品在频道和专场内显示。
+                                </div>
+                                <!-- 专场说明——end -->
+                                </eq>
+                                <eq name="info.to" value="pmh">
+                                <!-- 拍卖会说明 -->
+                                <div class="say_remark"><strong>添加拍品到拍卖会：</strong>在昂酷将拍卖发布到拍卖会是指该拍卖会内拍品会仿照真实拍卖会实行轮拍。<br>拍卖会是仿照真实拍卖会操作流程，所有拍品按照顺序进行轮拍，拍卖会流程为拍品预展->拍卖会开始->商品按照顺序轮拍<br>轮拍规则为：拍卖会开始，第一件拍品开始拍卖并进入《流拍时间》倒计时，在【流拍倒计时未结束】时有人出价时间变为拍品《拍卖时间》继续倒计时，在相应时间和价格会触发拍品相应的时间延时和价格浮动；【流拍倒计时结束】无人出价则拍品流拍。进入下一拍品《间隔时间》倒计时，间隔倒计时结束进入下一件拍品的流程，以此类推！</div>
+                                <!-- 拍卖会说明——end -->
+                                </eq>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="100">商品ID：</th>
+                                <td>{$info.gid}
+                                
+                                </td>
+                            </tr>
+                            <eq name="info.to" value="zc">
+                            <!-- 专场显示字段 -->
+                            <tr>
+                                <th width="100">发布的专场</th>
+                                <td>
+                                    <notempty name="info.special">
+                                        <eq name="info.special.nowtype" value="fut">未开拍专场</eq>
+                                        <eq name="info.special.nowtype" value="ing">已开拍专场</eq>
+                                        <eq name="info.special.nowtype" value="end">已结束专场</eq>
+                                        <a target="_blank" href="{:U('Home/Special/speul',array('sid'=>$info['sid']))}">{$info.special.sname}</a>
+                                    </notempty>
+                                </td>
+                            </tr>
+                            <!-- 专场显示字段——end -->
+                            </eq>
+                            <eq name="info.to" value="pmh">
+                            <!-- 拍卖会显示字段 -->
+                            <tr>
+                                <th width="100">发布的拍卖会：</th>
+                                <td>
+                                    <notempty name="info.meeting">
+                                        <eq name="info.meeting.nowtype" value="fut">未开拍拍卖会</eq>
+                                        <eq name="info.meeting.nowtype" value="ing">已开拍拍卖会</eq>
+                                        <eq name="info.meeting.nowtype" value="end">已结束拍卖会</eq>
+                                        <a href="{:U('Home/Meeting/meetul',array('sid'=>$info['sid']))}">{$info.meeting.mname}</a>
+                                    </notempty>
+                                </td>
+                            </tr>
+                            <!-- 拍卖会显示字段——end -->
+                            </eq>
+                            <tr>
+                                <th>拍卖标题：</th>
+                                <td>{$info.pname}</td>
+                            </tr>
+                            <tr>
+                                <th>拍卖模式：</th>
+                                <td>
+                                    <eq name="info[type]" value="0">竞拍：规定时间，多次出价，价高者得。</eq>
+                                    <eq name="info[type]" value="1">竞拍：规定时间，一次出价，价高者得。</eq>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>成交模式：</th>
+                                <td>
+                                    <eq name="info[succtype]" value="0">普通模式</eq>
+                                    <eq name="info[succtype]" value="1">即时成交->成交价：{$info.succprice}</eq>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>拍品状态：</th>
+                                <td>
+                                    <eq name="info[status]" value="0">新增：表示第一次参与拍卖的商品——默认。</eq>
+                                    <eq name="info[status]" value="1">
+                                    降价：表示之前该商品有发布拍卖，但未成交，用于让客户了解到该商品已经降价。</eq>
+                                </td>
+                            </tr>
+                            <!-- 单品拍下才可以设置开始结束时间 -->
+                            <eq name="info.to" value="js">
+                            <tr>
+                                <th>开始时间：</th>
+                                <td>{$info.starttime|date='Y-m-d H:i',###}</td>
+                            </tr>
+                            </eq>
+                            <!-- 单品拍下才可以设置开始结束时间——end -->
+                            <!-- 拍卖会不需要拍卖时间 -->
+                            <neq name="info.to" value="pmh">
+                                <tr>
+                                    <th>结束时间：</th>
+                                    <td>{$info.endtime|date='Y-m-d H:i',###}</td>
+                                </tr>
+                            </neq>
+                            <!-- 拍卖会不需要拍卖时间——end -->
+                            <eq name="ACTION_NAME" value="edit">
+                                <tr>
+                                    <th>当前价：</th>
+                                    <td>{$info.nowprice}</td>
+                                </tr>
+                            </eq>
+                            
+                            <tr>
+                                <th>拍卖起拍价：</th>
+                                <td>{$info.onset}</td>
+                            </tr>
+                            <tr>
+                                <th>拍卖保留价：</th>
+                                <td>{$info.price}</td>
+                            </tr>
+                            <tr>
+                                <th>价格浮动：</th>
+                                <td>
+                                    <eq name="info[stepsize_type]" value="0">阶梯：初始浮动额度为{$info.stepsize_ratio_r}当前价大于等于{$info.stepsize_ratio_s}以后，开始按照单位(十百千...){$info.stepsize_ratio_b}/{$info.stepsize_ratio_g}规则实行浮动，浮动最高不超过{$info.stepsize_ratio_t}</eq>
+                                    <eq name="info[stepsize_type]" value="1">定额：每次出价固定加价{$info.step_fixation}</eq>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>时间延时：</th>
+                                <td>最后{$info.steptime}秒内出价，时间延时{$info.deferred}秒&nbsp;&nbsp;&nbsp;&nbsp;（60秒=1分钟）</td>
+                            </tr>
+                            <tr id="pledge_box">
+                                <th>保证金：</th>
+                                <td>
+                                    <eq name="info[pledge_type]" value="ratio">比例：按照比例{$info.pledge_ratio}%冻结保证金(如：1%，就是拍1000元的商品冻结10元保证金)</eq>
+                                    <eq name="info[pledge_type]" value="fixation">定额：每件拍品冻结保证金{$info.pledge_fixation}（如：填写100，就是每件商品冻结100，与商品价格无关）</eq>
+                                </td>
+                            </tr>
+                            <tr id="broker_box">
+                                <th>{$info.broker_name|default="佣金"}：</th>
+                                <td>
+                                    <eq name="info[broker_type]" value="ratio">比例：按照{$info.broker_ratio}%比例收取{$info.broker_name|default="佣金"}(如：1%，就是订单成交价为1000元的商品收取10元{$info.broker_name|default="佣金"})</eq>
+                                    <eq name="info[broker_type]" value="fixation">按照定额{$info.broker_fixation}收取{$info.broker_name|default="佣金"}（如：填写100，就是订单支付固定收取100元{$info.broker_name|default="佣金"}）</eq>
+                                </td>
+                            </tr>
+                        </table>
+                    <div class="Item hr clearfix">
+                        <div class="current">当前状态</div>
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                        <tr>
+                            <th width="100">当前状态：</th>
+                            <td>
+                                <strong>
+                                <eq name="info.nowtype" value="fut">未开拍</eq>
+                                <eq name="info.nowtype" value="ing">已开拍</eq>
+                                <eq name="info.nowtype" value="end">已结束</eq>
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="100">出价记录</th>
+                            <td>
+                                <p>共计出价：<strong>{$count}</strong>次</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab recordall">
+                                    <thead>
+                                        <tr class="th">
+                                            <eq name="info.type" value="0">
+                                                <td>状态</td>
+                                                <td>出价人</td>
+                                                <td>出价方式</td>
+                                                <td>出价</td>
+                                                <td>时间</td>
+                                            </eq>
+                                            <eq name="info.type" value="1">
+                                                <td>出价人</td>
+                                                <td>出价方式</td>
+                                                <td>价格</td>
+                                                <td>时间</td>
+                                            </eq>
+                                        </tr>
+                                    </thead>
+                                    <empty name="bidRecord">
+                                        <tr class="nobody"><td colspan="6" align="center">暂时没有拍友出价</td></tr>
+                                    <else />
+                                        <volist name="bidRecord" id="brvo">
+                                        <!-- 竞拍出价记录 -->
+                                            <eq name="info.type" value="0">
+                                            <tr>
+                                                <td><div class="bidlistico"></div></td>
+                                                <td><span class="on_over" style="width: 60px;">{$brvo.nickname}</span></td>
+                                                <td align="center"><eq name="brvo.type" value="代理"><span title="代理出价" class="agency_ico"></span></eq>{$brvo.type}</td>
+                                                <td align="right">{$brvo.bided}</td>
+                                                <td align="center">{$brvo.time|date='m-d H:i',###}</td>
+                                            </tr>
+                                            </eq>
+                                        <!-- 竞拍出价记录——end -->
+                                        <!-- 竞标出价记录 -->
+                                            <eq name="info.type" value="1">
+                                            <tr>
+                                                <td><span class="on_over" style="width: 60px;">竞标保密</span></td>
+                                                <td align="center">{$brvo.type}</td>
+                                                <td align="right"><span class="red1 fb">竞标保密</span></td>
+                                                <td align="center">{$brvo.time|date='m-d H:i',###}</td>
+                                            </tr>
+                                            </eq>
+                                        <!-- 竞标出价记录——end -->
+                                        </volist>
+                                    </empty>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        
+        <include file="Common:foot" />
+        <script type="text/javascript">
+         var endStatus ="{$info.endstatus}"
+            $(function(){
+                if(endStatus==0){
+                    // 初始化拍卖记录状态
+                    $(".recordall tr:eq(1)").addClass('lingxian');
+                }else if(endStatus==1){
+                    $(".recordall tr:eq(1)").addClass('chengjiao');
+                }
+            });
+        </script>
+    </body>
+</html>

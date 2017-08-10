@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+    <meta name="description" content="{$site.SITE_INFO.description}" />
+    <title>在线直播-{$site.SITE_INFO.title}</title>
+
+	<meta name="keywords" content="在线直播,商品股市直播室,商品股市直播室">
+	<meta name="description" content="前景财富每个交易日8:00-24:00,122位前景资深分析师时刻在线,与千万投资者互动交流,秒杀行情波动。">
+	<link rel="stylesheet" type="text/css" href="/Public/ovideo/base.css">
+	<link rel="stylesheet" type="text/css" href="/Public/ovideo/common.css">
+	<link href="/Public/ovideo/jquery.mCustomScrollbar.css" rel="stylesheet">
+
+	<style>
+	.main-content .down-block .left-block .down .lmlist {
+	    height: 420px;
+	    padding-top: 20px;
+	    width: 695px;
+	 
+		padding-left:0px;
+		margin-left:30px 
+	}
+	.main-content .down-block .left-block {
+	    background-color: #fffefe;
+	    float: left;
+        /*height: 753px;*/
+	    height: 263px;
+	    margin-bottom: 20px;
+	    width: 742px;
+	}
+	.main-content .down-block {
+        /*height: 753px;*/
+	    height: 263px;
+	    width: 1000px;
+	}
+	.main-content .down-block .left-block .down .lmlist li {
+	    float: left;
+	    height: 202px;
+	    padding-right: 18px;
+	    width: 155px;
+	}
+	.main-content .down-block .left-block .down {
+	    height: 461px;
+	    width: 742px;
+	}
+	.main-content .down-block .left-block .up .point .item3 .right p {
+	    color: #666565;
+	    font-family: "微软雅黑";
+	    font-size: 15px;
+	    line-height: 20px;
+	    width: 150px;
+		padding-left: 15px;
+	}
+	</style>
+	<link rel="stylesheet" href="/Public/ovideo/layer.css" id="layui_layer_skinlayercss">
+
+    <include file="Common:intoHead" />
+    <css href="__CSS__/cuitindex.css"/>
+    <css href="__CSS__/list.css"/>
+    <js href="__JS__/indexjs.js"/>
+</head>
+<body>
+    <include file="Common:head_wide" />
+    <!-- <div  class="container auction_list"> -->
+
+    <script src="/Public/ovideo/hm.js.download"></script>
+    <script type="text/javascript" src="/Public/ovideo/jquery-1.11.3.min.js.download"></script>
+    <script type="text/javascript" language="javascript" src="/Public/ovideo/jquery.dropdown.js.download"></script>
+    <script type="text/javascript" src="/Public/ovideo/layer.js.download"></script>
+    <!-- <script type="text/javascript" src="/Public/ovideo/c.js.download"></script> -->
+    <link rel="stylesheet" type="text/css" href="/Public/ovideo/c.css">
+
+
+    <div class="main-content">
+        <div class="center-wrapper clearfix">
+            <div class="main-block">
+                <div class="tt"><p>非遗百家藏</p></div>
+                <div class="content">
+                    <div class="left">
+                        <iframe id="shipinurl1" frameborder="0" style="width:728px;height:515px;z-index:-999" border="0" scrolling="no" allowfullscreeninteractive="true" allowfullscreen="true" allowtransparency="true" ></iframe>
+                    </div>
+                    <div class="right">
+                        <div class="list">
+                            <h1>非遗百家藏</h1>
+                            <p>选集</p>
+                            <div class="/templets/fdcf/style1/zjsp_list1/images1"> <img src="/Public/ovideo/xx.png"></div>
+                            <div id="xj-box" class="xj mCustomScrollbar _mCS_1">
+                                <div class="mCustomScrollBox mCS-light" id="mCSB_1" style="position:relative; height:100%; overflow:hidden; max-width:100%;">
+                                    <div class="mCSB_container" style="position:relative; top:0;">
+                                        <ul>
+                                            <foreach name="video" item="v">
+                                                <li><p><a href="javascript:void()" onclick="changevideo('{$v.url}','{$v.name2}','{$v.jianjie}','{$v.teacher}','{$v.times}','{$v.updatetime}')" class="title"><b>{$v.name1}</b></a></p></li>
+                                            </foreach>
+                                        </ul>
+                                       
+                                    </div>
+                                    <div class="mCSB_scrollTools" style="position: absolute; display: block;">
+                                        <div class="mCSB_draggerContainer">
+                                            <div class="mCSB_dragger" style="position: absolute; height: 45px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="position: relative; line-height: 45px;"></div></div>
+                                            <div class="mCSB_draggerRail"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="down-block">
+                <div class="left-block">
+                    <div class="up" style="display:block">
+                        <input type="hidden" id="diyiurl" value="{$first.url}">
+                        <div class="point">
+                            <div class="item1">
+                                <table><tbody><tr><td><div class="left"><p>非遗百家藏:</p></div></td><td><div class="right"><p><b id="diyiname">{$first.name1}</b></p></div></td></tr></tbody></table>
+                            </div>
+                            <div class="item2">
+                                <table><tbody><tr><td><div class="left"><p>简介:</p></div></td><td><div class="right"><p id="diyijianjie">{$first.jianjie}</p></div></td></tr></tbody></table>
+                            </div>
+                            <div class="item3">
+                                <table><tbody><tr><td><div class="left"><p>主讲人：</p></div></td><td><div class="right"><p id="diyiteacher">{$first.teacher}</p></div></td></tr></tbody></table>
+                            </div>
+                        </div>
+                        <div class="cs">
+                            <div class="left"><p><span>上传时间：</span><span id="diyiupdatetime">{$first.updatetime}</span></p></div>
+                            <div class="right" >播放：<span id="diyitimes">{$first.times}</span></div>
+                        </div>
+                    </div>
+                </div>
+   
+
+            </div>
+        </div>
+    </div>
+
+ <script>
+    function changevideo(url,name2,jianjie,teacher,times,updatetime) {
+        document.getElementById("shipinurl1").src = url;
+        $('#diyiname').html(name2);
+        $('#diyijianjie').html(jianjie);
+        $('#diyiteacher').html(teacher);
+        $('#diyitimes').html(times);
+        $('#diyiupdatetime').html(updatetime);
+
+    }
+     //    var sshipinurl1 = "http://player.youku.com/embed/XMTY3MDgxNjI0MA==";
+     //    var sshipinpicname1 = "/uploads/160804/37-160P4140043150.jpg";
+
+     //    var sshipinurl2 = "http://player.youku.com/embed/XMjUyMTY3OTMyNA==";
+     //    var sshipinpicname2 = "/uploads/161228/37-16122PU553F6.jpg";
+
+     //    var sshipinurl3 = "http://player.youku.com/embed/XMjUxNjEyMzM3Mg==";
+     //    var sshipinpicname3 = "/uploads/161227/37-16122G13004936.jpg";
+
+     //    var sshipinurl4 = "http://player.youku.com/embed/XMjUxNDM2OTQ4MA==";
+     //    var sshipinpicname4 = "/uploads/161226/37-16122609300K15.jpg";
+
+     //    var sshipinurl5 = "http://player.youku.com/embed/XMjUxMDg5NDc1Mg==";
+     //    var sshipinpicname5 = "/uploads/170106/37-1F1060UQ3236.jpg";
+     var urlfirst = $('#diyiurl').val();  
+    document.getElementById("shipinurl1").src = urlfirst;
+
+
+    /*
+    if(u==''){
+    	document.getElementById("shipinurl1").src = sshipinpicname1;
+    	layer.confirm('您还未注册会员,请注册后在报名!', {icon: 3}, function(index){
+    		layer.close(index);
+    		window.location.href="http://www.fdcf.com.cn/member/login.php?gourl="+gourl;
+    	});
+    }
+    */
+    </script>
+    <script type="text/javascript" src="/Public/ovideo/jquery-1.11.3.min.js(1).download"></script>
+    <script type="text/javascript" src="/Public/ovideo/jquery.bxslider.min.js.download"></script>
+    <script type="text/javascript" src="/Public/ovideo/index.js.download"></script>
+    <script type="text/javascript" src="/Public/ovideo/jy.js.download"></script>
+    <script type="text/javascript" src="/Public/ovideo/jquery.mCustomScrollbar.min.js.download"></script>
+    <script src="/Public/ovideo/jquery.mousewheel.min.js.download"></script>
+
+
+    <!-- </div>  -->
+    <!-- 广告列表 -->
+    <include file="footer_add" />
+    <!-- 广告列表 -->
+    <!---底部开始-->
+    <include file="Common:help_wide" />
+    <include file="Common:footer"/>
+
+</body>
+</html>

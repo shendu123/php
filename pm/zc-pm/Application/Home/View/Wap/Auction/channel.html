@@ -1,0 +1,77 @@
+<include file="Common:meta" />
+<title>拍品分类-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body style="background-color: #f2f2f2; max-width: 100%;">
+    <div class="am-g am-g-collapse on-channel-body">
+        <div class="am-u-sm-4 on-channel-left">
+            <ul class="am-list on-channel-list">
+                <li class="on-active">
+                    <a class="am-cf on-act" titid="hot" href="javascript:void(0);">
+                        <img class="on-icon" alt="推荐分类" src="__IMG__/hot_cate.png">
+                        <span class="am-text-truncate on-name">推荐分类</span>
+                        <span class="am-icon-chevron-right on-more"></span>
+                    </a>
+                </li>
+                <foreach name="channel" item="cv">
+                    <li>
+                        <a  class="am-cf on-act" titid="{$cv.cid}" href="javascript:void(0);">
+                            <img class="on-icon" alt="{$cv.name}" src="<eq name='cv.ico' value=''>__IMG__/cate_default.png<else/>{$upWholeUrl}{$cv.ico}</eq>">
+                            <span class="am-text-truncate on-name">{$cv.name}</span>
+                            <span class="am-icon-chevron-right on-more"></span>
+                        </a>
+                    </li>
+                </foreach>
+                
+            </ul>
+        </div>
+        <div class="am-u-sm-8 on-channel-right">
+        <!-- 推荐分类【 -->
+            <ul id="hot"  class="on-cate-list on-act-con-hot am-avg-sm-3 gallery-list">
+                <foreach name="hot" item="hv">
+                    <li >
+                        <a href="{:U('Auction/index',array('gt'=>$hv['cid']))}">
+                            <img class="on-icon" alt="{$hv.name}" src="<eq name='hv.ico' value=''>__IMG__/cate_default.png<else/>{$upWholeUrl}{$hv.ico}</eq>">
+                            <div class="on-title am-text-truncate">{$hv.name}</div>
+                        </a>
+                    </li>
+                </foreach>
+            </ul>
+        <!-- 推荐分类【 -->
+            <foreach name="cate" item="ctv">
+                <ul  class="on-cate-list on-act-con-{$key} am-avg-sm-3 gallery-list on-hidden">
+                    <li >
+                        <a href="{:U('Auction/index',array('gt'=>$key))}">
+                            <img class="on-icon" alt="{$ctlv.name}" src="__IMG__/inst_cate.png">
+                            <div class="on-title am-text-truncate">进入频道</div>
+                        </a>
+                    </li>
+                    <foreach name="ctv" item="ctlv">
+                        <li >
+                            <a href="{:U('Auction/index',array('gt'=>$ctlv['cid']))}">
+                                <img class="on-icon" alt="{$ctlv.name}" src="<eq name='ctlv.ico' value=''>__IMG__/cate_default.png<else/>{$upWholeUrl}{$ctlv.ico}</eq>">
+                                <div class="on-title am-text-truncate">{$ctlv.name}</div>
+                            </a>
+                        </li>
+                    </foreach>
+                </ul>
+            </foreach>
+        </div>
+    </div>
+
+<include file="Common:navbar"/>
+<script type="text/javascript">
+$(function(){
+    $(".on-act").click(function(){
+        $(this).parents("ul").find("li").removeClass("on-active");
+        $(this).parents("li").addClass("on-active");
+        $(".on-channel-right ul").hide();
+        $(".on-channel-right ul.on-act-con-"+$(this).attr('titid')).show();
+        
+    });
+});
+</script>
+
+</body>
+</html>

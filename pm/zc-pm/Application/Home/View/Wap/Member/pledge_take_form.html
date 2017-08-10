@@ -1,0 +1,70 @@
+<include file="Common:meta" />
+<title>填写取款申请-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+<div style="font-size: 12px; margin:5px;" data-am-alert="" class="am-alert am-alert-warning"><button class="am-close" type="button">×</button><p>为了您的提现尽快完成，请仔细检查填写的信息后在提交！</p></div>
+        <div class="mbsecbox">
+            <form id="take" class="am-form" name="take" action="" method="post">
+                <div class="my_info clearfix">
+                    <dl class="user-frame memframe">
+                        <dd><input placeholder="取款金额" id="money" less="{$pledge.usable}" type="text" size="30" class="input" name="money" value="{$pledge.usable}"/></dd>
+                        <dd><div id="moneyTip"></div></dd>
+                    </dl> 
+                    <dl class="user-frame memframe">
+                        <dd><input placeholder="银行名称" id="bank" type="text" size="30" class="input" name="bank" value=""/></dd>
+                        <dd><div id="bankTip"></div></dd>
+                    </dl>
+                    <dl class="user-frame memframe">
+                        <dd><input placeholder="开户行" id="bankhome" type="text" size="30" class="input" name="bankhome" value=""/></dd>
+                        <dd><div id="bankhomeTip"></div></dd>
+                    </dl>
+                    <dl class="user-frame memframe">
+                        <dd><input placeholder="姓名" id="name" type="text" size="30" class="input" name="name" value=""/></dd>
+                        <dd><div id="nameTip"></div></dd>
+                    </dl>
+                    <dl class="user-frame memframe">
+                        <dd><input placeholder="账号" id="account" type="text" size="30" class="input" name="account" value=""/></dd>
+                        <dd><div id="accountTip"></div></dd>
+                    </dl>
+                    <dl class="user-frame memframe">
+                        <dd><textarea placeholder="备注" id="remark" name="remark" class="input" placeholder="有什么要给我们说的！"></textarea></dd>
+                        <dd><div id="remarkTip"></div></dd>
+                    </dl>
+                    <dl id="btn_box">
+                        <button class="am-btn am-btn-danger on-btn-danger am-radius submitBtn" id="submit">提交</button>
+                    </dl>
+                </div>
+            </form>
+        </div>
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<script type="text/javascript">
+var pledge = '{$pledge.usable}';
+    $(function(){
+        // 表单验证【
+        $.formValidator.initConfig({formID:"take",submitButtonID:"submit"});
+        $("#submit").click(function(){
+            
+            if($.formValidator.pageIsValid('1')==true){
+                commonAjaxSubmit('','','');
+            }
+            return false;
+        });
+
+        $("#money").formValidator({onShow:"请输入提现金额",onFocus:"提现金额不得大于"+pledge+"，必须为数字，小数点后最多可有两位",onCorrect:"输入正确"}).functionValidator({fun:isMoney});
+        $("#bank").formValidator({onShow:"您收款的银行或平台名称",onFocus:"如：建设银行或支付宝",onCorrect:"输入正确"}).inputValidator({min:4,onError:"你输入平台名称不正确,请确认"});
+        $("#bankhome").formValidator({onShow:"如果为支付平台可不填写",onFocus:"如果为支付平台可不填写",onCorrect:"输入正确"});
+        $("#name").formValidator({onShow:"对应您银行或平台的开户名称",onFocus:"要求真实不能为空",onCorrect:"输入正确"}).functionValidator({fun:trueName});
+        $("#account").formValidator({onShow:"对应您银行或平台的收款账号",onFocus:"要求真实不能为空",onCorrect:"输入正确"}).inputValidator({min:4,onError:"你输入平台名称不正确,请确认"});
+        $("#remark").formValidator({onShow:"填写备注",onFocus:"可以为空，需小于120个字符",onCorrect:"输入正确"}).inputValidator({min:0,max:120,onError:"你输入的昵称不正确,请确认"});
+    });
+</script>
+</body>
+</html>

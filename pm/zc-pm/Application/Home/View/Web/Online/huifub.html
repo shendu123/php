@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>发表 - 会员中心 - 前景财富</title>
+<link href="/Public/online/fayan.css" rel="stylesheet" type="text/css" />
+<style>
+
+</style>
+</head>
+<body>
+<div id="main">
+<div id="content">
+<div id="mcpmain">
+<div id="appTab">
+<ul>
+<li class="thisTab"><a href="#"><span>回复提问</span></a></li>
+</ul>
+</div>
+<form name="addcontent" action="http://www.fjsxpmh.com/Online/huifu" method="post" enctype="multipart/form-data" onsubmit="return checkSubmit();">
+<input type="hidden" name="id" value="{$chat.id}" />
+<div class="contentShow postForm">
+<p>
+{$chat.member_name} 提问：{$chat.question} </p>
+<p>
+回答： </p>
+<p>
+<textarea rows="3" cols="50" name="answer"></textarea>
+</p>
+<p>
+<button class="button2" type="submit">提交</button>
+<button class="button2 ml10" type="reset" onclick="location.reload();">重置</button>
+</p>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

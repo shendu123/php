@@ -1,0 +1,311 @@
+<table width="100%" cellspacing="0" cellpadding="0" class="tabela">
+<thead>
+    <tr bgcolor="#fbfaf7">
+        <th colspan="10">
+            <div class="on-title">
+                <a href="{:U('Auction/details',array('pid'=>$oinfo[bidinfo]['pid']))}" class="l_color" target="_blank">{$oinfo.bidinfo.pname}【<eq name="oinfo.type" value="0">竞拍</eq><eq name="oinfo.type" value="1">竞标</eq>】</a>
+                <span class="bidnb">[拍品编号：{$oinfo.bidinfo.bidnb}]</span>
+            </div>
+            <div>
+                
+            </div>
+        </th>
+    </tr>
+</thead>
+<tbody>
+    <tr valign="top" align="left">
+        <td align="left" class="tablea_pic" style="width: 315px;">
+            <div class="newPic">
+                <a href="{:U('Auction/details',array('pid'=>$oinfo[bidinfo]['pid']))}">
+                <img src="{$upWholeUrl}{$oinfo.bidinfo.pictures||getPicUrl=###,3,0}" alt="">
+                </a>
+            </div>
+            <div class="newCar clearfix">
+                <p></p>
+                <p>起拍价：<span class="qipai">{$oinfo.bidinfo.onset|wipezero=###}元</span></p>
+                <p>保证金：
+                <span class="p_col">
+                    {:pledgeShow($oinfo[bidinfo]['pattern'],$oinfo[bidinfo]['pledge_type'],$oinfo[bidinfo]['onset'],$oinfo[bidinfo]['pledge'],$oinfo[bidinfo]['spledge'],$oinfo[bidinfo]['mpledge'])}
+                </span>
+                </p>
+                <p>成交价：
+                    <span class="blue1">
+                        {$oinfo.bidinfo.nowprice|wipezero=###}
+                    </span>
+                </p>
+                <p>结束时间：{$oinfo.bidinfo.endtime|date='Y-m-d H:i',###}</p>
+            </div>
+        </td>
+        <td>
+            <ul>
+                <li>订单号：{$oinfo.order_no}</li>
+                <eq name="oinfo.status" value="0">
+                    <li>
+                        支付过期时间：
+                        <eq name="oinfo.deftime1st" value="0">
+                            {$oinfo.deftime1|date='Y-m-d H:i',###}
+                        <else/>
+                            已过期并扣除买家保证金
+                        </eq>
+                    </li>
+                </eq>
+                <li>状态：
+                    <span class="blue1">
+                        <if condition="$oinfo['status'] eq 0">
+                            <eq name="oinfo.deftime1st" value="0">
+                                待付款
+                            <else/>
+                                买家违约
+                            </eq>
+                        </if>
+                        <if condition="$oinfo['status'] eq 1">
+                            <eq name="oinfo.deftime2st" value="0">
+                                待发货
+                            <else/>
+                                卖家违约
+                            </eq>
+                        </if>
+                        <eq name="oinfo.status" value="2">待收货</eq>
+                        <eq name="oinfo.status" value="3">交易成功</eq>
+                        <eq name="oinfo.status" value="4">买家已评价</eq>
+                        <eq name="oinfo.status" value="5">申请退货</eq>
+                        <eq name="oinfo.status" value="6">卖家拒绝退货</eq>
+                        <eq name="oinfo.status" value="7">卖家同意退货，待发货</eq>
+                        <eq name="oinfo.status" value="8">已发货等待卖家收货</eq>
+                        <eq name="oinfo.status" value="9">已完成退货</eq>
+                        <eq name="oinfo.status" value="10">已互评</eq>
+                    </span>
+                </li>
+                <eq name="oinfo.status" value="2">
+                    <li>快递公司：{$oinfo.express}</li>
+                    <li>快递单号：{$oinfo.express_no}</li>
+                </eq>
+                <if condition="$whopage['type'] eq 'return'">
+                    <li>退款金额：<span class="qipai">{$oinfo.ret.money}</span>元</li>
+                    <li>退货原因：{$oinfo.ret.cause}</li>
+                        <neq name="oinfo.ret.ytime" value="0">
+                            <li>更新时间：{$oinfo.ret.ytime|date='Y-m-d H:i',###}</li>
+                            <else/>
+                            <li>更新时间：{$oinfo.ret.rtime|date='Y-m-d H:i',###}</li>
+                        </neq>
+                    <else/>
+                    <eq name="oinfo.deftime1st" value="0">
+                        <li>备注：{$oinfo.remark}</li>
+                    </eq>
+                </if>
+            </ul>
+        </td>
+        <!-- 订单列表页面显示【 -->
+        <in name="ACTION_NAME" value="mysucc,myorder">
+            <td align="center">
+                <if condition="$whopage['type'] eq 'buy'">
+                    <eq name="whopage.seller" value="0">
+                        <if condition="($oinfo['status'] eq 0) and ($oinfo['deftime1st'] eq 0)">
+                            <li><a class="am-btn am-btn-danger on-btn-danger" href="{:U('Member/payment_order',array('order_no'=>$oinfo['order_no']))}">支付</a></li>
+                        </if>
+                        <eq name="oinfo.status" value="2">
+                            <a pname="{$oinfo.bidinfo.pname}" order="{$oinfo.order_no}" id="receipt" href="javascript:void(0)">确认收货</a><br>
+                        </eq>
+                        <eq name="oinfo.status" value="3"><a href="{:U('Member/evaluate',array('order_no'=>$oinfo[order_no]))}">立即评价</a><br></eq>
+                        <eq name="oinfo.status" value="4"><a href="{:U('Member/evaluate_show',array('order_no'=>$oinfo[order_no]))}">我的评价</a><br></eq>
+                    <else/>
+                        <if condition="($oinfo['status'] eq 1) and ($oinfo['deftime2st'] eq 0)">
+                            <a href="{:U('Member/deliver',array('order_no'=>$oinfo['order_no']))}">发货</a><br/>
+                        </if>
+                        <eq name="oinfo.status" value="4">
+                            <a href="{:U('Member/seller_evaluate',array('order_no'=>$oinfo[order_no]))}">评价买家</a>
+                            <br>
+                        </eq>
+                    </eq>
+                    <eq name="oinfo.status" value="2">
+                        <a id="showExpress" target="_blank" href="{:U('Member/showExpress',array('order_no'=>$oinfo['order_no'],'type'=>'deliver'))}">快递查询</a>
+                        <br>
+                    </eq>
+                    <a href="{:U('Member/order_details',array('order_no'=>$oinfo['order_no']))}">订单详情</a><br/>
+                </if>
+            </td>
+        </in>
+        <!-- 订单列表页面显示】 -->
+    </tr>
+    <tr>
+        <td colspan="10" align="right" >
+            <eq name="whopage.seller" value="0">
+                <span class="ac-show-userbox clearfix" cardtips="0" pid="{$oinfo.bidinfo.pid}" uid="{$oinfo.sellerid}" seller="1">
+                    <span class="userrole">卖家：</span>
+                    <a target="_blank" class="ac-show-usercard" href="{:U('Seller/index',array('sellerid'=>$oinfo['sellerid']))}">{$oinfo.bidinfo.organization}</a>
+                </span>
+            </eq>
+            <div class="fr">
+                成交价:{$oinfo.price|wipezero=###}元+运费:{$oinfo.freight|wipezero=###}元=<span class="red1 fb">{$oinfo.total}元</span>
+            </div>
+        </td>
+    </tr>
+    <!-- 订单详情页面显示【 -->
+    <eq name="ACTION_NAME" value="order_details">
+        <tr>
+            <td class="od-det" colspan="10">
+                <ul>
+                    <li class="ut">买家信息</li>
+                    <eq name="oinfo.status" value="0">
+                        <li class="clearfix">
+                            <div class="lt">
+                                买家昵称：
+                            </div>
+                            <div class="ld">
+                                <span class="no-content">{$oinfo.buy_info.nickname|default='-'}</span>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="lt">
+                                买家电话：
+                            </div>
+                            <div class="ld">
+                                <span class="no-content">{$oinfo.buy_info.mobile|default='-'}&nbsp;&nbsp;(<eq name="oinfo.buy_info.verify_mobile" value="1">已认证<else/>未认证</eq>)</span>
+                            </div>
+                        </li>
+                    <else/>
+                        <li class="clearfix">
+                            <div class="lt">
+                                收货地址：
+                            </div>
+                            <div class="ld">
+                                <div data-show-address="false" class="address-detail">
+                                    {$oinfo.address.truename}，{$oinfo.address.mobile|default="无"}，{$oinfo.address.phone}，{$oinfo.address.address}，{$oinfo.address.postalcode}
+                                </div>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="lt">
+                                买家留言：
+                            </div>
+                            <div class="ld">
+                                <span class="no-content">{$oinfo.buyer_msg|default='-'}</span>
+                            </div>
+                        </li>
+                    </eq>
+                </ul>
+                <ul>
+                    <li class="ut">订单状态</li>
+                    <li>
+                        <if condition="$oinfo['status'] eq 0">
+                            <eq name="seller" value="0">
+                                <eq name="oinfo.deftime1st" value="0">
+                                    <p>您需要在<span class="countdown-timer">{$oinfo.deftime1|date='Y-m-d H:i',###}</span>前进行支付！如过期未支付，将无法支付，将扣除保证金！</p>
+                                    <div class="clearfix">
+                                        <div class="lt">您可以</div>
+                                        <div class="ld">
+                                            <a href="{:U('Member/payment_order',array('order_no'=>$oinfo['order_no']))}" class="mini_btn1">支付订单</a>
+                                        </div>
+                                    </div>
+                                <else/>
+                                    订单已过期并扣除您保证金！
+                                </eq>
+                            <else/>
+                                <eq name="oinfo.deftime1st" value="0">
+                                    竞拍成功，等待买家支付该订单！
+                                <else/>
+                                    买家未在有效期支付该订单，已扣除保证金！
+                                </eq>
+                            </eq>
+                        </if>
+                        <if condition="$oinfo['status'] eq 1">
+                            <eq name="seller" value="0">
+                                您已于<span class="countdown-timer">{$oinfo.time1|date='Y-m-d H:i',###}</span>支付该订单。
+                                <eq name="oinfo.deftime2st" value="0">
+                                    等待卖家发货！
+                                    <div class="clearfix">
+                                        <div class="lt">您可以</div>
+                                        <div class="ld">
+                                            联系客服：{$site.SITE_INFO.tel}
+                                        </div>
+                                    </div>
+                                <else/>
+                                    <p>卖家未在有效期发货，已扣除卖家保证金！</p>
+                                </eq>
+                            <else/>
+                                买家已于<span class="countdown-timer">{$oinfo.time1|date='Y-m-d H:i',###}</span>支付该订单！
+                                <eq name="oinfo.deftime2st" value="0">
+                                    <div class="clearfix">
+                                        <div class="lt">您可以</div>
+                                        <div class="ld">
+                                            <a href="{:U('Member/deliver',array('order_no'=>$oinfo['order_no']))}" class="mini_btn1">发货</a>
+                                        </div>
+                                    </div>
+                                <else/>
+                                    <p>您没有在有效期发货，已扣除您缴纳的保证金！</p>
+                                </eq>
+                            </eq>
+                        </if>
+                        <if condition="$oinfo['status'] eq 2">
+                            <eq name="seller" value="0">
+                                卖家已于<span class="countdown-timer">{$oinfo.time2|date='Y-m-d H:i',###}</span>发货！
+                                <div class="clearfix">
+                                    <div class="lt">您可以</div>
+                                    <div class="ld">
+                                        <a id="receipt" pname="{$oinfo.pname}" order="{$oinfo.order_no}" href="javascript:void(0)" class="mini_btn1">确认收货</a>
+                                    </div>
+                                </div>
+                            <else/>
+                                您已于<span class="countdown-timer">{$oinfo.time2|date='Y-m-d H:i',###}</span>发货！等待买家确认收货！
+                            </eq>
+                        </if>
+                        <if condition="$oinfo['status'] eq 3">
+                            <eq name="seller" value="0">
+                                您已于<span class="countdown-timer">{$oinfo.time3|date='Y-m-d H:i',###}</span>确认收货！
+                                <div class="clearfix">
+                                    <div class="lt">您可以在下方看到物流信息！或</div>
+                                    <div class="ld">
+                                        <a order="{$oinfo.order_no}" href="{:U('Member/evaluate',array('order_no'=>$oinfo['order_no']))}" class="mini_btn1">评价卖家</a>
+                                    </div>
+                                </div>
+                            <else/>
+                                买家已于<span class="countdown-timer">{$oinfo.time3|date='Y-m-d H:i',###}</span>确认收货！等待买家给您做出评价！
+                            </eq>
+                        </if>
+                        <if condition="$oinfo['status'] eq 4">
+                            <eq name="seller" value="0">
+                                您已于<span class="countdown-timer">{$oinfo.time4|date='Y-m-d H:i',###}</span>对卖家做出评价！
+                                <div class="clearfix">
+                                    <div class="lt">您可以</div>
+                                    <div class="ld">
+                                        <a href="{:U('Member/evaluate_show',array('order_no'=>$oinfo['order_no']))}" class="mini_btn1">查看评价</a>
+                                    </div>
+                                </div>
+                            <else/>
+                                买家已于<span class="countdown-timer">{$oinfo.time4|date='Y-m-d H:i',###}</span>对卖家做出评价！
+                                <div class="clearfix">
+                                    <div class="lt">您可以</div>
+                                    <div class="ld">
+                                        <a href="{:U('Member/seller_evaluate',array('order_no'=>$oinfo['order_no']))}" class="mini_btn1">评价买家</a>
+                                    </div>
+                                </div>
+                            </eq>
+                        </if>
+                        <if condition="$oinfo['status'] eq 10">
+                            <eq name="seller" value="0">
+                                卖家已于<span class="countdown-timer">{$oinfo.time11|date='Y-m-d H:i',###}</span>对您做出评价！
+                                <div class="clearfix">
+                                    <div class="lt">您可以</div>
+                                    <div class="ld">
+                                        <a href="{:U('Member/buy_myevaluate')}" class="mini_btn1">查看评价</a>
+                                    </div>
+                                </div>
+                            <else/>
+                                您已于<span class="countdown-timer">{$oinfo.time11|date='Y-m-d H:i',###}</span>对买家做出评价！
+                                <div class="clearfix">
+                                    <div class="lt">您可以</div>
+                                    <div class="ld">
+                                        <a href="{:U('Member/seller_myevaluate')}" class="mini_btn1">查看评价</a>
+                                    </div>
+                                </div>
+                            </eq>
+                        </if>
+                    </li>
+                </ul>
+                
+            </td>
+        </tr>
+    </eq>
+    <!-- 订单详情页面显示】 -->
+</tbody>
+</table>

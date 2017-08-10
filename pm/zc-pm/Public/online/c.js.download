@@ -1,0 +1,20 @@
+$(function () {
+
+    $('.weixin').click(function () {
+
+		layer.open({
+			type: 1,
+			title: false,
+			closeBtn: false,
+			area: ['430px', '430px'],
+			skin: 'layui-layer-nobg', //Ã»ÓÐ±³¾°É«
+			shadeClose: true,
+			content: '<img src="http://www.fdcf.com.cn/uploads/150914/1-150914161615626.jpg"/>'
+		});
+    });
+
+});
+
+
+document.write('<div style="width: 192px; height: 452px; position: fixed; float: left; top:35%; margin-left: 16px;z-index: 980; float: right;"><img src="http://www.fdcf.com.cn/uploads/kefu/20151015/images/tyu_05.png"/></div>
+');

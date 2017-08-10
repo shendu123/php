@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>我的出价-交易管理-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_wide" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;交易管理&nbsp;&gt;&gt;&nbsp;我的出价&nbsp;&gt;&gt;&nbsp;拍品</div>
+
+        
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                <ul class="inquiry">
+                    <li class="hover">我的出价</li>
+                </ul>
+                <div class="xunj">
+                <ul class="sea clearfix">
+                    <li class="th">状态筛选：</li>
+                    <li><a <eq name="st" value="ing">class="on"</eq> href="{:U('mybid',array('type'=>'pm'))}">正在拍卖</a></li>
+                    <li><a <eq name="st" value="end">class="on"</eq> href="{:U('mybid',array('type'=>'pm','st'=>'end'))}">已结束</a></li>
+                </ul>
+                <table width="100%" cellspacing="0" cellpadding="0" class="tabela">
+                    <thead>
+                        <tr bgcolor="#fbfaf7" align="center">
+                            <th width="45%" class="brno" scope="col">拍品信息</th>
+                            <th width="15%" valign="middle" align="center" class="brno" scope="col">当前价</th>
+                            <th width="10%" class="brno" scope="col">当前出价者</th>
+                            <th width="20%" valign="middle" align="center" class="brno" style="text-align: center;" scope="col">拍卖状态/剩余时间</th>
+                            <th width="9%" valign="middle" align="center" scope="col">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <empty name="alist">
+                        <tr><td colspan="5" align="center">
+                            哎哟！这里空空如也！
+                        </td></tr>
+                        <else/>
+                        <volist name="alist" id="avo">
+                            <tr valign="top" align="left">
+                                <td align="left" class="tablea_pic">
+                                    <div class="bid_title">
+                                        <a href="{:U('Auction/details',array('pid'=>$avo['pid']))}" class="l_color" target="_blank">{$avo.pname}</a>
+                                        <span class="bidnb">[拍品编号：{$avo.bidnb}]</span></div>
+                                    <div class="newPic">
+                                        <a href="{:U('Auction/details',array('pid'=>$avo['pid']))}">
+                                        <img src="{$upWholeUrl}{$avo.pictures||getPicUrl=###,3,0}" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="newCar clearfix">
+                                        <p></p>
+                                        <p>起拍价：<span class="qipai">{$avo.onset}元</span></p>
+                                        <p>保证金：
+                                        <span class="p_col">
+                                            {:pledgeShow($avo['pattern'],$avo['pledge_type'],$avo['onset'],$avo['pledge'],$avo['spledge'],$avo['mpledge'])}
+                                        </p>
+                                        <p>拍卖模式：
+                                            <span class="blue1">
+                                            <eq name="avo.type" value="0">竞拍</eq>
+                                            <eq name="avo.type" value="1">竞标</eq>
+                                            </span>
+                                        </p>
+                                        <p>结束时间：{$avo.endtime|date='m-d H:i',###}</p>
+                                    </div>
+                                    <p style="color:#999;">{$avo.keywords|str_replace=',','&nbsp;&nbsp;&nbsp;',###}</p>
+                                </td>
+                                <td valign="middle" align="center">
+                                    
+                                    <span class="red1 fb">
+                                    <eq name="avo.type" value="0">{$avo.nowprice}</eq>
+                                    <eq name="avo.type" value="1">竞标保密</eq>
+                                    </span>
+                                </td>
+                                <td valign="middle" align="center">
+                                    <span class="org1">
+                                    <eq name="avo.type" value="0">
+                                        
+                                        <empty name="avo[nickname]">
+                                            无
+                                            <else/>
+                                            {$avo.nickname}
+                                        </empty>
+                                    </eq>
+                                    <eq name="avo.type" value="1">竞标保密</eq>
+                                    </span>
+                                </td>
+                                <td valign="middle" align="center">
+                                    <if condition="$st eq 'end'">
+                                    <div class="timedown end"></div>
+                                    <else />
+                                    <div class="tc pd5">剩余时间</div>
+                                    <div class="timedown clearfix" id="bid{$avo.pid}">
+                                        <span class="day">-</span>
+                                        <span class="hour">-</span>
+                                        <span class="minute">-</span>
+                                        <span class="second">-</span>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(function(){
+                                            endDown("{$avo.endtime}","{$nowtime}","#bid{$avo.pid}","#bid{$avo.pid} .day","#bid{$avo.pid} .hour","#bid{$avo.pid} .minute","#bid{$avo.pid} .second");
+                                        });
+                                    </script>
+                                    </if>
+                                </td>
+                                <td valign="middle" align="center">
+                                    <a href="{:U('Auction/details',array('pid'=>$avo['pid']))}" target="_blank">
+                                    <if condition="$st eq 'ing'">
+                                        出价
+                                    <else />
+                                        查看
+                                    </if>
+                                    </a><br>
+                                    <a pid="{$avo.pid}" class="mybid" href="javascript:void(0)" class="att">我的出价</a>
+                                </td>
+                            </tr>
+                        </volist> 
+                        </empty>  
+                           
+                        <tr valign="top" align="left">
+                            <td bgcolor="#fbfaf7" align="left" colspan="5">
+                                <div class="page">
+                                    {$page}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<script type="text/javascript">
+    // 我的出价
+    var mybidUrl="{:U('Member/mybid_list')}";
+    $(".mybid").click(function(){
+        var pid = $(this).attr('pid');
+        asyncbox.open({id : 'mybid_list',url : mybidUrl,args :{'pid' : pid},title : '我的出价',scroll:false,drag : false,modal : true,fixed : false,reset : true});
+    });
+</script>
+</body>
+</html>

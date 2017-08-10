@@ -1,0 +1,73 @@
+<li>
+    <div class="on-licon">
+        <div class="pth">
+            <a href="{:U('Crowd/items',array('cid'=>$oinfo['crowd_id']))}" target="_blank">
+                【申购】{$oinfo['item'].title}
+            </a>
+        </div>
+        <div class="pcon clearfix">
+            <div class="imbox">
+                <a href="{:U('Crowd/items',array('cid'=>$oinfo['crowd_id']))}" target="_blank">
+                    <img src="{$upWholeUrl}{$oinfo.item.pictures||getPicUrl=###,3,0}" alt="">
+                </a>
+            </div>
+            <div class="infobox">
+                支持：<span class="qipai">{$oinfo.price|wipezero=###}元</span><br/>
+                运费：
+                <span class="blue1">
+                    {$oinfo.delivery_fee|wipezero=###}元
+                </span>
+            </div>
+        </div>
+        <eq name="whopage.seller" value="0">
+            <span class="ac-show-userbox clearfix" cardtips="0" pid="{$oinfo.bidinfo.pid}" uid="{$oinfo.sellerid}" seller="1">
+                <span class="userrole">卖家：</span>
+                <a class="ac-show-usercard" href="{:U('Seller/index',array('sellerid'=>$oinfo['sellerid']))}">{$oinfo.bidinfo.organization}</a>
+            </span>
+        </eq>
+        <ul class="dqup am-avg-sm-2">
+            <li class="li">订单号：{$oinfo.crd_no}</li>
+            <li class="li">状态：
+                <span class="blue1">
+                    <if condition="$oinfo['status'] eq 0">待付款</if>
+                    <if condition="$oinfo['status'] eq 1">待发货</if>
+                    <eq name="oinfo.status" value="2">待收货</eq>
+                    <eq name="oinfo.status" value="3">交易成功</eq>
+                    <eq name="oinfo.status" value="12">拍卖中</eq>
+                </span>
+            </li>
+            <li class="li">
+                订单总额：<span class="red1 fb">{$oinfo.total_price}元</span>
+            </li>
+            <eq name="oinfo.status" value="2">
+                <li class="li">快递公司：{$oinfo.express}</li>
+                <li class="li">快递单号：{$oinfo.express_no}</li>
+            </eq>
+        </ul>
+        <!-- 订单列表页面显示【 -->
+        <in name="ACTION_NAME" value="mycrowd">
+            <in name="oinfo.status" value="0,2,3,12">
+            <ul class="on-mini-morebtn am-avg-sm-<in name='oinfo.status' value='2'>2<else/>1</in>">
+                <if condition="$oinfo['status'] eq 0">
+                    <li><a class="am-btn am-btn-danger on-btn-danger" href="{:U('Member/crd_payment_order',array('crd_no'=>$oinfo['crd_no']))}">支付</a></li>
+                </if>
+                <eq name="oinfo.status" value="2">
+                    <li><a class="am-btn am-btn-danger on-btn-danger" pname="{$oinfo.item.title}" order="{$oinfo.crd_no}" id="receipt" href="javascript:void(0)">确认收货</a></li>
+                    <li><a class="am-btn am-btn-primary on-btn-primary" id="showExpress" href="{:U('Member/showExpress',array('order_no'=>$oinfo['crd_no'],'type'=>'deliver'))}">快递查询</a></li>
+                </eq>
+                <eq name="oinfo.status" value="3">
+                    <eq name="oinfo.auction_status" value="0">
+                        <li><a class="am-btn am-btn-primary on-btn-primary" pname="{$oinfo.item.title}" href="{:U('Member/addAuction',array('to'=>js,'crd_no'=>$oinfo['crd_no']))}">发布拍卖</a></li>
+                    </eq>
+                    <eq name="oinfo.auction_status" value="1">
+                        <li><a class="am-btn am-btn-danger on-btn-danger" pname="{$oinfo.item.title}" order="{$oinfo.crd_no}" id="del_auction" href="javascript:void(0)">撤销拍卖</a></li>
+                    </eq>
+                    <in name="oinfo.auction_status" value="2,3">
+                        <a class="am-btn am-btn-primary on-btn-primary" href="{:U('Member/crowdAuction',array('crd_no'=>$oinfo['crd_no']))}" target="_blank">拍卖详情</a><br>
+                    </in>
+                </eq>
+            </ul>
+            </in>
+        </in>
+    </div>
+</li>

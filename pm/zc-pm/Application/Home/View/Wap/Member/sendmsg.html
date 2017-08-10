@@ -1,0 +1,95 @@
+<include file="Common:meta" />
+<title>我评价的卖家-我是买家</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+<ul class="tabMenu am-avg-sm-2">
+    <li <eq name="ACTION_NAME" value="sendmsg">class="on"</eq>><a href="{:U('Member/sendmsg')}">发送站内信</a></li>
+    <li <eq name="ACTION_NAME" value="sendlist">class="on"</eq>><a href="{:U('Member/sendlist')}">已发送站内信</a></li>
+</ul>
+<div class="sendmsg">
+    <form id="sendMsg" name="sendMsg" class="am-form" action="" method="post">
+        <dl class="user-frame">
+            <eq name="tp" value="gp">
+                <dd class="suse clearfix">
+                    <select name="gp">
+                        <option value="0">关注我的({$sendct.0}个)</option>
+                        <option value="1">我的客户({$sendct.1}个)</option>
+                        <!-- <option value="2">全部用户({$sendct.2}个)</option> -->
+                    </select>
+                </dd>
+            <else/>
+                <dd class="on-sendmsg-to">
+                    <div class="on-tobox clearfix">
+                        <label>
+                            接收者：
+                        </label>
+                        <img class="img" src="{$info.uid|getUserpic=###,2}">
+                        <div class="on-ul clearfix">
+                            <div class="on-li">账号：{$info.account}</div>
+                            <div class="on-li">
+                                <empty name="auction">
+                                    昵称：<span><a class="td"  href="{:U('Seller/index',array('userid'=>$info['uid']))}">{$info.nickname}</a></span>
+                                <else/>
+                                    卖家：<span><a class="td"  href="{:U('Seller/index',array('userid'=>$info['uid']))}">{$info.organization}</a></span>
+                                </empty>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 关于拍品【 -->
+                    <if condition="$auction">
+                        <div class="on-tobox clearfix">
+                            <label>
+                                <input style="vertical-align: sub;" name="topid" type="checkbox" checked="checked" value="1" />关于拍卖：
+                            </label>
+                            <div class="on-tobox-pname">
+                                <img class="img" style="width: 45px;" src="{$upWholeUrl}{$auction.pictures|getPicUrl=###,2,0}">
+                                <a target="blank" style="color: #980000;" href="{:U('Auction/details',array('pid'=>$auction['pid']))}">{$auction.pname}</a>的留言。
+                            </div>
+                            <input type="hidden" name="info[pid]" value="{$auction.pid}" />
+                        </div>
+                        
+                    </if>
+                    <!-- 关于拍品】 -->
+                    <input type="hidden" name="info[uid]" value="{$info.uid}" />
+                    <input type="hidden" name="info[rsid]" value="{$info.rsid}" />
+                </dd>
+            </eq>
+        </dl>
+        <dl class="user-frame">
+            <dd>
+                <textarea id="content" name="info[content]" placeholder="填写你要发送的消息，小于120个字符">{$my_info.content}</textarea>
+            </dd>
+            <dd><div id="contentTip"></div></dd>
+        </dl>
+        <input type="hidden" name="tp" value="{$tp}" />
+        <dl class="user-frame" id="btn_box">
+            <button id="submit" class="submitBtn am-btn am-btn-danger on-btn-danger am-radius">发送</button>
+        </dl>
+    </form>
+</div>
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<script type="text/javascript">
+    $(function(){
+        // 表单验证【
+        $.formValidator.initConfig({formID:"sendMsg",submitButtonID:"submit"});
+        $("#submit").click(function(){
+            if($.formValidator.pageIsValid('1')==true){
+                commonAjaxSubmit('','','');
+            }
+            return false;
+        });
+
+        $("#content").formValidator({onShow:"请填写发送内容",onFocus:"小于120个字符",onCorrect:"输入正确"}).inputValidator({min:1,max:120,onError:"你输入的内容不正确,请确认"});
+
+        // 表单验证】
+    });
+</script>
+</body>
+</html>

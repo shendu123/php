@@ -1,0 +1,43 @@
+<nav data-am-widget="menu" class="am-menu  am-menu-default on-auction-menu"> 
+    <a href="javascript: void(0)" class="am-menu-toggle">
+          <i class="am-menu-toggle-icon am-icon-bars"></i>
+    </a>
+      <ul class="am-menu-nav am-avg-sm-2">
+          <li class="am-parent">
+            <a style="border-right: 1px solid #eeeeee;" href="javascript:void(0);"><if condition="(ACTION_NAME eq 'index')">今日拍卖<else />选择分类</if></a>
+              <ul class="am-menu-sub am-collapse  am-avg-sm-3 on-ul" style="box-shadow:0 3px 3px #999;">
+                    <li <eq name="gt.0" value="1">class="on-active"</eq> ><a href="{:U('Auction/index')}">全部</a></li>
+                    <volist name="clist" id="cvo">
+                        <li <eq name="cvo.cid" value="$gt.0">class="on-active"</eq>>
+                            <a class="am-text-middle"  href="{:U('',array('gt'=>$cvo[gt]))}">
+                            <img class="on-icon" alt="{$cvo.name}" src="<eq name='cvo.ico' value=''>__IMG__/cate_default.png<else/>{$upWholeUrl}{$cvo.ico}</eq>">{$cvo.name}
+                            </a>
+                        </li>
+                    </volist>
+              </ul>
+          </li>
+          <li class="am-parent">
+            <a href="javascript:void(0);" class="" >筛选条件</a>
+              <ul class="am-menu-sub am-collapse" style="box-shadow:0 3px 3px #999;">
+                  <li class="">
+                    <ul class="case-select clearfix am-avg-sm-3 on-ul">
+                        <li <if condition="(ACTION_NAME eq 'index')and($gt[6] eq 'a')">class="on-active"</if> ><a href="{:U('Auction/index',array('gt'=>$gt0))}">全部在拍</a></li>
+                        <li <if condition="(ACTION_NAME eq 'index')and($gt[6] eq 'n')">class="on-active"</if> ><a  href="{$ynUrl.n}">未出价</a></li>
+                        <li <if condition="(ACTION_NAME eq 'index')and($gt[6] eq 'y')">class="on-active"</if> ><a  href="{$ynUrl.y}">已出价</a></li>
+                        <li <if condition="(ACTION_NAME eq 'waitbid')">class="on-active"</if> ><a href="{:U('Auction/waitbid',array('gt'=>$gt0))}">即将开拍</a></li>
+                        <li <if condition="(ACTION_NAME eq 'endbid')">class="on-active"</if> ><a <a href="{:U('Auction/endbid',array('gt'=>$gt0))}">已成交</a> </li>
+                    </ul>
+                  </li>
+                  {$filt_html}
+              </ul>
+          </li>
+      </ul>
+  </nav>
+
+
+
+
+
+
+
+

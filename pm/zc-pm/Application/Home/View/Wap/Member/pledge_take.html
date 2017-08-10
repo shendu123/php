@@ -1,0 +1,49 @@
+<include file="Common:meta" />
+<title>余额取款-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+<include file="Member:menu" />
+
+    <div class="on-tips">
+        当前保证金：<strong>{$pledge.wallet_pledge}</strong>元&nbsp;&nbsp;
+        冻结：<strong>{$pledge.wallet_pledge_freeze}</strong>元&nbsp;&nbsp;
+        可申请取款<strong class="red1">{$pledge.usable}</strong> 元
+    </div>
+    <div class="on-minbtn">
+        <a href="{:U('pledge_take',array('take'=>'form'))}" class="am-btn am-btn-danger on-btn-danger am-radius">提现申请</a>
+    </div>
+    <div style="font-size: 12px; margin:5px;" data-am-alert="" class="am-alert am-alert-warning"><button class="am-close" type="button">×</button><p>提交申请后，保证金将暂时冻结；直到完成提现才会扣除！<br>
+            提现后请耐心等待！我们会在两个工作日（节假日顺延）内将您提现的金额转账到您指定账户！<br>
+            注意：转账产生的手续费将会从您提现金额内扣除！</p></div>
+    <ul class="on-shouzhi am-avg-sm-1 am-avg-md-2">
+        <volist name="take_list" id="tv">
+            <li class="on-li">
+                <div class="on-li-con">
+                    提现：<strong class="on-expend">{$tv.money}</strong>元<br/>
+                    收款账户：<notempty name="tv.bank">{$tv.bank}&nbsp;&nbsp;</notempty><notempty name="tv.bankhome">{$tv.bankhome}&nbsp;&nbsp;</notempty><notempty name="tv.name">{$tv.name}&nbsp;&nbsp;</notempty><notempty name="tv.account">{$tv.account}&nbsp;&nbsp;</notempty><br/>
+                    提现留言：{$tv.remark}<span class="on-time">{$tv.time|date='Y-m-d H:i',###}</span><br/>
+                    状态：<eq name="tv.status" value="0"><strong class="on-talksta">等待提现</strong></eq>
+                        <eq name="tv.status" value="1">
+                        <strong class="on-talksta">已转账</strong>{$tv.cause}<span class="on-time">{$tv.dtime|date='Y-m-d H:i',###}</span>
+                        </eq>
+                        <eq name="tv.status" value="2">
+                        <strong class="on-talksta">被驳回</strong>{$tv.cause}<span class="on-time">{$tv.dtime|date='Y-m-d H:i',###}</span>
+                        </eq>
+                </div>
+            </li>
+        </volist>
+    </ul>
+    <!--分页【-->
+    <notempty name="page">
+        <div class="pagestyle">
+            {$page}
+        </div>
+    </notempty>
+    <!--分页】-->
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+</body>
+</html>

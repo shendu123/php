@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>申购订单编辑-后台管理-{$site.SITE_INFO.name}</title>
+        <php>
+            
+            
+            $currentNav ='申购订单管理 > 订单编辑';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr clearfix">
+                        <div class="current">订单编辑</div>
+                    </div>
+                    <form>
+   
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                        <input type="hidden" name="business_id" value="{$business_id}">
+                        <input type="hidden" name="email" value="{$email}">
+                            <tr>
+                                <th>状态：</th>
+                                <td>
+                                    <label><input type="radio" value="4" name="info[status]"<eq name="info.status" value="0"> checked="checked"</eq>> 取消支付</label> &nbsp; 
+                                    &nbsp; &nbsp; &nbsp; 此处仅修改状态，将退还用户支付款项，请谨慎操作！
+                                </td>
+                            </tr>
+                            <tr>
+                            <th>取消原因：</th>
+                                <td>
+                                    <textarea name="info[remark]" style="height: 60px; width: 300px;" class="input">{$info.remark}</textarea>
+                                    &nbsp;*这里的信息会在用户订单列表内显示，如果发物流或快递可以填写快递号和提醒。您可以根据编辑的状态填写相应的备注！
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>密码：</th>
+                                <td>
+                                    <input type="password"  name="info[password]" class="input"> 
+                                    &nbsp; &nbsp; &nbsp; 此处仅修改状态，将退还用户支付款项，请谨慎操作！
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="info[crd_no]" value="{$info.crd_no}" />
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            $(function(){
+                $('#typecom').on("change",function(){
+                    if($(this).val()=='*'){
+                        $('#express_other').removeClass('hidden');
+                    }else{
+                        $('#express_other').addClass('hidden');
+                    }
+                });
+                $(".submit").click(function(){
+                    commonAjaxSubmit();
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

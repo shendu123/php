@@ -1,0 +1,22 @@
+<div class="search_news">   
+    <h3 class="pmlisttit">
+        <p style="width:500px;font-size:10pt;" class="pmlisttitleft"><a href="javascript:void(0);">资讯.{$site.SITE_INFO.name}中“{$searchkey}”关键词的搜索结果</a>
+        </p>
+        <p style="width:auto;" class="pmlisttitright">
+        <a target="_blank" href="{:U('Index/search',array('searchtype'=>2,'searchkey'=>$searchkey))}">更多</a>
+        </p>
+    </h3>
+    <empty name="search.news">
+        <div class="nullTip">没有找到“<strong style="color:red">{$searchkey}</strong>”{$site.SITE_INFO.name}资讯</div>
+    <else/>
+        <foreach name="search.news" item="nvo">
+            <div class="new_list">
+                <a title="{$nvo.title}" href="{:U('Article/notice_details',array('id'=>$nvo['id']))}" target="_blank">{$nvo.title|str_replace=$searchkey,'<strong style="color:red">'.$searchkey.'</strong>',###}</a>
+                <br><p style="font-size: 13px;">{$nvo.summary}</p>
+                <p align="right"> <span style="font-size: 13px;color:#ccc;">{$nvo.update_time|date='m-d H:i',###} </span></p>
+            </div>
+
+        </foreach>
+    </empty>
+    <div class="page">{$page}</div>
+</div>

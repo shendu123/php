@@ -1,0 +1,196 @@
+
+<include file="Common:meta" />
+<title>{$saytyp.ch}-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+
+<style>
+    .progress_wrapper{height: 18px; line-height: 18px;}
+    ul.on-group-ul li{ line-height: 24px;}
+    .p-bar-now{background:#690; background-position:0 0; display: block; height: 8px;}
+    .p-bar {background: #b6b6b6 none repeat scroll 0 0; border-radius: 4px; height: 8px; overflow: hidden;}
+
+
+/*jzb*/
+    .weizhipic_point_jzb{
+        position:static;
+        /*top:-30px;*/
+    } 
+    .p-percent_jzb {color: #5e5e5e; font-size: 11px; line-height: 18px;}
+    .weizhizi_point_jzb{
+        position: relative; 
+        top:-30px;
+        left: 30px;
+        font-weight:bold;
+        font-size: 13px;
+
+    }
+    .stvideo_fx a {
+    display: block;
+    width: 90px;
+    height: 44px;
+    line-height:44px;
+    float: left;
+    color: #7a7a7a;
+    padding-left: 35px;
+    text-align: left;
+    text-decoration:none; 
+}
+
+    .stvideo_fx_1 a{background:url(../../../../Public/Img/point/share01.png) no-repeat 7px 10px}
+    .stvideo_fx_2 a{background:url(../../../../Public/Img/point/share01.png) no-repeat 7px -55px}
+    .stvideo_fx_3 a{background:url(../../../../Public/Img/point/share01.png) no-repeat 7px -127px}
+    #ul_jzb_nopad ,#ul_jzb_nopad li{
+        padding: 0px;
+        padding-left: 0px;
+        padding-right: 12px;
+        margin-bottom: 0px;
+    }
+    #txt05088{
+        margin-top: 0px;
+    }
+</style>
+<div class="on-group-index">
+    <div class="decorate_index designer_info">
+<!--        <div class="content_text">
+           <div class="title">{$data.title}</div>
+           <div class="date">{$data.published|date="Y-m-d H:i",###}</div>
+           <div class="cont">
+               {$data.content}
+           </div>
+       </div> -->
+       <input type="hidden" name="" id="loginid" value="{{$login}}">
+               <input type="hidden" id="verphone" value="{$verphone}">
+        <input type="hidden" id="mobile" value="{$mobile}">
+        <input type="hidden" id="choseid" value="{$info.id}">
+        <input type="hidden" id="name_gift" value="{$info.name}">
+        <input type="hidden" id="name_point" value="{$info.point}">
+
+      <if condition="$isbuy eq 1">
+            <!-- <input type="text" name="" value="{$isbuy}"> -->
+            <div class="content_text content-gift-detail">
+                <div class="clearfix"></div>
+                <dl>
+                    <dd class="title-gitf-detail"> {$info.name} </dd>
+                    <div class="clearfix"></div>
+                    <dd class="title-gitf-detail time-g-detail"> <span>[{$info.createtime}]</span></dd>
+                </dl>
+                <dl class="juzhong">
+                    <p class="biankuan">您必须一次性兑换完积分，才可以完整查看改篇文章，<a href="javascript:;" onclick="clickduihuan({$info.id},'{$info.name}',{$info.point},{$jifenbuzu})" class="color-red">点击兑换</a></p>
+                </dl>
+                <div class="clearfix"></div>
+            </div>
+        
+
+        <else/>
+
+            <div class="content_text content-gift-detail">
+                <div class="clearfix"></div>
+                <dl>
+                    <dd class="title-gitf-detail"> {$info.name} </dd>
+                    <div class="clearfix"></div>
+                    <dd class="title-gitf-detail time-g-detail"> <span>[{$info.createtime}]</span></dd>
+                </dl>
+                <dl >
+                    <div class="main_b3_4_main">{$info.description|html_entity_decode}</div>
+                </dl>
+                <div class="clearfix"></div>
+            </div>
+
+        </if>
+
+
+
+   </div>
+</div>
+
+
+
+<!--分页【-->
+<notempty name="page">
+    <div class="pagestyle">
+        {$page}
+    </div>
+</notempty>
+<!--分页】-->
+<!---底部开始-->
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+var acpid = '{$info.pid}';
+var setTixingUrl ="{:U('Point/tixing')}";
+var handler ="function_name()";
+
+
+function clickduihuan(id,name,jifen,isjifen) {
+        var login = $('#loginid').val();
+
+    if(login==0){
+        popStatus(2, '请先登陆后进行积分兑换！', 2,'',true);
+    }else{
+        var verphone = $('#verphone').val();
+        var mobile = $('#mobile').val();
+        if(mobile.length!=11){
+            popStatus(1, '您的手机未验证，请正在为您跳转到手机验证页面', 3,'/Member/check/type/mobile',true);
+        }else{    
+
+            if(isjifen==0){
+                setTixingUrl = "{:U('Point/tixingb')}";
+                asyncbox.open({
+                    id : "open_0",
+                    title : '积分兑换',
+                    args : {pid:acpid},
+                    modal : true,
+                    buttons : asyncbox.btn.CANCEL,
+                    url : setTixingUrl+'?name='+name+'&jifen='+jifen,
+                    callback: handlerF
+                })
+            }else{
+                asyncbox.open({
+                    id : "open_0",
+                    title : '积分兑换',
+                    args : {pid:acpid},
+                    modal : true,
+                    buttons : asyncbox.btn.OKCANCEL,
+                    url : setTixingUrl+'?name='+name+'&jifen='+jifen,
+                    callback: handlerF
+                })
+            }
+            
+        }
+    }
+}
+
+function handlerF(buttonResult,contentWindow,returnValue){
+    var ggid = $('#choseid').val();
+    var name = $('#name_gift').val();
+    var jifen = $('#name_point').val();
+
+    if(buttonResult=='ok'){
+        $.ajax({
+            url: setTixingUrl,
+            type: 'POST',
+            dataType: 'json',
+            data: {jifen: jifen,
+                   ggid: ggid,
+                   name: name,
+                   type: '2'},
+        })
+        .done(function(data) {
+            popStatus(data.type, data.info, data.time,'',true);
+            location.reload();
+        })
+        .fail(function(data) {
+            popStatus(2, "系统故障了，请稍候", 1,'',true);
+        });
+    }
+}
+</script>

@@ -1,0 +1,27 @@
+<div class="on-plate">
+    <h1 class="on-channel-title am-cf">资讯中<span class="on-searchkey">“{$searchkey}”</span>关键词的搜索结果
+      <span class="am-fr">
+      <a class="on-mor" href="{:U('Index/search',array('searchtype'=>1,'searchkey'=>$searchkey))}">更多</a>
+      </span>
+   </h1>
+    <div class="am-list-news-bd am-margin-sm">
+        <ul class="am-list">
+            <empty name="search.news">
+                <li class="datanone">没有找到关于“<strong style="color:red">{$searchkey}</strong>”的资讯</li>
+            <else/>
+                <volist name="search.news" id="nvo">
+                    <li class="am-g am-list-item-desced">
+                        <a class="am-list-item-hd" href="{:U('notice_details',array('id'=>$nvo['id']))}" >{$nvo.title}</a>
+                        <div class="am-list-item-text">{$nvo.description}<span>{$nvo.published|date="Y-m-d H:i",###}</span></div>
+                        
+                    </li>
+                </volist>
+            </empty>
+        </ul>
+    </div>
+</div>
+<notempty name="page">
+        <div class="pagestyle">
+            {$page}
+        </div>
+    </notempty>

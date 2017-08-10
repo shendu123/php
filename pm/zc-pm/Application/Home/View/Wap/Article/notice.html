@@ -1,0 +1,32 @@
+<include file="Common:meta" />
+<title>{$cname}-{$site.SITE_INFO.title}</title>
+<meta name="description" content="{$site.SITE_INFO.keyword}">
+<meta name="keywords" content="{$site.SITE_INFO.description}">
+<include file="Common:link" />
+<body>
+    <div class="am-list-news am-list-news-default am-no-layout">
+        <div class="am-list-news-hd am-cf">
+            <a class="" href="javascript:void(0);">
+                <h2>{$cname}</h2>
+            </a>
+        </div>
+        <div class="am-list-news-bd">
+            <ul class="am-list">
+                <volist name="list" id="vo">
+                    <li class="am-g am-list-item-desced">
+                        <a class="am-list-item-hd" href="{:U('notice_details',array('id'=>$vo['id']))}" >{$vo.title}</a>
+                        <div class="am-list-item-text">{$vo.description}<span>{$vo.published|date="Y-m-d H:i",###}</span></div>
+                        
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+    <notempty name="page">
+        <div class="pagestyle">
+            {$page}
+        </div>
+    </notempty>
+<include file="Common:navbar"/>
+</body>
+</html>

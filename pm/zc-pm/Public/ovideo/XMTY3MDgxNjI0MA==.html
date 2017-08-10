@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0047)http://player.youku.com/embed/XMTY3MDgxNjI0MA== -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Youku Universal Player</title>
+    
+    <style>
+        html, body { height:100%; }
+        body { margin:0; }
+    </style>
+</head>
+<body>
+<div id="youku-playerBox" style="width:100%;height:100%;"><object type="application/x-shockwave-flash" data="./v.swf.download" width="100%" height="100%" id="youku-player"><param name="allowFullScreen" value="true"><param name="allowScriptAccess" value="always"><param name="movie" value="http://player.youku.com/player.php/sid/XMTY3MDgxNjI0MA==/isAutoPlay/false/partnerid/0edbfd2e4fc91b72/v.swf"><param name="flashvars" value="imglogo=&amp;partnerId=0edbfd2e4fc91b72&amp;styleid=0"></object></div>
+<script id="_youkujs_" type="text/javascript"></script>
+<script type="text/javascript" src="./jsapi"></script>
+<script language="javascript">
+	var _QS = QS();
+	var arr = window.location.pathname.split('/');
+	var _vid = 0;
+	if(arr.length == 3 && arr[1] == 'embed' && arr[2].charAt(0) == 'X' ){
+		_vid = arr[2];
+	}
+	if(_QS.target == null ) _QS.target = "youku-playerBox";
+	if(_QS.client_id == null) _QS.client_id = "0edbfd2e4fc91b72";//"youkuind_";
+	if(_QS.autoplay != true) _QS.autoplay = false;
+             
+	 var player = new YKU.Player('youku-playerBox',{
+		  styleid: '0', 
+		  client_id: _QS.client_id,
+		  vid: _vid,
+		  autoplay:_QS.autoplay
+		//  newPlayer: true
+	  });   
+</script>
+      
+
+</body></html>

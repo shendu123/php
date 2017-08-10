@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>订单信息-交易管理-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;交易管理&nbsp;&gt;&gt;&nbsp;订单信息</div>
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                <!-- 进度【 -->
+                <div class="flowstep">
+                    <ol class="flowstep-5">
+                        <li class="step-first">
+                            <div class="step-done">
+                                <div class="step-name">竞拍成功</div>
+                                <div class="step-no"></div>
+                                <div class="step-time">
+                                    <div class="step-time-wraper">{$oinfo.time|date='Y-m-d H:i',###}</div>
+                                </div>
+                            </div>        
+                        </li>
+                        <li>
+                            <neq name="oinfo.time1" value="0">
+                                <div class="step-done">
+                                    <div class="step-name">支付订单</div>
+                                    <div class="step-no"></div>
+                                    <div class="step-time">
+                                        <div class="step-time-wraper">{$oinfo.time1|date='Y-m-d H:i',###}</div>
+                                    </div>
+                                </div>
+                            <else />
+                                <div class="step-cur">
+                                    <div class="step-name">支付订单</div>
+                                    <div class="step-no">2</div>
+                                </div>
+                            </neq>
+                        <li>
+                            <neq name="oinfo.time2" value="0">
+                                <div class="step-done">
+                                    <div class="step-name">卖家发货</div>
+                                    <div class="step-no"></div>
+                                    <div class="step-time">
+                                        <div class="step-time-wraper">{$oinfo.time2|date='Y-m-d H:i',###}</div>
+                                    </div>
+                                </div>
+                            <else />
+                                <div class="step-cur">
+                                    <div class="step-name">卖家发货</div>
+                                    <div class="step-no">3</div>
+                                </div>
+                            </neq>
+                        </li>
+                        <li>
+                            <neq name="oinfo.time3" value="0">
+                                <div class="step-done">
+                                    <div class="step-name">确认收货</div>
+                                    <div class="step-no"></div>
+                                    <div class="step-time">
+                                        <div class="step-time-wraper">{$oinfo.time3|date='Y-m-d H:i',###}</div>
+                                    </div>
+                                </div>
+                            <else />
+                                <div class="step-cur">
+                                    <div class="step-name">确认收货</div>
+                                    <div class="step-no">4</div>
+                                </div>
+                            </neq>
+                        </li>
+                        <li>
+                            <neq name="oinfo.time5" value="0">
+                                <div class="step-done">
+                                    <div class="step-name">买家已评价</div>
+                                    <div class="step-no"></div>
+                                    <div class="step-time">
+                                        <div class="step-time-wraper">{$oinfo.time5|date='Y-m-d H:i',###}</div>
+                                    </div>
+                                </div>
+                            <else />
+                                <div class="step-cur">
+                                    <div class="step-name">买家已评价</div>
+                                    <div class="step-no">5</div>
+                                </div>
+                            </neq>
+                        </li>
+                        <li class="step-last">
+                            <neq name="oinfo.time11" value="0">
+                                <div class="step-done">
+                                    <div class="step-name">卖家已评价</div>
+                                    <div class="step-no"></div>
+                                    <div class="step-time">
+                                        <div class="step-time-wraper">{$oinfo.time11|date='Y-m-d H:i',###}</div>
+                                    </div>
+                                </div>
+                            <else />
+                                <div class="step-cur">
+                                    <div class="step-name">卖家已评价</div>
+                                    <div class="step-no">6</div>
+                                </div>
+                            </neq>
+                        </li>
+                    </ol>
+                </div>
+                <!-- 进度】 -->
+                <include file="Member:order_box" />
+                <eq name="oinfo.exphtml.status" value="1">
+                    <div class="expbird">
+                        {$oinfo.exphtml.html}
+                    </div>
+                </eq>
+            </div>
+            <!---右侧结束-->
+        </div>
+        <!--auction.html结束-->
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<script type="text/javascript">
+var receiptUrl = "{:U('Member/receipt')}";
+    $("#receipt").click(function(){
+        var order = $(this).attr("order");
+        popup.confirm('你确认已经收到拍品【<b>'+$(this).attr("pname")+'</b>】吗?','温馨提示',function(action){
+            if(action == 'ok'){
+                $.post(receiptUrl,{'order':order},function(data){      //ajax后台
+                popStatus(3, '正在确认收货...', 0,'',true);
+                if (data.status) {
+                        popup.success(data.msg);
+                        setTimeout(function(){
+                            popup.close("asyncbox_success");
+                            top.window.location.href=data.url;
+                        },2000);
+                    } else {
+                        popStatusOff();
+                        alert(data.msg);
+                    }
+                },'json'); 
+            }
+        });
+        return false;
+    });
+
+</script>
+</body>
+</html>

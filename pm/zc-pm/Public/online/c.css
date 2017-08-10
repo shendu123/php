@@ -1,0 +1,63 @@
+
+@charset "utf-8";
+.footer{
+	background: rgba(0, 0, 0, 0) url("../images/footer-bg.png") repeat scroll 0 0;
+	padding-top: 30px;
+	height: 290px;
+}
+.footer .footer-top .title{
+	text-align: center;
+	margin-bottom: :20px;
+	color: rgb(184,188,196,0.8);
+	font-size: 18px;
+}
+.footer .footer-top .coop-banks {
+	float: left;
+	width: 358px;
+	padding: 0px 20px;
+	border-left: solid 1px #646464;
+	border-right: solid 1px #646464;
+}
+.footer .footer-top .coop-banks li {
+	float: left;
+	width: 110px;
+	height: 25px;
+	list-style-type: disc;
+	list-style-position: inside;
+	color: #929496;
+	margin: 0px 4px;
+	/*margin: 2px 15px;*/
+}
+.footer .footer-top .coop-banks li a {
+	color: #929496;
+}
+.footer .footer-top .sub-companys li{
+	float: left;
+	width: 120px;
+	height: 35px;
+	margin: 2px 5px 2px 15px;
+}
+.footer .footer-bottom .web-links{
+	text-align: center;
+	margin: 0 auto;
+	padding: 10px 0px;
+	width: 716px;
+}
+.spacial-list .item-1 {float: left;width: 185px;height: 60px; padding: 30px 25px 30px 40px;}
+.spacial-list .item-2 {float: left;width: 200px;height: 60px; padding: 30px 25px 30px 30px;}
+.spacial-list .item-3 {float: left;width: 190px;height: 60px; padding: 30px 25px 30px 32px;}
+.spacial-list .item-4 {float: left;width: 185px;height: 60px; padding: 30px 25px 30px 32px;}
+
+
+.news-content p{
+	margin-bottom: 20px;
+	font-size: 16px;
+}
+.menu ul.dropdown ul {
+    display: none;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 375px;
+    z-index: 100;
+}

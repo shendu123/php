@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>找回密码-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+    <include file="Common:head_narrow" />
+    <!-- 主体开始 -->
+	<div id="container_white">
+		<div class="main_b3">
+        	<div class="register_add">
+				{:showAdvPosition('register_add','span')}
+			</div>
+			<!--注册开始-->	
+			<div class="main_b8_1">
+				<div class="main_b8_1_main">
+					<div class="wellcome">
+						<ul>
+							<li class="welltitle">找回密码——{$site.SITE_INFO.name}</li>
+							<li class="denglu">已注册？&nbsp;<a href="{:U('Login/index')}">登录</a></li>
+						</ul>
+					</div>
+					<div class="loginTypeTit">
+						<div class="loginType">
+							<a <eq name="findType" value="email"> class="on"</eq> href="{:U('Login/findPwd',array('findType'=>'email'))}">通过邮箱找回密码</a>
+							<a <eq name="findType" value="mobile"> class="on"</eq> href="{:U('Login/findPwd',array('findType'=>'mobile'))}">通过手机找回密码</a>
+						</div>
+					</div>
+					<!-- 邮箱注册表单 -->
+					<eq name="findType" value="email">
+						<div id="emailRegister">
+							<form id="RegForm" class="reg-form validateClass" name="register" method="post" >
+							<input type="hidden" name="" value="email" id="type_m_e">
+								 <dl class="clearfix">
+									 <dt>邮箱</dt>
+									 <dd><input id="email" name="email" size="30" type="text" class="input checkadr" value="{$email}" /></dd>
+									 <dd><input checktp="email" class="checkbtnto"  style="margin-left: 5px;" type="button" value="发送验证码" /></dd>
+									 <dd><div id="emailTip"></div></dd>
+								 </dl>
+								 <dl class="clearfix">
+									 <dt>邮箱验证码</dt>
+									 <dd><input size="10" id="email_verify" name="email_verify" type="text" class="input" value="" /></dd>
+									 <dd><div id="email_verifyTip"></div></dd>
+								 </dl>
+								 <dl class="clearfix">
+									 <dt>重设密码</dt>
+									 <dd><input id="pwd" name="pwd" size="30" type="password" class="input" /></dd>
+									 <dd><div id="pwdTip"></div></dd>
+								 </dl>
+								 <dl class="clearfix">
+									<dt>确认密码</dt>
+									<dd><input id="pwded" name="pwded" size="30" type="password" class="input" /></dd>
+									<dd><div id="pwdedTip"></div></dd>
+								 </dl>
+								 <dl>
+								   <dt>&nbsp;</dt>
+									<dd><input class="submit pm_btn_5" type="submit" value='重置密码' id='regis'/></dd>
+								</dl>
+								<input type="hidden" name="findType" value="email">
+							</form>
+						</div>
+					</eq>
+					<!-- 邮箱注册表单——end -->
+					<!-- 手机注册表单 -->
+					<eq name="findType" value="mobile">
+						<div id="noteRegister">
+							<form id="RegForm" class="reg-form validateClass" name="register" method="post">
+								<input type="hidden" name="" value="mobile" id="type_m_e">
+								 <dl class="clearfix">
+									 <dt>手机号码：</dt>
+									 <dd><input size="30" id="mobile" name="mobile" type="text" class="input checkadr" value="" /></dd>
+									 <dd><input checktp="mobile" class="checkbtnto"  style="margin-left: 5px;" type="button" value="发送验证码" /></dd>
+									 <dd><div id="mobileTip"></div></dd>
+								 </dl>
+								 <dl class="clearfix">
+									 <dt>手机验证码</dt>
+									 <dd><input size="10" id="mobile_verify" name="mobile_verify" type="text" class="input" value="" /></dd>
+									 <dd><div id="mobile_verifyTip"></div></dd>
+								 </dl>
+								 <dl class="clearfix">
+									 <dt>重设密码</dt>
+									 <dd><input id="pwd" name="pwd" size="30" type="password" class="input" /></dd>
+									 <dd><div id="pwdTip"></div></dd>
+								 </dl>
+								 <dl class="clearfix">
+									<dt>确认密码</dt>
+									<dd><input id="pwded" name="pwded" size="30" type="password" class="input" /></dd>
+									<dd><div id="pwdedTip"></div></dd>
+								 </dl>
+								 <dl>
+								   <dt>&nbsp;</dt>
+									<dd><input class="submit pm_btn_5" type="submit" value='重置密码' id='regis'/></dd>
+								</dl>
+								<input type="hidden" name="findType" value="mobile">
+							</form>
+						</div>
+					</eq>
+					<!-- 手机注册表单——end -->
+				</div>
+			</div>
+			<!--注册结束-->
+
+		</div>
+	</div>
+	<!---底部开始---->
+	<div class="main_a8 clearfix">
+	    <div class="main_a8_main clearfix">
+	        <include file="Common:advertorial" />
+	    </div>
+	</div>
+	<include file="Common:footer"/>
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<script type="text/javascript">
+var findCheckMobile = "{:U('Login/findCheckMobile')}";
+var findCheckEmail = "{:U('Login/findCheckEmail')}";
+var checkVerify = "{:U('Login/checkVerify')}";
+var checkEmailCode = "{:U('Login/checkEmailCode')}";
+var checkMobileCode = "{:U('Login/checkMobileCode')}";
+
+var sendCodeUlrl = "{:U('Login/sendCode')}";
+var wait=60;
+    $(function(){
+    	// 表单验证【
+		// $.formValidator.initConfig({formID:"RegForm",submitButtonID:"submit"});
+		// $("#email").formValidator({onShow:"请输入邮箱",onFocus:"邮箱6-100个字符",onCorrect:"输入正确",defaultValue:"@"}).inputValidator({min:6,max:100,onError:"你输入的邮箱长度不正确,请确认"}).regexValidator({regExp:"^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$",onError:"你输入的邮箱格式不正确"}).ajaxValidator({
+		// 		url : findCheckEmail,
+		// 		type : 'POST',
+		// 		dataType : "json",
+		// 		data : "&email="+$('#email').val()+"&how=findpwd",
+		// 		async : true,
+		// 		success : function(data){
+		// 			return data;
+		// 		},
+		// 		error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+		// 		onError : "该邮箱未注册，或未进行过认证！",
+		// 		onWait : "正在对邮箱进行合法性校验，请稍候..."
+		// 	});
+		// $("#email_verify").formValidator({onShow:"收到邮件中的验证码",onFocus:"完成注册必须项",onCorrect:"输入正确"}).inputValidator({min:1,max:8,onError:"验证码错误,请确认"}).ajaxValidator({
+		// 		url : checkEmailCode,
+		// 		type : 'POST',
+		// 		dataType : "json",
+		// 		data : "&email="+$('#email').val()+"&email_verify="+$('#email_verify').val(),
+		// 		async : true,
+		// 		success : function(data){
+		// 			return data;
+		// 		},
+		// 		error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+		// 		onError : "邮箱验证码错误！请检查",
+		// 		onWait : "正在对邮箱验证码进行合法性校验，请稍候..."
+		// 	});
+		// $("#mobile").formValidator({onShow:"主要用于交易通知",onFocus:"11位数字，如“13812345678”",onCorrect:"谢谢你的合作",onEmpty:"该项为必填项"}).inputValidator({min:11,max:11,onError:"手机号码必须是11位的,请确认"}).regexValidator({regExp:"mobile",dataType:"enum",onError:"你输入的手机号码格式不正确"}).ajaxValidator({
+		// 		url : findCheckMobile,
+		// 		type : 'POST',
+		// 		dataType : "json",
+		// 		data : "&mobile="+$('#mobile').val()+"&how=findpwd",
+		// 		async : true,
+		// 		success : function(data){
+		// 			return data;
+		// 		},
+		// 		error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+		// 		onError : "该手机号未注册，或未进行过认证！",
+		// 		onWait : "正在对手机号进行合法性校验，请稍候..."
+		// 	});
+		// $("#mobile_verify").formValidator({onShow:"收到手机中的验证码",onFocus:"完成注册必须项",onCorrect:"输入正确"}).inputValidator({min:1,max:8,onError:"验证码错误,请确认"}).ajaxValidator({
+		// 		url : checkMobileCode,
+		// 		type : 'POST',
+		// 		dataType : "json",
+		// 		data : "&mobile="+$('#mobile').val()+"&mobile_verify="+$('#mobile_verify').val(),
+		// 		async : true,
+		// 		success : function(data){
+		// 			return data;
+		// 		},
+		// 		error: function(jqXHR, textStatus, errorThrown){alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);},
+		// 		onError : "手机验证码错误！请检查",
+		// 		onWait : "正在对手机验证码进行合法性校验，请稍候..."
+		// 	});
+
+		// $("#pwd").formValidator({onShow:"请输入密码",onFocus:"至少6个字符",onCorrect:"密码合法"}).inputValidator({min:6,empty:{leftEmpty:false,rightEmpty:false,emptyError:"密码两边不能有空符号"},onError:"密码至少6个字符,请确认"});
+		// $("#pwded").formValidator({onShow:"输再次输入密码",onFocus:"至少6个字符",onCorrect:"密码一致"}).inputValidator({min:6,empty:{leftEmpty:false,rightEmpty:false,emptyError:"重复密码两边不能有空符号"},onError:"重复密码至少6个字符,请确认"}).compareValidator({desID:"pwd",operateor:"=",onError:"2次密码不一致,请确认"});
+		// 表单验证】
+		var typeme = $('#type_m_e').val();
+		var checkadr = $('#'+$(this).attr('checktp')).val();
+		var mes = '未知错误';
+		if(typeme=='mobile'){
+			mes  = '手机号码错误';
+		}else{
+			mes = '还不支持邮箱找回密码'
+		}
+
+    	// 重新发送验证码
+    	$('.checkbtnto').click(function(){
+    		
+    		var checkadr = $('#'+$(this).attr('checktp')).val();
+    		if(checkadr.length<11){
+    			popup.error(mes);
+    			setTimeout(function(){
+                    popup.close("asyncbox_error");
+                },2000);
+    		}else{
+    			popStatus(3, '发送中...', 0,'',true);
+				var checktp = $(this).attr('checktp');
+				$.post(sendCodeUlrl,{'checkadr':checkadr,'checktp':checktp,'how':'findpwd','type':'xiugai'},function(data){
+					popStatusOff();
+	                if (data.status) {
+	                    popup.success(data.info);
+	                    setTimeout(function(){
+	                        popup.close("asyncbox_success");
+	                    },2000);
+	                    $('.checkadrbox input').attr("disabled", 'disabled');
+	                    time($('.checkbtnto'));
+	                } else {
+	                    popup.error(data.info);
+	                    setTimeout(function(){
+	                        popup.close("asyncbox_error");
+	                    },2000);
+	                }
+	            },'json');
+			}
+        });
+    });
+// 重新发送验证码
+function time(o) {
+    if (wait == 0) {
+        o.attr("disabled", false);
+        o.attr('value','重新发送');       
+        wait = 60;
+    } else {
+        o.attr("disabled", true);
+        o.attr('value','重新发送(' + wait + ')');
+        wait--;
+        setTimeout(function() {
+            time(o)
+        },
+        1000)
+    }
+}
+</script>
+</body>
+</html>

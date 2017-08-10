@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="{$info.keywords}" />
+    <meta name="description" content="{$info.description}" />
+        <title>{$info.name}-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+    <css href="__CSS__/cuitindex.css"/>
+    <css href="__CSS__/picshow.css"/>
+    <!-- <js href="__WEBSOCKET__/js/swfobject.js"/> -->
+    <!-- <js href="__WEBSOCKET__/js/web_socket.js"/> -->
+        <js href="--PUBLIC--/Js/jquery_raty/jquery.raty.min.js"/>
+    <!-- <js href="__JS__/bid_details.js"/> -->
+        <js href="__JS__/picshow.js"/>
+        <!-- 图片查看器【 -->
+        <css href="__STATIC__/Js/viewer/viewer.min.css"/>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="__STATIC__/Js/viewer/html5shiv.min.js"></script>
+        <script src="__STATIC__/Js/viewer/respond.min.js"></script>
+        <![endif]-->
+        <js href="__STATIC__/Js/viewer/viewer.min.js"/>
+        <js href="__STATIC__/Js/viewer/main.js"/>
+        
+        <!-- 图片查看器】 -->
+    </head>
+    <body >
+    <include file="Common:head_wide" />
+
+    <style type="text/css">
+     #loginarea a {
+        line-height: 35px;
+        text-align: center;
+        margin-left: 32px;
+        float: left;
+        display: inline;
+            text-decoration:none; 
+    }
+
+    .title-gitf-detail{
+        text-align:center;
+        font-size: 20px;
+        color: #7b600f;
+    }
+    .time-g-detail{
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    .content-gift-detail{
+        min-height: 400px;
+        _height:400px;
+
+    }
+    .juzhong{
+        margin-top: 20px;
+        text-align:center;
+    }
+
+
+    .color-red{
+        color: red;
+    }
+    .main_b3_4_main{
+        margin: 0 180px;
+
+    }
+
+
+
+    .ax_uu {
+
+        text-align: center;
+        line-height: normal;
+    }
+
+　
+img{vertical-align:top;display:inline-block;}
+#u16 {
+    position: absolute;
+    left: 50%;
+    margin-top: 30%;
+    /* top: 520px; */
+    width: 180px;
+    height: 60px;
+    font-family: 'Arial Negreta', 'Arial';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px;
+    color: #FFFFFF;
+}
+.ax_uu {
+
+    line-height: normal;
+}
+#u17 {
+    position: absolute;
+    left: 50px;
+    top: 19px;
+    width: 176px;
+    word-wrap: break-word;
+}
+    .footer-btn{
+
+            width:180px;
+            height:60px;display:block;
+            margin:0px auto;
+            line-height:60px;
+            text-align:center;
+            color:#fff;
+            font-size:16px;
+            /*background:rgba(152,0,0);*/
+            background: #980000;
+            border:0;font-family: "微软雅黑";
+    }
+    #button-top{
+        margin-top: 100px;
+    }
+
+
+</style>
+
+    <div class="container">
+        <div class="clearfix">
+            <div class="main_b3_top">
+                <a href="">首页</a>&nbsp;&gt;&gt;&nbsp;
+                <a href="http://www.fjsxpmh.com/Point/index.html">积分商城</a>&nbsp;&gt;&gt;&nbsp;<a href="http://www.fjsxpmh.com/Point/index.html">积分兑换礼品</a>&nbsp;&gt;&gt;&nbsp;礼品详细</div>
+            <div class="main_b3_1 fl">
+                <div id="picShow">
+                    <ul class="image docs-pictures" id="bigpics" title="">
+                        <notempty name="info[picurl3]">
+                            <foreach name='info[picurl3]' item='pv' key="i">
+                                <if condition="$i eq 1 ">
+                                <li style="display: list-item;"> 
+                                        <a href="javascript:void(0);"><img data-original="{$upWholeUrl}{$pv}" src="{$upWholeUrl}{$pv}" class="viewer-toggle"></a>
+                                    </li>
+                                <else/>
+                                    <li style="display: none;"> 
+                                        <a href="javascript:void(0);"><img data-original="{$upWholeUrl}{$pv}" src="{$upWholeUrl}{$pv}" class="viewer-toggle"></a>
+                                    </li>
+                                </if>
+                                
+                            </foreach>
+                        </notempty>
+                    </ul>
+                    <div class="switch">
+                        <div class="icon1"><a class="prev_img" href="javascript:void(0);" title="上一个"></a></div>
+                        <div class="switch_center" id="pics">
+                            <ul style="width: 460px;">
+                                <notempty name="info[picurl3]">
+                                    <foreach name='info[picurl3]' item='pv'>
+                                         <li class="photo">
+                                            <a href="javascript:void(0);" class=""><img width="83px" height="62px" alt="tupian" data-original="{$upWholeUrl}{$pv}" lksrc="{$upWholeUrl}{$pv}" src="{$upWholeUrl}{$pv}"></a>
+                                        </li>
+                                    </foreach>
+                                </notempty>
+
+                             </ul>
+                      </div>
+                        <div class="icon2"><a class="next_img" href="javascript:void(0);" title="下一个" onfocus="this.blur();"></a></div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="main_b3_2 fl">
+                <div class="showtimebox clearfix">
+                    <div class="hleft">
+                        <h1>{$info.name}</h1>                         
+                    </div>
+                </div>
+                <div class="defcon">
+                    <ul class="bid_info">
+                        <li>
+                            <div id="nowth" class="th">兑换需要：</div>
+                            <span id="nowprice" class="nowprice">{$info.point}<span class="unit">积分</span></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="defcon">
+
+            <dt class="bid_info">颜色分类:随机</dt>
+                </div>
+                <div class="defcon">
+                     
+                <dt class="bid_info2">数量<span >
+                    <input id="min" name="" type="button" value="-" disabled="disabled">  
+                    <input id="text_box" name="" type="text" value="1" style="width:30px;">  
+                    <input id="add" name="" type="button" value="+">件
+                    </span>
+                    <em>(库存<span id="" class="">24</span>件)</em>                    </dt>
+                </div>
+<div class="defcon">
+                <a href="javascript:;" id ="button-top" class="footer-btn" onclick="clickduihuan({$info.id},'{$info.name}',{$info.point},{$jifenbuzu})" >              
+                立即兑换
+                        
+    
+                    </a></div>
+                
+            </div>
+
+        </div>
+                        
+
+        <!-- 竞拍详细页广告 -->
+        <div class="details_add"><span></span></div>
+        <!-- 竞拍详细页广告——end -->
+        
+            
+                    <!-- 详情下部【 -->
+        <div class="detail_content clearfix mt10">
+        <!-- 详情下部右侧【 -->
+            <div class="content_left">
+                <div class="main_b3_4">
+                    <div class="main_b3_4_top"><h2>礼品描述</h2></div>
+                    <div class="main_b3_4_main">{$info.description|html_entity_decode}</div>
+                </div>
+                <div class="main_b3_content">
+                    <ul id="extcon_menu" class="tab_menu">
+                        <li class="tab on">拍品详情</li>
+                                                
+                    </ul>
+                    <div id="extcon_content" class="main_b3_tab_con">
+                        {$info.description2|html_entity_decode}
+                    </div>
+                </div>
+            </div>
+            <!-- 详情下部右侧】 -->
+            <!-- 详情下部左侧【 -->
+            <div class="content_right">
+                
+                
+                <div class="morsp">
+                    <div class="morsp_tit"></div>
+                    <ul class="morsp_con">
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 详情下部左侧】 -->
+        </div>
+
+
+
+
+        <input type="hidden" id="verphone" value="{$verphone}">
+        <input type="hidden" id="mobile" value="{$mobile}">
+        <input type="hidden" id="choseid" value="{$info.id}">
+        <input type="hidden" id="name_gift" value="{$info.name}">
+        <input type="hidden" id="name_point" value="{$info.point}">
+
+
+        
+
+
+
+  <!--           <div class="content content-gift-detail">
+                <div class="clearfix"></div>
+                <dl>
+                    <dd class="title-gitf-detail">{$info.name} </dd>
+                    <div class="clearfix"></div>
+                    <dd class="title-gitf-detail time-g-detail"> <span>[{$info.createtime}]</span></dd>
+                </dl>
+                <dl >
+                    <div class="main_b3_4_main">{$info.description|html_entity_decode}
+                       
+                    </div>
+                </dl>
+                <div class="clearfix"></div>
+
+             
+            </div> -->
+
+
+    </div>
+
+        
+
+<!---底部开始-->
+<include file="Common:help_wide" />
+<include file="Common:footer"/>
+
+ <script src="--PUBLIC--/ueditor/ueditor.parse.js"></script>
+</body>
+</html>
+
+<script type="text/javascript">
+var acpid = '{$info.pid}';
+
+var setTixingUrl ="{:U('Point/tixing')}";
+var handler ="function_name()";
+
+
+function clickduihuan(id,name,jifen,isjifen) {
+
+    if(login==0){
+        popStatus(2, '请先登陆后进行积分兑换！', 2,'',true);
+    }else{
+        var verphone = $('#verphone').val();
+        var mobile = $('#mobile').val();
+        if(mobile.length!=11){
+            popStatus(1, '您的手机未验证，请正在为您跳转到手机验证页面', 3,'/Member/check/type/mobile',true);
+        }else{
+
+            if(isjifen==0){
+                setTixingUrl = "{:U('Point/tixingb')}";
+                asyncbox.open({
+                    id : "open_0",
+                    title : '积分兑换',
+                    args : {pid:acpid},
+                    modal : true,
+                    buttons : asyncbox.btn.CANCEL,
+                    url : setTixingUrl+'?name='+name+'&jifen='+jifen,
+                    callback: handlerF
+                })
+            }else{
+                asyncbox.open({
+                    id : "open_0",
+                    title : '积分兑换',
+                    args : {pid:acpid},
+                    modal : true,
+                    buttons : asyncbox.btn.OKCANCEL,
+                    url : setTixingUrl+'?name='+name+'&jifen='+jifen,
+                    callback: handlerF
+                })
+            }
+            
+        }
+    }
+}
+
+function handlerF(buttonResult,contentWindow,returnValue){
+    var ggid = $('#choseid').val();
+    var name = $('#name_gift').val();
+    var jifen = $('#name_point').val();
+
+    if(buttonResult=='ok'){
+        $.ajax({
+            url: setTixingUrl,
+            type: 'POST',
+            dataType: 'json',
+            data: {jifen: jifen,
+                   ggid: ggid,
+                   name: name,
+                   type: '2'},
+        })
+        .done(function(data) {
+            popStatus(data.type, data.info, data.time,'',true);
+            location.reload();
+        })
+        .fail(function(data) {
+            popStatus(2, "系统故障了，请稍候", 1,'',true);
+        });
+    }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

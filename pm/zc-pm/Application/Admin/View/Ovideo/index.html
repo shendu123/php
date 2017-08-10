@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>
+            <eq name="ACTION_NAME" value="index">{$saytyp.ch}</eq>
+            -{$site.SITE_INFO.name}
+        </title>
+        <php>
+            $pagname = '视讯';
+            $currentNav ='视讯管理 > '.$pagname;
+            $this->pagname=$pagname;
+            $this->currentNav->$currentNav;
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td width="5%">编号</td>
+                                <td width="18%">视频列表名字</td>
+                                <td width="10%">简介处名字</td>
+                                <td width="10%">讲师</td>
+                                <td width="9%">上传时间</td>
+                                <td width="9%">url</td>
+                                <td width="8%">初始化播放次数</td>
+                                <td width="10%">图片</td>
+                                <td width="21%">操作</td>
+
+                            </tr>
+                        </thead>
+                        <volist name="list" id="vo">
+                            <tr align="center" pid="{$vo.crowd_id}">
+                                <td>{$vo.ovideo_id}</td>
+                                <td>{$vo.name1}</td>
+                                <td>{$vo.name2}</td>
+                                <td>{$vo.teacher}</td>
+                                <td>{$vo.updatetime}</td>
+                                <td>{$vo.url}</td>
+                                <td>{$vo.times}</td>
+                                <td align="left">
+                                    <img style="margin-right: 5px; display: inline; float:left;" src="{$upWholeUrl}{$vo.picurl}" width="61" height="26">
+                                </td>
+
+        
+                                <td>
+                                <neq name="saytyp.get" value="bidend">
+                                    [ <a href="__URL__/editcourse?cid={$vo.ovideo_id}">编辑 </a> ] [ <a link="{:U('Ovideo/delcourse/',array('cid'=>$vo['ovideo_id']))}" href="javascript:void(0)" name="{$vo.name1}" class="del">删除 </a> ]
+                                </neq>
+                                </td>
+
+                            </tr>
+                        </volist>
+                                                <tr>
+                            <td colspan="10" align="right" class="page">
+                            
+                            {$page}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            var formUrl ="{:U('Goods/search')}";
+            var getCateUrl ="{:U('Goods/getcate')}";
+            var catePid = '{$keys.pid}';
+            var selectObj = $('select[name=pid]');
+            // 频道select事件
+            selectObj.on("change",function(){
+                var pid = $(this).children('option:selected').attr('value');
+                getCateHtml(pid,$(this));
+            });
+            // 获取分类select的html
+            function getCateHtml(cheCid,selectObj){
+               $.post(getCateUrl,{'pid':cheCid},function(data){      //ajax后台
+                if (data.status) {
+                        selectObj.next('#cid_select').remove();
+                        selectObj.after(data.htm);
+                    } else {
+                        alert(data.msg);
+                    }
+                },'json');
+            }
+            $(function(){
+                getCateHtml(catePid,selectObj)
+                $(".del").click(function(){
+                    var delLink=$(this).attr("link");
+                    popup.confirm('你真的打算删除【<b>'+$(this).attr("name")+'</b>】吗?<br/>','温馨提示',function(action){
+                        if(action == 'ok'){
+                            top.window.location.href=delLink;
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,1 @@
+ var gourl = window.location.href; var u = ''; var rank = ''; var mtype = '';

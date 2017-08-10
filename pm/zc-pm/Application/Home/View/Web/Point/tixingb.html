@@ -1,0 +1,54 @@
+<style type="text/css">
+    .settcbox{ width: 100%; margin:0 auto;}
+    .settcbox li{border: 1px solid #f1f1f1;
+        color: #999;
+        display: block;
+        margin: 5px 0;
+        padding: 5px;
+    line-height: 35px;}
+    .settcbox li .checkico{ background: url(--PUBLIC--/Home/Img/checkbox_tx.png) no-repeat 0 -35px;display: block;
+        float: left;
+        width: 35px;
+        height: 35px;
+        margin-right: 10px; }
+    .settcbox li .txname{ font-size: 14px;}
+    .settcbox li .txno{ color: #980000;
+        font-size: 16px;}
+    .settcbox li.allow{cursor: pointer;}
+    .settcbox li.allow:hover{border: solid 1px #e4e4e4; color: #666; background-color: #f1f1f1;}
+    .settcbox li.allow:hover .checkico,.settcbox li.on .checkico{ background-position: 0 0;}
+    .settcbox li.on,.settcbox li.on:hover{ border: solid 1px #f59494; color: #980000; background-color: #fdd3d3;}
+    .red-tixingb{
+        color: red;
+    }
+</style>
+
+
+<html>
+    <head>
+        <css href="__CSS__/base.css"/>
+        <css href="__CSS__/common.css"/>
+        <js href="--PUBLIC--/Js/jquery-1.9.0.min.js"/>
+    </head>
+    <body style="width:440px; padding:10px 20px;">
+
+            <form id="tixingtype" name="tixingtype">
+                <div class="settcbox">
+                    <ul class="settxul">
+                        <li altp="email" class="clearfix ">
+                            <span class="txname fl">您的积分不足，<a href="javascript:;" onclick="gotoPaimai()" class="red-tixingb">去努力赚积分...</a></span></span> 
+                        </li>
+                    </ul>
+                </div>
+            </form>
+    </body>
+</html>
+
+<script type="text/javascript">
+    function gotoPaimai() {
+        // window.close();
+        window.open("{:U('Meeting/index')}");
+
+    }
+</script>
+

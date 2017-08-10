@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>添加、编辑申购商品-后台管理-{$site.SITE_INFO.name}</title>
+    <php>
+        $currentNav ='申购管理 > 添加编辑申购商品';
+    </php>
+    <include file="Common:intoHead" />
+</head>
+<body>
+    <div class="wrap">
+        <include file="Common:head" />
+        <div class="mainBody">
+            <include file="Common:left" />
+            <div id="Right">
+                <div class="Item hr clearfix">
+                    <div class="current">添加编辑申购商品</div>
+                </div>
+                <form>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                        <tr>
+                            <th width="100">商品ID：</th>
+                            <td>{$info.gid}
+                            <input type="hidden" name="info[gid]" value="{$info.gid}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>商品名称：</th>
+                            <td>{$info.title}</td>
+                        </tr>
+                        <eq name="ACTION_NAME" value="add_goods">
+                        <tr>
+                            <th width="100">发布的申购</th>
+                            <td>
+                                <select id="sidselect">
+                                    <option value="0" <eq name="info.sse" value="0">selected="selected"</eq> >未开始申购</option>
+                                    <option value="1" <eq name="info.sse" value="1">selected="selected"</eq> >正在申购</option>
+                                </select>&nbsp;&nbsp;下的&nbsp;&nbsp;
+                                <select class="hide" id="futureSelect" name="info[crowd_id]">
+                                    <volist name="futureList" id="fvo">
+                                        <option
+                                            value="{$fvo.crowd_id}"
+                                            <eq name="info[sid]" value="fvo.sid">selected="selected"</eq>
+                                        >
+                                            {$fvo.name}
+                                        </option>
+                                    </volist>
+                                </select>
+                                <select class="hide" id="bidingSelect" name="info[crowd_id]">
+                                    <volist name="bidingList" id="fvo">
+                                        <option value="{$fvo.crowd_id}"
+                                            <eq name="info[sid]" value="fvo.sid">selected="selected"</eq>
+                                        >
+                                            {$fvo.name}
+                                        </option>
+                                    </volist>
+                                </select>
+                            </td>
+                        </tr>
+                        </eq>
+                        <tr>
+                            <th>价格：</th>
+                            <td><input type="text" class="input" size="10" name="info[price]" value="{$info.price}"/></td>
+                        </tr>
+                        <tr>
+                            <th>是否收取运费：</th>
+                            <td>
+                                <input type="radio" name="info[is_delivery]" value="no" <if condition="$info.is_delivery eq 'no' or $info.is_delivery eq 0">checked="checked"</if> />不收
+                                <input type="radio" name="info[is_delivery]" value="yes"  <if condition="$info.is_delivery eq 'yes'">checked="checked"</if> />收取
+                            </td>
+                        </tr>
+                        <tr id="delivery_fee">
+                            <th>运费：</th>
+                            <td><input type="text" class="input" size="10" name="info[delivery_fee]" value="{$info.delivery_fee}"/></td>
+                        </tr>
+                        <tr>
+                            <th>是否限购：</th>
+                            <td>
+                                <input type="radio" name="info[is_limit_buy]" value="no" <if condition="$info.is_limit_buy eq 'no' or $info.is_limit_buy eq 0">checked="checked"</if> />不限
+                                <input type="radio" name="info[is_limit_buy]" value="yes"  <if condition="$info.is_limit_buy eq 'yes'">checked="checked"</if> />限购
+                            </td>
+                        </tr>
+                        <tr id="limit_buy">
+                            <th>限购人数：</th>
+                            <td><input type="text" class="input" size="10" name="info[limit_buy]" value="{$info.limit_buy}"/></td>
+                        </tr>
+                        <tr id="broker_box">
+                            <th>{$info.broker_name|default="佣金"}：</th>
+                            <td>
+                                <select id="broker_type" name="info[broker_type]">
+                                    <option value="ratio" <eq name="info.broker_type" value="ratio">selected="selected"</eq> >比例</option>
+                                    <option value="fixation" <eq name="info.broker_type" value="fixation">selected="selected"</eq> >定额</option>
+                                </select>
+                                <span>
+                                    <input id="broker" type="text" class="input" size="5" name="info[broker]" value="{$info.broker}"/>
+                                    <span class="broker_ratioTip hidden">% 按照比例收取{$info.broker_name|default="佣金"}(如：1/100，就是订单成交价为1000元的商品收取10元{$info.broker_name|default="佣金"})</span>
+                                    <span class="broker_fixationTip hidden">按照定额收取{$info.broker_name|default="佣金"}（如：填写100，就是订单支付固定收取100元{$info.broker_name|default="佣金"}）</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <eq name="ACTION_NAME" value="edit_goods">
+                        <tr>
+                            <th>注意：</th>
+                            <td>如果申购的商品已开始且已有人购买。请不要编辑数据。否则会导致数据混乱！请根据情况酌情处理！</td>
+                        </tr>
+                        <input type="hidden" name="info[ciid]" value="{$info.ciid}" />
+                        </eq>
+                    </table>
+                    <input type="hidden" name="info[referer]" value="{$referer}" />
+                </form>
+                <div class="commonBtnArea" >
+                    <button class="btn submit">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <include file="Common:foot" />
+
+<script type="text/javascript">
+var broker_ratio = "{$info.broker_ratio}";
+var broker_fixation = "{$info.broker_fixation}";
+$(function(){
+    //运费和限购
+    load_delivery();
+    load_limit_buy();
+    $("input:radio[name='info[is_delivery]']").on('click', function() { load_delivery();});
+    $("input:radio[name='info[is_limit_buy]']").on('click', function () {load_limit_buy();});
+    //运费和限购-end
+
+    resid($('#sidselect').val()); //初始化专场
+
+    $(".submit").click(function(){
+        commonAjaxSubmit();
+        return false;
+    });
+});
+
+function load_delivery() {
+    var is_delivery = $("input:radio[name='info[is_delivery]']:checked").val();
+    if(is_delivery=='no') {
+        $("input[name='delivery_fee']").val('');
+        $("#delivery_fee").hide();
+    } else {
+        $("#delivery_fee").show();
+    }
+}
+
+function load_limit_buy() {
+    var load_limit_buy = $("input:radio[name='info[is_limit_buy]']:checked").val();
+    if(load_limit_buy=='no') {
+        $("input[name='limit_buy']").val('');
+        $("#limit_buy").hide();
+    } else {
+        $("#limit_buy").show();
+    }
+}
+
+// 根据select动态改变时间
+$('#bidingSelect').on("change",function(){
+    changtime($(this));
+});
+$('#futureSelect').on("change",function(){
+    changtime($(this));
+});
+
+//初始化专场选项-------------------------------------------
+$('#sidselect').on("change",function(){
+    var stype = $(this).children('option:selected').val();
+    resid(stype);
+});
+function resid(sid){
+    if(sid==0){
+        $('#bidingSelect').addClass('hide');
+        $('#bidingSelect').removeAttr('name');
+
+        $('#futureSelect').removeClass('hide');
+        $('#futureSelect').attr('name','info[crowd_id]');
+    }else if(sid==1){
+        $('#bidingSelect').removeClass('hide');
+        $('#bidingSelect').attr('name','info[crowd_id]');
+
+        $('#futureSelect').addClass('hide');
+        $('#futureSelect').removeAttr('name');
+    }
+}
+//初始化专场选项_end -----------------------------------------
+
+// 专场动态增加删除保证金字段
+$('#bidingSelect').on("change",function(){
+    rhs($(this).children('option:selected').attr('spledge'));
+});
+$('#futureSelect').on("change",function(){
+    rhs($(this).children('option:selected').attr('spledge'));
+});
+
+//初始化佣金字段----------------------------------------
+rebroker($('#broker_type').val()); //初始化扩展字段
+$('#broker_type').on("change",function(){
+    var type = $(this).children('option:selected').val();
+    rebroker(type);
+});
+function rebroker(broker_type){
+    if(broker_type=='ratio'){
+        $('#broker').val(broker_ratio);
+        $('.broker_ratioTip').show();
+        $('.broker_fixationTip').hide();
+    }else if(broker_type=='fixation'){
+        $('#broker').val(broker_fixation);
+        $('.broker_ratioTip').hide();
+        $('.broker_fixationTip').show();
+    }
+}
+//初始化佣金字段_end ------------------------------------------
+</script>
+</body>
+</html>

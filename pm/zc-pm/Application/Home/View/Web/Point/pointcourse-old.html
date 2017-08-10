@@ -1,0 +1,175 @@
+<style>
+    .p-bar-now{background:#690; background-position:0 0; display: block; height: 8px;}
+    .p-bar {background: #b6b6b6 none repeat scroll 0 0; border-radius: 4px; height: 8px; overflow: hidden;}
+    .fore1_jzb {float: left; padding-left: 8px; position: relative; width: 80px;}
+    .fore2_jzb {float: left; padding-left: 8px; position: relative; width: 60px;}
+    .fore3_jzb {float: left; padding-left: 8px; position: relative; width: 60px;}
+   
+    .p-extra {color: #a5a5a5;}
+    .v-line_jzb {background: #e7e7e7 none repeat scroll 0 0; height: 20px; position: absolute; right: 0; top: 0; width: 1px;}
+    ul.box-progress-tbl {width: 237px; margin-left: 0px;padding: 10px; border: none;}
+    ul.box-progress-tbl:hover{border: none; box-shadow:none;}
+    li.crowd-title{height: 32px; line-height: 14px; margin-top: 19px;}
+    .auctionbox ul{
+        padding: 0px;
+        margin: 0 14px 14px;
+    }
+
+    .weizhipic_point_jzb{
+        position:absolute;
+        top:123px;
+    } 
+    .p-percent_jzb {color: #5e5e5e; font-size: 11px; line-height: 18px;}
+    .weizhizi_point_jzb{
+        position: absolute; 
+        top:126px;
+        left: 30px;
+        /*font-weight:bold;*/
+        font-size: 13px;
+
+    }
+    .stvideo_fx a {
+    display: block;
+    width: 90px;
+    height: 44px;
+    line-height:44px;
+    float: left;
+    color: #7a7a7a;
+    padding-left: 35px;
+    text-align: left;
+    text-decoration:none; 
+}
+
+    .stvideo_fx_1 a{background:url(../../../../Public/Img/point/share01.png) no-repeat 7px 10px}
+    .stvideo_fx_2 a{background:url(../../../../Public/Img/point/share01.png) no-repeat 7px -55px}
+    .stvideo_fx_3 a{background:url(../../../../Public/Img/point/share01.png) no-repeat 7px -127px}
+    #ul_jzb_nopad ,#ul_jzb_nopad li{
+        padding: 0px;
+        padding-left: 0px;
+        padding-right: 12px;
+        margin-bottom: 0px;
+    }
+    #txt05088{
+        margin-top: 0px;
+    }
+
+    .juzhong{
+        width:100px; height:20px; 
+        line-height:20px; 
+        text-align:center; float:left;
+    }
+
+    #biankuan{
+        display:inline-block;
+        width:60px; 
+        height:40px;
+        border:1px solid black;
+    }
+    
+
+</style>
+
+<js href="--PUBLIC--/Js/asyncbox/asyncbox.js"/>
+
+
+<ul class="bidbox" >
+    <li class="txt01" gid="{$avo.id}">
+        <p   class="dianji"  href="javascript:void(0);" target="_blank">
+            <a href="javascript:;"><img onclick="clickduihuan({$avo.id})" width="259" title="{$avo.name}" height="150" src="{$upWholeUrl}{$avo.picurl}" alt="{$avo.name}"></img></a>
+            <!-- <img width="259" title="{$avo.name}" height="150" src="{$avo.picurl}" alt="{$avo.name}"></img> -->
+        </p>
+        <span  ><img class="weizhipic_point_jzb" width="259" title="{$avo.name}" height="27" src="../../../../Public/Img/point/u12.jpg" alt="{$avo.name}"></img></span><span class="weizhizi_point_jzb" ><span  class="juzhong">{$avo.name}</span>
+    </li>
+    <li class="txt05" id="txt05088">
+        <input type="hidden" id="verphone" value="{$verphone}">
+        <input type="hidden" id="choseid" value="56">
+        <input type="hidden" id="mobile" value="{$mobile}">
+        <input type="hidden" id="name_course{$avo.id}" value="{$avo.name}">
+        <input type="hidden" id="name_point{$avo.id}" value="{$avo.point}">
+        <ul id = "ul_jzb_nopad" class="p-i-infos box-progress-tbl clearfix " onclick="clickduihuan({$avo.id})">
+             <li class="fore1_jzb stvideo_fx ">
+                <p class=" p-percent_jzb stvideo_fx_2 "><a  href="javascript:;">立即兑换</a></p>
+            </li>
+            <li class="fore2_jzb stvideo_fx">
+                <p class=" p-percent_jzb stvideo_fx_1"><a >{$avo.watched}万次</a></p>
+            </li>
+            <li class="fore3_jzb stvideo_fx">
+                <p class=" p-percent_jzb stvideo_fx_3"><a >{$avo.liked}万</a></p>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<script type="text/javascript">
+var acpid = '{$info.pid}';
+var setTixingUrl ="{:U('Point/tixing')}";
+var handler ="function_name()";
+var setTixingUrlB ="{:U('Point/isbuy')}";
+
+
+function clickduihuan(id) {
+    window.location.href="{:U('Point/coursedetail')}"+'?id='+id
+}
+
+function clickduihuanB(id) {
+    $('#choseid').val(id);
+
+
+    if(login==0){
+        popStatus(2, '请先登陆后进行积分兑换！', 2,'',true);
+    }else{
+        $.ajax({
+            url: setTixingUrlB+'?&ggid='+id+'&type=1',
+            type: 'GET',
+            async: false,
+            dataType: 'json'
+        })
+        .done(function(data) {
+            if(data.code==0){
+                popStatus(1, '恭喜您！您已经购买过该课程，我们的客服人员正在联系您，请耐心等待，谢谢！', 2,'',true);
+            }else{
+                var verphone = $('#verphone').val();
+                var mobile = $('#mobile').val();
+                console.log(mobile.length); 
+                if(mobile.length!=11){
+                    popStatus(1, '您的手机未验证，正在为您跳转到手机验证页面', 3,'/Member/check/type/mobile',true);
+                }else{
+                    asyncbox.open({
+                        id : "open_0",
+                        title : '积分兑换',
+                        args : {pid:acpid},
+                        modal : true,
+                        buttons : asyncbox.btn.OKCANCEL,
+                        url : setTixingUrl+'?name='+$('#name_course'+id).val()+'&jifen='+$('#name_point'+id).val(),
+                        callback: handlerF
+                    })
+                }
+            }
+        });
+    }
+}
+
+function handlerF(buttonResult,contentWindow,returnValue){
+    var ggid = $('#choseid').val();
+    var name = $('#name_course'+ggid).val();
+    var jifen = $('#name_point'+ggid).val();
+
+    if(buttonResult=='ok'){
+        $.ajax({
+            url: setTixingUrl,
+            type: 'POST',
+            dataType: 'json',
+            data: {jifen: jifen,
+                   ggid: ggid,
+                   name: name,
+                   type: '1'},
+        })
+        .done(function(data) {
+            popStatus(data.type, data.info, data.time,'',true);
+        })
+        .fail(function(data) {
+            popStatus(2, "系统故障了，请稍候", 1,'',true);
+        });
+    }
+}
+</script>

@@ -1,0 +1,48 @@
+<style>
+    .p-bar-now{background:#690; background-position:0 0; display: block; height: 8px;}
+    .p-bar {background: #b6b6b6 none repeat scroll 0 0; border-radius: 4px; height: 8px; overflow: hidden;}
+    .fore1 {float: left; padding-left: 8px; position: relative; width: 60px;}
+    .fore2 {float: left; padding-left: 8px; position: relative; width: 98px;}
+    .fore3 {float: left; padding-left: 8px; position: relative; width: 50px;}
+    .p-percent {color: #5e5e5e; font-size: 14px; line-height: 18px;}
+    .p-extra {color: #a5a5a5;}
+    .v-line {background: #e7e7e7 none repeat scroll 0 0; height: 36px; position: absolute; right: 0; top: 0; width: 1px;}
+    ul.box-progress-tbl {width: 237px; margin-left: 0px;padding: 10px; border: none;}
+    ul.box-progress-tbl:hover{border: none; box-shadow:none;}
+    li.crowd-title{height: 32px; line-height: 14px; margin-top: 19px;}
+</style>
+<ul class="bidbox">
+    <li class="txt01" gid="{$avo.gid}">
+        <a href="{:U('Crowd/items',array('cid'=>$avo['crowd_id']))}" target="_blank">
+            <img width="259" title="{$avo.name}" height="110" src="{$upWholeUrl}{$avo.main_img}" alt="{$avo.name}"></img>
+        </a>
+    </li>
+    <li class="txt03 crowd-title">
+        <a title="{$avo.name}" href="{:U('Crowd/items',array('cid'=>$avo['crowd_id']))}">
+            {$avo.name}
+        </a>
+    </li>
+    <li class="txt04 clearfix">
+        <div class="p-bar">
+            <span class="p-bar-now" style="width:{$avo.percent|min=100,###}%"></span>
+        </div>
+    </li>
+    <li class="txt05">
+        <ul class="p-i-infos box-progress-tbl clearfix">
+            <li class="fore1">
+                <p class="p-percent">{$avo.percent}%</p>
+                <p class="p-extra">已达</p>
+                <span class="v-line"></span>
+            </li>
+            <li class="fore2">
+                <p class="p-percent">￥{$avo.support_money|round}</p>
+                <p class="p-extra">已购</p>
+                <span class="v-line"></span>
+            </li>
+            <li class="fore3">
+                <p class="p-percent">{$avo.dt}</p>
+                <p class="p-extra">{$avo.dt-tag}</p>
+            </li>
+        </ul>
+    </li>
+</ul>

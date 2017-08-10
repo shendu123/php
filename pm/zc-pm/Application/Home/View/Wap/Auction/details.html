@@ -1,0 +1,653 @@
+<include file="Common:meta" />
+<title>{$info.pname}-{$site.SITE_INFO.title}</title>
+<meta name="description" content=""><!-- {$info.description} -->
+<meta name="keywords" content="{$info.keywords}">
+<include file="Common:link" />
+<js href="__WEBSOCKET__/js/swfobject.js"/>
+<js href="__WEBSOCKET__/js/web_socket.js"/>
+<js href="--PUBLIC--/Js/jquery_raty/jquery.raty.min.js"/>
+<js href="__JS__/bid_details.js"/>
+<eq name="iswei" value="1">
+  <script type="text/javascript">
+    var imgUrl = "{$shimg}";
+    var descContent = "{$info.description}";
+    var shareTitle = "{$info.pname}[{$site.SITE_INFO.name}]";
+  </script>
+</eq>
+<body onload="connect();">
+<div class="details_imglist">
+    <div class="icobox">
+        <!-- 正在拍图标 -->
+        <eq name="info.nstatus" value="ing">
+            <eq name='info.status' value='0'><em class="xz">新增</em></eq>
+            <eq name='info.status' value='1'><em class="jj">已降价</em></eq>
+        </eq>
+        <em class="typ">
+            <eq name="info.type" value="0">竞拍</eq>
+            <eq name="info.type" value="1">竞标</eq>
+        </em>
+        <!-- 成交图标 -->
+        <eq name='info.nstatus' value='end'><em class="cj">成交</em></eq>
+        <!-- 预告图标 -->
+        <eq name="info.nstatus" value="fut"><em class="yg">预告</em></eq>
+        <!-- 拍卖会图标 -->
+        <in name="info.pattern" value="3,4"><em class="pmh">拍卖会</em></in>
+        <!-- 专场图标 -->
+        <in name="info.pattern" value="1,2"><em class="zc">专场</em></in>
+    </div>
+    <neq name="info.sid" value="0">
+        <a class="gotospec" href="{:U('Special/speul',array('sid'=>$info['sid']))}"><span class="am-icon-gavel"></span>进入专场&nbsp;>></a>
+    </neq>
+    <neq name="info.mid" value="0">
+        <span class="nextbid">
+            <span class="am-icon-gavel"></span>
+            <neq name="mtdata.nexbid" value="">
+            下一件<strong class="pd05">{$mtdata.nexbid.msort}</strong>号拍品：<a href="{:U('Auction/details',array('mid'=>$info['mid'],'pid'=>$mtdata['nexbid']['pid']))}">{$mtdata.nexbid.pname}&nbsp;&gt;</a>
+            <else />
+            这已是拍卖会最后一件拍品
+            </neq>
+        </span>
+    </neq>
+    <div data-am-widget="slider" class="am-slider am-slider-a2" data-am-slider='{&quot;directionNav&quot;:false}' >
+        <ul id="previewImage"  class="am-slides" <neq name='iswei' value='1'>data-am-widget="gallery" data-am-gallery="{pureview: 1}"</neq>>
+            <notempty name="info['pictures']">
+                <foreach name="info['pictures']" item='pv'>
+                    <li>
+                        <img data-rel="{$pv|getImgUrl=###}" src="{$upWholeUrl}{$pv|picRep=###,1}"/>
+                    </li>
+                </foreach>
+            </notempty>
+        </ul>
+    </div>
+    <eq name='iswei' value='1'>
+        <script type="text/javascript">
+            $('#previewImage').on('click', 'img',function(event) {
+                var imgArray = [];
+                var curImageSrc = $(this).attr('data-rel');
+                if (curImageSrc) {
+                    $('#previewImage img').each(function(index, el) {
+                        var itemSrc = $(this).attr('data-rel');
+                        imgArray.push(itemSrc);
+                    });
+                    wx.previewImage({
+                        current: curImageSrc,
+                        urls: imgArray
+                    });
+                }
+            });
+        </script>
+    </eq>
+</div>
+
+<div class="on-default-act">
+        <div class="timeDownBox">
+            <if condition="$info.nstatus eq 'end'">
+                <ul class="endTime">
+                    <li>开始于：{$info.starttime|date='Y-m-d H:i',###}</li>
+                    <li>结束于：{$info.endtime|date='Y-m-d H:i',###}</li>
+                </ul>
+            <elseif condition="$info.nstatus eq 'fut'"/>
+                <div class="noStartBidTbox clearfix">
+                    <div class="th" id="bidTimeStatus">未开始<span class="zt">距开始&nbsp;↓</span></div>
+                    <div class="noStartTime" id="noStartTime">
+                        <span class="day">-</span>
+                        <span class="dw">天</span>
+                        <span class="hour">-</span>
+                        <span class="dw">时</span>
+                        <span class="minute">-</span>
+                        <span class="dw">分</span>
+                        <span class="second">-</span>
+                        <span class="dw">秒</span>
+                        <span class="msec">-</span>
+                    </div>
+                    <script type="text/javascript">
+                        $(function(){
+                            startDown("{$info.starttime}","{$nowtime}",".noStartTime",".noStartTime .day",".noStartTime .hour",".noStartTime .minute",".noStartTime .second",".noStartTime .msec");
+                        });
+                    </script>
+                </div>
+            <else />
+                <div class="onBidTbox clearfix">
+                    <div class="th" id="bidTimeStatus">正在拍卖<span class="zt">距离束&nbsp;↓</span></div>
+                    <div class="onBidtime" id="onBidtime">
+                        <span class="day">-</span>
+                        <span class="dw">天</span>
+                        <span class="hour">-</span>
+                        <span class="dw">时</span>
+                        <span class="minute">-</span>
+                        <span class="dw">分</span>
+                        <span class="second">-</span>
+                        <span class="dw">秒</span>
+                        <span class="msec">-</span>
+                    </div>
+                    <script type="text/javascript">
+                        $(function(){
+                            endDown("{$info.endtime}","{$nowtime}",".onBidtime",".onBidtime .day",".onBidtime .hour",".onBidtime .minute",".onBidtime .second",".onBidtime .msec");
+                        });
+                    </script>
+                </div>
+            </if>
+        </div>
+        <div class="gzbox ac-pointer clearfix">
+            <a class="ac-tx tx"  st="{$ustx}"  href="javascript:void(0);" stype="{$info.nstatus}" <empty name='alerttype'>id="settx"<else />id="tx"</empty>>
+                <div class="ico"></div>
+                <div class="txt"><eq name='ustx' value='0'>设置提醒<else />已设提醒</eq></div>
+            </a>
+            <a id="gz" class="gz fl" st="{$usgz}" href="javascript:void(0);">
+                <div class="ico"></div>
+                <div class="txt cuit_over"><eq name='usgz' value='0'>关注<else />已关注</eq></div>
+            </a>
+        </div>
+</div>
+    <ul class="am-avg-sm-2 on-group-list  details_price boxstyle">
+            <li>
+                <span class="th">当前价:</span>
+                <span id="nowprice" class="nowprice">
+                    <!-- 竞拍模式 -->
+                    <eq name="info.type" value="0">
+                        <if condition="$info.uid eq 0"><span class="prcl1">暂无出价</span>
+                        <else /><span class="prcl1">{$info.nowprice}<span class="unit">元</span></span>
+                        </if>
+                    </eq>
+                    <!-- 竞标模式 -->
+                    <eq name="info.type" value="1"><span class="prcl1">竞标保密</span></eq>
+                </span>
+            </li>
+            <li>
+                <span class="th">保证金:</span>
+                <span class="prcl2">
+                    {$info.pledge}
+                </span>
+            </li>
+            <eq name="info.succtype" value="1">
+            <li>
+                <span class="th">即时成交：</span>
+                <span class="prcl3">{$info.succprice}</span>元
+            </li>
+            </eq>
+        </ul>
+    <div class="on-details-importance boxstyle">
+        <eq name="login" value="0">
+            <div class="details_login clearfix">
+                <div class="auction_login">
+                    <div class="th">请登录后参与拍卖</div>
+                    <div class="login_area clearfix">
+                        <a class="a_minbtn lg" title="请登录" href="{:U('Login/index')}"><strong>登录</strong></a> 
+                        <a class="a_minbtn rg" href="{:U('Login/register')}"><strong>注册</strong></a>
+                    </div>
+                    <div class="arc_link">
+                        <ul class="clearfix">
+                            <li><a href="{:U('Article/help',array('id'=>1))}">拍卖须知</a>&#12288;|&#12288;<a href="{:U('Article/help',array('id'=>2))}">如何竞买</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </eq>
+        <!-- 判断登录 -->
+        <eq name="login" value="1">
+            <if condition="$info.nstatus eq 'end'">
+                <!-- 已结束拍品 -->
+                <ul class="am-avg-sm-2 on-group-list details_price">
+                    <li>
+                        <span class="th">共计出价：</span>
+                        <span class="td prcl1">{$info.bidcount}<span class="unit">次</span></span>
+                    </li>
+                    <li>
+                        <span class="th">结束价：</span>
+                        <span class="td prcl1">{$info.nowprice}<span class="unit">元</span></span>
+                    </li>
+                    
+                    <li>
+                        <span class="th">最高出价者：</span>
+                        <span class="td prcl2">
+                            <empty name="info.nickname">无<else />{$info.nickname}</empty>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="th">结束类型：</span>
+                        <span class="td">
+                            <eq name="info.endstatus" value="1">成交</eq>
+                            <eq name="info.endstatus" value="2">未达到目标价-流拍</eq>
+                            <eq name="info.endstatus" value="3">无人出价-流拍</eq>
+                            <eq name="info.endstatus" value="4">撤拍</eq>
+                        </span>
+                    </li>
+                <!-- 已结束拍品——end -->
+            <elseif condition="$info.nstatus eq 'fut'"/>
+                <!-- 判断权限未开始 -->
+                <if condition="$uLimit['yn'] eq 1">
+                    <div class="nostarttip clearfix">
+                        <ul>
+                            <li class="th">拍品还没有开始！</li>
+                            <li class="td">到开始时间该页面会自动刷新！</li>
+                        </ul>
+                    </div>
+                <else />
+                    <div class="unliminfo clearfix">
+                        <ul  class="am-avg-sm-1 on-group-list details_price">
+                            <li class="tit">账户余额不足不能进行出价</li>
+                            <li>信用额度：<span class="prcl1">{$uLimit.limsum}<span class="unit">元</span></span>可用</li>
+                            <li>保证金：<span class="prcl1">{$uLimit.pledge}<span class="unit">元</span></span>可用</li>
+                            <li>如参与该拍品出价您需要充值保证金<span class="prcl1">{$uLimit.diff}<span class="unit">元</span></span></li>
+                            <li class="am-margin-top-xs"><a class="cz_btn am-btn am-btn-danger on-btn-danger am-radius" href="{:U('Member/payment')}">充值保证金</a></li>
+                        </ul>
+                    </div>
+                </if>
+                <!-- 判断权限未开始——end -->
+            <else />
+                <!-- 判断权限正在出价 -->
+                <if condition="$uLimit['yn'] eq 1">
+                    <eq name="info.type" value="0">
+                        <div class="am-g on-bidbtn-box">
+                            <div class="am-u-sm-6 on-bidbtn-box"><button type="button" class="am-btn am-btn-danger on-btn-danger am-radius" data-am-modal="{target: '#on-manual'}">竞拍出价</button></div>
+                            <div class="am-u-sm-6 on-dlibtn-btn"><button type="button" class="am-btn am-btn-secondary am-radius" data-am-modal="{target: '#on-setagency'}"><in name='setagency' value='0,1,2'><img class="on-wapact-autoimg" src="__IMG__/auto_btn_ico.gif" alt=""><span class="on-wapact-autotxt">停止代理出价</span><else/><img class="on-wapact-autoimg" src="__IMG__/auto_btn_ico0.gif" alt=""><span class="on-wapact-autotxt">启动代理出价</span></in></button></div>
+                        </div>
+                        <div class="am-modal-actions on-bid-modal" id="on-setagency">
+                            <button class="am-btn am-btn-default am-btn-block" data-am-modal-close>关闭</button>
+                            <div id="setagency">
+                                <ul class="pm-price">
+                                    <li class="plus-minus-operation">
+                                        <div class="am-g operation_box">
+                                            <div class="am-u-sm-8 am-text-truncate on-keyboard-input-box">{$info.stepsized|wipezero=###}</div>
+                                            <div class="am-u-sm-4 pm-sign">元</div>
+                                            <input type="hidden" name="priceFormat" id="robotprice" class="pm-price-input on-keyboard-input" value="{$myagprice}">
+                                        </div>
+                                    </li>
+                                    <li class="ts">请输入最高目标价后，点击启动开始代理出价！</li>
+                                    <li class="ts">注意：当最高报价达到您设置的目标价后，系统将停止代理出价。</li>
+                                </ul>
+                            </div>
+                            <ul class="on-keyboard am-avg-sm-3">
+                                <li><span num="1">1</span></li>
+                                <li><span num="2">2</span></li>
+                                <li><span num="3">3</span></li>
+                                <li><span num="4">4</span></li>
+                                <li><span num="5">5</span></li>
+                                <li><span num="6">6</span></li>
+                                <li><span num="7">7</span></li>
+                                <li><span num="8">8</span></li>
+                                <li><span num="9">9</span></li>
+                                <li><span num=".">.</span></li>
+                                <li><span num="0">0</span></li>
+                                <li><span num="del">&lt&lt</span></li>
+                            </ul>
+                            <button id="isbegin" class="am-btn am-margin-vertical am-btn-secondary am-btn-block" data-am-modal-close><in name='setagency' value='0,1,2'><img class="on-wapact-autoimg" src="__IMG__/auto_btn_ico.gif" alt=""><span class="on-wapact-autotxt">停止</span><else/><img class="on-wapact-autoimg" src="__IMG__/auto_btn_ico0.gif" alt=""><span class="on-wapact-autotxt">启动</span></in></button>
+                        </div>
+                    <!-- 判断竞拍模式 出价框——end -->
+                    </eq>
+                    <eq name="info.type" value="1">
+                        <!-- 判断竞标模式 出价框-->
+                        <div class="am-g on-bidbtn-box">
+                            <div class="am-u-sm-12 on-bidbtn-box"><button type="button" class="am-btn am-btn-danger on-btn-danger am-radius" data-am-modal="{target: '#on-manual'}">竞标出价</button></div>
+                        </div>
+                        <!-- 竞标出价——end -->
+                    <!-- 判断竞标模式 出价框——end-->
+                    </eq>
+                <else />
+                    <div class="unliminfo clearfix">
+                        <ul  class="am-avg-sm-1 on-group-list details_price">
+                            <li class="tit">账户余额不足不能进行出价</li>
+                            <li>信用额度：<span class="prcl1">{$uLimit.limsum|wipezero=###}<span class="unit">元</span></span>可用</li>
+                            <li>保证金：<span class="prcl1">{$uLimit.pledge|wipezero=###}<span class="unit">元</span></span>可用</li>
+                            <li>如参与该拍品出价您需要充值保证金<span class="prcl1">{$uLimit.diff|wipezero=###}<span class="unit">元</span></span></li>
+                            <li class="am-margin-top-xs"><a class="cz_btn am-btn am-btn-danger on-btn-danger am-radius" href="{:U('Member/payment')}">充值保证金</a></li>
+                        </ul>
+                    </div>
+                </if>
+                <!-- 判断权限正在出价——end -->
+            </if>
+        </eq>
+    </div>
+    <div class="am-modal-actions on-bid-modal" id="on-manual">
+        <button class="am-btn am-btn-default am-btn-block" data-am-modal-close>关闭</button>
+        <div id="manual">
+            <ul class="pm-price">
+                <li class="plus-minus-operation">
+                    <button class="am-btn am-btn-default am-btn-block change_step minus_step" act="minus">-</button>
+                    <div class="am-g operation_box">
+                        <div class="am-u-sm-8 am-text-truncate on-keyboard-input-box">{$info.stepsized|wipezero=###}</div>
+                        <div class="am-u-sm-4 pm-sign">元</div>
+                        <input type="hidden" name="priceFormat" id="bidprice" class="pm-price-input on-keyboard-input" value="{$info.stepsized|wipezero=###}">
+                    </div>
+                    <button class="am-btn am-btn-default am-btn-block change_step add_step" act="add">+</button>
+                </li>
+                <li class="ts">最低出价不能小于<span id="stped">{$info.stepsized|wipezero=###}</span>元</li>
+            </ul>
+        </div>
+        <ul class="on-keyboard am-avg-sm-3">
+            <li><span num="1">1</span></li>
+            <li><span num="2">2</span></li>
+            <li><span num="3">3</span></li>
+            <li><span num="4">4</span></li>
+            <li><span num="5">5</span></li>
+            <li><span num="6">6</span></li>
+            <li><span num="7">7</span></li>
+            <li><span num="8">8</span></li>
+            <li><span num="9">9</span></li>
+            <li><span num=".">.</span></li>
+            <li><span num="0">0</span></li>
+            <li><span num="del">&lt&lt</span></li>
+        </ul>
+        <button id="manual_but" class="am-btn am-margin-vertical am-btn-danger on-btn-danger am-btn-block" data-am-modal-close>出价</button>
+    </div>
+    <ul class="am-avg-sm-2 on-group-list bid_info boxstyle">
+        <li class="wfix">
+            <span class="th">起拍价：</span>
+            <span class="prcl1">{$info.onset|wipezero=###}<span class="unit">元</span></span>
+        </li>
+        <li class="wfix">
+            <span class="th">加价方式：</span>
+            <eq name="info.stepsize_type" value="0">阶梯</eq>
+            <eq name="info.stepsize_type" value="1">定额</eq>
+            <span class="prcl1"><span id="steps">{$info.stepsize|wipezero=###}</span><span class="unit">元</span></span>
+        </li>
+        <li><span class="th" title="<neq name='info.steptime' value='0'>最后{$info.steptime}出价延时{$info.deferred}</neq>">时间延时：</span>
+            <eq name="info.steptime" value="0">
+                <span class="fb">不延时</span>
+            <else/>
+                {$info.deferred}/次
+            </eq>
+        </li>
+        <li class="wfix">
+            <span class="th">运费：</span>
+            <neq name="info.freight" value="0">{$info.freight}<span class="unit">元</span><else/>包邮</neq>
+            
+        </li>
+    </ul>
+    <div class="user_info boxstyle clearfix">
+        <a href="{:U('Seller/index',array('sellerid'=>$seller['uid']))}" class="usinf_a">
+            <div class="uimg">
+                <img title="{$seller.organization}" src="{$seller.uid|getUserpic=###,1}">
+            </div>
+            <div class="uinfo">
+                <div class=" clearfix">
+                    <div class="th">卖家：</div>
+                    <div class="td am-text-truncate">{$seller.organization}</div>
+                </div>
+                <div class=" clearfix mhd_star"><div class="th">级别：</div><div class="td"><img src="{$seller.leval}"></div></div>
+                <div class=" clearfix mhd_star"><div class="th">信誉：</div><div class="td" id="credit"></div></div>
+            </div>
+        </a>
+        <div class="usinf_b sell">
+            <div class="gzbox fr clearfix">
+                <a class="ly fl" href="{:U('Member/sendmsg',array('uid'=>$seller['uid'],'pid'=>$info['pid']))}">
+                    <div class="ico"></div>
+                    <div class="txt cuit_over">给我留言</div>
+                </a>
+                <a class="gz_sell selatt{$seller.uid} gz fl" sellerid="{$seller.uid}" st="{$gzuser}" href="javascript:void(0);">
+                    <div class="ico"></div>
+                    <div class="txt cuit_over"><eq name='gzuser' value='0'>关注卖家<else />已关注</eq></div>
+                </a>
+            </div>
+        </div>
+    </div>
+        <div class="boxstyle">
+            <div class="record_box">
+                <ul class="ontab tab_menu <eq name="login" value="1">am-avg-sm-2<else/>am-avg-sm-1</eq>">
+                    <li class="tab on"><a href="#recordA">出价记录</a></li>
+                    <eq name="login" value="1">
+                    <li class="tab"><a href="#recordB">我的出价</a></li>
+                    </eq>
+                </ul>
+                <div class="ontab_con">
+                    <!-- 出价记录 -->
+                    <div id="recordA" class="tab_con">
+                        <table id="bid_record" class="<eq name='info.type' value='0'>ac-auction-part</eq>">
+                            <tr class="th">
+                                <eq name="info.type" value="0">
+                                    <th width="15%">状态</th>
+                                    <th width="25%">出价人</th>
+                                    <th width="25%">加价</th>
+                                    <th width="35%">价格</th>
+                                </eq>
+                                <eq name="info.type" value="1">
+                                    <th>出价人</th>
+                                    <th>方式</th>
+                                    <th>价格</th>
+                                    <th>时间</th>
+                                </eq>
+                            </tr>
+
+                            <empty name="bidRecord">
+                            <tr class="nobody"><td colspan="4">暂时没有拍友出价</td></tr>
+                            <else />
+                            <volist name="bidRecord" id="brvo" offset="0" length='10'>
+                                <eq name="info.type" value="0">
+                                <!-- 竞拍出价记录 -->
+                                <tr uid="{$brvo.uid}" title="{$brvo.time|date='m-d H:i:s',###}">
+                                    <td><div class="bidlistico"></div></td>
+                                    <td><span class="on_over" style="width: 60px;">{$brvo.nickname}</span></td>
+                                    <td align="right"><eq name="brvo.type" value="代理"><span title="代理出价" class="agency_ico"></span></eq>{$brvo.money|wipezero=###}</td>
+                                    <td align="right">{$brvo.bided|wipezero=###}</td>
+                                </tr>
+                                <!-- 竞拍出价记录——end -->
+                                </eq>
+                                <eq name="info.type" value="1">
+                                <!-- 竞标出价记录 -->
+                                <tr uid="{$brvo.uid}">
+                                    <td><span class="on_over" style="width: 60px;">竞标保密</span></td>
+                                    <td align="center">{$brvo.type}</td>
+                                    <td align="right"><span class="red1 fb">竞标保密</span></td>
+                                    <td align="center">{$brvo.time|date='m-d H:i:s',###}</td>
+                                </tr>
+                                <!-- 竞标出价记录——end -->
+                                </eq>
+                            </volist>
+                            </empty>
+                        </table>
+
+                        <div class="tip">
+                            拍品共计出价<span class="red1 fb" id="bidcount">{$info.bidcount}</span>次，此处显示最近10次出价。
+                        </div>
+                        <a href="{:U('Auction/record',array('pid'=>$info['pid']))}"  class="morbid">更多出价<span></span></a>
+                    </div>
+                    <!-- 出价记录——end -->
+                    <!-- 我的出价 -->
+                    <eq name="login" value="1">
+                    <div id="recordB" class="tab_con" style="display:none;">
+                        <table id="my_record">
+                            <tr class="th">
+                                <eq name="info.type" value="0">
+                                    <th width="25%">出价方式</th>
+                                    <th width="30%">加价</th>
+                                    <th width="45%">价格</th>
+                                </eq>
+                                <eq name="info.type" value="1">
+                                    <th>出价方式</th>
+                                    <th>价格</th>
+                                    <th>时间</th>
+                                </eq>
+                            </tr>
+                            <empty name="myRecord">
+                            <tr class="nobody"><td colspan="3">您没有出价</td></tr>
+                            <else />
+                            <volist name="myRecord" id="myvo">
+                            <tr title="{$myvo.time|date='m-d H:i:s',###}">
+                                <eq name="info.type" value="0">
+                                    <td align="left"><eq name="myvo.type" value="代理"><span title="代理出价" class="agency_ico"></span></eq>{$myvo.type}出价</td>
+                                    <td align="right">{$myvo.money|wipezero=###}</td>
+                                    <td align="right"><span class="red1 fb">{$myvo.bided|wipezero=###}</span></td>
+                                </eq>
+                                <eq name="info.type" value="1">
+                                    <td align="center">{$myvo.type}</td>
+                                    <td align="right"><span class="red1 fb">{$myvo.bided|wipezero=###}</span></td>
+                                    <td align="right">{$myvo.time|date='m-d H:i:s',###}</td>
+                                </eq>
+                            </tr>
+                            </volist>
+                            </empty>
+                        </table>
+                        <div class="tip">
+                            <ul class="mycont">
+                                <li class="clearfix"><span class="th">共计出价：</span><span class="td"><span class="red1 fb" id="mycount">{$myCount}</span>次</span></li>
+                                <li class="clearfix">
+                                    <span class="th"><strong><neq name="info.sid" value="0">专场<else />拍品</neq></strong>冻结：</span>
+                                    <span class="td">
+                                    信用值<span class="red1 fb">{$uFrezze.limsum|wipezero=###}</span>&nbsp;&nbsp;&nbsp;&nbsp;保证金<span class="red1 fb">{$uFrezze.pledge|wipezero=###}</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </eq>
+                    <!-- 我的出价——end -->
+                </div>
+            </div>
+        </div>
+    <div data-am-widget="tabs" class="am-tabs on-details-tabs am-tabs-d2" data-am-tabs>
+        <ul class="am-tabs-nav am-cf">
+            <li class="am-active"><a href="#tab0">拍品详情</a></li>
+            <foreach name="info.extend.eArrUl" item="ulv">
+                <li class=""><a href="#tab{$key}">{$ulv}</a></li>
+            </foreach>
+        </ul>
+        <div class="am-tabs-bd">
+            <div id="tab0" class="am-tab-panel am-active">
+            {$info.content}
+            </div>
+            <foreach name="info.extend.eArrHtml" item="htv">
+                <div id="tab{$key}" class="am-tab-panel ">{$htv}</div>
+            </foreach>
+        </div>
+    </div>
+<include file="Common:footer"/>
+<include file="Common:navbar"/>
+</body>
+<script src="--PUBLIC--/ueditor/ueditor.parse.js"></script>
+<script type="text/javascript">
+    var iswei = "{$iswei}";
+    var mapstate = "{$mapstate}";
+    var keyon = 0;
+    $(function(){
+        $('.on-keyboard li span').click(function(){
+            $(this).addClass('on');
+            if(keyon==0){
+                var currval = '';
+                keyon = 1;
+            }else{
+                var currval = $('.on-keyboard-input').val();
+            }
+            var keyval = $(this).attr('num');
+            if(keyval=='del'){
+                $('.on-keyboard-input').val(currval.substring(0,currval.length-1));
+
+            }else{
+                $('.on-keyboard-input').val(currval+keyval);
+            }
+            $('.on-keyboard-input-box').html($('.on-keyboard-input').val());
+            setTimeout(function(){
+                $('.on-keyboard li span').removeClass('on');
+            },100);
+        });
+    });
+</script>
+<script>
+setTimeout(function(){uParse('.editbox',
+{
+ 'highlightJsUrl':'--PUBLIC--/ueditor/third-party/SyntaxHighlighter/shCore.js',
+ 'highlightCssUrl':'--PUBLIC--/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css'})
+},300);
+</script>
+<script type="text/javascript">
+var acpid = '{$info.pid}';
+// 代理状态
+var setagency = "{$setagency}";
+// 代理价格
+var myagprice = "{$myagprice}"
+// 代理出价知道提醒
+var iknowurl ="{:U('Auction/iknow')}";
+//取消代理出价
+var cancelAgency ="{:U('Auction/cancel_agency')}";
+// 启动中代理图标
+var startautoimg = "__IMG__/auto_btn_ico.gif";
+var stopautoimg = "__IMG__/auto_btn_ico0.gif";
+// 停止中代理图标
+// 关注
+var setAttentionUrl ="{:U('Auction/attention')}";
+// 设置提醒
+var setScheduledUrl ="{:U('Auction/scheduled')}";
+// 设置提醒方式
+var setTixingUrl ="{:U('Member/settixing')}";
+
+// 出价被超越提醒
+var send_remind = "{:U('Auction/send_remind')}";
+// 保证金冻结提醒
+var freeze_remind = "{:U('Auction/freeze_remind')}";
+
+//拍品状态 
+var nstatus = "{$info.nstatus}";
+// 拍卖类型
+var bidtype = "{$info.type}";
+//出价统计
+var bidCount='{$info.bidcount}'; 
+//出价提交地址
+var bidUrl ="{:U('Auction/bid')}"; 
+//商品结束验证生成订单提交地址
+var ajaxCheckSucc ="{:U('Auction/checksucc')}";
+
+// 加价幅度
+var steplin = "{$info.stepsize}";
+// 当前价
+var nowPrice = "{$info.nowprice}";
+// 当前出价者
+var nowUid = "{$info.uid}";
+// 结束类型
+var endStatus = "{$info.endstatus}";
+//获取拍卖时间
+var ajaxGetTime = "{:U('Auction/ajaxGetTime')}";
+endDowntimer = null;
+startDowntimer = null;
+// 拍卖会mid
+var mid = "{$info.mid}";
+var mname = "{$mtdata.mname}";
+// 拍卖会进行中的拍品地址
+// 下一个拍卖链接
+var mtnextPid = "{$mtdata.nexbid.pid}";
+var mtnextUrl ="{:U('Auction/details',array('mid'=>$info['mid'],'pid'=>$mtdata['nexbid']['pid']))}";
+// 拍卖会进行中的拍品
+var mtnowpid = "{$mtdata.mtnowpid}";
+var mtnowUrl = "{:U('Auction/details',array('pid'=>$mtdata['mtnowpid']))}";
+// 拍卖会状态进行
+var mtstatus ="{$mtdata.mtstatus}";
+// 结论页面地址
+var conclusion = "{:U('Meeting/conclusion',array('mid'=>$info['mid']))}";
+// 下一件拍品pid
+
+// web_socket【
+var connectLink = 1;
+var ws_rom_pre = "{:C('BID_PRE')}";
+var ws_my_name = '{$myname}';
+var ws_my_uid = '{$uid}';
+var ws_rob_uid='{$rob_uid}';
+var ltnr = '__IMG__/ltnr_pic.png';
+var domain = "{$site.WEB_ROOT}";
+if (typeof console == "undefined") {    this.console = { log: function (msg) {  } };}
+    WEB_SOCKET_SWF_LOCATION = "./Public/WebSocketMain/swf/WebSocketMain.swf";
+    WEB_SOCKET_DEBUG = true;
+    var ws, client_list={};
+
+// web_socket】
+// 拍卖状态
+</script>
+<script src="--PUBLIC--/ueditor/ueditor.parse.js"></script>
+<script>
+setTimeout(function(){uParse('.editbox',
+{
+ 'highlightJsUrl':'--PUBLIC--/ueditor/third-party/SyntaxHighlighter/shCore.js',
+ 'highlightCssUrl':'--PUBLIC--/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css'})
+},300);
+var start_path = "--PUBLIC--/Js/jquery_raty/img"
+var credit_score = "{$seller.credit_score}";
+$(function(){
+    $('#credit').raty({
+        readOnly: true,
+        score: Number(credit_score),
+        path : start_path
+      });
+
+
+});
+</script>
+
+
+</html>

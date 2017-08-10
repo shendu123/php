@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+		<meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>积分记录-账号中心-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body>
+    <include file="Common:head_wide" />
+<div id="container_white">
+    <div class="main_b9">
+        <div class="h8 clearfix"></div>
+        <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;账号中心&nbsp;&gt;&gt;&nbsp;积分记录</div>
+
+        
+        <div class="main_b9_1 clearfix">
+            <!--左侧导航开始-->
+            <include file="Member:menu" />
+            <!--左侧导航结束-->
+            <!---右侧开始-->
+            <div class="sider">
+                <div class="sider">                    
+                    <div class="trade">
+                        <table width="100%" bgcolor="dddddd" cellspacing="0" cellpadding="0" class="trade-table">
+                            <caption class="history">
+                                <span>可用积分：<strong>{$mInfo.point}</strong> 元</span>积分历史：</caption>
+                            <thead>
+                                <tr>
+                                    <th width="15%">单号</th>
+                                    <th width="15%">积分名</th>
+                                    <th width="10%">消费</th>
+                                    <th width="10%">增加</th>
+                                    <th width="20%">积分</th>
+                                    <th width="15%">操作时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="list" id="bv">
+                                <tr>
+                                    <td>{$bv.id}</td>
+                                    <td>{$bv.name}</td>
+                                    <td>{$bv['expend']?$bv['expend']:0}</td>
+                                    <td>{$bv['income']?$bv['income']:0}</td>
+                                    <td>{$bv.point_now}</td>
+                                    <td>{$bv.time|date='Y-m-d H:i',###}</td>
+                                </tr>
+                            </volist>
+                              <tr valign="top" align="left">
+                                <td bgcolor="#fbfaf7" align="left" colspan="10">
+                                    <div class="page">
+                                        {$page}
+                                    </div>
+                                </td>
+                            </tr>  
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!---右侧结束-->
+        </div>
+    </div>
+</div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<js href="--PUBLIC--/Js/jquery-validate.js"/>
+</body>
+</html>

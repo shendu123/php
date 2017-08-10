@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>在线直播</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="前景遵循“你理财我在身边”的服务理念，每个产品的基础资产都经过专业而审慎的风险控制，顶尖的资产管理团队为客户创造财富稳健增长、稀缺的创新投资机会，打造了以筛选产品为优劣、以贴心服务为核心的独特竞争力。我们一直秉承“独立，所以客观;因为贴心，所以安心”的理念扮演者金融产品的参谋长，客户财富管家的角色。" />
+<meta name="keywords" content="现货白银 白银投资 黄金饰品 白银饰品 学习 股票 教程 最赚钱的方法 前景财富 前景 财富 福建前景 福州前景 海西商品交易所 " />
+<link rel="stylesheet" type="text/css" href="templets/live/css/base.css">
+<link rel="stylesheet" type="text/css" href="templets/live/css/common.css">
+<link href="templets/live/css/jquery.mCustomScrollbar.css" rel="stylesheet" />
+<style>
+.main-content {
+margin:0 0 0 0;
+width:600px;
+    height: 350px;
+}
+
+.liveroomright {
+    background-color: #383d46;
+    float: left;
+    height: 350px;
+    width: 598px;
+}
+.center-wrapper {
+ 
+    width: 550px;
+}
+td{border:solid #ccc; border-width:0px 1px 1px 0px;}
+table{margin-top:10px;border:solid #ccc; border-width:1px 0px 0px 1px;}
+a{color:#666}
+</style>
+</head>
+<body>
+<center>
+<table width="95%">
+<td width="100px" height="40px">用户</td>
+<td width="150px">提问时间</td>
+<td width="*">问题</td>
+<td width="100px">操作</td>
+	<foreach name="chat" item="c">
+		<tr>
+			<td>{$c.member_name}</td>
+			<td>{$c.createtime}</td>
+			<td>
+			提问：{$c.question}<br>
+			回复：{$c.message|html_entity_decode}</td>
+			<td><a href="http://www.fjsxpmh.com/Online/huifu?deletehuifu={$c.id}">删除</a> <a href="http://www.fjsxpmh.com/Online/huifub?id={$c.id}">回复</a></td>
+		</tr>
+	</foreach>
+</table>
+</center>
+<!-- <script type="text/javascript" src="templets/live/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="templets/live/js/jquery.bxslider.min.js"></script>
+<script src="templets/live/js/jquery.mousewheel.min.js"></script>
+<script src="templets/live/js/jquery.mCustomScrollbar.min.js"></script>
+<script type="text/javascript" src="templets/live/js/index.js"></script>
+<script type="text/javascript" src="/images/js/layer/layer.js"></script> -->
+</body>
+</html>

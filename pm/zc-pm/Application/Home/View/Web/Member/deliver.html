@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{$site.SITE_INFO.keyword}" />
+        <meta name="description" content="{$site.SITE_INFO.description}" />
+        <title>发货处理-{$site.SITE_INFO.title}</title>
+        <include file="Common:intoHead" />
+		<css href="__CSS__/user.css"/>
+		<js href="__JS__/user.js"/>
+    </head>
+    <body onload="express();">
+    <include file="Common:head_narrow" />
+        <div class="main_b9">
+            <div class="h8 clearfix"></div>
+            <div class="main_b3_top"><a href="">首　页</a>&nbsp;&gt;&gt;&nbsp;我是卖家&nbsp;&gt;&gt;&nbsp;发货处理</div>
+            <div class="main_b9_1 clearfix">
+                <!--左侧导航开始-->
+                <include file="Member:menu" />
+                <!--左侧导航结束-->
+                <!---右侧开始-->
+                <div class="sider">
+                    <ul class="inquiry">
+                        <li class="hover">发货处理</li>
+                    </ul>
+                    <div class="inquiry-con">
+                        <form id="deliver" name="deliver" class="validateClass" action="" method="post">
+                            <div class="my_info">
+                                <ul class="select_address_list clearfix">
+                                    <li style="width: 780px;">
+                                        <span class="ld">
+                                            <p>收件人：{$address.truename}</p>
+                                            <p>地址：{$address.province}{$address.city}{$address.area}{$address.address}</p>
+                                            <p>手机：{$address.mobile} <neq name="v.phone" value="">电话：{$address.phone}</neq></p>
+                                            <p>邮编：{$address.postalcode}</p>
+                                        </span>
+                                    </li>
+                                </ul>
+                                <dl class="clearfix">
+                                    <dt class="dt" width="100px;" align="right">快递公司：</dt>
+                                    <dd class="dd">
+                                        <select style="height: 29px;" id="express" name="info[express]">
+                                            <volist name="express_list" id="vo">
+                                                <option value="">请选择快递</option>
+                                                <option value="*" <eq name="info.express" value="*">selected="selected"</eq>>其他快递/物流</option>
+                                                <!-- 字母 -->
+                                                <option disabled="disabled" class="sltit"><eq name="key" value="com">常用快递<else/>{$key}</eq></option>
+                                                <volist name="vo" id="ca">
+                                                    <if condition="$info['express'] eq $ca['en']">
+                                                        <option value="{$ca.en}" selected="selected">{$ca.ch}</option>
+                                                    <else/>
+                                                        <option value="{$ca.en}">{$ca.ch}</option>
+                                                    </if>
+                                                </volist>
+                                            </volist>
+                                        </select>
+                                    </dd>
+                                    <dd id="expressTip"></dd>
+                                </dl>
+                                <dl id="express_other_box" class="clearfix <neq name="info.express" value="*">hidden</neq>" >
+                                    <dt class="dt" width="100px;" align="right">快递名称：</dt>
+                                    <dd><input id="expressother" class="input" type="text" name="info[express_other]" value="{$info.express_other}" /></dd>
+                                    <dd id="expressotherTip"></dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt class="dt" width="100px;" align="right">快递单号：</dt>
+                                    <dd class="dd"><input id="expressno" type="text" class="input" size="40" name="info[express_no]" value="{$info.express_no}"/></dd>
+                                    <dd id="expressnoTip"></dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt class="dt" width="100px;" align="right">备注：</dt>
+                                    <dd class="dd"><textarea id="remark" class="input" style="height: 60px; width: 243px;" name="info[remark]"><eq name="ac" value="1">{$info.remark}</eq></textarea></dd>
+                                    <span id="remarkTip"></span>
+                                </dl>
+                            </div>
+                                <input type="hidden" value="{$info.order_no}" name="info[order_no]">
+                        </form>
+                        <div id="btn_box">
+                            <button class="on-btn on-btn-red submit"><eq name="ac" value="1">编辑发货<else/>提交发货</eq></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!---底部开始-->
+<include file="Common:help_narrow" />
+<include file="Common:footer"/>
+<!-- 表单验证【 -->
+
+<js href="--PUBLIC--/Js/formValidator/formValidator-4.1.3.js"/>
+<js href="--PUBLIC--/Js/formValidator/formValidatorRegex.js"/>
+<!-- 表单验证】 -->
+<script type="text/javascript">
+    $(function(){
+        $.formValidator.initConfig({formID:"deliver"});
+        $(".submit").click(function(){
+            if($.formValidator.pageIsValid('1')==true){
+                commonAjaxSubmit();
+            }
+            return false;
+        });
+        
+        $("#express").formValidator({onShow:"请选快递公司",onFocus:"快递公司必选",onCorrect:"谢谢你的配合"}).inputValidator({min:1,onError: "请选择快递!"});
+        $("#expressother").formValidator({onShow:"请填写您发货的快递公司名称",onFocus:"请填写您发货的快递公司名称",onCorrect:"输入正确"}).inputValidator({min:3,onError:"你输入的名称不正确,请确认"});
+        $("#expressno").formValidator({onShow:"请填写您发货的快递单号",onFocus:"请填写您发货的快递单号",onCorrect:"输入正确"}).inputValidator({min:3,onError:"你输入的快递单号不正确,请确认"});
+        
+        $("#remark").formValidator({onShow:"有哪些需要给买家说明的",onFocus:"有哪些需要给买家说明的",onCorrect:"输入正确"});
+        // 表单验证】
+        $('#express').on("change",function(){
+            express();
+        });
+    });
+function express(tval){
+    if($('#express').val()=='*'){
+        $('#express_other_box').removeClass('hidden');
+        $("#expressother").unFormValidator(false);
+    }else{
+        $('#express_other_box').addClass('hidden');
+        $("#expressother").unFormValidator(true);
+    }
+}
+</script>
+</body>
+</html>
