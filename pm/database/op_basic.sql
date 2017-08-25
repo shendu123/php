@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50628
 File Encoding         : 65001
 
-Date: 2017-08-23 15:22:59
+Date: 2017-08-25 17:32:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,11 +31,11 @@ CREATE TABLE `opb_access_token` (
 -- Records of opb_access_token
 -- ----------------------------
 INSERT INTO `opb_access_token` VALUES ('0', '0', '70c13ef96f16242115cf4763ff0f0b5ed5dc64dc', '2017-05-22 11:06:05');
-INSERT INTO `opb_access_token` VALUES ('1', '1', 'eedf1fbbceb14093e168ac2d1e9989ac9d54982d', '2017-08-23 15:08:05');
+INSERT INTO `opb_access_token` VALUES ('1', '1', 'a8076193b28bf5081d9e3eba623178781386f9f1', '2017-08-25 19:06:29');
 INSERT INTO `opb_access_token` VALUES ('1', '2', '7520f590503bac968a0c3edce70355f913714f16', '2017-07-20 16:53:11');
-INSERT INTO `opb_access_token` VALUES ('1', '3', '133c2a5b7814bf3c840fb27aa40b8d1fa0beda8e', '2017-08-23 16:30:32');
-INSERT INTO `opb_access_token` VALUES ('1', '4', '902db8bfb89b2ceb1b3c16afba53202669bfb1f2', '2017-08-22 18:17:16');
-INSERT INTO `opb_access_token` VALUES ('1', '5', 'e85aaabe60445b5d07b3c2266edb5066a5184af4', '2017-08-22 16:16:50');
+INSERT INTO `opb_access_token` VALUES ('1', '3', '8616856c4cb7841cea7010b531872219b92ee786', '2017-08-24 12:38:06');
+INSERT INTO `opb_access_token` VALUES ('1', '4', '928011b7d0cd4ff240d1356a9ce50badc21ecffd', '2017-08-24 18:00:36');
+INSERT INTO `opb_access_token` VALUES ('1', '5', '0cf058475d341a7029ff6b9b64648a0cdafd8f41', '2017-08-25 19:24:04');
 INSERT INTO `opb_access_token` VALUES ('1', '6', 'f770ba5d1016a761d5270d43fb461892d11286c9', '2017-06-27 15:49:04');
 INSERT INTO `opb_access_token` VALUES ('1', '108', '8115a952a8155cc7123e3c4541dfcb795cf5aebb', '2017-06-19 17:55:52');
 INSERT INTO `opb_access_token` VALUES ('1', '116', 'dafaec9da3b8d806b2e844eee7f83495da8cb104', '2017-07-31 11:26:58');
@@ -62,10 +62,10 @@ INSERT INTO `opb_access_token` VALUES ('1', '201', 'fc731b1a48072590803ead2a53e2
 INSERT INTO `opb_access_token` VALUES ('1', '214', 'd9a7e82bf8736074423ac9de8f77ec46a0c78334', '2017-07-28 12:16:33');
 INSERT INTO `opb_access_token` VALUES ('1', '257', '86baa9af8736cca95c48e0da5250cbcf8b10e3c8', '2017-08-15 10:46:00');
 INSERT INTO `opb_access_token` VALUES ('1', '259', 'cd73c60a0ac24ea120f8ac9fe1598670bf5c3d7b', '2017-08-01 16:52:07');
-INSERT INTO `opb_access_token` VALUES ('1', '270', '2d01544ed024dcaa5e7ce65aa46c5e1396244fab', '2017-08-21 18:10:11');
-INSERT INTO `opb_access_token` VALUES ('1', '273', '0737c0ca7ccdd7c0566cee8a5f8d014d50ae015c', '2017-08-22 13:16:10');
-INSERT INTO `opb_access_token` VALUES ('1', '321', 'a353a34e962f7b0dfba7e925375e85fdf29b3f09', '2017-08-23 15:08:10');
+INSERT INTO `opb_access_token` VALUES ('1', '273', 'b94d5182b76cc5c87c617fca92f81b378ca64fd3', '2017-08-24 12:20:50');
+INSERT INTO `opb_access_token` VALUES ('1', '321', 'c12ee53e21da6d0486c7ae1d2bd5c28aaacc5688', '2017-08-25 18:13:25');
 INSERT INTO `opb_access_token` VALUES ('1', '327', '6d17a7eea6180eb8b95906b25274d70b716be21f', '2017-08-23 15:44:52');
+INSERT INTO `opb_access_token` VALUES ('1', '329', 'f195f2f32ae45ccaffbd751f6e851a43b41ff2c0', '2017-08-25 18:26:35');
 INSERT INTO `opb_access_token` VALUES ('2', '2', 'fabc7b93276c92db1258d2ce0fe60f004cc3f81d', '2017-05-17 03:27:30');
 INSERT INTO `opb_access_token` VALUES ('3', '1', 'f2c32aaa637549d8325a1ce2ee6da1af2485d327', '2017-08-15 13:46:56');
 INSERT INTO `opb_access_token` VALUES ('3', '2', '12dcf5fab52836bbff4175b28b62a95fc9f24df2', '2017-07-17 16:47:21');
@@ -90,21 +90,26 @@ INSERT INTO `opb_access_token` VALUES ('3', '211', '464f18a91eac0dcde3598e2e0d62
 INSERT INTO `opb_access_token` VALUES ('3', '214', '90c321acfd7b400029c7c7fd6f80ecb01906faa1', '2017-07-28 19:43:46');
 INSERT INTO `opb_access_token` VALUES ('3', '225', 'bf24ff6650bc901853ac8d5f69c571fe73aac1c1', '2017-07-31 16:00:56');
 INSERT INTO `opb_access_token` VALUES ('3', '242', '4c0dce51d144df18b6b066a9c9ba1f8e10635a3f', '2017-08-02 18:11:30');
+INSERT INTO `opb_access_token` VALUES ('3', '257', '313de06a18b394cae9fcb518407962f842a8dc89', '2017-08-25 18:57:45');
 INSERT INTO `opb_access_token` VALUES ('3', '266', '76996acf785db9d268d1b72ed57beb976d988383', '2017-08-02 12:34:08');
 INSERT INTO `opb_access_token` VALUES ('3', '267', '64bd3a759b2a626180bed142a3b97168f233c592', '2017-08-14 15:36:45');
+INSERT INTO `opb_access_token` VALUES ('3', '270', '36c5050a3f8988d40577370b9de391b92eb2f60d', '2017-08-25 11:26:06');
 INSERT INTO `opb_access_token` VALUES ('3', '271', 'c1d62ca0ba95ae35cc3a6845f43de2770df95180', '2017-08-02 18:10:51');
 INSERT INTO `opb_access_token` VALUES ('3', '272', 'fe536affeb5a9ac0a9d16c0f3f3a542dd3c20bff', '2017-08-02 19:17:26');
 INSERT INTO `opb_access_token` VALUES ('3', '273', 'f26e3ec004a6bd3e4cdffb3e1493ea2a3382152b', '2017-08-15 15:12:38');
-INSERT INTO `opb_access_token` VALUES ('3', '322', 'f0ff15cd72cbcaa6ad3dcef66ba081409f98681a', '2017-08-19 14:08:42');
+INSERT INTO `opb_access_token` VALUES ('3', '322', '80db94860b0ee0eb9f5e1dc4c19134b89579ab6c', '2017-08-23 19:26:58');
 INSERT INTO `opb_access_token` VALUES ('3', '328', 'c6b70e548dbc42ee54948b03628411edfb3153a1', '2017-08-04 19:10:16');
-INSERT INTO `opb_access_token` VALUES ('3', '329', 'b379caafcd9beb7293b98555500c3fd813458f5b', '2017-08-23 16:14:06');
-INSERT INTO `opb_access_token` VALUES ('3', '331', '442edf548a9c8eb2f3e8a09627cf461c90dbd0c6', '2017-08-23 08:22:25');
+INSERT INTO `opb_access_token` VALUES ('3', '329', 'db42b8fb777edb44e82ff1f137f0f6836b585f24', '2017-08-24 20:06:07');
+INSERT INTO `opb_access_token` VALUES ('3', '331', '9e3990050bee09deae8ae4fb3080a383955c87f5', '2017-08-25 08:24:07');
 INSERT INTO `opb_access_token` VALUES ('3', '339', 'd3409e9fa3982af00b8d11237c11c826344b9db0', '2017-08-15 17:46:10');
-INSERT INTO `opb_access_token` VALUES ('3', '340', 'bbff65e9e3d832537b8a533388cae322358b74cd', '2017-08-21 18:59:32');
+INSERT INTO `opb_access_token` VALUES ('3', '340', 'f3457fc7b68b8bc242d9c84bb8d18cc9140085a0', '2017-08-24 17:22:37');
+INSERT INTO `opb_access_token` VALUES ('3', '372', 'cbbbd113a669be5d8320769ef7e889985d1fb27d', '2017-08-24 19:37:06');
+INSERT INTO `opb_access_token` VALUES ('5', '1', '737c6acfcba7925c581afa4acd55cc6766b2a1cd', '2017-08-24 16:47:17');
 INSERT INTO `opb_access_token` VALUES ('5', '275', 'bafc56f6209dcd30670da85a49529023e9f5c6f8', '2017-08-14 12:03:55');
-INSERT INTO `opb_access_token` VALUES ('5', '344', '65faf0db32df0d2523c8e61c5b5cc0894133b2f2', '2017-08-23 15:40:20');
-INSERT INTO `opb_access_token` VALUES ('5', '345', '3ca6e76deb13939f2ff2608d26fd1708f1b429b7', '2017-08-22 20:10:27');
-INSERT INTO `opb_access_token` VALUES ('5', '347', '36001f07ba09c3ced7513231dd952f1b479bc33d', '2017-08-22 18:31:54');
+INSERT INTO `opb_access_token` VALUES ('5', '344', '4c43cca3560e14f73f027ba2c3ca15d6fc446393', '2017-08-23 20:21:06');
+INSERT INTO `opb_access_token` VALUES ('5', '345', '1473cebd81a00eff8da557a83b1fabeb4f38523e', '2017-08-24 15:55:45');
+INSERT INTO `opb_access_token` VALUES ('5', '347', '2898c274fc2377c9db4b05744f06e28bed75a476', '2017-08-24 17:51:42');
+INSERT INTO `opb_access_token` VALUES ('5', '373', '814b191be8b5a36693eb532e62a96c6291ff65e1', '2017-08-25 18:24:07');
 
 -- ----------------------------
 -- Table structure for `opb_app`
@@ -4132,25 +4137,26 @@ CREATE TABLE `opb_config` (
   `config_oprid` int(11) NOT NULL DEFAULT '0' COMMENT '操作者id',
   `config_status` tinyint(3) NOT NULL DEFAULT '0' COMMENT '配置状态 0启用 1禁用',
   `config_syslevel` tinyint(3) NOT NULL DEFAULT '0' COMMENT '配置系统级别 0系统配置 1子系统配置 2商户配置',
-  `config_module` tinyint(3) NOT NULL DEFAULT '0' COMMENT '所属系统的模块 0所有 1basic 2auction 3adv 4bi 5crowd 6finance 7goods 8item 9message 10news',
+  `config_group` varchar(64) NOT NULL DEFAULT '' COMMENT '配置分组',
   `config_name` varchar(64) NOT NULL DEFAULT '' COMMENT '配置名称',
   `config_value` varchar(256) NOT NULL DEFAULT '' COMMENT '配置值',
   `config_remarks` varchar(64) NOT NULL DEFAULT '' COMMENT '配置备注',
   `config_intime` int(11) NOT NULL DEFAULT '0' COMMENT '插入时间',
   `config_uptime` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`config_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='平台配置表';
+  PRIMARY KEY (`config_id`),
+  UNIQUE KEY `config_name` (`config_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='平台配置表';
 
 -- ----------------------------
 -- Records of opb_config
 -- ----------------------------
-INSERT INTO `opb_config` VALUES ('1', '3', '0', '0', '0', 'integral_reg', '10', '注册赠送积分', '1503470316', '1503470316');
-INSERT INTO `opb_config` VALUES ('2', '3', '0', '0', '0', 'integral_money', '1,10', '积分换算比例 1元=10积分', '1503470592', '1503470592');
-INSERT INTO `opb_config` VALUES ('3', '3', '0', '0', '0', 'auction_unpay', '3', '拍中后多少天不支付处罚', '1503470663', '1503470663');
-INSERT INTO `opb_config` VALUES ('4', '3', '0', '0', '0', 'order_unpay', '5', '待付款订单不支付多少天后关闭', '1503470755', '1503470755');
-INSERT INTO `opb_config` VALUES ('5', '3', '0', '0', '0', 'order_close', '5', '收货后多少天订单完成', '1503470818', '1503470818');
-INSERT INTO `opb_config` VALUES ('6', '3', '0', '0', '0', 'upload_limit', '10', '附件上传大小', '1503470855', '1503470855');
-INSERT INTO `opb_config` VALUES ('7', '3', '0', '0', '0', 'withdraw_lowlimit', '100', '提现金额 需超过多少才能提现金额', '1503471455', '1503471455');
+INSERT INTO `opb_config` VALUES ('11', '3', '0', '0', 'integral', 'integral_reg', '10', '注册赠送积分', '1503479290', '1503479290');
+INSERT INTO `opb_config` VALUES ('12', '3', '0', '0', 'integral', 'integral_money', '1,10', '积分换算比例 1元=xx积分', '1503479290', '1503479290');
+INSERT INTO `opb_config` VALUES ('13', '3', '0', '0', 'service', 'auction_unpay', '3', '拍中后多少天不支付处罚', '1503479290', '1503479290');
+INSERT INTO `opb_config` VALUES ('14', '3', '0', '0', 'service', 'order_unpay', '5', '待付款订单不支付多少天后关闭', '1503479290', '1503479290');
+INSERT INTO `opb_config` VALUES ('15', '3', '0', '0', 'service', 'order_close', '5', '收货后多少天订单完成', '1503479290', '1503479290');
+INSERT INTO `opb_config` VALUES ('16', '3', '0', '0', 'upload', 'upload_limit', '10', '附件上传大小', '1503479290', '1503479290');
+INSERT INTO `opb_config` VALUES ('17', '3', '0', '0', 'withdraw', 'withdraw_lowlimit', '100', '提现金额 需超过多少才能提现金额', '1503479290', '1503479290');
 
 -- ----------------------------
 -- Table structure for `opb_delivery_address`
@@ -4172,39 +4178,45 @@ CREATE TABLE `opb_delivery_address` (
   `addr_uptime` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
   `addr_intime` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 COMMENT='企业或会员收货地址表';
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8 COMMENT='企业或会员收货地址表';
 
 -- ----------------------------
 -- Records of opb_delivery_address
 -- ----------------------------
-INSERT INTO `opb_delivery_address` VALUES ('71', '0', '256', '7460', '110100', '7462', 'dsfasdfsafs', '000000', 'test', '13675020412', '13675020412', '2', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('73', '0', '4', '7460', '110100', '7462', '恩德拉链钱包手包！我', '000000', 't t t t t t', '13613345678', '13613345678', '0', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('74', '0', '258', '7460', '110100', '7462', '大西路', '000000', '库里', '18860142637', '18860142637', '0', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('71', '0', '256', '7460', '8766', '7462', 'dsfasdfsafs', '000000', 'test', '13675020412', '13675020412', '2', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('73', '0', '4', '7460', '8766', '7462', '恩德拉链钱包手包！我', '000000', 't t t t t t', '13613345678', '13613345678', '0', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('74', '0', '258', '7460', '8766', '7462', '大西路', '000000', '库里', '18860142637', '18860142637', '0', '0', '0');
 INSERT INTO `opb_delivery_address` VALUES ('75', '0', '239', '8765', '8766', '8769', '捷福', '000000', '框架', '18650728487', '18650728487', '0', '0', '0');
 INSERT INTO `opb_delivery_address` VALUES ('76', '0', '256', '8765', '8766', '8767', '哦哦婆婆 in', '000000', '赶紧来咯哟', '13675020412', '13675020412', '3', '0', '0');
 INSERT INTO `opb_delivery_address` VALUES ('77', '0', '271', '8765', '8766', '8769', '截的图', '000000', '框架', '18650728487', '18650728487', '0', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('78', '0', '257', '7460', '110100', '7462', '工aaa', '000000', '张小龙', '15520191592', '15520191592', '0', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('78', '0', '257', '7460', '8766', '7462', '工aaa', '000000', '张小龙', '15520191592', '15520191592', '0', '0', '0');
 INSERT INTO `opb_delivery_address` VALUES ('84', '0', '259', '8765', '8766', '8769', '金工路1023号', '351100', '林仲达', '18650723093', '0591-888888', '0', '1501667222', '1501667196');
 INSERT INTO `opb_delivery_address` VALUES ('85', '0', '259', '8765', '8766', '8769', '金工路10223号', '351100', '林仲达', '18650723093', '0591-888888', '0', '1503278947', '1501667222');
 INSERT INTO `opb_delivery_address` VALUES ('86', '0', '273', '8765', '8766', '8769', '捷福', '000000', '陈奕迅', '18650728487', '18650728487', '2', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('87', '0', '273', '7460', '110100', '7464', '来啦来', '000000', '框架', '18650728487', '18650728487', '3', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('88', '0', '256', '11080', '710100', '11082', 'fsdfasdfsadf', '000000', 'test', '13535657894', '13535657894', '2', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('89', '0', '322', '7460', '110100', '7462', '银河系', '000000', '菜芹', '18120856005', '18120856005', '0', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('91', '0', '321', '7460', '110100', '7462', '嘎嘎嘎嘎', '000000', '地球地球', '17750288225', '17750288225', '2', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('92', '0', '325', '7460', '110100', '7462', 'dfasdfsadfsdf', '000000', 'test', '13675020412', '13675020412', '0', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('93', '0', '326', '7460', '110100', '7462', 'rtwertwert', '000000', 'tset', '13434343434', '13434343434', '0', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('94', '0', '328', '7460', '110100', '7462', '123466', '000000', '你的', '13675020412', '13675020412', '0', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('95', '0', '329', '7460', '110100', '7462', '大西路', '000000', '兰陵王', '18860142637', '18860142637', '3', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('96', '0', '330', '7460', '110100', '7462', '45588', '000000', 'abc', '13658242512', '13658242512', '3', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('97', '0', '270', '7460', '110100', '7462', '大西路', '000000', '兰陵王', '18860142637', '18860142637', '0', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('99', '0', '331', '7460', '110100', '7462', 'dfadfasdf111', '000000', 'test', '13675020412', '13675020412', '2', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('87', '0', '273', '7460', '8766', '7464', '来啦来', '000000', '框架', '18650728487', '18650728487', '3', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('88', '0', '256', '7460', '8766', '7464', 'fsdfasdfsadf', '000000', 'test', '13535657894', '13535657894', '2', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('89', '0', '322', '7460', '8766', '7462', '银河系', '000000', '菜芹', '18120856005', '18120856005', '0', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('91', '0', '321', '7460', '8766', '7462', '嘎嘎嘎嘎', '000000', '地球地球', '17750288225', '17750288225', '2', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('92', '0', '325', '7460', '8766', '7462', 'dfasdfsadfsdf', '000000', 'test', '13675020412', '13675020412', '0', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('93', '0', '326', '7460', '8766', '7462', 'rtwertwert', '000000', 'tset', '13434343434', '13434343434', '0', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('94', '0', '328', '7460', '8766', '7462', '123466', '000000', '你的', '13675020412', '13675020412', '0', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('95', '0', '329', '7460', '8766', '7462', '大西路', '000000', '兰陵王', '18860142637', '18860142637', '3', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('96', '0', '330', '7460', '8766', '7462', '45588', '000000', 'abc', '13658242512', '13658242512', '3', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('97', '0', '270', '7460', '8766', '7462', '大西路', '000000', '兰陵王', '18860142637', '18860142637', '3', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('99', '0', '331', '7460', '8766', '7462', 'dfadfasdf111', '000000', 'test', '13675020412', '13675020412', '2', '0', '0');
 INSERT INTO `opb_delivery_address` VALUES ('100', '0', '331', '8623', '8766', '8625', 'dfsafsaf', '000000', 'redsda', '13675020412', '13675020412', '2', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('101', '0', '331', '7460', '110100', '7462', 'qmpmt', '000000', 'jqjm', '13675020412', '13675020412', '3', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('102', '0', '321', '7460', '110100', '7462', '清河路1124', '000000', '茄子', '13405984452', '13405984452', '3', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('101', '0', '331', '7460', '8766', '7462', 'qmpmt', '000000', 'jqjm', '13675020412', '13675020412', '3', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('102', '0', '321', '7460', '8766', '7462', '清河路1124', '000000', '茄子', '13405984452', '13405984452', '3', '0', '0');
 INSERT INTO `opb_delivery_address` VALUES ('103', '0', '340', '8765', '8766', '8769', '感觉鞠躬', '000000', '雨伞', '18650728488', '18650728488', '3', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('104', '0', '3', '7460', '110100', '7462', '萨达速度发生的发生的发生的发生的', '000000', 'test听说', '12345604560', '12345604560', '0', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('105', '0', '339', '7460', '110100', '7464', '晓得电动车', '000000', '佩琪', '12345264578', '12345264578', '3', '0', '0');
-INSERT INTO `opb_delivery_address` VALUES ('106', '0', '259', '8765', '8766', '8769', '金林路123号', '351100', '林仲达', '18650723093', '0591-888888', '1', '1503278947', '1503278947');
+INSERT INTO `opb_delivery_address` VALUES ('104', '0', '3', '7460', '8766', '7462', '萨达速度发生的发生的发生的发生的', '000000', 'test听说', '12345604560', '12345604560', '0', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('105', '0', '339', '7460', '8766', '7464', '晓得电动车', '000000', '佩琪', '12345264578', '12345264578', '3', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('106', '0', '259', '8765', '8766', '8769', '金林路123号', '351100', '林仲达', '18650723093', '0591-888888', '0', '1503559217', '1503278947');
+INSERT INTO `opb_delivery_address` VALUES ('107', '0', '270', '7971', '8766', '7973', '最终路', '000000', '注射器', '13467549132', '13467549132', '2', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('108', '0', '329', '8510', '8766', '8512', '发啊阿发', '000000', '关羽', '12536954263', '12536954263', '2', '0', '0');
+INSERT INTO `opb_delivery_address` VALUES ('109', '0', '259', '8765', '8766', '8769', '金工路10223号', '351100', '林仲达', '18650723093', '0591-888888', '1', '1503559217', '1503559217');
+INSERT INTO `opb_delivery_address` VALUES ('110', '0', '259', '8765', '8766', '8769', '金工路10223号', '', '林仲达', '18650723093', '', '0', '1503560255', '1503560255');
+INSERT INTO `opb_delivery_address` VALUES ('111', '0', '347', '8765', '8766', '8769', 'ddd', '', 'dsad', '13559050752', '', '0', '1503562625', '1503562625');
+INSERT INTO `opb_delivery_address` VALUES ('112', '0', '372', '9504', '8766', '9506', '潇湘', '000000', 'NightKing', '13356894616', '13356894616', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `opb_member`
@@ -4243,19 +4255,19 @@ CREATE TABLE `opb_member` (
   KEY `idx_member_account` (`account`),
   KEY `idx_member_email` (`email`),
   KEY `idx_member_status` (`status_xxxx_delete`)
-) ENGINE=InnoDB AUTO_INCREMENT=350 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='网站前台会员表';
+) ENGINE=InnoDB AUTO_INCREMENT=374 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='网站前台会员表';
 
 -- ----------------------------
 -- Records of opb_member
 -- ----------------------------
-INSERT INTO `opb_member` VALUES ('1', '13665045615', 'AJMstr', 'AJMstr@126.com', '1', '1', '', '', '', '14e1b600b1fd579f47433b88e8d85291', 'http://api.wode-mall.com/uploads/20170706/1eca59b042649bf6a8ea275e38c5d8de.jpg', '', '1503464885', '0', '-', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('3', '13800138000', 'JackLin', 'JackLin@skynet.com', '1', '1', 'lin', 'JackLin', '', '14e1b600b1fd579f47433b88e8d85291', 'http://api.wode-mall.com/uploads/20170607/ceeb6d23ca090eb992c58211daab1c6b.jpg', '', '1503469832', '0', '-', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('4', '13625085560', 'chyl001', 'kusch@vip.qq.com', '1', '1', 'chyl', 'chyl', '', '14e1b600b1fd579f47433b88e8d85291', 'http://api.wode-mall.com/uploads/20170627/1e55d6f3c04ab83f2139cd52a4e2c609.jpg', '', '1503389836', '0', '-', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('5', '13665045616', 'zxl', 'AJMstr@126.com', '1', '1', 'zxl', '', '', '9db06bcff9248837f86d1a6bcf41c9e7', 'http://api.wode-mall.com/uploads/20170627/1108517f42746bb48ec67bffe345464d.jpg', '', '1503382610', '0', '-', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('1', '13665045615', 'AJMstr', 'AJMstr@126.com', '1', '1', '', '', '', '14e1b600b1fd579f47433b88e8d85291', 'http://api.wode-mall.com/uploads/20170706/1eca59b042649bf6a8ea275e38c5d8de.jpg', '', '1503651989', '0', '-', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('3', '13800138000', 'JackLin', 'JackLin@skynet.com', '1', '1', 'lin', 'JackLin', '', '14e1b600b1fd579f47433b88e8d85291', 'http://api.wode-mall.com/uploads/20170607/ceeb6d23ca090eb992c58211daab1c6b.jpg', '', '1503542287', '0', '-', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('4', '13625085560', 'chyl001', 'kusch@vip.qq.com', '1', '1', 'chyl', 'chyl', '', '14e1b600b1fd579f47433b88e8d85291', 'http://api.wode-mall.com/uploads/20170627/1e55d6f3c04ab83f2139cd52a4e2c609.jpg', '', '1503561636', '0', '-', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('5', '13665045616', 'zxl', 'AJMstr@126.com', '1', '1', 'zxl', '', '', '9db06bcff9248837f86d1a6bcf41c9e7', 'http://api.wode-mall.com/uploads/20170627/1108517f42746bb48ec67bffe345464d.jpg', '', '1503653044', '0', '-', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('6', '13800138001', 'linlinux', 'linlinux@wk.com', '1', '1', 'testsette', '', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '1498542544', '0', '-', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('252', '13185949495', '-', '-', '3', '1', '0', '131*****495', '13185949495', '14e1b600b1fd579f47433b88e8d85291', '', '', '0', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '-', '0');
 INSERT INTO `opb_member` VALUES ('256', '13186785535', '-', '-', '3', '1', '0', '131*****535', '13186785535', '14e1b600b1fd579f47433b88e8d85291', 'uploads/pic/20170814/30bc4d1162e6d18ff7bd8183d4c3f96c.JPG', '', '1502781439', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '-', '0');
-INSERT INTO `opb_member` VALUES ('257', '15220191592', '-', '-', '1', '1', '0', '152*****592', '15220191592', '9db06bcff9248837f86d1a6bcf41c9e7', '', '', '1502757960', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '-', '0');
+INSERT INTO `opb_member` VALUES ('257', '15220191592', '-', '-', '1', '1', '0', '152*****592', '15220191592', '9db06bcff9248837f86d1a6bcf41c9e7', '', '', '1503651466', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '-', '0');
 INSERT INTO `opb_member` VALUES ('259', '18650723093', '', '', '1', '1', '林正浩', '仲达', '0594-888888', '46cc468df60c961d8da2326337c7aa58', 'http://api.wode-mall.com/uploads/20170627/1108517f42746bb48ec67bffe345464d.jpg', '', '1503459504', '0', '', '0', '2', '2', '1', '812908800', '192.168.74.112', '1501490477', '8765', '350100', '8767', '鼓楼区', '350001');
 INSERT INTO `opb_member` VALUES ('260', '18650723094', '', '', '1', '1', '', '', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '0', '0', '', '0', '2', '2', '2', '0', '192.168.74.112', '1501491101', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('261', '18650723095', '', '', '1', '1', '', '186*****095', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '0', '0', '', '0', '2', '2', '2', '0', '192.168.74.112', '1501491769', '0', '0', '0', '', '0');
@@ -4265,28 +4277,30 @@ INSERT INTO `opb_member` VALUES ('266', '18650723040', '', '', '1', '1', '', '18
 INSERT INTO `opb_member` VALUES ('267', '18650723041', '', '', '1', '1', '', '186*****041', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '1502689005', '0', '', '0', '2', '2', '2', '0', '192.168.74.112', '1501550778', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('268', '18650723042', '', '', '1', '1', '', '186*****042', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '0', '0', '', '0', '2', '2', '2', '0', '192.168.74.112', '1501550930', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('269', '18650723043', '', '', '1', '1', '', '186*****043', '', '46cc468df60c961d8da2326337c7aa58', '', '', '0', '0', '', '0', '2', '2', '2', '0', '192.168.74.112', '1501551013', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('270', '18065851576', '', '', '3', '1', '', '安东尼', '18065851576', '14e1b600b1fd579f47433b88e8d85291', 'uploads/pic/20170803/2dcf22abfa93f13b48a131ab2fa2b85d.gif', '', '1503395297', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('273', '18650728487', 'chengx', '', '3', '1', 'cgx', 'all他', '18650728487', '63ee451939ed580ef3c4b6f0109d1fd0', 'uploads/pic/20170803/7b445084b5b813627afc63c85cbe1ccc.jpg', '', '1503371770', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('274', '18350070534', '', '', '1', '1', '', '183*****534', '', 'aa22a1cea8d10e3e6d1289bb0f5e2f94', '', '', '0', '0', '', '0', '2', '2', '1', '0', '192.168.74.115', '1501726416', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('270', '18065851576', '', '', '3', '1', '', '安东尼', '18065851576', '14e1b600b1fd579f47433b88e8d85291', 'uploads/pic/20170803/2dcf22abfa93f13b48a131ab2fa2b85d.gif', '', '1503624366', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('273', '18650728487', 'chengx', '', '3', '1', 'cgx', 'all他', '18650728487', '63ee451939ed580ef3c4b6f0109d1fd0', 'uploads/pic/20170803/7b445084b5b813627afc63c85cbe1ccc.jpg', '', '1503541250', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('275', '18350070535', '', '', '1', '1', '', '183*****535', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '1502676235', '0', '', '0', '2', '2', '1', '0', '192.168.74.115', '1501742117', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('321', '17750288225', 'lisa', '', '1', '1', '', '茄子', '17750288225', '14e1b600b1fd579f47433b88e8d85291', '', '', '1503464891', '0', '0', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('322', '18120856005', '', '', '3', '1', '', '181*****005', '18120856005', '63ee451939ed580ef3c4b6f0109d1fd0', '', '', '1503115722', '0', '0', '0', '2', '2', '0', '0', '', '0', '7460', '110100', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('321', '17750288225', 'lisa', '', '1', '1', '', '茄子', '17750288225', '14e1b600b1fd579f47433b88e8d85291', '', '', '1503648805', '0', '0', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('322', '18120856005', '', '', '3', '1', '', '181*****005', '18120856005', '63ee451939ed580ef3c4b6f0109d1fd0', '', '', '1503480418', '0', '0', '0', '2', '2', '0', '0', '', '0', '7460', '110100', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('327', '18006942218', '18006942218', '', '1', '1', 'shenqinghai', 'shenqinghai', '18006942218', '14e1b600b1fd579f47433b88e8d85291', '', '', '1503467092', '0', '', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('329', '18860142637', '', '', '3', '1', '', '库里', '18860142637', '14e1b600b1fd579f47433b88e8d85291', 'uploads/pic/20170808/64fdb5ff9fa305bf11b67ac9f9480e54.gif', '', '1503468846', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('329', '18860142637', '', '', '3', '1', '', '库里', '18860142637', '14e1b600b1fd579f47433b88e8d85291', 'uploads/pic/20170808/64fdb5ff9fa305bf11b67ac9f9480e54.gif', '', '1503649595', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('330', '13405958958', '13405958958', '', '1', '1', 'zzz', '', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '1502357122', '0', '', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('331', '13675020412', '', '', '3', '1', '', '136*****412', '13675020412', '224cf2b695a5e8ecaecfb9015161fa4b', 'uploads/pic/20170814/0e88e9b18d98b0daefa04d4fe0dc0ae8.png', '', '1503440545', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('331', '13675020412', '', '', '3', '1', '', '136*****412', '13675020412', '224cf2b695a5e8ecaecfb9015161fa4b', 'uploads/pic/20170814/0e88e9b18d98b0daefa04d4fe0dc0ae8.png', '', '1503613448', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('332', '13559132218', '1231456', '', '1', '1', '121233', '', '', '63ee451939ed580ef3c4b6f0109d1fd0', '', '', '0', '0', '', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('338', '13290931883', '', '', '3', '1', '', '132*****883', '13290931883', '63ee451939ed580ef3c4b6f0109d1fd0', '', '', '1502351505', '0', '0', '0', '2', '2', '2', '0', '', '0', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('339', '13290931820', '', '', '2', '1', '', '132*****820', '13290931820', '14e1b600b1fd579f47433b88e8d85291', '', '', '1502783170', '0', '0', '0', '2', '2', '0', '0', '', '0', '8765', '350100', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('340', '13774508059', '', '', '1', '1', '', '雨册', '13774508059', '83470205b9eefee6749cd4313ca97520', 'uploads/pic/20170810/9cd49aac0dabaf672fb395835cf4daa1.jpg', '', '1503305973', '0', '0', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('340', '13774508059', '', '', '1', '1', '', '雨册', '13774508059', '83470205b9eefee6749cd4313ca97520', 'uploads/pic/20170810/9cd49aac0dabaf672fb395835cf4daa1.jpg', '', '1503559357', '0', '0', '0', '2', '2', '0', '0', '', '0', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('341', '13774508031', '', '', '3', '1', '', '137*****031', '13774508031', '23deeb829a5a16ab39c132faa416a80e', '', '', '1502356850', '0', '0', '0', '2', '2', '0', '0', '', '0', '8371', '320900', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('343', '15659378086', 'cwzqf', '', '3', '1', '', '156*****086', '15659378086', '095edf2c2ee553785f9fde2fba4de24c', '', '', '1502687807', '0', '0', '0', '2', '2', '1', '0', '', '0', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('344', '18350070531', '', '', '1', '1', '', '183*****531', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '1503466820', '0', '', '0', '2', '2', '1', '0', '192.168.74.115', '1502697068', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('345', '18350070529', '', '', '1', '1', '', '183*****529', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '1503396628', '0', '', '0', '2', '2', '1', '0', '192.168.74.115', '1502959418', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('344', '18350070531', '', '', '1', '1', '', '183*****531', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '1503483666', '0', '', '0', '2', '2', '1', '0', '192.168.74.115', '1502697068', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('345', '18350070529', '', '', '1', '1', '', '183*****529', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '1503554145', '0', '', '0', '2', '2', '1', '0', '192.168.74.115', '1502959418', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('346', '18350070520', '', '', '1', '1', '', '183*****520', '', 'aa22a1cea8d10e3e6d1289bb0f5e2f94', '', '', '0', '0', '', '0', '2', '2', '1', '0', '192.168.74.115', '1503294996', '0', '0', '0', '', '0');
-INSERT INTO `opb_member` VALUES ('347', '13559050752', '', '', '1', '1', '', '135*****752', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '1503390714', '0', '', '0', '2', '2', '1', '0', '192.168.74.115', '1503295041', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('347', '13559050752', '', '', '1', '1', '', '135*****752', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '1503561102', '0', '', '0', '2', '2', '1', '0', '192.168.74.115', '1503295041', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('348', '18650725093', '', '', '1', '1', '', '186*****093', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '0', '0', '', '0', '2', '2', '2', '0', '192.168.74.112', '1503451663', '0', '0', '0', '', '0');
 INSERT INTO `opb_member` VALUES ('349', '18350070599', '', '', '1', '1', '', 'lala', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '0', '0', '', '0', '2', '2', '1', '0', '192.168.74.115', '1503469986', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('350', '18650724056', '', '', '1', '1', '', '186*****056', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '0', '0', '', '0', '2', '2', '2', '0', '192.168.74.112', '1503557197', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('372', '18650724057', '', '', '1', '1', '', '186*****057', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '1503567426', '0', '', '0', '2', '2', '2', '0', '192.168.74.112', '1503558982', '0', '0', '0', '', '0');
+INSERT INTO `opb_member` VALUES ('373', '18350070534', '', '', '3', '1', '', 'ffff', '', '14e1b600b1fd579f47433b88e8d85291', '', '', '1503649447', '0', '', '0', '2', '2', '1', '0', '192.168.74.115', '1503648977', '0', '0', '0', '', '0');
 
 -- ----------------------------
 -- Table structure for `opb_member_business_attention`
@@ -4332,7 +4346,7 @@ CREATE TABLE `opb_member_collect` (
   `url` varchar(256) DEFAULT NULL COMMENT '商品地址',
   `from` varchar(10) DEFAULT NULL COMMENT '什么商品',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of opb_member_collect
@@ -4383,9 +4397,10 @@ INSERT INTO `opb_member_collect` VALUES ('119', 'http://api.wode-mall.com/upload
 INSERT INTO `opb_member_collect` VALUES ('120', 'http://ap.wode-mall.com:81/uploads/20170807/2051a8f3bc7bcf8d7637759834d85af7.jpg', '249', '2.00', '竞价太阳', '2', '273', '/deal/maimai_details.html?id=98', null);
 INSERT INTO `opb_member_collect` VALUES ('121', 'http://ap.wode-mall.com:81/uploads/20170809/84e70ba6b35bbe07cf8444d86a2dc12c.jpg', '261', '300000.00', '青花瓷', '3', '321', '/deal/maimai_details.html?id=105', null);
 INSERT INTO `opb_member_collect` VALUES ('122', 'http://ap.wode-mall.com:81/uploads/20170810/8c9373156c297f161047387d8796bd7b.jpg', '269', '1.00', '螺蛳粉', '3', '340', '/deal/maimai_details.html?id=108', null);
-INSERT INTO `opb_member_collect` VALUES ('123', 'http://ap.wode-mall.com:81/uploads/20170810/65cb195ab49f5f6b21a1a0097f8b89c1.jpg', '270', '1.00', '谁动了我的拍卖', '2', '340', '/deal/maimai_details.html?id=109', null);
+INSERT INTO `opb_member_collect` VALUES ('123', 'http://ap.wode-mall.com:81/uploads/20170810/65cb195ab49f5f6b21a1a0097f8b89c1.jpg', '270', '1.00', '谁动了我的拍卖', '3', '340', '/deal/maimai_details.html?id=109', null);
 INSERT INTO `opb_member_collect` VALUES ('124', 'http://ap.wode-mall.com:81/uploads/20170814/681379e8b8b28bd55f8b563c5d101152.jpg', '275', '1.00', '拍卖树懒', '2', '340', '/deal/maimai_details.html?id=114', null);
-INSERT INTO `opb_member_collect` VALUES ('125', 'http://ap.wode-mall.com:81/uploads/20170810/65cb195ab49f5f6b21a1a0097f8b89c1.jpg', '270', '8.00', '谁动了我的拍卖', '2', '329', '/deal/maimai_details.html?id=109', null);
+INSERT INTO `opb_member_collect` VALUES ('125', 'http://ap.wode-mall.com:81/uploads/20170810/65cb195ab49f5f6b21a1a0097f8b89c1.jpg', '270', '8.00', '谁动了我的拍卖', '3', '329', '/deal/maimai_details.html?id=109', null);
+INSERT INTO `opb_member_collect` VALUES ('126', 'http://ap.wode-mall.com:81/uploads/20170810/65cb195ab49f5f6b21a1a0097f8b89c1.jpg', '270', '8.00', '谁动了我的拍卖', '3', '270', '/deal/maimai_details.html?id=109', null);
 
 -- ----------------------------
 -- Table structure for `opb_member_company`
@@ -4590,7 +4605,7 @@ CREATE TABLE `opb_member_rule` (
   `rule_intime` int(11) NOT NULL DEFAULT '0' COMMENT '添加时间',
   `rule_uptime` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`sysid`)
-) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8 COMMENT='用户规则表';
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8 COMMENT='用户规则表';
 
 -- ----------------------------
 -- Records of opb_member_rule
@@ -4707,6 +4722,10 @@ INSERT INTO `opb_member_rule` VALUES ('133', '346', '1', '0', '0', '0', '0', '0'
 INSERT INTO `opb_member_rule` VALUES ('134', '347', '1', '0', '0', '0', '0', '0', '0', '', '0', '1503295041', '1503295041');
 INSERT INTO `opb_member_rule` VALUES ('135', '348', '1', '0', '0', '0', '0', '0', '0', '', '0', '1503451663', '1503451663');
 INSERT INTO `opb_member_rule` VALUES ('136', '349', '1', '0', '0', '0', '0', '0', '0', '', '0', '1503469986', '1503469986');
+INSERT INTO `opb_member_rule` VALUES ('137', '350', '1', '0', '0', '0', '0', '0', '0', '', '0', '1503557197', '1503557197');
+INSERT INTO `opb_member_rule` VALUES ('158', '371', '1', '0', '0', '0', '0', '0', '0', '', '0', '1503558940', '1503558940');
+INSERT INTO `opb_member_rule` VALUES ('159', '372', '1', '321', '0', '0', '0', '0', '0', '', '0', '1503558982', '1503559971');
+INSERT INTO `opb_member_rule` VALUES ('160', '373', '3', '0', '0', '0', '0', '0', '0', '', '0', '1503648977', '1503648977');
 
 -- ----------------------------
 -- Table structure for `opb_message`
@@ -4764,7 +4783,7 @@ CREATE TABLE `opb_node` (
   `sysid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'system.sysid（所属系统）',
   `remarks` varchar(128) DEFAULT '' COMMENT '备注',
   `title` varchar(50) NOT NULL DEFAULT '' COMMENT '菜单标题',
-  `icon` varchar(30) NOT NULL DEFAULT '' COMMENT 'icon',
+  `icon` varchar(40) NOT NULL DEFAULT '' COMMENT 'icon',
   `url_value` varchar(255) NOT NULL DEFAULT '' COMMENT '链接地址（module/controller/action)',
   `is_menu` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0：非菜单项（弹窗-增删改），1：菜单项，2：非菜单项（新页面-增改）',
   `files` varchar(255) NOT NULL DEFAULT '' COMMENT '需要按需加载的文件',
@@ -4785,11 +4804,11 @@ CREATE TABLE `opb_node` (
 INSERT INTO `opb_node` VALUES ('1', '0', '1', '', '系统功能', 'fa fa-fw fa-gear', '', '1', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('2', '1', '1', '', '站点配置', 'fa fa-fw fa-wrench', 'basic/System/webConfig', '1', 'index,service', '/:currentPage?searchName', '50', '1');
 INSERT INTO `opb_node` VALUES ('3', '1', '1', '', '节点管理', 'fa fa-fw fa-bars', 'basic/Node/index', '1', 'index,service', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('4', '3', '1', '', '新增', '', 'basic/Node/add', '0', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('5', '3', '1', '', '编辑', 'glyphicon glyphicon-cloud', 'basic/Node/edit', '0', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('7', '3', '1', '', '启用', 'glyphicon glyphicon-minus-sign', 'basic/Node/enable', '0', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('8', '3', '1', '', '禁用', '', 'basic/Node/disable', '0', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('9', '3', '1', '', '保存', '', 'basic/Node/save', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('4', '3', '1', '', '新增', 'glyphicon glyphicon-plus', 'basic/Node/add', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('5', '3', '1', '', '编辑', 'glyphicon glyphicon-pencil', 'basic/Node/edit', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('7', '3', '1', '', '启用', 'glyphicon glyphicon-ok-sign', 'basic/Node/enable', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('8', '3', '1', '', '禁用', 'glyphicon glyphicon-minus-sign', 'basic/Node/disable', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('9', '3', '1', '', '保存', 'glyphicon glyphicon-floppy-disk', 'basic/Node/save', '0', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('10', '0', '1', '', '权限管理', 'fa fa-fw fa-key', '', '1', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('11', '10', '1', '', '用户管理', 'fa fa-fw fa-user', 'basic/User/index', '1', 'index,service', '/:currentPage?start_date&end_date&keyword', '50', '1');
 INSERT INTO `opb_node` VALUES ('12', '11', '1', '', '新增', '', 'basic/User/add', '0', '', '', '50', '1');
@@ -4866,7 +4885,7 @@ INSERT INTO `opb_node` VALUES ('167', '100', '1', '已推荐管理[167-170]', '�
 INSERT INTO `opb_node` VALUES ('168', '167', '1', '', '批量上/下架', '', 'goods/Goodsrec/onsaleAll', '0', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('169', '167', '1', '', '单个上/下架', '', 'goods/Goodsrec/onsale', '0', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('170', '167', '1', '', '编辑', '', 'goods/Goodsrec/edit', '0', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('171', '100', '1', '自由买卖列表[171-178]', '自由买卖列表', '', 'item/Admin/index', '1', 'index,service', '/:currentPage?keyword&check&onsale', '50', '1');
+INSERT INTO `opb_node` VALUES ('171', '100', '1', '自由买卖管理[171-178]', '自由买卖管理', '', 'item/Admin/index', '1', 'index,service', '/:currentPage?keyword&check&onsale', '50', '1');
 INSERT INTO `opb_node` VALUES ('172', '171', '1', '', '添加', '', 'item/Admin/add', '2', 'index,service', '/:currentPage', '50', '1');
 INSERT INTO `opb_node` VALUES ('173', '171', '1', '', '编辑', '', 'item/Admin/edit', '2', 'index,service', '/:currentPage?id', '50', '1');
 INSERT INTO `opb_node` VALUES ('174', '171', '1', '', '删除', '', 'item/Admin/delete', '0', '', '', '50', '1');
@@ -4902,7 +4921,7 @@ INSERT INTO `opb_node` VALUES ('270', '250', '1', '删除竞价订单', '删除'
 INSERT INTO `opb_node` VALUES ('271', '250', '1', '竞拍订单列表', '竞拍订单', '', 'pay/Order/free', '1', 'index,service', '/:currentPage?start_date&end_date&isdelivery&ispay&keyword', '50', '1');
 INSERT INTO `opb_node` VALUES ('272', '250', '1', '编辑竞拍订单', '编辑', '', 'pay/Order/editFree', '0', 'edit,service', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('273', '250', '1', '删除竞拍订单', '删除', '', 'pay/Order/delFree', '0', 'index,service', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('300', '0', '1', '【【300-399给拍卖应用】】', '拍卖管理', '', '', '1', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('300', '100', '1', '【【300-399给拍卖应用】】', '拍卖管理', '', '', '1', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('301', '300', '1', '添加拍卖', '添加拍卖', '', 'auction/Admin/add', '2', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('302', '300', '1', '竞价买卖列表', '竞价买卖', '', 'auction/Admin/jingjia', '1', 'index,service', '/:currentPage?start_date&end_date&keyword&type&check', '50', '1');
 INSERT INTO `opb_node` VALUES ('303', '300', '1', '拍卖列表', '拍卖', '', 'auction/Admin/paimai', '1', 'index,service', '/:currentPage?start_date&end_date&keyword&type&check', '50', '1');
@@ -4918,7 +4937,7 @@ INSERT INTO `opb_node` VALUES ('315', '300', '1', 'auction添加', '新增', '',
 INSERT INTO `opb_node` VALUES ('316', '300', '1', 'auction列表接口', '列表接口unlimited', '', 'auction/Admin/getList', '0', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('317', '300', '1', 'auction排序', '排序', '', 'auction/Admin/changeAuctionSort', '0', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('318', '300', '1', 'auction上/下架', '上/下架', '', 'auction/Admin/onsale', '0', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('400', '100', '1', '【【400-449给申购应用】】', '申购商品', '', 'crowd/Admin/index', '1', 'index,service', '/:currentPage?start_date&end_date&keyword&check', '50', '1');
+INSERT INTO `opb_node` VALUES ('400', '100', '1', '【【400-449给申购应用】】', '申购管理', '', 'crowd/Admin/index', '1', 'index,service', '/:currentPage?start_date&end_date&keyword&check', '50', '1');
 INSERT INTO `opb_node` VALUES ('401', '400', '1', '申购商品列表', '申购列表', '', 'crowd/Admin/index', '0', 'index,service', '/:currentPage?start_date&end_date&keyword&check', '50', '1');
 INSERT INTO `opb_node` VALUES ('402', '400', '1', '申购详情', '详情', '', 'crowd/Admin/detail', '2', 'index,service', '/:currentPage?start_date&end_date&id', '50', '1');
 INSERT INTO `opb_node` VALUES ('403', '400', '1', '申购编辑', '编辑', '', 'crowd/Admin/edit', '2', 'index,service', '/:currentPage?start_date&end_date&id', '50', '1');
@@ -4932,14 +4951,15 @@ INSERT INTO `opb_node` VALUES ('501', '0', '0', '', '', '', 'pay/Stat/getSumByPa
 INSERT INTO `opb_node` VALUES ('512', '0', '0', '', '', '', '', '1', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('513', '0', '1', '资讯管理', '资讯管理', '', '', '1', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('514', '513', '1', '资讯栏目管理', '资讯栏目', '', 'news/Category/index', '1', 'index,service', '/:currentPage?name', '50', '1');
-INSERT INTO `opb_node` VALUES ('515', '513', '1', '资讯栏目添加', '添加', '', 'news/Category/add', '0', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('516', '513', '1', '资讯栏目编辑', '编辑', '', 'news/Category/edit', '0', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('517', '513', '1', '资讯栏目删除', '删除', '', 'news/Category/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('515', '514', '1', '资讯栏目添加', '添加', '', 'news/Category/add', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('516', '514', '1', '资讯栏目编辑', '编辑', '', 'news/Category/edit', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('517', '514', '1', '资讯栏目删除', '删除', '', 'news/Category/delete', '0', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('518', '513', '1', '资讯文章管理', '资讯文章', '', 'news/Article/index', '1', 'index,service', '/:currentPage?cid&status&title', '50', '1');
-INSERT INTO `opb_node` VALUES ('519', '513', '1', '资讯文章添加', '添加', '', 'news/Article/add', '2', 'index,service', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('520', '513', '1', '资讯文章编辑', '编辑', '', 'news/Article/edit', '2', 'index,service', '/:currentPage?id', '50', '1');
-INSERT INTO `opb_node` VALUES ('521', '513', '1', '资讯文章删除', '删除', '', 'news/Article/delete', '0', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('522', '513', '1', '资讯文章推荐/显示', '是否推荐/显示', '', 'news/Article/changeRecOrShow', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('519', '518', '1', '资讯文章添加', '添加', '', 'news/Article/add', '2', 'index,service', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('520', '518', '1', '资讯文章编辑', '编辑', '', 'news/Article/edit', '2', 'index,service', '/:currentPage?id', '50', '1');
+INSERT INTO `opb_node` VALUES ('521', '518', '1', '资讯文章删除', '删除', '', 'news/Article/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('522', '518', '1', '资讯文章推荐/显示', '是否推荐/显示', '', 'news/Article/changeRecOrShow', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('523', '514', '1', '资讯文章栏目排序/显示', '排序/是否显示', '', 'news/Category/changeSortOrShow', '0', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('530', '0', '1', '商户管理[530-549]', '商户管理', '', '', '1', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('531', '530', '1', '运营数据', '运营数据', '', 'basic/Business/adminStatistic', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
 INSERT INTO `opb_node` VALUES ('532', '530', '1', '合伙人数据', '合伙人数据', '', 'basic/Business/hehuoren', '1', 'index,service', '/:currentPage?start_date&end_date&keyword', '50', '1');
@@ -4960,23 +4980,70 @@ INSERT INTO `opb_node` VALUES ('546', '530', '0', '资金统计', '资金统计'
 INSERT INTO `opb_node` VALUES ('547', '530', '0', '订单统计', '订单统计', '', 'pay/Order/stat', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
 INSERT INTO `opb_node` VALUES ('548', '530', '0', '注册', '注册', '', 'basic/Register/index', '2', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('549', '530', '0', '获取用户信息', '获取用户信息', '', 'basic/User/getUserInfo', '2', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('600', '0', '3', '【一级运营商开始】运营情况', '运营情况', '', 'basic/Business/statistic', '1', 'index,service', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('603', '0', '3', '订单管理', '订单管理', '', 'pay/Order/crowd', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
-INSERT INTO `opb_node` VALUES ('604', '603', '3', '订单详情', '订单详情', '', 'pay/Pay/stat', '0', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
-INSERT INTO `opb_node` VALUES ('605', '0', '3', '下属运营商管理[605-614]', '下属运营商管理', '', '', '1', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('606', '605', '3', '2级运营商数据', '2级运营商数据', '', 'basic/Business/erji', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
-INSERT INTO `opb_node` VALUES ('607', '605', '3', '直属用户数据', '直属用户数据', '', 'basic/Business/customer', '1', 'index,service', '/:currentPage?start_date&end_date&keyword', '50', '1');
-INSERT INTO `opb_node` VALUES ('608', '605', '3', '查看详情', '查看详情', '', 'basic/Business/view', '2', 'index,service', '/:currentPage?business_id', '50', '1');
-INSERT INTO `opb_node` VALUES ('609', '605', '3', '', '', '', 'basic/User/getUserInfo', '2', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('610', '0', '3', '申购管理[610-614]', '申购管理', '', '', '1', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('611', '610', '3', '申购商品列表', '商品列表', '', 'crowd/Admin/index', '1', 'index,service', '/:currentPage?start_date&end_date&keyword&check', '50', '1');
-INSERT INTO `opb_node` VALUES ('612', '610', '3', '申购详情', '详情', '', 'crowd/Admin/detail', '2', 'index,service', '/:currentPage?start_date&end_date&id', '50', '1');
-INSERT INTO `opb_node` VALUES ('613', '610', '3', '申购编辑', '编辑', '', 'crowd/Admin/edit', '2', 'index,service', '/:currentPage?start_date&end_date&id', '50', '1');
-INSERT INTO `opb_node` VALUES ('614', '610', '3', '申购添加', '添加申购', '', 'crowd/Admin/add', '2', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
-INSERT INTO `opb_node` VALUES ('615', '0', '3', '账户管理', '账户管理', '', '', '1', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('617', '615', '3', '密码修改', '密码修改', '', 'basic/User/changepwd', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
-INSERT INTO `opb_node` VALUES ('618', '615', '3', '企业名称修改', '企业名称修改', '', 'basic/Business/changename', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
-INSERT INTO `opb_node` VALUES ('619', '615', '3', '联系人手机号修改', '联系人手机号修改', '', 'basic/Business/changecontact', '1', 'index,service', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('550', '0', '3', '【【550-599给商品应用用】】【一级运营商开始】', '商品中心', 'fa fa-fw fa-cloud', '', '1', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('551', '550', '3', '商品管理模块[101-115]', '商品管理', 'fa fa-fw fa-cog', 'goods/Goods/index', '1', 'index,service', '/:currentPage?start_date&end_date&keyword', '50', '1');
+INSERT INTO `opb_node` VALUES ('552', '551', '3', '', '新增', '', 'goods/Goods/add', '2', 'index,service', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('553', '551', '3', '', '编辑', '', 'goods/Goods/edit', '2', 'index,service', '/:currentPage?start_date&end_date&id', '50', '1');
+INSERT INTO `opb_node` VALUES ('554', '551', '3', '', '删除', '', 'goods/Goods/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('555', '551', '3', '', '商品详情', '', 'goods/Goods/detail', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('556', '551', '3', '', '商品预览', '', 'goods/Goods/preview', '2', 'index,service', '/:currentPage?start_date&end_date&id', '50', '1');
+INSERT INTO `opb_node` VALUES ('557', '550', '3', '商品分类管理模块[116-125]', '分类管理', 'fa fa-fw fa-book', 'goods/Category/index', '1', 'index,service', '/:currentPage?start_date&end_date&keyword', '50', '1');
+INSERT INTO `opb_node` VALUES ('558', '557', '3', '', '新增', '', 'goods/Category/add', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('559', '557', '3', '', '编辑', '', 'goods/Category/edit', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('560', '557', '3', '', '删除', '', 'goods/Category/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('561', '557', '3', '', '启用/禁用', '', 'goods/Category/ableAll', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('562', '557', '3', '', '排序/是否显示', '', 'goods/Category/changeSortOrShow', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('563', '550', '3', '商品品牌管理[136-145]', '品牌管理', '', 'goods/Brand/index', '1', 'index,service', '/:currentPage?start_date&end_date&keyword', '50', '1');
+INSERT INTO `opb_node` VALUES ('564', '563', '3', '', '新增', '', 'goods/Brand/add', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('565', '563', '3', '', '编辑', '', 'goods/Brand/edit', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('566', '563', '3', '', '删除', '', 'goods/Brand/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('567', '550', '3', '自由买卖管理[171-178]', '自由买卖管理', '', 'item/Admin/index', '1', 'index,service', '/:currentPage?keyword&check&onsale', '50', '1');
+INSERT INTO `opb_node` VALUES ('568', '567', '3', '', '添加', '', 'item/Admin/add', '2', 'index,service', '/:currentPage', '50', '1');
+INSERT INTO `opb_node` VALUES ('569', '567', '3', '', '编辑', '', 'item/Admin/edit', '2', 'index,service', '/:currentPage?id', '50', '1');
+INSERT INTO `opb_node` VALUES ('570', '567', '3', '', '删除', '', 'item/Admin/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('571', '567', '3', '', '查看', '', 'item/Admin/detail', '2', 'index,service', '/:currentPage?id', '50', '1');
+INSERT INTO `opb_node` VALUES ('572', '567', '3', '', '审核', '', 'item/Admin/check', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('573', '567', '3', '', '强制下架/恢复上架', '', 'item/Admin/onsale', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('574', '567', '3', '', '排序或推荐', '', 'item/Admin/changeSortOrRec', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('575', '550', '3', '申购管理', '申购管理', '', 'crowd/Admin/index', '1', 'index,service', '/:currentPage?start_date&end_date&keyword&check', '50', '1');
+INSERT INTO `opb_node` VALUES ('576', '575', '3', '', '申购详情', '', 'crowd/Admin/detail', '2', 'index,service', '/:currentPage?start_date&end_date&id', '50', '1');
+INSERT INTO `opb_node` VALUES ('577', '575', '3', '', '申购编辑', '', 'crowd/Admin/edit', '2', 'index,service', '/:currentPage?start_date&end_date&id', '50', '1');
+INSERT INTO `opb_node` VALUES ('578', '575', '3', '', '添加申购', '', 'crowd/Admin/add', '2', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
+INSERT INTO `opb_node` VALUES ('579', '575', '3', '', '申购审核', '', 'crowd/Admin/check', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('580', '575', '3', '', '申购删除', '', 'crowd/Admin/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('581', '575', '3', '', '申购上下架', '', 'crowd/Admin/onsale', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('582', '575', '3', '', '申购列表', '', 'crowd/Admin/getList', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('583', '575', '3', '', '申购商品排序', '', 'crowd/Admin/changeCrowdSort', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('584', '550', '3', '', '拍卖管理', '', '', '1', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('585', '584', '3', '添加拍卖', '添加拍卖', '', 'auction/Admin/add', '2', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('586', '584', '3', '竞价买卖列表', '竞价买卖', '', 'auction/Admin/jingjia', '1', 'index,service', '/:currentPage?start_date&end_date&keyword&type&check', '50', '1');
+INSERT INTO `opb_node` VALUES ('587', '584', '3', '拍卖列表', '拍卖', '', 'auction/Admin/paimai', '1', 'index,service', '/:currentPage?start_date&end_date&keyword&type&check', '50', '1');
+INSERT INTO `opb_node` VALUES ('588', '584', '3', 'vip列表', 'vip', '', 'auction/Admin/vip', '1', 'index,service', '/:currentPage?start_date&end_date&keyword&type&check', '50', '1');
+INSERT INTO `opb_node` VALUES ('589', '584', '3', '专场列表', '专场', '', 'auction/Admin/zhuanchang', '1', 'index,service', '/:currentPage?start_date&end_date&keyword&type&check', '50', '1');
+INSERT INTO `opb_node` VALUES ('590', '584', '3', '拍卖会列表', '拍卖会', '', 'auction/Admin/paimaihui', '1', 'index,service', '/:currentPage?start_date&end_date&keyword&type&check', '50', '1');
+INSERT INTO `opb_node` VALUES ('591', '584', '3', 'auction列表接口', '列表接口', '', 'auction/Admin/index', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('592', '584', '3', 'auction状态审核', '审核', '', 'auction/Admin/check', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('593', '584', '3', 'auction详情', '详情', '', 'auction/Admin/detail', '2', 'index,service', '/:currentPage?start_date&end_date&id&type', '50', '1');
+INSERT INTO `opb_node` VALUES ('594', '584', '3', 'auction删除', '删除', '', 'auction/Admin/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('595', '584', '3', 'auction编辑', '编辑', '', 'auction/Admin/edit', '2', 'index,service', '/:currentPage?start_date&end_date&id&type', '50', '1');
+INSERT INTO `opb_node` VALUES ('596', '584', '3', 'auction添加', '新增', '', 'auction/Admin/add', '2', 'index,service', '/:currentPage?start_date&end_date&type', '50', '1');
+INSERT INTO `opb_node` VALUES ('597', '584', '3', 'auction列表接口', '列表接口unlimited', '', 'auction/Admin/getList', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('598', '584', '3', 'auction排序', '排序', '', 'auction/Admin/changeAuctionSort', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('599', '584', '3', 'auction上/下架', '上/下架', '', 'auction/Admin/onsale', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('600', '0', '3', '资讯管理', '资讯管理', '', '', '1', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('601', '600', '3', '资讯栏目管理', '资讯栏目', '', 'news/Category/index', '1', 'index,service', '/:currentPage?name', '50', '1');
+INSERT INTO `opb_node` VALUES ('602', '601', '3', '资讯栏目添加', '添加', '', 'news/Category/add', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('603', '601', '3', '资讯栏目编辑', '编辑', '', 'news/Category/edit', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('604', '601', '3', '资讯栏目删除', '删除', '', 'news/Category/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('605', '600', '3', '资讯文章管理', '资讯文章', '', 'news/Article/index', '1', 'index,service', '/:currentPage?cid&status&title', '50', '1');
+INSERT INTO `opb_node` VALUES ('606', '605', '3', '资讯文章添加', '添加', '', 'news/Article/add', '2', 'index,service', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('607', '605', '3', '资讯文章编辑', '编辑', '', 'news/Article/edit', '2', 'index,service', '/:currentPage?id', '50', '1');
+INSERT INTO `opb_node` VALUES ('608', '605', '3', '资讯文章删除', '删除', '', 'news/Article/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('609', '605', '3', '资讯文章推荐/显示', '是否推荐/显示', '', 'news/Article/changeRecOrShow', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('610', '601', '3', '资讯文章栏目排序/显示', '排序/是否显示', '', 'news/Category/changeSortOrShow', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('611', '551', '3', '', '发布到申购', '', 'goods/Goods/pubtocrowd', '2', 'index,service', '/:currentPage?id', '50', '1');
+INSERT INTO `opb_node` VALUES ('612', '551', '3', '', '发布到拍卖', '', 'goods/Goods/pubtoauction', '2', 'index,service', '/:currentPage?id', '50', '1');
+INSERT INTO `opb_node` VALUES ('613', '551', '3', '', '发布到自由买卖', '', 'goods/Goods/pubtoitem', '2', 'index,service', '/:currentPage?id', '50', '1');
 INSERT INTO `opb_node` VALUES ('620', '0', '4', '【二级运营商开始（620-659）】运营情况', '运营情况', '', 'basic/Business/statistic', '1', 'index,service', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('621', '0', '4', '查看详情', '查看详情', '', 'basic/Business/view', '2', 'index,service', '/:currentPage?business_id', '50', '1');
 INSERT INTO `opb_node` VALUES ('622', '0', '4', '用户详情', '用户详情', '', 'basic/Business/customer', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
@@ -5012,13 +5079,25 @@ INSERT INTO `opb_node` VALUES ('673', '623', '4', '我的授权申请', '我的�
 INSERT INTO `opb_node` VALUES ('679', '660', '2', '查看详情', '查看详情', '', 'basic/Business/view', '2', 'index,service', '/:currentPage?business_id', '50', '1');
 INSERT INTO `opb_node` VALUES ('680', '0', '1', '广告管理', '广告管理', '', '', '1', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('681', '680', '1', '广告位管理', '广告位', '', 'adv/Advposition/index', '1', 'index,service', '/:currentPage?name', '50', '1');
-INSERT INTO `opb_node` VALUES ('682', '680', '1', '广告位添加', '添加', '', 'adv/Advposition/add', '0', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('683', '680', '1', '广告位编辑', '编辑', '', 'adv/Advposition/edit', '0', '', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('684', '680', '1', '广告位删除', '删除', '', 'adv/Advposition/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('682', '681', '1', '广告位添加', '添加', '', 'adv/Advposition/add', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('683', '681', '1', '广告位编辑', '编辑', '', 'adv/Advposition/edit', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('684', '681', '1', '广告位删除', '删除', '', 'adv/Advposition/delete', '0', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('685', '680', '1', '广告管理', '广告', '', 'adv/Adv/index', '1', 'index,service', '/:currentPage?cid&status&adv_name', '50', '1');
-INSERT INTO `opb_node` VALUES ('686', '680', '1', '广告添加', '添加', '', 'adv/Adv/add', '2', 'index,service', '', '50', '1');
-INSERT INTO `opb_node` VALUES ('687', '680', '1', '广告编辑', '编辑', '', 'adv/Adv/edit', '2', 'index,service', '/:currentPage?id', '50', '1');
-INSERT INTO `opb_node` VALUES ('688', '680', '1', '广告删除', '删除', '', 'adv/Adv/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('686', '685', '1', '广告添加', '添加', '', 'adv/Adv/add', '2', 'index,service', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('687', '685', '1', '广告编辑', '编辑', '', 'adv/Adv/edit', '2', 'index,service', '/:currentPage?id', '50', '1');
+INSERT INTO `opb_node` VALUES ('688', '685', '1', '广告删除', '删除', '', 'adv/Adv/delete', '0', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('2000', '0', '3', '运营情况', '运营情况', '', 'basic/Business/statistic', '1', 'index,service', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('2001', '0', '3', '订单管理', '订单管理', '', 'pay/Order/crowd', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
+INSERT INTO `opb_node` VALUES ('2002', '2001', '3', '订单详情', '订单详情', '', 'pay/Pay/stat', '0', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
+INSERT INTO `opb_node` VALUES ('2003', '0', '3', '下属运营商管理[605-614]', '下属运营商管理', '', '', '1', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('2004', '2003', '3', '2级运营商数据', '2级运营商数据', '', 'basic/Business/erji', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
+INSERT INTO `opb_node` VALUES ('2005', '2004', '3', '直属用户数据', '直属用户数据', '', 'basic/Business/customer', '1', 'index,service', '/:currentPage?start_date&end_date&keyword', '50', '1');
+INSERT INTO `opb_node` VALUES ('2006', '2004', '3', '查看详情', '查看详情', '', 'basic/Business/view', '2', 'index,service', '/:currentPage?business_id', '50', '1');
+INSERT INTO `opb_node` VALUES ('2007', '2004', '3', '', '', '', 'basic/User/getUserInfo', '2', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('2008', '0', '3', '账户管理', '账户管理', '', '', '1', '', '', '50', '1');
+INSERT INTO `opb_node` VALUES ('2009', '2008', '3', '密码修改', '密码修改', '', 'basic/User/changepwd', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
+INSERT INTO `opb_node` VALUES ('2010', '2008', '3', '企业名称修改', '企业名称修改', '', 'basic/Business/changename', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
+INSERT INTO `opb_node` VALUES ('2012', '2008', '3', '联系人手机号修改', '联系人手机号修改', '', 'basic/Business/changecontact', '1', 'index,service', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('9000', '0', '1', '数据统计', '数据统计', '', '', '1', '', '', '50', '1');
 INSERT INTO `opb_node` VALUES ('9001', '9000', '1', '资金统计', '资金统计', '', 'pay/Pay/stat', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
 INSERT INTO `opb_node` VALUES ('9002', '9000', '1', '订单统计', '订单统计', '', 'pay/Order/stat', '1', 'index,service', '/:currentPage?start_date&end_date', '50', '1');
@@ -5044,11 +5123,11 @@ CREATE TABLE `opb_refresh_token` (
 -- Records of opb_refresh_token
 -- ----------------------------
 INSERT INTO `opb_refresh_token` VALUES ('0', '0', '23d78a9f22ded9b35ba2fb1f2c915502a9a40867', '2017-05-24 10:06:05');
-INSERT INTO `opb_refresh_token` VALUES ('1', '1', 'd9d6a5a872cf3ce86e1475b953bb9ce35d520253', '2017-08-25 13:08:05');
+INSERT INTO `opb_refresh_token` VALUES ('1', '1', 'f5bed1aebc0aaec185207703c457e917d5e341eb', '2017-08-27 17:06:29');
 INSERT INTO `opb_refresh_token` VALUES ('1', '2', '781baa755da229abcc2d7b725f92269e2900385f', '2017-07-22 14:53:11');
-INSERT INTO `opb_refresh_token` VALUES ('1', '3', '5ffdf4d404c98c6d43f5cac629ade8886357d3d2', '2017-08-25 14:30:32');
-INSERT INTO `opb_refresh_token` VALUES ('1', '4', '99b28a7279604e21f45edee5d09a746be86ceda7', '2017-08-24 16:17:16');
-INSERT INTO `opb_refresh_token` VALUES ('1', '5', '24415a0d290990c003ca22226c0b3ac30926b442', '2017-08-24 14:16:50');
+INSERT INTO `opb_refresh_token` VALUES ('1', '3', 'f51ff3fbc96d536299417adf8c9fbd077fb6c0c9', '2017-08-26 10:38:07');
+INSERT INTO `opb_refresh_token` VALUES ('1', '4', '4935dc27fbf58e50bd29158f60b9c67c456bd48e', '2017-08-26 16:00:36');
+INSERT INTO `opb_refresh_token` VALUES ('1', '5', 'ee64b8660a6cbd974e59c778ff0daf9fd36655f7', '2017-08-27 17:24:04');
 INSERT INTO `opb_refresh_token` VALUES ('1', '6', '41cc70ed40912e62ccaad8963673ca4f6670d3f6', '2017-06-29 13:49:04');
 INSERT INTO `opb_refresh_token` VALUES ('1', '108', '494c36a0b9a787a9e56a9965db3dc9c100d6b089', '2017-06-21 15:55:52');
 INSERT INTO `opb_refresh_token` VALUES ('1', '110', '2adfba2f5f4e4501b1ee8aee14d2d2fa66ddadc0', '2017-07-21 14:36:18');
@@ -5087,13 +5166,13 @@ INSERT INTO `opb_refresh_token` VALUES ('1', '239', 'ff9790c609551f690da26bda7ec
 INSERT INTO `opb_refresh_token` VALUES ('1', '257', 'e5ab1e90c85c823dbbd3a89b1d2366908064e8de', '2017-08-17 08:46:00');
 INSERT INTO `opb_refresh_token` VALUES ('1', '258', '44c6ff162d5167eb430b4727bbd9100b7236f0d9', '2017-08-06 10:21:13');
 INSERT INTO `opb_refresh_token` VALUES ('1', '259', 'd691a474d0a1d503014575f9e5c8acc7d42d83fc', '2017-08-03 14:52:07');
-INSERT INTO `opb_refresh_token` VALUES ('1', '270', '5f27841adb4fe599edc5435c9c74348e2b3faadc', '2017-08-23 16:10:11');
+INSERT INTO `opb_refresh_token` VALUES ('1', '270', '4fd433fe59bac434f8fd5c7eb2b0ea9c6743e9c0', '2017-08-27 09:23:05');
 INSERT INTO `opb_refresh_token` VALUES ('1', '271', '9ead1ad46e4fb0d947e65f22a9a69a73a78108c1', '2017-08-04 09:17:02');
 INSERT INTO `opb_refresh_token` VALUES ('1', '272', 'd23109a37d98e1d3827e06b1fb1a912006666e91', '2017-08-04 17:17:03');
-INSERT INTO `opb_refresh_token` VALUES ('1', '273', '226f076cb30f58c408c8f8d924d38969608c4220', '2017-08-24 11:16:10');
-INSERT INTO `opb_refresh_token` VALUES ('1', '321', '6e0f25acea4134e8fe181a259262ab1d41771a3e', '2017-08-25 13:08:11');
+INSERT INTO `opb_refresh_token` VALUES ('1', '273', '9e89c5a6815fa2b75502c8dc72029b099f1d3cef', '2017-08-26 10:20:50');
+INSERT INTO `opb_refresh_token` VALUES ('1', '321', '2f885ea1878414a05e2017e566edae1d7d25de64', '2017-08-27 16:13:25');
 INSERT INTO `opb_refresh_token` VALUES ('1', '327', '0c6c2c8a92fadeb0966c12a94726a063209a3cfc', '2017-08-25 13:44:52');
-INSERT INTO `opb_refresh_token` VALUES ('1', '329', '6694618b5a1b6b87ebe2279b13ea0ad3bbca206b', '2017-08-09 13:16:12');
+INSERT INTO `opb_refresh_token` VALUES ('1', '329', '9da730ec5c73f36efcfabe3662099164e062e929', '2017-08-27 16:26:35');
 INSERT INTO `opb_refresh_token` VALUES ('3', '1', '6a5b3cb53f48f80d86e125d71b726ffe7adf864a', '2017-08-17 11:46:56');
 INSERT INTO `opb_refresh_token` VALUES ('3', '2', '7b13478a900b997aadec4b92739e5cec92f7157e', '2017-07-19 14:47:21');
 INSERT INTO `opb_refresh_token` VALUES ('3', '3', '87ce7febb8f8e6b9d690b0ba77e5bfc596b392dd', '2017-08-19 10:05:21');
@@ -5128,32 +5207,35 @@ INSERT INTO `opb_refresh_token` VALUES ('3', '238', 'ded2621cd31f84169ae36d059d2
 INSERT INTO `opb_refresh_token` VALUES ('3', '239', '5a64f98b21506fc23d74983ea35cc8c698976b1d', '2017-08-03 13:58:58');
 INSERT INTO `opb_refresh_token` VALUES ('3', '242', 'ffff44753898f6c8561e434726a3514d7d4c4c28', '2017-08-04 16:11:30');
 INSERT INTO `opb_refresh_token` VALUES ('3', '256', '37ba2792b75fd550c5a41345710f3d785117bd51', '2017-08-17 15:17:19');
-INSERT INTO `opb_refresh_token` VALUES ('3', '257', 'c4fa9eb840eee6b5e1e6ad0427d1ec71de135129', '2017-08-16 17:30:52');
+INSERT INTO `opb_refresh_token` VALUES ('3', '257', '6b6a8b6e98ba925b03cca8bfda27097d56d578eb', '2017-08-27 16:57:45');
 INSERT INTO `opb_refresh_token` VALUES ('3', '258', '3192723bf51f3f18f6b88a7bcf239daa934a4fbd', '2017-08-06 17:26:58');
 INSERT INTO `opb_refresh_token` VALUES ('3', '259', '565d37240f398ae0274ff37ca49359393ea0b876', '2017-08-25 11:38:24');
 INSERT INTO `opb_refresh_token` VALUES ('3', '266', '22915cab9fd556a51466f73b01ae0b95c8a67bce', '2017-08-04 10:34:09');
 INSERT INTO `opb_refresh_token` VALUES ('3', '267', 'ae759f1b47722c4bda83f6578e52308448ecd5cf', '2017-08-16 13:36:45');
-INSERT INTO `opb_refresh_token` VALUES ('3', '270', '7be9b92bb2649fa6f8b5cae15206a1906f9592fb', '2017-08-24 17:48:17');
+INSERT INTO `opb_refresh_token` VALUES ('3', '270', '652f133bd52e45574f2e190459b121cfb40f234e', '2017-08-27 09:26:06');
 INSERT INTO `opb_refresh_token` VALUES ('3', '271', '31c15a80e91b17934282c5dc970a49dd12808a04', '2017-08-04 16:10:51');
 INSERT INTO `opb_refresh_token` VALUES ('3', '272', 'e03ff71103b04a3a57291d2b5281fced79089ce9', '2017-08-04 17:17:26');
 INSERT INTO `opb_refresh_token` VALUES ('3', '273', '0a3ce2da77b1c9082f290fcbf88affce996afc26', '2017-08-17 13:12:38');
 INSERT INTO `opb_refresh_token` VALUES ('3', '321', '085fd94cb1b317c3277346e264a94e61dd6b58fd', '2017-08-12 17:27:16');
-INSERT INTO `opb_refresh_token` VALUES ('3', '322', '4270706b62add3b9dc4c14ea6fc70f2e48ece265', '2017-08-21 12:08:42');
+INSERT INTO `opb_refresh_token` VALUES ('3', '322', '56605aa9f9d73f1c928424834f140594a4304b01', '2017-08-25 17:26:58');
 INSERT INTO `opb_refresh_token` VALUES ('3', '325', '769aaea489e3b166e430ca81a63f2b9888a2d72c', '2017-08-06 15:38:34');
 INSERT INTO `opb_refresh_token` VALUES ('3', '326', '0f38d6486b49ef8ba9f48475e6f0df22f3f866f5', '2017-08-06 16:44:37');
 INSERT INTO `opb_refresh_token` VALUES ('3', '328', '5f9ccd3f828ce67f6f682f508f385bee9af65043', '2017-08-06 17:10:16');
-INSERT INTO `opb_refresh_token` VALUES ('3', '329', 'cc7d113601b61b48045fa7863b63af0da2adb5c0', '2017-08-25 14:14:06');
+INSERT INTO `opb_refresh_token` VALUES ('3', '329', '2710432c924dbb9c3f6e95a40e082c9b6c9e8d66', '2017-08-26 18:06:07');
 INSERT INTO `opb_refresh_token` VALUES ('3', '330', '12021b85a29b77d9eb251c3d7a1ea9065e7db520', '2017-08-12 17:25:22');
-INSERT INTO `opb_refresh_token` VALUES ('3', '331', 'c7665ae8b8d999d31805daef38566385e56f16ee', '2017-08-25 06:22:25');
+INSERT INTO `opb_refresh_token` VALUES ('3', '331', '9efdd7a518bc18c4c2f243aad9b789605c977a1a', '2017-08-27 06:24:07');
 INSERT INTO `opb_refresh_token` VALUES ('3', '338', '0bff0c41bdb20022477d00a5659f482f6d96752b', '2017-08-12 15:51:45');
 INSERT INTO `opb_refresh_token` VALUES ('3', '339', 'cf09ce2c9a64c47feaed320d469c010f895fa39d', '2017-08-17 15:46:10');
-INSERT INTO `opb_refresh_token` VALUES ('3', '340', '739b70990429498b463d926f53ccdeb30ae9995f', '2017-08-23 16:59:33');
+INSERT INTO `opb_refresh_token` VALUES ('3', '340', '4036af75ea4cccca56522701d9374020a17e87ce', '2017-08-26 15:22:37');
 INSERT INTO `opb_refresh_token` VALUES ('3', '341', '401d07dcbbdba58203bb3ab184b7700c36f7d376', '2017-08-12 17:20:50');
 INSERT INTO `opb_refresh_token` VALUES ('3', '343', 'bcb31d8531f75586969d389dd071bf62fb5d4e94', '2017-08-16 13:16:47');
+INSERT INTO `opb_refresh_token` VALUES ('3', '372', 'dd26e71c159a1744679d7372fa44a688a62d6158', '2017-08-26 17:37:06');
+INSERT INTO `opb_refresh_token` VALUES ('5', '1', 'ff1d879a449c845c4ad8ab78220994a0aa3534c0', '2017-08-26 14:47:17');
 INSERT INTO `opb_refresh_token` VALUES ('5', '275', '48272e87b74dba89460441c40f313ecc97915dd7', '2017-08-16 10:03:55');
-INSERT INTO `opb_refresh_token` VALUES ('5', '344', '9118671d913fa95cc3c19946d53c040a42ae9772', '2017-08-25 13:40:20');
-INSERT INTO `opb_refresh_token` VALUES ('5', '345', 'cb1c76418b886b1253ffdc64ff405542eb8cca6c', '2017-08-24 18:10:27');
-INSERT INTO `opb_refresh_token` VALUES ('5', '347', '21c06078a6e0bd371a45f33c49bafd37ffcd51cb', '2017-08-24 16:31:54');
+INSERT INTO `opb_refresh_token` VALUES ('5', '344', '2d2e07aa669153313003c415885e8948c1fa90d5', '2017-08-25 18:21:06');
+INSERT INTO `opb_refresh_token` VALUES ('5', '345', '59ab7e6fee596398f39f717c07d5b6adeab06a43', '2017-08-26 13:55:45');
+INSERT INTO `opb_refresh_token` VALUES ('5', '347', '775feef32048f57aa6c3e740c7bae96b8afe1275', '2017-08-26 15:51:42');
+INSERT INTO `opb_refresh_token` VALUES ('5', '373', '64ca53826664a925f1db6501b5c3d1e433bc8f26', '2017-08-27 16:24:07');
 
 -- ----------------------------
 -- Table structure for `opb_role`
@@ -5255,12 +5337,7 @@ INSERT INTO `opb_role_node` VALUES ('1', '117');
 INSERT INTO `opb_role_node` VALUES ('1', '118');
 INSERT INTO `opb_role_node` VALUES ('1', '119');
 INSERT INTO `opb_role_node` VALUES ('1', '120');
-INSERT INTO `opb_role_node` VALUES ('1', '126');
-INSERT INTO `opb_role_node` VALUES ('1', '127');
-INSERT INTO `opb_role_node` VALUES ('1', '128');
-INSERT INTO `opb_role_node` VALUES ('1', '129');
-INSERT INTO `opb_role_node` VALUES ('1', '130');
-INSERT INTO `opb_role_node` VALUES ('1', '131');
+INSERT INTO `opb_role_node` VALUES ('1', '121');
 INSERT INTO `opb_role_node` VALUES ('1', '136');
 INSERT INTO `opb_role_node` VALUES ('1', '137');
 INSERT INTO `opb_role_node` VALUES ('1', '146');
@@ -5352,6 +5429,7 @@ INSERT INTO `opb_role_node` VALUES ('1', '519');
 INSERT INTO `opb_role_node` VALUES ('1', '520');
 INSERT INTO `opb_role_node` VALUES ('1', '521');
 INSERT INTO `opb_role_node` VALUES ('1', '522');
+INSERT INTO `opb_role_node` VALUES ('1', '523');
 INSERT INTO `opb_role_node` VALUES ('1', '530');
 INSERT INTO `opb_role_node` VALUES ('1', '531');
 INSERT INTO `opb_role_node` VALUES ('1', '532');
@@ -5364,6 +5442,61 @@ INSERT INTO `opb_role_node` VALUES ('1', '538');
 INSERT INTO `opb_role_node` VALUES ('1', '539');
 INSERT INTO `opb_role_node` VALUES ('1', '540');
 INSERT INTO `opb_role_node` VALUES ('1', '542');
+INSERT INTO `opb_role_node` VALUES ('1', '550');
+INSERT INTO `opb_role_node` VALUES ('1', '551');
+INSERT INTO `opb_role_node` VALUES ('1', '552');
+INSERT INTO `opb_role_node` VALUES ('1', '553');
+INSERT INTO `opb_role_node` VALUES ('1', '554');
+INSERT INTO `opb_role_node` VALUES ('1', '555');
+INSERT INTO `opb_role_node` VALUES ('1', '556');
+INSERT INTO `opb_role_node` VALUES ('1', '557');
+INSERT INTO `opb_role_node` VALUES ('1', '558');
+INSERT INTO `opb_role_node` VALUES ('1', '559');
+INSERT INTO `opb_role_node` VALUES ('1', '560');
+INSERT INTO `opb_role_node` VALUES ('1', '561');
+INSERT INTO `opb_role_node` VALUES ('1', '562');
+INSERT INTO `opb_role_node` VALUES ('1', '563');
+INSERT INTO `opb_role_node` VALUES ('1', '564');
+INSERT INTO `opb_role_node` VALUES ('1', '565');
+INSERT INTO `opb_role_node` VALUES ('1', '566');
+INSERT INTO `opb_role_node` VALUES ('1', '567');
+INSERT INTO `opb_role_node` VALUES ('1', '568');
+INSERT INTO `opb_role_node` VALUES ('1', '569');
+INSERT INTO `opb_role_node` VALUES ('1', '570');
+INSERT INTO `opb_role_node` VALUES ('1', '571');
+INSERT INTO `opb_role_node` VALUES ('1', '572');
+INSERT INTO `opb_role_node` VALUES ('1', '573');
+INSERT INTO `opb_role_node` VALUES ('1', '574');
+INSERT INTO `opb_role_node` VALUES ('1', '575');
+INSERT INTO `opb_role_node` VALUES ('1', '576');
+INSERT INTO `opb_role_node` VALUES ('1', '577');
+INSERT INTO `opb_role_node` VALUES ('1', '578');
+INSERT INTO `opb_role_node` VALUES ('1', '579');
+INSERT INTO `opb_role_node` VALUES ('1', '580');
+INSERT INTO `opb_role_node` VALUES ('1', '581');
+INSERT INTO `opb_role_node` VALUES ('1', '582');
+INSERT INTO `opb_role_node` VALUES ('1', '583');
+INSERT INTO `opb_role_node` VALUES ('1', '584');
+INSERT INTO `opb_role_node` VALUES ('1', '585');
+INSERT INTO `opb_role_node` VALUES ('1', '586');
+INSERT INTO `opb_role_node` VALUES ('1', '587');
+INSERT INTO `opb_role_node` VALUES ('1', '588');
+INSERT INTO `opb_role_node` VALUES ('1', '589');
+INSERT INTO `opb_role_node` VALUES ('1', '590');
+INSERT INTO `opb_role_node` VALUES ('1', '591');
+INSERT INTO `opb_role_node` VALUES ('1', '592');
+INSERT INTO `opb_role_node` VALUES ('1', '593');
+INSERT INTO `opb_role_node` VALUES ('1', '594');
+INSERT INTO `opb_role_node` VALUES ('1', '595');
+INSERT INTO `opb_role_node` VALUES ('1', '596');
+INSERT INTO `opb_role_node` VALUES ('1', '597');
+INSERT INTO `opb_role_node` VALUES ('1', '598');
+INSERT INTO `opb_role_node` VALUES ('1', '599');
+INSERT INTO `opb_role_node` VALUES ('1', '600');
+INSERT INTO `opb_role_node` VALUES ('1', '601');
+INSERT INTO `opb_role_node` VALUES ('1', '602');
+INSERT INTO `opb_role_node` VALUES ('1', '603');
+INSERT INTO `opb_role_node` VALUES ('1', '604');
 INSERT INTO `opb_role_node` VALUES ('1', '605');
 INSERT INTO `opb_role_node` VALUES ('1', '606');
 INSERT INTO `opb_role_node` VALUES ('1', '607');
@@ -5373,7 +5506,6 @@ INSERT INTO `opb_role_node` VALUES ('1', '610');
 INSERT INTO `opb_role_node` VALUES ('1', '611');
 INSERT INTO `opb_role_node` VALUES ('1', '612');
 INSERT INTO `opb_role_node` VALUES ('1', '613');
-INSERT INTO `opb_role_node` VALUES ('1', '614');
 INSERT INTO `opb_role_node` VALUES ('1', '623');
 INSERT INTO `opb_role_node` VALUES ('1', '624');
 INSERT INTO `opb_role_node` VALUES ('1', '625');
@@ -5389,9 +5521,6 @@ INSERT INTO `opb_role_node` VALUES ('1', '662');
 INSERT INTO `opb_role_node` VALUES ('1', '663');
 INSERT INTO `opb_role_node` VALUES ('1', '664');
 INSERT INTO `opb_role_node` VALUES ('1', '665');
-INSERT INTO `opb_role_node` VALUES ('1', '667');
-INSERT INTO `opb_role_node` VALUES ('1', '669');
-INSERT INTO `opb_role_node` VALUES ('1', '670');
 INSERT INTO `opb_role_node` VALUES ('1', '671');
 INSERT INTO `opb_role_node` VALUES ('1', '672');
 INSERT INTO `opb_role_node` VALUES ('1', '673');
