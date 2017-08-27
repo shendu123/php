@@ -1,0 +1,33 @@
+一、业务逻辑
+
+		
+1、商品:分类与类型，类型又包含属性与规格
+   属性:如：手机：操作系统、屏幕材质、尺寸、通话时长、待机时间
+   规格：如：手机：网络（4G手机、3G手机）、内存（16G、64G）
+   属性与规格区别：规格影响价格，属性与价格无关 
+   spu与sku区别：就好比苹果6s有两个不同的内存（16G、64G），16G与64G是两个不同的sku,苹果6s是一个spu
+2、商品相关表（6张表）：商品表、分类表、商品类型表，商品属性表，商品属性值表，商品规格表，商品规格值表
+3、未登录加入购物车：未登录时通过往cart表中插入sessionid来标识是哪个用户加入的购物车，当此用户登录后，根据cart表中的sessionid，把cart表中的用户id改为登录的用户id	
+4、支付、登录等插件
+5、秒杀、团购业务流程
+6、订单、支付等
+		     		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+二、技能掌握
+
+1、关于sesionid：如果网站开启了sessioin（就是session_start()），第一次访问网站时服务端会返回一个sessionid给客户端保存在cookie中，详见http响应头（Response Headers）
+  Set-Cookie:PHPSESSID=7qmhgolhumah9ce0j3m7b4lus4，第二次访问时，客户端带着cookie中的sessionid去请求服务器，详见http请求头（Request Headers）Cookie:PHPSESSID=7qmhgolhumah9ce0j3m7b4lus4，如果第三访问时你删掉sessionid对应的文件，服务器会根据请求头中的sessionid重新生成该文件
