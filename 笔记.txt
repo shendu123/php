@@ -11,6 +11,7 @@
 4、支付、登录等插件
 5、秒杀、团购业务流程
 6、订单、支付等
+
 		     		
 
 
@@ -29,5 +30,34 @@
 
 二、技能掌握
 
-1、关于sesionid：如果网站开启了sessioin（就是session_start()），第一次访问网站时服务端会返回一个sessionid给客户端保存在cookie中，详见http响应头（Response Headers）
-  Set-Cookie:PHPSESSID=7qmhgolhumah9ce0j3m7b4lus4，第二次访问时，客户端带着cookie中的sessionid去请求服务器，详见http请求头（Request Headers）Cookie:PHPSESSID=7qmhgolhumah9ce0j3m7b4lus4，如果第三访问时你删掉sessionid对应的文件，服务器会根据请求头中的sessionid重新生成该文件
+1、session与cookie
+
+   1)、关于sessionid：
+			如果网站开启了session（就是session_start()），第一次访问网站时服务端会返回一个sessionid给客户端保存在cookie中，详见http响应头（Response Headers）
+  Set-Cookie:PHPSESSID=7qmhgolhumah9ce0j3m7b4lus4，第二次访问时，客户端带着cookie中的sessionid去请求服务器，详见http请求头（Request Headers）Cookie:PHPSESSID=7qmhgolhumah9ce0j3m7b4lus4，如果第三访问时你删掉sessionid对应的文件，服务器会根据请求头中的sessionid重新生成该文件,清除session（session_destroy）时，会清空sessionid对应文件中的内容！session_id()是怎么产生的？是session_start()时产生的
+
+
+
+
+2、mysql知识点整理
+   1）mysql分表分区
+   2）mysql优化	
+   3）mysql主从
+   4）mysql集群			1
+
+
+
+
+3、redis、memcache知识点整理
+
+4、sphix、coreseek
+
+5、nginx+keepalive
+
+6、websocket(workerman)
+
+
+
+
+
+2、得意之作？说下项目中遇到了哪些困难，最后怎么解决的？
