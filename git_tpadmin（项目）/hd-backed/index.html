@@ -1,0 +1,101 @@
+<!doctype html>
+<html class="no-js" data-ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title>后台管理系统</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- oclazyload stylesheets before this tag -->
+    <meta id="load_styles_before">
+    <!-- build:css({.tmp,app}) styles/app.min.css -->
+    <link rel="stylesheet" href="styles/webfont.css">
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="vendor/textAngular/dist/textAngular.css">
+    <link rel="stylesheet" href="vendor/perfect-scrollbar/css/perfect-scrollbar.css">
+    <link rel="stylesheet" href="styles/climacons-font.css">
+    <link rel="stylesheet" href="styles/font-awesome.css">
+    <link rel="stylesheet" href="styles/card.css">
+    <link rel="stylesheet" href="styles/sli.css">
+    <link rel="stylesheet" href="styles/animate.css">
+    <link rel="stylesheet" href="styles/app.css">
+    <link rel="stylesheet" href="styles/app.skins.css">
+    <!-- endbuild -->
+  </head>
+  <body data-ng-controller="AppCtrl" class="{{ app.layout.sidebarTheme }} {{ app.layout.headerTheme }} page-loading">
+    <!-- page loading spinner -->
+    <div class="pageload">
+      <div class="pageload-inner">
+        <div class="sk-rotating-plane"></div>
+      </div>
+    </div>
+    <!-- /page loading spinner -->
+    <div class="app {{$state.current.data.appClasses}}" 
+    data-ng-class="{
+    'layout-small-menu': app.layout.isSmallSidebar,
+     'layout-chat-open': app.layout.isChatOpen, 
+     'layout-fixed-header': app.layout.isFixedHeader,
+      'layout-boxed': app.layout.isBoxed, 
+      'layout-static-sidebar': app.layout.isStaticSidebar, 
+      'layout-right-sidebar': app.layout.isRightSidebar, 
+      'layout-fixed-footer': app.layout.isFixedFooter,
+       'message-open': app.isMessageOpen, 
+       'contact-open': app.isContactOpen}" data-ui-view>
+    </div>
+
+
+
+    <!-- build:js({.tmp,app}) scripts/app.min.js -->
+    <script src="scripts/util.js"></script>
+    <script src="scripts/helpers/modernizr.js"></script>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+    <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="vendor/angular-animate/angular-animate.min.js"></script>
+    <script src="vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="vendor/angular-touch/angular-touch.min.js"></script>
+    <script src="vendor/ui-jq/jq.min.js"></script>
+    <script src="vendor/ngstorage/ngStorage.min.js"></script>
+    <script src="vendor/angular-cookies/angular-cookies.min.js"></script>
+    <script src="vendor/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="vendor/angular-translate/angular-translate.min.js"></script>
+    <script src="vendor/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <script src="vendor/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+    <script src="vendor/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
+    <script src="vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+    <script src="vendor/fastclick/lib/fastclick.js"></script>
+    <script src="scripts/helpers/smartresize.js"></script>
+    <script src="scripts/helpers/sameheight.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/app.main.js"></script>
+    <script src="scripts/config.router.js"></script>
+    <script src="scripts/config.language.js"></script>
+    <script src='vendor/textAngular/dist/textAngular-rangy.min.js'></script>
+    <script src='vendor/textAngular/dist/textAngular-sanitize.min.js'></script>
+    <script src="vendor/textAngular/dist/textAngularSetup.js"></script>
+    <script src="vendor/textAngular/dist/textAngular.min.js"></script>
+    <script src="scripts/helpers/colors.js"></script>
+    <script src="scripts/directives/anchor-scroll.js"></script>
+    <script src="scripts/directives/c3.js"></script>
+    <script src="scripts/directives/chosen.js"></script>
+    <script src="scripts/directives/navigation.js"></script>
+    <script src="scripts/directives/offscreen.js"></script>
+    <script src="scripts/directives/card-control-collapse.js"></script>
+    <script src="scripts/directives/card-control-refresh.js"></script>
+    <script src="scripts/directives/card-control-remove.js"></script>
+    <script src="scripts/directives/preloader.js"></script>
+    <script src="scripts/directives/quick-launch.js"></script>
+    <script src="scripts/directives/rickshaw.js"></script>
+    <script src="scripts/directives/scrollup.js"></script>
+    <script src="scripts/directives/vector.js"></script>
+    <script src="scripts/directives/ripple.js"></script>
+    <script src="scripts/directives/disable-ng-animate.js"></script>
+    <script src="vendor/d3/d3.min.js"></script>
+    <script src="vendor/n3-line-chart/build/line-chart.js"></script>
+    <script src="vendor/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+    <script src="scripts/helpers/noty-defaults.js"></script>
+
+    <!-- endbuild -->
+  </body>
+</html>

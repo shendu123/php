@@ -1,0 +1,60 @@
+<div class="brand">
+
+  <!-- toggle small sidebar menu -->
+  <a href="javascript:;" class="toggle-apps hidden-xs" ng-click="toggle.quickLaunch = !toggle.quickLaunch">
+    <i class="icon-grid"></i>
+  </a>
+  <!-- /toggle small sidebar menu -->
+
+  <!-- toggle offscreen menu -->
+  <div class="toggle-offscreen">
+    <offscreen class="visible-xs"></offscreen>
+  </div>
+  <!-- /toggle offscreen menu -->
+
+  <!-- logo -->
+  <a class="brand-logo">
+    <span>用户管理系统</span>
+  </a>
+  <a href="#" class="small-menu-visible brand-logo">LZX</a>
+  <!-- /logo -->
+
+</div>
+
+
+<!-- main navigation -->
+<nav role="navigation" side-navigation ng-if="!toggle.quickLaunch">
+
+  <ul class="nav">
+        
+    <li>
+      <a>
+        <i class="icon-bag"></i>
+        <span translate="网站管理"></span>
+      </a>
+      <ul class="sub-menu"  ng-repeat="menu in leftMenu" >
+        <li ui-sref-active="active"   ng-if="authList==1 || in_array(menu.name,authControl)">
+          <a ui-sref="app.{{menu.control}}.index">
+            <span translate="{{menu.html}}{{menu.title}}"></span>
+          </a>
+<!--            <ul class="sub-menu" ng-repeat="child in menu.ChildNodes" style="max-height: 100px;">
+                <li style="opacity: 10;" ui-sref-active="active"   ng-if="authList==1 || in_array(child.name,authControl)">
+                    <a ui-sref="app.{{child.control}}.index">
+                      <span translate="{{child.title}}"></span>
+                    </a>
+                    <ul class="sub-menu" ng-repeat="ch in child.ChildNodes" style="max-height: 100px;">
+                        <li style="opacity: 10;" ui-sref-active="active"   ng-if="authList==1 || in_array(ch.name,authControl)">
+                          <a ui-sref="app.{{ch.control}}.index">
+                            <span translate="{{ch.title}}"></span>
+                          </a>
+                        </li>
+                    </ul> 
+                </li>
+            </ul>            -->
+
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+<!-- /main navigation -->

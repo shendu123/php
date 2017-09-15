@@ -1,0 +1,72 @@
+<div class="page-title">
+  <div class="title" translate="轮播管理"></div>
+</div>
+<div data-ng-controller="lunboListCtrl">
+  <div class="card bg-white">
+    <div class="card-header">
+      <button class="btn btn-default btn-xs pull-right" ng-click="statGoto('app.lunbo.ea')">添加</button>
+      轮播信息表
+    </div>
+    <div class="card-block p-a-0">
+      <table ng-table="tableParams" class="table-striped table align-middle m-b-0 table-bordered" >
+        <tr ng-repeat="car in data">
+          <td  title="'标题'" filter="{ title: 'text'}" sortable="'title'" style="width:25%">
+            <span text="car.title"  e-required>
+              {{ car.title || '' }}
+            </span>
+          </td>
+          <td title="'类型'" filter="{ type: 'text'}" sortable="'type'" style="width:10%">
+            <span editable-text="car.type"  >
+              {{ (car.type=="C")?"车型展示":"企业视频" }}
+            </span>
+          </td>
+          <td title="'顶部轮播图'" filter="{ url1: 'text'}" sortable="'url1'" style="width:15%">
+            <span editable-text="car.picurl"  e-required>
+              <img src="/{{ car.url1 || 'admin/data/sd.jpg' }}" style="width:30%">
+            </span>
+          </td>
+          <td title="'全屏大图'" filter="{ url2: 'text'}" sortable="'url2'" style="width:15%">
+            <span editable-text="car.url2"    e-required>
+              <img src="/{{ car.url2 || 'admin/data/sd.jpg' }}" style="width:30%">
+            </span>
+          </td>
+          <td title="'状态（选中为上架）'" filter="{ isonsell: 'text'}" sortable="'isonsell'" style="width:15%">
+            <label class="switch switch-info m-b">
+              <input  type="checkbox" ng-model="car.isonsell" ng-checked="{{car.isonsell}}" ng-click="changeCheckbox(car.id)">
+              <span>
+                <i class="handle"></i>
+              </span>
+            </label>
+          </td>
+          <td title="'录入人'" filter="{ inputerid: 'text'}" sortable="'inputerid'" style="width:15%">
+            <span editable-text="car.istop"  e-required>
+              {{ car.inputer || '' }}
+            </span>
+          </td>
+          <td title="'录入时间'" filter="{ createat: 'text'}" sortable="'content'" style="width:17%">
+            <span editable-text="car.createat" e-required>
+              {{ car.createat || '' }}
+            </span>
+          </td>
+          <td title="'最后修改人'" filter="{ inputerid: 'text'}" sortable="'inputerid'" style="width:15%">
+            <span editable-text="car.istop"  e-required>
+              {{ car.modifyername || '' }}
+            </span>
+          </td>
+          <td title="'最后修改时间'" filter="{ createat: 'text'}" sortable="'content'" style="width:17%">
+            <span editable-text="car.createat"  e-required>
+              {{ car.modifytime || '' }}
+            </span>
+          </td>
+
+          <td title="'操作'" style="white-space: nowrap" style="width:10%">
+            <div class="buttons" ng-show="!rowform.$visible">
+              <button class="btn btn-primary btn-xs" ng-click="edit(car.isonsell,car.id,car.istop)">编辑</button>
+              <button class="btn btn-danger btn-xs" ng-click="deleteById(car.isonsell,$index,car.id,car.type)">删除</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

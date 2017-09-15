@@ -1,0 +1,8 @@
+.settings/
+.buildpath
+.project
+*.swp
+.DS_Store
+.idea/
+change.clpprj
+runtime/

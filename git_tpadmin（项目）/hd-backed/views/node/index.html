@@ -1,0 +1,104 @@
+<div class="page-title">
+  <div class="title" translate="节点信息列表"></div>
+</div>
+<div data-ng-controller="nodeCtrl">
+  <div class="card bg-white">
+    <div class="card-header">
+      <button ng-if="authList==1||authList.Admin.AdminNode.add" class="btn btn-success btn-sm pull-right" ng-click="addNode('app.node.addnode')">添加节点</button>
+    </div>
+      <div class="card-block p-a-0" > 
+        <ul>
+            <li style="width:600px;font-weight: bold;">
+                <span title="'节点ID'" filter="{ id: 'text'}" sortable="'id'" style="width:30%">
+                    节点ID
+               </span>
+                <span title="'节点类型'" filter="{ name: 'text'}" sortable="'name'" style="width:30%">
+                   节点类型
+               </span>
+               <span title="'节点名称'" filter="{ name: 'text'}" sortable="'name'" style="width:30%">
+                   节点名称
+               </span>
+               <span title="'操作'" style="white-space: nowrap" style="width:20%">
+                   操作&nbsp;&nbsp;<font color="red">(只有第一与第二级菜单才能添加子节点)</font>
+               </span> 
+            </li>
+         </ul>   
+        
+      <ul ng-table="tableParams" class="table-striped table align-middle m-b-0 table-bordered" ng-repeat="car in carsData" ng-init="outerIndex = $index" >
+        <li> 
+
+          <span title="'节点ID'" filter="{ id: 'text'}" sortable="'id'" style="width:15%">
+            <span text="id" e-name="id" onbeforesave="checkChejia($data, id)" e-form="rowform" e-required>
+              {{ car.id }}
+            </span>
+          </span>
+          <span title="'节点类型'" filter="{ type: 'text'}" sortable="'type'" style="width:15%">
+            <span text="type:" e-name="type:" onbeforesave="checkChejia($data, id)" e-form="rowform" e-required>
+              <font color="#f37b1d">[{{car.type==1?'菜单':'方法'}}]</font>
+            </span>
+          </span>  
+          <span title="'节点名称'" filter="{ name: 'text'}" sortable="'name'" style="width:15%">
+            <span text="name" e-name="name" onbeforesave="checkChejia($data, car.name)" e-form="rowform" e-required>
+              {{ car.title}}
+            </span>
+          </span>
+
+
+          <span title="'操作'" style="white-space: nowrap" style="width:10%">
+              <button ng-if="authList==1||authList.Admin.AdminNode.edit" class="btn btn-primary btn-xs" ng-click="editNode(car.id)">编辑</button>
+              <button ng-if="authList==1||authList.Admin.AdminNode.delete" class="btn btn-danger btn-xs" ng-click="deleteById(car.id)">删除</button>
+              <button ng-if="authList==1||authList.Admin.AdminNode.addChildNode" class="btn btn-primary btn-xs" ng-click="addChild(car.id,car.title)">添加子节点</button>
+          </span>
+           <ul >  
+               <li ng-repeat="child in car.ChildNodes track by $index" ng-init="innerIndex  = $index">
+                        <span title="'节点ID'" filter="{ id: 'text'}" sortable="'id'" style="width:15%">
+                          <span text="id" e-name="id" onbeforesave="checkChejia($data, id)" e-form="rowform" e-required>
+                            {{ child.id }}
+                          </span>
+                        </span> 
+                        <span title="'节点类型'" filter="{ type: 'text'}" sortable="'type'" style="width:15%">
+                         <span text="type:" e-name="type:" onbeforesave="checkChejia($data, id)" e-form="rowform" e-required>
+                           <font color="#f37b1d">[{{child.type==1?'菜单':'方法'}}]</font>
+                         </span>
+                       </span>                    
+                        <span text="name" e-name="name" onbeforesave="checkChejia($data, car.name)" e-form="rowform" e-required>
+                          {{ child.title}}
+                        </span>  
+                        <span title="'操作'" style="white-space: nowrap" style="width:10%">
+                           <button ng-if="authList==1||authList.Admin.AdminNode.edit" class="btn btn-primary btn-xs" ng-click="editNode(child.id)">编辑</button>
+                           <button ng-if="authList==1||authList.Admin.AdminNode.delete" class="btn btn-danger btn-xs" ng-click="deleteById(child.id)">删除</button>
+                           <button ng-if="(authList==1||authList.Admin.AdminNode.addChildNode)&&(child.type==1)" class="btn btn-primary btn-xs" ng-click="addChild(child.id,child.title)">添加子节点</button>
+                       </span>
+                        <ul>  
+                           <li ng-repeat="grandSon in child.ChildNodes track by $index" ng-if="grandSon">
+                                    <span title="'节点ID'" filter="{ id: 'text'}" sortable="'id'" style="width:15%">
+                                      <span text="id" e-name="id" onbeforesave="checkChejia($data, id)" e-form="rowform" e-required>
+                                        {{ grandSon.id }}
+                                      </span>
+                                    </span>   
+                                    <span title="'节点类型'" filter="{ type: 'text'}" sortable="'type'" style="width:15%">
+                                     <span text="type:" e-name="type:" onbeforesave="checkChejia($data, id)" e-form="rowform" e-required>
+                                       <font color="#f37b1d">[{{grandSon.type==1?'菜单':'方法'}}]</font>
+                                     </span>
+                                   </span>                                
+                                    <span text="name" e-name="name" onbeforesave="checkChejia($data, car.name)" e-form="rowform" e-required>
+                                      {{ grandSon.title}}
+                                    </span>  
+                                    <span title="'操作'" style="white-space: nowrap" style="width:10%">
+                                       <button ng-if="authList==1||authList.Admin.AdminNode.edit" class="btn btn-primary btn-xs" ng-click="editNode(grandSon.id)">编辑</button>
+                                       <button ng-if="authList==1||authList.Admin.AdminNode.delete" class="btn btn-danger btn-xs" ng-click="deleteById(grandSon.id)">删除</button>
+                                       
+                                   </span>
+                           </li>       
+                       </ul>  
+               </li>       
+           </ul>           
+           
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<style>
+    ul{list-style: none;}
+</style>

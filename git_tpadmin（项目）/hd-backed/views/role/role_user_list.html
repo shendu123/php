@@ -1,0 +1,70 @@
+<div class="page-title">
+  <div class="title" translate="角色用户列表"></div>
+</div>
+<div data-ng-controller="roleuserlistCtrl">
+  <div class="card bg-white">
+    <div class="card-block p-a-0">
+      <table ng-table="tableParams" class="table-striped table align-middle m-b-0 table-bordered" >
+        <tr ng-repeat="user in carsData"> 
+          <td title="'用户ID'" filter="{ id: 'text'}" sortable="'id'" style="width:15%">
+            <span text="id" e-name="id" onbeforesave="checkChejia($data, id)" e-form="rowform" e-required>
+                <div ng-if="in_array(user.uid,check_user)">
+                    <input type="checkbox" id="{{user.uid}}" name="{{user.name}}" ng-click="isSelected($event,user.uid)" checked >
+                </div>
+                <div ng-if="!in_array(user.uid,check_user)" id="{{user.uid}}" name="{{user.name}}" ng-click="isSelected($event,user.uid)">
+                    <input type="checkbox">
+                </div>  
+            </span>
+          </td>            
+          <td title="'用户ID'" filter="{ id: 'text'}" sortable="'id'" style="width:15%">
+            <span text="uid" e-name="id" onbeforesave="checkChejia($data, id)" e-form="rowform" e-required>
+              {{ user.uid }}
+            </span>
+          </td>
+          <td title="'用户名'" filter="{ account: 'text'}" sortable="'account'" style="width:15%">
+            <span text="account" e-name="account" onbeforesave="checkChejia($data, account)" e-form="rowform" e-required>
+              {{ user.account}}
+            </span>
+          </td>
+          
+          <td  title="'真实姓名'" filter="{ realname: 'text'}" sortable="'realname'" style="width:15%">
+            <span text="truename" e-name="realname" e-form="rowform" e-required>
+              {{ user.truename  }}
+            </span>
+          </td>
+
+<!--          <td  title="'上次登录ip'" filter="{ last_login_ip: 'text'}" sortable="'last_login_ip'" style="width:15%">
+            <span text="last_login_ip" e-name="last_login_ip" e-form="rowform" e-required>
+              {{ user.last_login_ip  }}
+            </span>
+          </td>-->
+
+          <td title="'用户状态（未选禁用）'" filter="{ status: 'text'}" sortable="'status'" style="width:15%">
+            <label class="switch switch-danger m-b">
+              <input  type="checkbox" ng-model="status" ng-checked="{{user.status}}" ng-click="changePrivilegeIsonsell(user.uid)">
+              <span>
+                <i class="handle"></i>
+              </span>
+            </label> 
+          </td>
+
+<!--          <td title="'创建时间'" filter="{ create_time: 'text'}" sortable="'create_time'" style="width:17%">
+            <span text="create_time" e-name="create_time" onbeforesave="checkChejia($data, create_time)" e-form="rowform" e-required>
+              {{ user.create_time  }}
+            </span>
+          </td>
+          <td title="'修改时间'" filter="{ update_time: 'text'}" sortable="'update_time'" style="width:17%">
+            <span text="update_time" e-name="update_time" onbeforesave="checkChejia($data, update_time)" e-form="rowform" e-required>
+              {{ user.update_time  }}
+            </span>
+          </td>-->
+          <div class="buttons">
+           <button class="btn btn-danger btn-xs" ng-click="postRoleUser()">保存</button>
+          </div>
+        </tr>
+        
+      </table>
+        
+    </div>
+  </div>
+</div>

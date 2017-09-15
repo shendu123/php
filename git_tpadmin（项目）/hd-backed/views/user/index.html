@@ -1,0 +1,70 @@
+<div class="page-title">
+  <div class="title" translate="用户信息列表"></div>
+</div>
+<div data-ng-controller="userCtrl">
+  <div class="card bg-white">
+    <div class="card-header">
+      <button ng-if="authList==1||authList.Admin.AdminUser.add" class="btn btn-success btn-sm pull-right" ng-click="addUser('app.user.adduser')">添加用户</button>
+    </div>
+    <div class="card-block p-a-0">
+      <table ng-table="tableParams" class="table-striped table align-middle m-b-0 table-bordered" >
+        <tr ng-repeat="user in $data" align="center"> 
+          <td title="'用户ID'" filter="{ id: 'text'}" sortable="'id'" style="width:15%">
+            <span text="id" e-name="id" onbeforesave="checkChejia($data, id)" e-form="rowform" e-required>
+              {{ user.uid }}
+            </span>
+          </td>
+          <td title="'用户名'" filter="{ account: 'text'}" sortable="'account'" style="width:15%">
+            <span text="account" e-name="account" onbeforesave="checkChejia($data, account)" e-form="rowform" e-required>
+              {{ user.account}}
+            </span>
+          </td>
+          
+          <td  title="'真实姓名'" filter="{ realname: 'text'}" sortable="'realname'" style="width:15%">
+            <span text="realname" e-name="realname" e-form="rowform" e-required>
+              {{ user.truename  }}
+            </span>
+          </td>
+
+<!--          <td  title="'用户登录ip'" filter="{ last_login_ip: 'text'}" sortable="'last_login_ip'" style="width:15%">
+            <span text="last_login_ip" e-name="last_login_ip" e-form="rowform" e-required>
+              {{ user.last_login_ip  }}
+            </span>-->
+          </td>
+          <td  title="'角色'" filter="{ last_login_ip: 'text'}" sortable="'last_login_ip'" style="width:15%">
+            <span text="last_login_ip" e-name="last_login_ip" e-form="rowform" e-required>
+              {{ user.name  }}
+            </span>
+          </td>
+
+          <td title="'用户状态（未选禁用）'" filter="{ status: 'text'}" sortable="'status'" style="width:15%" align="left">
+            <label class="switch switch-danger m-b">
+              <input  type="checkbox" ng-model="status" ng-checked="{{user.status}}" ng-click="changeStatus('/admin/admin_user/changeStatus',user)">
+              <span>
+                <i class="handle"></i>
+              </span>
+            </label> 
+          </td>
+
+<!--          <td title="'创建时间'" filter="{ create_time: 'text'}" sortable="'create_time'" style="width:17%"> 
+            <span text="create_time" e-name="create_time" onbeforesave="checkChejia($data, create_time)" e-form="rowform" e-required>
+              {{ user.create_time  }}
+            </span>
+          </td>
+          <td title="'修改时间'" filter="{ update_time: 'text'}" sortable="'update_time'" style="width:17%">
+            <span text="update_time" e-name="update_time" onbeforesave="checkChejia($data, update_time)" e-form="rowform" e-required>
+              {{ user.update_time  }}
+            </span>
+          </td>-->
+
+          <td title="'操作'" style="white-space: nowrap" style="width:10%">
+            <div class="buttons" ng-show="!rowform.$visible">
+                    <button ng-if="authList==1||authList.Admin.AdminUser.edit" class="btn btn-primary btn-xs" ng-click="editUser(user.uid)">编辑</button>
+                    <button ng-if="authList==1||authList.Admin.AdminUser.delete" class="btn btn-danger btn-xs" ng-click="deleteById(user.uid)">删除</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

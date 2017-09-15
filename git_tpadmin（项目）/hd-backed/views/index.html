@@ -1,0 +1,36 @@
+<div>
+  
+  <div class="row">
+
+    <div class="col-md-4">      
+
+      <div class="card card-block bg-white p-b-0 no-border">
+        <div class="p-a bb">
+          <h4 class="m-a-0">系统首页</h4>
+        </div>
+<!--        <flot dataset="pieDataset" options="pieOptions" class="block p-a-md" height="122"></flot>-->
+        <div class="text-center m-b-md">
+          <div class="text-muted text-uppercase">Total</div>
+          <h5 class="m-a-0"></h5>
+        </div>
+        <ul class="list-unstyled m-x-n m-b-0">
+          <li class="b-t p-a-md">
+            <i class="fa fa-circle text-primary m-r"></i>
+            欢迎光临
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script id="template/carousel/carousel.html" type="text/ng-template">
+  <div ng-mouseenter="pause()" ng-mouseleave="play()" class="carousel" ng-swipe-right="prev()" ng-swipe-left="next()">
+    <div class="carousel-inner" ng-transclude></div>
+  </div>
+</script>
+<script type="text/javascript">
+  $('.same-height-cards').sameHeight(991);
+  $(window).smartresize(function () {
+    $('.same-height-cards').sameHeight(991);
+  });
+</script>
