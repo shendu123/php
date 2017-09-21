@@ -1,0 +1,257 @@
+<!-- header -->
+<section class="content-header">
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>拍卖管理</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="adminService" page-size="5" added-reload="false">
+    	<div class="box-header">
+    		<form class="form-inline pull-right">
+    			<input type="text" class="form-control fd-input-text" name="keyword" ng-model="searchCondition.keyword" placeholder="输入拍卖名称或编号">
+    			<button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+    		</form>
+    	</div>
+    	<div class="box">
+    		 <a title="新增" class="btn btn-primary" ui-sref="auction-Admin-add({type:'vip'})"><i class="fa fa-dashboard"></i>新增</a>
+    	</div>
+    	<div class="fd-tabs-default fd-clear">
+		    <ul class="fd-tabs-ul clean">
+		      <li><a class="{{tagSwitch_all}}" ui-sref="auction-Admin-vip({check: 'egt|0'})">全部</a></li>
+		      <li><a class="{{tagSwitch_pass}}" ui-sref="auction-Admin-vip({check: 'eq|1'})">审核通过</a></li>
+		      <li><a class="{{tagSwitch_wait}}" ui-sref="auction-Admin-vip({check: 'eq|0'})">待审核</a></li>
+		      <li><a class="{{tagSwitch_failed}}" ui-sref="auction-Admin-vip({check: 'eq|2'})">审核失败</a></li>
+		    </ul>
+		</div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                	<th><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+                    <th>序号</th>
+                    <th>拍卖名称编号</th>
+                    <th>拍卖佣金保证金</th>
+                    <th>拍卖时间</th>
+                    <th>商品信息</th>
+                    <th>商户信息</th>
+                    <th>拍卖审核</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in list" class="list-animation fd-tr">
+                    <td><input type="checkbox" value="{{item.id}}" name="ids[]"></td>
+                    <td>{{$index+1}}</td>
+                    <td class="fd-merge">
+                    	<p>拍卖名称：{{item.auction_name}}</p>
+                    	<p>拍卖标号：{{item.auction_code}}</p>
+                    </td>
+                    <td class="fd-merge">
+                    	<p>&#12288;拍卖佣金：{{item.auction_broker_price}}元</p>
+                    	<p>卖家保证金：{{item.auction_seller_price}}元</p>
+                    	<p>买家保证金：{{item.auction_buier_price}}元</p>
+                    </td>
+                    <td class="fd-merge">
+                    	<p>开始时间：{{item.auction_starttime_tag}}</p>
+                    	<p>结束时间：{{item.auction_endtime_tag}}</p>
+                    </td>
+                    <td class="fd-merge">
+                    	<p>商品名称：{{item.goods_info.goods_name}}</p>
+                    	<p>商品分类：{{item.goods_info.cat_name}}</p>
+                    	<p>所属品牌：{{item.goods_info.brand_name}}</p>
+                    </td>
+                    <td class="fd-merge">
+                    	<p>商户名称：{{item.owner.business.name}}</p>
+                    	<p>商品所属：{{item.owner.member.truename}} {{item.owner.member.mobile}}</p>
+                    </td>
+                    <td class="fd-merge">
+                    	<p>审核状态：{{item.auction_check_status_tag}}</p>
+                    	<p>审核人员：{{item.checker.truename}}</p>
+                    	<p>联系电话：{{item.checker.mobile}}</p>
+                    </td>
+                    <td>
+                        <button title="审核" class="btn btn-info btn-xs glyphicon glyphicon-check" ng-click="openWindow(item.id,'tpl-check.html')" ></button>
+                        <button title="推荐" class="btn btn-info btn-xs glyphicon glyphicon-share" ng-click="openWindow(item.id,'tpl-recommend.html')" ></button>
+                        <button title="查看详情" class="btn btn-info btn-xs glyphicon glyphicon-search" ui-sref="auction-Admin-detail({id: '{{item.id}}'})"></button>
+                        <button title="编辑" class="btn btn-info btn-xs glyphicon glyphicon-edit" ui-sref="auction-Admin-edit({id: '{{item.id}}', type: 'vip'})" ></button>
+<!--                         <button title="删除" class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="remove($index, item.uid)"></button> -->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/ng-template" id="tpl-check.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">审核</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="box-body">
+				<ul class="fd-content-ul-wrap fd-clear">
+					<!-- -->
+					<li class="li50">
+						<div class="title">成交模式：</div>
+						<div class="fd-content">{{item.auction_succtype_tag}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">交易佣金：</div>
+						<div class="fd-content fd-price">{{item.auction_broker_price}}</div>
+					</li>
+					<!-- -->
+					<li class="li50">
+						<div class="title">开始时间：</div>
+						<div class="fd-content">{{item.auction_starttime_tag}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">结束时间：</div>
+						<div class="fd-content">{{item.auction_endtime_tag}}</div>
+					</li>
+					<!-- -->
+					<li class="li100">
+						<div class="title">加价幅度：</div>
+						<div class="fd-content fd-price">{{item.auction_stepsize_price}}</div>
+					</li>
+					<!-- -->
+					<li class="li50">
+						<div class="title">起拍价：</div>
+						<div class="fd-content fd-price">{{item.auction_onset_price}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">保留价：</div>
+						<div class="fd-content fd-price">{{item.auction_reserve_price}}</div>
+					</li>
+					<!-- -->
+					<li class="li50">
+						<div class="title">卖家保证金：</div>
+						<div class="fd-content fd-price">{{item.auction_seller_price}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">买家保证金：</div>
+						<div class="fd-content fd-price">{{item.auction_buier_price}}</div>
+					</li>
+					<!-- -->
+					<li class="li50">
+						<div class="title">商品名称：</div>
+						<div class="fd-content">{{item.goods_info.goods_name}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">商品分类：</div>
+						<div class="fd-content">{{item.goods_info.cat_name}}</div>
+					</li>
+					<!-- -->
+					<li class="li50">
+						<div class="title">商品关键字：</div>
+						<div class="fd-content">{{item.goods_info.goods_keywords}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">商品价值：</div>
+						<div class="fd-content fd-price">{{item.goods_info.goods_price}}</div>
+					</li>
+					<!-- -->
+					<li class="li100 fd-hight-ultd">
+						<div class="title">商品图片：</div>
+						<div class="fd-content-img fd-img-gallery">
+							<figure>
+								<div>
+									<a href="{{item.goods_info.goods_thumb[0]['url']}}" data-size="286x220" target="_blank"><img style="width: 200px;" src="{{item.goods_info.goods_thumb[0]['url']}}"></a>
+								</div>
+							</figure>
+						</div>
+					</li>
+					<!-- -->
+					<li class="li100 fd-hight-ultd">
+						<div class="title">商品轮播图：</div>
+						<div class="fd-content-img fd-img-gallery">
+			  			<figure ng-repeat="item_img in item.goods_info.goods_pictures">
+							<div>
+				  			<a href="{{item_img.url}}" data-size="286x220" target="_blank"><img style="width:200px;" src="{{item_img.url}}"></a>
+							</div>
+			  			</figure>
+						</div>
+					</li>
+					<!-- -->
+					<li class="li100 fd-hight-ultd">
+						<div class="title">商品详情：</div>
+						<div class="fd-content-content" ng-bind-html="item.goods_info.goods_content"></div>
+					</li>
+				</ul>
+                <div class="fd-modal-footer">
+					<ul class="fd-content-ul-wrap fd-clear">
+						<li class="li50">
+							<button class="btn btn-success" type="submit" ng-click="check(1)">审核通过</button>
+						</li>
+						<li class="li50">
+							<button class="btn btn-warning" type="submit" ng-click="check(2)">失败</button>
+							<input type='text' id='reason' style="width:80%;" ng-model="item.checkmsg">
+						</li>
+					</ul>
+                </div>
+				<!-- TODO 这边不应该影响整体的布局 -->
+                <div class="modal-footer"></div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<!-- 商品推荐 -->
+<script type="text/ng-template" id="tpl-recommend.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">推荐设置</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal fd-edit-form" name="editRecommend" ng-submit="submitEditRecommend(item)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label fd-must">选择推荐区域</label>
+                    <div class="col-sm-10">
+						<label class="wrap-label" ng-repeat="item_pos in posList">
+							<input type="checkbox" class="form-element" name="apply_pos_ids[]" value="{{item_pos.id}}"> {{item_pos.pos_name}}
+						</label>
+                    </div>
+                </div>
+				<div class="form-inline form-group">
+                    <label for="item_apply_starttime" class="col-sm-2 control-label fd-must">开始时间</label>
+					<div class="col-sm-4">
+	                    <span class="input-group datepicker modv2-sel-warap" datepicker-click="apply_starttime">
+	                        <input type="hidden"  ng-model="item.apply_starttime" />
+	                        <input placeholder="日/月" type="datetime"  name="apply_starttime"  required ng-model="item.apply_starttime" sync="item.apply_starttime"
+	                               class="form-control" datepicker-popup="yyyy-MM-dd"  is-open="apply_starttime"
+	                               datepicker-options="dateOptions"  ng-required="true"  current-text="今天" clear-text="清空" close-text="关闭"  readonly />
+	                    </span>
+					</div>
+                    <label for="item_apply_starttime" class="col-sm-2 control-label fd-must">结束时间</label>
+					<div class="col-sm-4">
+	                    <span class="input-group datepicker modv2-sel-warap" datepicker-click="apply_endtime">
+	                        <input type="hidden"  ng-model="item.apply_endtime" />
+	                        <input placeholder="日/月" type="datetime"  name="apply_endtime"  required ng-model="item.apply_endtime" sync="item.apply_endtime"
+	                               class="form-control" datepicker-popup="yyyy-MM-dd"  is-open="apply_endtime"
+	                               datepicker-options="dateOptions"  ng-required="true"  current-text="今天" clear-text="清空" close-text="关闭"  readonly />
+	                    </span>
+					</div>
+				</div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">申请附加内容</label>
+                    <div class="col-sm-10">
+                        <textarea ng-model="item.apply_remarks"></textarea>
+                    </div>
+                </div>
+				<div style="height:70px;"><!-- 占高 --></div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

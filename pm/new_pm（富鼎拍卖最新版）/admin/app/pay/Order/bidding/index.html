@@ -1,0 +1,180 @@
+<!-- header -->
+<section class="content-header" >
+    <h1>
+        {{$state.current.page.title}}
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li ui-sref-active="active"><a href="#" ui-sref="index-index-home"><i class="fa fa-dashboard"></i>{{$state.current.page.title}}</a></li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="biddingService" page-size="10" open-size="lg" added-reload="false">
+        <div class="box-header">
+            <div class="form form-inline form-alignment">
+                <div>
+                    <div class="form-group form-group-alignment">
+                        <label>&nbsp;下单时间：</label>
+                        <span class="input-group datepicker modv2-sel-warap" datepicker-click="startdOpened">
+                            <input type="hidden"  ng-model="searchCondition.start_date" />
+                            <input placeholder="日/月" type="datetime"  name="start_date"  required ng-model="start_date" sync="searchCondition.start_date"
+                                   class="form-control" datepicker-popup="yyyy-MM-dd"  is-open="startdOpened"
+                                   datepicker-options="dateOptions"  ng-required="true"  current-text="今天" clear-text="清空" close-text="关闭"  readonly />
+                        </span>
+                    </div>
+                    <div class="form-group form-group-alignment">
+                        <label>&nbsp;至&nbsp;</label>
+                        <span class="input-group datepicker modv2-sel-warap" datepicker-click="endOpened">
+                            <input type="hidden"  ng-model="searchCondition.end_date"/>
+                            <input placeholder="日/月" type="datetime"  name="end_date"  required ng-model="end_date" sync="searchCondition.end_date"
+                                   class="form-control" datepicker-popup="yyyy-MM-dd"  is-open="endOpened"
+                                   datepicker-options="dateOptions"  ng-required="true"  min-date="start_date" current-text="今天" clear-text="清空" close-text="关闭"  readonly />
+                        </span>
+                    </div>
+<!--                    <div class="form-group form-group-alignment">
+                        <label>&nbsp;来源：</label>
+                        <select name="from" ng-model="searchCondition.from" class="form-control">
+                            <option value="">请选择</option>
+                            <option value="PM">拍卖</option>
+                            <option value="ZM">自由买卖</option>
+                            <option value="SG">申购</option>
+                            <option value="YC">余额充值</option>
+                            <option value="CZ">充值</option>
+                            <option value="JJ">竞价</option>
+                        </select>
+                    </div>-->
+                    <div class="form-group form-group-alignment">
+                        <label>&nbsp;发货状态：</label>
+                        <select name="from" ng-model="searchCondition.isdelivery" class="form-control">
+                            <option value="">请选择</option>
+                            <option value="1">已发货</option>
+                            <option value="2">待发货</option>
+                            <option value="3">已收货</option>  
+                        </select>
+                    </div>
+                    <div class="form-group form-group-alignment">
+                        <label>&nbsp;支付状态：</label>
+                        <select name="from" ng-model="searchCondition.ispay" class="form-control">
+                            <option value="">请选择</option>
+                            <option value="1">成功</option>
+                            <option value="2">未支付</option>
+                            <option value="3">失败</option>  
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="" ng-model="searchCondition.keyword" placeholder="订单号/用户名/手机号/商品价格">
+                    </div>
+                    <div class="form-group modv2-formg">
+                        <label class="" >&nbsp;</label>
+                        <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="box">           
+            <a title="删除" class="btn btn-danger" ng-click="deleteAll()"><i class="fa fa-times-circle-o"></i> 删除</a>
+        </div>
+        
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                    <th><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+                    <th>ID</th>
+                    <th>物流费用</th>                    
+                    <th>商品售价</th>
+                    <th>订单标题</th>
+                    <th>用户名</th>
+                    <th>手机号码</th>
+                    <th>创建时间</th>
+                    <th>支付状态</th>
+                    <th>发货状态</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in list" class="list-animation">
+                    <td><input type="checkbox" value="{{item.pay_o_bidding_id}}" name="ids[]"></td>
+                    <td>{{item.pay_o_bidding_id}}</td>                    
+                    <td>{{item.freight}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.title}}</td>
+                    <td>{{item.username}}</td>
+                    <td>{{item.phone}}</td>
+                    <td>{{item.createtime}}</td>
+                    <td>{{item.ispay}}</td>
+                    <td>{{item.isdeliveryText}}</td>
+                    <td>
+                        <button title="编辑" class="btn btn-info btn-xs glyphicon glyphicon-edit" ng-click="update($index)" ></button>
+                        <button title="查看详情" class="btn btn-info btn-xs glyphicon glyphicon-search" ui-sref="pay-Order-view({id: '{{item.pay_o_bidding_id}}', type: 'bidding'})" ></button>
+                        <button title="删除" class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="removeb(item.pay_o_bidding_id)"></button>                       
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">.modal-backdrop{ z-index: 999 !important; } .modal{z-index: 1000 !important; }</style>
+
+<script type="text/ng-template" id="tpl-update.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="editUser" ng-submit="submitAddForm(editUser.$valid)">
+            <div class="box-body">
+
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">物流费用</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="url" ng-model="item.freight">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">订单标题</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="creator" ng-model="item.title">
+                    </div>
+                </div>
+                <div class="form-group">
+                     <label for="cat" class="col-sm-2 control-label">状态</label>
+                    <div class="col-sm-10">
+                            <label class="wrap-label"><input type="radio" class="form-element" ng-model="item.isdelivery" value="1" ng-checked="{{item.isdelivery==1}}"> 已发货</label>
+                            <label class="wrap-label"><input type="radio" class="form-element" ng-model="item.isdelivery" value="2" ng-checked="{{item.isdelivery==2}}"> 待发货</label>
+                            <label class="wrap-label"><input type="radio" class="form-element" ng-model="item.isdelivery" value="3" ng-checked="{{item.isdelivery==3}}"> 已收货</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">给买家发货</label>
+                    <div class="col-sm-5">
+                        <select ng-model="item.express_id" class="form-control" on-change >
+                            <option  value="0">请选择快递</option>
+                            <option ng-repeat="exp in expressList" value="{{exp.id}}" ng-selected="{{exp.id==item.express_id}}">{{exp.ch}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">快递单号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="creator" ng-model="item.express_no">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

@@ -1,0 +1,123 @@
+<!-- header -->
+<section class="content-header">
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>商品中心</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+<!-- content -->
+<section class="content slide">
+
+
+    <div class="box" senior-table="categoryService" pageSize="15"  added-reload="true">
+        <div class="box-header">
+            <form class="form-inline pull-right">
+                <input type="text" class="form-control" name="" ng-model="searchCondition.keyword" placeholder="请输入分类名">
+                 <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+            </form>
+        </div>
+        <div class="box">
+            <a title="新增" class="btn btn-primary" ng-click="add()"><i class="fa fa-plus-circle"></i> 新增</a>
+        </div>
+		<div class="box-body no-padding">
+
+            <div class="table-list text-center" tree-table>
+                <div class=" clearfix table-list-header">
+                    <div class="table-list-col col-xs-3"><button class="btn btn-primary slide-all" type="button">全部展开</button> &nbsp;&nbsp;分类名称</div>
+                    <div class="table-list-col col-xs-1">上级分类</div>
+                    <div class="table-list-col col-xs-1">商品数量</div>
+                    <div class="table-list-col col-xs-1">分类图标</div>
+                    <div class="table-list-col col-xs-1">排序</div>
+                    <div class="table-list-col col-xs-1">是否显示</div>
+                    <div class="table-list-col col-xs-1">是否推荐</div>
+                    <div class="table-list-col col-xs-1">是否启用</div>
+                    <div class="table-list-col col-xs-1">更新时间</div>
+                    <div class="table-list-col col-xs-1">操作</div>
+                </div>
+
+                <div class="tree-table" >
+
+                </div>
+            </div>
+		</div>
+	</div>
+</section>
+<style type="text/css">
+.modal-backdrop {
+	z-index: 999 !important;
+}
+
+.modal {
+	z-index: 1000 !important;
+}
+</style>
+
+<script type="text/ng-template" id="tpl-update.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">添加/编辑分类</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal fd-edit-form" name="editCategory" ng-submit="submitAddForm(editCategory.$valid)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">上级分类</label>
+                    <div class="col-sm-10">
+                        <div class="btn-group"  tree-list >
+                            <div class="btn  dropdown-toggle" model-key="item.cat_pid" model-value="item.pname">
+                                {{ item.pname || '请选择'  }} <span class="caret"></span>
+                            </div>
+                            <ul  class="dropdown-menu tree-list" role="menu" >
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">分类名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="item.cat_name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">是否启用</label>
+                    <div class="col-sm-10">
+						<label class="wrap-label"><input type="radio" class="form-element" ng-model="item.cat_disable" value="0"> 启用</label>
+						<label class="wrap-label"><input type="radio" class="form-element" ng-model="item.cat_disable" value="1"> 不启用</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">是否推荐</label>
+                    <div class="col-sm-10">
+						<label class="wrap-label"><input type="radio" class="form-element" ng-model="item.cat_recomend" value="1"> 推荐</label>
+						<label class="wrap-label"><input type="radio" class="form-element" ng-model="item.cat_recomend" value="0"> 不推荐</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic" class="col-sm-2 control-label">分类图标</label>
+                    <div class="col-sm-10">
+                        <web-uploader width="200" ng-model="item.cat_icon" file-num-limit="1">
+                            <input type="hidden" ng-model="item.cat_icon[0].url" />
+                        </web-uploader>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">分类排序</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="item.cat_sort">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">分类描述</label>
+                    <div class="col-sm-10">
+                        <textarea ng-model="item.cat_remarks"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

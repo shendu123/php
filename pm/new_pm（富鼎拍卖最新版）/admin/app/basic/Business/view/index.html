@@ -1,0 +1,174 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="goods-Goods-index"><i class="fa fa-dashboard"></i>运营商管理</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<section class="content slide">
+	<div id="myTabs">
+	  <!-- Nav tabs -->
+	  <ul class="nav nav-tabs" role="tablist">
+	    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">基本信息</a></li>
+	    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">认证企业</a></li>
+	    <a type="button" href="javascript:history.go(-1)" class="btn btn-default pull-right">返回</a>
+	  </ul>
+	  <!-- Tab panes -->
+	  <div class="tab-content">
+	    <div role="tabpanel" class="tab-pane active" id="home">
+	   		<div class="bs-callout bs-callout-info clearfix">
+	   			<div class="row">
+				    <dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>运营商名称：</strong></dt>
+					  <dd class="ng-binding">{{item.basic.name}}</dd>
+					</dl>
+				    <dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>店铺账号：</strong></dt>
+					  <dd class="ng-binding">{{item.basic.business_account}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>运营商级别：</strong></dt>
+					  <dd class="ng-binding"> {{item.basic.business_level}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>推荐商户：</strong></dt>
+					  <dd class="ng-binding"> {{item.basic.phone}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>开店时间：</strong></dt>
+					  <dd class="ng-binding">{{item.basic.business_starttime}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>到期时间：</strong></dt>
+					  <dd class="ng-binding">{{item.basic.business_endtime}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>平台保证金：</strong></dt>
+					  <dd class="ng-binding">{{item.business_pay.fee.deposit_money}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>平台使用费：</strong></dt>
+					  <dd class="ng-binding">{{item.business_pay.fee.plat_money}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>销售订单数：</strong></dt>
+					  <dd class="ng-binding">{{item.basic.order.order_count}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>销售金额：</strong></dt>
+					  <dd class="ng-binding">{{item.basic.order.order_total_price}}</dd>
+					</dl>
+				</div>
+				<table class="table table-hover text-center">
+	                <thead>
+	                        <th>id</th>
+	                        <th>付款时间</th>
+	                        <th>付款内容</th>
+	                        <th>付款方式</th>
+	                        <th>付款金额</th>
+	                        <th>付款状态</th>
+	                        <th>店铺到期时间</th>
+	                        <th>备注</th>                                        
+	                </thead>
+	                <tbody>
+	                        <tr ng-repeat="pay in item.business_pay" class="list-animation">
+	                                <td>{{pay.id}}</td>
+	                                <td>{{pay.pay_time}}</td>
+	                                <td>{{pay.type}}</td>
+	                                <td>{{pay.pay_type}}</td>
+	                                <td>{{pay.money}}</td>
+	                                <td>{{pay.pay_status}}</td>
+	                                <td>{{pay.store_time}}</td>
+	                                <td>{{pay.remark}}</td>
+	                        </tr>
+	                </tbody>
+	        	</table>
+			 </div>
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="profile">
+	   		<div class="bs-callout bs-callout-info clearfix">
+	   			<div class="row">
+				    <dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业ID：</strong></dt>
+					  <dd class="ng-binding">{{item.business_company.com_id}}</dd>
+					</dl>
+				    <dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业名称：</strong></dt>
+					  <dd class="ng-binding"> {{item.business_company.com_name}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业统一信用码：</strong></dt>
+					  <dd class="ng-binding"> {{item.business_company.com_ucredit}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业地址：</strong></dt>
+					  <dd class="ng-binding"> {{item.business_company.address.province_tag}}{{item.business_company.address.city_tag}}{{item.business_company.address.area_tag}}{{item.business_company.com_detail_addr}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业联系人：</strong></dt>
+					  <dd class="ng-binding">{{item.business_company.com_contact_name}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业法人：</strong></dt>
+					  <dd class="ng-binding">{{item.business_company.com_legal_name}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>联系人电话：</strong></dt>
+					  <dd class="ng-binding">{{item.business_company.com_contact_mobile}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>法人身份证：</strong></dt>
+					  <dd class="ng-binding">{{item.business_company.com_legal_idcard}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>公司电话：</strong></dt>
+					  <dd class="ng-binding">{{item.com_tel}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业营业执照：</strong></dt>
+					  <dd class="ng-binding">{{item.com_legal_idcard}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>公司电话：</strong></dt>
+					  <dd class="ng-binding">{{item.business_company.com_tel}}</dd>
+					</dl>
+				</div>
+				<div class="row">
+				  <div class="col-sm-4 col-md-4">
+				    <div class="thumbnail">
+				      <a href="{{item.business_company.com_license[0]['url']}}" data-size="286x220" target="_blank"><img style="width: 200px;" src="{{item.business_company.com_license[0]['url']}}"></a>
+				      <div class="caption">
+				        <h3 style="text-align: center;">企业营业执照：</h3>
+				      </div>
+				    </div>
+				   </div>
+				   <div class="col-sm-4 col-md-4">
+				    <div class="thumbnail">
+				       <a href="{{item.business_company.com_legal_idcard_front[0]['url']}}" data-size="286x220" target="_blank"><img style="width: 200px;" src="{{item.business_company.com_legal_idcard_front[0]['url']}}"></a>
+				      <div class="caption">
+				        <h3 style="text-align: center;">法人身份证正面：</h3>
+				      </div>
+				    </div>
+				   </div>
+				   <div class="col-sm-4 col-md-4">
+				    <div class="thumbnail">
+				        <a href="{{item.business_company.com_legal_idcard_back[0]['url']}}" data-size="286x220" target="_blank"><img style="width: 200px;" src="{{item.business_company.com_legal_idcard_back[0]['url']}}"></a>
+				      <div class="caption">
+				        <h3 style="text-align: center;">法人身份证背面：</h3>
+				      </div>
+				    </div>
+				   </div>
+				  
+				</div>
+			 </div>
+	    </div>
+	  </div>
+	</div>
+</section>
+<script type="text/javascript">
+$('#myTabs li a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+</script>

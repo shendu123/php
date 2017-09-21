@@ -1,0 +1,287 @@
+<!-- header -->
+<section class="content-header" >
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>申购管理</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="adminService" page-size="5" added-reload="false">
+        <div class="box-header">
+            <form class="form-inline pull-right">
+                <input type="text" class="form-control fd-input-text" name="keyword" ng-model="searchCondition.keyword" placeholder="输入申购名称或编号">
+                <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+            
+            </form>
+        </div>
+        <div class="box">
+            <a title="新增" class="btn btn-primary" ui-sref="crowd-Admin-add"><i class="fa fa-dashboard"></i>新增</a>
+            <a title="新增" class="btn btn-primary" ng-click="openWindow('','tpl-addBrandApply.html')"><i class="fa fa-dashboard"></i>品牌申请</a>
+            <a title="上架" class="btn btn-primary" ng-click="all_onsale(1)"><i class="btn btn-info btn-xs glyphicon glyphicon-hand-up" ></i> 上架</a>
+            <a title="上架" class="btn btn-primary" ng-click="all_onsale(2)"><i class="btn btn-info btn-xs glyphicon glyphicon-hand-down" ></i> 下架</a>
+        </div>
+        <div class="fd-tabs-default fd-clear">
+            <ul class="fd-tabs-ul clean">
+                <li><a class="{{tagSwitch_all}}" ui-sref="crowd-Admin-index({check: 'egt|0'})">全部</a></li>
+                <li><a class="{{tagSwitch_pass}}" ui-sref="crowd-Admin-index({check: 'eq|1'})">审核通过</a></li>
+                <li><a class="{{tagSwitch_wait}}" ui-sref="crowd-Admin-index({check: 'eq|0'})">待审核</a></li>
+                <li><a class="{{tagSwitch_failed}}" ui-sref="crowd-Admin-index({check: 'eq|2'})">审核失败</a></li>
+            </ul>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                	<th><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+                    <th>序号</th>
+                    <th>申购名称编号</th>
+                    <th>申购佣金保证金</th>
+                    <th>申购时间</th>
+                    <th>状态</th>
+                    <th>排序</th>  
+                    <th>商品信息</th>
+                    <th>商户信息</th>
+                    <th>申购审核</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in list" class="list-animation fd-tr">
+                    <td><input type="checkbox" value="{{item.id}}" name="ids[]"></td>
+                    <td>{{$index+1}}</td>
+                    <td class="fd-merge">
+                    	<p>申购名称：{{item.crowd_name}}</p>
+                    	<p>申购标号：{{item.crowd_code}}</p>
+                    </td>
+                    <td class="fd-merge">
+                    	<p>&#12288;申购佣金：{{item.crowd_broker_price}}元</p>
+                    	<p>卖家保证金：{{item.crowd_seller_price}}元</p>
+                    </td>
+                    <td class="fd-merge">
+                    	<p>开始时间：{{item.crowd_starttime_tag}}</p>
+                    	<p>结束时间：{{item.crowd_endtime_tag}}</p>
+                    </td>
+                    <td class="fd-color-{{item.crowd_onsale==1?'green':'red'}}">{{item.crowd_onsale_tag}}</td>
+                    <td class="fd-merge">
+                    	<p><input class="form-control" style='width:50px;' type="text" value="{{item.crowd_sort}}" ng-blur="changeSort(item.id,$event)"></p>
+                    </td>
+                    <td class="fd-merge">
+                    	<p>商品名称：{{item.goods_info.goods_name}}</p>
+                    	<p>商品分类：{{item.goods_info.cat_name}}</p>
+                    	<p>所属品牌：{{item.goods_info.brand_name}}</p>
+                    </td>
+                    <td class="fd-merge">
+                    	<p>商户名称：{{item.owner.business.name}}</p>
+                    </td>
+                    <td class="fd-merge">
+                    	<p>审核状态：{{item.crowd_check_tag}}</p>
+                    	<p>审核人员：{{item.checker.truename}}&#12288;{{item.checker.mobile}}</p>
+                    </td>
+                    <td>
+                        <button ng-show="sysid==1" title="审核" class="btn btn-info btn-xs glyphicon glyphicon-check" ng-click="openWindow(item.id,'tpl-check.html')" ></button>
+                        <button title="推荐" class="btn btn-info btn-xs glyphicon glyphicon-share" ng-click="openWindow(item.id,'tpl-recommend.html')" ></button>
+                        <button title="查看详情" class="btn btn-info btn-xs glyphicon glyphicon-search" ui-sref="crowd-Admin-detail({id: '{{item.id}}'})"></button>
+                        <button title="编辑" class="btn btn-info btn-xs glyphicon glyphicon-edit" ui-sref="crowd-Admin-edit({id: '{{item.id}}'})" ></button>
+                        <button title="{{item.crowd_onsale==1?'下架':'上架'}}" class="btn btn-info btn-xs glyphicon glyphicon-hand-{{item.crowd_onsale==1?'down':'up'}}" ng-click="onsale(item.id,item.crowd_onsale==1?2:1)" ></button>
+                        <!-- <button title="删除" class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="remove($index, item.uid)"></button> -->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/ng-template" id="tpl-check.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">审核</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="box-body">
+                <form>
+                    <fieldset>
+                        <legend>商品信息</legend>
+                        <div class="row">
+                            <dl class="dl-horizontal col-xs-6">
+                              <dt> <strong>商品名称：</strong></dt>
+                              <dd class="ng-binding">{{item.goods_info.goods_name}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal col-xs-6">
+                              <dt> <strong>商品分类：</strong></dt>
+                              <dd class="ng-binding">{{item.goods_info.cat_name}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal col-xs-6">
+                              <dt> <strong>申购价：</strong></dt>
+                              <dd class="ng-binding">{{item.crowd_price}}</dd>
+                            </dl>
+                           
+                            <dl class="dl-horizontal col-xs-6">
+                              <dt> <strong>商品价值：</strong></dt>
+                              <dd class="ng-binding">{{item.goods_info.goods_price}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal col-xs-6">
+                              <dt> <strong>商品数量：</strong></dt>
+                              <dd class="ng-binding">{{item.crowd_total}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal col-xs-6">
+                              <dt> <strong>申购佣金：</strong></dt>
+                              <dd class="ng-binding">{{item.crowd_broker_price}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal col-xs-6">
+                              <dt> <strong>卖家保证金：</strong></dt>
+                              <dd class="ng-binding">{{item.crowd_seller_price}}</dd>
+                            </dl>
+                             <dl class="dl-horizontal col-xs-12">
+                              <dt> <strong>商品详情：</strong></dt>
+                              <dd class="ng-binding" ng-bind-html="item.goods_info.goods_content"></dd>
+                            </dl>
+                            <dl class="dl-horizontal col-xs-12">
+                              <dt> <strong>商品图片：</strong></dt>
+                              <dd class="ng-binding"><a href="{{item.goods_info.goods_thumb[0]['url']}}" data-size="286x220" target="_blank"><img style="width: 200px;" src="{{item.goods_info.goods_thumb[0]['url']}}"></a></dd>
+                            </dl>
+                        </div>
+                    </fieldset>
+                </form>
+                <form>
+                    <fieldset>
+                        <legend>商品轮播图</legend>
+                        <div class="row">
+                          <div class="col-sm-3 col-md-3"  ng-repeat="item_img in item.goods_info.goods_pictures">
+                            <a href="{{item_img.url}}" data-size="286x220" target="_blank"><img class="img-thumbnail" style="width:200px;" src="{{item_img.url}}"></a>
+                           </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <div class="fd-modal-footer">
+					<ul class="fd-content-ul-wrap fd-clear">
+						<li class="li50">
+							<button class="btn btn-success" type="submit" ng-click="check(1)">审核通过</button>
+						</li>
+						<li class="li50">
+							<button class="btn btn-warning" type="submit" ng-click="check(2)">失败</button>
+							<input type='text' id='reason' style="width:80%; height: 110%;" ng-model="item.checkmsg">
+						</li>
+					</ul>
+                </div>
+				<!-- TODO 这边不应该影响整体的布局 -->
+                <div class="modal-footer"></div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<!-- 品牌授权申请 -->
+<style type="text/css">
+.modal-backdrop {
+	z-index: 999 !important;
+}
+.modal {
+	z-index: 1000 !important;
+}
+</style>
+<script type="text/ng-template" id="tpl-addBrandApply.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">品牌授权申请</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal fd-edit-form" name="editBrandapply" ng-submit="submitAddBrandApply(item)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label fd-must">选择商品分类</label>
+                    <div class="col-sm-10">
+						<select ng-model="item.cat_id" class="form-control" required>
+							<option ng-repeat="item in catList" value="{{item.id}}">{{item.html}}{{item.cat_name}}</option>
+						</select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="apply_brand_name" class="col-sm-2 control-label fd-must">申请品牌名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="item.apply_brand_name">
+                    </div>
+                </div>
+				<!-- 
+                <div class="form-group">
+                    <label for="pic" class="col-sm-2 control-label fd-must">资质证明</label>
+                    <div class="col-sm-10">
+                        <web-uploader width="200" ng-model="item.apply_stuff" file-num-limit="5">
+                            <input type="hidden" ng-model="item.apply_stuff[0].url" />
+                        </web-uploader>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">申请附加内容</label>
+                    <div class="col-sm-10">
+                        <textarea ng-model="item.apply_content"></textarea>
+                    </div>
+                </div>
+				-->
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<!-- 商品推荐 -->
+<script type="text/ng-template" id="tpl-recommend.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">推荐设置</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal fd-edit-form" name="editRecommend" ng-submit="submitEditRecommend(item)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label fd-must">选择推荐区域</label>
+                    <div class="col-sm-10">
+						<label class="wrap-label" ng-repeat="item_pos in posList">
+							<input type="checkbox" class="form-element" name="apply_pos_ids[]" value="{{item_pos.id}}"> {{item_pos.pos_name}}
+						</label>
+                    </div>
+                </div>
+				<div class="form-inline form-group">
+                    <label for="item_apply_starttime" class="col-sm-2 control-label fd-must">开始时间</label>
+					<div class="col-sm-4">
+	                    <span class="input-group datepicker modv2-sel-warap" datepicker-click="apply_starttime">
+	                        <input type="hidden"  ng-model="item.apply_starttime" />
+	                        <input placeholder="日/月" type="datetime"  name="apply_starttime"  required ng-model="item.apply_starttime" sync="item.apply_starttime"
+	                               class="form-control" datepicker-popup="yyyy-MM-dd"  is-open="apply_starttime"
+	                               datepicker-options="dateOptions"  ng-required="true"  current-text="今天" clear-text="清空" close-text="关闭"  readonly />
+	                    </span>
+					</div>
+                    <label for="item_apply_starttime" class="col-sm-2 control-label fd-must">结束时间</label>
+					<div class="col-sm-4">
+	                    <span class="input-group datepicker modv2-sel-warap" datepicker-click="apply_endtime">
+	                        <input type="hidden"  ng-model="item.apply_endtime" />
+	                        <input placeholder="日/月" type="datetime"  name="apply_endtime"  required ng-model="item.apply_endtime" sync="item.apply_endtime"
+	                               class="form-control" datepicker-popup="yyyy-MM-dd"  is-open="apply_endtime"
+	                               datepicker-options="dateOptions"  ng-required="true"  current-text="今天" clear-text="清空" close-text="关闭"  readonly />
+	                    </span>
+					</div>
+				</div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">申请附加内容</label>
+                    <div class="col-sm-10">
+                        <textarea ng-model="item.apply_remarks"></textarea>
+                    </div>
+                </div>
+				<div style="height:70px;"><!-- 占高 --></div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

@@ -1,0 +1,77 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="goods-Goods-index"><i class="fa fa-dashboard"></i>商品管理</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<section class="content slide">
+	<div class="box">
+		<a title="返回" class="btn btn-success" href="javascript:history.go(-1);"><i class="fa fa-check-circle-o"></i> 返回</a>
+	</div>
+	<div class="box" added-reload="false">
+		<div class="box-body no-padding">
+			<form class="form-horizontal" name="editForm-goods" ng-submit="publish(item)">
+				<input type="hidden" ng-model="item.id">
+                                <div class="form-inline form-group">
+                                         <label for="item_auction_starttime" class="col-sm-1 control-label fd-must">开始时间</label>
+					<div class="col-sm-4">
+                                            <span class="input-group datepicker modv2-sel-warap" datepicker-click="startOpened">
+                                                <input type="hidden"  ng-model="item.auction_starttime"/>
+                                                <input placeholder="日/月" type="text"  name="auction_starttime"  required ng-model="item.auction_starttime" sync="item.auction_starttime"
+                                                       class="form-control" datepicker-popup="yyyy-MM-dd"  is-open="startOpened"
+                                                       datepicker-options="dateOptions"  ng-required="true"  min-date="auction_starttime" current-text="今天" clear-text="清空" close-text="关闭"  readonly />
+                                            </span>
+					</div>
+                                         <label for="item_auction_endtime" class="col-sm-1 control-label fd-must">结束时间</label>
+					<div class="col-sm-4">
+                                            <span class="input-group datepicker modv2-sel-warap" datepicker-click="endOpened">
+                                                <input type="hidden"  ng-model="item.auction_endtime"/>
+                                                <input placeholder="日/月" type="text"  name="auction_endtime"  required ng-model="item.auction_endtime" sync="item.auction_endtime"
+                                                       class="form-control" datepicker-popup="yyyy-MM-dd"  is-open="endOpened"
+                                                       datepicker-options="dateOptions"  ng-required="true"  min-date="auction_endtime" current-text="今天" clear-text="清空" close-text="关闭"  readonly />
+                                            </span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="item_title" class="col-sm-1 control-label fd-must">起拍价</label>
+					<div class="col-sm-4">
+						<input type="text" ng-model="item.auction_onset_price" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="item_title" class="col-sm-1 control-label fd-must">加价幅度</label>
+					<div class="col-sm-4">
+						<input type="text" ng-model="item.auction_stepsize_price" class="form-control" required>
+					</div>
+				</div>  
+                                <div class="form-group">
+					<label for="item_title" class="col-sm-1 control-label fd-must">保证金</label>
+					<div class="col-sm-4">
+						<input type="text" ng-model="item.auction_buier_price" class="form-control" required>
+					</div>
+				</div> 
+                                <div class="form-group">
+                                    <label for="item_title" class="col-sm-1 control-label fd-must">保留价</label>
+                                   <div class="col-sm-14">
+                                           <label class="wrap-label"><input type="radio" class="form-element" ng-model="item.auction_reserve_type" value="0"> 无保留价</label>
+                                           <label class="wrap-label"><input type="radio" class="form-element" ng-model="item.auction_reserve_type" value="1"> 有保留价</label>
+                                   </div>
+                                    
+                                </div> 
+                                <div class="form-group" ng-show="item.auction_reserve_type==1">
+					<div class="col-sm-4">
+						<input type="text" ng-model="item.auction_reserve_price" class="form-control">
+					</div>
+				</div>
+                                <div class="form-group">
+					<div class="col-sm-offset-1 col-sm-5">
+						<button class="btn btn-success" type="submit" ng-disabled="editForm-crowd.$invalid">确定</button>
+					</div>
+				</div>
+ 
+			</form>
+		</div>
+	</div>
+</section>

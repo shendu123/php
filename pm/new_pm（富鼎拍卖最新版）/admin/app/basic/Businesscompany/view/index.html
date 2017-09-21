@@ -1,0 +1,96 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="goods-Goods-index"><i class="fa fa-dashboard"></i>企业管理</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+
+<section class="content slide">
+	 
+	<form>
+        <fieldset>
+            <legend>基本信息</legend>
+	   		
+	   			<div class="row">
+				    <dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业ID：</strong></dt>
+					  <dd class="ng-binding">{{item.com_id}}</dd>
+					</dl>
+				    <dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业名称：</strong></dt>
+					  <dd class="ng-binding"> {{item.com_name}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业统一信用码：</strong></dt>
+					  <dd class="ng-binding"> {{item.com_ucredit}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业地址：</strong></dt>
+					  <dd class="ng-binding"> {{item.address.province_tag}}{{item.address.city_tag}}{{item.address.area_tag}}{{item.com_detail_addr}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业联系人：</strong></dt>
+					  <dd class="ng-binding">{{item.com_contact_name}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业法人：</strong></dt>
+					  <dd class="ng-binding">{{item.com_legal_name}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>联系人电话：</strong></dt>
+					  <dd class="ng-binding">{{item.com_contact_mobile}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>法人身份证：</strong></dt>
+					  <dd class="ng-binding">{{item.com_legal_idcard}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>公司电话：</strong></dt>
+					  <dd class="ng-binding">{{item.com_tel}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>企业营业执照：</strong></dt>
+					  <dd class="ng-binding">{{item.com_legal_idcard}}</dd>
+					</dl>
+					<dl class="dl-horizontal col-xs-6">
+					  <dt> <strong>公司电话：</strong></dt>
+					  <dd class="ng-binding">{{item.com_tel}}</dd>
+					</dl>
+				</div>
+				<div class="row">
+				  <div class="col-sm-4 col-md-4">
+				    <div class="thumbnail">
+				      <a href="{{item.com_license[0]['url']}}" data-size="286x220" target="_blank"><img style="width: 200px;" src="{{item.com_license[0]['url']}}"></a>
+				      <div class="caption">
+				        <h3 style="text-align: center;">企业营业执照</h3>
+				      </div>
+				    </div>
+				   </div>
+				   <div class="col-sm-4 col-md-4">
+				    <div class="thumbnail">
+				       <a href="{{item.com_legal_idcard_front[0]['url']}}" data-size="286x220" target="_blank"><img style="width: 200px;" src="{{item.com_legal_idcard_front[0]['url']}}"></a>
+				      <div class="caption">
+				        <h3 style="text-align: center;">法人身份证正面</h3>
+				      </div>
+				    </div>
+				   </div>
+				   <div class="col-sm-4 col-md-4">
+				    <div class="thumbnail">
+				       <a href="{{item.com_legal_idcard_back[0]['url']}}" data-size="286x220" target="_blank"><img style="width: 200px;" src="{{item.com_legal_idcard_back[0]['url']}}"></a>
+				      <div class="caption">
+				        <h3 style="text-align: center;">法人身份证背面</h3>
+				      </div>
+				    </div>
+				   </div>
+				  
+				</div>
+		</fieldset>
+	</form>
+			
+</section>
+
+
+
+

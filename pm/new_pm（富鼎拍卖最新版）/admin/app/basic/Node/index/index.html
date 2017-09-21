@@ -1,0 +1,155 @@
+<!-- header -->
+<section class="content-header" >
+    <h1>
+        {{$state.current.page.title}}
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li ui-sref-active="active"><a href="#" ui-sref="index-index-home"><i class="fa fa-dashboard"></i>{{$state.current.page.title}}</a></li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+
+<section class="content slide">
+    <table>
+        <tr>
+            <td width="260" valign="top">
+                <div class="pos-f tp-page-aside">
+                    <div class="panel panel-primary tp-panel tp-panel-module">
+                        <div class="panel-header">系统</div>
+                        <div class="panel-body tp-box-list" ng-click="chooseSys($event)">
+                            <div ng-repeat="system in systems" ng-class="{'focus':system.sysid==currentSysid}" id="{{system.sysid}}">{{system.title}}</div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td width="400" valign="top">
+                <div>
+                    <ol >
+                        <li>
+                            <div class="tree-node tree-node-content">{{currentSys}}
+                                <a class="pull-right btn btn-primary btn-xs" ng-click="newNode(currentSysid, currentSys, 0, '根节点')">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <ol>
+                                <li ng-repeat="node in menu" ng-include="'treeMenu.html'"></li>
+                            </ol>
+                        </li>
+                    </ol>
+                </div>
+            </td>
+        </tr>
+    </table>
+</section>
+
+<script id="treeMenu.html" type="text/ng-template">
+    <div class="tree-node tree-node-content">
+        <i class="{{node.icon}}"></i>
+        {{node.title}}
+        <a class="pull-right btn btn-danger btn-xs" ng-click="delNode(currentSysid, node.id)">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+        <a ng-if="node.is_menu == 1" class="pull-right btn btn-primary btn-xs"  ng-click="newNode(currentSysid, currentSys, node.id, node.title)">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+        <a class="pull-right btn btn-primary btn-xs"  ng-click="editNode(currentSys, node)">
+            <span class="glyphicon glyphicon-edit"></span>
+        </a>
+    </div>
+    <ol>
+        <li ng-repeat="node in node.child" ng-include="'treeMenu.html'"></li>
+    </ol>
+</script>
+
+<script type="text/ng-template" id="editNode.html">
+    <form role="form" name="editNode" ng-submit="submitNode(editNode.$valid)"  novalidate>
+        <div class="modal-header">
+            <button aria-label="Close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+            <h3 class="modal-title">新增节点</h3>
+        </div>
+        <div class="modal-body">
+            <div class="box-body">
+                <table class="table">
+                    <tr>
+                        <td class="">所属系统</td>
+                        <td>
+                            {{from.systitle}}<input type="hidden" name="sysid" ng-model="node.sysid">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">所属节点</td>
+                        <td>
+                            {{from.ptitle}}<input type="hidden" name="pid" ng-model="node.pid">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">节点名称</td>
+                        <td>
+                            <div class="modv2-inputg">
+                                <input type="text" name="title" ng-model="node.title" class="form-control" required ng-minlength="2" ng-maxlength="8" placeholder="节点名称">
+                            </div>
+                            <div class="has-feedback text-danger" ng-messages="editNode.title.$error">
+                                <div ng-message="required"><i class="fa fa-info-circle"></i> 请输入节点名称 </div>
+                                <div ng-message="minlength"><i class="fa fa-info-circle"></i> 名称不能少于2个字 </div>
+                                <div ng-message="maxlength"><i class="fa fa-info-circle"></i> 名称不能大于8个字 </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">节点类型</td>
+                        <td ng-click="chgType()">
+                            <input type="radio" name="is_menu" ng-model="node.is_menu" value="0">非菜单项(弹窗)
+                            <input type="radio" name="is_menu" ng-model="node.is_menu" value="2">非菜单项(新页)
+                            <input type="radio" name="is_menu" ng-model="node.is_menu" value="1">菜单项
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">节点链接</td>
+                        <td>
+                            <div class="modv2-inputg">
+                                <input type="text" name="url_value" ng-model="node.url_value" class="form-control" url-value="url_value" placeholder="节点链接">
+                            </div>
+                            <div class="has-feedback text-danger" ng-messages="editNode.url_value.$error">
+                                <div ng-message="uv"><i class="fa fa-info-circle"></i> 节点格式：basic/Node/add </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">图标</td>
+                        <td>
+                            <div class="form-group">
+                                <div class="input-group modv2-inputg">
+                                    <span class="input-group-btn">
+                                        <ui-iconpicker ng-model="node.icon"></ui-iconpicker>
+                                    </span>
+                                    <input class="form-control" type="text"  ng-model="node.icon" >
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div><!-- /.box-body -->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary modv2-btn"  ng-disabled="editNode.$invalid" >保存</button>
+            <button class="btn btn-primary modv2-btn" ng-click="cancel()" type="button">取消</button>
+        </div>
+    </form>
+</script>
+
+<style>
+    ul, ol{list-style-type:none;counter-reset:sectioncounter;}
+    .btn {margin-right: 6px;}
+    .tree-node {border: 1px solid #dae2ea;background: #f8faff;color: #7c9eb2;}
+    .tree-node-content {padding: 5px;margin: 6px;}
+    .panel-primary > .panel-header {background-color: #5a98de;border-color: #5a98de;color: #fff;}
+    .tp-panel-module {margin-top: 6px;}
+    .panel-primary{border-color: #5a98de;border-radius:0}
+    .panel-header {border-bottom: 1px solid transparent;font-size: 14px;font-weight: 700; padding: 2px 15px;}
+    .panel-body { height: 380px;  overflow: auto; padding-top: 7px}
+    .tp-panel {line-height: 28px; font-size: 14px; color: #9b9b9b}
+    .tp-box-list div:hover, .tp-box-list div.focus {background-color: #eeeeee; color: #148cf1; cursor: pointer;}
+</style>

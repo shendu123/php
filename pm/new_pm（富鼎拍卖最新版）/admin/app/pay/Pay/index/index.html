@@ -1,0 +1,187 @@
+<!-- header -->
+<section class="content-header" >
+    <h1>
+        {{$state.current.page.title}}
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li ui-sref-active="active"><a href="#" ui-sref="index-index-home"><i class="fa fa-dashboard"></i>{{$state.current.page.title}}</a></li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="payService" page-size="10" open-size="lg" added-reload="false">
+        <div class="box-header">
+            <form class="form-inline pull-right">
+                
+                <label>&nbsp;注册时间：</label>
+                <span class="input-group datepicker modv2-sel-warap" datepicker-click="startdOpened">
+                    <input type="hidden"  ng-model="searchCondition.start_at" />
+                    <input placeholder="日/月" type="datetime"  name="start_date"  required ng-model="start_at" sync="searchCondition.start_at"
+                           class="form-control" datepicker-popup="yyyy-MM-dd"  is-open="startdOpened"
+                           datepicker-options="dateOptions"  ng-required="true"  current-text="今天" clear-text="清空" close-text="关闭"  readonly />
+                </span>
+            
+                <label>&nbsp;至&nbsp;</label>
+                <span class="input-group datepicker modv2-sel-warap" datepicker-click="endOpened">
+                    <input type="hidden"  ng-model="searchCondition.end_at"/>
+                    <input placeholder="日/月" type="datetime"  name="end_date"  required ng-model="end_date" sync="searchCondition.end_at"
+                           class="form-control" datepicker-popup="yyyy-MM-dd"  is-open="endOpened"
+                           datepicker-options="dateOptions"  ng-required="true"  min-date="start_date" current-text="今天" clear-text="清空" close-text="关闭"  readonly />
+                </span>
+            
+                <label>&nbsp;来源：</label>
+                <select name="from" ng-model="searchCondition.from" class="form-control">
+                    <option value="">请选择</option>
+                    <option value="PM">拍卖</option>
+                    <option value="ZM">自由买卖</option>
+                    <option value="SG">申购</option>
+                    <option value="YC">余额充值</option>
+                    <option value="CZ">充值</option>
+                    <option value="JJ">竞价</option>
+                </select>
+            
+                <label>&nbsp;支付类型：</label>
+                <select name="from" ng-model="searchCondition.pay_type" class="form-control">
+                    <option value="">请选择</option>
+                    <option value="YE">余额支付</option>
+                    <option value="W">微信</option>
+                    <option value="P">pc支付</option>
+                    <option value="S">手机支付</option>
+                    <option value="A">App支付</option>
+                    <option value="Z">支付宝</option>
+                    <option value="H">汇潮</option>
+                </select>
+            
+                <label>&nbsp;支付状态：</label>
+                <select name="from" ng-model="searchCondition.status" class="form-control">
+                    <option value="">请选择</option>
+                    <option value="1">成功</option>
+                    <option value="0">未支付</option>
+                    <option value="2">失败</option>  
+                </select>
+            
+                <input type="text" class="form-control" name="" ng-model="searchCondition.keywords" placeholder="支付单号/流水号/总订单id号/商品价格" style="width:250px;">
+           
+                <label class="" >&nbsp;</label>
+                <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+                   
+            </form>
+        </div>
+        <div class="box">           
+            <a title="删除" class="btn btn-danger" ng-click="deleteAll()"><i class="fa fa-times-circle-o" ></i> 删除</a>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                    <th><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+                    <th>支付ID</th>
+                    <th>流水号</th>                    
+                    <th>总订单id号</th>
+                    <th>账号</th>
+                    <th>支付类型</th>
+                    <th>来源</th>
+                    <th>金额</th>
+                    <th>创建时间</th>
+                    <th>描述</th>
+                    <th>支付状态</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in list" class="list-animation">
+                    <td><input type="checkbox" value="{{item.pay_fd_id}}" name="ids[]"></td>
+                    <td>{{item.flow_id}}</td>                    
+                    <td>{{item.flow_code}}</td>
+                    <td>{{item.flow_order_id}}</td>
+                    <td>{{item.flow_account}}</td>
+                    <td>{{item.flow_from_paytype}}</td>
+                    <td>{{item.flow_fromid}}</td>
+                    
+                    <td>{{item.flow_price}}</td>
+                     <td>{{item.flow_intime_tag}}</td>
+                    <td>{{item.flow_remarks}}</td>
+                    <td>{{item.flow_status}}</td>
+                   
+                    <td>
+<!--                        <button class="btn btn-info btn-xs glyphicon glyphicon-edit" ng-click="update($index)" ></button>-->
+                        <button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="removeb(item.pay_fd_id)"></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">.modal-backdrop{ z-index: 999 !important; } .modal{z-index: 1000 !important; }</style>
+
+<script type="text/ng-template" id="tpl-update.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="editUser" ng-submit="submitAddForm(editUser.$valid)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="pic" class="col-sm-2 control-label">头像</label>
+                    <div class="col-sm-10">
+                        <web-uploader width="200" ng-model="item.pic_arr" file-num-limit="1">
+                            <input type="hidden" ng-model="item.pic_arrArray" />
+                        </web-uploader>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">链接</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="url" ng-model="item.url" ng-disabled="show_editor">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label">创建者</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="creator" ng-model="item.creator" disabled="disabled">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">编辑文章</label>
+                    <div class="col-sm-10">
+                        <input type="checkbox" ng-model="show_editor">
+                    </div>
+                </div>
+
+                <div ng-show="show_editor">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">文章标题</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="item.article_title">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <textarea  ueditor="article" ng-model="item.article_content"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="preview()" ng-show="show_editor">预览</button>
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

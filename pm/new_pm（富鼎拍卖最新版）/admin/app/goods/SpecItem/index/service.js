@@ -1,0 +1,54 @@
+angular.module('goods.SpecItem.index.service',[
+
+]).service('goods.SpecItem.index', [ "$http" , "API_WD_DOMAIN" ,function( $http , HOST){
+
+    this.get = function(page, condition) {
+    	console.log(condition)
+        return $http({
+        	
+            method: 'GET',
+            url: HOST +'/goods/Category/catList',
+           params: condition
+        });
+    };
+       this.getlist = function() {
+       	console.log('111')
+        return $http({
+            method: 'GET',
+            url: HOST + '/goods/Category/catList',
+           
+        });
+    };
+    this.getlistchild=function(id) {
+       console.log(id)
+        return $http({
+            method: 'GET',
+            url: HOST + '/goods/SpecItem/',
+           params: {spec_id:id}
+        });
+    };
+    this.getlistitem = function(id) {
+      
+        return $http({
+            method: 'GET',
+            url: HOST + '/goods/spec/',
+           params: {cat_id:id}
+        });
+    };
+      this.postitem = function(item) {
+      	console.log(item)
+       console.log(typeof item.id)
+        return $http({
+            method: 'POST',
+            url: HOST + '/goods/SpecItem/edit',
+           data:item
+        });
+    };
+    //  this.remove = function (id) {
+    //     return $http({
+    //         method: 'post',
+    //         url: HOST + '/goods/spec/del',
+    //         params: {'id': id}
+    //     });
+    // };
+}]);

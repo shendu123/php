@@ -1,0 +1,175 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="goods-Goods-index"><i class="fa fa-dashboard"></i>拍卖订单详情</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<section class="content slide">
+    <div class="mb text-right"><a type="button" href="javascript:history.go(-1)" class="btn btn-default">返回</a></div>
+	<div class="step">        	
+	    <ul>
+	        <li class="col-xs-3" ng-class="{true:'on',false:''}[oneOrderOn]">
+	            <span class="num"><em class="f-r5"></em><i>1</i></span>                	
+	            <span class="line_bg lbg-r"></span>
+	            <p class="lbg-txt">买家下单</p>
+	        </li>
+	        <li class="col-xs-3" ng-class="{true:'on',false:''}[twoPayOn]">
+	            <span class="num"><em class="f-r5"></em><i>2</i></span>
+	            <span class="line_bg lbg-l"></span>
+	            <span class="line_bg lbg-r"></span>
+	            <p class="lbg-txt">买家付款</p>
+	        </li>
+	        <li class="col-xs-3" ng-class="{true:'on',false:''}[threeSendOn]">
+	            <span class="num"><em class="f-r5"></em><i>3</i></span>
+	            <span class="line_bg lbg-l"></span>
+	            <span class="line_bg lbg-r"></span>
+	            <p class="lbg-txt">卖家发货</p>
+	        </li>
+	        <li class="col-xs-3" ng-class="{true:'on',false:''}[fourFinishOn]">
+	            <span class="num"><em class="f-r5"></em><i>4</i></span>
+	            <span class="line_bg lbg-l"></span>
+	            <p class="lbg-txt">确认订单</p>
+	        </li>
+	    </ul>
+	</div>
+	<div class="bs-callout bs-callout-info clearfix" >
+	    <dl class="dl-horizontal col-xs-6">
+		  <dt> <strong>当前订单状态</strong></dt>
+		  <dd> {{item.order_status | statusName}}</dd>
+		</dl>
+	    <dl class="dl-horizontal col-xs-6">
+		  <dt> <strong>商家</strong></dt>
+		  <dd> {{item.order_seller.business_name}}</dd>
+		</dl>
+		<dl class="dl-horizontal col-xs-6">
+		  <dt> <strong>订单编号</strong></dt>
+		  <dd> {{item.order_code}}</dd>
+		</dl>
+		<dl class="dl-horizontal col-xs-6">
+		  <dt> <strong>下单时间</strong></dt>
+		  <dd> {{item.order_intime*1000  | date:"yyyy-MM-dd 'at' h:mma"}}</dd>
+		</dl>
+		<dl class="dl-horizontal col-xs-6">
+		  <dt> <strong>消息提醒</strong></dt>
+		  <dd>买家还有{{upTimeText}}来确认收货超时收货，订单将默认收货</dd>
+		</dl>
+	  </div>
+	<div class="bs-callout bs-callout-warning" >
+	    <dl class="dl-horizontal">
+		  <dt> <strong>收货人</strong></dt>
+		  <dd> {{item.nickname}}，{{item.phone}}，{{item.order_address_info.province_tag}}{{item.order_address_info.city_tag}}{{item.order_address_info.area_tag}}{{item.order_address_info.addr_address}}</dd>
+		</dl>
+	    <dl class="dl-horizontal">
+		  <dt> <strong>付款方式</strong></dt>
+		  <dd>{{item.order_pay_type | payName : item.order_paytime : item.order_pay_type }}</dd>
+		</dl>
+	  </div>
+
+            <table class="table table-list text-center">
+            <thead>
+                    <tr>
+                        <th>商品信息</th>
+                        <th>单价（元）</th>
+                        <th>数量</th>
+                        <th>卖家</th>
+                        <th>交易状态</th>
+                        <th>金额</th>
+                        <!-- <th>操作</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                   <!--  <tr>
+                        <td style="text-align: left;" colspan="7">订单编号： {{item.order_code}}   下单时间：  {{item.order_intime}} 订单来源： Android端 卖家： {{item.order_seller.business_name}}</td>
+                    </tr> -->
+                    <tr ng-repeat="good in item.order_detail " ng-show="$index ==0">
+                        <td >
+                            <a style="float: left;" href="">
+                                <img src="{{good.detail_goods_thumb}}" style="width: 80px;height: 80px;">
+                            </a>
+                            <h3>{{good.detail_goods_name}}</h3>
+                            <!-- <p><span title="颜色:蓝色">颜色:蓝色</span>&nbsp;&nbsp;<span title="尺码:29/170">尺码:29/170</span></p> -->
+                        </td>
+                        <td>
+                          <span>
+                                {{good.detail_goods_price | toMoney}}
+                          </span>
+
+                          <del></del>
+                        </td>
+                        <td>{{good.detail_num}}</td>
+                        <td  rowspan="{{item.order_detail.length}}">
+                           {{item.order_buyer.nickname}}
+                        </td>
+                        <td  rowspan="{{item.order_detail.length}}">
+                          {{item.order_status | statusName}}
+                        </td>
+                        <td  rowspan="{{item.order_detail.length}}">
+
+                           总金额/代付款：{{item.order_paytotal_price | toMoney}}
+                        </td>
+                        <!-- <td  rowspan="3">
+                              <button title="查看详情" class="btn btn-info btn-xs glyphicon glyphicon-search" ui-sref="pay-Order-view({order_id: '{{item.order_id}}',type:'Auction'})" ></button>
+                        </td> -->
+                    </tr>
+                    <tr ng-repeat="good in item.order_detail " ng-show="$index >0">
+                        <td>
+                            <a style="float: left;" href="">
+                                <img src="{{good.detail_goods_thumb}}" style="width: 80px;height: 80px;">
+                            </a>
+                            <h3>{{good.detail_goods_name}}</h3>
+                            <!-- <p><span title="颜色:蓝色">颜色:蓝色</span>&nbsp;&nbsp;<span title="尺码:29/170">尺码:29/170</span></p> -->
+                        </td>
+                        <td>
+                          <span>
+                               {{good.detail_goods_price}}
+                          </span>
+
+                          <del></del>
+                        </td>
+                        <td>{{good.detail_num}}</td>
+                    </tr>
+                     
+                </tbody>
+            </table>
+            <div class="subtotal">
+	            <ul>
+	                <li class="yf"><label>运费：</label><span>￥<strong>0.00</strong></span></li>
+	                <li class="yhq"><label>活动优惠：</label><span>-￥<strong>23.00</strong></span></li>
+	                <li class="heji"><label>实付款：</label><span>￥<b class="js_realAmount">{{item.order_paytotal_price | toMoney}}</b></span></li>
+	            </ul>
+	        </div>
+	       <a title="新增" class="btn btn-primary" ng-click="openWindow('tpl-logist.html')"><i class="fa fa-plus-circle"></i> 发货</a> 
+</section>
+
+
+<script type="text/ng-template" id="tpl-logist.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">发货物流</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal fd-edit-form" name="editMember" ng-submit="updateMemberSubmuit(editMember.$valid)">
+            <div class="box-body">
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">快递公司:</label>
+                        <div class="col-sm-10">
+	                        <select class="form-control" ng-model="myLogist"  ng-options="Logist.ch for Logist in Logistics"> 
+	                        </select>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">快递单号:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="myLogist_id">
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

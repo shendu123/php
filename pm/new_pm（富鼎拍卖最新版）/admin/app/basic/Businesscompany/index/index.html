@@ -1,0 +1,64 @@
+<!-- header -->
+<section class="content-header" >
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>企业管理</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="BusinesscompanyService" page-size="15" added-reload="false">
+        <div class="box-header">
+        	<form class="form-inline pull-right">
+        		<input type="text" class="form-control fd-input-text" name="keyword" ng-model="searchCondition.keyword" placeholder="企业名称/联系人/手机号">
+        		<button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+        	</form>
+        </div>
+        <div class="box">
+        	<a title="新增" class="btn btn-primary" ui-sref="basic-Businesscompany-add"><i class="fa fa-plus-circle"></i> 新增</a>
+            <a title="删除" class="btn btn-danger" ng-click="deleteAll()"><i class="fa fa-times-circle-o"></i> 删除</a>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+				<thead>
+					<th><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+					<th>编号</th>
+					<th>企业名称</th>
+					<th>企业情况</th>
+					<th>联系人</th>
+					<th>联系方式</th>
+					<th>添加日期</th>
+                    <th>修改日期</th>
+					<th>操作</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in list" class="list-animation">
+						<td><input type="checkbox" value="{{item.id}}" name="ids[]"></td>
+						<td>{{$index+1}}</td>
+						<td>{{item.com_name}}</td>
+						<td>
+                          <p ng-repeat="binfo in item.business_count_info">
+                            {{binfo.bLevel}}：{{binfo.bcount}}
+                          </p>  
+                        </td>
+						<td>{{item.com_contact_name}}</td>
+						<td>{{item.com_contact_mobile}}</td>
+						<td>{{item.com_intime}}</td>
+						<td>{{item.com_uptime}}</td>
+						<td>
+							<button title="查看" class="btn btn-info btn-xs glyphicon glyphicon-search" ui-sref="basic-Businesscompany-view({com_id: '{{item.com_id}}'})"></button>
+							<button title="编辑" class="btn btn-info btn-xs glyphicon glyphicon-edit" ui-sref="basic-Businesscompany-edit({com_id: '{{item.com_id}}'})"></button>
+							 <button title="删除" class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="removeb(item.com_id)"></button>  
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="box-footer clearfix ">
+			<pagination num-pages="numPages" boundary-links="true" max-size="maxSize" ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+			<div class="pull-right ng-binding modv2-pageinfo">
+				<span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+			</div>
+		</div>
+	</div>
+</section>

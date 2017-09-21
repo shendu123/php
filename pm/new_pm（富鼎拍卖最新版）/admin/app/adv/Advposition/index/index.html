@@ -1,0 +1,130 @@
+<!-- header -->
+<section class="content-header" >
+    <h1>
+        {{$state.current.page.title}}
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li ui-sref-active="active"><a href="#" ui-sref="index-index-home"><i class="fa fa-dashboard"></i>{{$state.current.page.title}}</a></li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="AdvpositionService" page-size="20" open-size="lg" added-reload="false">
+        <div class="box-header">
+            <div class="form-inline pull-right">
+                
+                        <input type="text" class="form-control" name="" ng-model="searchCondition.name" placeholder="请输入分类名">
+                    
+                        <label class="" >&nbsp;</label>
+                        <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+              
+            </div>
+        </div>
+       <div class="box">
+           <a title="新增" class="btn btn-primary"  ng-click="add()"><i class="fa fa-plus-circle"></i> 新增</a>
+            <a title="删除" class="btn btn-danger" ng-click="deleteAll()"><i class="fa fa-times-circle-o"></i> 删除</a>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                    <th><input type="checkbox" class="firstCb" onclick="fdCheckAll()"></th>
+                    <th>id</th>
+                    <th>广告位平台</th>
+                    <th>广告位名称</th>
+<!--                    <th>广告位宽</th>  
+                    <th>广告位高</th>  -->
+                    <th>状态</th>  
+                    <th>添加时间</th>  
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in list track by $index" class="list-animation">    
+                    <td>
+                        <input type="checkbox" value="{{item.id}}" name="ids[]"> 
+                    </td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.pos_type_tag}}</td>
+                    <td>{{item.name}}</td>
+<!--                    <td>{{item.width}}</td>
+                    <td>{{item.height}}</td>-->
+                    <td>{{item.status==1?'启用':'禁用'}}</td>
+                    <td>{{item.createtime}}</td>
+                    <td>
+                        <button class="btn btn-info btn-xs glyphicon glyphicon-edit" ng-click="update(item)" class="editCat">编辑</button>
+                        <button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="removeb(item.id)">删除</button>
+                    </td>
+                </tr>
+                
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">.modal-backdrop{ z-index: 999 !important; } .modal{z-index: 1000 !important; }</style>
+
+<script type="text/ng-template" id="tpl-update.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">广告位信息</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="editUser" ng-submit="submitAddForm(editUser.$valid)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label">广告位名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="creator" ng-model="item.name" required>
+                    </div>
+                </div>  
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label">广告位宽</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="creator" ng-model="item.width" required>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label">广告位高</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="creator" ng-model="item.height" required>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">广告位平台</label>
+                    <div class="col-sm-10">
+						<select class="form-control" ng-model="item.pos_type">
+  							<option value="0" ng-selected="{{! item.pos_type}}">pc</option>
+  							<option value="1" ng-selected="{{item.pos_type == 1}}">app</option>
+  							<option value="2" ng-selected="{{item.pos_type == 2}}">微信</option>
+						</select>
+                    </div>
+                </div>
+                <div class="form-group">
+                     <label for="cat" class="col-sm-2 control-label">状态</label>
+                    <div class="col-sm-10">
+                            <label class="wrap-label"><input type="radio" class="form-element" ng-model="item.status" value="1"> 启用</label>
+                            <label class="wrap-label"><input type="radio" class="form-element" ng-model="item.status" value="0"> 禁用</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">描述</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="creator" ng-model="item.desc" required>
+                    </div>
+                </div>        
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

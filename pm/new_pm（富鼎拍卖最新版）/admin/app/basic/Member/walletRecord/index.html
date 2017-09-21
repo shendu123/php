@@ -1,0 +1,109 @@
+<!-- header -->
+<section class="content-header" >
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>会员管理</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+<!-- content -->
+<section class="content slide" >
+    
+    <div class="box" senior-table="memberService" page-size="15" added-reload="false">      
+        <div class="box">
+            <a title="调节金额" class="btn btn-primary" ng-click="openWindow('','tpl-adjustMoney.html')"><i class="fa fa-plus-circle"></i> 调节金额</a>
+            <a type="button" href="javascript:history.go(-1)" class="btn btn-default">返回</a>
+        </div>    
+        <div class="box-body no-padding">
+                <table class="table table-hover text-center">
+                        <thead>
+                                <th><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+                                <th>ID</th>
+                                <th>变更时间</th>
+                                <th>描述</th>
+                                <th>用户资金</th>
+                                <th>冻结资金</th>
+                                <th>积分</th>
+
+                        </thead>
+                        <tbody>
+                                <tr ng-repeat="item in list" class="list-animation">
+                                        <td><input type="checkbox" value="{{item.pay_wa_time_id}}" name="ids[]"></td>
+                                        <td>{{item.pay_wa_time_id}}</td>
+                                        <td>{{item.createtime}}</td>
+                                        <td>{{item.desc}}</td>
+                                        <td>{{item.money>0?'+'+item.money:item.money}}</td>
+                                        <td>{{item.wallet_freeze>0?'+'+item.wallet_freeze:item.wallet_freeze}}</td>
+                                        <td>{{item.point>0?'+'+item.point:item.point}}</td>
+                                </tr>
+                        </tbody>
+                </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+		
+	</div>
+</section>
+<script type="text/ng-template" id="tpl-adjustMoney.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">调节金额</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal fd-edit-form" name="editMember" ng-submit="adjustMoneySubmit(item)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">金额</label>
+                    <div class="col-sm-2">
+                       <select class="form-control ng-pristine ng-valid ng-touched" ng-model="item.opMoney" ng-init="item.opMoney=1">
+                            <option value='1'>增加</option>
+                            <option value="-12">减少</option>
+                       </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" ng-model="item.money" placeholder="请输入金额" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">冻结金额</label>
+                    <div class="col-sm-2">
+                       <select class="form-control ng-pristine ng-valid ng-touched" ng-model="item.opWallet_freeze" ng-init="item.opWallet_freeze=1">
+                            <option value='1'>增加</option>
+                            <option value="-12">减少</option>
+                       </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" ng-model="item.wallet_freeze" placeholder="请输入金额" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">积分</label>
+                    <div class="col-sm-2">
+                       <select class="form-control ng-pristine ng-valid ng-touched" ng-model="item.opPoint" ng-init="item.opPoint='1'">
+                            <option value='1'>增加</option>
+                            <option value="-1">减少</option>
+                       </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" ng-model="item.point" placeholder="请输入积分" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">操作备注</label>
+                    <div class="col-sm-10">
+                        <textarea  class="form-control" ng-model="item.desc" required></textarea>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+

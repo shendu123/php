@@ -1,0 +1,72 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="goods-Goods-index"><i class="fa fa-dashboard"></i>商品管理</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<section class="content slide">
+	<div class="box" added-reload="false">
+		<div class="box-body no-padding">
+			<form class="form-horizontal" name="editForm-goods" ng-submit="editSubmit()">
+				<input type="hidden" ng-model="item.id">
+				<div class="form-group">
+					<label for="item_title" class="col-sm-1 control-label fd-must">商品名称</label>
+					<div class="col-sm-4">
+						<input type="text" ng-model="item.goods_name" class="form-control" required>
+					</div>
+					<label for="item_title" class="col-sm-1 control-label fd-must">商品标题</label>
+					<div class="col-sm-4">
+						<input type="text" ng-model="item.goods_title" class="form-control" required>
+					</div>
+				</div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label fd-must">所属分类</label>
+                    <div class="col-sm-4">
+						<select ng-model="item.cat_id" class="form-control" required>
+							<option ng-repeat="catitem in catList" value="{{catitem.id}}" ng-selected="{{catitem.id==item.cat_id}}">{{catitem.html}}{{catitem.cat_name}}</option>
+						</select>
+                    </div>
+					<label for="item_title" class="col-sm-1 control-label fd-must">计量单位</label>
+					<div class="col-sm-4">
+						<input type="text" ng-model="item.goods_unit" class="form-control" id="item_title" placeholder="请输入计量单位">
+					</div>
+                </div>
+				<div class="form-group">
+					<label for="item_title" class="col-sm-1 control-label fd-must">商品价格</label>
+					<div class="col-sm-4">
+						<input type="text" ng-model="item.goods_price" class="form-control" id="item_title">
+					</div>
+				</div>
+                <div class="form-group">
+                    <label for="pic" class="col-sm-1 control-label">商品主图</label>
+                    <div class="col-sm-9">
+                        <web-uploader width="200" ng-model="item.goods_thumb" file-num-limit="1">
+                            <input type="hidden" ng-model="item.goods_thumb[0].url" />
+                        </web-uploader>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic" class="col-sm-1 control-label fd-must">轮播图</label>
+                    <div class="col-sm-9">
+                        <web-uploader width="200" ng-model="item.goods_pictures" file-num-limit="5">
+                            <input type="hidden" ng-model="item.goods_pictures" />
+                        </web-uploader>
+                    </div>
+                </div>
+				<div class="form-group">
+					<label class="col-sm-1 control-label fd-must">商品详情</label>
+					<div class="col-sm-9">
+						<textarea ueditor="article" ng-model="item.goods_content" required></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-1 col-sm-5">
+						<button class="btn btn-success" type="submit" ng-disabled="editForm-crowd.$invalid">确定</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

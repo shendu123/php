@@ -1,0 +1,118 @@
+<!-- header -->
+<section class="content-header" >
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>商品中心</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="GoodsrecService" page-size="15" open-size="lg" added-reload="false">
+    	<div class="box-header">
+    		<form class="form-inline pull-right">
+
+    			
+    		</form>
+    	</div>
+    	<div class="box">
+    		<a title="上架" class="btn btn-primary" ng-click="onsaleAll(0)"><i class="fa fa-dashboard"></i>上架</a>
+			<a title="下架" class="btn btn-danger" ng-click="onsaleAll(1)"><i class="fa fa-times-circle-o"></i>下架</a>
+    	</div>
+    	<div class="fd-tabs-default fd-clear">
+			<ul class="fd-tabs-ul clean">
+				<li><a class="{{tagSwitch_all}}" ui-sref="goods-Goodsrec-index({onsale: 'egt|0'})">全部</a></li>
+				<li><a class="{{tagSwitch_pass}}" ui-sref="goods-Goodsrec-index({onsale: 'eq|0'})">已上架</a></li>
+				<li><a class="{{tagSwitch_wait}}" ui-sref="goods-Goodsrec-index({onsale: 'eq|1'})">已下架</a></li>
+			</ul>
+		</div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+				<thead class="fd-table-header">
+					<tr>
+						<th rowspan="2"><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+						<th rowspan="2">序号</th>
+						<th rowspan="2">商户名称</th>
+						<th rowspan="2">商品名称</th>
+						<th colspan="2">推荐时间</th>
+						<th colspan="2">推荐到</th>
+						<th colspan="3">上架信息</th>
+						<th rowspan="2">操作</th>
+					</tr>
+					<tr>
+						<th>开始时间</th>
+						<th>结束时间</th>
+						<th>应用名称</th>
+						<th>区域</th>
+						<th>状态</th>
+						<th>操作人</th>
+						<th>操作时间</th>
+					</tr>
+				</thead>
+                <tbody>
+                <tr ng-repeat="item in list" class="list-animation">
+                    <td><input type="checkbox" value="{{item.id}}" name="ids[]"></td>
+                    <td>{{$index+1}}</td>
+                    <td>{{item.owner.business.name}}</td>
+                    <td>{{item.service.crowd_name||item.service.auction_name}}</td>
+                    <td>{{item.rec_starttime_tag}}</td>
+                    <td>{{item.rec_endtime_tag}}</td>
+                    <td><p ng-repeat="item_pos in item.rec_pos_info">{{item_pos.pos_app_type_tag}}</p></td>
+                    <td><p ng-repeat="item_pos in item.rec_pos_info">{{item_pos.pos_name}}</p></td>
+                    <td ng-class="{true: 'fd-color-green', false: 'fd-color-red'}[item.rec_status == 0]">{{item.rec_status_tag}}</td>
+                    <td>{{item.operator.truename||item.operator.nickname||item.operator.account}}</td>
+                    <td>{{item.rec_uptime_tag}}</td>
+                    <td>
+                        <button title="修改推荐时间" class="btn btn-info btn-xs glyphicon glyphicon-edit" ng-click="openWindow(item,'tpl-changeTime.html')" ></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/ng-template" id="tpl-changeTime.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">推荐时间修改</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" ng-submit="submitEditRecommend(form)">
+            <div class="box-body">
+				<div class="form-inline form-group">
+                    <label for="item_rec_starttime" class="col-sm-2 control-label fd-must">开始时间</label>
+					<div class="col-sm-4">
+	                    <span class="input-group datepicker modv2-sel-warap" datepicker-click="rec_starttime">
+	                        <input type="hidden"  ng-model="form.rec_starttime" />
+	                        <input placeholder="日/月" type="datetime"  name="rec_starttime"  required ng-model="form.rec_starttime" sync="form.rec_starttime"
+	                               class="form-control" datepicker-popup="yyyy-MM-dd"  is-open="rec_starttime"
+	                               datepicker-options="dateOptions"  ng-required="true"  current-text="今天" clear-text="清空" close-text="关闭"  readonly />
+	                    </span>
+					</div>
+                    <label for="item_rec_starttime" class="col-sm-2 control-label fd-must">结束时间</label>
+					<div class="col-sm-4">
+	                    <span class="input-group datepicker modv2-sel-warap" datepicker-click="rec_endtime">
+	                        <input type="hidden"  ng-model="form.rec_endtime" />
+	                        <input placeholder="日/月" type="datetime"  name="rec_endtime"  required ng-model="form.rec_endtime" sync="form.rec_endtime"
+	                               class="form-control" datepicker-popup="yyyy-MM-dd"  is-open="rec_endtime"
+	                               datepicker-options="dateOptions"  ng-required="true"  current-text="今天" clear-text="清空" close-text="关闭"  readonly />
+	                    </span>
+					</div>
+				</div>
+				<div style="height:170px;"><!-- 占高 --></div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+				<!-- TODO 这边不应该影响整体的布局 -->
+                <div class="modal-footer"></div>
+            </div>
+        </form>
+    </div>
+</script>

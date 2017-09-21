@@ -1,0 +1,87 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="goods-Goods-index"><i class="fa fa-dashboard"></i>自由买卖管理</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<section class="content slide">
+	<form>
+		<fieldset>
+			<legend>商户信息</legend>
+		    <div class="row">
+			    <dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商户名称：</strong></dt>
+				  <dd class="ng-binding">{{item.owner.business.name}}</dd>
+				</dl>
+			    
+			</div>
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+			<legend>自由买卖信息</legend>
+		    <div class="row">
+			    <dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>添加时间：</strong></dt>
+				  <dd class="ng-binding">{{item.item_intime_tag}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>修改时间：</strong></dt>
+				  <dd class="ng-binding"> {{item.item_uptime_tag}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>自由买卖名称：</strong></dt>
+				  <dd class="ng-binding"> {{item.item_name}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>自由买卖编码：</strong></dt>
+				  <dd class="ng-binding">{{item.item_code}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商品名称：</strong></dt>
+				  <dd class="ng-binding">{{item.goods_info.goods_name}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商品分类：</strong></dt>
+				  <dd class="ng-binding">{{item.goods_info.cat_name}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商品品牌：</strong></dt>
+				  <dd class="ng-binding">{{item.goods_info.brand_name}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>自由买卖价：</strong></dt>
+				  <dd class="ng-binding">{{item.item_price}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商品价值：</strong></dt>
+				  <dd class="ng-binding">{{item.goods_info.goods_price}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商品数量：</strong></dt>
+				  <dd class="ng-binding">{{item.item_total}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商品详情：</strong></dt>
+				  <dd class="ng-binding" ng-bind-html="item.goods_info.goods_content"></dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商品图片：</strong></dt>
+				  <dd class="ng-binding"><a href="{{item.goods_info.goods_thumb[0]['url']}}" data-size="286x220" target="_blank"><img style="width: 200px;" src="{{item.goods_info.goods_thumb[0]['url']}}"></a></dd>
+				</dl>
+			</div>
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+			<legend>商品相册</legend>
+			<div class="row">
+			  <div class="col-sm-3 col-md-3"  ng-repeat="item_img in item.goods_info.gallery_pic_url">
+			    <a href="{{item_img.url}}" data-size="286x220" target="_blank"><img class="img-thumbnail" style="width:200px;" src="{{item_img.url}}"></a>
+			   </div>
+			</div>
+		</fieldset>
+	</form>
+</section>

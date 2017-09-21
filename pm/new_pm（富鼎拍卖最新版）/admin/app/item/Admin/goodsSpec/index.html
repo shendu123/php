@@ -1,0 +1,96 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><i class="fa fa-dashboard"></i>自由买卖商品规格管理</li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>	
+</section>
+<!-- content -->
+<section class="content slide">
+	<div class="box" senior-table="specService" page-size="5" >
+
+        <div class="box-header">
+            <form class="form-inline">
+            	<div class="form-group">
+            		<select ng-model='classify'  class="goods-brandapply-select" ng-change='listselect(classify)'>
+            			<option value="0">全部</option>
+            			<option value="{{item.id}}" ng-repeat='item in list' >{{item.cat_name}}</option>
+            			
+            		</select>
+            		
+            	</div>
+              
+            </form>            
+        </div>
+        <div class="box">
+            <!--<a title="新增" class="btn btn-primary" ng-click="openWindow('tpl-add.html')"><i class="fa fa-plus-circle"></i> 添加规格</a>--> 
+        </div>
+
+		<div class="box-body no-padding">
+			<table class="table table-list text-center">
+				<thead>
+					<th>规格名称</th>
+					<th class="sss">规格项</th>
+				
+					
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in listitem" class="list-animation " id='item-goodsSpec-form'>
+						<td>{{item.name}}</td>
+						<!-- <td>{{item.cat_id}}</td> -->
+						<td ng-init='listchild(item.id)'>
+							<div class="form-inline">
+							
+							<!--<button ng-repeat="itemchild in listchilditem[$index]"  class="btn btn-primary" style="margin-left: 8px;">{{itemchild.item}}</button>-->
+							<span ng-repeat="itemchild in listchilditem[$index]">
+								<button   class="form-control item-goodsSpec-btn" ng-model='itemchild.item'  ng-click='itemchildselect($event,item.id,itemchild.item)'>{{itemchild.item}}</button>
+								<!--<button title="删除" class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="removeid(itemchild.id)"></button>-->
+							</span>
+							
+						
+					        </div>
+					      </td>
+		
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<div class="box text-center">
+		<form name="sub" ng-submit="updateitem(iteminfo)">
+		  <div  ng-include="'treeGoodspec.html'" ></div> 
+			
+			<button class="btn btn-success" type="submit">确定</button>
+		</form>
+		<!--<button type="button" ng-click='updateitem()' class="btn btn-primary btn-lg btn-block">提交</button>-->
+	</div>
+		   <!--<div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>-->
+	</div>
+</section>
+<script id="treeGoodspec.html" type="text/ng-template">
+
+		<div class="" ng-repeat='guigexiang in guige'>
+				<div class="pull-left">
+					<input type="button" class="btn-primary"  value='{{guigexiang.value}}' />
+				</div>
+			<div ng-switch="guigexiang.child.length" class="pull-left">
+				<div ng-switch-default class="pull-left" >
+                       <div  ng-include="'treeGoodspec.html'" ng-init="guige=guigexiang.child"></div> 
+				</div>
+				 <div ng-switch-when=0 class="pull-left" >
+	
+			<label for="">价格</label>
+			<input type="text" ng-model='iteminfo[price]' required="required" />
+			<label for="">库存</label>
+			<input type="text" ng-model='iteminfo[inventory]' required="required" />
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+				
+			</div>
+</script>
+

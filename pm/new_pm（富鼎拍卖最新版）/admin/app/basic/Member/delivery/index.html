@@ -1,0 +1,26 @@
+<!-- header -->
+<section class="fd-content-header" style="top:50px;height:129px;">
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>会员管理</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+	<div class="fd-tabs-default fd-clear">
+		<ul class="fd-tabs-ul clean">
+			<li><a class="{{tagSwitch_garden}}" ui-sref="basic-Member-garden({type: 'garden', uid: uid})">会员园地</a></li>
+			<!-- <li><a class="{{tagSwitch_all}}" ui-sref="basic-Member-consume({type: 'all', uid: uid})">记录</a></li>  -->
+			<li><a class="{{tagSwitch_crowd}}" ui-sref="basic-Member-consume({type: 'crowd', uid: uid})">申购记录</a></li>
+			<li><a class="{{tagSwitch_auction}}" ui-sref="basic-Member-consume({type: 'auction', uid: uid})">拍卖记录</a></li>
+			<li><a class="{{tagSwitch_wallet}}" ui-sref="basic-Member-wallet({type: 'wallet', uid: uid})">钱包收支</a></li>
+			<li><a class="{{tagSwitch_delivery}}" ui-sref="basic-Member-delivery({type: 'delivery', uid: uid})">收货地址</a></li>
+		</ul>
+	</div>
+   	<div class="fd-content-menu">
+		<ul class="fd-content-ul-wrap clean">
+			<li class="li50">
+				<!--  -->
+				<a title="新增" class="btn btn-primary" ng-click="openWindow('tpl-add.html')"><i class="fa fa-plus-circle"></i> 调节金额</a>
+			</li>
+		</ul>
+   	</div>
+</section>
+<!-- content -->

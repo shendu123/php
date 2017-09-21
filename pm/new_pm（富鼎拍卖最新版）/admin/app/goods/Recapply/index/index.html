@@ -1,0 +1,316 @@
+<!-- header -->
+<section class="content-header">
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>商品中心</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+	
+</section>
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="RecapplyService" page-size="15" open-size="lg" added-reload="false">
+    	<div class="box-header">
+    		<form class="form-inline pull-right">
+    			
+    		</form>
+    	</div>
+    	<div class="fd-tabs-default fd-clear">
+			<ul class="fd-tabs-ul clean">
+				<li><a class="{{tagSwitch_wait}}" ui-sref="goods-Recapply-index({check: 'eq|0'})">待审核</a></li>
+				<li><a class="{{tagSwitch_pass}}" ui-sref="goods-Recapply-index({check: 'eq|1'})">审核通过</a></li>
+				<li><a class="{{tagSwitch_failed}}" ui-sref="goods-Recapply-index({check: 'eq|2'})">审核失败</a></li>
+				<li><a class="{{tagSwitch_all}}" ui-sref="goods-Recapply-index({check: 'egt|0'})">全部</a></li>
+			</ul>
+		</div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+				<thead class="fd-table-header">
+					<tr>
+						<th rowspan="2"><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+						<th rowspan="2">序号</th>
+						<th rowspan="2">商户名称</th>
+						<th rowspan="2">商品名称</th>
+						<!-- <th rowspan="2">申请备注</th> -->
+						<th colspan="2">推荐时间</th>
+						<th colspan="2">申请推荐到</th>
+						<th colspan="3">审核</th>
+						<th rowspan="2">操作</th>
+					</tr>
+					<tr>
+						<th>开始时间</th>
+						<th>结束时间</th>
+						<th>应用名称</th>
+						<th>区域</th>
+						<th>状态</th>
+						<th>审核人</th>
+						<th>审核时间</th>
+					</tr>
+				</thead>
+                <tbody>
+                <tr ng-repeat="item in list" class="list-animation">
+                    <td><input type="checkbox" value="{{item.id}}" name="ids[]"></td>
+                    <td>{{$index+1}}</td>
+                    <td>{{item.owner.business.name}}</td>
+                    <td>{{item.service.crowd_name||item.service.auction_name||item.service.item_name}}</td>
+                    <!-- <td>{{item.apply_remarks}}</td> -->
+                    <td>{{item.apply_starttime_tag}}</td>
+                    <td>{{item.apply_endtime_tag}}</td>
+                    <td><p ng-repeat="item_pos in item.rec_pos_info">{{item_pos.pos_app_type_tag}}</p></td>
+                    <td><p ng-repeat="item_pos in item.rec_pos_info">{{item_pos.pos_name}}</p></td>
+                    <td>{{item.apply_status_tag}}</td>
+                    <td>{{item.checker.truename||item.checker.nickname||item.checker.account}}</td>
+                    <td>{{item.apply_checktime_tag}}</td>
+                    <td>
+                        <button ng-show="item.apply_status == 0" title="审核" class="btn btn-info btn-xs glyphicon glyphicon-check" ng-click="openWindow(item)" ></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/ng-template" id="tpl-check_crowd.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">审核</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="box-body">
+				<ul class="fd-content-ul-wrap fd-clear">
+					<!-- 商户信息 -->
+					<li class="li100">
+						<div class="title">商户名称：</div>
+						<div class="fd-content">{{item.owner.business.name}}</div>
+					</li>
+					<!-- 申请推荐信息 -->
+					<li class="li50">
+						<div class="title">推荐开始时间：</div>
+						<div class="fd-content">{{item.apply_starttime_tag}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">推荐结束时间：</div>
+						<div class="fd-content">{{item.apply_endtime_tag}}</div>
+					</li>
+					<li class="li100 fd-hight-ultd">
+						<div class="title">申请推荐至：</div>
+						<div class="fd-content-img">
+							<ul class="fd-content-ul-wrap fd-clear">
+								<li class="li50" ng-repeat="item_pos in item.rec_pos_info">
+									<div class="title">{{item_pos.pos_app_type_tag}}：</div>
+									<div class="fd-content">{{item_pos.pos_name}}</div>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<!-- 商品信息 -->
+					<li class="li50">
+						<div class="title">商品名称：</div>
+						<div class="fd-content">{{item.service.goods_info.goods_name}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">商品分类：</div>
+						<div class="fd-content">{{item.service.goods_info.cat_name}}</div>
+					</li>
+					<!-- 申购信息 -->
+					<li class="li50">
+						<div class="title">申购价：</div>
+						<div class="fd-content fd-price">{{item.service.crowd_price}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">商品价值：</div>
+						<div class="fd-content fd-price">{{item.service.goods_info.goods_price}}</div>
+					</li>
+					<!-- -->
+					<li class="li100">
+						<div class="title">商品数量：</div>
+						<div class="fd-content">{{item.service.crowd_total}}</div>
+					</li>
+					<!-- -->
+					<li class="li50">
+						<div class="title">申购佣金：</div>
+						<div class="fd-content fd-price">{{item.service.crowd_broker_price}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">卖家保证金：</div>
+						<div class="fd-content fd-price">{{item.service.crowd_seller_price}}</div>
+					</li>
+					<!-- -->
+					<li class="li100 fd-hight-ultd">
+						<div class="title">商品图片：</div>
+						<div class="fd-content-img fd-img-gallery">
+							<figure>
+								<div>
+									<a href="{{item.service.goods_info.goods_thumb[0]['url']}}" data-size="286x220" target="_blank"><img style="width: 200px;" src="{{item.service.goods_info.goods_thumb[0]['url']}}"></a>
+								</div>
+							</figure>
+						</div>
+					</li>
+					<!-- 
+					<li class="li100 fd-hight-ultd">
+						<div class="title">商品轮播图：</div>
+						<div class="fd-content-img fd-img-gallery">
+			  			<figure ng-repeat="item_img in item.service.goods_info.goods_pictures">
+							<div>
+				  			<a href="{{item_img.url}}" data-size="286x220" target="_blank"><img style="width:200px;" src="{{item_img.url}}"></a>
+							</div>
+			  			</figure>
+						</div>
+					</li>
+					<li class="li100 fd-hight-ultd">
+						<div class="title">商品详情：</div>
+						<div class="fd-content-content" ng-bind-html="item.service.goods_info.goods_content"></div>
+					</li>
+					-->
+				</ul>
+                <div class="fd-modal-footer">
+					<ul class="fd-content-ul-wrap fd-clear">
+						<li class="li50">
+							<button class="btn btn-success" type="submit" ng-click="check(1)">审核通过</button>
+						</li>
+						<li class="li50">
+							<button class="btn btn-warning" type="submit" ng-click="check(2)">失败</button>
+							<input type='text' id='reason' style="width:80%;" ng-model="item.checkmsg">
+						</li>
+					</ul>
+                </div>
+				<!-- TODO 这边不应该影响整体的布局 -->
+                <div class="modal-footer"></div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tpl-check_auction.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">审核</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="box-body">
+				<ul class="fd-content-ul-wrap fd-clear">
+					<!-- 商户信息 -->
+					<li class="li100">
+						<div class="title">商户名称：</div>
+						<div class="fd-content">{{item.owner.business.name}}</div>
+					</li>
+					<!-- 申请推荐信息 -->
+					<li class="li50">
+						<div class="title">推荐开始时间：</div>
+						<div class="fd-content">{{item.apply_starttime_tag}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">推荐结束时间：</div>
+						<div class="fd-content">{{item.apply_endtime_tag}}</div>
+					</li>
+					<li class="li100 fd-hight-ultd">
+						<div class="title">申请推荐至：</div>
+						<div class="fd-content-img">
+							<ul class="fd-content-ul-wrap fd-clear">
+								<li class="li50" ng-repeat="item_pos in item.rec_pos_info">
+									<div class="title">{{item_pos.pos_app_type_tag}}：</div>
+									<div class="fd-content">{{item_pos.pos_name}}</div>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<!-- 商品信息 -->
+					<li class="li50">
+						<div class="title">商品名称：</div>
+						<div class="fd-content">{{item.service.goods_info.goods_name}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">商品分类：</div>
+						<div class="fd-content">{{item.service.goods_info.cat_name}}</div>
+					</li>
+					<!-- 拍卖信息 -->
+					<li class="li50">
+						<div class="title">拍卖名称：</div>
+						<div class="fd-content">{{item.service.auction_name}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">拍卖编码：</div>
+						<div class="fd-content">{{item.service.auction_code}}</div>
+					</li>
+					<!-- -->
+					<li class="li50">
+						<div class="title">拍卖模式：</div>
+						<div class="fd-content">{{item.service.auction_mode_tag}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">成交模式：</div>
+						<div class="fd-content">{{item.service.auction_succtype_tag}}</div>
+					</li>
+					<!-- -->
+					<li class="li50">
+						<div class="title">佣金：</div>
+						<div class="fd-content fd-price">{{item.service.auction_broker_price}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">运费：</div>
+						<div class="fd-content fd-price">{{item.service.auction_freight_price}}</div>
+					</li>
+					<!-- -->
+					<li class="li50">
+						<div class="title">起拍价：</div>
+						<div class="fd-content fd-price">{{item.service.auction_onset_price}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">保留价：</div>
+						<div class="fd-content fd-price">{{item.service.auction_reserve_price}}</div>
+					</li>
+					<!-- -->
+					<li class="li50">
+						<div class="title">卖家保证金：</div>
+						<div class="fd-content fd-price">{{item.service.auction_seller_price}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">买家保证金：</div>
+						<div class="fd-content fd-price">{{item.service.auction_buier_price}}</div>
+					</li>
+					<!-- -->
+					<li class="li50">
+						<div class="title">拍卖开始时间：</div>
+						<div class="fd-content">{{item.service.auction_starttime_tag}}</div>
+					</li>
+					<li class="li50">
+						<div class="title">拍卖结束时间：</div>
+						<div class="fd-content">{{item.service.auction_endtime_tag}}</div>
+					</li>
+					<!-- -->
+					<li class="li100 fd-hight-ultd">
+						<div class="title">商品图片：</div>
+						<div class="fd-content-img fd-img-gallery">
+							<figure>
+								<div>
+									<a href="{{item.service.goods_info.goods_thumb[0]['url']}}" data-size="286x220" target="_blank"><img style="width: 200px;" src="{{item.service.goods_info.goods_thumb[0]['url']}}"></a>
+								</div>
+							</figure>
+						</div>
+					</li>
+				</ul>
+                <div class="fd-modal-footer">
+					<ul class="fd-content-ul-wrap fd-clear">
+						<li class="li50">
+							<button class="btn btn-success" type="submit" ng-click="check(1)">审核通过</button>
+						</li>
+						<li class="li50">
+							<button class="btn btn-warning" type="submit" ng-click="check(2)">失败</button>
+							<input type='text' id='reason' style="width:80%;" ng-model="item.checkmsg">
+						</li>
+					</ul>
+                </div>
+				<!-- TODO 这边不应该影响整体的布局 -->
+                <div class="modal-footer"></div>
+            </div>
+        </form>
+    </div>
+</script>

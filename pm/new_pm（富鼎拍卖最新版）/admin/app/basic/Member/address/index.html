@@ -1,0 +1,51 @@
+<!-- header -->
+<section class="content-header">
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>会员管理</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+    <!-- <div class="fd-content-menu">
+		<ul class="fd-content-ul-wrap clean">
+			<li class="li50">
+				 <a title="新增" class="btn btn-primary" ><i class="fa fa-plus-circle"></i> 新增</a> 
+			</li>
+		</ul>
+	</div> -->
+</section>
+<!-- content -->
+<section class="content slide" >
+	<div class="mb text-right"><a type="button" href="javascript:history.go(-1)" class="btn btn-default">返回</a></div>
+	<div class="box" >
+        <div class="box-body no-padding">
+           <!--  <table class="table table-hover text-center">
+				<thead>
+					<th><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+					<th>ID</th>
+					<th>收货人</th>
+					<th>联系方式</th>
+					<th>邮政编码</th>
+					<th>地址</th>
+					
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in addressList" class="list-animation">
+						<td><input type="checkbox" value="{{item.id}}" name="ids[]"></td>
+						<td>{{item.id}}</td>
+						<td>{{item.addr_truename}}</td>
+						<td>{{item.addr_mobile}}</td>
+						<td>{{item.addr_mobile}}</td>
+						<td>{{item.sheng}}{{item.shi}}{{item.xian}}{{item.addr_address}}</td>
+					</tr>
+				</tbody>
+			</table> -->
+			<div class="Caddress">
+				<div class="col-sm-2" ng-repeat="item in addressList" ng-class="{1:'active',0:''}[item.addr_isdefault]">
+					<p>{{item.addr_truename}}(收)</p>
+					<p>{{item.sheng}}{{item.shi}}{{item.xian}}{{item.addr_address}} {{item.addr_mobile}}</p>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</section>
+
