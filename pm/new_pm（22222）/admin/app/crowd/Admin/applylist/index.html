@@ -1,0 +1,40 @@
+<!-- header -->
+<section class="content-header" >
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>申购管理</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="adminService" page-size="5" added-reload="false">
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                	<th><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+                    <th>序号</th>
+					<th>分类名称</th>
+					<th>申请品牌</th>
+					<th>申请时间</th>
+					<th>申请状态</th>
+                </tr>
+                <tr ng-repeat="item in list" class="list-animation fd-tr">
+                    <td><input type="checkbox" value="{{item.id}}" name="ids[]"></td>
+                    <td>{{$index+1}}</td>
+                    <td>{{item.cat_name}}</td>
+                    <td>{{item.apply_brand_name}}</td>
+                    <td>{{item.apply_intime_tag}}</td>
+                    <td>{{item.apply_status_tag}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>

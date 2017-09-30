@@ -1,0 +1,83 @@
+<!-- header -->
+<section class="content-header" >
+    <h1>
+        {{$state.current.page.title}}
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li ui-sref-active="active"><a href="#" ui-sref="index-index-home"><i class="fa fa-dashboard"></i>{{$state.current.page.title}}</a></li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="AdvService" page-size="10" open-size="lg" added-reload="false">
+        <div class="box-header">
+            <div class="form-inline pull-right">
+                
+                <label>&nbsp;栏目：</label>
+                <select name="from" ng-model="searchCondition.cid" class="form-control">
+                    <option value="">所有</option>
+                    <option ng-repeat="item in catList" value="{{item.id}}" ng-selected = "{{searchCid == item.id}}">{{item.name}}</option>
+                </select>
+           
+                <label>&nbsp;状态：</label>
+                <select name="from" ng-model="searchCondition.is_show" class="form-control">
+                    <option value="">所有</option>
+                    <option value="1">显示</option>
+                    <option value="-1">不显示</option>
+                </select>
+            
+                <input type="text" class="form-control" name="" ng-model="searchCondition.adv_name" placeholder="请输入标题关键字">
+            
+                <label class="" >&nbsp;</label>
+                <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+                   
+            </div>
+        </div>
+        <div class="box">
+            <a ng-show="{{userAuthority[0].userHave}}"  title="{{userAuthority[0].title}}"  class="btn btn-primary"  ui-sref="adv-Adv-add"><i class="fa fa-dashboard"></i> 新增</a>
+            <a ng-show="{{userAuthority[2].userHave}}"  title="{{userAuthority[2].title}}"  class="btn btn-danger" ng-click="deleteAll()"><i class="fa fa-times-circle-o" ></i> 删除</a>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                    <th><input type="checkbox" class="firstCb" onclick="fdCheckAll()"></th>
+                    <th>ID</th>
+                    <th>广告名</th>                    
+                    <th>广告位</th>
+                    <th>图片</th>                   
+                    <th>是否显示</th>
+                    <th>广告链接</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in list" class="list-animation">
+                    <td><input type="checkbox" value="{{item.id}}" name="ids[]"></td>
+                    <td>{{item.id}}</td>                    
+                    <td>{{item.adv_name}}</td>
+                    <td>{{item.name}}</td>
+                    <td><img src="{{item.adv_pic[0].url}}" width='150' height="100"></td>                    
+                    <td><input type="checkbox" ng-checked="{{item.is_show==1}}"  ng-click="show(item.id,$event)"></td>
+                    <td>{{item.link_url}}</td>
+                    <td>{{item.start_time}}</td>
+                    <td>{{item.end_time}}</td>
+                    <td>
+                        <button ng-show="{{userAuthority[1].userHave}}"  title="{{userAuthority[1].title}}"  class="btn btn-info btn-xs glyphicon glyphicon-edit" ui-sref="adv-Adv-edit(item)" >编辑</button>
+                        <button ng-show="{{userAuthority[2].userHave}}"  title="{{userAuthority[2].title}}"  class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="removeb(item.id)">删除</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>

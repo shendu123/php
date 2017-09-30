@@ -1,0 +1,16 @@
+.settings/
+.buildpath
+.project
+*.swp
+*.log
+*.pid
+.DS_Store
+.idea/
+change.clpprj
+runtime/
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+public/uploads/

@@ -1,0 +1,65 @@
+<!-- header -->
+<section class="content-header" >
+    <h1>
+        {{$state.current.page.title}}
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li ui-sref-active="active"><a href="#" ui-sref="basic-Role-index"><i class="fa fa-dashboard"></i>角色管理</a></li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+
+<!-- content -->
+<section class="content slide">
+    <div class="box" senior-table="roleService"  added-reload="true">
+        <div class="modal-header">
+            <button aria-label="Close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+            <h3 class="modal-title">权限列表</h3>
+        </div>
+        <div class="modal-body">
+            <form role="form">
+                <div class="box-body row separated-box">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="">
+                        <ol ng-repeat="nodes in menu" style="clear:both;">
+                            <h3>{{nodes.stitle}}</h3>
+                            <li  ng-repeat="node in nodes" ng-if="node.id" style="clear:both;">                                                                
+                                <span>
+                                    <input type="checkbox" name='checkbox1' class="firstCb" ng-click="checkAll($event)" value='{{node.id}}' ng-checked="in_array(node.id,authorize)">
+                                </span>
+                                {{node.title}}
+                                <ol>
+                                    <li ng-repeat="cNode in node.child" style="clear:both;">
+                                        <span>
+                                            <input type="checkbox" name='checkbox2'  ng-click="checkOne($event,2)" value='{{cNode.id}}' ng-checked="in_array(cNode.id,authorize)">
+                                        </span>
+                                        {{cNode.title}}
+                                        <ol>
+                                            <li ng-repeat="tNode in cNode.child" style="float:left;">
+                                                <span>
+                                                    <input type="checkbox"  name='checkbox3' ng-click="checkOne($event,3)" value='{{tNode.id}}' ng-checked="in_array(tNode.id,authorize)">
+                                                </span>
+                                                {{tNode.title}}
+                                            </li>
+                                        </ol>                                     
+                                    </li>
+                                </ol>                            
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary modv2-btn"  ng-disabled="editNode.$invalid" ng-click="submitNode(true)">保存</button>
+                    <button class="btn btn-primary modv2-btn" ng-click="cancel()" type="button">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<style type="text/css">.modal-backdrop{ z-index: 999 !important; } .modal{z-index: 1000 !important; } </style>
+<style>
+    ol{list-style-type: none;}
+</style>

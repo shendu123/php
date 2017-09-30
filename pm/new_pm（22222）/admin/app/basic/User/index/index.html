@@ -1,0 +1,348 @@
+<!-- header -->
+<section class="content-header" >
+    <ol class="breadcrumb">
+        <li ui-sref-active="active"><a href="#" ui-sref="basic-User-index({start_date:'2017-05-30', end_date: '2017-05-31'})"><i class="fa fa-dashboard"></i>{{$state.current.page.title}}</a></li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="userService" page-size="20" open-size="lg" added-reload="false">
+        <div class="box-header">
+            <form class="form-inline pull-right">                 
+                <label>&nbsp;注册时间：</label>
+                <span class="input-group datepicker modv2-sel-warap">
+                    <ung-datepicker ng-model="searchCondition.start_date" name="start_date" required readonly has-timepicker="true" format="yyyy/MM/dd HH:mm:ss"></ung-datepicker>
+                </span>
+                
+                <input type="text" class="form-control" name="" ng-model="searchCondition.keyword" placeholder="请输入手机号或账号">
+                
+                <label class="" >&nbsp;</label>
+                <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+                    
+            </form>      
+        </div>
+        <div class="box">
+                <a ng-show="{{userAuthority[0].userHave}}"  title="{{userAuthority[0].title}}" class="btn btn-primary" ng-click="openWindow('tpl-add.html')"><i class="fa fa-plus-circle"></i> 新增</a>
+                <a ng-show="{{userAuthority[3].userHave}}" title="{{userAuthority[3].title}}" class="btn btn-success" ng-click="changeStatus(0)"><i class="fa fa-check-circle-o" ></i> 启用</a>
+                <a ng-show="{{userAuthority[3].userHave}}" title="{{userAuthority[3].title}}" class="btn btn-warning" ng-click="changeStatus(1)"><i class="fa fa-ban" ></i> 禁用</a>
+                <a ng-show="{{userAuthority[2].userHave}}" title="{{userAuthority[2].title}}" class="btn btn-danger" ng-click="delChecked()"><i class="fa fa-times-circle-o delete" ></i> 删除</a>
+                <a ng-show="{{userAuthority[5].userHave}}" title="{{userAuthority[5].title}}" class="btn btn-success" ui-sref="basic-User-message"><i class="fa fa-dashboard"></i> 消息推送</a>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                    <th><input type="checkbox" class="firstCb" ng-click="checkAll($event)"></th>
+                    <th>ID</th>
+                    <th>头像</th>
+                    <th>账号</th>
+                    <th>姓名</th>
+                    <th>角色</th>
+                    <th>手机号</th>
+                    <th>注册时间</th>
+                    <th>登陆时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in list" class="list-animation">
+                    <td><input type="checkbox" value="{{item.uid}}"></td>
+                    <td>{{item.uid}}</td>
+                    <td><img src="{{item.avatar[0].url}}" width="50" height="50"></td>
+                    <td>{{item.account||item.mobile}}</td>
+                    <td>{{item.truename}}</td>
+                    <td>{{item.role.name}}</td>
+                    <td>{{item.mobile}}</td>
+                    <td>{{item.reg_date}}</td>
+                    <td>{{item.login_time}}</td>
+                    <td> <span class="checkbox-wrap"><input type="checkbox" class="checkbox-slide" ng-true-value="1" ng-false-value="0"  ng-model="item.status" ng-click="change()"/><label></label></span></td>
+                    <td>
+<!--                        <button ng-show="{{userAuthority[4].userHave}}" title="{{userAuthority[4].title}}"   class="btn btn-info btn-xs glyphicon glyphicon-check" ng-click="openWindow(item,'tpl-check.html')" ></button>-->
+<!--                        <button class="btn btn-info btn-xs glyphicon glyphicon-lock" ng-click="openWindow(item,'tpl-changePwd.html')" ></button>-->
+
+                        <button ng-show="{{userAuthority[1].userHave}}" title="{{userAuthority[1].title}}"   class="btn btn-info btn-xs glyphicon glyphicon-edit" ng-click="openWindow('tpl-update.html',item)" ></button>
+                        <button ng-show="{{userAuthority[2].userHave}}" title="{{userAuthority[2].title}}"   class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="removeb(item.uid)"></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">.modal-backdrop{ z-index: 999 !important; } .modal{z-index: 1000 !important; }</style>
+
+<script type="text/ng-template" id="tpl-add.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">新增</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="editUser" ng-submit="submitAddForm(item)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="pic" class="col-sm-2 control-label">头像</label>
+                    <div class="col-sm-10">
+                        <web-uploader width="200" ng-model="item.avatar" file-num-limit="1">
+                            <input type="hidden" ng-model="item.avatar[0].url" />
+                        </web-uploader>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">账号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="url" ng-model="item.account" ng-disabled="show_editor">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="url" ng-model="item.pwd" ng-disabled="show_editor">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label class="col-sm-2 control-label ">所属平台</label>
+                    <div class="col-sm-10">
+                        <select name="sec" ng-model='selectitem' ng-init='selectitem=0' class="goods-brandapply-select" ng-change='listselect(selectitem)' style="width:100%;">
+                            <option value="0">请选择</option>
+                            <option value='{{ita.sysid}}' ng-repeat='ita in items'>{{ita.title}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所属角色</label>
+                    <div class="col-sm-10">
+                       
+                        <select name="sec" ng-model='childselect.pname' ng-init='childselect.pname=itemschild[0].id' class="goods-brandapply-select" style="width:100%;">
+                            <option value='{{child.name}}' ng-repeat='child in itemschild'>{{child.name}}</option>
+                       </select>
+                           
+                
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label">姓名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="creator" ng-model="item.truename">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">手机号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="creator" ng-model="item.mobile">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tpl-update.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">修改</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="editUser" ng-submit="submitUpdateForm(item)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="pic" class="col-sm-2 control-label">头像</label>
+                    <div class="col-sm-10">
+                        <web-uploader width="200" ng-model="item.avatar" file-num-limit="1">
+                            <input type="hidden" ng-model="item.avatar[0].url" />
+                        </web-uploader>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">账号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="url" ng-model="item.account" ng-disabled="show_editor">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="url" ng-model="item.pwd" ng-disabled="show_editor">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所属角色</label>
+                    <div class="col-sm-10">
+                       
+                        <select name="sec" ng-model='item.role.id' class="goods-brandapply-select" style="width:100%;">
+                            <option value='{{child.id}}' ng-repeat='child in item.Rolelist' ng-selected="{{item.role.id == child.id}}">{{child.name}}</option>
+                       </select>
+                           
+                
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label">姓名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="creator" ng-model="item.truename">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">手机号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="creator" ng-model="item.mobile">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tpl-check.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">审核</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="editUser" ng-submit="submitAddForm(editUser.$valid)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="pic" class="col-sm-2 control-label">企业信息</label>
+                    <div class="col-sm-10">
+                    {{mComInfo.com_name}}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">公司名称</label>
+                    <div class="col-sm-10">
+                        {{mComInfo.com_name}}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label">详细地址</label>
+                    <div class="col-sm-10">
+                        {{mComInfo.com_detail_addr}}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">联系人姓名</label>
+                    <div class="col-sm-10">
+                        {{mComInfo.com_contact_name}}
+                    </div>
+                </div>
+        
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">法人姓名</label>
+                    <div class="col-sm-10">
+                        {{mComInfo.com_legal_name}}
+                    </div>
+                </div>  
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">法人手机号</label>
+                    <div class="col-sm-10">
+                        {{mComInfo.com_legal_phone}}
+                    </div>
+                </div>
+        
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">法人身份证号</label>
+                    <div class="col-sm-10">
+                        {{mComInfo.com_contact_idcard}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">统一信用代码</label>
+                    <div class="col-sm-10">
+                        {{mComInfo.com_contact_idcard}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">运营商</label>
+                    <div class="col-sm-10">
+                        {{mComInfo.com_name}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">地区</label>
+                    <div class="col-sm-10">
+                        {{mComInfo.com_detail_addr}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">联系人身份证号</label>
+                    <div class="col-sm-10">
+                        {{mComInfo.com_detail_addr}}
+                    </div>
+                </div>
+                
+
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit" ng-click="check(1)">审核通过</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit" ng-click="check(-1)">拒绝</button>
+                    <input type='text' width='100' id='reason' ng-model="mComInfo.com_check_reason">
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tpl-changePwd.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">修改密码</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="editUser" ng-submit="submitAddForm(editUser.$valid)">
+            <div class="box-body">
+
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">原密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="oldPwd" ng-model="item.pwd">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label">新密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="newPwd">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">确认密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="confirmPwd">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit" ng-click="changePwdSub()">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

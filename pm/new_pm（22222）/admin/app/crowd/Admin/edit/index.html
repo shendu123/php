@@ -1,0 +1,121 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="crowd-Admin-index"><i class="fa fa-dashboard"></i>申购管理</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<section class="content slide">
+	<div class="box" added-reload="false">
+		<div class="box-body no-padding">
+			<form class="form-horizontal" name="addForm-crowd" ng-submit="editSubmit(item)">
+				<div class="form-group">
+					<label for="item_title" class="col-sm-2 control-label fd-must">申购名称</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.crowd_name" class="form-control" required>
+					</div>
+					<label for="item_title" class="col-sm-2 control-label fd-must">申购代码</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.crowd_code" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="item_title" class="col-sm-2 control-label fd-must">申购价</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.crowd_price" class="form-control">
+					</div>
+					<label for="item_title" class="col-sm-2 control-label fd-must">数量</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.crowd_total" class="form-control" id="item_title">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="item_title" class="col-sm-2 control-label fd-must">商品名称</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.goods_name" class="form-control" required>
+					</div>
+					<label for="item_title" class="col-sm-2 control-label fd-must">商品价值</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.goods_price" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="item_title" class="col-sm-2 control-label fd-must">商品分类</label>
+					<div class="col-sm-3">
+						<select ng-model="item.cat_id" class="form-control" required ng-change="getMapBrand(item.cat_id)">
+                                                    <option ng-repeat="cat in catList" value="{{cat.id}}" ng-selected="{{item.cat_id==cat.id}}">{{cat.html}}{{cat.cat_name}}</option>
+						</select>
+					</div>
+					<label for="item_title" class="col-sm-2 control-label fd-must">商品品牌</label>
+					<div class="col-sm-3">
+						<select ng-model="item.brand_id" class="form-control" required >
+							<option ng-repeat="brand in brandList" value="{{brand.id}}" ng-selected="{{item.brand_id==brand.id}}">{{brand.brand_name}}</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="item_title" class="col-sm-2 control-label fd-must">卖家保证金</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.crowd_seller_price" class="form-control" id="item_title" placeholder="单位元">
+					</div>
+					<label for="item_title" class="col-sm-2 control-label fd-must">交易佣金</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.crowd_broker_price" class="form-control" placeholder="单位元">
+					</div>
+				</div>
+				<div class="form-inline form-group">
+                    <label for="item_crowd_starttime" class="col-sm-2 control-label fd-must">开始时间</label>
+					<div class="col-sm-3">
+                        <span class="input-group datepicker modv2-sel-warap" datepicker-click="startOpened">
+                            <input type="hidden"  ng-model="item.crowd_starttime"/>
+                            <ung-datepicker ng-model="item.crowd_starttime" name="crowd_starttime" required readonly has-timepicker="true" format="yyyy/MM/dd HH:mm:ss"></ung-datepicker> 
+                        </span>
+					</div>
+                    <label for="item_crowd_endtime" class="col-sm-2 control-label fd-must">结束时间</label>
+					<div class="col-sm-3">
+                        <span class="input-group datepicker modv2-sel-warap" datepicker-click="endOpened">
+                            <input type="hidden"  ng-model="item.crowd_endtime"/>
+                            <ung-datepicker ng-model="item.crowd_endtime" name="crowd_endtime" required readonly has-timepicker="true" format="yyyy/MM/dd HH:mm:ss"></ung-datepicker>
+                        </span>
+					</div>
+				</div>
+                <div class="form-group">
+                    <label for="pic" class="col-sm-2 control-label fd-must">封面图</label>
+                    <div class="col-sm-8">
+                        <web-uploader width="200" ng-model="item.goods_thumb" file-num-limit="1">
+                            <input type="hidden" ng-model="item.goods_thumb[0].url" />
+                        </web-uploader>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic" class="col-sm-2 control-label fd-must">轮播图</label>
+                    <div class="col-sm-8">
+                        <web-uploader width="200" ng-model="item.goods_pictures" file-num-limit="5">
+                            <input type="hidden" ng-model="item.goods_pictures" />
+                        </web-uploader>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic" class="col-sm-2 control-label fd-must">商品相册</label>
+                    <div class="col-sm-8">
+                        <web-uploader width="200" ng-model="item.gallery_pic_url" file-num-limit="5">
+                            <input type="hidden" ng-model="item.gallery_pic_url" />
+                        </web-uploader>
+                    </div>
+                </div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label fd-must">商品详情</label>
+					<div class="col-sm-8">
+						<textarea ueditor="article" ng-model="item.goods_content"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-8">
+						<button class="btn btn-success" type="submit" ng-disabled="addForm-crowd.$invalid">确定</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

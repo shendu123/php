@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="fd Co">
+<title>fd Co</title>
+<link rel="stylesheet" type="text/css" href="msg_box.css">
+<script src="jquery.min.js"></script>
+</head>
+<!-- 上面为通用头部 -->
+<script src="msg_box.js"></script>
+<body>
+  <div class="dianji">11111111111111111</div>
+  <div class="dianji2">2222222222222222</div>
+  <div class="dianji3">3333333333333333</div>
+  <script>
+			function test() {
+				alert("你点击了确定,进行了修改");
+			}
+			function alert_test() {
+				alert("alert回调函数");
+			}
+			//也可以传方法名 test
+			$(".dianji").on("click", function() {
+				$.MsgBox.Confirm("温馨提示", "确定要进行修改吗？", test, alert_test);
+			});
+			$(".dianji2").on("click", function() {
+				$.MsgBox.Alert("消息", "哈哈，添加成功！");
+			});
+			$(".dianji3").on("click", function() {
+				$.MsgBox.Alert("消息", "哈哈，添加成功！", alert_test);
+			});
+		</script>
+</body>
+</html>

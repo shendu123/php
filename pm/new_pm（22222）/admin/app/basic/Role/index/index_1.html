@@ -1,0 +1,149 @@
+<!-- header -->
+<section class="content-header" >
+    <h1>
+        {{$state.current.page.title}}
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li ui-sref-active="active"><a href="#" ui-sref="index-index-home"><i class="fa fa-dashboard"></i>{{$state.current.page.title}}</a></li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+
+<!-- content -->
+<section class="content slide">
+    <div class="box" senior-table="roleService"  added-reload="true">
+        <div class="box-header">
+        </div>
+        <div class="box">
+            <a title="新增" class="btn btn-primary" ng-click="add()"><i class="fa fa-plus-circle"></i> 新增</a>
+            <a title="启用" class="btn btn-success" ng-click="changeStatus(1)"><i class="fa fa-check-circle-o" ></i> 启用</a>
+            <a title="禁用" class="btn btn-warning"  ng-click="changeStatus(0)"><i class="fa fa-ban"></i> 禁用</a>
+            <a title="删除" class="btn btn-danger" ng-click="deleteAll()"><i class="fa fa-times-circle-o" ></i> 删除</a>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                    <th><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+                    <th>ID</th>
+                    <th>父级</th>
+                    <th>名称</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in list" class="list-animation">
+                    <td><input type="checkbox" value="{{item.id}}" name="ids[]"></td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.pid}}</td>
+                    <td style="text-align: left">{{item.display | trustHtml}}</td>
+                    <td>{{item.status==1?'启用':'禁用'}}</td>
+                    <td>
+                        <button class="btn btn-info btn-xs" ng-click="authorize(item)" ><i class="fa fa-fw fa-key"></i></button>
+                        <button class="btn btn-info btn-xs glyphicon glyphicon-edit" ng-click="update($index)" ></button>
+                        <button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="remove()"></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<style type="text/css">.modal-backdrop{ z-index: 999 !important; } .modal{z-index: 1000 !important; } </style>
+
+<script type="text/ng-template" id="tpl-update.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="editUser" ng-submit="submitAddForm(editUser.$valid)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label ">角色名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="item.name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所属角色</label>
+                    <div class="col-sm-10" select-role="">
+                        <select class="form-control" ng-model="item.pid" ng-options="role.id as role.display for role in roles" ></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="item.remark">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="preview()" ng-show="show_editor">预览</button>
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tpl-authorize.html">
+    <div class="modal-header">
+        <button aria-label="Close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">{{ name }}拥有的权限</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form">
+            <div class="box-body row separated-box">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-10">
+                    <ol>
+                        <li ng-repeat="node in menu">
+                            <span ng-if="in_array(node.id,authorize)">
+                                <input type="checkbox" class="firstCb" ng-click="checkAll(this)" value='{{node.id}}' checked>
+                            </span>
+                            <span ng-if="!in_array(node.id,authorize)">
+                                <input type="checkbox" class="firstCb" ng-click="checkAll(this)" value='{{node.id}}' >
+                            </span> 
+                            {{node.title}}
+                            <ol class="ol{{node.id}}">
+                                <li ng-repeat="cNode in node.child">
+                                    <span ng-if="in_array(cNode.id,authorize)">
+                                        <input type="checkbox"  ng-click="checkOne(this,1)" value='{{cNode.id}}' checked>
+                                    </span>
+                                    <span ng-if="!in_array(cNode.id,authorize)">
+                                        <input type="checkbox"  ng-click="checkOne(this,1)" value='{{cNode.id}}'>
+                                    </span> 
+                                    {{cNode.title}}
+                                    <ol class="ol{{cNode.id}}">
+                                        <li ng-repeat="tNode in cNode.child">
+                                            <span ng-if="in_array(tNode.id,authorize)">
+                                                <input type="checkbox"  ng-click="checkOne(this,2)" value='{{tNode.id}}' checked>
+                                            </span>
+                                            <span ng-if="!in_array(tNode.id,authorize)">
+                                                <input type="checkbox"  ng-click="checkOne(this,2)" value='{{tNode.id}}'>
+                                            </span> 
+                                            {{tNode.title}}
+                                        </li>
+                                    </ol>                                     
+                                </li>
+                            </ol>                            
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary modv2-btn"  ng-disabled="editNode.$invalid" ng-click="submitNode(true)"=>保存</button>
+                <button class="btn btn-primary modv2-btn" ng-click="cancel()" type="button">取消</button>
+            </div>
+        </form>
+    </div>
+</script>
+<style>
+    ol{list-style-type: none;}
+</style>

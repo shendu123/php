@@ -1,0 +1,101 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="basic-User-index"><i class="fa fa-dashboard"></i>用户管理</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="userMessageService" page-size="20" open-size="lg" added-reload="false">
+        <div class="box-header">
+            <div class="form form-inline form-alignment">
+                <div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="" ng-model="searchCondition.theme" placeholder="请输入标题关键字">
+                    </div>
+                    <div class="form-group modv2-formg">
+                        <label class="" >&nbsp;</label>
+                        <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <a title="消息推送" class="btn btn-primary" ng-click="message()"><i class="fa fa-plus-circle"></i> 消息推送</a>
+            <a title="删除" class="btn btn-danger" ng-click="deleteAll()"><i class="fa fa-times-circle-o" ></i> 删除</a>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                    <th><input type="checkbox" class="firstCb" onclick="fdCheckAll()"></th>
+                    <th>ID</th>
+                    <th>标题</th>
+                    <th>内容</th>
+                    <th>时间</th>
+                    <th>对象</th>                   
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in list" class="list-animation">
+                    <td><input type="checkbox" value="{{item.mes_id}}" name="ids[]"></td>
+                    <td>{{item.mes_id}}</td>
+                    <td>{{item.theme}}</td>
+                    <td ng-bind-html="item.detail"></td>
+                    <td>{{item.createtime}}</td>
+                    <td>{{item.iscom==0?'全体用户':(item.iscom==1?'企业用户':'个人用户')}}</td>
+                    <td>
+                        <button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="removeb(item.mes_id)"></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/ng-template" id="tpl-message.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">消息推送</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="editUser" ng-submit="submitAddForm(editUser.$valid)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">对象</label>
+                    <div class="col-sm-10">
+                        <select ng-model="item.iscom" class="form-control" id="iscom" required>
+                            <option  value="0">全体用户</option>
+                            <option  value="2">个人用户</option>
+                            <option  value="1">企业用户</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label">标题</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="title" ng-model="item.title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label fd_must">内容</label>
+                    <div class="col-sm-9">
+                            <textarea ueditor="article" ng-model="item.detail"  id="detail"></textarea>
+                    </div>
+                </div>
+                
+
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit" ng-click="messagePush()">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

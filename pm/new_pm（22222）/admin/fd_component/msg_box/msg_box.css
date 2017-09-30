@@ -1,0 +1,166 @@
+/* 横线 begin */
+	.fd-dialog-wrap .ft:before{
+	content: '';
+	height: 0;
+	display: block;
+	border-top: 1px solid #ddd;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+}
+
+.fd-dialog-wrap .ft a:after{
+	content: '';
+	width: 0;
+	display: block;
+	border-right: 1px solid #ddd;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
+
+/* 横线 end */
+/*弹窗整理 begin*/
+.fd-dialog-wrap {
+	width: 20%;
+	background: #fff;
+	border-radius: 5px;
+	position: fixed;
+	z-index: 9999;
+	margin: 0 37%;
+	position: fixed;
+	top: 30%;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-transition: -webkit-transform .3s;
+	transition: transform .3s;
+}
+
+.fd-dialog-wrap .hd {
+	padding: 23px 10% 10px 10%;
+	text-align: center;
+	color: #000;
+	font-weight: 700;
+}
+
+.fd-dialog-wrap .bd {
+	padding: 10px 10% 30px 10%;
+}
+
+.fd-dialog-wrap .ft {
+	position: relative;
+	width: 100%;
+	text-align: center;
+	display: -webkit-box;
+	display: box;
+	display: -webkit-flex;
+	display: flex;
+	background: #f5f5f5;
+	border-radius: 0 0 3px 3px;
+}
+
+.fd-dialog-wrap .ft a {
+	position: relative;
+	height: 45px;
+	line-height: 45px;
+	color: #666;
+	-webkit-box-flex: 1;
+	box-flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
+}
+
+.fd-dialog-wrap .ft a.btn-cfm {
+	color: #0e90d2;
+}
+/*弹窗整理 end*/
+/*确认弹窗 begin*/
+.fd-cfm-dialog {
+	width: 78%;
+	background: #fff;
+	border-radius: 5px;
+	position: fixed;
+	z-index: 1001;
+	top: 23%;
+	margin: 0 11%;
+}
+
+.fd-cfm-dialog-hd {
+	padding: 20px 10% 10px 10%;
+	text-align: center;
+	color: #000;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.fd-cfm-dialog-hd {
+	border-bottom: none;
+}
+
+.fd-cfm-dialog-bd {
+	padding: 10px 5%;
+	overflow-y: auto;
+	font-size: 1.4rem;
+}
+
+.fd-cfm-dialog-bd ul li {
+	margin: 1px 0;
+}
+
+.fd-cfm-dialog-bd {
+	height: inherit;
+}
+
+.fd-cfm-dialog-bd em.num {
+	color: red;
+	margin: 0 2px;
+}
+
+.fd-cfm-dialog-ft {
+	font-size: 15px;
+	color: #0e90d2;
+	position: relative;
+	width: 100%;
+	text-align: center;
+	display: -webkit-box;
+	display: box;
+	display: -webkit-flex;
+	display: flex;
+	background: #f5f5f5;
+	border-radius: 0 0 3px 3px;
+}
+
+.fd-cfm-dialog-ft>a {
+	position: relative;
+	height: 45px;
+	line-height: 45px;
+	color: #666;
+	-webkit-box-flex: 1;
+	box-flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
+	display: block;
+}
+
+.fd-cfm-dialog-ft  .btn-cfm {
+	color: #0e90d2;
+}
+
+.fd-cfm-dialog-wrap .alert-con {
+	text-align: center;
+	font-size: 1.6rem;
+	line-height: 60px;
+}
+
+.fd-dialog-mark {
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.6);
+}
+/*确认弹窗 end*/

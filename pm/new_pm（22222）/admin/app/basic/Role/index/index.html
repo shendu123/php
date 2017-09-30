@@ -1,0 +1,242 @@
+
+
+<section class="content-header">
+
+    <ol class="breadcrumb">
+        <li ui-sref-active="active"><a href="#" ui-sref="index-index-home"><i class="fa fa-dashboard"></i>{{$state.current.page.title}}</a></li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+<!-- content -->
+
+<section class="content slide">
+    <div class="box" senior-table="roleService" added-reload="false">
+        <div class="box">
+
+             <a ng-show="{{userAuthority[0].userHave}}" title="{{userAuthority[0].title}}"  class="btn btn-primary" ng-click="openWindow('tpl-update.html',items)"><i class="fa fa-plus-circle"></i> 新增</a>
+
+
+
+        </div>
+        <div class="box-body no-padding">
+            <div class="table-list text-center" tree-table>
+                <div class=" clearfix table-list-header">
+                    <div class="table-list-col col-xs-3"> <button class="btn btn-primary slide-all" type="button">全部展开/收起</button> &nbsp;&nbsp;角色名称</div>
+                    <div class="table-list-col col-xs-3">描述</div>
+                    <div class="table-list-col col-xs-3">状态</div>
+                    <div class="table-list-col col-xs-3">操作</div>
+                </div>
+
+                <div class="tree-table" >
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style type="text/css">.modal-backdrop{ z-index: 999 !important; } .modal{z-index: 1000 !important; } </style>
+<script type="text/ng-template" id="tpl-role.html">
+    <div class="modal-header">
+        <div class="pull-right">
+            <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+            <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="toggleSize()"><i class="fa fa-square-o"></i></button>
+        </div>
+        <h3 class="modal-title">权限列表</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form">
+            <div class="box-body row separated-box">
+                <div class="col-md-2">
+
+                </div>
+                <div class="">
+                    <ol ng-repeat="nodes in menu" style="clear:both;">
+                        <h3>{{nodes.stitle}}</h3>
+                        <li  ng-repeat="node in nodes" ng-if="node.id" style="clear:both;">
+                                <span>
+                                    <input type="checkbox" name='checkbox1' class="firstCb" ng-click="checkAll($event)" value='{{node.id}}' ng-checked="in_array(node.id,authorize)">
+                                </span>
+                            {{node.title}}
+                            <ol>
+                                <li ng-repeat="cNode in node.child" style="clear:both;">
+                                        <span>
+                                            <input type="checkbox" name='checkbox2'  ng-click="checkOne($event,2)" value='{{cNode.id}}' ng-checked="in_array(cNode.id,authorize)">
+                                        </span>
+                                    {{cNode.title}}
+                                    <ol>
+                                        <li ng-repeat="tNode in cNode.child" style="float:left;">
+                                                <span>
+                                                    <input type="checkbox"  name='checkbox3' ng-click="checkOne($event,3)" value='{{tNode.id}}' ng-checked="in_array(tNode.id,authorize)">
+                                                </span>
+                                            {{tNode.title}}
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary modv2-btn"  ng-disabled="editNode.$invalid" ng-click="submitNode(true)">保存</button>
+                <button class="btn btn-primary modv2-btn" ng-click="cancel()" type="button">取消</button>
+            </div>
+        </form>
+    </div>
+</script>
+
+
+<script type="text/ng-template" id="tpl-update.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">新增</h3>
+    </div>
+    <div class="modal-body">
+    	
+        <form class="form-horizontal" name="editUser" ng-submit="submitAddForm(childselect)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label ">角色名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="childselect.name" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label ">所属平台</label>
+                    <div class="col-sm-10">
+                        <select name="sec" ng-model='selectitem' ng-init='selectitem=0' class="goods-brandapply-select" ng-change='listselect(selectitem)' style="width:100%;">
+                            <option value="0">请选择</option>
+                            <option value='{{ita.sysid}}' ng-repeat='ita in items'>{{ita.title}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所属角色</label>
+                    <div class="col-sm-10">
+                       
+                        <select name="sec" ng-model='childselect.pname' ng-init='childselect.pname=itemschild[0].id' class="goods-brandapply-select" style="width:100%;">
+            		        <option value='{{child.name}}' ng-repeat='child in itemschild'>{{child.name}}</option>
+            	       </select>
+                           
+                
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="childselect.remark">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="preview()" ng-show="show_editor">预览</button>
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tpl-edit.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">     
+        <form class="form-horizontal" name="editUser" ng-submit="submiteditForm(modifyGetObj)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label ">角色名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="modifyGetObj.name" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所属角色</label>
+                    <div class="col-sm-10" >
+                        <select name="sec" ng-model='modifyGetObj.pid' class="goods-brandapply-select" style="width:100%;">
+                            <option value='{{child.pid}}' ng-repeat='child in modifyGetObj.Rolelist' ng-selected="{{modifyGetObj.pid == child.pid}}">{{child.name}}</option>
+                       </select>
+                        
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="modifyGetObj.remark">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tpl-authorize.html">
+    <div class="modal-header">
+        <button aria-label="Close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">{{ name }}拥有的权限</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form">
+            <div class="box-body row separated-box">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-10">
+                    <ol>
+                        <li ng-repeat="node in menu" style="clear:both;">
+                            <span ng-if="in_array(node.id,authorize)">
+                                <input type="checkbox" name='checkbox1' class="firstCb" ng-click="checkAll($event)" value='{{node.id}}' checked>
+                            </span>
+                            <span ng-if="!in_array(node.id,authorize)">
+                                <input type="checkbox" name='checkbox1' class="firstCb" ng-click="checkAll($event)" value='{{node.id}}' >
+                            </span> 
+                            {{node.title}}
+                            <ol>
+                                <li ng-repeat="cNode in node.child" style="clear:both;">
+                                    <span ng-if="in_array(cNode.id,authorize)">
+                                        <input type="checkbox" name='checkbox2'  ng-click="checkOne($event,2)" value='{{cNode.id}}' checked>
+                                    </span>
+                                    <span ng-if="!in_array(cNode.id,authorize)">
+                                        <input type="checkbox"  name='checkbox2' ng-click="checkOne($event,2)" value='{{cNode.id}}'>
+                                    </span> 
+                                    {{cNode.title}}
+                                    <ol>
+                                        <li ng-repeat="tNode in cNode.child" style="float:left;">
+                                            <span ng-if="in_array(tNode.id,authorize)">
+                                                <input type="checkbox"  name='checkbox3' ng-click="checkOne($event,3)" value='{{tNode.id}}' checked>
+                                            </span>
+                                            <span ng-if="!in_array(tNode.id,authorize)">
+                                                <input type="checkbox"  name='checkbox3' ng-click="checkOne($event,3)" value='{{tNode.id}}'>
+                                            </span> 
+                                            {{tNode.title}}
+                                        </li>
+                                    </ol>                                     
+                                </li>
+                            </ol>                            
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary modv2-btn"  ng-disabled="editNode.$invalid" ng-click="submitNode(true)">保存</button>
+                <button class="btn btn-primary modv2-btn" ng-click="cancel()" type="button">取消</button>
+            </div>
+        </form>
+    </div>
+</script>
+<style>
+    ol{list-style-type: none;}
+</style>
+
+
