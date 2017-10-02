@@ -19,6 +19,11 @@
 
 三、redis、memcache知识点整理
 
+		1、
+		   1）redis单线程
+		2、
+	           2）memcache多线程（利于并发）		
+
 四、sphix、coreseek
 
 五、nginx+keepalive
@@ -28,6 +33,8 @@
 七、秒杀团购用到了哪些知识点
 
 八、支付、登录插件怎么编写
+
+九、网站安全问题：sql注入、xss攻击 、csrf攻击
 
 
 
