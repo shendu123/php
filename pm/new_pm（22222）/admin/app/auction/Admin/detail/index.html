@@ -1,0 +1,124 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="goods-Goods-index"><i class="fa fa-dashboard"></i>拍卖管理</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<section class="content slide">
+	<form>
+		<fieldset>
+			<legend>商户信息<a title="返回" class="btn btn-success pull-right" href="javascript:history.go(-1);"><i class="fa fa-check-circle-o"></i> 返回</a></legend>
+		    <div class="row">
+			    <dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商户名称：</strong></dt>
+				  <dd class="ng-binding">{{item.owner.business.name}}</dd>
+				</dl>
+			</div>
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+			<legend>拍卖信息</legend>
+		    <div class="row">			    
+			    <dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>拍卖名称：</strong></dt>
+				  <dd class="ng-binding">{{item.auction_name}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>拍卖编码：</strong></dt>
+				  <dd class="ng-binding"> {{item.auction_code}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>成交模式：</strong></dt>
+				  <dd class="ng-binding"> {{item.auction_succtype_tag}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>交易佣金：</strong></dt>
+				  <dd class="ng-binding">{{item.auction_broker_price}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>加价幅度：</strong></dt>
+				  <dd class="ng-binding">{{item.auction_stepsize_price}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>买家保证金：</strong></dt>
+				  <dd class="ng-binding">{{item.auction_buier_price}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>卖家保证金：</strong></dt>
+				  <dd class="ng-binding">{{item.auction_seller_price}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>起拍价：</strong></dt>
+				  <dd class="ng-binding">{{item.auction_onset_price}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>保留价：</strong></dt>
+				  <dd class="ng-binding">{{item.auction_reserve_price}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>拍卖开始时间：</strong></dt>
+				  <dd class="ng-binding">{{item.auction_starttime_tag}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>拍卖结束时间：</strong></dt>
+				  <dd class="ng-binding" >{{item.auction_endtime_tag}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>添加时间：</strong></dt>
+				  <dd class="ng-binding">{{item.auction_intime_tag}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>修改时间：</strong></dt>
+				  <dd class="ng-binding">{{item.auction_uptime_tag}}</dd>
+				</dl>
+			</div>
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+			<legend>商品信息</legend>
+		    <div class="row">
+			    <dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商品名称：</strong></dt>
+				  <dd class="ng-binding">{{item.goods_info.goods_name}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商品分类：</strong></dt>
+				  <dd class="ng-binding">{{item.goods_info.cat_name}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商品品牌：</strong></dt>
+				  <dd class="ng-binding">{{item.goods_info.brand_name}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商品关键字：</strong></dt>
+				  <dd class="ng-binding">{{item.goods_info.goods_keywords}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-6">
+				  <dt> <strong>商品价值：</strong></dt>
+				  <dd class="ng-binding">{{item.goods_info.goods_price}}</dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-12">
+				  <dt> <strong>商品详情：</strong></dt>
+				  <dd class="ng-binding" ng-bind-html="item.goods_info.goods_content"></dd>
+				</dl>
+				<dl class="dl-horizontal col-xs-12">
+				  <dt> <strong>商品图片：</strong></dt>
+				  <dd class="ng-binding"><a href="{{item.goods_info.goods_thumb[0]['url']}}" data-size="286x220" target="_blank"><img style="width: 200px;" src="{{item.goods_info.goods_thumb[0]['url']}}"></a></dd>
+				</dl>
+			</div>
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+			<legend>商品轮播图</legend>
+		    <div class="row">
+			  <div class="col-sm-3 col-md-3"  ng-repeat="item_img in item.goods_info.goods_pictures">
+			    <a href="{{item_img.url}}" data-size="286x220" target="_blank"><img class="img-thumbnail" style="width:200px;" src="{{item_img.url}}"></a>
+			   </div>
+			</div>
+		</fieldset>
+	</form>
+</section>

@@ -1,0 +1,77 @@
+<!-- header -->
+<section class="content-header" >
+    <h1>
+        {{$state.current.page.title}}
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li ui-sref-active="active"><a href="#" ui-sref="index-index-home"><i class="fa fa-dashboard"></i>{{$state.current.page.title}}</a></li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="customerDataService" page-size="20" open-size="lg" added-reload="false">
+        <div class="box-header">
+            <div class="form form-inline form-alignment">
+                <div>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="" ng-model="searchCondition.name" placeholder="">
+                    </div>
+                    <div class="form-group modv2-formg">
+                        <label class="" >&nbsp;</label>
+                        <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div class="box">
+            <a title="删除" class="btn btn-danger"><i class="fa fa-times-circle-o" ng-click="deleteAll()"></i> 删除</a>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                    <th rowspan="2">分成比例</th>  
+                    <th rowspan="2">用户数</th> 
+                    <th rowspan="2">日期</th> 
+                    <th rowspan="2">订单数</th> 
+                    <th rowspan="2">成交额</th> 
+                    
+                </tr>
+                <tr ng-repeat="item in list" class="list-animation">    
+                    <td>
+                      <span ng-if="item.id > 4">  
+                        <input type="checkbox" value="{{item.id}}" name="ids[]">
+                      <span>  
+                    </td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>
+                        <button class="btn btn-info btn-xs glyphicon glyphicon-edit" ng-click="editCat($event,item)" class="editCat">编辑</button>
+                        <span ng-if="item.id > 4">
+                          <button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="removeb(item.id)">删除</button>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><a href="javascript:;" class="addCat" ng-click="addCat()">新增</a></td>                    
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">.modal-backdrop{ z-index: 999 !important; } .modal{z-index: 1000 !important; }</style>
+

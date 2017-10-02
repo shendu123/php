@@ -1,0 +1,96 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="goods-Goods-index"><i class="fa fa-dashboard"></i>j申购订单</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<section class="fd-session-article">
+	<div class="fd-header">基本信息</div>
+	<ul class="fd-content-ul-wrap fd-clear">
+		<!-- -->
+		<li class="li50">
+			<div class="title">订单Id：</div>
+			<div class="fd-content">{{item.ooid}}</div>
+		</li>
+		<li class="li50">
+			<div class="title">订单编号：</div>
+			<div class="fd-content">{{item.ooid}}</div>
+		</li>
+		<!-- -->
+		<li class="li50">
+			<div class="title">用户：</div>
+			<div class="fd-content">{{item.username}}</div>
+		</li>
+		<li class="li50">
+			<div class="title">电话：</div>
+			<div class="fd-content fd-price">{{item.phone}}</div>
+		</li>
+		<!-- -->
+		<li class="li50">
+			<div class="title">应付金额：</div>
+			<div class="fd-content fd-price">{{item.price}}</div>
+		</li>
+		<li class="li50">
+			<div class="title">订单状态：</div>
+			<div class="fd-content fd-price">{{item.auction_seller_price}}</div>
+		</li>
+		<!-- -->
+		<li class="li50">
+			<div class="title">下单时间：</div>
+			<div class="fd-content fd-price">{{item.createtime}}</div>
+		</li>
+		<li class="li50">
+			<div class="title">支付时间：</div>
+			<div class="fd-content fd-price">{{item.createtime}}</div>
+		</li>	
+	</ul>
+</section>
+<section class="fd-session-article">
+	<div class="fd-header">收货信息</div>
+	<ul class="fd-content-ul-wrap fd-clear">
+		<!-- -->
+		<li class="li50">
+			<div class="title">收货人：</div>
+			<div class="fd-content">{{item.aInfo.addr_truename}}</div>
+		</li>
+		<li class="li50">
+			<div class="title">联系方式：</div>
+			<div class="fd-content">{{item.aInfo.addr_mobile}}</div>
+		</li>
+		<!-- -->
+		<li class="li50">
+			<div class="title">收货地址：</div>
+			<div class="fd-content">{{item.aInfo.sheng}}{{item.aInfo.shi}}{{item.aInfo.xian}}{{item.aInfo.addr_address}}</div>
+		</li>
+		<li class="li50">
+			<div class="title">邮编：</div>
+			<div class="fd-content fd-price">{{item.goods_info.goods_price}}</div>
+		</li>
+		<!-- -->
+		<li class="li100 fd-hight-ultd">
+			<div class="title">配送方式：</div>
+			
+		</li>
+	</ul>
+</section>
+<section class="fd-session-article">
+	<div class="fd-header">费用信息</div>
+	<ul class="fd-content-ul-wrap fd-clear">
+		<!-- -->
+		<li class="li50">
+			<div class="title">小计：</div>
+			<div class="fd-content">{{item.price}}</div>
+		</li>
+		<li class="li50">
+			<div class="title">运费：</div>
+			<div class="fd-content">{{item.freight}}</div>
+		</li>
+		<!-- -->
+		<li class="li50">
+			<div class="title">应付：</div>
+			<div class="fd-content">{{item.total}}</div>
+		</li>
+	</ul>
+</section>

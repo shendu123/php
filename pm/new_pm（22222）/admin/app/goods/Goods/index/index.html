@@ -1,0 +1,139 @@
+<!-- header -->
+<section class="content-header" >
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>商品中心</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+
+	
+</section>
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="goodsService" page-size="15" open-size="lg" added-reload="false">
+    	<div class="box-header">
+    		
+	    
+	     <!--  <button class="btn btn-default"><a class="on" ui-sref="goods-Category-index">商品分类</a></button>
+	      <button class="btn btn-default"><a ui-sref="goods-Brand-index">商品品牌</a></button> -->
+	    
+	
+
+<!--	<div class="fd-tabs-default fd-clear">
+	    <ul class="fd-tabs-ul clean">
+	      <li><a class="on" ui-sref="goods-Category-index">商品分类</a></li>
+	      <li><a ui-sref="goods-Brand-index">商品品牌</a></li>
+	    </ul>
+	</div>-->
+            <form class="form-inline pull-right">
+                <input type="text" class="form-control fd-input-text" name="keyword" ng-model="searchCondition.keyword" placeholder="输入商品名称或商品标题">
+                <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+            </form>
+    	</div>
+        <div class="box">
+            <a title="新增" ng-show="1" class="btn btn-primary" ui-sref="goods-Goods-add"><i class="fa fa-dashboard"></i>新增</a>
+            <a title="删除" ng-show="0" class="btn btn-danger" ng-click="deleteAll()"><i class="fa fa-times-circle-o"></i> 删除</a>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                    <th><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+                    <th>序号</th>
+                    <th>商品主图</th>
+                    <th>商品名称</th>
+                    <th>商品标题</th>
+                    <th>商品分类</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in list" class="list-animation">
+                    <td><input type="checkbox" value="{{item.id}}" name="ids[]"></td>
+                    <td>{{$index+1}}</td>
+                    <td><img src="{{item.goods_thumb[0].url ? item.goods_thumb[0].url : 'img/goods_thumb.png'}}" onerror="javascript:this.src='img/goods_thumb.png';" style="width:50px; max-height:50px;"></td>
+                    <td>{{item.goods_name}}</td>
+                    <td>{{item.goods_title}}</td>
+                    <td>{{item.cat_name}}</td>
+                    <td>
+                        <button ng-show="1" class="btn btn-info btn-xs glyphicon glyphicon-edit" ui-sref="goods-Goods-pubtocrowd({id: '{{item.id}}'})">发布到申购</button>
+                        <button ng-show="1" class="btn btn-info btn-xs glyphicon glyphicon-edit" ui-sref="goods-Goods-pubtoauction({id: '{{item.id}}'})">发布到拍卖</button>
+                        <button ng-show="1" class="btn btn-info btn-xs glyphicon glyphicon-edit" ui-sref="item-Admin-goodsSpec({goods_id: '{{item.id}}', type : 'pubToItem'})">发布到自由买卖</button>
+                    	<button class="btn btn-info btn-xs glyphicon glyphicon-search" ui-sref="goods-Goods-preview({id: '{{item.id}}'})"></button>
+                        <button ng-show="1" class="btn btn-info btn-xs glyphicon glyphicon-edit" ui-sref="goods-Goods-edit({id: '{{item.id}}'})"></button>
+                        <button ng-show="1" class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="remove()"></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">.modal-backdrop{ z-index: 999 !important; } .modal{z-index: 1000 !important; }</style>
+
+<script type="text/ng-template" id="tpl-update.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="editUser" ng-submit="submitAddForm(editUser.$valid)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="pic" class="col-sm-2 control-label">头像</label>
+                    <div class="col-sm-10">
+                        <web-uploader width="200" ng-model="item.pic_arr" file-num-limit="1">
+                            <input type="hidden" ng-model="item.pic_arrArray" />
+                        </web-uploader>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">链接</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="url" ng-model="item.url" ng-disabled="show_editor">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label">创建者</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="creator" ng-model="item.creator" disabled="disabled">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">编辑文章</label>
+                    <div class="col-sm-10">
+                        <input type="checkbox" ng-model="show_editor">
+                    </div>
+                </div>
+
+                <div ng-show="show_editor">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">文章标题</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="item.article_title">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <textarea  ueditor="article" ng-model="item.article_content"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="preview()" ng-show="show_editor">预览</button>
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

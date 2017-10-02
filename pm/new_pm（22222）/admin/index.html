@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="cn" id="ng-app" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta name="fragment" content="!">
+    <meta name="renderer" content="webkit">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link href="sea_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="sea_modules/jScrollPane/style/jquery.jscrollpane.css">
+    <link rel="stylesheet" href="sea_modules/webuploader/dist/webuploader.css"/>
+    <link rel="stylesheet" href="sea_modules/webuploader/examples/image-upload/style.css"/>
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="css/skins/skin-blue.css" rel="stylesheet" type="text/css"/>
+    <link href="css/app.css" rel="stylesheet" type="text/css"/>
+    <link href="css/fd-app.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="sea_modules/jquery-autocomplete/jquery.autocomplete.css"/>
+    <link rel="stylesheet" href="sea_modules/angular-loading-bar/build/loading-bar.min.css"/>
+    <link rel="stylesheet" href="sea_modules/ueditor/themes/default/css/ueditor.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="sea_modules/util/iconpicker.css">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <title ng-bind-template="{{$state.current.page.title}} - 运营系统">运营系统</title>
+</head>
+<body class="skin-blue login-page">
+<div class="loading in page-loading" id="page-loading"></div>
+<div ng-controller="controller.init">
+    <div class="login-box" id="login-box" style="display: none;">
+        <div class="login-logo">
+            <a>运营系统</a>
+
+        </div>
+        <div class="login-box-body">
+            <p class="login-box-msg">登录后台</p>
+            <form name="loginForm" ng-submit="submitForm(loginForm.$valid)" role="form" novalidate>
+                <div class="form-group has-feedback" ng-init="sysid=1">
+                    <select class="form-control" ng-model="sysid" ng-options="system.sysid as system.title for system in systems"></select>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="text" name="email" class="form-control" placeholder="请输入用户名" required ng-model="user.username" hint-on-blur/>
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" name="password" placeholder="请输入密码" required ng-model="user.password" ng-minlength="6" hint-on-blur/>
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row" style="visibility: visible">
+                    <div class="col-xs-8">
+                        <div class="has-feedback text-danger" ng-messages="loginForm.email.$error" ng-show="interacted(loginForm.email)">
+                            <div ng-message="required"><i class="fa fa-info-circle"></i> 请输入用户名！</div>
+                        </div>
+                        <div class=" has-feedback text-danger" ng-messages="loginForm.password.$error" ng-show="interacted(loginForm.password)">
+                            <div ng-message="required"><i class="fa fa-info-circle"></i> 请输入密码！</div>
+                            <div ng-message="minlength"><i class="fa fa-info-circle"></i> 密码不能小于6位！</div>
+                        </div>
+                        <div id="tips-info" class=" text-danger"></div>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">登 录</button>
+                    </div>
+                </div>
+            </form><br>
+        </div>
+    </div>
+    <div class="wrapper" id="main">
+        <header class="main-header">
+            <a ui-sref="home" class="logo">运营系统<span class="modv2-ver">v1.0.0</span></a>
+            <nav class="navbar navbar-static-top" role="navigation">
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="img/logo.gif" ng-src="{{ profile.photo }}" class="user-image" alt="User Image"/>
+                                <span class="hidden-xs " title="{{ profile.nickname }}">{{ profile.truename }} <i class="glyphicon glyphicon-chevron-down"></i></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="user-header">
+                                    <img src="img/logo.gif" ng-src="{{ profile.photo }}" class="img-circle" alt="User Image"/>
+                                    <p>
+                                        {{ profile.truename }}
+                                    </p>
+                                </li>
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="javascript:;"></a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="javascript:;" ng-click="signout()" class="btn  btn-flat btn-danger">退出</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <a href="javascript:;" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="modv2-sidebar-ico">&lt;</span>
+            </a>
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="img/logo.gif" ng-src="{{ profile.photo }}" class="img-circle" alt="User Image"/>
+                    </div>
+                    <div class="pull-left info" style="width: 100px; line-height: 18px;">
+                        <p>{{ profile.truename || profile.nickname }}</p>
+                        <p>{{ systitle }}</p>
+                    </div>
+                </div>
+                <ul class="sidebar-menu">
+                    <li>
+                        <a href="#" ui-sref="index-index-home" ui-sref-opts="{reload: true}">
+                            <i class="glyphicon glyphicon-home"></i> <span>后台首页</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="fd-mainbar-scroll"><ul ng-include="'treeMenu.html'" class="sidebar-menu"></ul></div>
+            </section>
+        </aside>
+        <div class="content-wrapper" style="margin-top: 51px;">
+            <div class="" ui-view>
+            </div>
+            <div class="modal-body businessLogin" style="display:none;">
+               <h3>完善商户信息</h3> 
+               <form class="form-horizontal" name="editUser" ng-submit="improveBusinessInfo(item)">
+                   <div class="box-body">
+                       <div class="form-group">
+                           <label for="creator" class="col-sm-2 control-label">企业名称</label>
+                           <div class="col-sm-10">
+                               <input type="text" class="form-control" id="creator" ng-model="item.name">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label class="col-sm-2 control-label">联系人手机号</label>
+                           <div class="col-sm-10">
+                               <input type="text" class="form-control" id="creator" ng-model="item.mobile">
+                           </div>
+                       </div>
+                       <div class="form-group">
+                           <label for="creator" class="col-sm-2 control-label">设置新密码</label>
+                           <div class="col-sm-10">
+                               <input type="password" class="form-control" id="newPwd" ng-model="item.pwd">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label class="col-sm-2 control-label">确认密码</label>
+                           <div class="col-sm-10">
+                               <input type="password" class="form-control" id="confirmPwd" ng-model="item.confirmPwd">
+                           </div>
+                       </div>
+                       <div class="modal-footer">
+                           <button class="btn btn-success" type="submit">确定</button>
+                       </div>
+                   </div>
+               </form>
+           </div>
+        </div>
+    </div>
+    <div class="login-box help-info" id="help-info">
+        <div class="login-logo">
+            <a>运营系统</a>
+        </div>
+        <div class="login-box-body">
+            <p>
+                您的浏览器版本过低,请使用ie9以上的浏览器,或
+                <a href="http://down.360safe.com/cse/360cse_8.7.0.306.exe">点击下载</a>
+                <a href="http://chrome.360.cn/">360安全浏览器</a>!
+            </p>
+        </div>
+    </div>
+</div>
+
+<script id="treeMenu.html" type="text/ng-template">
+    <li class="treeview" ng-repeat="node in menu" ng-switch="node.leaf" data-id='{{node.id}}'>
+        <!-- <a ng-switch-when="true" href="javascript:;" ui-sref="{{node.url_value|rail2ds}}({node_id: '{{node.id}}'})" ui-sref-opts="{reload: true}"> -->
+        <a ng-switch-when="true" href="javascript:;" ui-sref="{{node.url_value|rail2ds}}" ui-sref-opts="{reload: true}">
+            <i class="{{node.icon}}"></i>
+            <span>{{node.title}}</span>
+            <i ng-hide="{{node.leaf}}" class="fa fa-angle-left pull-right"></i>
+        </a>
+        <a ng-switch-default href="javascript:;">
+            <i class="{{node.icon}}"></i>
+            <span>{{node.title}}</span>
+            <i ng-hide="{{node.leaf}}" class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul ng-hide="{{node.leaf}}" ng-include="'treeMenu.html'" ng-init="menu=node.child" class="treeview-menu"></ul>
+    </li>
+</script>
+
+
+<script src="js/sea.js"></script>
+<script src="sea_modules/seajs-css/seajs-css.js"></script>
+<script src="sea_modules/seajs-wrap/dist/seajs-wrap.js"></script>
+<script src="sea_modules/jquery/1.9.1/jquery.min.js"></script>
+<script src="sea_modules/angular/angular.min.js"></script>
+<script src="sea_modules/angular-sanitize/angular-sanitize.min.js"></script>
+<script src='sea_modules/bootstrap/js/bootstrap.min.js'></script>
+<script src='sea_modules/jquery.drag-and-drop/js/jquery.dragndrop.js'></script>
+<script src='sea_modules/jScrollPane/script/jquery.mousewheel.js'></script>
+<script src='sea_modules/jScrollPane/script/jquery.jscrollpane.min.js'></script>
+<script src="js/fd_public.js"></script>
+<script src="fd_component/msg_box/msg_box.js"></script>
+<link rel="stylesheet" href="fd_component/msg_box/msg_box.css"/>
+
+<script src="js/all.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=OECI52VwrchhYaTtQrgxdaTfFvHVPyN7"></script>
+<script>
+    eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('!(o(){s a=j.p.m(),2={};h(/q/.v(a)||a.C(/D/i)){G(j.H.k(";")[1].l(/[ ]/g,"")){5"n.0":2.3=6;4;5"r.0":2.3=7;4;5"t.0":2.3=8;4;5"u.0":2.3=9;4;5"w.0":2.3=x;4;5"y.0":2.3=z;4;A:2.3=B;4}h(2.3<9){e.d(\'E-F\').c.b=\'f\';e.d(\'I\').c.b=\'f\';e.d(\'J-K\').c.b=\'f\';e.d(\'L-M\').c.b=\'N\';O P}}})();',52,52,'||browser|version|break|case||||||display|style|getElementById|document|none||if||navigator|split|replace|toLowerCase|MSIE6|function|userAgent|msie|MSIE7|var|MSIE8|MSIE9|test|MSIE10|10|MSIE11|11|default|99|match|trident|login|box|switch|appVersion|main|page|loading|help|info|block|return|false'.split('|'),0,{}))
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="news-Article-index"><i class="fa fa-dashboard"></i>文章管理</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<div class="modal-header">
+        <a title="返回" class="btn btn-success pull-right" href="javascript:history.go(-1);"><i class="fa fa-check-circle-o "></i> 返回</a>
+        <h3 class="modal-title">新增信息</h3>
+    </div>
+    
+    <div class="modal-body">      
+        <form class="form-horizontal" name="editUser" ng-submit="addSubmit(item)">
+            <div class="box-body">
+
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label fd-must">所属栏目</label>
+                    <div class="col-sm-8">
+                        <select ng-model="item.cid" class="form-control" on-change>
+                            <option  value="">请选择</option>
+                            <option ng-repeat="cat in catList" value="{{cat.id}}" ng-selected="{{cat.id==item.cid}}">{{cat.name}}</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label fd-must">标题</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="creator" ng-model="item.title">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label fd-must">排序</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="creator" ng-model="item.sort">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label fd-must">是否推荐</label>
+                    <div class="col-sm-8">
+						<label class="radio-inline"><input type="radio" class="form-element" ng-model="item.is_recommend" value="1"> 是</label>
+						<label class="radio-inline"><input type="radio" class="form-element" ng-model="item.is_recommend" value="0"> 否</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic" class="col-sm-2 control-label fd-must">文章图片</label>
+                    <div class="col-sm-8">
+                        <web-uploader width="200" ng-model="item.thumb_pic" file-num-limit="5">
+                            <input type="hidden" ng-model="item.thumb_pic" />
+                        </web-uploader>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label fd-must">文章内容</label>
+                    <div class="col-sm-8">
+                            <textarea ueditor="article" ng-model="item.content"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8">
+                            <button class="btn btn-success" type="submit" ng-disabled="addForm-crowd.$invalid">确定</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>

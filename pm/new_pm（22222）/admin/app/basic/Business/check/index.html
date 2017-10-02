@@ -1,0 +1,126 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="basic-Businesscompany-index"><i class="fa fa-dashboard"></i>运营商管理</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<section class="content slide">
+	<div class="box" added-reload="false">
+		<div class="box-body no-padding">
+			<form class="form-horizontal fd-edit-form" name="addForm-Businesscompany" ng-submit="checkSubmit(item)">
+                <div class="form-group">
+					<label class="col-sm-2 control-label">公司名称</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.com_name" class="form-control" required>
+					</div>
+				</div>
+                <div class="form-group">
+					<label class="col-sm-2 control-label">统一信用代码</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.com_ucredit" class="form-control" required>
+					</div>
+				</div>
+                <div class="form-group">
+					<label for="item_title" class="col-sm-2 control-label">公司地址</label>
+					<div class="col-sm-1">
+						<select ng-model="item.com_province" class="form-control" required ng-change="getMapCity(item.com_province)">
+							<option ng-repeat="item_p in provList" value="{{item_p.id}}">{{item_p.region_name}}</option>
+						</select>
+					</div>
+					<div class="col-sm-1">
+						<select ng-model="item.com_city" class="form-control" required ng-change="getMapArea(item.com_city)">
+							<option ng-repeat="item_c in cityList" value="{{item_c.id}}">{{item_c.region_name}}</option>
+						</select>
+					</div>
+					<div class="col-sm-1">
+						<select ng-model="item.com_area" class="form-control" required id="fd-com-area-select">
+							<option ng-repeat="item_a in areaList" value="{{item_a.id}}">{{item_a.region_name}}</option>
+						</select>
+					</div>
+				</div>
+                <div class="form-group">
+                   <label class="col-sm-2 control-label"></label>
+                   <div class="col-sm-3">
+                       <textarea ng-model="item.com_detail_addr" placeholder="请输入详细地址"></textarea>
+                   </div>
+               </div>                           
+                <div class="form-group">
+					<label class="col-sm-2 control-label">公司电话</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.com_tel" class="form-control" required>
+					</div>
+				</div>
+                <div class="form-group">
+					<label class="col-sm-2 control-label">法人姓名</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.com_legal_name" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">法人身份证号</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.com_legal_idcard" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">联系人姓名</label>
+					<div class="col-sm-4">
+						<input type="text" ng-model="item.com_contact_name" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label fd-must">联系人手机号</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.com_contact_mobile" class="form-control" required>
+					</div>
+				</div>				
+												
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">营业执照</label>
+                    <div class="col-sm-3">
+                        <web-uploader width="200" ng-model="item.com_license" file-num-limit="1">
+                            <input type="hidden" ng-model="item.com_license" />
+                        </web-uploader>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">法人身份证正面</label>
+                    <div class="col-sm-3">
+                        <web-uploader width="200" ng-model="item.com_legal_idcard_front" file-num-limit="1">
+                            <input type="hidden" ng-model="item.com_legal_idcard_front" />
+                        </web-uploader>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">法人身份证反面</label>
+                    <div class="col-sm-3">
+                        <web-uploader width="200" ng-model="item.com_legal_idcard_back" file-num-limit="1">
+                            <input type="hidden" ng-model="item.com_legal_idcard_back" />
+                        </web-uploader>
+                    </div>
+                </div>
+                <div class="form-group">
+					<label class="col-sm-2 control-label">是否通过</label>
+					<div class="col-sm-3">
+						<label class="wrap-label"><input type="radio" class="form-element" ng-model="item.business_check_status" value="1"  ng-checked="item.business_check_status==1">通过</label>
+                        <label class="wrap-label"><input type="radio" class="form-element" ng-model="item.business_check_status" value="2"  ng-checked="item.business_check_status==2">不通过</label>
+                                                
+					</div>
+				</div>
+                <div class="form-group" ng-show="item.business_check_status==2">
+					<label class="col-sm-2 control-label fd-must">不通过原因</label>
+					<div class="col-sm-3">
+						<input type="text" ng-model="item.business_check_reason" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-3">
+						<button class="btn btn-success" type="submit" ng-disabled="addForm-crowd.$invalid">下一步</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

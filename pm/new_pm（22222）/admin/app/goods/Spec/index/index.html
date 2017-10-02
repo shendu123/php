@@ -1,0 +1,136 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><i class="fa fa-dashboard"></i>商品规格</li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+	
+</section>
+<!-- content -->
+<section class="content slide">
+	<div class="box" >
+
+        <div class="box-header">
+            <form class="form-inline">
+                <div class="form-group pull-right">
+                    <select ng-model="item.cat_id" class="form-control" ng-init="item.cat_id='-1'">
+                        <option  value="-1">请选择</option>
+                        <option ng-repeat="category in listCategory" value="{{category.cat_pid}}">{{category.cat_name}}</option>
+                    </select>
+                    <input type="text" class="form-control fd-input-text" name="keyword" ng-model="searchCondition.keyword" placeholder="输入会员昵称或手机号码">
+                    <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i>搜索</button>
+                </div>
+            </form>            
+        </div>
+        <div class="box">
+            <a ng-show="{{userAuthority[0].userHave}}"  title="{{userAuthority[0].title}}" class="btn btn-primary" ng-click="openWindow('tpl-add.html')"><i class="fa fa-plus-circle"></i> 新增</a> 
+        </div>
+
+		<div class="box-body no-padding">
+			<table class="table table-list text-center">
+				<thead>
+					<th>ID</th>
+					<th>规格名称</th>
+					<th>规格分类</th>
+					<th>排序</th>
+					<th>操作</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in list" class="list-animation">
+						<td>{{item.id}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.cat_id}}</td>
+						<td> <input type="text" ng-model='item.sort' placeholder="规格项" ng-change='listupdate(item.id,item.name,item.sort,item.cat_id)'/></td>
+						<td>
+							
+							<button ng-show="{{userAuthority[1].userHave}}"  title="{{userAuthority[1].title}}"  class="btn btn-info btn-xs glyphicon glyphicon-edit" ng-click="openWindow('tpl-edit.html', item)"></button>
+                            <button ng-show="{{userAuthority[2].userHave}}"  title="{{userAuthority[2].title}}"  class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="remove(item.id)"></button>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+	</div>
+</section>
+
+<script type="text/ng-template" id="tpl-add.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">添加商品规格</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal fd-edit-form" name="editMember" ng-submit="updateMemberSubmuit(editMember.$valid)">
+            <div class="box-body">
+            	<div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label fd-must">规格名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="item.name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label fd-must">规格分类</label>
+                    <div class="col-sm-10">
+                         <select ng-model="item.cat_id" class="form-control" ng-init="item.cat_id='-1'">
+                            <option  value="-1">请选择</option>
+                            <option ng-repeat="category in listCategory" value="{{category.id}}">{{category.cat_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label fd-must">排序</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" ng-model="item.sort">
+                    </div>
+                </div>
+               
+                
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tpl-edit.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">编辑商品规格</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal fd-edit-form" name="editMember" ng-submit="updateMemberSubmuit(item)">
+            <div class="box-body">
+             <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label fd-must">规格名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="item.name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label fd-must">规格分类</label>
+                    <div class="col-sm-10">
+                        <select ng-model="item.cat_id" class="form-control">
+                            <option  value="">请选择</option>
+                            <option ng-repeat="category in listCategory" value="{{category.id}}" ng-selected="{{category.id==item.cat_id}}">{{category.cat_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label fd-must">排序</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" ng-model="item.sort">
+                    </div>
+                </div>
+              
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

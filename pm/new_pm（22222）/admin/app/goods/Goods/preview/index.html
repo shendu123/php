@@ -1,0 +1,61 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="goods-Goods-index"><i class="fa fa-dashboard"></i>商品管理</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<section class="fd-session-article">
+	<div class="box">
+		<a title="返回" class="btn btn-success" href="javascript:history.go(-1);"><i class="fa fa-check-circle-o"></i> 返回</a>
+	</div>
+			<div class="fd-header">商品信息</div>
+			<ul class="fd-content-ul-wrap fd-clear">
+				<!-- -->
+				<li class="li50">
+					<div class="title">商品名称：</div>
+					<div class="fd-content">{{item.goods_name}}</div>
+				</li>
+				<li class="li50">
+					<div class="title">商品分类：</div>
+					<div class="fd-content">{{item.cat_name}}</div>
+				</li>
+				<!-- -->
+				<li class="li50">
+					<div class="title">添加时间：</div>
+					<div class="fd-content">{{item.goods_intime_tag}}</div>
+				</li>
+				<li class="li50">
+					<div class="title">更新时间：</div>
+					<div class="fd-content">{{item.goods_uptime_tag}}</div>
+				</li>
+				<!-- -->
+				<li class="li100 fd-hight-ultd">
+					<div class="title">商品主图：</div>
+					<div class="fd-content-img fd-img-gallery">
+					  <figure>
+						<div>
+						  <a href="{{item.goods_thumb[0]['url']}}" data-size="286x220" target="_blank"><img style="width:200px;" src="{{item.goods_thumb[0]['url']}}"></a>
+						</div>
+					  </figure>
+					</div>
+				</li>
+				<!-- -->
+				<li class="li100 fd-hight-ultd">
+					<div class="title">商品轮播图：</div>
+					<div class="fd-content-img fd-img-gallery">
+					  <figure ng-repeat="item_img in item.goods_pictures">
+						<div>
+						  <a href="{{item_img.url}}" data-size="286x220" target="_blank"><img style="width:200px;" src="{{item_img.url}}"></a>
+						</div>
+					  </figure>
+					</div>
+				</li>
+				<!-- -->
+				<li class="li100 fd-hight-ultd">
+					<div class="title">商品详情：</div>
+					<div class="fd-content-content" ng-bind-html="item.goods_content"></div>
+				</li>
+			</ul>
+</section>

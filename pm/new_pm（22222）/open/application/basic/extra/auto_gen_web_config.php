@@ -1,0 +1,152 @@
+<?php 
+        return array (
+  'shopping' => 
+  array (
+    'integral_reg' => 
+    array (
+      'config_id' => 38,
+      'config_oprid' => 5,
+      'config_status' => 0,
+      'config_syslevel' => 0,
+      'config_group' => 'shopping',
+      'config_name' => 'integral_reg',
+      'config_value' => '1003',
+      'config_remarks' => '注册赠送积分',
+      'config_intime' => 1506394593,
+      'config_uptime' => 1506394593,
+    ),
+    'integral_money' => 
+    array (
+      'config_id' => 39,
+      'config_oprid' => 259,
+      'config_status' => 0,
+      'config_syslevel' => 0,
+      'config_group' => 'shopping',
+      'config_name' => 'integral_money',
+      'config_value' => '1,10',
+      'config_remarks' => '积分换算比例 1元=xx积分',
+      'config_intime' => 1504841618,
+      'config_uptime' => 1504841618,
+    ),
+    'auction_unpay' => 
+    array (
+      'config_id' => 40,
+      'config_oprid' => 259,
+      'config_status' => 0,
+      'config_syslevel' => 0,
+      'config_group' => 'shopping',
+      'config_name' => 'auction_unpay',
+      'config_value' => '3',
+      'config_remarks' => '拍中后多少天不支付处罚',
+      'config_intime' => 1504841618,
+      'config_uptime' => 1504841618,
+    ),
+    'order_unpay' => 
+    array (
+      'config_id' => 41,
+      'config_oprid' => 259,
+      'config_status' => 0,
+      'config_syslevel' => 0,
+      'config_group' => 'shopping',
+      'config_name' => 'order_unpay',
+      'config_value' => '5',
+      'config_remarks' => '待付款订单不支付多少天后关闭',
+      'config_intime' => 1504841618,
+      'config_uptime' => 1504841618,
+    ),
+    'order_close' => 
+    array (
+      'config_id' => 42,
+      'config_oprid' => 259,
+      'config_status' => 0,
+      'config_syslevel' => 0,
+      'config_group' => 'shopping',
+      'config_name' => 'order_close',
+      'config_value' => '5',
+      'config_remarks' => '收货后多少天订单完成',
+      'config_intime' => 1504841618,
+      'config_uptime' => 1504841618,
+    ),
+    'upload_limit' => 
+    array (
+      'config_id' => 43,
+      'config_oprid' => 259,
+      'config_status' => 0,
+      'config_syslevel' => 0,
+      'config_group' => 'shopping',
+      'config_name' => 'upload_limit',
+      'config_value' => '10',
+      'config_remarks' => '附件上传大小',
+      'config_intime' => 1504841618,
+      'config_uptime' => 1504841618,
+    ),
+    'withdraw_lowlimit' => 
+    array (
+      'config_id' => 44,
+      'config_oprid' => 259,
+      'config_status' => 0,
+      'config_syslevel' => 0,
+      'config_group' => 'shopping',
+      'config_name' => 'withdraw_lowlimit',
+      'config_value' => '10344',
+      'config_remarks' => '提现金额 需超过多少才能提现金额',
+      'config_intime' => 1504841618,
+      'config_uptime' => 1504841618,
+    ),
+    'withdraw_mini' => 
+    array (
+      'config_id' => 48,
+      'config_oprid' => 259,
+      'config_status' => 0,
+      'config_syslevel' => 0,
+      'config_group' => 'shopping',
+      'config_name' => 'withdraw_mini',
+      'config_value' => '1000',
+      'config_remarks' => '最少提现额度',
+      'config_intime' => 1504841621,
+      'config_uptime' => 1504841621,
+    ),
+  ),
+  'bonus' => 
+  array (
+    'partner_seller_bonus' => 
+    array (
+      'config_id' => 45,
+      'config_oprid' => 375,
+      'config_status' => 0,
+      'config_syslevel' => 0,
+      'config_group' => 'bonus',
+      'config_name' => 'partner_seller_bonus',
+      'config_value' => '10,2',
+      'config_remarks' => '合伙人推荐卖家获得佣金比例',
+      'config_intime' => 1505699879,
+      'config_uptime' => 1505699879,
+    ),
+    'opr_seller_bonus' => 
+    array (
+      'config_id' => 46,
+      'config_oprid' => 259,
+      'config_status' => 0,
+      'config_syslevel' => 0,
+      'config_group' => 'bonus',
+      'config_name' => 'opr_seller_bonus',
+      'config_value' => '15,1',
+      'config_remarks' => '运营商推荐卖家获佣金比例',
+      'config_intime' => 1504841621,
+      'config_uptime' => 1504841621,
+    ),
+    'opr_buyer_bonus' => 
+    array (
+      'config_id' => 47,
+      'config_oprid' => 259,
+      'config_status' => 0,
+      'config_syslevel' => 0,
+      'config_group' => 'bonus',
+      'config_name' => 'opr_buyer_bonus',
+      'config_value' => '20,12',
+      'config_remarks' => '运营商推荐会员获佣金比例',
+      'config_intime' => 1504841621,
+      'config_uptime' => 1504841621,
+    ),
+  ),
+);

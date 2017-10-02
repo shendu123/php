@@ -1,0 +1,132 @@
+<!-- header -->
+<section class="content-header">
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>商品中心</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+	
+</section>
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="recpositionService" page-size="15" open-size="lg" added-reload="false">
+        <div class="box-header">
+            <form class="form-inline pull-right">
+                <input type="text" class="form-control fd-input-text" name="keyword" ng-model="searchCondition.keyword" placeholder="输入推荐区域名称">
+                <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+            </form>
+        </div>
+        <div class="box">
+            <a ng-show="{{userAuthority[0].userHave}}"  title="{{userAuthority[0].title}}"  class="btn btn-primary" ng-click="add()"><i class="fa fa-dashboard"></i>新增</a>
+            <a ng-show="{{userAuthority[2].userHave}}"  title="{{userAuthority[2].title}}"  class="btn btn-danger" ng-click="deleteAll()"><i class="fa fa-times-circle-o"></i> 删除</a>
+        </div>
+        <div class="fd-tabs-default fd-clear">
+            <ul class="fd-tabs-ul clean">
+                <li><a class="{{tagSwitch_all}}" ui-sref="goods-Recposition-index({check: 'egt|0'})">全部</a></li>
+                <li><a class="{{tagSwitch_pass}}" ui-sref="goods-Recposition-index({check: 'eq|1'})">审核通过</a></li>
+                <li><a class="{{tagSwitch_wait}}" ui-sref="goods-Recposition-index({check: 'eq|0'})">待审核</a></li>
+                <li><a class="{{tagSwitch_failed}}" ui-sref="goods-Recposition-index({check: 'eq|2'})">审核失败</a></li>
+            </ul>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+                <tbody>
+                <tr>
+                    <th><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+                    <th>序号</th>
+                    <th>推荐至应用</th>
+                    <th>推荐区域名称</th>
+                    <th>编码</th>
+                    <th>状态</th>
+                    <th>操作者</th>
+                    <th>备注</th>
+                    <th>操作时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in list" class="list-animation">
+                    <td><input type="checkbox" value="{{item.id}}" name="ids[]"></td>
+                    <td>{{$index+1}}</td>
+                    <td>{{item.pos_app_type_tag}}</td>
+                    <td>{{item.pos_name}}</td>
+                    <td>{{item.pos_code}}</td>
+                    <td>{{item.pos_status_tag}}</td>
+                    <td>{{item.pos_oprid}}</td>
+                    <td>{{item.pos_remarks}}</td>
+                    <td>{{item.pos_uptime_tag}}</td>
+                    <td>
+                        <button ng-show="{{userAuthority[1].userHave}}"  title="{{userAuthority[1].title}}"  class="btn btn-info btn-xs glyphicon glyphicon-edit" ng-click="update(item)"></button>
+                        <button ng-show="{{userAuthority[2].userHave}}"  title="{{userAuthority[2].title}}"  class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="remove()"></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer clearfix ">
+            <pagination num-pages="numPages"  boundary-links="true" max-size="maxSize"   ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div class="pull-right ng-binding modv2-pageinfo">
+                <span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+            </div>
+        </div>
+    </div>
+</section>
+
+<style type="text/css">
+.modal-backdrop {
+	z-index: 999 !important;
+}
+
+.modal {
+	z-index: 1000 !important;
+}
+</style>
+
+<script type="text/ng-template" id="tpl-update.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">添加/编辑区域</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal fd-edit-form" name="editResposition" ng-submit="submitAddForm(editResposition.$valid)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">选择应用</label>
+                    <div class="col-sm-10">
+						<select class="form-control" ng-model="item.pos_app_type">
+  							<option value="0" ng-selected="{{! item.pos_app_type}}">app</option>
+  							<option value="1" ng-selected="{{item.pos_app_type == 1}}">pc</option>
+  							<option value="2" ng-selected="{{item.pos_app_type == 2}}">微信</option>
+						</select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">区域名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="item.pos_name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">区域编码</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="item.pos_code">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">是否启用</label>
+                    <div class="col-sm-10">
+						<label class="wrap-label"><input type="radio" class="form-element" ng-model="item.pos_status" value="0"> 启用</label>
+						<label class="wrap-label"><input type="radio" class="form-element" ng-model="item.pos_status" value="1"> 不启用</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-10">
+                        <textarea ng-model="item.pos_remarks"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

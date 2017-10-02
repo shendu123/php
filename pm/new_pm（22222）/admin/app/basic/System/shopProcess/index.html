@@ -1,0 +1,93 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#"><i class="fa fa-dashboard"></i>系统功能--购物流程</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title"></h3>
+    </div>
+    
+    <div class="modal-body">      
+        <form class="form-horizontal" name="editUser" ng-submit="shopProcessSubmit(shopProcess)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label">会员注册赠送积分</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="creator" ng-model="shopProcess.integral_reg">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">积分换算比例</label>
+                    <div class="col-sm-3">
+                        <label class="radio-inline">
+
+                            <input type="radio" name="inlineRadioOptions"  id="inlineRadio1" ng-value="'1,1'" ng-model="shopProcess.integral_money"> 1元=1积分
+
+                        </label>
+                 
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions"  id="inlineRadio2" ng-value="'1,10'" ng-model="shopProcess.integral_money"> 1元=10积分
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions"  id="inlineRadio3" ng-value="'1,100'" ng-model="shopProcess.integral_money"> 1元=100积分
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">拍中后多少天不支付处罚</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="creator" ng-model="shopProcess.auction_unpay">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">待付款订单不支付多少天后关闭</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="creator" ng-model="shopProcess.order_unpay">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">收货后多少天订单结算</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="creator" ng-model="shopProcess.order_close">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">附件上传大小</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" ng-model="shopProcess.upload_limit">
+                          <option value="1">1M</option>
+                          <option value="2">2M</option>
+                          <option value="3">3M</option>
+                          <option value="4">4M</option>
+                          <option value="5">5M</option>
+                          <option value="10">10M</option>
+                          <option value="50">50M</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">提现金额</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="creator" ng-model="shopProcess.withdraw_mini">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">最少提现额度</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="creator" ng-model="shopProcess.withdraw_lowlimit">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-5">
+                            <button class="btn btn-success" type="submit" ng-disabled="addForm-crowd.$invalid">确认提交</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+     <div>{{q}}</div>

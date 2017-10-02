@@ -1,0 +1,204 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><i class="fa fa-dashboard"></i>商户管理</li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<section class="content slide">
+	<div class="box" senior-table="businessService" pageSize="15" open-size="lg" added-reload="false">
+		
+    	<div class="fd-box-header">
+			<ul class="fd-content-ul-wrap clean">
+				<li class="li50">
+		            <a title="新增" class="btn btn-primary" ng-click="openWindow('','tpl-update.html')"><i class="fa fa-dashboard"></i>新增</a>
+					<!--  -->
+					<a title="删除" class="btn btn-danger" ng-click="deleteAll()"><i class="fa fa-times-circle-o"></i> 删除</a>
+				</li>
+				<li class="li50">
+					<ul class="fd-header-ul-wrap fd-clear">
+					<li class="li50 fd-aligh-right"><input type="text" class="form-control fd-input-text" name="keyword" ng-model="searchCondition.keyword" placeholder="输入商户名称或编号"></li>
+					<li class="li50 fd-aligh-left"><button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button></li>
+					</ul>
+				</li>
+			</ul>
+    	</div>
+		<div class="box-body no-padding">
+			<table class="table table-hover text-center">
+				<thead class="fd-table-header">
+					<tr>
+						<th rowspan="2"><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+						<th rowspan="2">商户名称</th>
+                                                <th rowspan="2">所属上级</th>
+                                                <th rowspan="2">商户账号</th>                                                
+						<th rowspan="2">创立时间</th>
+						<th rowspan="2">分成比例</th>
+						<th rowspan="2">下级运营商数量</th>
+						<th colspan="2">合计</th>
+						<th colspan="2">{{Ym.time1}}</th>
+						<th colspan="2">{{Ym.time2}}</th>
+						<th colspan="2">{{Ym.time3}}</th>
+						<th rowspan="2">操作</th>
+					</tr>
+					<tr>
+						<th>订单数</th>
+						<th>成交额</th>
+						<th>订单数</th>
+						<th>成交额</th>
+						<th>订单数</th>
+						<th>成交额</th>
+						<th>订单数</th>
+						<th>成交额</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in list" class="list-animation">
+						<td><input type="checkbox" value="{{item.business_id}}" name="ids[]"></td>
+						<td>{{item.name}}</td>
+                                                <th>{{item.parent_name}}【{{item.title}}】</th>
+                                                <td>{{item.service_code}}</td>                                                
+						<td>{{item.business_intime}}</td>
+						<td>{{item.service_inrate}}</td>                                               
+						<td>{{item.userCount}}</td>
+						<td>{{item.all.orderCount}}</td>
+						<td>{{item.all.total_money}}</td>                                                
+						<td>{{item.time1.orderCount}}</td>
+						<td>{{item.time1.total_money}}</td>
+						<td>{{item.time2.orderCount}}</td>
+						<td>{{item.time2.total_money}}</td>
+						<td>{{item.time3.orderCount}}</td>
+						<td>{{item.time3.total_money}}</td>
+						<td>
+                                                    <button title="查看详情" class="btn btn-info btn-xs glyphicon glyphicon-search" ui-sref="basic-Business-view(item)"></button>
+                                                        <button class="btn btn-info btn-xs glyphicon glyphicon-edit" ng-click="openWindow(item,'tpl-manage.html')">管理</button>
+							<button class="btn btn-info btn-xs glyphicon glyphicon-edit" ng-click="openWindow(item,'tpl-update.html')"></button>
+							<button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="removeb(item.business_id)"></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="box-footer clearfix ">
+			<pagination num-pages="numPages" boundary-links="true" max-size="maxSize" ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+			<div class="pull-right ng-binding modv2-pageinfo">
+				<span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+			</div>
+		</div>
+	</div>
+</section>
+<style type="text/css">
+.modal-backdrop {
+	z-index: 999 !important;
+}
+
+.modal {
+	z-index: 1000 !important;
+}
+</style>
+
+<script type="text/ng-template" id="tpl-update.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">{{info.business_id?'编辑':'新增'}}</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal fd-edit-form" name="editBrand" ng-submit="submitAddForm(item?item:info)">
+            <div class="box-body">
+                <div class="form-group">
+                           <label for="creator" class="col-sm-2 control-label">企业名称</label>
+                           <div class="col-sm-10">
+                               <input type="text" class="form-control" id="comName" ng-model="info.name" required>
+                           </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">上级归属</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" ng-model="info.pid" id="pid" required>
+                            <option ng-repeat="b in bList" value="{{b.business_id}}" code="{{b.code}}" ng-selected="{{b.business_id==info.pid}}">{{b.name}}</option>
+                        </select>
+                                        
+                    </div>
+                </div>
+               <div class="form-group" ng-show="showii">
+                    <label for="cat" class="col-sm-2 control-label">手机号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="item.mobile" id="mobile">
+                    </div>
+                </div>
+                <div class="form-group" ng-show="showii">
+                    <label for="cat" class="col-sm-2 control-label">初始密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" ng-model="item.pwd" id="pwd" >
+                    </div>
+                </div>
+                <div class="form-group" ng-show="showii">
+                    <label for="cat" class="col-sm-2 control-label">确认密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control"  id="confirmPwd" ng-model="item.confirmPwd"> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">用户交易分成</label>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-1 control-label">买入</label>
+                    <div class="col-sm-3">
+                         <select ng-model="info.service_inrate" class="form-control" id="service_inrate" on-change>
+                            <option  value="">请选择</option>
+                            <option ng-repeat="per in percent" value="{{per}}" ng-selected="{{info.service_inrate==per}}">{{per}}</option>
+                        </select>                       
+                    </div>
+<!--                    <label for="cat" class="col-sm-1 control-label">卖出</label>
+                    <div class="col-sm-3">
+                        <select ng-model="info.service_outrate" class="form-control" id="service_outrate" on-change>
+                            <option  value="">请选择</option>
+                            <option ng-repeat="per in percent" value="{{per}}" ng-selected="{{per==info.service_outrate}}">{{per}}</option>
+                        </select>
+                    </div>-->
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit" ng-click='addSubmit()'>确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tpl-manage.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">合伙人管理</h3>
+    </div>
+    <h3>{{info.name}}({{info.service_code}})</h3>
+    <div class="modal-body">
+        <form class="form-horizontal fd-edit-form" name="editBrand" ng-submit="submitManage(item)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">新密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" ng-model="item.pwd" id="pwd" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">确认密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control"  id="confirmPwd" ng-model="item.confirmPwd" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">屏蔽该账户</label>
+                    <div class="col-sm-10" >
+                        <input type="checkbox"   value='{{info.status}}' ng-model="info.status" ng-checked="{{info.status==2}}" id="status">
+                    </div>
+                </div>
+        
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit" ng-click='manageSubmit()'>确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

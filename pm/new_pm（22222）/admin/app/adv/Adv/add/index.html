@@ -1,0 +1,87 @@
+<!-- header -->
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li ui-sref-active="active"><a href="#" ui-sref="news-Article-index"><i class="fa fa-dashboard"></i>广告管理</a></li>
+		<li class="active">{{$state.current.page.title}}</li>
+	</ol>
+</section>
+<!-- content -->
+<div class="modal-header">
+        <a title="返回" class="btn btn-success pull-right" href="javascript:history.go(-1);"><i class="fa fa-check-circle-o"></i> 返回</a>
+        <!-- <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button> -->
+        <h3 class="modal-title">编辑广告</h3>
+    </div>
+    
+    <div class="modal-body">     
+        <form class="form-horizontal" name="editUser" ng-submit="addSubmit(item)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="creator" class="col-sm-2 control-label">广告名称</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="creator" ng-model="item.adv_name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">所属广告位</label>
+                    <div class="col-sm-3">
+                        <select ng-model="item.pid" class="form-control" on-change>
+                            <option  value="">请选择</option>
+                            <option ng-repeat="cat in catList" value="{{cat.id}}" ng-selected="{{cat.id==item.pid}}">{{cat.name}}</option>
+                        </select>
+
+                    </div>
+                </div>                
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">排序</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="creator" ng-model="item.sort">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">广告链接</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="creator" ng-model="item.link_url">
+                    </div>
+                </div>
+                <div class="form-group">
+                     <label for="cat" class="col-sm-2 control-label">是否显示</label>
+                    <div class="col-sm-3">
+                            <label class="radio-inline"><input type="radio" class="form-element" ng-model="item.is_show" value="1"> 是</label>
+                            <label class="radio-inline"><input type="radio" class="form-element" ng-model="item.is_show" value="0"> 否</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="start_time" class="col-sm-2 control-label">开始时间</label>
+					<div class="col-sm-3">
+	                    <span class="input-group datepicker modv2-sel-warap" datepicker-click="start_time" style="width: 100%;">
+	                        <input type="hidden"  ng-model="item.start_time" />
+	                         <ung-datepicker ng-model="item.start_time" name="start_time" required readonly has-timepicker="true" format="yyyy/MM/dd HH:mm:ss"></ung-datepicker>  
+	                    </span>
+					</div>
+                </div>
+                <div class="form-group">
+                    <label for="end_time" class="col-sm-2 control-label">结束时间</label>
+					<div class="col-sm-3">
+	                    <span class="input-group datepicker modv2-sel-warap" datepicker-click="end_time" style="width: 100%;">
+	                        <input type="hidden"  ng-model="item.end_time" />
+	                        <ung-datepicker ng-model="item.end_time" name="end_time" required readonly has-timepicker="true" format="yyyy/MM/dd HH:mm:ss"></ung-datepicker>  
+	                    </span>
+					</div>
+                </div>
+                <div class="form-group">
+                    <label for="pic" class="col-sm-2 control-label fd-must">广告图片</label>
+                    <div class="col-sm-3">
+                        <web-uploader width="200" ng-model="item.adv_pic" file-num-limit="5">
+                            <input type="hidden" ng-model="item.adv_pic" />
+                        </web-uploader>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-3">
+                            <button class="btn btn-success" type="submit" ng-disabled="addForm-crowd.$invalid">确定</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>

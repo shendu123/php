@@ -1,0 +1,160 @@
+<!-- header -->
+<section class="content-header">
+    <ol class="breadcrumb">
+    	<li ui-sref-active="active"><i class="fa fa-dashboard"></i>运营商管理</li>
+        <li class="active">{{$state.current.page.title}}</li>
+    </ol>
+</section>
+<!-- content -->
+<section class="content slide" >
+    <div class="box" senior-table="BusinessService" page-size="15" added-reload="false">
+        <div class="box-header">
+            <form class="form-inline pull-right">
+                <input type="text" class="form-control fd-input-text" name="keyword" ng-model="searchCondition.keyword" placeholder="企业名称/联系人/手机号">
+                <button class="btn btn-default" ng-click="searchInfo()"><i class="fa fa-search"></i> 搜索</button>
+            </form>
+        </div>
+        <div class="box">
+            <a title="新增" class="btn btn-primary" ui-sref="basic-{{sysid == 1 ? 'Business' : 'Businesscompany'}}-add"><i class="fa fa-plus-circle"></i> {{sysid == 1 ? '新增' : '添加下级'}}</a>
+            <a ng-show= 'sysid == 1' title="删除" class="btn btn-danger" ng-click="deleteAll()"><i class="fa fa-times-circle-o"></i> 删除</a>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-hover text-center">
+				<thead>
+					<th><input type="checkbox" id="checkall" onclick="fdCheckAll()"></th>
+					<th>编号</th>
+					<th>运营商名称</th>
+					<th>店铺账号</th>
+                    <th>开店起止时间</th>
+					<th>运营商状态</th>
+					<th>店铺经营状况</th>
+                    <th>推荐</th>
+                    <th>排序</th>
+					<th>店铺状态</th>                                        
+					<th>操作</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in list" class="list-animation">
+						<td><input type="checkbox" value="{{item.business_id}}" name="ids[]"></td>
+						<td>{{$index+1}}</td>
+                        <td class="fd-merge" style="text-align: left;">
+                            <p>运营商名称：{{item.name}}</p>
+                            <p>运营商id：{{item.business_id}}</p>
+                            <p>{{item.business_level}}</p>
+                        </td>
+						<td>
+                            {{item.business_account}}
+                        </td>
+                        <td>
+                            <p>开店起始时间：{{item.business_starttime}}</p>
+                            <p>开店结束时间：{{item.business_endtime}}</p>
+                        </td>
+						<td>{{item.business_check_status}}</td>
+						<td class="fd-merge"  style="text-align: left;">
+                            <p>关注数：{{item.business_attention_count}} &nbsp;&nbsp;&nbsp;&nbsp;推荐会员数：{{item.recommend_member_count}}</p>
+
+                            <p>订单数：{{item.order.order_count}} &nbsp;&nbsp;&nbsp;&nbsp;订单总金额：{{item.order.order_total_price}}</p>
+                       
+                            <p>佣金比例：{{item.business_broker}}</p>
+                        </td>
+						<td><input type="checkbox" ng-checked="{{item.business_is_recommend==1}}"  ng-click="changeStatus(item.business_id,'business_is_recommend',$event)"></td>
+						<td style="text-align:-webkit-center;"><input class="form-control" style='width:50px;' type="nunber" value="{{item.business_sort}}" ng-blur="changeSort(item.business_id,$event)"></td>
+                        <td>
+                            <p>店铺状态：<label class="checkbox-inline"><input type="checkbox" ng-checked="{{item.status==1}}"  ng-click="changeStatus(item.business_id,'status',$event)">{{item.status_tag}}<label></p>
+                            <p>商品显示：<label class="checkbox-inline"><input type="checkbox" ng-checked="{{item.business_allow_goods_show==1}}"  ng-click="changeStatus(item.business_id,'business_allow_goods_show',$event)">{{item.business_allow_goods_show_tag}}</label></p>
+                            <p>店铺显示：<label class="checkbox-inline"><input type="checkbox" ng-checked="{{item.business_allow_show==1}}"  ng-click="changeStatus(item.business_id,'business_allow_show',$event)">{{item.business_allow_show_tag}}</label></p>
+                        </td>
+						<td>
+							<button title="查看" class="btn btn-info btn-xs glyphicon glyphicon-search" ui-sref="basic-Business-view({business_id: '{{item.business_id}}'})"></button>
+							<button ng-show="sysid==1" title="编辑" class="btn btn-info btn-xs glyphicon glyphicon-edit" ui-sref="basic-Business-edit({business_id: '{{item.business_id}}'})"></button>
+                            <button ng-show="sysid==1" title="审核" class="btn btn-info btn-xs glyphicon glyphicon-check" ui-sref="basic-Business-check({com_id: '{{item.business_company_id}}',business_id:'{{item.business_id}}'})"></button>
+							<button ng-show="sysid==1" title="付款" class="btn btn-info btn-xs glyphicon glyphicon-print" ng-click="openWindow(item,'tpl-pay.html')"></button>
+                            <button ng-show="sysid==1" title="删除" class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" ng-click="removeb(item.business_id)"></button>  
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="box-footer clearfix ">
+			<pagination num-pages="numPages" boundary-links="true" max-size="maxSize" ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination pull-right no-margin" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+			<div class="pull-right ng-binding modv2-pageinfo">
+				<span class="modv2-pagecur"> {{currentPage}} </span> / {{numPages}} 页 | 共 {{ totalItems }} 条
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/ng-template" id="tpl-pay.html">
+    <div class="modal-header">
+        <button aria-label="close" data-dismiss="modal" class="close" type="button" ng-click="cancel()"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title">添加付款</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal fd-edit-form" name="editMember" ng-submit="paySubmit(item)">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">金额</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="item.money">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">付款类型</label>
+                    <div class="col-sm-10">
+                        <label class="radio-inline"><input type='radio'  ng-model='item.type' value='1'>保证金</label>
+                        <label class="radio-inline"><input type='radio'  ng-model='item.type' value='2'>平台使用费</label>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">开店时长</label>
+                    <div class="col-sm-10">
+                        <select ng-model="item.store_time" class="form-control" required">
+                            <option  value="3个月">3个月</option>
+                            <option  value="1年">1年</option>
+                            <option  value="2年">2年</option>
+                            <option  value="3年">3年</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">付款方式</label>
+                    <div class="col-sm-10">
+                        <select ng-model="item.pay_type" class="form-control" required">
+                            <option  value="1">银联</option>
+                            <option  value="2">支付宝</option>
+                            <option  value="3">微信</option>
+                            <option  value="4">余额</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">付款时间</label>
+                    <div class="col-sm-10">
+                        <div class="input-group datepicker modv2-sel-warap" style="width: 100%;">
+                            <ung-datepicker ng-model="item.pay_time" name="pay_time" required readonly has-timepicker="true" format="yyyy/MM/dd HH:mm:ss"></ung-datepicker>                        
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">付款状态</label>
+                    <div class="col-sm-10">
+                        <label class="radio-inline"><input type="radio" name="inlineRadioOptions" ng-model='item.pay_status' value='0'> 未付款</label>
+                        <label class="radio-inline"><input type="radio" name="inlineRadioOptions" ng-model='item.pay_status' value='1'> 已付款</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat" class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="item.remark">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">确定</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>        
+</script>
