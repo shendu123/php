@@ -18,7 +18,7 @@
 
 3)、未登录加入购物车：未登录时通过往cart表中插入sessionid来标识是哪个用户加入的购物车，当此用户登录后，根据cart表中的sessionid，把cart表中的用户id改为登录的用户id
 
-4）购物车、下单、支付逻辑
+4）购物车、下单、支付逻辑、库存
    购物车实现：
 		（1）、获取商品详情页表单中的数据，ajax序列化提交到ajaxAddCart进行处理，如goods_id,goods_num,选中的规格（以键为规格名，值为规格值id的数组）如：
 			<input type="radio"  rel="16G" name="goods_spec[内存]" value="13" checked="checked">
