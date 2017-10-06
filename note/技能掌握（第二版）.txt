@@ -33,16 +33,32 @@
 	
 五、sphix、coreseek （全文检索引擎）
 	1、适用场景：
-		1）当sql全文检索，like查询速度比较慢的时候
+		1）当sql全文检索，like全表查询速度比较慢的时候
 		2)中文分词
 	2、原理：
 		1）流程图：Database(数据源)->Indexer(创建/更新索引)->searched(搜索)->客户端	
-		2）搜索之前先建立数据源，然后indexer添加/更新索引，用户搜索的时候，触发searched,	
+		2）Sphinx的整个工作流程就是Indexer程序到数据库里面提取数据，对数据进行分词，然后根据生成的分词生成单个或多个索引，并将它们传递给searchd程序。然后客户端可以通过API调用进行搜索。
+	3、php中使用sphinx：
+		1）php先把要搜索的sql发给shpinx服务器，sphinx返回记录的id,php再用这个id去查询数据库
+	4、sphinxse：把sphinx当成插件编译到mysql中去，成为mysql的一部分	
+	5、主索引、增量索引、实时索引（因为有数据不断插入与修改，所以要实时更新索引，可以用sphinxRt,一个实时索引的api，rt是real time的简写）
 
 六、lvs+keepalive 、nginx+keepalive
 
-七、网站安全问题：sql注入、xss攻击 、csrf攻击
 
+
+七、网站安全问题：xss攻击 、csrf攻击 、sql注入
+	1、xss攻击:
+		1)定义：跨站脚本（Cross-site scripting，通常简称为XSS）是一种网站应用程序的安全漏洞攻击，是代码注入的一种。它允许恶意用户将代码注入到网页上，其他用户在观看网页时就会受到影响。这类攻击通常包含了HTML以及用户端脚本语言。
+		2）通俗解释：通过客户端脚本语言（最常见如：JavaScript）在一个论坛发帖中发布一段恶意的JavaScript代码就是脚本注入，如果这个代码内容有请求外部服务器，那么就叫做XSS！
+		3）防御方法：
+			（1）、前端提交的代码进行过滤（如：php中的htmlentities()或htmlspecialchars()）
+	2、csrf攻击：
+		1）定义：跨站请求伪造（英语：Cross-site request forgery），通常缩写为 CSRF 或者 XSRF，是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。
+		2）通俗解释：冒充用户发起请求（在用户不知情的情况下）,完成一些违背用户意愿的请求（如恶意发帖，删帖，改密码，发邮件、银行转账等）。
+		3）防御方法：
+			（1）、验证码
+			（2）、token令牌,（服务器端生成token,赋值到前端隐藏表单，然后提交表单token与服务器token比对）
 
 
 八、秒杀团购用到了哪些知识点
