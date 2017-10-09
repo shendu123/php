@@ -81,6 +81,16 @@
 		3）防御方法：
 			（1）、验证码
 			（2）、token令牌,（服务器端生成token,赋值到前端隐藏表单，然后提交表单token与服务器token比对）
+	3、sql注入
+	
+ 		1）方式
+			（1）单引号、or
+			（2）union
+	 		 (3)/*（注释符），如用户名与密码登录时把密码注释掉，直接通过用户名后面加/*登录，（拼接的sql语句如：username = 'test' /* and password）
+ 		2）解决方式
+			（1）在php.ini文件中把magic_quotes_gpc设为on （单引号被加入\转义）
+	 		 (2)PDO （php data object） 预处理，sql语句变量用？代替，后面处理的时候再传入真实数据 （如：username=? and pwd=?,然后pdo执行excute([$username,$pwd])方法）
+			（3）addslashes过滤
 
 
 八、秒杀团购用到了哪些知识点
