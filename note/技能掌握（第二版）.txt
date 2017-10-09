@@ -43,7 +43,29 @@
 	4、sphinxse：把sphinx当成插件编译到mysql中去，成为mysql的一部分	
 	5、主索引、增量索引、实时索引（因为有数据不断插入与修改，所以要实时更新索引，可以用sphinxRt,一个实时索引的api，rt是real time的简写）
 
+
+
 六、lvs+keepalive 、nginx+keepalive
+	1、lvs：
+		1）LVS是一个开源的软件，可以实现LINUX平台下的简单负载均衡。LVS是Linux Virtual Server的缩写，意思是Linux虚拟服务器。目前有三种IP负载均衡技术（VS/NAT、VS/TUN和VS/DR）；工作在网络第五层（传输层）！
+	2、keepalive：
+		1）keepalived是集群管理中保证集群高可用的防止单点故障一个服务软件，以VRRP协议为实现基础的，VRRP全称Virtual Router Redundancy Protocol，即虚拟路由冗余协议
+		2）虚拟路由冗余协议，可以认为是实现路由器高可用的协议，即将N台提供相同功能的路由器组成一个路由器组，这个组里面有一个master和多个backup，master上面有一个对外提供服务的vip（virtual_ipaddress虚拟ip）（该路由器所在局域网内其他机器的默认路由为该vip），master会发组播，当backup收不到vrrp包时就认为master宕掉了，这时就需要根据VRRP的优先级来选举一个backup当master。这样的话就可以保证路由器的高可用了
+		3）keepalived主要有三个模块，分别是core、check和vrrp。core模块为keepalived的核心，负责主进程的启动、维护以及全局配置文件的加载和解析。check负责健康检查，包括常见的各种检查方式。vrrp模块是来实现VRRP协议的
+		4）priority 用来选举master的，要成为master，那么这个选项的值最好高于其他机器50个点，该项取值范围是1-255（在此范围之外会被识别成默认值100）
+    	3、lvs+keepalive：	
+		1）Keepalived 是运行在lvs 之上，它的主要功能是提供健康检查、实现真实机的故障隔离及负载均衡器间的失败切换，提高系统的可用性	
+		2）LVS+keepalived能很好的实现负载均衡技术、系统高可用性，LVS提供负载均衡，keepalived提供健康检查，故障转移，提高系统的可用性！采用这样的架构以后 很容易对现有系统进行扩展，只要在后端添加或者减少realserver，只要更改lvs的 配置文件，并能实现无缝配置变更！
+    	4、nginx+keepalive主从切换
+		1）原理：keepalive启动时加载配置文件中vrrp_script模块一个监控nginx状态的脚本，keepalive根据此脚本得出nginx状态，如果nginx不正常，则尝试恢复启动nginx，如果keepalive最终仍不能恢复NginX则杀掉keepalived，使得从服务器能够接管服务。
+		2）步骤：
+			（1）两台nginx服务器，一主一从，主从服务器上都安装keepalive，进行相关配置（如：虚拟ip）并启动
+			（2）如果主服务器的keepalived停止服务，从服务器会自动接管VIP对外服务；一旦主服务器的keepalived恢复，会重新接管VIP
+		3）如何监控NginX的状态：最简单的做法是监控NginX进程，更靠谱的做法是写监控脚本检查NginX端口
+		4）让keepalived监控NginX的状态，当NginX主服务器停止服务的时候能够自动切换到从服务器上，实现nginx高可用！
+				
+    	5、lvs+keepalive 与 nginx+keepalive区别
+		1）lvs是第四层（传输层，也叫ip层）负载均衡，nginx是第七层（应用层）负载均衡	
 
 
 
