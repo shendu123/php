@@ -91,6 +91,9 @@
 			（1）在php.ini文件中把magic_quotes_gpc设为on （单引号被加入\转义）
 	 		 (2)PDO （php data object） 预处理，sql语句变量用？代替，后面处理的时候再传入真实数据 （如：username=? and pwd=?,然后pdo执行excute([$username,$pwd])方法）
 			（3）addslashes过滤
+		3）危害：
+			（1）暴露库，暴露表
+			（2）传参的数据里面写sql，执行增删改查操作数据库给数据库带来损失
 
 
 八、秒杀团购用到了哪些知识点
