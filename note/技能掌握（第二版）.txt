@@ -70,7 +70,7 @@
 
 六、lvs+keepalive 、nginx+keepalive
 	1、lvs：
-		1）LVS是一个开源的软件，可以实现LINUX平台下的简单负载均衡。LVS是Linux Virtual Server的缩写，意思是Linux虚拟服务器。目前有三种IP负载均衡技术（VS/NAT、VS/TUN和VS/DR）；工作在网络第五层（传输层）！
+		1）LVS是一个开源的软件，可以实现LINUX平台下的简单负载均衡。LVS是Linux Virtual Server的缩写，意思是Linux虚拟服务器。目前有三种IP负载均衡技术（VS/NAT、VS/TUN和VS/DR）；工作在网络第四层（传输层）！
 	2、keepalive：
 		1）keepalived是集群管理中保证集群高可用的防止单点故障一个服务软件，以VRRP协议为实现基础的，VRRP全称Virtual Router Redundancy Protocol，即虚拟路由冗余协议
 		2）虚拟路由冗余协议，可以认为是实现路由器高可用的协议，即将N台提供相同功能的路由器组成一个路由器组，这个组里面有一个master和多个backup，master上面有一个对外提供服务的vip（virtual_ipaddress虚拟ip）（该路由器所在局域网内其他机器的默认路由为该vip），master会发组播，当backup收不到vrrp包时就认为master宕掉了，这时就需要根据VRRP的优先级来选举一个backup当master。这样的话就可以保证路由器的高可用了
@@ -88,7 +88,7 @@
 		4）让keepalived监控NginX的状态，当NginX主服务器停止服务的时候能够自动切换到从服务器上，实现nginx高可用！
 				
     	5、lvs+keepalive 与 nginx+keepalive区别
-		1）lvs是第四层（传输层，也叫ip层）负载均衡，nginx是第七层（应用层）负载均衡	
+		1）lvs是第四层（传输层）负载均衡，nginx是第七层（应用层）负载均衡
 
 
 
