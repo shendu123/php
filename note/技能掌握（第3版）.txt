@@ -1,0 +1,14 @@
+一、cgi、fastCgi、php-fpm
+	1、cgi
+		1)、CGI是Common Gateway Interface（公共网关接口）的缩写。解析动态数据（如：php）的一个协议
+		2）、缺点：每请求一个php脚本，就要开启一个php-cgi进程，耗内存与cpu，影响性能。
+	2、fastCgi
+		1)顾名思义为更快的 CGI，它允许在一个进程内处理多个请求
+		2）工作原理：fastCgi启动一个master进程，解析配置文件，初始化执行环境，然后再启动多个 worker。当请求过来时，master 会传递给一个 worker，然后立即可以接受下一个请求。这样就避免了重复的劳动，master负责接收请求，worker负责处理请求
+	3、php-fpm
+		1)专门为php打造的fastCGI process manager（PHP的fastCGI管理器）nginx使用这些php-fpm进程来和PHP进行通信，你可以把php-fpm理解为php解释器
+		2）php-cgi与php-fpm对比
+			（1）php-cgi实现了cig协议，php-fpm实现了fastCgi协议
+			（2）php-fpm能够平滑重启（不影响网站正常运行）php环境配置（如：我们知道在修改了php.ini之后，wamp和phpstudy需要重启服务器才能重新加载php.ini里的内容。如果是php-fpm，则不用重启web服务器，原先正在工作的php-fpm继续工作，等原先工作的php-fpm完成自己的工作后，就结束掉自己。新增加的php-fpm就使用修改后的php.ini即可
+
+）
