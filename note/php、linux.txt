@@ -1,0 +1,41 @@
+一、php杂项、函数：
+	1、杂项
+		1）php加密方式：1. MD5加密、2. Crypt加密、3. Sha1加密 
+		2）为什么对数组进行序列化serialize($arr)？
+			(1)在网络传输的时候保证数据类型不丢失。	
+		3）驼峰字符串转换成下划线方法：
+			（1）、ASCII码来处理，
+				一、A-Z对应的ASCII码为65-90
+				二、a-z对应的ASCII码为97-122
+			（2）、正则表达式
+				一、strtolower(preg_replace('/((?<=[a-z])(?=[A-Z]))/', '_', $str))
+		4）http错误代码含义：301（永久重定向）302（临时重定向）400（错误的请求）401（未授权）403（禁止访问forbidden）404（未找到网页not found） 500(服务器内部程序代码错误)  502（错误网关bad gateway）503（服务不可用）504（网关超时time out）
+		5）GD库是做什么用的？	
+			（1）生成图片（如：生成缩略图）
+			（2）处理图片（如：对图片加水印）
+	2、函数
+		1）number_format()：金额每三位加逗号
+		2）array_slice() 函数在数组中根据条件取出一段值，并返回。（从数组中移除元素，并用新元素取代它）
+		3）strlen()获取字符串长度
+		4）strpos（） （string position简写）返回第二个字符串在第一个字符串第一次出现的位置，第一个字符位置算0，所以判断要写!==false
+		5）strrchr() 函数查找字符串在另一个字符串中最后一次出现的位置，并返回从该位置到字符串结尾的所有字符
+		   strstr()  函数搜索一个字符串在另一个字符串中第一次出现的位置	
+
+
+二、linux
+	1、命令（可以参考：http://www.cnblogs.com/peida/archive/2013/03/15/2960802.html，每天一个linux命令）
+		1）su:  switch user 切换用户
+		2）ps： Process Status进程状态（如：ps -aux|grep mysql）
+		3) df:  Disk free磁盘剩余空间
+		4）du   Disk Usage磁盘使用情况
+		5）scp  secure copy远程拷贝文件的命令（如：从远程复制到本地：scp root@192.168.120.204:/opt/soft/nginx-0.5.38.tar.gz    /opt/soft/）
+		6）rsync 远程数据同步工具
+			（1）与scp区别
+				一、scp是把文件全部复制过去，当文件修改后还是把所有文件复制过去，rsync 第一次是把所有文件同步过去，当文件修改后，只把修改的文件同步过去，rsync只对差异文件做更新，增量同步。
+				
+		7) wget  命令行下载文件的工具（如：wget http://www.minjieren.com/wordpress-3.1-zh_CN.zip）
+		8）rz   上传工具（运行该命令会弹出一个文件选择窗口，从本地选择文件上传到Linux服务器）
+		9）sz	下载工具（将选定的文件发送到本地机器）	
+		10）chown: Change owner改变文件拥有者
+		11）chmod: Change mode  改变文件或目录权限 （如：chmod -R 777 /usr/local/web，-R文件夹递归遍历子目录）
+		12）wc 	   Word Count文件字数

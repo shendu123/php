@@ -90,8 +90,26 @@
 		（6）、在什么列上添加索引比较合适
 			一、在经常查询的列上加索引.
 			二、列的数据，内容就只有少数几个值,不太适合加索引（比如：status）
-			三、内容频繁变化，不适合加索引（因为更新表时也要更新索引）	
-		（7）：缺点：降低了增删改的速度.
+			三、内容频繁变化，不适合加索引（因为更新字段数据时也要更新索引）	
+		（7）索引缺点：降低了增删改的速度.
+		（8）索引常用操作：
+			一、查看索引：show index from tablename;
+			二、分析索引（explain）：explain select * from a where a_id > 1 \G       （\G表示纵向显示信息）
+	2）sql语句优化
+		（1）避免全表查询
+		（2）不要在sql语句中使用mysql函数，因为这将导致引擎放弃使用索引而进行全表扫描
+		（3）使用连接（JOIN）来代替子查询(Sub-Queries)
+	3）表设计优化：
+		（1）核心常用字段放一张表（如：商品主表），不常用字段放另外一张表（如：商品详情表、商品图片表），两张表进行关联
+		（2）合理选择字段类型（能用tinyint就不要用int）,因为大的字段浪费内存，影响速度
+		（3）尽量避免用NULL: NULL不利于索引,null用索引比非null用索引占据更大磁盘空间.	
+		
+	4）清除表空间碎片  （optimize table 表名）
+		（1）碎片产生的原因
+			一、表的存储会出现碎片化，每当删除了一行内容，该段空间就会变为空白、被留空，而在一段时间内的大量删除操作，会使这种留空的空间变得比存储列表内容所使用的空间更大；
+			二、当执行插入操作时，MySQL会尝试使用空白空间，但如果某个空白空间一直没有被大小合适的数据占用，仍然无法将其彻底占用，就形成了碎片；
+
+	
 			
    3、mysql存储引擎、存储过程、视图、触发器	
 	1)存储引擎：
@@ -105,7 +123,7 @@
 			六：MyISAM不支持外键，	InnoDB支持外键（外键：一个表的外键是另一个表的主键）
 			七：存储空间：MyISAM：可被压缩，存储空间较小。支持三种不同的存储格式：静态表(默认，但是注意数据末尾不能有空格，会被去掉)、动态表、压缩表。
 				      InnoDB：需要更多的内存和存储，它会在主内存中建立其专用的缓冲池用于高速缓冲数据和索引
-		（2）MEMORY存储引擎：数据存储在内存中，断电数据会丢失
+		（2）MEMORY存储引擎：数据存储在内存中，断电数据会丢失。默认是hash索引。
 		（3）merge存储引擎：简单管理动态日志表（比如：把不同的月份放在不同的表上）、分表	
 	2)存储过程：
 		(1)存储过程概念类似于函数,就是把一段代码封装起来,当要执行这一段代码的时候,可以通过调用该存储过程来实现.在封装的语句体里面,可以用if/else, case,while等控制结构.可以进行sql编程.
@@ -142,14 +160,71 @@
 	3）集群：主从复制无法做到高可用，因为如果主挂了，从只能提供读，不能提供写，集群可以高可用，一台服务器宕机了，另一台完全可以提供服务
 	4）集群与主从复制（replication）区别：集群时数据是共享的，主从复制时数据是完全独立在服务器上的				   		
 	   集群与分布式区别：集群是多个服务器完成同一个业务，某个服务器宕机，业务不受影响。
-			     分布式是一个业务分布在多个服务器上，只要其中的一个服务器出故障，业务就会受到影响	
+			     分布式是一个业务分布在多个服务器上，只要其中的一个服务器出故障，业务就会受到影响
 
 
 
-三、redis、memcache知识点整理
+   5、其它
+	1）mysqld意思是mysql daemon，在后台运行的服务器，监听3306端口，mysql是一个客户端软件，可以对任何主机的mysql服务（即后台运行的mysqld）发起连接。		
+	2）mysql导入导出sql文件：
+		(1）导出：mysqldump -u 用户名 -p 数据库名 > 导出的文件名
+                          mysqldump -u dbuser -p dbname > dbname.sql
+		(2）导入：mysql>     source d:/dbname.sql
+	3）SQL 分类：
+		（1）DDL（Data Definition Languages）语句：数据定义语言。常用的语句关键字主要包括 create、drop、alter等。
+		（2）DML（Data Manipulation Language）语句：数据操纵语言。常用的语句关键字主要包括 insert、delete、udpate 和select 等。(增添改查）
+		 (3) DCL（Data Control Language）语句：数据控制语句。定义了数据库、表、字段、用户的访问权限和安全级别。主要的语句关键字包括 grant、revoke 等。	
+	4）授权（grant）与撤消权限（revoke）
+		（1）grant语法： grant 权限 on 数据库对象 to 用户  (如果用户不存在，则 grant 权限 on 数据库对象 to 用户 identified by 密码;)
+			一、grant add,update on testdb.* to common_user@'%'，给用户授予添加、修改的权限，testdb.*表示testdb下所有的表，%表示所有ip
+			二、grant all on *.* to dba@'localhost'  identified by '123456'添加用户dba并授予mysql中所有数据库的权限（只能在localhost下）
+		（2）查看权限：show grants;  查看其他 MySQL 用户权限：show grants for dba@localhost;
+		（3）revoke语法：revoke 权限 on 数据库对象 from 用户
+			一、revoke语法与grant相似,grant是to，revoke是from
+		（4）注意：grant, revoke 用户权限后，该用户只有重新连接 MySQL 数据库（或flush privileges），权限才能生效。
+		（5）flush privileges刷新权限
+			一、本质上的作用是将当前user和privilige表中的用户信息/权限设置从mysql库(MySQL数据库的内置库)中提取到内存里。
+			二、两种情况下需要刷新权限：1、授权或取消授权。2、修改mysql用户密码（如：update user set Password = PASSWORD where User ='root'）。
+		（6）mysql授权表：共有5个表：user、db、host、tables_priv和columns_priv。
+			一、user表：用户表，user表启用的任何权限均是全局权限，并适用于所有数据库。例如，如果你启用了DELETE权限，在这里列出的用户可以从任何表中删除记录
+			二、db表：db表列出数据库，而用户有权限访问它们。在这里指定的权限适用于一个数据库中的所有表。
+			三、host表：host表与db表结合使用在一个较好层次上控制特定主机对数据库的访问权限，这个表不受GRANT和REVOKE语句的影响
+			四、tables_priv表：tables_priv表指定表级权限，在这里指定的一个权限适用于一个表的所有列。
+			五、columns_priv表：columns_priv表指定列级权限。这里指定的权限适用于一个表的特定列。
+		（7）mysql_install_db脚本初始化权限表
+	5）mysql启动方式：
+		（1）mysql_safe：是shell脚本启动，检测mysqld进程是否启动。如果mysqld没启动或挂了，会尝试重启mysqld
+		（2）mysql.server：也是shell脚本启动，其实也是调用了mysql_safe，调用顺序：mysql.server->mysql_safe->mysqld
+		（3）service mysql start：  复制mysql进程到/etc/init.d/mysql  	直接调用mysqld(进程启动)
+		（4）到mysql目录下直接启动mysql进程
+	6）注意：无论什么服务启动，只要是以service方式启动的，都是把启动进程复制到etc/init.d/目录）
+	7）Mysql有两种连接方式：（http://blog.csdn.net/u011249920/article/details/52100761）
+		（1）TCP/IP
+			一、127.0.0.1则是使用tcp来连接    mysql -h 127.0.0.1 -u root -p
+		（2）socket
+			一、localhost默认是使用sock连接,
+	8)mysql.socket：  
+		（1）作用：socket方式连接mysql,服务器与本地客户端进行通信的Unix套接字文件，如果文件被删，则localhost下的用户无法连接到mysql服务器
+		（2）mysql启动时会产生mysql.socket文件，如果文件被删，重启时又会生成该文件，如果没有，则用tcp连接mysql				
+			
 
-		1、redis
-		   1）基本使用
+
+三、NoSql数据库
+	1、mongodb
+		1）mongodb与mysql区别：
+			（1）MySQL是传统的关系型数据库，MongoDB则是非关系型数据库，也叫文档型数据库，是一种NoSQL的数据库。json风格，key，value方式存储。由于Mysql的读写速度会有一点瓶颈，于是我们就想到了最近发展很强势的Nosql，
+			（2）关系型数据库：数据库的每个表都可以有关联。一对多，多对多，一对一的关系。还有就是二维的，行，列。	
+		2） mongodb与mysql相比优缺点
+			（1）优点：1、访问速度更快.2、文档结构的存储方式，能够更方便获取数据3、支持大容量的存储	
+			（2）缺点：1、不支付事务
+
+
+
+
+四、redis、memcache知识点整理
+
+	1、redis
+		1）基本使用
 			（1）redis不仅是缓存服务器，还是存储服务器，因为其具有持久化的特点
 			（1）一个redis进程,打开了不止一个数据库, 默认打开16个数据库,从0到15编号
 			（2）事务：与mysql事务不一样，没有回滚，只有discard（取消），如果前两句执行成功，第三句失败，前两名造成的影响还存在
@@ -158,23 +233,34 @@
 			（5）恢复时rdb和aof哪个恢复的快？：db快,因为其是数据的内存映射,直接载入到内存,而aof是命令,需要逐条执行	
 			（6）aof重写是指什么?aof重写是指把内存中的数据,逆化成命令,写入到新的aof日志里。以解决 aof日志过大的问题.
 
-		   2）rdb与aof对比优缺点：
+		2）rdb与aof对比优缺点：
 			（1）rdb优点：
 				一、恢复数据快
 				二、可以最大化redis的性能，父进程只需要fork出子进程，让子进程处理所有的读写保存工作，父进程无需IO操作
 			（2）rdb缺点：如果服务器出故障，没有达到rdb配置时间的数据不能生成快照会丢失（达到时间了才会生成快照）
 			（3）aof缺点：比较慢，访问压力大时IO会成为性能瓶颈，进而导致服务不可用	
-		   3）redis主从：
+		3）redis主从：
 			（1）：缺陷:当主服务器挂了，因为从服务器只能读不能写，	所以还是不能提供服务
 			（2）：解决办法：redis sentinel（redis哨兵，监控） 可以将从服务器升级为主服务器，或者用集群
-		   4）redis集群
-			（1）：	集群没有主从之分，这个宕机了另一个可以立即提供服务								 	
+		4）redis集群
+			（1）：	集群没有主从之分，这个宕机了另一个可以立即提供服务
+		5) 基础知识
+			（1）：Redis支持五种数据类型：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。
+			（2）：有序集合和集合一样也是string类型元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。
+			（2）list常用命令
+				一、lpush：由列表头部添加字符串值（返回值：成功返回数组长度，失败false）
+				二、rpush：由列表尾部添加字符串值（返回值：成功返回数组长度，失败false）
+				三、lpop：返回和移除列表的第一个元素(返回值：成功返回第一个元素的值 ，失败返回false)
+				四、llen：返回的列表的长度。
+			（3）zset常用命令
+				一、Zrangebyscore：通过分数返回有序集合指定区间内的成员（如：ZRANGEBYSCORE key min max）
+				二、Zadd：向有序集合添加一个或多个成员，或者更新已存在成员的分数（如：ZADD key score1 member1 [score2 member2]）			 				三、zcard 返回存储在key对应的有序集合中的元素的个数 	（如：zcard key）
 
 		   
-		2、memcache
-		   1)基本使用
-		     （1）memcache依赖于libevent库，所以需要先安装libevent。
-		     （2）启动：/usr/local/bin/memcached  -m 256  -p 11211 -u root -d   -l 192.168.1.101 -c 50000 -t 8	-f 2
+	2、memcache
+		1)基本使用
+		     	（1）memcache依赖于libevent库，所以需要先安装libevent。
+		     	（2）启动：/usr/local/bin/memcached  -m 256  -p 11211 -u root -d   -l 192.168.1.101 -c 50000 -t 8	-f 2
 			  参数说明：
 				（一）、-m 分配给该memcached的内存大小，以MB为单位。（默认：64MB）
 				（二）、-p 监听的TCP端口(默认: 11211)
@@ -186,21 +272,21 @@
 				（八）、-f 不同slab class里面的chunk大小的增长倍率(增长因子)。（默认：1.25）
 				 (八)、-vvv超详细信息（还打印内部状态的变化）
 				（九）、-h 帮助信息
-		      （3）客户端连接工具：telnet
-		      （4）命令：add、replace（替换）、get、delete、set(相当于add与replace两者合用)、incr（增加)、decr(减少)、stats(统计)、flush_all(清空所有储存对象)
-		      （5）内存管理:
+		      	（3）客户端连接工具：telnet
+		      	（4）命令：add、replace（替换）、get、delete、set(相当于add与replace两者合用)、incr（增加)、decr(减少)、stats(统计)、flush_all(清空所有储存对象)
+		      	（5）内存管理:
 				（一）、内存碎片化：不断申请不断释放内存时形成的小内存片断无法利用造成的浪费
 				（二）、slab allocator机制缓解内存碎片化：把内存划分成数个slab allocator仓库，各仓库再切分成不同的尺寸的小块（chunk）,需要存内容时，判断内容的大小，选择合理的仓库	
 				（三）、固定大小的chunk造成的内存浪费怎么解决：在连接memcache时，通过-f参数，设置合理的增长因子（grow factor）来缓解
-		      （6）过期数据惰性删除：过期后并没有从内存中删除，	get获取数据的时候才从内存删除，好处：节省检测成本
-		      （7）lru删除机制：least recently used(最近最少使用)，有限的内存空间，最少使用的就被删除，旧数据被踢出		
-		   2）分布式集群算法：
-			（1）取模算法： 缺点：服务器增加或删除的时候命中率会受影响，down机厉害
-			 (2) 一致性hash算法：服务器越多，命中率越高
-		   3）缓存雪崩
-			 （1）原因：一般是由某个缓存节点失效，导致其它节点的缓存命中率下降，缓存中缺失的数据去数据库查询，短时间内，造成数据库服务器崩溃
-			 （2）解决办法：根据不同节点设置不同的缓存失效时间，随机3到9小时的生命周期，把工作分担到不同的时间点上，最好是晚上更新缓存，因为晚上访问量小		
-		3、memcache与redis区别
-		   1）memcache是多线程（利于并发），redis是单线程
-		   2）Redis存储的数据类型更多，不仅仅支持简单的k/v类型的数据，同时还提供list，set，hash等数据结构的存储
-		   3）memcache把数据保存在内存中，如果断电，数据全没了；redis可以定期保存到磁盘（持久化）
+		      	（6）过期数据惰性删除：过期后并没有从内存中删除，	get获取数据的时候才从内存删除，好处：节省检测成本
+		      	（7）lru删除机制：least recently used(最近最少使用)，有限的内存空间，最少使用的就被删除，旧数据被踢出		
+		2）分布式集群算法：
+		      	（1）取模算法： 缺点：服务器增加或删除的时候命中率会受影响，down机厉害
+		       	 (2) 一致性hash算法：服务器越多，命中率越高
+		3）缓存雪崩
+		      	（1）原因：一般是由某个缓存节点失效，导致其它节点的缓存命中率下降，缓存中缺失的数据去数据库查询，短时间内，造成数据库服务器崩溃
+		      	（2）解决办法：根据不同节点设置不同的缓存失效时间，随机3到9小时的生命周期，把工作分担到不同的时间点上，最好是晚上更新缓存，因为晚上访问量小		
+	3、memcache与redis区别
+		1）memcache是多线程（利于并发），redis是单线程
+		2）Redis存储的数据类型更多，不仅仅支持简单的k/v类型的数据，同时还提供list，set，hash等数据结构的存储
+		3）memcache把数据保存在内存中，如果断电，数据全没了；redis可以定期保存到磁盘（持久化）
