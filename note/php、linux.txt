@@ -13,6 +13,14 @@
 		5）GD库是做什么用的？	
 			（1）生成图片（如：生成缩略图）
 			（2）处理图片（如：对图片加水印）
+		6）php魔术方法与魔术变量
+			（1）魔术方法：  __construct()    __destruct()//析构函数    __set()   __get() __call()   __autoload()  __clone()  __unset()
+			（2）魔术变量：__CLASS__、__METHOD__、__NAMESPACE__、__FUNCTION__、__DIR__、__FILE__（文件的完整路径和文件名）、__LINE__（文件中的当前行号。）
+			（3）__call（）在一个对象的上下文中，如果调用的方法不存在的时候，它将被触发:
+		7）php运行模式：
+			（1）Apache+mod_php5
+			（2）nginx+PHP-FPM
+			（3）cli（命令行运行模式）
 	2、函数
 		1）number_format()：金额每三位加逗号
 		2）array_slice() 函数在数组中根据条件取出一段值，并返回。（从数组中移除元素，并用新元素取代它）
