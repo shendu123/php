@@ -14,13 +14,47 @@
 			（1）生成图片（如：生成缩略图）
 			（2）处理图片（如：对图片加水印）
 		6）php魔术方法与魔术变量
-			（1）魔术方法：  __construct()    __destruct()//析构函数    __set()   __get() __call()   __autoload()  __clone()  __unset()
+			（1）魔术方法：  __construct()    __destruct()//析构函数    __set()   __get()、 __call()   __autoload()  __clone()  __unset()
 			（2）魔术变量：__CLASS__、__METHOD__、__NAMESPACE__、__FUNCTION__、__DIR__、__FILE__（文件的完整路径和文件名）、__LINE__（文件中的当前行号。）
 			（3）__call（）在一个对象的上下文中，如果调用的方法不存在的时候，它将被触发:
+			（4）__autoload()，调用一个未定义的类时触发，作用：用到某个类的时候会自动加载这个类，否则不加载，避免加载不必要的类浪费内存
+			（5）__set()：设置一个对象不存在的属性时调用     __get()：获取一个对象不存在的属性时调用
+			（6）__destruct()：对象销毁时调用
 		7）php运行模式：
 			（1）Apache+mod_php5
 			（2）nginx+PHP-FPM
 			（3）cli（命令行运行模式）
+		8）php性能优化方案
+			（1）单引号代替双引号（因为单引号不会去解析变量，这样速度快）
+			（2）foreach代替for
+			（3）不用的变量要注销掉（unset），释放内存
+			（4）函数代替正则表达式完成相同的功能
+			（5）switch....case代替多个if...else...	
+			（6）尽量定义类的静态方法，因为静态方法比普通方法快4倍
+		9）php各版本特性
+			（1）php5.3：匿名函数，新增魔术方法，命名空间，const, 三元运算符
+			（2）php5.4：Short Open Tag（短标签，<??>这种）, 数组简写形式 （[]这种）
+			（3）php5.5：list() 用于 foreach、array_column返回数组中指定的一列（比如：二维数组只返回id列）
+			（4）php5.6：使用表达式定义常量（如：const ARR = ['a', 'b'];）、命名空间增强	
+		10）php7特性
+			（1）NULL 合并运算符。（如：$a = $_GET['a'] ?? 1;相当于 $a = isset($_GET['a']) ? $_GET['a'] : 1;）
+			（2）标量类型声明。标量就是string、int、float、bool四种类型，函数形参声明标量
+			（3）匿名类
+			（4）use 批量声明。如：use some/namespace/{ClassA, ClassB, ClassC}; 
+			（5）define 现在可以定义常量数组； 
+		11）define与const的区别：
+			（1）define不可以用于类成员变量的定义，可用于全局常量，const用于类成员变量的定义
+			（2）define可以在条件语句中定义常量，const不能
+			（3）define可以用表达式作为常量名称，如：define('TEST_'.$name，'test'），const不能
+		12）php内存管理机制：
+			（1）预先给出一块空间，用来存储变量，当空间不够时，再申请一块新的空间
+		13）php垃圾回收机制
+			（1）PHP使用引用计数（reference counting）垃圾回收（garbage collection）机制，每个对象都内含一个引用计数器，每当一个引用连接到对象时，计数器加1，当reference离开生成空间或被设置为NULL是，计数器减1,。当某个对象的引用计数器为0时，PHP引擎知道你将不再需要这个对象，释放其所占的内存空间
+		14）内存泄漏和内存溢出：
+			（1）内存泄漏：内存区域没有释放掉
+			（2）内存溢出：内存满了溢出来了
+
+						
 	2、函数
 		1）number_format()：金额每三位加逗号
 		2）array_slice() 函数在数组中根据条件取出一段值，并返回。（从数组中移除元素，并用新元素取代它）
