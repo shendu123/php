@@ -139,13 +139,35 @@
 		1）思路：先查询出id，再根据id去查。如：SELECT * FROM product a JOIN (select id from product limit 866613, 20) b ON a.ID = b.id
 
 
-九、 杂项
+
+九、websocket、workerman、swoole
+	1、websocket的工作机制：
+		1）客户端浏览器首先要向服务器发起一个 HTTP 请求，这个请求和通常的 HTTP 请求不同，包含了一些附加头信息，其中附加头信息”Upgrade: WebSocket”表明这是一个申请协议升级的 HTTP 请求（http协议升级为websocket协议），服务器端解析这些附加的头信息然后产生应答信息返回给客户端，客户端和服务器端的 WebSocket 连接就建立起来了
+	2、websocket与http区别
+		1）websocket是HTML5中的协议，支持持久连接；而Http协议不支持持久连接。
+		2）WebSocket是一种双向通信协议。在建立连接后，WebSocket服务器端和客户端都能主动向对方发送或接收数据，就像Socket一样；http只能客户端主动发送数据，服务端不能主动发数据
+	3、websocket与socket区别
+		1）WebSocket是应用层协议，Socket是传输控制层协议
+	4、websocket与socket.io区别
+		1)socket.io封装了websocket，同时包含了其它的连接方式，比如Ajax轮询，原因在于不是所有的浏览器都支持websocket。
+		2）通过socket.io的封装，你不用关心里面用了什么连接方式。你在任何浏览器里都可以使用socket.io来建立异步的连接。socket.io包含了服务端和客户端的库，如果在浏览器中使用了socket.io的js，服务端也必须同样适用
+	5、workerman：是一个PHP socket多进程服务器框架，具有PHP进程管理以及socket通信的模块，所以不依赖php-fpm、nginx或者apache等这些容器便可以独立运行。
+	6、workerman与swoole区别
+		1）都是php socket 服务器框架，workerman纯php写的，swoole是c编写的php扩展
+		2) 因为swoole是基于c编写的,所以swoole速度更快,但bug多，workerman更稳定
+
+
+
+
+十、 杂项
 	1、得意之作？说下项目中遇到了哪些困难，最后怎么解决的？
+		1）图片（数据）采集
+			（1）利用curl抓取页面，然后用正则匹配图片，循环取出每张图片的地址，创建目录，下载并保存
 
 
-十、支付、登录插件怎么编写
+十一、支付、登录插件怎么编写
 
-十一、websocket(workerman)
+
 
 
 
