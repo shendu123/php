@@ -5,7 +5,7 @@
 		（1）在php页面的最开始（要在任何输出之前，并且在session_start()之前）的地方进行以下设置  ini_set('session.cookie_domain', '.mydomain.com');
 		（2）在php.ini里设置  session.cookie_domain = .mydomain.com
      		
-     	2)、关于sessionid：
+     	2)、关于sessionid（session原理）：
 		（1）如果网站开启了session（就是session_start()），第一次访问网站时服务端会返回一个sessionid给客户端保存在cookie中，详见http响应头（Response Headers）
   Set-Cookie:PHPSESSID=7qmhgolhumah9ce0j3m7b4lus4，第二次访问时，客户端带着cookie中的sessionid去请求服务器，详见http请求头（Request Headers）Cookie:PHPSESSID=7qmhgolhumah9ce0j3m7b4lus4，如果第三访问时你删掉sessionid对应的文件，服务器会根据请求头中的sessionid重新生成该文件,清除session时（session_destroy），会清空sessionid对应文件中的内容！session_id()是怎么产生的？是session_start()时产生的
 		（2）如果关闭cookie，session_id可以通过url方式传递
@@ -26,7 +26,7 @@
 
    2、cookie
 	1) 原理：
-		（1）当你访问一个网站的时候，可以将服务器的一些少量的数据保存到硬盘上，比如说用户名，id等，等你下次访问的时候，服务器会首先寻找这个文件然后读取你的相关信息，这样可以让你在不输入用户名密码的情况下直接登陆网站	
+		（1）当你访问一个网站的时候，服务器响应头会返回一个set-cookie信息（比如说用户名，id等）让浏览器保存到硬盘上，等你下次访问的时候带上这个cookie文件，服务器会首先寻找这个文件然后读取你的相关信息，这样可以让你在不输入用户名密码的情况下直接登陆网站,cookie就是服务器暂存放在你计算机上的一笔资料，好让服务器用来辨认你的计算机	
 	2）用途：
 		（1）记住用户名密码
 	3）跨域：P3P
@@ -100,6 +100,13 @@
 		（8）索引常用操作：
 			一、查看索引：show index from tablename;
 			二、分析索引（explain）：explain select * from a where a_id > 1 \G       （\G表示纵向显示信息）
+		（9）聚簇索引与聚簇索引
+			一、聚簇索引也叫簇类索引，是一种对磁盘上实际数据重新组织以按指定的一个或多个列的值排序
+			二、区别：数据记录的排列顺序和索引的排列顺序是否一致来区分,聚簇索引排序一致，非聚簇索引不一致
+			三、在对聚集索引列查询时，聚集索引的速度要比非聚集索引速度快。
+		（10）覆盖索引
+			一、定义：从索引中直接获取查询结果（比普通索引速度更快），不用回表查询
+			二、触发条件：当要查询的列包含在索引列中（如：假设name列有建立索引，则select name from user会触发覆盖索引）
 	2）sql语句优化
 		（1）避免全表查询
 		（2）不要在sql语句中使用mysql函数，因为这将导致引擎放弃使用索引而进行全表扫描
