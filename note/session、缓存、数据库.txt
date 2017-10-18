@@ -292,6 +292,7 @@
 		3）redis主从：
 			（1）：缺陷:当主服务器挂了，因为从服务器只能读不能写，	所以还是不能提供服务
 			（2）：解决办法：redis sentinel（redis哨兵，监控） 可以将从服务器升级为主服务器，或者用集群
+			（3）：sentinel工作原理：Sentinel不断与master通信,获取master的slave信息，监听master与slave的状态，如果某slave失效,直接通知master去除该slave，如果master失效,是按照slave优先级(可配置), 选取1个slave做新的master
 		4）redis集群
 			（1）：	集群没有主从之分，这个宕机了另一个可以立即提供服务
 		5) 基础知识
