@@ -1,0 +1,8 @@
+1、表单提交enctype参数详解之：application/x-www-form-urlencode和multipart/form-data
+	1）我们在提交表单的时候，form表单参数中会有一个enctype的参数。enctype指定了HTTP请求的Content-Type。默认情况下，HTML的form表单的enctype=application/x-www-form-urlencoded。
+application/x-www-form-urlencoded是指表单的提交，并且将提交的数据进行urlencode。默认情况下，我们所有的表单提交都是通过这种默认的方式实现的。
+	2）https://www.lvtao.net/dev/1179.html
+2、单入口文件：应用程序的所有http请求都由某一个文件接受并由这个文件转发到功能代码中
+	1）单入口优势：
+       		（1）安全监测（如果是多入口我们就需要在每个入口文件中做相应的安全监测）
+       		（2）请求过滤(在我们的入口文件中，我们可以过滤掉某些无效的请求，如果是多入口就需要重复这个功能)

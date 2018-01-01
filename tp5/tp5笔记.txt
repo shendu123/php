@@ -1,0 +1,56 @@
+1、命名空间
+	1）、start.php 文件顶部为什么定义命名空间namesapce think ？
+		（1）、当运行App::run()->send()时，会触发base.php引入的load.php中的spl_autoload_register（）函数（也就是自动加载类，当实例化一个未定义的类时就会触发），会根据定义的命名空间去找文件路径中的文件，如果找不到就会报错
+		（2）、也可以不在顶部定义，用think\App::run()或\think\App::run()代替
+	2）、命名空间分类
+		（1）非限定名称，或不包含前缀的类名称，例如 $a=new foo() 
+		 	一、如果不是当前文件夹下，则头部需要定义namespace
+		（2）限定名称,或包含前缀的名称，例如 $a = new subnamespace\foo(); 
+			一、如果不是当前文件夹下，则头部需要定义namespace
+		（3）完全限定名称，或包含了全局前缀操作符的名称，例如， $a = new \currentnamespace\foo(); 
+			一、头部不需要定义namespace
+			二、访问任意全局类、函数或常量，都可以使用完全限定名称，例如 \strlen() 或 \Exception
+	3）psr0与psr4
+		（1）区别
+			一、PSR-4和PSR-0最大的区别是对下划线的定义不同。PSR-4中，在类名中使用下划线没有任何特殊含义。而PSR-0则规定类名中的下划线_会被转化成目录分隔符。
+如Name_Space_Test会转换成Name\Space\Test.php。
+			二、在composer中定义的namesapce，psr4必须以\结尾否则会抛出异常，psr0则不要求
+			三、psr0有更深的目录结构，比如定义了NS为 Foo\Bar=>vendor\foo\bar\src，  use Foo\Bar\Tool\Request调用NS。
+				（一）如果以psr0方式加载，实际的目录为vendor\foo\bar\src\Foo\Bar\Tool\Request.php
+				（二）如果以psr4方式加载，实际目录为vendor\foo\bar\src\Tool\Request.php
+				（三）结论：推荐psr4（psr4是psr0的升级版）
+
+2、init初始化配置文件（引入、设置、获取），因为controller、model、validate文件夹中的类实例化会调用自动加载类spl_autoload_register函数引入，所以不用手动引入文件
+3、字符串风格转换
+	1）test_abc_def转换为TestAbcDef		ucfirst(preg_replace_callback('/_([a-zA-Z])/', function ($match) { return strtoupper($match[1]);}, $name));
+	2）TestAbcDef转换为test_abc_def		strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));	注意：第一个‘\’是转义，\0表示匹配到的整个字符串
+4、var_export()与var_dump()区别
+	1)var_export必须返回合法的php代码， 也就是说，var_export返回的代码，可以直接当作php代码赋值个一个变量。 而这个变量就会取得和被var_export一样的类型的值 
+	2)var_dump返回的是php运行后的结果。
+5、think\Error     Error.php日志从这个文件开始写入，这是日志写入的源头  Log::save();
+6、路由
+	1）路由设置：
+		（1）先用App::routeCheck()方法进行URL路由检测
+			一、如果开启了路由（url_route_on=true），则获取路由配置文件（route.php）中的路由配置进行路由注册，设置路由规则（Route::setRule）
+		（2）注册路由规则
+			一、动态注册（get、post、put、delete、any、rule）
+				（一）动态单个注册，如：Route::rule('new/:id','index/News/read');
+				（二）动态批量注册，如：Route::get(['new/:id'=>'News/read','blog/:name'=>'Blog/detail']);				
+		（3）快捷路由（控制器注册路由）：Route::controller（$rule, $route）
+			一、Route::controller也是调用get、post...路由方法，再调用rule方法，然后调用setRule方法进行路由设置，
+		（4）路由设置执行顺序：
+			一 Route类中：   controller 、（get、post、delete等方法）、rule、setRule	
+	2）路由解析：
+		（1）如果开启了路由（url_route_on=true），则调用 Route::check（）方法进行路由检测，获取注册设置后的路由规则（self::$rules）
+		（2）Route::checkRoute，Route::checkRule检测路由规则
+		（1）Route::parseRule方法进行路由解析
+7、日志跟踪：
+	1）sql语句跟踪
+		（1）调用增删改查（如：模型中的select()）方法时，会调用\\think\\db\\Query类中的query()方法，此方法把sql语句传给\\think\\db\\Connection类中的query方法
+			如果数据库配置文件database.php中有设置debug为true（开启数据库调试模式），则会进行SQL监听（把sql语句、sql运行时间等信息 写入日志）
+			Log::record('[ SQL ] ' . $sql . ' [ RunTime:' . $runtime . 's ]', 'sql');
+		（2）如果database.php中有设置sql_explain为true,则会分析sql性能（索引之类的）
+			Log::record('[ EXPLAIN : ' . var_export($explain, true) . ' ]', 'sql');	
+
+	
+		

@@ -1,0 +1,199 @@
+1、tp5文件加载顺序		（think\Log，在think\Error后就开始调用）
+think\Error
+think\Config
+think\App
+think\Request
+think\Hook
+think\Env
+think\Lang
+think\Log
+think\Route
+app\index\controller\User
+think\Controller
+think\View
+think\view\driver\Think
+think\Template
+think\template\driver\File
+think\Session
+app\index\model\UserModel
+think\Model
+think\Db
+think\db\connector\Mysql
+think\db\Connection
+think\db\Query
+think\db\builder\Mysql
+think\db\Builder
+think\Debug
+think\paginator\driver\Bootstrap
+think\Paginator
+think\paginator\Collection
+think\Collection
+think\log\driver\File
+---------------------------------------------------------------------------------------------
+
+2、self::$prefixLengthsPsr4
+
+Array
+(
+    [t] => Array
+        (
+            [think\] => 6
+            [traits\] => 7
+        )
+
+    [b] => Array
+        (
+            [behavior\] => 9
+        )
+
+    [a] => Array
+        (
+            [app\] => 4
+        )
+
+)
+---------------------------------------------------------------------------------------------
+3、self::$prefixDirsPsr4
+
+Array
+(
+    [think\] => Array
+        (
+            [0] => E:\phpStudy\WWW\autologin\thinkphp\library\think
+        )
+
+    [behavior\] => Array
+        (
+            [0] => E:\phpStudy\WWW\autologin\thinkphp\library\behavior
+        )
+
+    [traits\] => Array
+        (
+            [0] => E:\phpStudy\WWW\autologin\thinkphp\library\traits
+        )
+
+    [app\] => Array
+        (
+            [0] => E:\phpStudy\WWW\autologin\public/../application/
+        )
+
+)
+---------------------------------------------------------------------------------------------
+4、$rule
+
+
+
+
+Array
+(
+    [get] => Array
+        (
+            [controller/:action] => Array
+                (
+                    [rule] => controller/:action
+                    [route] => index/Blog/get:action
+                    [var] => Array
+                        (
+                            [action] => 1
+                        )
+
+                    [option] => Array
+                        (
+                        )
+
+                    [pattern] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+
+    [head] => Array
+        (
+        )
+
+    [options] => Array
+        (
+        )
+
+    [*] => Array
+        (
+        )
+
+    [alias] => Array
+        (
+        )
+
+    [domain] => Array
+        (
+        )
+
+    [pattern] => Array
+        (
+        )
+
+    [name] => Array
+        (
+            [index/blog/get:action] => Array
+                (
+                    [0] => Array
+                        (
+                            [0] => controller/:action
+                            [1] => Array
+                                (
+                                    [action] => 1
+                                )
+
+                            [2] => 
+                        )
+
+                )
+
+            [index/blog/post:action] => Array
+                (
+                    [0] => Array
+                        (
+                            [0] => controller/:action
+                            [1] => Array
+                                (
+                                    [action] => 1
+                                )
+
+                            [2] => 
+                        )
+
+                )		
+
+
+
+        )
+
+)
+
+---------------------------------------------------------------------------------------------
+
+index/Blog/getinfo
+5、
+//Route::controller($rule, $route)是先调用get、post...路由方法，再调用rule方法，然后调用setRule方法进行路由设置
+//同样的规则（rule），不同的路由(route)，返回不一样的类型，但结果都是一样，示例如下：
+
+//（1）返回类型为模块
+//\think\Route::controller('controller', 'index/Blog');
+//控制器注册 http://www.autologin.zxl/controller/info会对应http://www.autologin.zxl/index/Blog/getinfo
+//Array ( [type] => module [module] => Array ( [0] => index [1] => Blog [2] => getinfo ) [convert] => )
+
+//（2）返回类型为重定向
+//\think\Route::controller('controller', '/index/Blog');
+//访问http://www.autologin.zxl/controller/info 会重定向跳转到 http://www.autologin.zxl/index/Blog/getinfo页面
+//Array ( [type] => redirect [url] => /index/Blog/getinfo [status] => 301 )
+
+//（3）返回类型为方法
+//\think\Route::controller('controller', 'app\\index\\controller\\Blog');
+//Array ( [type] => method [method] => Array ( [0] => \index\Blog [1] => getinfo ) )
+
+//（4）返回类型为控制器
+//\think\Route::controller('controller', '@index/Blog');
+//Array ( [type] => controller [controller] => index/Blog/getinfo )
+
