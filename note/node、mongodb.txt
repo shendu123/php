@@ -1,0 +1,21 @@
+1、node知识点
+	1）模块系统
+		（1）require 用于从外部获取一个模块的接口，即module.exports对象，exports是全局的
+		（2）	
+
+2、mongodb知识点总结
+	1）mongoDB服务启动
+		（1）window下：net start MongoDB
+	2）客户端连接mongodb
+		（1）使用用户 admin 使用密码 123456 连接到本地的 MongoDB 服务上	
+			一、mongodb://admin:123456@localhost/
+		（2）使用用户名和密码连接登陆到指定数据库
+			一、mongodb://admin:123456@localhost/test
+	3）基础操作：
+		（1）创建数据库：use 数据库名  （如：use dbTest）
+		（2）显示所有数据库：show dbs	(注意：创建空的数据库是不会显示的，数据库中有集合才会显示);
+		（4）显示所有集合：show collections（先要指定数据库，use 数据库名）
+		（3）MongoDB 中默认的数据库为 test，如果你没有创建新的数据库，集合将存放在 test 数据库中。
+		（4）删除数据库：db.dropDatabase()。（如dbTest.dropDatabase）
+			
+		
