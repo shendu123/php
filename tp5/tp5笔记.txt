@@ -19,6 +19,13 @@
 				（一）如果以psr0方式加载，实际的目录为vendor\foo\bar\src\Foo\Bar\Tool\Request.php
 				（二）如果以psr4方式加载，实际目录为vendor\foo\bar\src\Tool\Request.php
 				（三）结论：推荐psr4（psr4是psr0的升级版）
+	4)两种方式注册命名空间：
+		（1）自动注册
+			一、只需要把自己的类库包目录放入EXTEND_PATH目录（默认为extend，可配置）
+			二、例如：我们在extend目录下面新增一个my目录，然后定义一个\my\Test类（ 类文件位于extend/my/Test.php）
+		（2）手动注册
+			一、在应用入口文件（index.php）中添加下面的代码：\think\Loader::addNamespace('my','../application/extend/my/');
+		
 
 2、init初始化配置文件（引入、设置、获取），因为controller、model、validate文件夹中的类实例化会调用自动加载类spl_autoload_register函数引入，所以不用手动引入文件
 3、字符串风格转换
