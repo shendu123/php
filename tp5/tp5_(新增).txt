@@ -1,0 +1,40 @@
+1、行为
+2、路由（域名邦定模块）
+3、控制器
+	1）分层控制器：
+		（1）不在默认Controller目录，在指定的控制器目录。如：\think\Loader::controller('Blog', 'event');在event目录下的Blog控制器
+5、反射  
+	1)定义：
+		（1）、https://www.cnblogs.com/KeenLeung/p/6041280.html
+		（2）、PHP Reflection API详解:http://www.jb51.net/article/65897.htm
+		（3）、它是指在PHP运行状态中，扩展分析PHP程序，导出或提取出关于类、方法、属性、参数等的详细信息，包括注释。这种动态获取的信息以及动态调用对象的方法的功能称为反射API。
+			PHP反射api由若干类组成，可帮助我们用来访问程序的元数据或者同相关的注释交互。借助反射我们可以获取诸如类实现了那些方法，创建一个类的实例（不同于用new创建），调用一个方法（也不同于常规调用），传递参数，动态调用类的静态方法
+	2) 反射类
+		（1）ReflectionClass类
+			一、getConstructor方法：取得该类的构造函数信息
+			二、newInstanceArgs方法：实例化该类
+		（2）ReflectionMethod类		
+			一、getNumberOfParameters方法：获取控制器构造函数参数个数或请求方法参数个数
+			二、getParameters方法：获取控制器构造函数参数或请求方法参数（返回ReflectionParameter对象）
+			三、invoke方法：调用该方法
+			四、isPublic方法：测试该方法是否为public
+			五、isStatic方法：测试该方法是否为static
+		（3）ReflectionParameter类
+			一、getName方法：取得参数名
+			二、getClass方法：若该参数为对象，返回该对象的类名
+	3）邦定参数、依赖注入
+
+6、模型
+	1）分层模型：
+		（1）不在默认Model目录，在指定的模型目录。如：\think\Loader::model('User', 'logic');在logic目录下的User类
+	
+7、验证
+	1）$rule instanceof \Closure判断规则函数是否为匿名函数
+	2）内置函数：
+		（1）call_user_func	调用类内部的方法，并传参数。
+			一、如：call_user_func(array("a", "b"),"111"); 调用a类的b方法，参数为111
+		（2）call_user_func_array			
+			一、调用函数,并传参数：call_user_func_array('a', array("111", "222")); 调用a函数，第一个参数为111,第二个参数为222
+			二、调用类内部的方法，并传参数。call_user_func_array(array('ClassA','b'), array("111", "222")); 
+
+
