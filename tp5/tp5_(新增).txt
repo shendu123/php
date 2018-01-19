@@ -1,4 +1,8 @@
-1、行为
+1、行为（也就是钩子）
+	1）定义：应用执行过程中的一个动作
+	2）作用：有些行为的作用位置都是在应用执行前，有些行为都是在模板输出之后，我们把这些行为发生作用的位置称之为标签（位），当应用程序运行到这个标签的时候，就会被拦截下来，统一执行相关的行为
+	3）例子：记录网站操作日志功能，hook::listen（module_init）先监听模块初始化，（在tags.php里配置相应的类'\\app\\common\\behavior\\WebLog'），在自己的业务里获取获取网站请求操作相关值并进行初始化赋值，当程序执行完，也就是在模板输出之后，有一个hook::listen（app_end）应用结束监听行为，可以对这个行为进行数据库插入操作。就完成了对网站的操作记录功能。（详见tpadmin操作日志模块）
+	4）详细说明：http://blog.csdn.net/u013927110/article/details/47000379
 2、路由（域名邦定模块）
 3、控制器
 	1）分层控制器：
@@ -69,5 +73,8 @@
 			一、debug('begin'); ...代码段；debug('end');   echo debug('begin','end').'s';   echo debug('begin','end').'kb';	
 9、配置：
 	1）环境变量中的配置优先于项目应用的配置文件
+10、函数：
+	1）method_exists()与is_callable()的区别
+		（1）、一个方法存在并不意味着它就可以被调用。对于 private，protected和public类型的方法，method_exits()会返回true，但是is_callable()会检查存在其是否可以访问，如果是private，protected类型的，它会返回false
 
 
