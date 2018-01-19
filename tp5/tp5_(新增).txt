@@ -36,5 +36,38 @@
 		（2）call_user_func_array			
 			一、调用函数,并传参数：call_user_func_array('a', array("111", "222")); 调用a函数，第一个参数为111,第二个参数为222
 			二、调用类内部的方法，并传参数。call_user_func_array(array('ClassA','b'), array("111", "222")); 
+8、错误异常与调式
+	1）错误级别：
+		（1）Notice 通知级别的错误 如直接使用未声明变量，程序继续执行
+　		（2）Warning 警告级别的错误，可能得不到想要的结果
+　		（3）Fatal error  致命级别错误致命级别错误，程序不往下执行
+　		（4）parse error 语法解析错误，最高级别错误，连其他错误信息也不呈现出来
+		（5）补充说明：
+			一、http://blog.csdn.net/zhang197093/article/details/75094816
+			二、http://blog.sina.com.cn/s/blog_558839ae0100es0u.html
+			三、php的错误分成了很多的级别，如E_ERROR、E_WARNING、E_PARSE、E_NOTICE等等，对于像E_ERROR、E_PARSE这样的严重错误不能被用户自定义处理，php会直接终止脚本的运行。
+	2）php错误异常处理内置函数
+		（1）set_error_handler
+			一、定义：设置用户自定义的错误处理函数。 该函数用于创建运行时期间的用户自己的错误处理方法，用来捕捉错误级别为Warning或Notice的错误，E_ERROR、E_PARSE级别的错误无法捕捉
+			二、用法：
+				（一）、不仅可以接受函数，还可以接受 类的方法（公开的静态方法 及 公开的非静态方法 都可以），但需要以 数组形式 传递，数组的第一值为“类名”，第二个参数为“方法名
+				（二）、例：set_error_handler（'func'）或set_error_handler（['classA','method']）
+			三、提示：如果使用了该函数，会完全绕过标准的 PHP 错误处理函数，			
+		（2）set_exception_handler
+			一、定义：设置用户自定义的异常处理函数,只要有异常抛出（throw new Exception），就会被触发
+			二、用法：同上
+		（3）register_shutdown_function
+			一、定义：PHP程序执行完成后执行的函数，原理就是在PHP进程结束前会去调用它一次（在页面的最后）
+			二、触发情况分为以下几种使用场景：
+				（一）、php代码执行过程中发生错误（异常或错误），成功、die、exit等（调试时会看到在die后有输出）
+				（二）、php代码运行超时
+				（三）、页面被（用户）强制停止
+	3）ErrorException与HttpException
+		(1)ErrorException会记录日志，HttpException只渲染异常模板（tpAdmin-master/thinkphp/tpl/think_exception.tpl）
+	4）调式：
+		（1）性能调式：调试某段代码的运行时间（单位s）或者内存占用开销(单位kb)
+			一、debug('begin'); ...代码段；debug('end');   echo debug('begin','end').'s';   echo debug('begin','end').'kb';	
+9、配置：
+	1）环境变量中的配置优先于项目应用的配置文件
 
 
