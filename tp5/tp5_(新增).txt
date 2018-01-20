@@ -2,7 +2,10 @@
 	1）定义：应用执行过程中的一个动作
 	2）作用：有些行为的作用位置都是在应用执行前，有些行为都是在模板输出之后，我们把这些行为发生作用的位置称之为标签（位），当应用程序运行到这个标签的时候，就会被拦截下来，统一执行相关的行为
 	3）例子：记录网站操作日志功能，hook::listen（module_init）先监听模块初始化，（在tags.php里配置相应的类'\\app\\common\\behavior\\WebLog'），在自己的业务里获取获取网站请求操作相关值并进行初始化赋值，当程序执行完，也就是数据初始化之后，数据处理(模板渲染)之前，有一个hook::listen（app_end）应用结束监听行为，可以对这个行为进行数据库插入操作。就完成了对网站的操作记录功能。（详见tpadmin操作日志模块）
-	4）详细说明：http://blog.csdn.net/u013927110/article/details/47000379
+	4）注册行为：
+                （1）手动注册：hook:add()
+                （2）自动注册：在配置文件tags.php中进行配置   
+        5) 详细说明：http://blog.csdn.net/u013927110/article/details/47000379   
 2、路由（域名邦定模块）
 3、控制器
 	1）分层控制器：
@@ -76,9 +79,44 @@
 	1）环境变量中的配置优先于项目应用的配置文件
 10、日志
 	1）运行流程：App.php执行过程中有Log::record()函数对日志信息初始化，只要程序执行完成，就会触发php内置函数register_shutdown_function（在error.php），里面有个Log::save()
-	2）	
+	2）Log::record()与Log::write（）区别：
+		(1)、Log::record要等到程序执行完成才写入（Log::save），Log::write实时写入（方法里面直接调用Log::save）	
+	3)__callStatic： 当调用的静态方法不存在或权限不足时，会自动调用__callStatic方法。
+		（1）如：Log::error（'错误信息'）相当于Log::record('错误信息','error');      Log::info('日志信息')相当于Log::record('日志信息','info');
+		（2）与__call方法区别：__call 当要调用的方法不存在或权限不足时，会自动调用__call 方法。
+	4)独立日志：config.php配置文件log数组中设置'apart_level'   =>  ['error','sql'],会单独生成以日期天数为前缀 error 和 sql两个类型的日志文件，主日志文件中将不再包含这两个级别的日志信息
+11、命令行
+        1）自动生成目录结构（整个完整项目模块）
+12、杂项
+        1）缓存：
+                （1）配置多个缓存类型
+                        一、config.php配置文件cache数组中,设置'type' => 'complex',通过cache::store('file')->set('name','value')或cache::store('redis')->set('name','value')就可以切换到不同的缓存类型存储数据
+        2）session
+                (1)use_trans_sid
+                        一、浏览器禁用cookie后php如何保持session会话use_trans_sid机制（http://blog.csdn.net/wzxsjdt/article/details/50508240）
+                        二、Session变量不能传送到下一页.解决: session.use_trans_sid = 1（http://blog.csdn.net/drylandfish/article/details/244085?%3E）
+                (2)session_id()与session_name()
+                        一、赋值：session_id('123'),把PHPSESSID赋值为'123'
+                        二、获取：session_id（）；获取 PHPSESSID的值
+                        三、session_name()获取的值为'PHPSESSID'，用法与session_id（）一样，都是进行设置值与获取值
+                (3)session_unset()和session_destroy()区别
+                        一、session_unset()释放当前在内存中已经创建的所有$_SESSION变量，但不删除session文件以及不释放对应的session_id
+                        二、session_destroy()删除当前用户对应的session文件以及释放session_id，内存中的$_SESSION变量内容依然保留
+        3）cookie
+                (1)parse_str()函数：把查询字符串解析到变量中。
+                        一、如：parse_str("name=Bill&age=60",$myArray);     //$myArray数组结果为Array ( [name] => Bill [age] => 60 )
+                (2)        
 15、函数：
 	1）method_exists()与is_callable()的区别
 		（1）、一个方法存在并不意味着它就可以被调用。对于 private，protected和public类型的方法，method_exits()会返回true，但是is_callable()会检查存在其是否可以访问，如果是private，protected类型的，它会返回false
+        2)array_diff()
+                （1）比较两个数组的值，并返回差集。返回两个数组的差集数组。该数组包括了所有在被比较的数组中，但是不在任何其他参数数组中的键值。在返回的数组中，键名保持不变。
+        3）array_walk()与 array_walk_recursive() 用法与区别
+                （1）array_walk()：使用用户自定义函数对数组中的每个元素做回调处理 （对数组中的每个元素应用用户自定义函数。在函数中，数组的键名和键值是参数。）
+                        一、语法：array_walk(array,myfunction,userdata...)
+                （2）array_walk_recursive() ：比array_walk操作更深的数组（一个数组中包含另一个数组）
+        4）array_change_key_case()
+                （1）函数将数组的所有的键都转换为大写字母或小写字母。如果未提供可选参数（即第二个参数），则默认转换为小写字母。
+                （2）语法：array_change_key_case(array,case);case可以为CASE_LOWER（小写）或CASE_UPPER（大写） 
 
 
