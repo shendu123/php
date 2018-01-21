@@ -77,6 +77,12 @@
 			一、debug('begin'); ...代码段；debug('end');   echo debug('begin','end').'s';   echo debug('begin','end').'kb';	
 9、配置：
 	1）环境变量中的配置优先于项目应用的配置文件
+	2）配置文件初始化配置流程说明：
+		1）config::load($file,$name)函数会载入配置文件，如果载入的文件是config.php，则$name为空，否则$name为配置文件名。如：
+			一、Config::load(‘tpAdmin-master\application\database.php’ 'database');载入数据库配置文件
+			二、Config::load(‘tpAdmin-master\application\extra\captcha.php’ 'captcha');载入验证码配置文件	
+		2）载入配置文件后，调用config::set()函数对配置文件中的数据进行合并！（如果有设置$name,则$name就是数组中的键）
+		3）读取配置文件：config::get('database')数据库配置文件database.php中的数据，config::get('session')配置文件config.php中的session数据，
 10、日志
 	1）运行流程：App.php执行过程中有Log::record()函数对日志信息初始化，只要程序执行完成，就会触发php内置函数register_shutdown_function（在error.php），里面有个Log::save()
 	2）Log::record()与Log::write（）区别：
@@ -105,7 +111,23 @@
         3）cookie
                 (1)parse_str()函数：把查询字符串解析到变量中。
                         一、如：parse_str("name=Bill&age=60",$myArray);     //$myArray数组结果为Array ( [name] => Bill [age] => 60 )
-                (2)        
+                (2) 
+	4）验证码
+		（1）运行流程： 
+			一、首先使用Composer安装think-captcha扩展包：composer require topthink/think-captcha
+			二、在tpAdmin-master\vendor\topthink\think-captcha\src\helper.php有设置路由
+				（一）、\think\Route::get('captcha/[:id]', "\\think\\captcha\\CaptchaController@index");
+			三、在\tpAdmin-master\vendor\composer\autoload_psr4.php有注册验证码命名空间
+				（一）、'think\\captcha\\' => array($vendorDir . '/topthink/think-captcha/src'),
+			四、生成验证码并保存在session中
+		（2）登录时验证码校验：
+			一、在tpAdmin-master\vendor\topthink\think-captcha\src\helper.php中有一个验证函数。对输入的验证码与生成的验证码进行校验比对
+				（一）\think\Validate::extend('captcha', function ($value, $id = "") {
+					return captcha_check($value, $id, (array)\think\Config::get('captcha'));
+				       });
+		（3）tpAdmin-master\vendor\topthink\think-captcha\src\helper.php这个文件何时加载进来执行的？
+			一、tpAdmin-master\thinkphp\library\think\Load.php中有注册composer自动加载，有加载autoload_files.php文件，此文件有helper.php	
+      
 15、函数：
 	1）method_exists()与is_callable()的区别
 		（1）、一个方法存在并不意味着它就可以被调用。对于 private，protected和public类型的方法，method_exits()会返回true，但是is_callable()会检查存在其是否可以访问，如果是private，protected类型的，它会返回false
