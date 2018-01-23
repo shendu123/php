@@ -24,12 +24,12 @@
 		（1）Route::parseRule方法进行路由解析
         3）url生成(相当于tp3.2的U方法)：如：\think\Url::build('index/blog/read','id=5&name=thinkphp');//输出  /index/blog/read/id/5/name/thinkphp.html  
         4)路由url邦定与解析
-                （1）url邦定：如：邦定到模块/控制器/操作、邦定到类、邦定到命名空间等等
+                （1）url邦定：如：邦定到模块/控制器/操作、邦定到类、邦定到命名空间等等类型，最终把邦定的类型数据赋值给Route::$bind数组
                         一、Route::bind('\app\index\controller','namespace')邦定到命名空间
-                （2）解析：Route::checkUrlBind()检测URL绑定;然后根据不同的类型调用不同的解析方法 
+                （2）解析：Route::checkUrlBind()检测URL绑定，根据Route::$bind数组中不同的类型调用不同的解析方法 
         5）路由别名邦定与解析
-                （1）别名邦定：如：Route::alias('user','\app\index\controller\User');或在route.php中配置
-                （2）别名解析：Route::checkRouteAlias()检测路由别名,然后根据不同的url规则类型调用不同的解析方法
+                （1）别名邦定：如：Route::alias('user','\app\index\controller\User');或在route.php中配置，最终赋值给Route::$rules['alias']数组
+                （2）别名解析：Route::checkRouteAlias()检测路由别名,根据self::$rules['alias']分析url规则调用不同的解析方法
         6)路由地址
                 (1)路由到模块。如:\think\Route::controller('controller', 'index/Blog');//返回Array ( [type] => module ）
                 (2)路由到重定向地址。如:\think\Route::controller('controller', '/index/Blog');//返回Array ( [type] => redirect ）
@@ -37,13 +37,19 @@
                 (4)路由到类的方法(包含命名空间路径)。.如:\think\Route::controller('controller', 'app\\index\\controller\\Blog');//返回Array ( [type] => method ）
                 (5)路由到闭包(匿名函数)。如:\think\Route::get('controller/:name', function($name){ return 'Hello,'.$name;});//返回Array ( [type] => function ）
         7)域名路由
-                （1）注册方式：
-                        一、动态注册：
-                                (一)、完整域名：Route::domain('admin.thinkphp.cn','Admin');
-                                (二)、子域名邦定：Route::domain('admin','Admin');//假如网站域名为baidu.com,则admin.baidu.com邦定到Admin模块
-                               （三）、泛域名部署：Route::domain('*','Admin?name=*');                                
-                        二、配置定义：return['__domain__'=>['admin.thinkphp.cn'=>'Admin']]
-                （2）邦定方式：（邦定到模块、邦定到命名空间、邦定到类、绑定到闭包函数）  
+		（1）配置：config.php配置文件url_domain_deploy设置为true
+		（2）邦定
+                	一、注册方式：
+                        	（一）、动态注册：
+                                	(一)、完整域名：Route::domain('admin.thinkphp.cn','Admin');
+                                	(二)、子域名邦定：Route::domain('admin','Admin');//假如网站域名为baidu.com,则admin.baidu.com邦定到Admin模块
+                               	       （三）、泛域名部署：Route::domain('*','Admin?name=*');                                
+                        	（二）、配置定义：return['__domain__'=>['admin.thinkphp.cn'=>'Admin']]
+                	二、邦定方式：（邦定到模块、邦定到命名空间、邦定到类、绑定到闭包函数）
+			三、最终赋值：	赋值给Route::$rules['domain']数组
+		（3）解析
+			一、Route::checkDomain（）检测子域名部署，对self::$rules['domain']数组分析得出url，针对不同类型的url给予不同类型的数组，赋值给Route::$bind数组  
+			二、Route::checkUrlBind()检测URL绑定对Route::$bind数组进行分析;然后根据不同的类型调用不同的解析方法 
 3、控制器
 	1）分层控制器：
 		（1）不在默认Controller目录，在指定的控制器目录。如：\think\Loader::controller('Blog', 'event');在event目录下的Blog控制器
