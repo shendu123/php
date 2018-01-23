@@ -6,10 +6,50 @@
                 （1）手动注册：hook:add()
                 （2）自动注册：在配置文件tags.php中进行配置   
         5) 详细说明：http://blog.csdn.net/u013927110/article/details/47000379   
-2、路由（域名邦定模块）
+2、路由
+	1）路由注册（设置）：
+		（1）先用App::routeCheck()方法进行URL路由检测
+			一、如果开启了路由（url_route_on=true），则获取路由配置文件（route.php）中的路由配置进行路由注册，设置路由规则（Route::setRule）
+		（2）注册路由规则
+			一、动态注册（get、post、put、delete、any、rule）
+				（一）动态单个注册，如：Route::rule('new/:id','index/News/read');
+				（二）动态批量注册，如：Route::get(['new/:id'=>'News/read','blog/:name'=>'Blog/detail']);				
+		（3）快捷路由（控制器注册路由,会注册get、post、put、delete等5种类型）：Route::controller（$rule, $route）
+			一、Route::controller也是调用get、post...路由方法，再调用rule方法，然后调用setRule方法进行路由设置，
+		（4）路由设置执行顺序：
+			一 Route类中：   controller 、（get、post、delete等方法）、rule、setRule	
+	2）路由解析：
+		（1）如果开启了路由（url_route_on=true），则调用 Route::check（）方法进行路由检测，获取注册设置后的路由规则（self::$rules）
+		（2）Route::checkRoute，Route::checkRule检测路由规则
+		（1）Route::parseRule方法进行路由解析
+        3）url生成(相当于tp3.2的U方法)：如：\think\Url::build('index/blog/read','id=5&name=thinkphp');//输出  /index/blog/read/id/5/name/thinkphp.html  
+        4)路由url邦定与解析
+                （1）url邦定：如：邦定到模块/控制器/操作、邦定到类、邦定到命名空间等等
+                        一、Route::bind('\app\index\controller','namespace')邦定到命名空间
+                （2）解析：Route::checkUrlBind()检测URL绑定;然后根据不同的类型调用不同的解析方法 
+        5）路由别名邦定与解析
+                （1）别名邦定：如：Route::alias('user','\app\index\controller\User');或在route.php中配置
+                （2）别名解析：Route::checkRouteAlias()检测路由别名,然后根据不同的url规则类型调用不同的解析方法
+        6)路由地址
+                (1)路由到模块。如:\think\Route::controller('controller', 'index/Blog');//返回Array ( [type] => module ）
+                (2)路由到重定向地址。如:\think\Route::controller('controller', '/index/Blog');//返回Array ( [type] => redirect ）
+                (3)路由到控制器。如:\think\Route::controller('controller', '@index/Blog');//返回Array ( [type] => controller ）
+                (4)路由到类的方法(包含命名空间路径)。.如:\think\Route::controller('controller', 'app\\index\\controller\\Blog');//返回Array ( [type] => method ）
+                (5)路由到闭包(匿名函数)。如:\think\Route::get('controller/:name', function($name){ return 'Hello,'.$name;});//返回Array ( [type] => function ）
+        7)域名路由
+                （1）注册方式：
+                        一、动态注册：
+                                (一)、完整域名：Route::domain('admin.thinkphp.cn','Admin');
+                                (二)、子域名邦定：Route::domain('admin','Admin');//假如网站域名为baidu.com,则admin.baidu.com邦定到Admin模块
+                               （三）、泛域名部署：Route::domain('*','Admin?name=*');                                
+                        二、配置定义：return['__domain__'=>['admin.thinkphp.cn'=>'Admin']]
+                （2）邦定方式：（邦定到模块、邦定到命名空间、邦定到类、绑定到闭包函数）  
 3、控制器
 	1）分层控制器：
 		（1）不在默认Controller目录，在指定的控制器目录。如：\think\Loader::controller('Blog', 'event');在event目录下的Blog控制器
+        2)构造函数继承问题
+                （1）如果父类有构造函数，而且子类没有构造函数，那么在子类实例化时确实会执行父类构造函数
+                （2）如果子类也有构造函数，那么当子类实例化时，不论父类是否有构造函数，都会执行子类自己的构造函数,不会继承父类构造函数。如果想要继承（想用父类构造函数里的方法或属性），则调用parent::__construct();
 5、反射  
 	1)定义：
 		（1）、https://www.cnblogs.com/KeenLeung/p/6041280.html
@@ -34,6 +74,11 @@
 6、模型
 	1）分层模型：
 		（1）不在默认Model目录，在指定的模型目录。如：\think\Loader::model('User', 'logic');在logic目录下的User类
+        2) 获取器、修改器
+                (1)获取器：在获取数据的字段值后自动进行处理，例如，我们需要对状态值进行转换（如：status='1'的显示为'审核成功',status='-1'的显示为'审核失败'）
+                （2）修改器：数据赋值的时候自动进行转换处理，则入库后为转换后的值
+        3）自动完成
+                (1)auto、insert和update三个属性，可以分别在写入、新增和更新的时候进行字段的自动完成机制，auto属性自动完成包含新增和更新操作
 	
 7、验证
 	1）$rule instanceof \Closure判断规则函数是否为匿名函数
@@ -136,8 +181,6 @@
         3)sql调试与监听
                 (1)如果数据库配置文件有开启debug,则会对sql进行调试(把sql语句、sql性能分析、sql运行时间等信息写入日志)或监听
                 （2）监听：Db::listen();
-14、模型
-        1）
 
       
 15、函数：

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
@@ -30,6 +30,10 @@
 //（4）返回类型为控制器
 //\think\Route::controller('controller', '@index/Blog');
 //Array ( [type] => controller [controller] => index/Blog/getinfo )
+
+////（5）返回类型为闭包(匿名函数)
+//\think\Route::get('controller/:name', function($name){ return 'Hello,'.$name;});
+//Array ( [type] => function [function] => Closure Object ( [parameter] => Array ( [$name] => ) ) ) 
 
 
 
