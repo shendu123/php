@@ -176,17 +176,32 @@
 				       });
 		（3）tpAdmin-master\vendor\topthink\think-captcha\src\helper.php这个文件何时加载进来执行的？
 			一、tpAdmin-master\thinkphp\library\think\Load.php中有注册composer自动加载，有加载autoload_files.php文件，此文件有helper.php
+        5)分页(paginate方法)
+                （1）如：Db::name('user')->where('status',1)->paginate(10);
+                        一、 调用\think\db\Query.php中paginate方法,里面有对\\think\\paginator\\driver\\Bootstrap实例化赋值（父类Paginator类属性初始化）
+                        二、分页原理：paginate方法里有调用->page($page, $listRows)->select(）
+                        三、Bootstrap类中render方法渲染分页html
 13、数据库
         1）Db::query（）与Db::execute（）执行原理
                 （1）Db.php中有一个__callStatic方法，调用未定义的方法会去连接的数据库类（或父类Connection.php）中查找
                 （2）区别：Db::query方法用于执行SQL查询操作，Db::execute用于更新和写入数据的sql操作
+                 (3)Db::query（）、 Db::execute（）与model中的select（）、save()、update（）等方法区别：
+                        一、前者是调用\think\db\Connection.php，读取数据库（mysql）配置信息,pdo实例进行处理
+                        二、后者是调用\think\db\Query.php取得mysql驱动（\\think\\db\\builder\\mysql）的实例进行处理  
         2)Db::table()与Db::name()执行原理
                 （1）Db.php中有一个__callStatic方法（未定义的方法会去\think\db\Connection.php中找）
                 （2）Connection.php中有一个__call方法（未定义的方法会去\think\db\Query.php中找）   
                 （3）区别：Db::table('think_user')表要加前缀，Db::name('user')不用表前缀
         3)sql调试与监听
-                (1)如果数据库配置文件有开启debug,则会对sql进行调试(把sql语句、sql性能分析、sql运行时间等信息写入日志)或监听
-                （2）监听：Db::listen();
+                (1)如果数据库配置文件有开启debug,则会对sql进行调试(把sql语句、sql性能分析、sql运行时间等信息写入日志或监听输出)
+                （2）如果未注册监听（Db::listen()），则把调试信息写入日志，如果有注册监听则不写入日志。
+14、trait
+        1)作用：代码复用，解决了php不能多继承的问题。比如：增删改查都写在一个trait文件里
+        2）与interface区别： interface只是声明，抽象方法没有实现，trait里的方法都实现
+        3）tp5中调用步骤：
+                （1）\think\Loader.php中有注册traits命名空间（注意：这个目录名字是随便写的。）
+                （2）文件编写：trait文件内容声明格式：trait Controller(与class的区别就是：把class Controller改为trait Controller了）
+                （3）调用：在类文件中（class上面）\think\Loader::import()或用load_trait（）助手函数引入trait文件,在class下面 use。如：use \app\admin\traits\controller\Controller;
 
       
 15、函数：
@@ -205,10 +220,12 @@
 		（1）定义：解析一个 URL 并返回一个关联数组，包含在 URL 中出现的各种组成部分 
 		（2）用法：parse_url('http://username:password@hostname/path?arg=value#anchor')	
                         一、返回Array ( [scheme] => http [host] => hostname [user] => username [pass] => password [path] => /path [query] => arg=value [fragment] => anchor ) 
-        6)parse_str()函数：把查询字符串解析到变量中。
-                        一、如：parse_str("name=Bill&age=60",$myArray);     //$myArray数组结果为Array ( [name] => Bill [age] => 60 )
+        6)parse_str()与http_build_query（）
+                        一、parse_str()：把查询字符串解析到变量中。如：parse_str("name=Bill&age=60",$myArray);     //$myArray数组结果为Array ( [name] => Bill [age] => 60 )
+                        二、http_build_query（）把关联（或下标）数组生成一个经过 URL-encode 的请求字符串  如：http_build_query（ ['name' => 'Bill', 'age' =>'60'] ）//结果为name=Bill&age=60
         7) get_object_var($object)，返回一个数组。获取$object对象中的属性，组成一个数组
         8)  __CLASS__、get_class()都是获取当前的类名。
             但是get_class($this)与get_called_class()都是获取主调类的类名（就是调用者的类名）
+        9)is_scalar($var)检测变量是否是一个标量(标量变量是指那些包含了 integer、float、string 或 boolean的变量，而 array、object 和 resource 则不是标量)     
 
 

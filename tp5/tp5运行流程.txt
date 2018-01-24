@@ -1,0 +1,18 @@
+1、流程：
+    1）总体流程：
+        （1）定义系统常量->注册自动加载->注册错误和异常处理机制->加载惯例配置文件->执行应用程序->发送数据到客户端
+    2）详细流程说明
+        （1）注册自动加载
+                一、注册命名空间
+                二、自动加载类 
+         (2)注册错误和异常处理机制
+                一、自定义错误类 set_error_handler([__CLASS__, 'appError']);只要错误级别不是E_ERROR、E_PARSE这些致命错误、语法错误，就会触发
+                二、自定义异常类 set_exception_handler([__CLASS__, 'appException']);只要抛出（throw）异常就会触发
+                三、register_shutdown_function([__CLASS__, 'appShutdown']);程序执行完成就触发
+        （3）执行应用程序
+                一、初始化应用，
+                        （一）加载配置文件（config.php、database.php）、
+                        （二）加载扩展配置文件（extra目录下的文件）、
+                        （三）加载行为扩展文件（tags目录下的文件）、
+                        （四）加载公共文件（应用或模块下common.php）
+                        （五）加载语言包（应用或模块下lang.php）   
