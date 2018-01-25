@@ -43,12 +43,15 @@
                                 （四）method:   如果路由类型为类的方法,则根据调度信息返回的数据,调用反射类ReflectionMethod进行处理(实例化控制器,调用操作方法)
                                 （五）function: 如果路由类型为闭包,则调用反射类ReflectionFunction进行处理
                                 （六）response: 有设置路由after行为(after_behavior)才会返回response,对这个返回类型不做处理
-                        二）module类型解析后的$data说明
-                                （一）如果返回的是模板渲染,
-                                        [一]、如果是new \think\View()->fetch()，则返回模板引擎解析后的数据
-                                        [二]、如果是通过view（）助手函数渲染模板，则返回\\think\\response\\view实例
-                                （二）如果返回的是json
-                                        [一]、如果是通过json（）助手函数，则返回的是\\think\\response\\Json实例
+                        二）module类型解析后的$data说明（其它类型也是一样）
+                                （一）如果控制器方法里返回的是模板渲染,
+                                        [一]、如果是return new \think\View()->fetch()，则$data为模板引擎解析后的数据
+                                        [二]、如果是return view（）助手函数渲染模板，则$data为\\think\\response\\view实例
+                                （二）如果控制器方法里返回的是json
+                                        [一]、如果是通过json（$arr）助手函数，则$data为 \\think\\response\\Json实例
+                                （三）如果返回的是display或其它
+                                        [一]、如果返回的是new \think\View()->display($var),则$data为$var 
+                                        [二]、如果数据不做任务处理（如：直接return 变量、数组、json等），则$data为原始数据（浏览器里会直接输出）
                 五、返回response实例（response实例化,response类属性初始化，就是$data、$code、$header等进行赋值）
                         一)、如果数据不为空：如果是ajax请求，返回\\think\\response\\Json实例，否则返回response实例
                         二)、如果数据为空：返回response实例
