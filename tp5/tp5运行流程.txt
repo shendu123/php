@@ -9,28 +9,51 @@
                 一、自定义错误类 set_error_handler([__CLASS__, 'appError']);只要错误级别不是E_ERROR、E_PARSE这些致命错误、语法错误，就会触发
                 二、自定义异常类 set_exception_handler([__CLASS__, 'appException']);只要抛出（throw）异常就会触发
                 三、register_shutdown_function([__CLASS__, 'appShutdown']);程序执行完成就触发
-        （3）执行应用程序
+        （3）执行应用程序（返回response实例）
                 一、初始化应用，
-                        （一）加载配置文件（application或模块下config.php、database.php）（就是config类属性赋值）
-                        （二）加载扩展配置文件（application或模块下extra目录下的文件）（就是config类属性赋值）
-                        （三）加载行为扩展文件（application或模块下tags.php）（就是注册行为）
-                        （四）加载公共文件（application或模块下common.php）（include引入）
-                        （五）加载模块语言包（模块下lang文件夹下的文件）（相当于给语言类属性赋值）
-			（六）注册应用命名空间（config.php中'app_namespace'=>'app',就是application用app代替） 		
-			（七）加载额外文件（config.php中的extra_file_list=>APP_PATH . 'helper' . EXT, THINK_PATH . 'helper' . EXT）(就是include 引入助手函数文件)
+                        一）加载配置文件（application或模块下config.php、database.php）（就是config类属性赋值）
+                        二）加载扩展配置文件（application或模块下extra目录下的文件）（就是config类属性赋值）
+                        三）加载行为扩展文件（application或模块下tags.php）（就是注册行为）
+                        四）加载公共文件（application或模块下common.php）（include引入）
+                        五）加载模块语言包（模块下lang文件夹下的文件）（相当于给语言类属性赋值）
+			六）注册应用命名空间（config.php中'app_namespace'=>'app',就是application用app代替） 		
+			七）加载额外文件（config.php中的extra_file_list=>APP_PATH . 'helper' . EXT, THINK_PATH . 'helper' . EXT）(就是include 引入助手函数文件)
 		二、入口文件绑定、加载系统语言包
-			（一）、常量定义（就是模块邦定，入口文件添加BIND_MODULE常量，即可把当前入口文件绑定到指定的模块或者控制器)
-			（二）、自动入口绑定（根据入口文件名定位对应的模块，如：假设入口文件是demo.php,则访问时就去找demo模块）
-			（三）、开启多语言机制 检测当前语言
-			（四）、加载系统语言包(应用和thinkphp文件夹下lang文件夹下的(zh-cn.php)文件)
-		三、路由
-			（一）邦定
-				[一]、先进行路由检测，如果有开启路由，则导入路由配置文件进行路由注册（这里指静态配置定义注册，还有一种是动态注册。）
-				[二]、动态注册（get、post、controller等）
-			（二）解析
-				[一]、路由别名解析
-				[二]、域名路由解析
-				[三]、规则路由解析（包括静态注册、动态注册）
-		四、
-
-
+			一）、常量定义（就是模块邦定，入口文件添加BIND_MODULE常量，即可把当前入口文件绑定到指定的模块或者控制器)
+			二）、自动入口绑定（根据入口文件名定位对应的模块，如：假设入口文件是demo.php,则访问时就去找demo模块）
+			三）、开启多语言机制 检测当前语言
+			四）、加载系统语言包(应用和thinkphp文件夹下lang文件夹下的(zh-cn.php)文件)
+		三、路由检测并返回解析后的数据（调度信息）
+			一）邦定
+				(一)、先进行路由检测，如果有开启路由，则导入路由配置文件进行路由注册（这里指静态配置定义注册，还有一种是动态注册。）
+				(二)、动态注册（get、post、controller等）
+			二）解析
+				(一)、路由别名解析
+				(二)、域名路由解析
+				(三)、规则路由解析（包括静态注册、动态注册）
+                        三）返回数据(路由解析后的调度信息)
+                                (一)、如果有开启路由：返回解析后的数据类型type有（module、controller、redirect、method【类的方法(包含命名空间路径)】、function【闭包，匿名函数】）
+                                (二)、如果没开启，返回解析后的数据类型type有（module）
+                        四）如果有开启debug，无论是否开启路由，把解析后返回的数据（调度信息）写入日志                                        
+		四、调度信息（路由类型）解析
+                        一）可能有以下几种路由类型
+                                （一）redirect：如果路由类型为重定向，则取得\\think\\response\\Redirect 实例，跳转到目的url
+                                （二）module：  如果路由类型为模块，则根据调度信息返回的数据（包含模块、控制器、方法的数组），取得模块，实例化控制器，调用操作方法
+                                （三）controller：如果路由类型为控制器，则根据调度信息返回的url地址,对url地址进行pathinfo分析,ReflectionClass进行处理(实例化控制器,调用操作方法)
+                                （四）method:   如果路由类型为类的方法,则根据调度信息返回的数据,调用反射类ReflectionMethod进行处理(实例化控制器,调用操作方法)
+                                （五）function: 如果路由类型为闭包,则调用反射类ReflectionFunction进行处理
+                                （六）response: 有设置路由after行为(after_behavior)才会返回response,对这个返回类型不做处理
+                        二）module类型解析后的$data说明
+                                （一）如果返回的是模板渲染,
+                                        [一]、如果是new \think\View()->fetch()，则返回模板引擎解析后的数据
+                                        [二]、如果是通过view（）助手函数渲染模板，则返回\\think\\response\\view实例
+                                （二）如果返回的是json
+                                        [一]、如果是通过json（）助手函数，则返回的是\\think\\response\\Json实例
+                五、返回response实例（response实例化,response类属性初始化，就是$data、$code、$header等进行赋值）
+                        一)、如果数据不为空：如果是ajax请求，返回\\think\\response\\Json实例，否则返回response实例
+                        二)、如果数据为空：返回response实例
+        （3）发送数据到客户端（调用response类send方法）
+                一、数据处理
+                        一)如果是ajax请求，send()就会调用json实例中的output()方法对数据进行处理（json_encode）
+                        二)如果控制器方法里是通过view（）助手函数渲染模板，则send()就会调用\\think\\response\\view实例中的output()方法对数据进行处理（\think\view渲染）
+                二、处理后的数据输出到浏览器显示
