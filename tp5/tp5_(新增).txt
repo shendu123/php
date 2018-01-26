@@ -65,19 +65,22 @@
 	2) 反射类
 		（1）ReflectionClass类
 			一、getConstructor方法：取得该类的构造函数信息
-			二、newInstanceArgs方法：实例化该类
+			二、newInstanceArgs方法：实例化该类，给出的参数将传递到类的构造函数。new \ReflectionClass($class)->newInstanceArgs ([ array $args ] )
 		（2）ReflectionMethod类
-                        一、实例化参数问题，有两种方式
+                        一、实例化传参问题，有两种方式
                                 （一）、传两个参数则分别是类名(或类的实例)、方法名。如：new \ReflectionMethod($class , $method )
-                                （二）、传一个参数则是静态方法。如：new \ReflectionMethod( $class::$method ),类名称和方法名称，之间使用 :: 分隔
+                                （二）、传一个参数则是静态方法。如：new \ReflectionMethod( $class::$method ),类名和方法名之间使用 :: 分隔
 			一、getNumberOfParameters方法：获取控制器构造函数参数个数或请求方法参数个数
 			二、getParameters方法：获取控制器构造函数参数或请求方法参数（返回ReflectionParameter对象）
-			三、invoke方法：调用该方法
+			三、invoke方法：调用无参数的方法,
+                        四、invokeArgs方法：调用有参数的方法 new \ReflectionMethod($object , $method )->invokeArgs ( $object , array $args )
 			四、isPublic方法：测试该方法是否为public
 			五、isStatic方法：测试该方法是否为static
 		（3）ReflectionParameter类
 			一、getName方法：取得参数名
 			二、getClass方法：若该参数为对象，返回该对象的类名
+                （4）ReflectionFunction类：获取函数的有关信息
+                        一、invoke(调用该函数)、invokeArgs方法（调用有参数的函数）
 	3）邦定参数、依赖注入
 
 6、模型
