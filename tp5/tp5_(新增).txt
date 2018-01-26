@@ -82,7 +82,16 @@
                 （4）ReflectionFunction类：获取函数的有关信息
                         一、invoke(调用该函数)、invokeArgs方法（调用有参数的函数）
 	3）邦定参数、依赖注入
-
+        (1)控制器构造函数依赖注入解析：
+            一、第一步：args = App::bindParams(new \ReflectionClass($class)->getConstructor(), $vars);
+            二、第二步：new \ReflectionClass($class)->newInstanceArgs($args);
+        (2)控制器普通方法依赖注入
+            一、第一步：args = App::bindParams(new \ReflectionMethod($class, $method[1]), $vars);
+            二、第二步：new \ReflectionMethod($class, $method[1])->invokeArgs(isset($class) ? $class : null, $args);
+        （3）原理：（App::bindParams方法解释说明）
+            一、依赖注入：如果构造函数或方法参数传入的是对象（比如：\think\Request）, 则会去实例化那个类（Request），然后赋值给args数组，然后执行第二步传入args参数调用方法。 
+            二、参数邦定：如果构造函数或方法参数传入的是普通变量，则会获取url请求参数,然后赋值给args数组，然后执行第二步传入args参数调用方法。
+                
 6、模型
 	1）分层模型：
 		（1）不在默认Model目录，在指定的模型目录。如：\think\Loader::model('User', 'logic');在logic目录下的User类
