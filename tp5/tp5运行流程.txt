@@ -2,14 +2,21 @@
     1）总体流程：
         （1）定义系统常量->注册自动加载->注册错误和异常处理机制->加载惯例配置文件->执行应用程序->发送数据到客户端
     2）详细流程说明
-        （1）注册自动加载
+        （1）定义系统常量、加载环境变量
+                一、定义系统常量
+                二、加载环境变量（先解析，后配置）
+                        一）parse_ini_file() 函数解析一个配置文件，并以数组的形式返回其中的设置。https://www.cnblogs.com/longzhongren/p/5826173.html
+                        二）putenv（） 配置系统环境变量
+                        三）getenv（） 取得系统的环境变量
+        （2）注册自动加载
                 一、注册命名空间
                 二、自动加载类 
-         (2)注册错误和异常处理机制
+        （3）注册错误和异常处理机制
                 一、自定义错误类 set_error_handler([__CLASS__, 'appError']);只要错误级别不是E_ERROR、E_PARSE这些致命错误、语法错误，就会触发
                 二、自定义异常类 set_exception_handler([__CLASS__, 'appException']);只要抛出（throw）异常就会触发
                 三、register_shutdown_function([__CLASS__, 'appShutdown']);程序执行完成就触发
-        （3）执行应用程序（返回response实例）
+        （4）加载惯例配置文件(convention.php)       
+        （5）执行应用程序（返回response实例）
                 一、初始化应用，
                         一）加载配置文件（application或模块下config.php、database.php）（就是config类属性赋值）
                         二）加载扩展配置文件（application或模块下extra目录下的文件）（就是config类属性赋值）
@@ -55,7 +62,7 @@
                 五、返回response实例（response实例化,response类属性初始化，就是$data、$code、$header等进行赋值）
                         一)、如果数据不为空：如果是ajax请求，返回\\think\\response\\Json实例，否则返回response实例
                         二)、如果数据为空：返回response实例
-        （3）发送数据到客户端（调用response类send方法）
+        （6）发送数据到客户端（调用response类send方法）
                 一、数据处理
                         一)如果是ajax请求，send()就会调用json实例中的output()方法对数据进行处理（json_encode）
                         二)如果控制器方法里是通过view（）助手函数渲染模板，则send()就会调用\\think\\response\\view实例中的output()方法对数据进行处理（\think\view渲染）

@@ -66,7 +66,10 @@
 		（1）ReflectionClass类
 			一、getConstructor方法：取得该类的构造函数信息
 			二、newInstanceArgs方法：实例化该类
-		（2）ReflectionMethod类		
+		（2）ReflectionMethod类
+                        一、实例化参数问题，有两种方式
+                                （一）、传两个参数则分别是类名(或类的实例)、方法名。如：new \ReflectionMethod($class , $method )
+                                （二）、传一个参数则是静态方法。如：new \ReflectionMethod( $class::$method ),类名称和方法名称，之间使用 :: 分隔
 			一、getNumberOfParameters方法：获取控制器构造函数参数个数或请求方法参数个数
 			二、getParameters方法：获取控制器构造函数参数或请求方法参数（返回ReflectionParameter对象）
 			三、invoke方法：调用该方法
