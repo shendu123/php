@@ -1,7 +1,43 @@
 1、node知识点
 	1）模块系统
 		（1）require 用于从外部获取一个模块的接口，即module.exports对象，exports是全局的
-		（2）	
+		（2）两种方式封装模块
+                        一、通过exports对象
+                                一）exports.world = function() {console.log('Hello World');}
+                        二、通过模块接口
+                                一）function hello() { this.sayHello = function() { console.log('Hello ' + name); }; };
+                                二）module.exports = hello
+                        三、两种方式区别：
+                                一）通过exports对象封装：在外部引用该模块时，其接口对象是exports
+                                二）通过模块接口封装：在外部引用该模块时，其接口对象是hello
+        2）路由
+                （1）url模块：解析 GET 请求。如：url.parse(request.url).pathname ， url.parse(request.url, true).query
+                （2）querystring模块：解析 POST 请求体中的参数
+        3）http模块：
+                （1）http.createServer().listen(8888)分析;  （创建服务并监听端口） 
+                        一、http对象调用createServer函数会返回一个对象，这个对象有一个叫做 listen 的方法，这个方法有一个数值参数， 指定这个 HTTP 服务器监听的端口号。
+                        二、浏览器访问：http://127.0.0.1:8888/
+        4）Express框架（https://blog.gtwang.org/programming/learn-to-use-the-new-router-in-expressjs-4/）
+                （1）核心特性：
+                        一、可以设置中间件来响应 HTTP 请求。               如：express.static 来设置静态文件如：图片， CSS, JavaScript 等。
+                        二、定义了路由表用于执行不同的 HTTP 请求动作。      如：app.get（）、app.post（）路由请求方式
+                        三、可以通过向模板传递参数来动态渲染 HTML 页面
+                （2）node中Express的use深入理解：http://www.html-js.com/article/1603  
+                （3）中间件:
+                        一、深入理解express的中间件：http://blog.csdn.net/u011413061/article/details/50518069
+                        二、Node.js开发入门—Express里的路由和中间件：http://blog.csdn.net/foruok/article/details/47354737
+                （4）Express框架深入学习：
+                        一、http://www.cnblogs.com/monkey1314/p/6897090.html
+        5）Node模板引擎ejs
+                （1）http://www.cnblogs.com/monkey1314/p/6895112.html
+        6）NodeJS 入门第一、二、三天    http://www.cnblogs.com/monkey1314/p/6803397.html    
+        7）exports 和 module.exports 的区别：https://cnodejs.org/topic/5231a630101e574521e45ef8
+                （1）module.exports 初始值为一个空对象 {}
+                （2）exports 是指向的 module.exports 的引用
+                （3）require() 返回的是 module.exports 而不是 exports
+            
+                
+                                
 
 2、mongodb知识点总结
 	1）mongoDB服务启动
@@ -17,5 +53,19 @@
 		（4）显示所有集合：show collections（先要指定数据库，use 数据库名）
 		（3）MongoDB 中默认的数据库为 test，如果你没有创建新的数据库，集合将存放在 test 数据库中。
 		（4）删除数据库：db.dropDatabase()。（如dbTest.dropDatabase）
-			
+3、composer知识点
+        1）基础
+                （1）composer install - 如有 composer.lock 文件，直接安装，否则从 composer.json 安装最新扩展包和依赖；
+                （2）composer update - 从 composer.json 安装最新扩展包和依赖；
+                （3）composer update vendor/package - 从 composer.json 或者对应包的配置，并更新到最新；
+                （4）composer require new/package - 添加安装 new/package, 可以指定版本，如： composer require new/package ~2.5.
+        2）Composer 教程    
+                （1）、http://wiki.jikexueyuan.com/project/composer/（极客学院）
+                （2）、https://www.w3cschool.cn/composer/a5xk1nfd.html（w3cschool）
+        3）composer install 与 composer require区别( http://blog.csdn.net/xianglingchuan/article/details/51930960 )
+                （1）、composer install会去读取composer.lock或composer.json文件，读取文件配置安装
+                （2）、composer require是从输入的路径安装。如：composer require topthink/think-captcha
+        4）composer.lock文件与composer.json文件区别（ http://www.jb51.net/article/79140.htm ）
+                （1）、如果当前目录下存在 composer.lock 文件，它会从此文件读取依赖版本，而不是根据 composer.json 文件去获取依赖。
+                （2）、如果没有composer.lock文件，composer将在处理完依赖关系（composer require或composer install[读取composer.json]）后创建它（composer.lock）。
 		
