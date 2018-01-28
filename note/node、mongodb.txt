@@ -8,7 +8,8 @@
 		（3）事件机制，事件环
 			一、不管是新用户的请求，还是老用户的I/O完成，都将以事件方式加入事件环，等待调度。
 	2）模块系统
-		（1）Node.js中，一个JavaScript文件中定义的变量、函数，都只在这个文件内部有效。当需要从此JS文件外部引用这些变量、函数时，必须使用exports对象进行暴露。使用者要用require()命令引用这个JS文件。
+		（1）Node.js中，一个JavaScript文件中定义的变量、函数，都只在这个文件内部有效。当需要从此JS文件外部引用这些变量、函数时，
+		     必须使用exports对象进行暴露。使用者要用require()命令引用这个JS文件。
 		（2）每一个JavaScript文件都是一个模块.require 用于从外部获取一个模块的接口，即module.exports对象，exports是全局的
 		（3）两种方式暴露模块
                         一、通过exports对象暴露函数、变量
@@ -39,12 +40,14 @@
                         二、定义了路由表用于执行不同的 HTTP 请求动作。      如：app.get（）、app.post（）路由请求方式
                         三、可以通过向模板传递参数来动态渲染 HTML 页面
                 （3）中间件:
-			一、定义：收到请求后和发送响应之前这个阶段执行的一些函数，是一个可访问请求对象（req）和响应对象（res）的函数，在 Express 应用的请求-响应循环里，下一个内联的中间件通常用变量 next 表示
+			一、定义：收到请求后和发送响应之前这个阶段执行的一些函数，是一个可访问请求对象（req）和响应对象（res）的函数，
+				  在 Express 应用的请求-响应循环里，下一个内联的中间件通常用变量 next 表示
 			二、中间件类别：
 				一）、应用级中间件
-					（一）var app = express();app.use()、app.get()、app.post()等
+					（一）use参数可以为为对象或函数。如：app.use('引入的路由对象文件')或app.use(function( req, res, next ) {})
 				二｝、路由级中间件
-					（一）路由级中间件和应用级中间件一样，只是它绑定的对象为 express.Router()。如：var router = express.Router();router.use();
+					（一）路由级中间件和应用级中间件一样，只是它绑定的对象为 express.Router()。
+					     如：var router = express.Router();router.use(function( req, res, next ){});
 				三）、错误处理中间件
 					（一）错误处理中间件和其他中间件定义类似，只是要使用 4 个参数。如：app.use(function(err, req, res, next) {})
 				四）、内置中间件
@@ -64,7 +67,8 @@
 					（一）app.use(path,callback)中的callback既可以是router对象又可以是函数，path可以为空，表示根'/'
 					（二）app.get(path,callback)中的callback只能是函数，path可以为空，表示根'/'
 				三）什么时候用：
-					（1）当一个路径有多个匹配规则时，把处理的方法封装成对象文件传参给app.use，如果只有一个规则，则可以使用app.get，参数为匿名函数进行处理
+					（1）当一个路径有多个匹配规则时，把处理的方法封装成对象文件传参给app.use，如果只有一个规则，
+					     则可以使用app.get，参数为匿名函数进行处理
         5）Node模板引擎
 		（1）著名的有两个，第一个叫做ejs； 第二个叫做jade。
         6）NodeJS 入门第一、二、三天    http://www.cnblogs.com/monkey1314/p/6803397.html （强烈推荐）   
