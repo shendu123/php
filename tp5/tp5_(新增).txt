@@ -70,36 +70,36 @@
                         一、实例化传参问题，有两种方式
                                 （一）、传两个参数则分别是类名(或类的实例)、方法名。如：new \ReflectionMethod($class , $method )
                                 （二）、传一个参数则是静态方法。如：new \ReflectionMethod( $class::$method ),类名和方法名之间使用 :: 分隔
-			一、getNumberOfParameters方法：获取控制器构造函数参数个数或请求方法参数个数
-			二、getParameters方法：获取控制器构造函数参数或请求方法参数（返回ReflectionParameter对象）
-			三、invoke方法：调用无参数的方法,
-                        四、invokeArgs方法：调用有参数的方法 new \ReflectionMethod($object , $method )->invokeArgs ( $object , array $args )
-			四、isPublic方法：测试该方法是否为public
-			五、isStatic方法：测试该方法是否为static
+			二、getNumberOfParameters方法：获取控制器构造函数参数个数或请求方法参数个数
+			三、getParameters方法：获取控制器构造函数参数或请求方法参数（返回ReflectionParameter对象）
+			四、invoke方法：调用无参数的方法,
+                        五、invokeArgs方法：调用有参数的方法 new \ReflectionMethod($object , $method )->invokeArgs ( $object , array $args )
+			六、isPublic方法：测试该方法是否为public
+			七、isStatic方法：测试该方法是否为static
 		（3）ReflectionParameter类
 			一、getName方法：取得参数名
 			二、getClass方法：若该参数为对象，返回该对象的类名
                 （4）ReflectionFunction类：获取函数的有关信息
                         一、invoke(调用该函数)、invokeArgs方法（调用有参数的函数）
 	3）邦定参数、依赖注入
-        (1)控制器构造函数依赖注入解析：
-            一、第一步：args = App::bindParams(new \ReflectionClass($class)->getConstructor(), $vars);
-            二、第二步：new \ReflectionClass($class)->newInstanceArgs($args);
-        (2)控制器普通方法依赖注入
-            一、第一步：args = App::bindParams(new \ReflectionMethod($class, $method[1]), $vars);
-            二、第二步：new \ReflectionMethod($class, $method[1])->invokeArgs(isset($class) ? $class : null, $args);
-        （3）原理：（App::bindParams方法解释说明）
-            一、依赖注入：如果构造函数或方法参数传入的是对象（比如：\think\Request）, 则会去实例化那个类（Request），然后赋值给args数组，然后执行第二步传入args参数调用方法。 
-            二、参数邦定：如果构造函数或方法参数传入的是普通变量，则会获取url请求参数,然后赋值给args数组，然后执行第二步传入args参数调用方法。
+		(1)控制器构造函数依赖注入解析：
+			一、第一步：args = App::bindParams(new \ReflectionClass($class)->getConstructor(), $vars);
+			二、第二步：new \ReflectionClass($class)->newInstanceArgs($args);
+		(2)控制器普通方法依赖注入
+			一、第一步：args = App::bindParams(new \ReflectionMethod($class, $method[1]), $vars);
+			二、第二步：new \ReflectionMethod($class, $method[1])->invokeArgs(isset($class) ? $class : null, $args);
+		（3）原理：（App::bindParams方法解释说明）
+			一、依赖注入：如果构造函数或方法参数传入的是对象（比如：\think\Request）, 则会去实例化那个类（Request），然后赋值给args数组，然后执行第二步传入args参数调用方法。 
+			二、参数邦定：如果构造函数或方法参数传入的是普通变量，则会获取url请求参数,然后赋值给args数组，然后执行第二步传入args参数调用方法。
                 
 6、模型
 	1）分层模型：
 		（1）不在默认Model目录，在指定的模型目录。如：\think\Loader::model('User', 'logic');在logic目录下的User类
         2) 获取器、修改器
-                (1)获取器：在获取数据的字段值后自动进行处理，例如，我们需要对状态值进行转换（如：status='1'的显示为'审核成功',status='-1'的显示为'审核失败'）
+                （1）获取器：在获取数据的字段值后自动进行处理，例如，我们需要对状态值进行转换（如：status='1'的显示为'审核成功',status='-1'的显示为'审核失败'）
                 （2）修改器：数据赋值的时候自动进行转换处理，则入库后为转换后的值
         3）自动完成
-                (1)auto、insert和update三个属性，可以分别在写入、新增和更新的时候进行字段的自动完成机制，auto属性自动完成包含新增和更新操作
+                （1）auto、insert和update三个属性，可以分别在写入、新增和更新的时候进行字段的自动完成机制，auto属性自动完成包含新增和更新操作
 	
 7、验证
 	1）$rule instanceof \Closure判断规则函数是否为匿名函数
