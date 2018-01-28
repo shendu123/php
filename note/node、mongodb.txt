@@ -67,7 +67,7 @@
 					（一）app.use(path,callback)中的callback既可以是router对象又可以是函数，path可以为空，表示根'/'
 					（二）app.get(path,callback)中的callback只能是函数，path可以为空，表示根'/'
 				三）什么时候用：
-					（1）当一个路径有多个匹配规则时，把处理的方法封装成对象文件传参给app.use，如果只有一个规则，
+					（一）当一个路径有多个匹配规则时，把处理的方法封装成对象文件传参给app.use，如果只有一个规则，
 					     则可以使用app.get，参数为匿名函数进行处理
         5）Node模板引擎
 		（1）著名的有两个，第一个叫做ejs； 第二个叫做jade。
