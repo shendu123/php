@@ -6,6 +6,8 @@
 	1)适配器模式：驱动类，Db类
 	2）观察者模式：Hook类，行为
 	3）命令行模式：cli
+	4)先提出问题（为什么那样做，有什么好处？），再解决问题https://www.awaimai.com/patterns/adapter
+	5）各设计模式优点、缺点
 5、thinkphp架构：
 	1）
 	   http://blog.csdn.net/u011069013/article/category/6506374
