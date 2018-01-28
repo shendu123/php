@@ -1,0 +1,25 @@
+1、trait
+2、参数邦定、依赖注入，反射
+3、行为（钩子技术）
+4、tp5设计模式：
+	1）单例模式：数据库连接
+	1)适配器模式：驱动类，Db类
+	2）观察者模式：Hook类，行为
+	3）命令行模式：cli
+5、thinkphp架构：
+	1）
+	   http://blog.csdn.net/u011069013/article/category/6506374
+	   https://www.cnblogs.com/lixiuran/p/4322803.html	
+	   http://www.thinkphp.cn/topic/35803.html
+	   http://blog.csdn.net/bbyyzhang/article/details/52171631（推荐）
+	2）tp5
+	   http://blog.csdn.net/hsd2012/article/details/50773349
+	   http://blog.csdn.net/ikewyz/article/details/67633375	
+	   http://blog.csdn.net/u011069013/article/details/53096102?%3E	
+6、深入PHP面向对象、模式与实践
+	1）http://blog.jobbole.com/97315/#article-comment
+	2）http://www.cnblogs.com/red-code/p/5288639.html
+7、Laravel5.1框架关键技术解析（读书笔记）
+	1）http://blog.csdn.net/g5g5t9/article/details/72822572
+
+
