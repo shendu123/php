@@ -1,15 +1,31 @@
 1、node知识点
-	1）模块系统
-		（1）require 用于从外部获取一个模块的接口，即module.exports对象，exports是全局的
-		（2）两种方式封装模块
-                        一、通过exports对象
+	1）特点：
+		（1）单线程
+			一、好处：减少了内存开销，操作系统完全不再有线程创建、销毁的时间开销
+			二、坏处： 一个用户造成了线程的崩溃，整个服务都崩溃了，其他人也崩溃了
+		（2）非阻塞I/O（异步）
+			一、不会傻等I/O语句结束，而会执行后面的语句。
+		（3）事件机制，事件环
+			一、不管是新用户的请求，还是老用户的I/O完成，都将以事件方式加入事件环，等待调度。
+	2）模块系统
+		（1）Node.js中，一个JavaScript文件中定义的变量、函数，都只在这个文件内部有效。当需要从此JS文件外部引用这些变量、函数时，必须使用exports对象进行暴露。使用者要用require()命令引用这个JS文件。
+		（2）每一个JavaScript文件都是一个模块.require 用于从外部获取一个模块的接口，即module.exports对象，exports是全局的
+		（3）两种方式暴露模块
+                        一、通过exports对象暴露函数、变量
                                 一）exports.world = function() {console.log('Hello World');}
-                        二、通过模块接口
+				二）exports.msg = 'hi';    
+                        二、通过exports向外暴露一个类
                                 一）function hello() { this.sayHello = function() { console.log('Hello ' + name); }; };
                                 二）module.exports = hello
                         三、两种方式区别：
-                                一）通过exports对象封装：在外部引用该模块时，其接口对象是exports
-                                二）通过模块接口封装：在外部引用该模块时，其接口对象是hello
+                                一）通过exports对象暴露函数、变量：在外部引用该模块时，其接口对象是exports
+                                二）暴露类：在外部引用该模块时，其接口对象是hello
+		（4）require("foo.js");与require("./foo.js")的区别：
+			一、没有写./， 所以不是一个相对路径。是一个特殊的路径，那么Node.js将该文件视为node_modules目录下的一个文件
+		（5）exports 和 module.exports 的区别：https://cnodejs.org/topic/5231a630101e574521e45ef8
+			一、module.exports 初始值为一个空对象 {}
+			二、exports 是指向的 module.exports 的引用
+			三、require() 返回的是 module.exports 而不是 exports	
         2）路由
                 （1）url模块：解析 GET 请求。如：url.parse(request.url).pathname ， url.parse(request.url, true).query
                 （2）querystring模块：解析 POST 请求体中的参数
@@ -22,19 +38,37 @@
                         一、可以设置中间件来响应 HTTP 请求。               如：express.static 来设置静态文件如：图片， CSS, JavaScript 等。
                         二、定义了路由表用于执行不同的 HTTP 请求动作。      如：app.get（）、app.post（）路由请求方式
                         三、可以通过向模板传递参数来动态渲染 HTML 页面
-                （2）node中Express的use深入理解：http://www.html-js.com/article/1603  
                 （3）中间件:
-                        一、深入理解express的中间件：http://blog.csdn.net/u011413061/article/details/50518069
-                        二、Node.js开发入门—Express里的路由和中间件：http://blog.csdn.net/foruok/article/details/47354737
-                （4）Express框架深入学习：
-                        一、http://www.cnblogs.com/monkey1314/p/6897090.html
-        5）Node模板引擎ejs
-                （1）http://www.cnblogs.com/monkey1314/p/6895112.html
-        6）NodeJS 入门第一、二、三天    http://www.cnblogs.com/monkey1314/p/6803397.html    
-        7）exports 和 module.exports 的区别：https://cnodejs.org/topic/5231a630101e574521e45ef8
-                （1）module.exports 初始值为一个空对象 {}
-                （2）exports 是指向的 module.exports 的引用
-                （3）require() 返回的是 module.exports 而不是 exports
+			一、定义：收到请求后和发送响应之前这个阶段执行的一些函数，是一个可访问请求对象（req）和响应对象（res）的函数，在 Express 应用的请求-响应循环里，下一个内联的中间件通常用变量 next 表示
+			二、中间件类别：
+				一）、应用级中间件
+					（一）var app = express();app.use()、app.get()、app.post()等
+				二｝、路由级中间件
+					（一）路由级中间件和应用级中间件一样，只是它绑定的对象为 express.Router()。如：var router = express.Router();router.use();
+				三）、错误处理中间件
+					（一）错误处理中间件和其他中间件定义类似，只是要使用 4 个参数。如：app.use(function(err, req, res, next) {})
+				四）、内置中间件
+					（一）public目录来存放静态文件如：图片， CSS, JavaScript 等。如：app.use(express.static('public'));	
+				五）、第三方中间件
+					（一）加载 cookie 解析中间件。如：var cookieParser = require('cookie-parser');app.use(cookieParser());
+			三、注意：  
+				一）没有挂载路径的中间件，应用的每个请求都会执行该中间件。
+					（一）如：app.use(function (req, res, next) {});对所有url有效，都会执行这个匿名函数
+					（二）如：app.use('/user/:id',function (req, res, next) {});指向 /user/:id 的请求都会执行它
+                        四、深入理解express的中间件：http://blog.csdn.net/u011413061/article/details/50518069（强烈推荐）
+                        五、Node.js开发入门—Express里的路由和中间件：http://blog.csdn.net/foruok/article/details/47354737（强烈推荐）
+			六、node中Express的use中间件深入理解：http://www.html-js.com/article/1603
+			七、app.use与app.get区别：http://blog.csdn.net/wthfeng/article/details/53366169（强烈推荐）
+				一）app.use是用来加载中间件的。如:第三方中间件、内置中间件（静态文件）
+				二）参数方面
+					（一）app.use(path,callback)中的callback既可以是router对象又可以是函数，path可以为空，表示根'/'
+					（二）app.get(path,callback)中的callback只能是函数，path可以为空，表示根'/'
+				三）什么时候用：
+					（1）当一个路径有多个匹配规则时，把处理的方法封装成对象文件传参给app.use，如果只有一个规则，则可以使用app.get，参数为匿名函数进行处理
+        5）Node模板引擎
+		（1）著名的有两个，第一个叫做ejs； 第二个叫做jade。
+        6）NodeJS 入门第一、二、三天    http://www.cnblogs.com/monkey1314/p/6803397.html （强烈推荐）   
+        
             
                 
                                 
