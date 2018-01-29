@@ -241,6 +241,7 @@
         7) get_object_var($object)，返回一个数组。获取$object对象中的属性，组成一个数组
         8)  __CLASS__、get_class()都是获取当前的类名。
             但是get_class($this)与get_called_class()都是获取主调类的类名（就是调用者的类名）
-        9)is_scalar($var)检测变量是否是一个标量(标量变量是指那些包含了 integer、float、string 或 boolean的变量，而 array、object 和 resource 则不是标量)     
+        9)is_scalar($var)检测变量是否是一个标量(标量变量是指那些包含了 integer、float、string 或 boolean的变量，而 array、object 和 resource 则不是标量)  
+	10）array_column(array,column_key,index_key);返回输入二维数组中某一列的值组成以index_key为键的一维数组。
 
 
