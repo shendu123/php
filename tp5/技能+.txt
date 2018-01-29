@@ -1,13 +1,57 @@
 1、trait
 2、参数邦定、依赖注入，反射
 3、行为（钩子技术）
+4、设计模式：https://www.awaimai.com/patterns/adapter(歪麦博客)
+	1）单例模式：允许创建一个而且只能创建一个对象的类
+		（1）特点：
+			一、3私1公：1个私有静态属性，1个私有构造方法，1个私有克隆方法，1个公共静态方法。
+		（2）使用场景：
+			一、配置类、Session类、Database类、Cache类、File类
+		（3）作用：
+			一、避免多次实例化带来的服务器内存开销
+			二、例：在PHP的大多数应用中都会存在大量的数据库操作，如果不用单例模式，那每次都要new操作，但是每次new都会消耗大量的系统资源和内存资源
+				而且每次打开和关闭数据库都是对数据库的一种极大考验和浪费。所以单例模式经常用在数据库操作类中				
+		（4）优、缺点：
+			一、优点：减少服务器内存开销
+			二、缺点：php中的变量是页面级的，无法常驻内存，程序执行完后会被回收;
+			三、彻底认清PHP单例模式的本质：https://www.cnblogs.com/in-loading/archive/2011/09/20/2182949.html
+
+	2）工厂模式：就是负责生成其他对象的类或方法,而不是在代码中直接new。http://blog.csdn.net/hel12he/article/details/51703472
+                （1）特点：定义一个创建对象的接口，让子类决定哪个类实例化。https://www.cnblogs.com/xuan-yan/p/7073800.html
+                （2）使用场景：数据库驱动类（如：mysql、oracle）、支付类(如：微信支付、支付宝支付）
+                （3）作用：拿支付举例 
+                    一、例：写一个Pay类接口，里面写一个抽象pay方法，新建一个WxPay类与AliPay类，实现（implements）Pay接口，并实现Pay方法，里面封装自己的支付逻辑
+                           ，另建一个PayFactory类,里面写一个静态的instance方法，对传进来的支付类型进行实例化,再写一个处理客户端请求的类orderPay，在orderPay类的方法里
+                           调用PayFactory::instance（$type）->pay($data);
+                （4）优、缺点：
+                    一、优点：降低代码耦合，代码复用，避免在原来代码的基础上修改出错
+                （5）简单工厂模式（静态工厂）：https://www.cnblogs.com/lovecucu/p/6069943.html。
+                （6）工厂模式：.http://blog.csdn.net/u010412301/article/details/54925217    
+        3）观察者模式：就是观察者向主题注册，注册完之后，主题再通知观察者做出相应的操作。比如thinkphp5中的行为（hook::add就是注册，hook::listen调用注册的接口）
+                （1）特点：http://www.cnblogs.com/DeanChopper/p/4830134.html
+                （2）使用场景：把用户对后台的操作记录写入日志                
+	4）适配器模式：
+		（1）特点：http://www.cnblogs.com/DeanChopper/p/4770572.html
+		（2）使用场景：当你的实现和需要的接口，都不能修改的时候。如：你需要给甲方已有的系统做标准的兼容，标准不可修改，甲方的系统也不可修改，
+                              这个时候你就需要适配器的设计模式了
+		（3）作用：即根据客户端需要，将某个类的接口转换成特定样式的接口，以解决类之间的兼容问题
+		（4）优、缺点
+        5)装饰者模式 
+                (1)https://www.cnblogs.com/yujon/p/5535324.html
+
 4、tp5设计模式：
-	1）单例模式：数据库连接
-	1)适配器模式：驱动类，Db类
+	1）单例模式：数据库连接、缓存实例化
+	1) 工厂模式：数据库驱动类（如：mysql、oracle）、支付类(如：微信支付、支付宝支付）
 	2）观察者模式：Hook类，行为
 	3）命令行模式：cli
-	4)先提出问题（为什么那样做，有什么好处？），再解决问题https://www.awaimai.com/patterns/adapter
-	5）各设计模式优点、缺点
+5、后期静态绑定：https://www.cnblogs.com/hylaz/archive/2012/11/16/2772632.html
+        1）https://www.jianshu.com/p/25a78620fa5c
+6、 PHP依赖注入（DI）和 控制反转（IOC）
+        1）https://www.cnblogs.com/sweng/p/6392336.html
+        2）http://www.thinkphp.cn/topic/12180.html
+7、thinkphp ORM
+
+
 5、thinkphp架构：
 	1）
 	   http://blog.csdn.net/u011069013/article/category/6506374
@@ -21,7 +65,8 @@
 6、深入PHP面向对象、模式与实践
 	1）http://blog.jobbole.com/97315/#article-comment
 	2）http://www.cnblogs.com/red-code/p/5288639.html
-7、Laravel5.1框架关键技术解析（读书笔记）
+7、Laravel5.1框架关键技术解析
 	1）http://blog.csdn.net/g5g5t9/article/details/72822572
-
+	2)最适合入门的laravel初级教程：https://baijunyao.com/	(推荐: 白俊遥博客)
+8、王滔博客园、白俊遥博客、歪麦博客		
 
