@@ -96,5 +96,6 @@
 7、Laravel5.1框架关键技术解析
 	1）http://blog.csdn.net/g5g5t9/article/details/72822572
 	2)最适合入门的laravel初级教程：https://baijunyao.com/	(推荐: 白俊遥博客)
+	3)https://d.laravel-china.org/docs/5.5/routing
 8、王滔博客园、白俊遥博客、歪麦博客		
 
