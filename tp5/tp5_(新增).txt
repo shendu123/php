@@ -4,8 +4,10 @@
 	3）例子：记录网站操作日志功能，hook::listen（module_init）先监听模块初始化，（在tags.php里配置相应的类'\\app\\common\\behavior\\WebLog'），在自己的业务里获取获取网站请求操作相关值并进行初始化赋值，当程序执行完，也就是数据初始化之后，数据处理(模板渲染)之前，有一个hook::listen（app_end）应用结束监听行为，可以对这个行为进行数据库插入操作。就完成了对网站的操作记录功能。（详见tpadmin操作日志模块）
 	4）注册行为：
                 （1）手动注册：hook:add()
-                （2）自动注册：在配置文件tags.php中进行配置   
-        5) 详细说明：http://blog.csdn.net/u013927110/article/details/47000379   
+                （2）自动注册：在配置文件tags.php中进行配置，写在return里，（系统加载行为扩展配置文件的时候会对hook::$tags进行设置）  
+        5) 详细说明：
+		一、注意：hook:add()一定要先于hook::listen调用。因为hook::add是设置hook::$tags值，hook::listen是获取hook::$tags值
+		二、http://blog.csdn.net/u013927110/article/details/47000379   
 2、路由
 	1）路由注册（设置）：
 		（1）先用App::routeCheck()方法进行URL路由检测
