@@ -110,7 +110,6 @@ class Goods extends \think\Controller
                 $content = $objSpider->getStrByStartEnd($content, '<div class="erji-nav">', '<div class="wrapper">');
                 $pattern = '/href="\/sell\/mc(.*)_a0_c0_f_p1">(.*)<\/a>/i';   
                 preg_match_all($pattern, $content, $m);
-                $goods=new \app\common\model\Goods();
                 if ($m) {
                    $newArr = array_combine($m[1], $m[2]);//dump($newArr);exit;
                    foreach($newArr as $k=>$v){
