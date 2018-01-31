@@ -43,7 +43,8 @@
 		（2）使用场景：当你的实现和需要的接口，都不能修改的时候。如：你需要给甲方已有的系统做标准的兼容，标准不可修改，甲方的系统也不可修改，
                               这个时候你就需要适配器的设计模式了
 		（3）作用：即根据客户端需要，将某个类的接口转换成特定样式的接口，以解决类之间的兼容问题
-		（4）优、缺点
+			一、例：假设Goods.php类里面有一个GoodsData方法,返回的是序列化（serialize）后的数据，现在java需要商品数据，但是java无法解析序列化数据，解决办法就是，建一个adapterGoods.php类继承Goods类，重写GoodsData方法，并且调用父类方法获取数据，对它反序列化unserialize（parent::GoodsData()）,然后转化为json(就是json_encode）返回，java就可以解析了(java可以解析json数据)
+		（4）优点：低耦合，解决兼容问题
         5)装饰者模式 
                 (1)https://www.cnblogs.com/yujon/p/5535324.html
 
