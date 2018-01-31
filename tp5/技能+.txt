@@ -78,6 +78,9 @@
 6、解读 thinkphp5 源码：https://segmentfault.com/a/1190000006766872
 7、thinkphp5与thinkphp3.X对比:https://www.cnblogs.com/supe/p/8067846.html
 8、微信支付教程：http://www.cnblogs.com/bcphp/p/7115820.html
+9、支付宝支付接口：
+        1）即时到账：操作成功后资金是立即打给对方账户的，实时到账，没有确认收货的环节，需谨慎操作；
+        2）担保交易：买家先付款到支付宝，满意后在规定时间内确认收货或超出时间后由支付宝打款给卖家
 9、爬虫：
         1)preg_match_all($pattern,$content,$matchs):搜索$content中所有匹配$pattern给定正则表达式 的匹配结果并且将它们以flag指定顺序输出到$matchs中.
         2)array_combine(keys,values);通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值：

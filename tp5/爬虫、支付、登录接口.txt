@@ -1,0 +1,17 @@
+1、爬虫：
+        1)preg_match_all($pattern,$content,$matchs):搜索$content中所有匹配$pattern给定正则表达式 的匹配结果并且将它们以flag指定顺序输出到$matchs中.
+        2)array_combine(keys,values);通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值：
+        3)PHP爬虫入门--简单的登录抓取内容:https://www.cnblogs.com/dapianzi/p/7095594.html
+        4)模拟登录第三方系统:http://blog.csdn.net/liu_c_y/article/details/49956679
+
+2、支付：
+
+	1）、微信支付教程：http://www.cnblogs.com/bcphp/p/7115820.html
+	2）、支付宝支付接口：
+        	（1）即时到账：操作成功后资金是立即打给对方账户的，实时到账，没有确认收货的环节，需谨慎操作；
+        	（2）担保交易：买家先付款到支付宝，满意后在规定时间内确认收货或超出时间后由支付宝打款给卖家
+	3）、异步通知与同步通知区别：
+3、登录
+	1）qq登录
+	2）微博登录
+	3）微信登录
