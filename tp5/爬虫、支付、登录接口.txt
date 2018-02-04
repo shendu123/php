@@ -1,38 +1,88 @@
 1、爬虫：
-        1)preg_match_all($pattern,$content,$matchs):搜索$content中所有匹配$pattern给定正则表达式 的匹配结果并且将它们以flag指定顺序输出到$matchs中.
-        2)array_combine(keys,values);通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值：
-        3)PHP爬虫入门--简单的登录抓取内容:https://www.cnblogs.com/dapianzi/p/7095594.html
-        4)模拟登录第三方系统:http://blog.csdn.net/liu_c_y/article/details/49956679
+1）爬虫可以做什么：
+（1）百度搜索引擎：利用爬虫技术去各网站服务器抓取文章标题、关键字、url等录入到百度服务器以便搜索
+（2）去哪儿网：比如利用爬虫技术去各大型酒店网站抓取标题、图片、价格等信息录入自己的服务器
+（3）酷狗音乐排行榜：利用爬虫技术伪造用户下载某首歌以达到刷榜的目的。（排行榜是根据下载量来的）
+2)用到的技术工具：
+（1）采集类：snoopy
+（2）解析html类库：simple_html_dom
+（3）30分钟正则表达式入门教程：
+  		一、https://www.cnblogs.com/deerchao/archive/2006/08/24/zhengzhe30fengzhongjiaocheng.html
+3）curl、fopen和file_get_contents区别
+(1)fopen /  file_get_contents不会缓存DNS, curl可以缓存DNS，这样多次访问同一个网站的时候，curl的速度会更快
+(2) fopen /file_get_contents在请求HTTP时，不会keeplive。而curl却可以。这样多次请求同一个链接时curl的速度会更快
+(3)fopen /file_get_contents只有get请求，后者可以模拟get、post，ftp，tcp等请求
+(4)curl可以实现模拟登陆；实现模拟Cookie；下载文件断点续传
+4）用到的函数
+(1)preg_match_all($pattern,$content,$matchs):搜索$content中所有匹配$pattern给定正则表达式 的匹配结果并且将它们以flag指定顺序输出到$matchs中.
+               (2)array_combine(keys,values);通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值：
+5)curl 模拟登录
+(1)curlopt_cookiejar与curlopt_cookiefile区别：
+一、前者是连接时把获得的cookie存为文件，后者是在访问其他页面时拿着这个cookie文件去访问！
+(2)相关文章
+一、https://www.cnblogs.com/dapianzi/p/7095594.html
+二、http://blog.csdn.net/stu_promiss/article/details/78935032
+（3）遇到验证码怎么处理
+一、查看源码拿到生成验证码的地址,，通过输入验证码提交表单请求登录接口的方式进行登录
+二、https://www.cnblogs.com/wujuntian/p/4776543.html
+
 
 2、支付：
 	1）、微信支付教程：http://www.cnblogs.com/bcphp/p/7115820.html
-		（1）刷卡支付：就是商家扫用户微信钱包里的收付款码
-		（2）公众号支付：
-			一、定义：用户关注商家公众号，在微商城（h5网站）购物进行支付（也叫jsapi支付、h5支付）,因为需要openid获取用户信息，
+		（1）公众号支付：
+			一、定义：用户关注商家公众号，在微商城（h5网站）购物进行支付（也叫jsapi支付）,因为需要openid获取用户信息，
 				  所以只能在微信浏览器里进行支付
-		（3）扫码支付：
+  二、流程：http://www.php.cn/weixin-kaifa-353551.html
+一）获取用户授权（网页授权，获取用户信息）
+二）调用统一下单接口获取预支付id
+三）H5调起微信支付的内置JS
+四）支付完成后，微信回调URL的处理
+  
+		（2）扫码支付：
 			一、定义：用户扫描商家二维码进行支付，也叫原生支付（Native）
-			二、两种模式：https://www.cnblogs.com/raincedar/p/5653584.html
+			二、两种模式：https://www.cnblogs.com/raincedar/p/5653584.html。	  http://blog.csdn.net/u011852706/article/details/50300915
 				一）模式一：先扫码，再生成订单。
                                     （一）、模式一中的二维码，是商品的二维码。更适合无人职守的自动售卖机。所有的商品都有一个固定的二维码。
                                     （二）、也就是线下支付，这种模式是商户自己为商品生成链接二维码，顾客通过扫描商品二维码得到商品详细信息并选择是否确认购买；
 				二）模式二：先生成订单，再扫码。
                                     （一）、模式二中的二维码，是订单的二维码，更适合有人职守的，支付金额非常不确定的场合，比如，你去饭馆吃饭
                                     （二）、也就是线上支付，这种模式是顾客在线选好商品选择调用微信支付，商户平台给予相应，完成购买动作。
-		（4）app支付	
+（三）、流程：
+{一}、生成支付二维码
+[1]、先在后台进行微信支付配置（APPID、商户号、商户支付密钥等，没配置或配置错误就不能生成二维码）
+[2]、前台确认选择微信支付后，调用统一下单接口，设置订单数据、微信支付配置文件数据转换为xml
+[3]、curl以post方式提交xml到对应的接口，然后把返回的xml接口数据转换为数组，获取地址（数组中的code_url）生成二维码
+{二}、扫二维码支付
+[1]、扫码支付完后，跳转到回调地址（根据返回的支付结果通知，处理订单状态等业务逻辑）
+[2]、微信返回支付结果通知：WxpayApi::notify（）获取返回结果，如果有数据（如：商家appid、订单号、订单金额），则支付成功  https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_7
+[3]、改变订单状态：微信支付PayNotifyCallBack类继承WxPayNotify类，重写回调处理函数NotifyProcess。（支付成功或失败后的业务逻辑都在此函数里面处理）
+ （3）刷卡支付：就是商家扫用户微信钱包里的收付款码
+ （4）H5支付：
+ （5）app支付	
 				
 	2）、支付宝支付接口：
         	（1）即时到账：操作成功后资金是立即打给对方账户的，实时到账，没有确认收货的环节，需谨慎操作；
         	（2）担保交易：买家先付款到支付宝，满意后在规定时间内确认收货或超出时间后由支付宝打款给卖家
 	3）、异步通知与同步通知区别：
-3、登录
+3、第三方登录
 	1）qq登录
+（1）流程：
+一、调用接口获取授权码Code。（接口参数有：app_id、redirect_uri(回调地址)，code以回调地址参数的形式返回）
+二、通过授权码，调用相应接口获取Access Token
+三、使用Access Token调用相应接口来获取用户的OpenID
+四、使用Access Token以及OpenID获取用户信息（qq头像、昵称等）
+五、然后根据openid去数据库查询是否有记录，如果没有，则插入qq用户信息，如果有，则修改用户登录时间 ，
+（2）注意：回调地址要与qq互联上的回调地址一样，否则无法接入
+（3）邦定：
+一、qq邦定：就是用户已经用账号登录的情况下，请求qq登录接口，返回qq用户信息，然后根据用户id来填充数据库中空缺的qq信息
+二、手机邦定：就是根据登录的用户id填充数据库中的手机号，登录时可以根据手机号、用户名来判断。邦定邮箱也是同样的道理。
 	2）微博登录
-	3）微信登录
+	3）微信登录：
+ （1）去微信开放平台（https://open.weixin.qq.com/）申请开发者资质认证（要收300元审核费用）
 4、小程序
 
 5、专业名词解释
 	1）SDK与API
-		(1)SDK  叫做 "软件开发工具包"（software development kit）,比如：微信支付SDK
+		(1)SDK  叫做 "软件开发工具包"（software development kit）,比如：微信支付SDK（https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=11_1）
 		(2）API	叫做 "应用程序接口"（Application Programming Interface）
 		(3)二者关系：SDK不仅包含了API，重要的是包含了使API有效所必须的资料（SDK是API的衣食父母）
