@@ -1,0 +1,137 @@
+1、帮助文档：http://www.tp-shop.cn/Doc/Index/index.html
+2、模板引擎实现的原理
+1）访问php文件, php文件会去加载模板引擎，通过模板引擎去加载模板然后替换模板里面的变量 然后生成一个编译文件
+最后将该编译文件导入 访问的php文件中输出 第二次访问的时候 如果 缓存文件存在或者没有被改动则直接 导入缓存文件 输出
+否则重新编译https://www.cnblogs.com/lihuajunztdh/archive/2012/11/20/2778447.html
+3、经常被问的知识点
+1）单点登录
+（1）session跨域共享
+、	2）高并发（抢购）
+（1）淘宝高并发解决方案https://www.cnblogs.com/lichaoloveliangying/p/6612575.html
+（2）http://blog.csdn.net/u011061889/article/details/77417739
+（3）http://blog.csdn.net/nuli888/article/details/51865401
+（4）https://www.csdn.net/article/2014-11-28/2822858
+（5）http://www.php.cn/mysql-tutorials-360100.html
+3）、得意之作？说下项目中遇到了哪些困难，最后怎么解决的？
+		（1）图片（数据）采集（就是爬虫）
+			一、利用curl抓取页面，然后用正则匹配图片，循环取出每张图片的地址，创建目录，下载并保存
+  二、下载图片：就是先打开（fopen）网上图片地址读取（fread）内容，再把图片内容写入（fputs）到本地文件
+4）、IO就是I/O输入/输出(Input/Output)，
+4、composer知识点
+        1）基础
+                （1）composer install - 如有 composer.lock 文件，直接安装，否则从 composer.json 安装最新扩展包和依赖；
+                （2）composer update - 从 composer.json 安装最新扩展包和依赖；
+                （3）composer update vendor/package - 从 composer.json 或者对应包的配置，并更新到最新；
+                （4）composer require new/package - 添加安装 new/package, 可以指定版本，如： composer require new/package ~2.5.
+        2）Composer 教程    
+                （1）、http://wiki.jikexueyuan.com/project/composer/（极客学院）
+                （2）、https://www.w3cschool.cn/composer/a5xk1nfd.html（w3cschool）
+        3）composer install 与 composer require区别( http://blog.csdn.net/xianglingchuan/article/details/51930960 )
+                （1）、composer install会去读取composer.lock或composer.json文件，读取文件配置安装
+                （2）、composer require是从输入的路径安装。如：composer require topthink/think-captcha
+        4）composer.lock文件与composer.json文件区别（ http://www.jb51.net/article/79140.htm ）
+                （1）、如果当前目录下存在 composer.lock 文件，它会从此文件读取依赖版本，而不是根据 composer.json 文件去获取依赖。
+                （2）、如果没有composer.lock文件，composer将在处理完依赖关系（composer require或composer install[读取composer.json]）后创建它（composer.lock）。
+
+  
+20、权限管理：rbac  基于角色的访问控制（Role-Based Access Control）
+	1）权限表设计：
+		（1）、think_user用户表
+		（2）、think_role角色表
+		（3）、think_role_user角色与用户关联表
+		（4）、think_node节点表
+		（5）、think_role_node角色与节点关联表（权限表）
+	2）授权：
+		（1）给用户选定角色
+		（2）给角色授权，就是往role_node表里插入数据（role_id以及选中的node_id）
+		（3）编辑权限提交表单时，先删除该角色下所有权限，重新插入选中的权限
+	3）鉴权：
+		（1）查询出登录用户id对应的role_id，以role_id为where条件，node表与role_rode表关联查询此角色对应的node_id并返回true或false（此node_id便是此角色拥有的权限）
+		（2）后台网站所有模块都会走基控制器，在基控制器构造函数里调用权限验证的方法,如果返回false，则抛出错误提示（throw new exception('没有权限')）
+		（3）若要在前台判断此节点是否展示，则应返回权限node_id列表，然后判断要操作的节点id是否在node_id列表中，在就显示，不在就不显示	
+
+七、网站安全问题：xss攻击 、csrf攻击 、sql注入
+	1、xss攻击:
+		1)定义：跨站脚本（Cross-site scripting，通常简称为XSS）是一种网站应用程序的安全漏洞攻击，是代码注入的一种。它允许恶意用户将代码注入到网页上，其他用户在观看网页时就会受到影响。这类攻击通常包含了HTML以及用户端脚本语言。
+		2）通俗解释：通过客户端脚本语言（最常见如：JavaScript）在一个论坛发帖中发布一段恶意的JavaScript代码就是脚本注入，如果这个代码内容有请求外部服务器，那么就叫做XSS！
+		3）防御方法：
+			（1）、前端提交的代码进行过滤（如：php中的htmlentities()或htmlspecialchars()）
+	2、csrf攻击：
+		1）定义：跨站请求伪造（英语：Cross-site request forgery），通常缩写为 CSRF 或者 XSRF，是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。
+		2）通俗解释：冒充用户发起请求（在用户不知情的情况下）,完成一些违背用户意愿的请求（如恶意发帖，删帖，改密码，发邮件、银行转账等）。
+		3）防御方法：
+			（1）、验证码
+			（2）、token令牌,（服务器端生成token,赋值到前端隐藏表单，然后提交表单token与服务器token比对）
+	3、sql注入
+	
+ 		1）方式
+			（1）单引号、or
+			（2）union
+	 		 (3)/*（注释符），如用户名与密码登录时把密码注释掉，直接通过用户名后面加/*登录，（拼接的sql语句如：username = 'test' /* and password）
+ 		2）解决方式
+			（1）在php.ini文件中把magic_quotes_gpc设为on （单引号被加入\转义）
+	 		 (2)PDO （php data object） 预处理，sql语句变量用？代替，后面处理的时候再传入真实数据 （如：username=? and pwd=?,然后pdo执行excute([$username,$pwd])方法）
+			（3）addslashes过滤
+		3）危害：
+			（1）暴露库，暴露表
+			（2）传参的数据里面写sql，执行增删改查操作数据库给数据库带来损失
+
+八、网站性能
+
+	1、网站高并发（高并发读写）
+		1）高并发读（查询）
+			（1）1、负载均衡。2、建立主从数据库，分库分表。3、缓存。4、优化sql语句
+		2）高并发写入（添加或更新）
+			（1）如秒杀时库存超卖解决方案：执行事务时，先更新（减少）库存，然后去查询库存，得出结果并在事务里判断库存是否大于0,如果不大于，则抛出错误提示“库存不足”并回滚，否则就commit。
+			（2）实际应用中，肯定不能如此高频率的去读写数据库，会严重造成性能问题的，直接写入会导致数据库压力太大挂掉。利用缓存。将需要秒杀的商品放入缓存中，并使用锁来处理其并发情况。当接到用户秒杀提交订单的情况下，先将商品数量递减（加锁）后再进行其他方面的处理，处理失败再将数据递增1（加锁），否则表示交易成功。当商品数量递减到0时，表示商品秒杀完毕，拒绝其他用户的请求。
+
+	2、网站访问慢解决方案：
+            	1）通过php-fpm和mysql的cpu占用可以看出来是哪个导致的，如果php占用高则查看php的timeout和max_child优化php配置，如果mysql占用高，则查看my.cnf配置调优，优化之后，则查看慢查询日志，找出查询时间长的sql加以优化，另外带宽和服务器的软硬件配置，和程序逻辑，还有是否被攻击也是需要考虑的要素。
+   	 2）cdn加速：https://www.cnblogs.com/wxiaona/p/5867685.html
+一、简单来说就是把原服务器上数据复制到其他服务器上，用户访问时，哪台服务器近就访问那台服务器上的数据
+二、http://blog.csdn.net/ligaofeng/article/details/17139481
+
+
+	3、秒杀、团购
+		1）秒杀库存超卖解决方案：
+			（1）“多线程”转成“单线程”（redis是单线程），依次排队，用redis中的队列（入队与出队）来操作，往redis中存入（lpush） 10个数到列表中，抢购开始后，每来一个用户就减去（lpop）一个数，当列表为空时，表示已经抢光了。因为列表的pop操作是原子的，即使有很多用户同时到达，也是依次执行的。
+		2)原子性：就是执行这个指令时,不容许打断，依次执行，redis具有原子性
+	4、千万级数据如何分页？
+		1）思路：先查询出id，再根据id去查。如：SELECT * FROM product a JOIN (select id from product limit 866613, 20) b ON a.ID = b.id
+
+
+
+
+
+
+
+
+
+
+1、如何提升工作兴趣？
+
+鸟哥：
+以自己的核心技能为原点，相关技术体系为半径的圆圈这样一个技能覆盖里，换不同的事情做。因为这样你才能在做
+新的事情的时候，也能加固 老的事情的经验。
+
+通过不断的在这个圆内做些新的事情来刺激兴趣，继而综合交叉加深对原有知识的提升，新知识的沉淀，从而做到持
+续的保有兴趣，持续的成长
+2、splhttp://www.ruanyifeng.com/blog/2008/07/php_spl_notes.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

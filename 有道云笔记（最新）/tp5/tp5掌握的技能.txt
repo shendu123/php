@@ -1,0 +1,82 @@
+1、thinkphp5用到的技术：
+	1）、trait
+	2）、参数邦定、依赖注入，反射
+	3）、惰性加载（__autoload）、composer
+	4）、行为（钩子技术）
+	5）、tp5设计模式：
+		（1）单例模式：数据库连接、缓存实例化
+		（2）工厂模式：数据库驱动类（如：mysql、oracle）、支付类(如：微信支付、支付宝支付）
+		（3）观察者模式：Hook类，行为（钩子技术）
+		（4）命令行模式：cli
+	6）验证机制、自定义错误、自定义异常、日志调试、sql监听、Rest	
+
+
+3、 PHP依赖注入（DI）和 控制反转（IOC）：http://www.jb51.net/article/83940.htm
+	1）依赖注入
+		（1）谁依赖于谁？为什么会有依赖？
+			一、某个对象依赖于IoC/DI的容器。依赖是不可避免的，在一个项目中，各个类之间有各种各样的关系，不可能全部完全独立，
+			    这就形成了依赖。传统的开发是使用其他类时直接调用，这会形成强耦合，这是要避免的。依赖注入借用容器转移了被依赖对象实现解耦。
+		（2）谁注入于谁？到底注入什么？
+			一、通过容器向对象注入其所需要的外部资源（比如外部对象实例 Request）
+		（3）依赖注入方式
+			一、构造函数注入。（如：Request）;
+			二、setter方法设置注入
+	2）控制反转：
+		（1）谁控制谁？控制什么？为什么叫反转？
+			一、IoC/DI的容器控制对象，主要是控制对象实例的创建。反转是相对于正向而言的，那么什么算是正向的呢？
+			    考虑一下常规情况下的应用程序，如果要在A里面使用C，你会怎么做呢？当然是直接去创建C的对象，也就是说，
+			    是在A类中主动去获取所需要的外部资源C，这种情况被称为正向的。那么什么是反向呢？就是A类不再主动去获取C,
+			    而是被动等待，等待IoC/DI的容器获取一个C的实例，然后反向的注入到A类中。
+		（2）特点：依赖抽象类而非实践类
+	3）相关文章
+		（1）http://www.thinkphp.cn/topic/12180.html
+		（2）https://www.jianshu.com/p/cb0693dd8d2e
+		（3）https://www.cnblogs.com/sweng/p/6392336.html
+4、后期静态绑定：
+        1）https://www.jianshu.com/p/25a78620fa5c
+	2）https://www.cnblogs.com/hylaz/archive/2012/11/16/2772632.html		
+5、thinkphp ORM
+	1)ORM:对象关系映射的方式（Object Relation Mapping），就是模型映射到表（如：user模型对应user表）
+	2）http://blog.sina.com.cn/s/blog_14ecc04170102wg2v.html
+6、解读 thinkphp5 源码：https://segmentfault.com/a/1190000006766872
+7、thinkphp5与thinkphp3.X对比:https://www.cnblogs.com/supe/p/8067846.html
+8、微信支付教程：http://www.cnblogs.com/bcphp/p/7115820.html
+9、支付宝支付接口：
+        1）即时到账：操作成功后资金是立即打给对方账户的，实时到账，没有确认收货的环节，需谨慎操作；
+        2）担保交易：买家先付款到支付宝，满意后在规定时间内确认收货或超出时间后由支付宝打款给卖家
+9、爬虫：
+        1)preg_match_all($pattern,$content,$matchs):搜索$content中所有匹配$pattern给定正则表达式 的匹配结果并且将它们以flag指定顺序输出到$matchs中.
+        2)array_combine(keys,values);通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值：
+        3)PHP爬虫入门--简单的登录抓取内容:https://www.cnblogs.com/dapianzi/p/7095594.html
+        4)模拟登录第三方系统:http://blog.csdn.net/liu_c_y/article/details/49956679
+
+
+
+
+
+
+
+
+
+5、thinkphp架构：
+	1）
+	   http://blog.csdn.net/u011069013/article/category/6506374
+	   https://www.cnblogs.com/lixiuran/p/4322803.html	
+	   http://www.thinkphp.cn/topic/35803.html
+	   http://blog.csdn.net/bbyyzhang/article/details/52171631（推荐）
+	2）tp5
+	   http://blog.csdn.net/hsd2012/article/details/50773349
+	   http://blog.csdn.net/ikewyz/article/details/67633375	
+	   http://blog.csdn.net/u011069013/article/details/53096102?%3E	
+6、深入PHP面向对象、模式与实践
+	1）http://blog.jobbole.com/97315/#article-comment
+	2）http://www.cnblogs.com/red-code/p/5288639.html
+
+7、Laravel5.1框架关键技术解析
+	1）http://blog.csdn.net/g5g5t9/article/details/72822572
+	2)最适合入门的laravel初级教程：https://baijunyao.com/	(推荐: 白俊遥博客)
+	3)https://d.laravel-china.org/docs/5.5/routing
+
+8、「七天自制PHP框架」：http://blog.csdn.net/g5g5t9/article/details/72822572
+8、王滔博客园、白俊遥博客、歪麦博客		
+

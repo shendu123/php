@@ -1,0 +1,251 @@
+1、钩子（也就是行为 Hook）
+	1）定义：应用执行过程中的一个动作，有些行为的作用位置都是在应用执行前，有些行为都是在模板输出之后，我们把这些行为发生作用的位置称之为标签（位），当应用程序运行到这个标签的时候，就会被拦截下来，统一执行相关的行为
+	2）原理：先注册某个事件，当监听到某个事件的时候触发某个事件
+	3）例子：记录网站操作日志功能，先注册操作日志事件（在tags.php里配置相应的类'\\app\\common\\behavior\\WebLog'给这个事件），在自己的业务里获取网站请求操作相关值并进行初始化赋值，当程序执行完，也就是数据初始化之后，数据处理(模板渲染)之前，有一个hook::listen（app_end）应用结束监听行为，可以对这个行为进行数据库插入操作。就完成了对网站的操作记录功能。（详见tpadmin操作日志模块）
+	4）注册行为：
+                （1）手动注册：hook:add()
+                （2）自动注册：在配置文件tags.php中进行配置，写在return里，（系统加载行为扩展配置文件的时候会对hook::$tags进行设置）  
+        5) 详细说明：
+		一、注意：hook:add()一定要先于hook::listen调用。因为hook::add是设置hook::$tags值，hook::listen是获取hook::$tags值
+		二、http://blog.csdn.net/u013927110/article/details/47000379  
+ 三、https://www.php1.cn/Content/PHP_ZhongDeGouZiShiShiMeZenMeLiJieTa.html
+https://www.cnblogs.com/miketwais/articles/hook.html
+2、路由
+	1）路由注册（设置）：
+		（1）先用App::routeCheck()方法进行URL路由检测
+			一、如果开启了路由（url_route_on=true），则获取路由配置文件（route.php）中的路由配置进行路由注册，设置路由规则（Route::setRule）
+		（2）注册路由规则
+			一、动态注册（get、post、put、delete、any、rule）
+				（一）动态单个注册，如：Route::rule('new/:id','index/News/read');
+				（二）动态批量注册，如：Route::get(['new/:id'=>'News/read','blog/:name'=>'Blog/detail']);				
+		（3）快捷路由（控制器注册路由,会注册get、post、put、delete等5种类型）：Route::controller（$rule, $route）
+			一、Route::controller也是调用get、post...路由方法，再调用rule方法，然后调用setRule方法进行路由设置，
+		（4）路由设置执行顺序：
+			一 Route类中：   controller 、（get、post、delete等方法）、rule、setRule	
+	2）路由解析：
+		（1）如果开启了路由（url_route_on=true），则调用 Route::check（）方法进行路由检测，获取注册设置后的路由规则（self::$rules）
+		（2）Route::checkRoute，Route::checkRule检测路由规则
+		（1）Route::parseRule方法进行路由解析
+        3）url生成(相当于tp3.2的U方法)：如：\think\Url::build('index/blog/read','id=5&name=thinkphp');//输出  /index/blog/read/id/5/name/thinkphp.html  
+        4)路由url邦定与解析
+                （1）url邦定：如：邦定到模块/控制器/操作、邦定到类、邦定到命名空间等等类型，最终把邦定的类型数据赋值给Route::$bind数组
+                        一、Route::bind('\app\index\controller','namespace')邦定到命名空间
+                （2）解析：Route::checkUrlBind()检测URL绑定，根据Route::$bind数组中不同的类型调用不同的解析方法 
+        5）路由别名邦定与解析
+                （1）别名邦定：如：Route::alias('user','\app\index\controller\User');或在route.php中配置，最终赋值给Route::$rules['alias']数组
+                （2）别名解析：Route::checkRouteAlias()检测路由别名,根据self::$rules['alias']分析url规则调用不同的解析方法
+        6)路由地址
+                (1)路由到模块。如:\think\Route::controller('controller', 'index/Blog');//返回Array ( [type] => module ）
+                (2)路由到重定向地址。如:\think\Route::controller('controller', '/index/Blog');//返回Array ( [type] => redirect ）
+                (3)路由到控制器。如:\think\Route::controller('controller', '@index/Blog');//返回Array ( [type] => controller ）
+                (4)路由到类的方法(包含命名空间路径)。.如:\think\Route::controller('controller', 'app\\index\\controller\\Blog');//返回Array ( [type] => method ）
+                (5)路由到闭包(匿名函数)。如:\think\Route::get('controller/:name', function($name){ return 'Hello,'.$name;});//返回Array ( [type] => function ）
+        7)域名路由
+		（1）配置：config.php配置文件url_domain_deploy设置为true
+		（2）邦定
+                	一、注册方式：
+                        	（一）、动态注册：
+                                	(一)、完整域名：Route::domain('admin.thinkphp.cn','Admin');
+                                	(二)、子域名邦定：Route::domain('admin','Admin');//假如网站域名为baidu.com,则admin.baidu.com邦定到Admin模块
+                               	       （三）、泛域名部署：Route::domain('*','Admin?name=*');                                
+                        	（二）、配置定义：return['__domain__'=>['admin.thinkphp.cn'=>'Admin']]
+                	二、邦定方式：（邦定到模块、邦定到命名空间、邦定到类、绑定到闭包函数）
+			三、最终赋值：	赋值给Route::$rules['domain']数组
+		（3）解析
+			一、Route::checkDomain（）检测子域名部署，对self::$rules['domain']数组分析得出url，针对不同类型的url给予不同类型的数组，赋值给Route::$bind数组  
+			二、Route::checkUrlBind()检测URL绑定对Route::$bind数组进行分析;然后根据不同的类型调用不同的解析方法 
+3、控制器
+	1）分层控制器：
+		（1）不在默认Controller目录，在指定的控制器目录。如：\think\Loader::controller('Blog', 'event');在event目录下的Blog控制器
+        2)构造函数继承问题
+                （1）如果父类有构造函数，而且子类没有构造函数，那么在子类实例化时确实会执行父类构造函数
+                （2）如果子类也有构造函数，那么当子类实例化时，不论父类是否有构造函数，都会执行子类自己的构造函数,不会继承父类构造函数。如果想要继承（想用父类构造函数里的方法或属性），则调用parent::__construct();
+5、反射  
+	1)定义：
+		（1）、https://www.cnblogs.com/KeenLeung/p/6041280.html
+		（2）、PHP Reflection API详解:http://www.jb51.net/article/65897.htm
+		（3）、它是指在PHP运行状态中，扩展分析PHP程序，导出或提取出关于类、方法、属性、参数等的详细信息，包括注释。这种动态获取的信息以及动态调用对象的方法的功能称为反射API。
+			PHP反射api由若干类组成，可帮助我们用来访问程序的元数据或者同相关的注释交互。借助反射我们可以获取诸如类实现了那些方法，创建一个类的实例（不同于用new创建），调用一个方法（也不同于常规调用），传递参数，动态调用类的静态方法
+	2) 反射类
+		（1）ReflectionClass类
+			一、getConstructor方法：取得该类的构造函数信息
+			二、newInstanceArgs方法：实例化该类，给出的参数将传递到类的构造函数。new \ReflectionClass($class)->newInstanceArgs ([ array $args ] )
+		（2）ReflectionMethod类
+                        一、实例化传参问题，有两种方式
+                                （一）、传两个参数则分别是类名(或类的实例)、方法名。如：new \ReflectionMethod($class , $method )
+                                （二）、传一个参数则是静态方法。如：new \ReflectionMethod( $class::$method ),类名和方法名之间使用 :: 分隔
+			二、getNumberOfParameters方法：获取控制器构造函数参数个数或请求方法参数个数
+			三、getParameters方法：获取控制器构造函数参数或请求方法参数（返回ReflectionParameter对象）
+			四、invoke方法：调用无参数的方法,
+                        五、invokeArgs方法：调用有参数的方法 new \ReflectionMethod($object , $method )->invokeArgs ( $object , array $args )
+			六、isPublic方法：测试该方法是否为public
+			七、isStatic方法：测试该方法是否为static
+		（3）ReflectionParameter类
+			一、getName方法：取得参数名
+			二、getClass方法：若该参数为对象，返回该对象的类名
+                （4）ReflectionFunction类：获取函数的有关信息
+                        一、invoke(调用该函数)、invokeArgs方法（调用有参数的函数）
+	3）邦定参数、依赖注入
+		(1)控制器构造函数依赖注入解析：
+			一、第一步：args = App::bindParams(new \ReflectionClass($class)->getConstructor(), $vars);
+			二、第二步：new \ReflectionClass($class)->newInstanceArgs($args);
+		(2)控制器普通方法依赖注入
+			一、第一步：args = App::bindParams(new \ReflectionMethod($class, $method[1]), $vars);
+			二、第二步：new \ReflectionMethod($class, $method[1])->invokeArgs(isset($class) ? $class : null, $args);
+		（3）原理：（App::bindParams方法解释说明）
+			一、依赖注入：如果构造函数或方法参数传入的是对象（比如：\think\Request）, 则会去实例化那个类（Request），然后赋值给args数组，然后执行第二步传入args参数调用方法。 
+			二、参数邦定：如果构造函数或方法参数传入的是普通变量，则会获取url请求参数,然后赋值给args数组，然后执行第二步传入args参数调用方法。
+                
+6、模型
+	1）分层模型：
+		（1）不在默认Model目录，在指定的模型目录。如：\think\Loader::model('User', 'logic');在logic目录下的User类
+        2) 获取器、修改器
+                （1）获取器：在获取数据的字段值后自动进行处理，例如，我们需要对状态值进行转换（如：status='1'的显示为'审核成功',status='-1'的显示为'审核失败'）
+                （2）修改器：数据赋值的时候自动进行转换处理，则入库后为转换后的值
+        3）自动完成
+                （1）auto、insert和update三个属性，可以分别在写入、新增和更新的时候进行字段的自动完成机制，auto属性自动完成包含新增和更新操作
+	
+7、验证
+	1）$rule instanceof \Closure判断规则函数是否为匿名函数
+	2）内置函数：
+		（1）call_user_func	调用类内部的方法，并传参数。
+			一、如：call_user_func(array("a", "b"),"111"); 调用a类的b方法，参数为111
+		（2）call_user_func_array			
+			一、调用函数,并传参数：call_user_func_array('a', array("111", "222")); 调用a函数，第一个参数为111,第二个参数为222
+			二、调用类内部的方法，并传参数。call_user_func_array(array('ClassA','b'), array("111", "222")); 
+8、错误异常与调式
+	1）错误级别：
+		（1）Notice 通知级别的错误 如直接使用未声明变量，程序继续执行
+　		（2）Warning 警告级别的错误，可能得不到想要的结果
+　		（3）Fatal error  致命级别错误致命级别错误，程序不往下执行
+　		（4）parse error 语法解析错误，最高级别错误，连其他错误信息也不呈现出来
+		（5）补充说明：
+			一、http://blog.csdn.net/zhang197093/article/details/75094816
+			二、http://blog.sina.com.cn/s/blog_558839ae0100es0u.html
+			三、php的错误分成了很多的级别，如E_ERROR、E_WARNING、E_PARSE、E_NOTICE等等，对于像E_ERROR、E_PARSE这样的严重错误不能被用户自定义处理，php会直接终止脚本的运行。
+	2）php错误异常处理内置函数
+		（1）set_error_handler
+			一、定义：设置用户自定义的错误处理函数。 该函数用于创建运行时期间的用户自己的错误处理方法，用来捕捉错误级别为Warning或Notice的错误，E_ERROR、E_PARSE级别的错误无法捕捉
+			二、用法：
+				（一）、不仅可以接受函数，还可以接受 类的方法（公开的静态方法 及 公开的非静态方法 都可以），但需要以 数组形式 传递，数组的第一值为“类名”，第二个参数为“方法名
+				（二）、例：set_error_handler（'func'）或set_error_handler（['classA','method']）
+			三、提示：如果使用了该函数，会完全绕过标准的 PHP 错误处理函数，			
+		（2）set_exception_handler
+			一、定义：设置用户自定义的异常处理函数,只要有异常抛出（throw new Exception），就会被触发
+			二、用法：同上
+		（3）register_shutdown_function
+			一、定义：PHP程序执行完成后执行的函数，原理就是在PHP进程结束前会去调用它一次（在页面的最后）
+			二、触发情况分为以下几种使用场景：
+				（一）、php代码执行过程中发生错误（异常或错误），成功、die、exit等（调试时会看到在die后有输出）
+				（二）、php代码运行超时
+				（三）、页面被（用户）强制停止
+	3）ErrorException与HttpException
+		（1）ErrorException对错误处理，HttpException对异常处理	
+		（2）ErrorException会记录日志并且渲染异常模板，HttpException只渲染异常模板（tpAdmin-master/thinkphp/tpl/think_exception.tpl）
+	4）调式：
+		（1）性能调式：调试某段代码的运行时间（单位s）或者内存占用开销(单位kb)
+			一、debug('begin'); ...代码段；debug('end');   echo debug('begin','end').'s';   echo debug('begin','end').'kb';	
+9、配置：
+	1）环境变量中的配置优先于项目应用的配置文件
+	2）配置文件初始化配置流程说明：
+		1）config::load($file,$name)函数会载入配置文件，如果载入的文件是config.php，则$name为空，否则$name为配置文件名。如：
+			一、Config::load(‘tpAdmin-master\application\database.php’ 'database');载入数据库配置文件
+			二、Config::load(‘tpAdmin-master\application\extra\captcha.php’ 'captcha');载入验证码配置文件	
+		2）载入配置文件后，调用config::set()函数对配置文件中的数据进行合并！（如果有设置$name,则$name就是数组中的键）
+		3）读取配置文件：config::get('database')数据库配置文件database.php中的数据，config::get('session')配置文件config.php中的session数据，
+10、日志
+	1）运行流程：App.php执行过程中有Log::record()函数对日志信息初始化，只要程序执行完成，就会触发php内置函数register_shutdown_function（在error.php），里面有个Log::save()
+	2）Log::record()与Log::write（）区别：
+		(1)、Log::record要等到程序执行完成才写入（Log::save），Log::write实时写入（方法里面直接调用Log::save）	
+	3)__callStatic： 当调用的静态方法不存在或权限不足时，会自动调用__callStatic方法。
+		（1）如：Log::error（'错误信息'）相当于Log::record('错误信息','error');      Log::info('日志信息')相当于Log::record('日志信息','info');
+		（2）与__call方法区别：__call 当要调用的方法不存在或权限不足时，会自动调用__call 方法。
+	4)独立日志：config.php配置文件log数组中设置'apart_level'   =>  ['error','sql'],会单独生成以日期天数为前缀 error 和 sql两个类型的日志文件，主日志文件中将不再包含这两个级别的日志信息
+11、命令行
+        1）自动生成目录结构（整个完整项目模块）
+12、杂项
+        1）缓存：
+                （1）配置多个缓存类型
+                        一、config.php配置文件cache数组中,设置'type' => 'complex',通过cache::store('file')->set('name','value')或cache::store('redis')->set('name','value')就可以切换到不同的缓存类型存储数据
+        2）session
+                (1)use_trans_sid
+                        一、浏览器禁用cookie后php如何保持session会话use_trans_sid机制（http://blog.csdn.net/wzxsjdt/article/details/50508240）
+                        二、Session变量不能传送到下一页.解决: session.use_trans_sid = 1（http://blog.csdn.net/drylandfish/article/details/244085?%3E）
+                (2)session_id()与session_name()
+                        一、赋值：session_id('123'),把PHPSESSID赋值为'123'
+                        二、获取：session_id（）；获取 PHPSESSID的值
+                        三、session_name()获取的值为'PHPSESSID'，用法与session_id（）一样，都是进行设置值与获取值
+                (3)session_unset()和session_destroy()区别
+                        一、session_unset()释放当前在内存中已经创建的所有$_SESSION变量，但不删除session文件以及不释放对应的session_id
+                        二、session_destroy()删除当前用户对应的session文件以及释放session_id，内存中的$_SESSION变量内容依然保留
+        3）cookie                
+                (1) 
+	4）验证码
+		（1）运行流程： 
+			一、首先使用Composer安装think-captcha扩展包：composer require topthink/think-captcha
+			二、在tpAdmin-master\vendor\topthink\think-captcha\src\helper.php有设置路由
+				（一）、\think\Route::get('captcha/[:id]', "\\think\\captcha\\CaptchaController@index");
+			三、在\tpAdmin-master\vendor\composer\autoload_psr4.php有注册验证码命名空间
+				（一）、'think\\captcha\\' => array($vendorDir . '/topthink/think-captcha/src'),
+			四、生成验证码并保存在session中
+		（2）登录时验证码校验：
+			一、在tpAdmin-master\vendor\topthink\think-captcha\src\helper.php中有一个验证函数。对输入的验证码与生成的验证码进行校验比对
+				（一）\think\Validate::extend('captcha', function ($value, $id = "") {
+					return captcha_check($value, $id, (array)\think\Config::get('captcha'));
+				       });
+		（3）tpAdmin-master\vendor\topthink\think-captcha\src\helper.php这个文件何时加载进来执行的？
+			一、tpAdmin-master\thinkphp\library\think\Load.php中有注册composer自动加载，有加载autoload_files.php文件，此文件有helper.php
+        5)分页(paginate方法)
+                （1）如：Db::name('user')->where('status',1)->paginate(10);
+                        一、 调用\think\db\Query.php中paginate方法,里面有对\\think\\paginator\\driver\\Bootstrap实例化赋值（父类Paginator类属性初始化）
+                        二、分页原理：paginate方法里有调用->page($page, $listRows)->select(）
+                        三、Bootstrap类中render方法渲染分页html
+13、数据库
+        1）Db::query（）与Db::execute（）执行原理
+                （1）Db.php中有一个__callStatic方法，调用未定义的方法会去连接的数据库类（或父类Connection.php）中查找
+                （2）区别：Db::query方法用于执行SQL查询操作，Db::execute用于更新和写入数据的sql操作
+                 (3)Db::query（）、 Db::execute（）与model中的select（）、save()、update（）等方法区别：
+                        一、前者是调用\think\db\Connection.php，读取数据库（mysql）配置信息,pdo实例进行处理
+                        二、后者是调用\think\db\Query.php取得mysql驱动（\\think\\db\\builder\\mysql）的实例进行处理  
+        2)Db::table()与Db::name()执行原理
+                （1）Db.php中有一个__callStatic方法（未定义的方法会去\think\db\Connection.php中找）
+                （2）Connection.php中有一个__call方法（未定义的方法会去\think\db\Query.php中找）   
+                （3）区别：Db::table('think_user')表要加前缀，Db::name('user')不用表前缀
+        3)sql调试与监听
+                (1)如果数据库配置文件有开启debug,则会对sql进行调试(把sql语句、sql性能分析、sql运行时间等信息写入日志或监听输出)
+                （2）如果未注册监听（Db::listen()），则把调试信息写入日志，如果有注册监听则不写入日志。
+14、trait
+        1)作用：代码复用，解决了php不能多继承的问题。比如：增删改查都写在一个trait文件里
+        2）与interface区别： interface只是声明，抽象方法没有实现，trait里的方法都实现
+        3）tp5中调用步骤：
+                （1）\think\Loader.php中有注册traits命名空间（注意：这个目录名字是随便写的。）
+                （2）文件编写：trait文件内容声明格式：trait Controller(与class的区别就是：把class Controller改为trait Controller了）
+                （3）调用：在类文件中（class上面）\think\Loader::import()或用load_trait（）助手函数引入trait文件,在class下面 use。如：use \app\admin\traits\controller\Controller;
+
+      
+15、函数：
+	1）method_exists()与is_callable()的区别
+		（1）、一个方法存在并不意味着它就可以被调用。对于 private，protected和public类型的方法，method_exits()会返回true，但是is_callable()会检查存在其是否可以访问，如果是private，protected类型的，它会返回false
+        2)array_diff()
+                （1）比较两个数组的值，并返回差集。返回两个数组的差集数组。该数组包括了所有在被比较的数组中，但是不在任何其他参数数组中的键值。在返回的数组中，键名保持不变。
+        3）array_walk()与 array_walk_recursive() 用法与区别
+                （1）array_walk()：使用用户自定义函数对数组中的每个元素做回调处理 （对数组中的每个元素应用用户自定义函数。在函数中，数组的键名和键值是参数。）
+                        一、语法：array_walk(array,myfunction,userdata...)
+                （2）array_walk_recursive() ：比array_walk操作更深的数组（一个数组中包含另一个数组）
+        4）array_change_key_case()
+                （1）函数将数组的所有的键都转换为大写字母或小写字母。如果未提供可选参数（即第二个参数），则默认转换为小写字母。
+                （2）语法：array_change_key_case(array,case);case可以为CASE_LOWER（小写）或CASE_UPPER（大写）
+	5)parse_url
+		（1）定义：解析一个 URL 并返回一个关联数组，包含在 URL 中出现的各种组成部分 
+		（2）用法：parse_url('http://username:password@hostname/path?arg=value#anchor')	
+                        一、返回Array ( [scheme] => http [host] => hostname [user] => username [pass] => password [path] => /path [query] => arg=value [fragment] => anchor ) 
+        6)parse_str()与http_build_query（）
+                        一、parse_str()：把查询字符串解析到变量中。如：parse_str("name=Bill&age=60",$myArray);     //$myArray数组结果为Array ( [name] => Bill [age] => 60 )
+                        二、http_build_query（）把关联（或下标）数组生成一个经过 URL-encode 的请求字符串  如：http_build_query（ ['name' => 'Bill', 'age' =>'60'] ）//结果为name=Bill&age=60
+        7) get_object_var($object)，返回一个数组。获取$object对象中的属性，组成一个数组
+        8)  __CLASS__、get_class()都是获取当前的类名。
+            但是get_class($this)与get_called_class()都是获取主调类的类名（就是调用者的类名）
+        9)is_scalar($var)检测变量是否是一个标量(标量变量是指那些包含了 integer、float、string 或 boolean的变量，而 array、object 和 resource 则不是标量)  
+	10）array_column(array,column_key,index_key);返回输入二维数组中某一列的值组成以index_key为键的一维数组。
+
+

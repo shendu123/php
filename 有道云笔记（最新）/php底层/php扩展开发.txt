@@ -1,0 +1,13 @@
+1、流程http://blog.csdn.net/sunlylorn/article/details/6226955，
+http://blog.csdn.net/shi_yi_fei/article/details/50039021
+http://bbs.chinaunix.net/thread-951224-1-1.html
+1）建立扩展文件名（在php源码ext目录下执行ext_skel --extname=myExt，会生成myExt目录 ）
+2）修改编译参数（就是修改config.m4文件（此文件在myExt目录里））
+3）编写代码（编写功能函数代码给php文件调用）
+4）编译代码、生成模块 （make  install）
+5）修改php.ini文件并重启apache进行测试
+（1）在php.ini文件中新增extension=myExt.so，并重启apache,然后在php文件中调用myExt.so模块提供的功能函数进行测试（注：如果是在windows环境，则是myExt.dll）
+2、名词解释及作用：
+1）phpize：生成configure配置文件。（执行这一步的目的是根据config.m4文件的内容生成configure配置文件 ）
+2）make ：编译、生成扩展模块。（在myExt/modules目录就应该已经生成了myExt.so扩展模块了）
+3）make install：安装 //会自动把生成的myExt.so模块拷贝到php认为正确的扩展目录（默认目录或configure配置时手动指定的目录）

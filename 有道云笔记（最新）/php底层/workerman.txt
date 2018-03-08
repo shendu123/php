@@ -1,0 +1,60 @@
+1、教程：
+1）手册：http://doc.workerman.net（比较详细，强烈推荐）
+2）即时通讯（可以参考GatewayWorker手册：http://doc2.workerman.net/326102）
+（1）BusinessWorker进程负责处理实际的业务逻辑（默认调用Events.php处理业务）
+（2）开发者只需要关注Events.php（里面有对客户端的业务请求处理。如聊天时：登录、回复消息、关闭连接）
+（3）客户端和服务端协议一定要对应才能通讯（如：都应该使用websocket协议）
+2、特点：
+1）workerman是命令行启动的，workerman不依赖apache或者nginx：workerman本身已经是一个类似apache/nginx的容器，只要PHP环境ok，workerman就可以运行。（基于php-cli解析php，不依赖php-fpm）
+2）原理：一个主进程，多个子进程的方式工作，主进程只负责监控（启动或停止）子进程，不负责接收数据也不处理任何业务逻辑，用户请求都交给子进程处理。
+3）改代码要重启：workerman是常驻内存的框架，改代码要重启workerman才能看到新代码的效果。
+4）长连接(比如即时通讯)
+（1）必须加心跳，以便检测客户端是否断开。
+（2）应使用GatewayWorker框架，它专门在workerman的基础上再次封装
+（3）长连接优点：每个TCP连接都需要三步握手，这需要时间，如果每个操作都是先连接，再操作的话那么处理速度会降低很多。所以长连接在每个操作完后都不断开，下次处理时直接发送数据包就OK了，不用建立TCP连接
+3、专业名词解释：
+1）心跳：指主服务器与各设备之间通过周期性发送信息，判断设备的健康状况，判断对方是否“存活”。如果在指定的时间内仍没有收到设备的心跳信息，就可以怀疑此设备发生故障。
+（1）心跳原理：
+一、GatewayWorker心跳原理：https://www.workerman.net/gatewaydoc/gateway-worker-development/heartbeat.html
+二、Workerman心跳原理：http://doc.workerman.net/315282
+2）守护进程(daemon)：是一类在linux后台运行的特殊进程，不会接受电脑用户的直接操控
+3）平滑重启：
+（1）不同于普通的重启，平滑重启可以做到在不影响业务的情况下重启服务
+（2）原理：当WorkerMan主进程收到平滑重启信号时，主进程会向其中一个子进程发送安全退出(让对应进程处理完毕当前请求后才退出)信号，当这个进程退出后，主进程会重新创建一个新的子进程（这个子进程载入了新的PHP代码），然后主进程再次向另外一个旧的进程发送停止命令，这样一个进程一个进程的重启，直到所有旧的进程全部被置换为止。
+4）IO密集型与cpuj密集型：
+（1）IO密集型：就是同步、阻塞式IO
+（2）cpu密集型：就是异步、非阻塞式IO
+4、运行流程：http://wenda.workerman.net/?/question/68。https://www.cnblogs.com/CpNice/p/4714182.html
+5、源码解析：https://www.kancloud.cn/zmwtp/workerman/132361（针对linux版本，workerman for linux）
+http://blog.csdn.net/liujiekkk123/article/details/50441318（针对windows版本，workerman for  win）
+
+6、php多进程与多线程编程：（这个要深入学习下）
+1）https://www.cnblogs.com/niniwzw/archive/2010/01/18/1651082.html
+2）https://www.cnblogs.com/zhenbianshu/p/7978835.html
+3）https://www.cnblogs.com/zhenbianshu/p/5676822.html
+
+
+
+
+20、websocket
+1）、websocket的工作机制：
+		（1）客户端浏览器首先要向服务器发起一个 HTTP 请求，这个请求和通常的 HTTP 请求不同，包含了一些附加头信息，其中附加头信息”Upgrade: WebSocket”表明这是一个申请协议升级的 HTTP 请求（http协议升级为websocket协议），服务器端解析这些附加的头信息然后产生应答信息返回给客户端，客户端和服务器端的 WebSocket 连接就建立起来了
+	2）、websocket与http区别
+		（1）websocket是HTML5中的协议，支持持久连接；而Http协议不支持持久连接。
+		（2）WebSocket是一种双向通信协议。在建立连接后，WebSocket服务器端和客户端都能主动向对方发送或接收数据，就像Socket一样；http只能客户端主动发送数据，服务端不能主动发数据
+	3）、websocket与socket区别
+		（1）WebSocket是应用层协议，Socket是传输控制层协议
+	4）、websocket与socket.io区别
+		（1)socket.io封装了websocket，同时包含了其它的连接方式，比如Ajax轮询，原因在于不是所有的浏览器都支持websocket。
+		（2）通过socket.io的封装，你不用关心里面用了什么连接方式。你在任何浏览器里都可以使用socket.io来建立
+5）、看完让你彻底搞懂Websocket原理：http://blog.csdn.net/frank_good/article/details/50856585
+6）、关于ws与wss（注：websocket Security ）协议
+（1）ws是普通的WebSocket通信协议，而wss是安全的WebSocket通信协议(就像HTTP与HTTPS之间的差异一样)。在默认情况下，ws的端口是80而wss的端口是443。
+7）、websocket api介绍
+（1）https://www.cnblogs.com/wooer/p/5588993.html
+（2）http://www.runoob.com/html/html5-websocket.html
+
+
+
+
+
