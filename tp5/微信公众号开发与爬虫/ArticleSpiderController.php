@@ -41,6 +41,9 @@ class ArticleSpiderController extends Controller
             $list = array_slice($list,0,$limit);
         }
         if($add){
+            if($keyword && (new \yii\db\Query())->where(['like', 'title', $keyword])->from('article')->one()){
+                exit('数据已存在');
+            }
             $this->add($table_keys, $list);
         }else{
             p($list);
@@ -50,7 +53,7 @@ class ArticleSpiderController extends Controller
     }
 
     function add($table_keys, $list){
-        Yii::$app->db->createCommand()->truncateTable('article')->execute();
+        //Yii::$app->db->createCommand()->truncateTable('article')->execute();
         if(Yii::$app->db->createCommand()->batchInsert('article', $table_keys, $list)->execute()){
             exit('数据插入成功');
         }
